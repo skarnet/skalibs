@@ -1,0 +1,1 @@
+#define error_isalready(e) (((e) == EALREADY) || ((e) == EINPROGRESS))

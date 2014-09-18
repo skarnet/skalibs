@@ -1,0 +1,28 @@
+typedef struct ip46_s ip46_t, *ip46_t_ref ;
+struct ip46_s
+{
+  char ip[4] ;
+} ;
+#define IP46_ZERO { .ip = "\0\0\0" }
+
+#undef SKALIBS_IPV6_ENABLED
+#define SKALIBS_IP_SIZE 4
+#define ip46_is6(ip) 0
+#define ip46_fmt(s, i) ip4_fmt(s, (i)->ip)
+#define ip46_scan(s, i) ip4_scan(s, (i)->ip)
+#define ip46_scanlist(out, max, s, num) ip4_scanlist((out)->ip, max, s, num)
+#define ip46_from_ip4(i, ip4) (byte_copy((i)->ip, 4, ip4), 1)
+#define ip46_from_ip6(i, ip6) (errno = ENOSYS, 0)
+
+#define socket_connect46(s, i, port) socket_connect4(s, (i)->ip, port)
+#define socket_bind46(s, i, port) socket_bind4(s, (i)->ip, port)
+#define socket_bind46_reuse(s, i, port) socket_bind4_reuse(s, (i)->ip, port)
+#define socket_tcp46(h) socket_tcp4()
+#define socket_udp46(h) socket_udp4()
+#define socket_recv46(fd, s, len, i, port) socket_recv4(fd, s, len, (i)->ip, port)
+#define socket_send46(fd, s, len, i, port) socket_send4(fd, s, len, (i)->ip, port)
+#define socket_local46(fd, i, port) socket_local4(fd, (i)->ip, port)
+#define socket_remote46(fd, i, port) socket_remote4(fd, (i)->ip, port)
+
+#define socket_recvnb46(fd, buf, len, i, port, deadline, stamp) socket_recvnb4(fd, buf, len, (i)->ip, port, deadline, stamp)
+#define socket_sendnb46(fd, buf, len, i, port, deadline, stamp) socket_sendnb4(fd, buf, len, (i)->ip, port, deadline, stamp)

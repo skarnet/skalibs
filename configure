@@ -1,0 +1,590 @@
+#!/bin/sh
+
+usage () {
+  cat <<EOF
+Usage: $0 [OPTION]... [VAR=VALUE]... [TARGET]
+
+To assign environment variables (e.g., CC, CFLAGS...), specify them as
+VAR=VALUE.  See below for descriptions of some of the useful variables.
+
+Defaults for the options are specified in brackets.
+
+System types:
+  --target=TARGET               configure to run on target TARGET [detected]
+  --host=TARGET                 same as --target
+
+Installation directories:
+  --prefix=PREFIX               main installation prefix [/]
+
+Fine tuning of the installation directories:
+  --dynlibdir=DIR               shared library files [PREFIX/lib]
+  --libdir=DIR                  static library files [PREFIX/usr/lib/skalibs]
+  --includedir=DIR              include files for the C compiler [PREFIX/usr/include]
+  --datadir=DIR                 global configuration files [PREFIX/etc]
+  --sysdepdir=DIR               sysdeps directory [PREFIX/usr/lib/skalibs/sysdeps]
+
+Dependencies:
+  --with-sysdeps=DIR            use provided sysdeps in DIR [autodetected]
+  --with-include=DIR            add DIR to the list of searched directories for headers
+  --with-lib=DIR                add DIR to the list of searched directories for static libraries
+  --with-dynlib=DIR             add DIR to the list of searched directories for shared libraries
+
+Optional features:
+  --disable-shared              do not build shared libraries [enabled]
+  --disable-static              do not build static libraries [enabled]
+  --enable-slashpackage[=ROOT]  assume /package installation at ROOT [disabled]
+  --enable-cross=PREFIX         prefix toolchain executable names with PREFIX [none]
+
+skalibs options:
+  --enable-libc-replacements    use independent low-level primitives [disabled]
+  --enable-egd=PATH             support an EGD daemon listening on PATH as RNG [disabled]
+  --disable-ipv6                do not build IPv6 support [enabled]
+  --enable-iopause-select       prefer select() over poll() for iopause implementation [disabled]
+  --enable-tai-clock            assume the system clock is TAI-10 instead of UTC [disabled]
+  --enable-right-tz             assume the timezone is Olson's right/ instead of posix/ [disabled]
+  --enable-clock                use clock_gettime() instead of gettimeofday() [disabled]
+  --enable-monotonic            count time with CLOCK_MONOTONIC instead of CLOCK_REALTIME
+  --enable-force-devr           assume /dev/random exists and is valid [autodetection takes time]
+  --with-default-path=PATH      default executable search path [/usr/bin:/bin]
+
+EOF
+  exit 0
+}
+
+
+# Helper functions
+
+# If your system does not have printf, you can comment this, but it is
+# generally not a good idea to use echo.
+# See http://www.etalabs.net/sh_tricks.html
+echo () {
+  IFS=" "
+  printf %s\\n "$*"
+}
+
+quote () {
+  tr '\n' ' ' <<EOF | grep '^[-[:alnum:]_=,./:]* $' >/dev/null 2>&1 && { echo "$1" ; return 0 ; }
+$1
+EOF
+  echo "$1" | sed -e "s/'/'\\\\''/g" -e "1s/^/'/" -e "\$s/\$/'/" -e "s#^'\([-[:alnum:]_,./:]*\)=\(.*\)\$#\1='\2#" -e "s|\*/|* /|g"
+}
+
+fail () {
+  echo "$*"
+  exit 1
+}
+
+fnmatch () {
+  eval "case \"\$2\" in $1) return 0 ;; *) return 1 ;; esac"
+}
+
+cmdexists () {
+  type "$1" >/dev/null 2>&1
+}
+
+trycc () {
+  test -z "$CC_AUTO" && cmdexists "$1" && CC_AUTO=$1
+}
+
+stripdir () {
+  while eval "fnmatch '*/' \"\${$1}\"" ; do
+    eval "$1=\${$1%/}"
+  done
+}
+
+tryflag () {
+  echo "Checking whether compiler accepts $2 ..."
+  echo "typedef int x;" > "$tmpc"
+  if $CC_AUTO "$2" -c -o /dev/null "$tmpc" >/dev/null 2>&1 ; then
+    echo "  ... yes"
+    eval "$1=\"\${$1} \$2\""
+    eval "$1=\${$1# }"
+    return 0
+  else
+    echo "  ... no"
+    return 1
+  fi
+}
+
+tryldflag () {
+  echo "Checking whether linker accepts $2 ..."
+  echo "typedef int x;" > "$tmpc"
+  if $CC_AUTO -nostdlib "$2" -o /dev/null "$tmpc" >/dev/null 2>&1 ; then
+    echo "  ... yes"
+    eval "$1=\"\${$1} \$2\""
+    eval "$1=\${$1# }"
+    return 0
+  else
+    echo "  ... no"
+    return 1
+  fi
+}
+
+choose () {
+  echo "Checking whether system has $4..."
+  r=true
+  case "$1" in
+    *c*) $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO -o try$2.o -c src/sysdeps/try$2.c 2>/dev/null || r=false ;;
+  esac
+  if $r ; then
+    case "$1" in
+      *l*) $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o try$2 try$2.o $5 2>/dev/null || r=false ;;
+    esac
+  fi
+  if $r ; then
+    case "$1" in
+     *r*) ./try$2 >/dev/null 2>&1 || r=false ;;
+    esac
+  fi
+  rm -f try$2.o try$2
+  if $r ; then
+    echo "$2: yes" >> $sysdeps/sysdeps
+    echo "#define ${package_macro_name}_HAS$3" >> $sysdeps/sysdeps.h
+    echo "  ... yes"
+  else
+    echo "$2: no" >> $sysdeps/sysdeps
+    echo "#undef ${package_macro_name}_HAS$3" >> $sysdeps/sysdeps.h
+    echo "  ... no"
+  fi
+}
+
+trytypesize() {
+  echo "Checking size of $3..."
+  $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o trysizeof$1 src/sysdeps/trysizeof$1.c
+  type_size=$(./trysizeof$1) || fail "$0: unable to determine size of $3"
+  type_bits=$(expr 8 \* $type_size)
+  rm -f trysizeof$1
+  echo "sizeof$1: $type_size" >> $sysdeps/sysdeps
+  echo "#define ${package_macro_name}_SIZEOF$2 $type_size" >> $sysdeps/sysdeps.h
+  echo "#define ${package_macro_name}_$2_BITS $type_bits" >> $sysdeps/sysdeps.h
+  echo "  ... $type_size"
+}
+
+# Actual script
+
+CC_AUTO="$CC"
+CFLAGS_AUTO="$CFLAGS"
+CPPFLAGS_AUTO="-D_POSIX_C_SOURCE=200809L -D_XOPEN_SOURCE=600 $CPPFLAGS"
+LDFLAGS_AUTO="$LDFLAGS"
+LDFLAGS_NOSHARED=
+prefix=
+dynlibdir='$prefix/lib'
+libdir='$prefix/usr/lib/skalibs'
+includedir='$prefix/usr/include'
+datadir='$prefix/etc'
+sysdepdir='$prefix/usr/lib/$package/sysdeps'
+sysdeps=
+shared=true
+static=true
+slashpackage=false
+replacements=false
+egd=
+ipv6=true
+select=false
+taiclock=false
+righttz=false
+clockrt=false
+clockmon=false
+forcedevr=false
+defaultpath=/usr/bin:/bin
+sproot=
+home=
+exthome=
+addincpath=''
+addlibspath=''
+addlibdpath=''
+vpaths=''
+vpathd=''
+cross="$CROSS_COMPILE"
+
+. package/info
+
+for arg ; do
+  case "$arg" in
+    --help) usage ;;
+    --prefix=*) prefix=${arg#*=} ;;
+    --dynlibdir=*) dynlibdir=${arg#*=} ;;
+    --libdir=*) libdir=${arg#*=} ;;
+    --includedir=*) includedir=${arg#*=} ;;
+    --datadir=*) datadir=${arg#*=} ;;
+    --sysdepdir=*) sysdepdir=${arg#*=} ;;
+    --with-sysdeps=*) sysdeps=${arg#*=} ;;
+    --with-include=*) var=${arg#*=} ; stripdir var ; addincpath="$addincpath -I$var" ;;
+    --with-lib=*) var=${arg#*=} ; stripdir var ; addlibspath="$addlibspath -L$var" ; vpaths="$vpaths $var" ;;
+    --with-dynlib=*) var=${arg#*=} ; stripdir var ; addlibdpath="$addlibdpath -L$var" ; vpathd="$vpathd $var" ;;
+    --enable-shared|--enable-shared=yes) shared=true ;;
+    --disable-shared|--enable-shared=no) shared=false ;;
+    --enable-static|--enable-static=yes) static=true ;;
+    --disable-static|--enable-static=no) static=false ;;
+    --enable-slashpackage=*) sproot=${arg#*=} ; slashpackage=true ; ;;
+    --enable-slashpackage) sproot= ; slashpackage=true ;;
+    --disable-slashpackage) sproot= ; slashpackage=false ;;
+    --enable-cross=*) cross=${arg#*=} ;;
+    --enable-cross) cross= ;;
+    --disable-cross) cross= ;;
+    --enable-libc-replacements|--enable-libc-replacements=yes) replacements=true ;;
+    --disable-libc-replacements|--enable-libc-replacements=no) replacements=false ;;
+    --enable-egd=*) egd=${arg#*=} ;;
+    --disable-egd) egd= ;;
+    --enable-ipv6|--enable-ipv6=yes) ipv6=true ;;
+    --disable-ipv6|--enable-ipv6=no) ipv6=false ;;
+    --enable-iopause-select|--enable-iopause-select=yes) select=true ;;
+    --disable-iopause-select|--enable-iopause-select=no) select=false ;;
+    --enable-tai-clock|--enable-tai-clock=yes) taiclock=true ;;
+    --disable-tai-clock|--enable-tai-clock=no) taiclock=false ;;
+    --enable-right-tz|--enable-right-tz=yes) righttz=true ;;
+    --disable-right-tz|--enable-right-tz=no) righttz=false ;;
+    --enable-clock|--enable-clock=yes) clockrt=true ;;
+    --disable-clock|--enable-clock=no) clockrt=false ;;
+    --enable-monotonic|--enable-monotonic=yes) clockmon=true ;;
+    --disable-monotonic|--enable-monotonic=no) clockmon=false ;;
+    --enable-force-devr|--enable-force-devr=yes) forcedevr=true ;;
+    --disable-force-devr|--enable-force-devr=no) forcedevr=false ;;
+    --with-default-path=*) defaultpath=${arg#*=} ;;
+    --without-default-path) defaultpath=/usr/bin:/bin ;;
+    --enable-*|--disable-*|--with-*|--without-*|--*dir=*|--build=*) ;;
+    --host=*|--target=*) target=${arg#*=} ;;
+    -* ) echo "$0: unknown option $arg" ;;
+    *=*) ;;
+    *) target=$arg ;;
+  esac
+done
+
+for i in prefix exec_prefix dynlibdir libdir includedir datadir sysdepdir sysdeps sproot ; do
+  eval tmp=\${$i}
+  eval $i=$tmp
+  stripdir $i
+done
+
+# Get usable temp filenames
+i=0
+set -C
+while : ; do
+  i=$(($i+1))
+  tmpc="./tmp-configure-$$-$PPID-$i.c"
+  tmpe="./tmp-configure-$$-$PPID-$i.tmp"
+  2>|/dev/null > "$tmpc" && break
+  2>|/dev/null > "$tmpe" && break
+  test "$i" -gt 50 && fail "$0: cannot create temporary files"
+done
+set +C
+trap 'rm -f "$tmpc" "$tmpe"' EXIT ABRT INT QUIT TERM HUP
+
+# Set slashpackage values
+if $slashpackage ; then
+  home=${sproot}/package/${category}/${package}-${version}
+  exthome=${sproot}/package/${category}/${package}
+  sysdepdir=${home}/sysdeps
+  binprefix=${home}/command
+  extbinprefix=${exthome}/command
+  dynlibdir=${home}/library.so
+  libdir=${home}/library
+  includedir=${home}/include
+fi
+
+# Find a C compiler to use
+echo "Checking for C compiler..."
+trycc ${cross}gcc
+trycc ${cross}c99
+trycc ${cross}cc
+test -n "$CC_AUTO" || { echo "$0: cannot find a C compiler" ; exit 1 ; }
+echo "  ... $CC_AUTO"
+echo "Checking whether C compiler works... "
+echo "typedef int x;" > "$tmpc"
+if $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO -c -o /dev/null "$tmpc" 2>"$tmpe" ; then
+  echo "  ... yes"
+else
+  echo "  ... no. Compiler output follows:"
+  cat < "$tmpe"
+  exit 1
+fi
+
+echo "Checking target system type..."
+test -n "$target" || target=$($CC_AUTO -dumpmachine 2>/dev/null) || target=unknown
+echo "  ... $target"
+
+tryflag CFLAGS_AUTO -std=c99
+tryflag CFLAGS_AUTO -fomit-frame-pointer
+tryflag CFLAGS_AUTO -fno-exceptions
+tryflag CFLAGS_AUTO -fno-unwind-tables
+tryflag CFLAGS_AUTO -fno-asynchronous-unwind-tables
+tryflag CFLAGS_AUTO -Wa,--noexecstack
+tryflag CFLAGS_AUTO -fno-stack-protector
+tryflag CPPFLAGS_AUTO -Werror=implicit-function-declaration
+tryflag CPPFLAGS_AUTO -Werror=implicit-int
+tryflag CPPFLAGS_AUTO -Werror=pointer-sign
+tryflag CPPFLAGS_AUTO -Werror=pointer-arith
+tryflag CPPFLAGS_AUTO -Wno-parentheses
+tryflag CPPFLAGS_AUTO -Wno-uninitialized
+tryflag CPPFLAGS_AUTO -Wno-missing-braces
+tryflag CPPFLAGS_AUTO -Wno-unused-value
+tryflag CPPFLAGS_AUTO -Wno-unused-but-set-variable
+tryflag CPPFLAGS_AUTO -Wno-unknown-pragmas
+tryflag CPPFLAGS_AUTO -Wno-pointer-to-int-cast
+
+if $shared ; then
+  tryldflag LDFLAGS_AUTO -Wl,--hash-style=both
+fi
+
+if test -n "$sysdeps" ; then
+  if test ! -d $sysdeps || test ! -f $sysdeps/target ; then
+    echo "$0: error: $sysdeps is not a valid sysdeps directory"
+    exit 1
+  fi
+  if [ "x$target" != "x$(cat $sysdeps/target)" ] ; then
+    echo "$0: error: target $target does not match the contents of $sysdepdir/target"
+    exit 1
+  fi
+  echo "Using pre-computed sysdeps in $sysdeps."
+  rt_lib=$(cat $sysdeps/rt.lib)
+  socket_lib=$(cat $sysdeps/socket.lib)
+  sysclock_lib=$(cat $sysdeps/sysclock.lib)
+  tainnow_lib=$(cat $sysdeps/tainnow.lib)
+  util_lib=$(cat $sysdeps/util.lib)
+  if test -n "$egd" ; then
+    egd=$(grep -F egd: $sysdeps/sysdeps | cut -d' ' -f2-)
+    echo "warning: --enable-egd option ignored, using sysdeps-provided value instead: $egd"
+  fi
+else
+  sysdeps=sysdeps.cfg
+  mkdir -p $sysdeps
+  echo "$target" > $sysdeps/target
+  echo "target: $target" > $sysdeps/sysdeps
+  cat <<EOF > $sysdeps/sysdeps.h
+/* ISC license. */
+
+#ifndef SYSDEPS_H
+#define SYSDEPS_H
+
+#define SKALIBS_TARGET "$target"
+EOF
+
+  util_lib=
+  echo > $sysdeps/util.lib
+
+  echo "Checking whether socket functions need an additional library..."
+  $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO -c -o trylsock.o src/sysdeps/trylsock.c || fail "$0: compiler cannot compile src/sysdeps/trylsock.c"
+  if $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o /dev/null trylsock.o 2>/dev/null ; then
+    socket_lib=
+    echo "  ... no"
+  elif $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o /dev/null trylsock.o -lsocket 2>/dev/null ; then
+    socket_lib=-lsocket
+    echo "  ... -lsocket"
+  elif $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o /dev/null trylsock.o -lsocket -lnsl 2>/dev/null ; then
+    socket_lib="-lsocket -lnsl"
+    echo "  ... -lsocket -lnsl"
+  else
+    fail "$0: unable to determine socket.lib sysdep"
+  fi
+  rm -f trylsock.o
+  echo "$socket_lib" > $sysdeps/socket.lib
+
+  echo "Checking whether clock functions are available..."
+  rt_lib=
+  if $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO -c -o tryclockrt.o src/sysdeps/tryclockrt.c 2>/dev/null ; then
+    if $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o /dev/null tryclockrt.o 2>/dev/null ; then
+      hasclock=true
+      echo "  ... yes"
+    elif $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o /dev/null tryclockrt.o -lrt 2>/dev/null ; then
+      hasclock=true
+      echo "  ... yes, with -lrt"
+      rt_lib=-lrt
+    else
+      hasclock=false
+    fi
+    rm -f tryclockrt.o
+  else
+    hasclock=false
+  fi
+  echo "$rt_lib" > $sysdeps/rt.lib
+  if $clockrt ; then
+    echo "$rt_lib" > $sysdeps/sysclock.lib
+    echo "$rt_lib" > $sysdeps/tainnow.lib
+  else
+    echo > $sysdeps/sysclock.lib
+    if $clockmon ; then
+      echo "$rt_lib" > $sysdeps/tainnow.lib
+    else
+      echo > $sysdeps/tainnow.lib
+    fi
+  fi
+  if $hasclock ; then
+    rm -f tryclockrt
+    echo 'clockrt: yes' >> $sysdeps/sysdeps
+    echo "#define ${package_macro_name}_HASCLOCKRT" >> $sysdeps/sysdeps.h
+    choose cl clockmon CLOCKMON CLOCK_MONOTONIC $rt_lib
+  else
+    echo 'clockrt: no' >> $sysdeps/sysdeps
+    echo "#undef ${package_macro_name}_HASCLOCKRT" >> $sysdeps/sysdeps.h
+    echo '  ... no'
+  fi
+
+  echo "Checking system endianness..."
+  $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO -o tryendianness src/sysdeps/tryendianness.c
+  endianness=$(./tryendianness) || fail "$0: unable to determine endianness"
+  echo "endianness: $endianness" >> $sysdeps/sysdeps
+  echo "#define ${package_macro_name}_ENDIANNESS \"$endianness\"" >> $sysdeps/sysdeps.h
+  echo "  ... $endianness"
+  rm -f tryendianness
+
+  trytypesize ushort USHORT "unsigned short"
+  trytypesize uint UINT "unsigned int"
+  trytypesize ulong ULONG "unsigned long"
+  trytypesize gid GID "gid_t"
+  trytypesize time TIME "time_t"
+  choose clr accept4 ACCEPT4 'accept4()'
+  choose clr ancilautoclose ANCILAUTOCLOSE 'auto-close after fd-passing'
+  choose c cmsgcloexec CMSGCLOEXEC 'MSG_CMSG_CLOEXEC'
+  choose clr devurandom DEVURANDOM '/dev/urandom'
+  choose c eproto EPROTO EPROTO
+  choose cl eventfd EVENTFD 'eventfd()'
+  choose cl flock FLOCK 'flock()'
+  choose cl getpeereid GETPEEREID 'getpeereid()'
+  choose cl sopeercred SOPEERCRED 'SO_PEERCRED'
+  choose cl getpeerucred GETPEERUCRED 'getpeerucred()'
+  choose cl ipv6 IPV6 'IPv6 support' $socket_lib
+  choose clr malloc0 MALLOC0 'non-NULL malloc(0)'
+  choose cl openat OPENAT 'openat()'
+  choose cl linkat LINKAT 'linkat()'
+  choose clr pipe2 PIPE2 'pipe2()'
+  choose cl posixspawn POSIXSPAWN 'posix_spawn()'
+  choose clr ppoll PPOLL 'ppoll()'
+  choose cl revoke REVOKE 'revoke()'
+  choose cl sendfile SENDFILE 'sendfile()'
+  choose cl setgroups SETGROUPS 'setgroups()'
+  choose cl settimeofday SETTIMEOFDAY 'settimeofday()'
+  choose clr signalfd SIGNALFD 'signalfd()'
+  choose clr splice SPLICE 'splice()'
+  choose cl strcasestr STRCASESTR 'strcasestr()'
+  choose c uint64t UINT64T 'uint64_t'
+
+  if $forcedevr ; then
+    echo "/dev/random detection override required, assuming it exists and is working."
+    echo "devrandom: yes" >> $sysdeps/sysdeps
+    echo "#define ${package_macro_name}_HASDEVRANDOM" >> $sysdeps/sysdeps.h
+  else
+    choose clr devrandom DEVRANDOM /dev/random
+  fi
+  if test -n "$egd" ; then
+    if echo "$egd" | grep -q '[^[:alnum:]/_-]' ; then
+      fail "$0: invalid EGD path: $egd"
+    fi
+    echo "egd: $egd" >> $sysdeps/sysdeps
+    echo "#define ${package_macro_name}_HASEGD \"$egd\"" >> $sysdeps/sysdeps.h
+  fi
+  echo '#endif' >> $sysdeps/sysdeps.h
+fi
+
+echo "Copying $sysdeps/sysdeps.h to src/include/${package}/sysdeps.h ..."
+cat < $sysdeps/sysdeps.h > src/include/${package}/sysdeps.h
+echo "  ... done"
+
+echo "Creating config.mak..."
+cmdline=$(quote "$0")
+for i ; do cmdline="$cmdline $(quote "$i")" ; done
+exec 3>&1 1>config.mak
+cat << EOF
+# This file was generated by:
+# $cmdline
+# Any changes made here will be lost if configure is re-run.
+
+target := $target
+package := $package
+prefix := $prefix
+datadir := $datadir
+sysdepdir := $sysdepdir
+dynlibdir := $dynlibdir
+libdir := $libdir
+includedir := $includedir
+sysdeps := $sysdeps
+version := $version
+sproot := $sproot
+home := $home
+exthome := $exthome
+ipv6 := $ipv6
+RT_LIB := ${rt_lib}
+SOCKET_LIB := ${socket_lib}
+SYSCLOCK_LIB := ${sysclock_lib}
+TAINNOW_LIB := ${tainnow_lib}
+UTIL_LIB := ${util_lib}
+CC := $CC_AUTO
+CFLAGS := $CFLAGS_AUTO
+CPPFLAGS := $CPPFLAGS_AUTO
+LDFLAGS := $LDFLAGS_AUTO
+LDFLAGS_NOSHARED := $LDFLAGS_NOSHARED
+CROSS_COMPILE := $cross
+EOF
+if test -n "$vpaths" ; then
+  echo "vpath lib%a$vpaths"
+fi
+if test -n "$vpathd" ; then
+  echo "vpath lib%.so$vpathd"
+fi
+
+$static || echo "STATIC_LIBS :="
+$shared || echo "SHARED_LIBS :="
+exec 1>&3 3>&-
+echo "  ... done."
+
+echo "Creating src/include/${package}/config.h..."
+mkdir -p -m 0755 src/include/${package}
+exec 3>&1 1> src/include/${package}/config.h
+cat <<EOF
+/* ISC license. */
+
+/* Generated by: $cmdline */
+
+#ifndef ${package_macro_name}_CONFIG_H
+#define ${package_macro_name}_CONFIG_H
+
+#define ${package_macro_name}_VERSION "$version"
+#define ${package_macro_name}_DEFAULTPATH "$defaultpath"
+#define ${package_macro_name}_ETC "$datadir"
+#define ${package_macro_name}_SPROOT "$sproot"
+#define ${package_macro_name}_HOME "$home"
+EOF
+if $replacements ; then
+  echo "#define ${package_macro_name}_FLAG_REPLACE_LIBC"
+else
+  echo "#undef ${package_macro_name}_FLAG_REPLACE_LIBC"
+fi
+if $taiclock ; then
+  echo "#define ${package_macro_name}_FLAG_CLOCKISTAI"
+else
+  echo "#undef ${package_macro_name}_FLAG_CLOCKISTAI"
+fi
+if $righttz ; then
+  echo "#define ${package_macro_name}_FLAG_TZISRIGHT"
+else
+  echo "#undef ${package_macro_name}_FLAG_TZISRIGHT"
+fi
+if $clockrt ; then
+  echo "#define ${package_macro_name}_FLAG_USERT"
+else
+  echo "#undef ${package_macro_name}_FLAG_USERT"
+fi
+if $clockmon ; then
+  echo "#define ${package_macro_name}_FLAG_USEMON"
+else
+  echo "#undef ${package_macro_name}_FLAG_USEMON"
+fi
+if $ipv6 ; then
+  echo "#define ${package_macro_name}_FLAG_WANTIPV6"
+else
+  echo "#undef ${package_macro_name}_FLAG_WANTIPV6"
+fi
+if $select ; then
+  echo "#define ${package_macro_name}_FLAG_PREFERSELECT"
+else
+  echo "#undef ${package_macro_name}_FLAG_PREFERSELECT"
+fi
+if test -n "$egd" ; then
+  echo "#define ${package_macro_name}_EGD $egd"
+else
+  echo "#undef ${package_macro_name}_EGD"
+fi
+
+echo
+echo "#endif"
+exec 1>&3 3>&-
+echo "  ... done."

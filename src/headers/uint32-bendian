@@ -1,0 +1,3 @@
+#define uint32_little_endian(s, n) uint32_reverse((s), (n))
+#define uint32_big_endian(s, n)
+

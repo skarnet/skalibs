@@ -1,0 +1,462 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Language" content="en" />
+    <title>skalibs: the tai library interface</title>
+    <meta name="Description" content="skalibs: the tai library interface" />
+    <meta name="Keywords" content="skalibs c unix tai library libstddjb" />
+    <!-- <link rel="stylesheet" type="text/css" href="http://skarnet.org/default.css" /> -->
+  </head>
+<body>
+
+<p>
+<a href="index.html">libstddjb</a><br />
+<a href="../libskarnet.html">libskarnet</a><br />
+<a href="../index.html">skalibs</a><br />
+<a href="http://skarnet.org/software/">Software</a><br />
+<a href="http://skarnet.org/">skarnet.org</a>
+</p>
+
+<h1> The <tt>tai</tt> library interface </h1>
+
+<p>
+ The following functions are declared in the <tt>skalibs/tai.h</tt> header,
+and implemented in the <tt>libskarnet.a</tt> or <tt>libskarnet.so</tt> library.
+</p>
+
+<h2> General information </h2>
+
+<p>
+ <tt>tai</tt> is a set of data structures and primitives to represent
+and perform operations on time.
+</p>
+
+<p>
+ The point of <tt>tai</tt> is to handle time without ever having to
+deal with annoyances such as Y2K, Y2038, NTP limits, non-linear
+clocks, and the like. By using the <tt>tai</tt> interface, you ensure
+your program will behave properly no matter what.
+</p>
+
+<h3> What is the problem&nbsp;? </h3>
+
+<p>
+ The standard APIs for time management under Unix are broken in more
+or less subtle ways. The most obvious thing is that they do not pass
+year 2038. A less obvious problem is that they do not handle leap
+seconds correctly. Here are a few references you should read to
+understand what is going on:
+</p>
+
+<ul>
+ <li> <a href="http://www.madore.org/~david/misc/time.html">David Madore's page
+on time</a>. It's outdated (there was a leap second in 2009), but complete. </li>
+ <li> From David Madore again, more to the point: a
+<a href="http://www.madore.org/~david/computers/unix-leap-seconds.html">page
+about leap seconds, UTC and TAI</a>. </li>
+ <li> The skalibs <a href="../flags.html#clockistai">--enable-tai-clock</a>
+and <a href="../flags.html#tzisright">--enable-right-tz</a> documentation. </li>
+ <li> <a href="http://cr.yp.to/proto/utctai.html">Dan J. Bernstein's page
+on UTC, TAI and Unix time</a>. </li>
+</ul>
+
+<p>
+ The meat and potatoes of all this is that programmers cannot simply rely on
+standard Unix APIs such as
+<a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/gettimeofday.html">gettimeofday()</a>
+(which, by the way, is marked as obsolescent, but it's not going to disappear tomorrow)
+to measure time intervals or even to give precise absolute time, and in
+any case those APIs will become obsolete in 2038.
+</p>
+
+<h3> So what does <tt>tai</tt> do&nbsp;? </h3>
+
+<p>
+ <tt>tai</tt> implements - among other things - the
+<a href="http://cr.yp.to/libtai/tai64.html">TAI64 and TAI64N</a>
+formats, which are used in all of skalibs. This gives a programmer access
+to precise <em>linear absolute time</em>, which is suitable for both
+timestamping (<em>wallclock</em> usage) and time interval measurements
+(<em>stopwatch</em> usage). Additionally, TAI64 passes Y2038 (it can
+represent dates exceeding the estimated lifespan of the universe).
+</p>
+
+<p>
+ <tt>tai</tt> has been inspired by Dan J. Bernstein's
+<a href="http://cr.yp.to/libtai.html">libtai</a> library, but does not
+borrow any code from it.
+</p>
+
+<h2> Data structures </h2>
+
+<p>
+ A <tt>tai_t</tt> structure holds an absolute date with a one-second
+precision. A <tt>tain_t</tt> structure holds an absolute date with a
+maximum of one-nanosecond precision, as permitted by the underlying system
+call. If <a href="../flags.html#usert">flag-usert</a> is clear, the system
+clock will be read via
+<a href="http://www.opengroup.org/onlinepubs/9699919799/functions/gettimeofday.html">gettimeofday()</a>
+system call, which has a one-microsecond precision; if it is set, the
+system clock will be read via the 
+<a href="http://www.opengroup.org/onlinepubs/9699919799/functions/clock_gettime.html">clock_gettime()</a>
+system call, which has a one-nanosecond precision. In either case, a current
+<tt>tain_t</tt> will be unable to be more precise than the underlying
+implementation.
+</p>
+
+<p>
+ A <tt>tai_t</tt>, as well as a <tt>tain_t</tt>, can also
+hold a (possibly negative) relative time, i.e. a difference of absolute
+dates. It is up to the programmer to make sure that a relative time is
+never interpreted as an absolute TAI64 date, and vice-versa.
+</p>
+
+<h3> The leap second table </h3>
+
+<p>
+ skalibs provides a <tt>src/etc/leapsecs.dat</tt> file,
+which is copied to <tt>/etc/leapsecs.dat</tt> at installation time
+(or wherever you specified with the <tt>--prefix</tt> or <tt>--datadir</tt>
+options to configure).
+<strong>Make sure this file is always present and readable.</strong>
+This file contains the <em>leap second table</em>, which is needed for
+conversions between TAI and UTC. If you call a function that needs such
+a conversion (for instance, you call <tt>tain_sysclock()</tt> and your
+system clock is set to UTC) and the file cannot be read, the function
+call will fail.
+</p>
+
+<p>
+ The leap second table is read once in every process that needs it
+(the first time a TAI &harr; UTC conversion is made) and then is
+stored in memory. If the <tt>leapsecs.dat</tt> file changes, long-lived
+processes will need to be restarted to take the change into account.
+</p>
+
+<h2> Functions </h2>
+
+<h3> Wallclock operations </h3>
+
+<p>
+<code> int tai_now (tai_t *t) </code> <br />
+Writes the current time as a TAI value to *<em>t</em>, with a
+1-second precision. The current time is based on the system clock.
+Make sure skalibs has been compiled with or without the
+<a href="../flags.html#clockistai">--enable-tai-clock</a> configure option according
+to your system clock synchronization method: skalibs supports a
+system clock set to TAI-10 or to UTC.
+The function returns 1 if it succeeds, or 0 (and sets errno) if
+it fails.
+</p>
+
+<p>
+<code> int sysclock_get (tain_t *a) </code> <br />
+Reads the current value of the system clock into *<em>a</em>, with
+a 1-nanosecond (resp. 1-microsecond ) precision if skalibs has been
+configured with (resp. without) the
+<a href="../flags.html#usert">--enable-clock</a> option.
+Returns 1 if it succeeds or 0 (and sets errno) if it
+fails. Note that despite being a <tt>tain_t</tt>, *<em>a</em>
+<strong>does not contain a TAI value</strong> - it only contains
+an internal, Y2038-safe representation of the value of the system
+clock, which should be either TAI-10 or UTC. You should not use
+this function directly unless you know exactly what you are doing.
+</p>
+
+<p>
+<code> int sysclock_set (tain_t const *a) </code> <br />
+Sets the system clock to *<em>a</em>, provided *<em>a</em> has
+the correct internal representation. You should not use this
+function directly unless you know exactly what you are doing.
+</p>
+
+<p>
+<code> int tain_sysclock (tain_t *a) </code> <br />
+Reads the current time into *<em>a</em>, as a TAI64N value,
+with a 1-nanosecond (resp. 1-microsecond) precision if skalibs
+has been configured with (resp. without) the
+<a href="../flags.html#usert">--enable-clock</a>
+option. Returns 1 if it succeeds or 0 (and sets errno) if it
+fails.
+ Here <em>a</em> contains a valid TAI stamp, no matter what the
+system clock is set to: arithmetic operations can be performed
+on it.
+</p>
+
+<p>
+<code> int tain_setnow (tain_t const *a) </code> <br />
+Sets the current time to *<em>a</em>, with a 1-nanosecond
+(resp. 1-microsecond) precision if skalibs has been configured
+with (resp. without) the
+<a href="../flags.html#usert">--enable-clock</a>
+option. Returns 1 if it succeeds or 0 (and sets errno) if it
+fails. <em>a</em> must contain a valid TAI stamp; proper
+operations will be automatically run to convert that stamp into
+the right format for the system clock.
+</p>
+
+<h3> Stopwatch operations </h3>
+
+<p>
+ The following 3 operations are only defined if your system
+provides the
+<a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/clock_gettime.html">clock_gettime()</a>
+primitive with the CLOCK_MONOTONIC option.
+</p>
+
+<p>
+<code> int tain_clockmon_init (tain_t *offset) </code> <br />
+Initializes a stopwatch in *<em>offset</em>. The actual value of
+*<em>offset</em> is meaningless to the user; <em>offset</em>'s only
+use is to be given as a second parameter to <tt>tain_clockmon()</tt>.
+The function returns 1 if it succeeds or 0 (and sets errno) if it fails.
+</p>
+
+<p>
+ What <tt>tain_clockmon_init()</tt> does is synchronize the "stopwatch
+clock" (CLOCK_MONOTONIC) to the system clock. Right after
+<tt>tain_clockmon_init()</tt> has been called, the absolute times given
+by <tt>tain_clockmon()</tt> and <tt>tain_sysclock()</tt> are similar. Then,
+depending on the accuracy of the system clock, a drift may appear; calling
+<tt>tain_clockmon_init()</tt> again resets that drift to zero.
+</p>
+
+<p>
+<code> int tain_clockmon (tain_t *a, tain_t const *offset) </code> <br />
+ Gives the absolute time, as a TAI64N value, in *<em>a</em>. This
+absolute time is computed as a linear increase (as measured with
+CLOCK_MONOTONIC) since the last time <tt>tain_clockmon_init()</tt>
+was called with parameter <em>offset</em>. <tt>tain_clockmon()</tt>
+guarantees precise time interval measurements; however, the time it
+gives can slightly differ from the result of <tt>tain_sysclock()</tt>.
+The function returns 1 if it succeeds or 0 (and sets errno) if it fails.
+</p>
+
+<h3> All-purpose time reading </h3>
+
+<p>
+<code> int tain_init (void) </code> <br />
+If skalibs has been configured with the
+<a href="../flags.html#usemon">--enable-monotonic</a> option: this
+function initializes a process-global stopwatch, that future
+<tt>tain_now</tt> invocations will depend on.
+Without the <a href="../flags.html#usemon">--enable-monotonic</a> option: this
+function does nothing.
+The function returns 1 if it succeeds or 0 (and sets errno) if it fails.
+</p>
+
+<p>
+<code> int tain_now (tain_t *a) </code> <br />
+Writes the current time, as a TAI value, to *<em>a</em>. This is the
+function you should use to read time by default. It returns 1 if it succeeds or
+0 (and sets errno) if it fails.
+</p>
+
+<p>
+ If skalibs has been configured with the
+<a href="../flags.html#usemon">--enable-monotonic</a> option:
+<tt>tain_now()</tt> is computed as a linear increase from the last time
+<tt>tain_init()</tt> was called. (If <tt>tain_init()</tt> has never
+been called before, the first invocation of <tt>tain_now()</tt>
+automatically calls <tt>tain_init()</tt>.)
+ Without the <a href="../flags.html#usemon">--enable-monotonic</a> option:
+<tt>tain_now()</tt> is the same as <tt>tain_sysclock()</tt>.
+</p>
+
+<p>
+ If the above is unclear to you: just use <tt>tain_now()</tt>
+everytime you need to read time, and you will always get a reasonable
+approximation of the current time, in a format suited for arithmetic
+computations.
+</p>
+
+<h3> Converting to/from libc representations </h3>
+
+<p>
+<code> int tai_from_timeval (tai_t *t, struct timeval const *tv) <br />
+int tai_from_timespec (tai_t *t, struct timespec const *ts) <br />
+int tai_relative_from_timeval (tai_t *t, struct timeval const *tv) <br />
+int tai_relative_from_timespec (tai_t *t, struct timespec const *ts) </code> <br />
+Those functions convert an absolute (resp. relative) time in a
+struct timeval (resp. struct timespec) to an absolute (resp. relative)
+time in a tai_t, with a 1-second precision. They return 1.
+</p>
+
+<p>
+<code> int timeval_from_tai (struct timeval *tv, tai_t const *t) <br />
+int timespec_from_tai (struct timespec *ts, tai_t const *t) <br />
+int timeval_from_tai_relative (struct timeval *tv, tai_t const *t) <br />
+int timespec_from_tai_relative (struct timespec *ts, tai_t const *t) </code> <br />
+Those functions do the opposite conversion. They normally return 1;
+however, <tt>struct timeval</tt> and <tt>struct timespec</tt> cannot
+represent an absolute date before the Epoch, or a negative relative time;
+if *<em>t</em> cannot be converted, 0 EINVAL is returned.
+</p>
+
+<p>
+<code> int tain_from_timeval (tain_t *a, struct timeval const *tv) <br />
+int tain_from_timespec (tain_t *a, struct timespec const *ts) <br />
+int tain_relative_from_timeval (tain_t *a, struct timeval const *tv) <br />
+int tain_relative_from_timespec (tain_t *a, struct timespec const *ts) <br />
+int timeval_from_tain (struct timeval *tv, tain_t const *a) <br />
+int timespec_from_tain (struct timespec *ts, tain_t const *a) <br />
+int timeval_from_tain_relative (struct timeval *tv, tain_t const *a) <br />
+int timespec_from_tain_relative (struct timespec *ts, tain_t const *a) </code> <br />
+Same conversion operations, but with a <tt>tain_t</tt>. The 1-microsecond
+(for <tt>struct timeval</tt>) or 1-nanosecond (for <tt>struct timespec</tt>)
+precision is preserved.
+</p>
+
+<p>
+<code> void tain_uint (tain_t *a, unsigned int c) </code> <br />
+Stores a relative time of <em>c</em> seconds into <em>a</em>.
+</p>
+
+<p>
+<code> int tain_from_millisecs (tain_t *a, int ms) </code> <br />
+This function makes a <tt>tain_t</tt> representing a relative
+time of <em>ms</em> milliseconds. <em>ms</em> must be non-negative.
+The function returns 1, unless <em>ms</em> is negative, in which case
+it returns 0 EINVAL.
+</p>
+
+<p>
+<code> int tain_to_millisecs (tain_t const *a) </code> <br />
+If *<em>a</em> contains a non-negative relative time that fits into
+a 31-bit integer number of milliseconds, the function returns that
+number. Else it returns -1 EINVAL.
+</p>
+
+<h3> Time computations </h3>
+
+<p>
+<code> void tai_add (tai_t *t, tai_t const *t1, tai_t const *t2) </code> <br />
+Stores *<em>t1</em> + *<em>t2</em> into <em>t</em>. Of course, *<em>t1</em>
+and *<em>t2</em> must not both represent absolute times.
+</p>
+
+<p>
+<code> void tai_sub (tai_t *t, tai_t const *t1, tai_t const *t2) </code> <br />
+Stores *<em>t1</em> - *<em>t2</em> into <em>t</em>. Of course, *<em>t1</em>
+and *<em>t2</em> must be of the same type (relative or absolute), and
+*<em>t</em> will always be relative.
+</p>
+
+<p>
+<code> void tain_add (tain_t *a, tain_t const *a1, tain_t const *a2) <br />
+void tain_sub (tain_t *a, tain_t const *a1, tain_t const *a2) </code> <br />
+Same thing with <tt>tain_t</tt>.
+</p>
+
+<p>
+<code> void tain_addsec (tain_t *a, tain_t const *a1, int c) </code> <br />
+Adds <em>c</em> seconds to *<em>a1</em> and stores the result into <em>a</em>.
+<em>c</em> may be negative.
+</p>
+
+<p>
+<code> void tain_half (tain_t *a, tain_t const *b) </code> <br />
+Stores *<em>b</em>/2 into <em>a</em>. *<em>b</em> must be relative.
+</p>
+
+<h3> Comparing dates or durations </h3>
+
+<p>
+<code> int tai_less (tai_t const *t1, tai_t const *t2) <br />
+int tain_less (tain_t const *t1, tain_t const *t2) </code> <br />
+Those functions return nonzero iff *<em>t1</em> is lesser than *<em>t2</em>.
+*<em>t1</em> and *<em>t2</em> must be both relative, or both absolute.
+</p>
+
+<h3> Packing and unpacking </h3>
+
+<p>
+<code> void tai_pack (char *s, tai_t const *t) </code> <br />
+Marshals *<em>t</em> into the buffer <em>s</em> points to, which
+must be preallocated with at least TAI_PACK (8) characters. Afterwards,
+the buffer contains the
+<a href="http://cr.yp.to/libtai/tai64.html#tai64">external TAI64 format</a>
+representation of *<em>t</em>.
+</p>
+
+<p>
+<code> void tai_unpack (char const *s, tai_t *t) </code> <br />
+Unmarshals the
+<a href="http://cr.yp.to/libtai/tai64.html#tai64">external TAI64 format</a>
+label pointed to by <em>s</em> (at least TAI_PACK characters) and stores
+the result into <em>t</em>.
+</p>
+
+<p>
+<code> void tain_pack (char *s, tain_t const *a) <br />
+void tain_unpack (char const *s, tain_t *a) <br />
+void tain_pack (char *s, tain_t const *a) <br />
+void tain_unpack (char const *s, tain_t *a) </code> <br />
+Same thing with
+<a href="http://cr.yp.to/libtai/tai64.html#tai64n">external TAI64N format</a>,
+using TAIN_PACK (12) characters.
+</p>
+
+<h3> Formatting and scanning </h3>
+
+<p>
+<code> unsigned int tain_fmt (char *s, tain_t const *a) </code> <br />
+Writes into <em>s</em> an ASCII representation of *<em>a</em> in external
+TAI64N format. <em>s</em> must point to a preallocated buffer of at least
+TAIN_PACK*2 (24) characters. The function returns the number of bytes that
+have been written to <em>s</em> (24).
+</p>
+
+<p>
+<code> unsigned int tain_scan (char const *s, tain_t *a) </code> <br />
+Reads 24 characters from <em>s</em>; if those characters are a valid ASCII
+representation of the external TAI64N format of some time value, this value
+is stored into <em>a</em>, and 24 is returned. Else 0 is returned.
+</p>
+
+<a name="timestamp"><h3> Timestamping </h3></a>
+
+<p>
+ A <em>TAI64N timestamp</em> is a string of 25 characters: a single '@'
+character followed by the ASCII representation of the TAI64N external
+format of an absolute date.
+</p>
+
+<p>
+<code> unsigned int timestamp_fmt (char *s, tain_t const *a) </code> <br />
+Writes a TAI64N timestamp representing the absolute date *<em>a</em>
+into the 25 characters pointed to by <em>s</em>. Returns 25.
+</p>
+
+<p>
+<code> unsigned int timestamp_scan (char const *s, tain_t *a) </code> <br />
+Reads 25 characters at <em>s</em>. If those characters are a valid TAI64N
+timestamp, stores the absolute date in <em>a</em> and returns 25. Else,
+returns 0.
+</p>
+
+<p>
+<code> int timestamp (char *s) </code> <br />
+Writes the current time (read from the system clock) as a TAI64N timestamp
+into <em>s</em>. Returns 1 if it succeeds or 0 (and sets errno) if it fails.
+</p>
+
+<p>
+ TAI64N timestamps are an efficient, robust, and easy-to-use way of
+timestampping log lines. They're easy to recognize in automatic data
+parsers. Log files where every line starts with a TAI64N timestamp can
+be merged and alphanumerically sorted: the resulting file will be
+chronologically sorted.
+</p>
+
+<p>
+ The <a href="http://skarnet.org/software/s6/">s6</a> package
+provides tools to convert TAI64N timestamps into human-readable
+dates. Please do not embed human-readable dates in your log files,
+thus making parsing tools unnecessarily hard to write;
+use TAI64N timestamps instead, design tools that can parse them,
+and translate them to human-readable form at human analysis time.
+</p>
+
+</body>
+</html>

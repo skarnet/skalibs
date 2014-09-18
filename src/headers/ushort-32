@@ -1,0 +1,34 @@
+#include <skalibs/uint32.h>
+
+#define USHORT_PACK 4
+#define ushort_pack uint32_pack
+#define ushort_pack_big uint32_pack_big
+#define ushort_unpack(s, u) uint32_unpack(s, (uint32 *)(char *)(u))
+#define ushort_unpack_big(s, u) uint32_unpack_big(s, (uint32 *)(char *)(u))
+
+#define ushort_reverse uint32_reverse
+#define ushort_big_endian uint32_big_endian
+#define ushort_little_endian uint32_little_endian
+
+#define USHORT_FMT UINT32_FMT
+#define USHORT_OFMT UINT32_OFMT
+#define USHORT_XFMT UINT32_XFMT
+#define USHORT_BFMT UINT32_BFMT
+
+#define ushort_fmt_base uint32_fmt_base
+#define ushort0_fmt_base uint320_fmt_base
+#define ushort_fmt uint32_fmt
+#define ushort0_fmt uint320_fmt
+#define ushort_ofmt uint32_ofmt
+#define ushort0_ofmt uint320_ofmt
+#define ushort_xfmt uint32_xfmt
+#define ushort0_xfmt uint320_xfmt
+#define ushort_bfmt uint32_bfmt
+#define ushort0_bfmt uint320_bfmt
+
+#define ushort_fmtlist(s, tab, n) uint32_fmtlist(s, tab, n)
+
+#define ushort_scan_base(s, u, b) uint32_scan_base(s, (uint32 *)(char *)(u), b)
+#define ushort0_scan_base(s, u, b) uint320_scan_base(s, (uint32 *)(char *)(u), b)
+
+#define ushort_scanlist(tab, max, s, num) uint32_scanlist(tab, max, s, num)

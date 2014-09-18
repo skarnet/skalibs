@@ -1,0 +1,93 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Language" content="en" />
+    <title>How to cross-compile skalibs</title>
+    <meta name="Description" content="How to cross-compile skalibs" />
+    <meta name="Keywords" content="skalibs build cross-compilation" />
+    <!-- <link rel="stylesheet" type="text/css" href="http://skarnet.org/default.css" /> -->
+  </head>
+<body>
+
+<p>
+<a href="index.html">skalibs</a><br />
+<a href="http://skarnet.org/software/">Software</a><br />
+<a href="http://skarnet.org/">skarnet.org</a>
+</p>
+
+<h1> How to cross-compile skalibs </h1>
+
+<p>
+ There are three issues in the world of cross-compilation:
+</p>
+
+<ul>
+ <li> support for parallel builds: the source directory must be read-only
+and each build process must have its own build tree. </li>
+ <li> support for compiler options: to specify the target architecture,
+the header and library files that should be used, etc.
+ <li> build-time tests performed on the build architecture are invalid
+if the target architecture is different. </li>
+</ul>
+
+<h2> Support for parallel builds </h2>
+
+<p>
+ skalibs does not support out-of-tree builds at the moment,
+but since the source code tree is small, it's not costly to duplicate it
+to perform parallel builds. If the source code trees grows significantly
+larger, out-of-tree build support will be considered.
+</p>
+
+<h2> Support for build-time options </h2>
+
+<p>
+ skalibs now uses a standard <tt>./configure &amp;&amp; make &amp;&amp; make install</tt>
+process, and cross-compiling build-time options can be given on the
+<tt>./configure</tt> command line.
+</p>
+
+<h2> Bypassing the build-time tests </h2>
+
+<p>
+ This is the hardest part of cross-compilation, and very few build systems
+get it right. (GNU autotools does not, which is one of the reasons why
+skarnet.org packages do not use autotools.)
+</p>
+
+<p>
+ Native build procedures usually perform build-time tests: they compile
+executables and run them (on the build platform, which is the same as
+the target platform) to check for features and system quirks. skalibs
+does exactly that: the <tt>./configure</tt> step performs tests on the
+build platform and stores the system-dependent results in a directory
+that it calls the <em>sysdeps</em> for this platform.
+</p>
+
+<p>
+But in a
+cross-compilation environment, build-time tests are invalid, since the build
+platform and the target platform differ.
+ There is only one way to cross-compile portable code without resorting
+to build-time autodetection:
+<strong>you must provide by hand the sysdeps for your target
+architecture</strong>, via the --with-sysdeps option to configure.
+</p>
+
+<p>
+ The easiest way to get the correct sysdeps for a target achitecture is
+to natively compile skalibs on that target, and steal the produced sysdeps
+files. It can be easily done with a virtual machine, qemu for instance.
+You could also (politely) ask for precompiled sysdeps on the
+skaware mailing-list, if you cannot find them anywhere on the Internet.
+</p>
+
+<h2> Credits </h2>
+
+<p>
+<a href="http://www.kegel.com/">Dan Kegel</a> brought up the need for a
+clean cross-compilation system.
+</p>
+
+</body>
+</html>

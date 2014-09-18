@@ -1,0 +1,34 @@
+/* ISC license. */
+
+#ifndef IP46_H
+#define IP46_H
+
+#include <errno.h>
+#include <skalibs/uint16.h>
+#include <skalibs/bytestr.h>
+#include <skalibs/fmtscan.h>
+#include <skalibs/tai.h>
+#include <skalibs/socket.h>
+
+#define IP46_FMT IP6_FMT
+#define IP4_ANY "\0\0\0"
+#define IP6_ANY "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
+#define IP4_LOCAL "\177\0\0\1"
+#define IP6_LOCAL "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\1"
+
+typedef struct ip46full_s ip46full_t, *ip46full_t_ref ;
+
+struct ip46full_s
+{
+  char ip[16] ;
+  unsigned int is6: 1 ;
+} ;
+#define IP46FULL_ZERO { .ip = IP6_ANY, .is6 = 0 }
+
+#define ip46full_is6(i) ((i)->is6)
+#define ip46full_fmt(s, i) ((i)->is6 ? ip6_fmt(s, (i)->ip) : ip4_fmt(s, (i)->ip))
+extern unsigned int ip46full_scan (char const *, ip46full_t_ref) ;
+extern unsigned int ip46full_scanlist (ip46full_t_ref, unsigned int, char const *, unsigned int *) ;
+#define ip46full_from_ip4(i, ip4) (byte_copy((i)->ip, 4, ip4), byte_zero((i)->ip + 4, 12), (i)->is6 = 0)
+#define ip46full_from_ip6(i, ip6) (byte_copy((i)->ip, 16, ip6), (i)->is6 = 1)
+

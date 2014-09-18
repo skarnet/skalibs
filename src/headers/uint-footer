@@ -1,0 +1,10 @@
+#define uint_scan(s, u) uint_scan_base(s, (u), 10)
+#define uint0_scan(s, u) uint0_scan_base(s, (u), 10)
+#define uint_oscan(s, u) uint_scan_base(s, (u), 8)
+#define uint0_oscan(s, u) uint0_scan_base(s, (u), 8)
+#define uint_xscan(s, u) uint_scan_base(s, (u), 16)
+#define uint0_xscan(s, u) uint0_scan_base(s, (u), 16)
+#define uint_bscan(s, u) uint_scan_base(s, (u), 2)
+#define uint0_bscan(s, u) uint0_scan_base(s, (u), 2)
+
+#endif

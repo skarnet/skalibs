@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Language" content="en" />
+    <title>skalibs: safe wrappers</title>
+    <meta name="Description" content="skalibs: safe wrappers" />
+    <meta name="Keywords" content="skalibs c unix safe wrappers safewrappers library libstddjb" />
+    <!-- <link rel="stylesheet" type="text/css" href="http://skarnet.org/default.css" /> -->
+  </head>
+<body>
+
+<p>
+<a href="index.html">libstddjb</a><br />
+<a href="../libskarnet.html">libskarnet</a><br />
+<a href="../index.html">skalibs</a><br />
+<a href="http://skarnet.org/software/">Software</a><br />
+<a href="http://skarnet.org/">skarnet.org</a>
+</p>
+
+<h1> Safe wrappers </h1>
+
+<p>
+ Lots of functions in <tt>libstddjb</tt>, declared for instance in
+<a href="allreadwrite.html">allreadwrite.h</a> or
+<a href="djbunix.html">djbunix.h</a>, are just "safe wrappers"
+around corresponding system functions. For instance,
+<tt>fd_read()</tt> is a safe wrapper around the system <tt>read()</tt>
+function.
+</p>
+
+<h2> The problem </h2>
+
+<p>
+ Quite a lot of system calls are defined by
+<a href="http://www.opengroup.org/onlinepubs/9699919799/nfindex.html">The
+Open Group Base Specifications</a> as interruptible: when the process is in
+the middle of such a system call and receives a signal that it does not
+ignore, the system call immediately returns -1 EINTR (after the signal
+handler, if any, has been executed).
+</p>
+
+<p>
+ This means that the intended execution of the process is at the mercy
+of a stray signal. If a signal happens at the wrong time, a system call
+fails when it could have succeeded. This is not acceptable.
+</p>
+
+<h2> The solution </h2>
+
+<p>
+ So, in order to be perfectly reliable, when a program makes an interruptible
+system call, it <em>must</em> check whether the return value is -1 EINTR,
+and restart the system call if it is the case. This is annoying to write;
+so, <tt>libstddjb</tt> provides small wrappers around interruptible system
+calls, so that programmers can just call those <em>safe wrappers</em> and
+never bother with this again.
+</p>
+
+<p>
+ The performance loss from having a wrapper layer is totally negligible
+compared to the cost of using a system call in the first place.
+</p>
+
+<h2> But isn't it what the SA_RESTART flag is meant to address? </h2>
+
+<p>
+ Yes, it is. Unfortunately, SA_RESTART only protects interruptible
+system calls from signals you actually have control over, and set a
+handler for with
+<a href="http://www.opengroup.org/onlinepubs/9699919799/functions/sigaction.html">sigaction()</a>.
+This is not enough. You cannot decide that <em>every</em> signal sent
+to your process should have SA_RESTART behaviour; and the Single Unix
+specification says nothing about signals you do not control. For instance,
+you cannot trap SIGSTOP; SIGSTOP does not kill your process, which
+should resume flawlessly at the next SIGCONT; and according to the
+specification, it is valid for SIGSTOP and SIGCONT to <em>not</em>
+have SA_RESTART behaviour. So if you get a SIGSTOP while performing
+an interruptible system call, that system call may return -1 EINTR,
+this is not an OS bug, and there's nothing you can do about it with
+<tt>sigaction()</tt>.
+</p>
+
+<p>
+ SA_RESTART is only a partial solution: in other words, it doesn't work.
+Until the Single Unix specification explicitly states that untrapped
+non-lethal signals MUST have SA_RESTART behaviour by default, you
+<em>need</em> safe wrappers to protect interruptible system calls.
+</p>
+
+</body>
+</html>

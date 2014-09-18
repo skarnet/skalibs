@@ -1,0 +1,32 @@
+#include <skalibs/uint32.h>
+
+#define ULONG_PACK 4
+#define ulong_pack uint32_pack
+#define ulong_pack_big uint32_pack_big
+#define ulong_unpack(s, u) uint32_unpack(s, (uint32 *)(char *)(u))
+#define ulong_unpack_big(s, u) uint32_unpack_big(s, (uint32 *)(char *)(u))
+
+#define ulong_reverse uint32_reverse
+#define ulong_big_endian uint32_big_endian
+#define ulong_little_endian uint32_little_endian
+
+#define ULONG_FMT UINT32_FMT
+#define ULONG_OFMT UINT32_OFMT
+#define ULONG_XFMT UINT32_XFMT
+#define ULONG_BFMT UINT32_BFMT
+
+#define ulong_fmt uint32_fmt
+#define ulong0_fmt uint320_fmt
+#define ulong_ofmt uint32_ofmt
+#define ulong0_ofmt uint320_ofmt
+#define ulong_xfmt uint32_xfmt
+#define ulong0_xfmt uint320_xfmt
+#define ulong_bfmt uint32_bfmt
+#define ulong0_bfmt uint320_bfmt
+
+#define ulong_fmtlist(s, tab, n) uint32_fmtlist(s, tab, n)
+
+#define ulong_scan_base(s, u, b) uint32_scan_base(s, (uint32 *)(char *)(u), b)
+#define ulong0_scan_base(s, u, b) uint320_scan_base(s, (uint32 *)(char *)(u), b)
+
+#define ulong_scanlist(tab, max, s, num) uint32_scanlist(tab, max, s, num)

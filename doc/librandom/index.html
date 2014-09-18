@@ -1,0 +1,113 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Language" content="en" />
+    <title>skalibs: the random library interface</title
+    <meta name="Description" content="skalibs: the random library interface" />
+    <meta name="Keywords" content="skalibs library random librandom random.h" />
+    <!-- <link rel="stylesheet" type="text/css" href="http://skarnet.org/default.css" /> -->
+  </head>
+<body>
+
+<p>
+<a href="../libskarnet.html">libskarnet</a><br />
+<a href="../index.html">skalibs</a><br />
+<a href="http://skarnet.org/software/">Software</a><br />
+<a href="http://skarnet.org/">skarnet.org</a>
+</p>
+
+<h1> The <tt>random</tt> library interface </h1>
+
+<p>
+<tt>librandom</tt> is a small library designed to provide an
+interface to some reasonable-quality pseudorandom number
+generation. Some libcs have a bad
+<tt>random()</tt> implementation; <tt>librandom</tt> is designed
+to use system pseudorandom number generation when it's provided
+via <tt>/dev/random</tt> and <tt>/dev/urandom</tt>, and to use
+a good default PRNG otherwise.
+</p>
+
+<p>
+ <tt>librandom</tt> also supports
+<a href="http://egd.sourceforge.net/">EGD</a>. If you have built
+skalibs with  <tt>--enable-egd</tt>, then the librandom
+primitives will try and connect to an EGD service to get random bytes
+if there is no kernel-based entropy generator such as <tt>/dev/random</tt>.
+If the EGD connection fails, a SURF PRNG is used.
+</p>
+
+<h2> Compiling </h2>
+
+<ul>
+ <li> Use <tt>#include &lt;skalibs/random.h&gt;</tt> </li>
+</ul>
+
+<h2> Programming </h2>
+
+<p>
+ You should refer to the <tt>skalibs/random.h</tt> header for the exact
+function prototypes.
+</p>
+
+ <h3> High quality, cryptographically strong random data </h3>
+
+<pre>
+  unsigned char c ;
+  unsigned int max ;
+  unsigned int n ;
+  unsigned int b ;
+  char data[at least b] ;
+  int r ;
+
+  goodrandom_init() ;
+  c = goodrandom_char() ;
+  n = goodrandom_int(max) ;
+  r = goodrandom_string(data, b) ;
+  goodrandom_finish() ;
+</pre>    
+
+<p>
+ <tt>goodrandom_init()</tt> becomes optional with skalibs-0.43.
+ It is recommended that you let the library perform cleanups after you
+have used it, by calling <tt>goodrandom_finish()</tt>.
+</p>
+
+<ul>
+  <li> <tt>goodrandom_char()</tt> returns a random character </li>
+  <li> <tt>goodrandom_int(<em>max</em>)</tt> returns a random integer
+between 0 and <em>max</em>-1 </li>
+  <li> <tt>goodrandom_string(<em>data</em>, <em>b</em>)</tt> puts
+<em>b</em> random bytes in <em>data</em>, which must be preallocated.
+It returns <em>b</em> if it succeeds, or a non-negative integer lesser
+than <em>b</em> if it fails for any reason. </li>
+</ul>
+
+<p>
+ If you have neither <tt>/dev/random</tt> nor EGD, a software PRNG is
+used. This PRNG is based on the
+<a href="http://cr.yp.to/antiforgery.html#surf">SURF</a> function, which
+is unpredictable enough for most uses.
+</p>
+
+ <h3> Lower quality random data </h3>
+
+<p>
+ It works basically the same, by replacing <tt>goodrandom_*</tt> with
+<tt>badrandom_*</tt>. It uses <tt>/dev/urandom</tt> on systems that
+support it; on systems that do not, but support EGD, non-blocking calls
+to EGD are made ; if that is not enough, or EGD is not supported,
+the SURF generator is used.
+</p>
+
+<p>
+ The point of <tt>badrandom</tt> is to get random bytes <em>instantly</em>,
+even at the expense of quality; whereas <tt>goodrandom</tt> always returns
+high-quality random bytes, but may block if entropy is insufficient. In
+practice, in spite of its name, <tt>badrandom</tt> will return quite
+unpredictable pseudo-random data, so <tt>goodrandom</tt> should be used
+only when paranoia is the rule and blocking is an option.
+</p>
+
+</body>
+</html>

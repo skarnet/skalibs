@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Language" content="en" />
+    <title>skalibs: the stdcrypto library interface</title>
+    <meta name="Description" content="skalibs: the stdcrypto library interface" />
+    <meta name="Keywords" content="skalibs stdcrypto libstdcrypto library interface" />
+    <!-- <link rel="stylesheet" type="text/css" href="http://skarnet.org/default.css" /> -->
+  </head>
+<body>
+
+<p>
+<a href="../libskarnet.html">libskarnet</a><br />
+<a href="../index.html">skalibs</a><br />
+<a href="http://skarnet.org/software/">Software</a><br />
+<a href="http://skarnet.org/">skarnet.org</a>
+</p>
+
+<h1> The <tt>stdcrypto</tt> library interface </h1>
+
+<p>
+<tt>stdcrypto</tt> is a small collection of standard,
+public-domain cryptographic primitives. Currently, the following
+operations are provided:
+</p>
+
+<ul>
+  <li> rc4 </li>
+  <li> md5 </li>
+  <li> sha1 </li>
+</ul>
+
+<h2> Compiling </h2>
+
+<ul>
+ <li> Use <tt>#include &lt;skalibs/stdcrypto.h&gt;</tt> </li>
+</ul>
+
+<h2> Programming </h2>
+
+<p>
+ You should refer to the <tt>skalibs/stdcrypto.h</tt> header and included headers
+for the exact function prototypes.
+</p>
+
+<h3> <a name="rc4" />
+RC4 </h3>
+
+<pre>
+  RC4Schedule ctx ;
+  unsigned char const *key ;
+  unsigned int keylen ;
+  unsigned char const *in ;
+  unsigned char *out ;
+  unsigned int len ;
+
+  rc4_init(&amp;ctx, key, keylen) ;
+  rc4(&amp;ctx, in, out, len) ;
+</pre>
+
+<ul>
+  <li> <tt>rc4_init()</tt> initializes a RC4Schedule structure with a key <em>key</em>,
+of length <em>keylen</em>. It then computes and throws away the first <tt>RC4_THROWAWAY</tt>
+bytes, usually 100 </li>
+  <li> <tt>rc4()</tt> encrypts <em>len</em> bytes of <em>in</em> with the RC4 flow, and
+stores the results into <em>out</em> </li>
+</ul>
+
+<h3> <a name="md5" />
+MD5 </h3>
+
+<pre>
+  MD5Schedule ctx ;
+  char const *message ;
+  unsigned int messagelen ;
+  char digest[16] ;
+
+  md5_init(&amp;ctx) ;
+  md5_update(&amp;ctx, message, messagelen) ;
+  md5_final(&amp;ctx, digest) ;
+</pre>    
+
+<ul>
+  <li> <tt>md5_init()</tt> prepares a MD5Schedule structure for computation </li>
+  <li> <tt>md5_update()</tt> adds <em>message</em> to the message to be digested </li>
+  <li> <tt>md5_final()</tt> computes the digest </li>
+</ul>
+
+<h3> <a name="sha1"></a>
+SHA1 </h3>
+
+<pre>
+  SHA1Schedule ctx ;
+  char const *message ;
+  unsigned int messagelen ;
+  unsigned char digest[20] ;
+
+  sha1_init(&amp;ctx) ;
+  sha1_update(&amp;ctx, message, messagelen) ;
+  sha1_final(&amp;ctx, digest) ;
+</pre>
+
+<ul>
+  <li> <tt>sha1_init()</tt> prepares a SHA1Schedule structure for computation </li>
+  <li> <tt>sha1_update()</tt> adds <em>message</em> to the message to be digested </li>
+  <li> <tt>sha1_final()</tt> computes the digest </li>
+</ul>
+
+</body>
+</html>

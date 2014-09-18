@@ -1,0 +1,10 @@
+#define ushort_scan(s, u) ushort_scan_base(s, (u), 10)
+#define ushort0_scan(s, u) ushort0_scan_base(s, (u), 10)
+#define ushort_oscan(s, u) ushort_scan_base(s, (u), 8)
+#define ushort0_oscan(s, u) ushort0_scan_base(s, (u), 8)
+#define ushort_xscan(s, u) ushort_scan_base(s, (u), 16)
+#define ushort0_xscan(s, u) ushort0_scan_base(s, (u), 16)
+#define ushort_bscan(s, u) ushort_scan_base(s, (u), 2)
+#define ushort0_bscan(s, u) ushort0_scan_base(s, (u), 2)
+
+#endif

@@ -1,0 +1,10 @@
+#define ulong_scan(s, u) ulong_scan_base(s, (u), 10)
+#define ulong0_scan(s, u) ulong0_scan_base(s, (u), 10)
+#define ulong_oscan(s, u) ulong_scan_base(s, (u), 8)
+#define ulong0_oscan(s, u) ulong0_scan_base(s, (u), 8)
+#define ulong_xscan(s, u) ulong_scan_base(s, (u), 16)
+#define ulong0_xscan(s, u) ulong0_scan_base(s, (u), 16)
+#define ulong_bscan(s, u) ulong_scan_base(s, (u), 2)
+#define ulong0_bscan(s, u) ulong0_scan_base(s, (u), 2)
+
+#endif

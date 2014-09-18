@@ -1,0 +1,34 @@
+#include <skalibs/uint16.h>
+
+#define UINT_PACK 2
+#define uint_pack uint16_pack
+#define uint_pack_big uint16_pack_big
+#define uint_unpack(s, u) uint16_unpack(s, (uint16 *)(char *)(u))
+#define uint_unpack_big(s, u) uint16_unpack_big(s, (uint16 *)(char *)(u))
+
+#define uint_reverse uint16_reverse
+#define uint_big_endian uint16_big_endian
+#define uint_little_endian uint16_little_endian
+
+#define UINT_FMT UINT16_FMT
+#define UINT_OFMT UINT16_OFMT
+#define UINT_XFMT UINT16_XFMT
+#define UINT_BFMT UINT16_BFMT
+
+#define uint_fmt_base uint16_fmt_base
+#define uint0_fmt_base uint160_fmt_base
+#define uint_fmt uint16_fmt
+#define uint0_fmt uint160_fmt
+#define uint_ofmt uint16_ofmt
+#define uint0_ofmt uint160_ofmt
+#define uint_xfmt uint16_xfmt
+#define uint0_xfmt uint160_xfmt
+#define uint_bfmt uint16_bfmt
+#define uint0_bfmt uint160_bfmt
+
+#define uint_fmtlist(s, tab, n) uint16_fmtlist(s, tab, n)
+
+#define uint_scan_base(s, u, b) uint16_scan_base(s, (uint16 *)(char *)(u), b)
+#define uint0_scan_base(s, u, b) uint160_scan_base(s, (uint16 *)(char *)(u), b)
+
+#define uint_scanlist(tab, max, s, num) uint16_scanlist(tab, max, s, num)

@@ -1,0 +1,260 @@
+20110628
+	version: 1.0.0
+20110630
+	doc: in libstddjb/index.html, corrected strerr.h -> webipc.h
+	bug: when not HASSIGNALFD, selfpipe_trap.c and selfpipe_untrap.c did not compile
+	  fix: change "i" to "sig". Silly me.
+	version: 1.0.1
+20110705
+	bug: wrong test for "after" banner in skaclient2_startf.c
+	  fix: test readbanner() < afterlen
+	version: 1.0.2
+20110711
+	bug: sig_restoreto.o wasn't in deps-lib/stddjb
+	  fix: add it
+	portability: some OSes have an off-by-one NSIG (65).
+	  fix: don't rely on NSIG, always test whether sigismember() < 0
+	  in the future: consider making SKALIBS_NSIG a sysdep
+	internal: removed sig_nostack, made sig_catcha and sig_restore macros.
+	version: 1.0.3
+20110712
+	bug: localtmn_scan didn't scan the nano part properly
+	  fix: change *s to *s++
+	version: 1.0.4
+20110718
+	code: changed short_scan, int_scan and long_scan behaviour according
+	  to prj's advice
+	build: changed internal targets to mode 755 instead of 555
+	ui: gensetdyn_p sets errno when returning NULL
+	bug: genset_new() didn't set the newly allocated bit
+	  fix: trivial
+	bug: static initialization of gensetb and avltreeb didn't work
+	  fix: impossible to make them work in all cases -> scrap the API
+	  workaround: declare them statically, but init them dynamically
+	ui: changed uintcmpfunc_t to accept a callback argument
+	    modified avlnode/avltree(n) in consequence
+	ui: changed gensetdyn_new() and avltree_newnode() interfaces
+	bug: avlnode_insert and avlnode_delete() didn't work in all cases
+	  fix: went over the logic again, added missing logic (subspin...)
+	version: 1.1.0
+20110726
+	bug: avltree_newnode() segfaulted in some cases
+	  fix: don't deref before the gensetdyn_new, duh.
+	version: 1.1.1
+20110815
+	ui: clarified avlnode, avltree and avltreen interfaces
+	version: 1.2.0
+20110820
+	ui: added lolstdio.h
+	doc: documented lolstdio.h
+20110822
+	version: 1.2.1
+20110906
+	bug: absolutepath sometimes added a stray '\0'
+	  fix: adjust tmp length when exiting the loop
+	internal: exposed buffer_0/1/2 objects; buffer_0/1/2 now is a macro
+	code: added genwrite
+	doc: documented genwrite
+20110915
+	internal: separated genwrite write into put and flush, added bufalloc handles
+	doc: reflected changes
+	internal: changed EINVAL to EOVERFLOW when localtm_from_ltm64() finds a date > 32 bits
+	  todo: 2038 is fast approaching, we need to push for tai64 adoption
+20110919
+	version: 1.2.2
+20110929
+	ui: changed openwritenclose_unsafe* and openwritenclose_suffix* to macros
+	ui: changed socket_accept4* to macros, same thing
+	ui: changed ipc_accept* to macros, same thing
+	ui: added more macros in tai.h to help with static init
+	version: 1.2.3
+20111108
+	bug: TAI_INFINITE was incorrectly defined
+	  fix: trivial
+	bug: potential security hole in stralloc_ready_tuned
+	  fix: check for uint overflows
+20111207
+	internal: reworked nbcoe to accommodate new Linux socket() options
+	ui: socket_* and ipc_* are now often macros
+20111208
+	version: 1.2.4
+20120206
+	bug: missing const in taia_clockmon() stub definition when !HASCLOCKMON
+	  fix: trivial
+20120213
+	internal: changed all bools from unsigned char to int
+	ui: some APIs are affected by the unsigned char to int change
+20120220
+	version: 1.2.5
+20120310
+	code: added options to envdir(), renamed it envdir_internal()
+	ui: envdir() is now a macro, for compatibility
+	version: 1.2.6
+20120311
+	data: updated leapsecs.dat to include the 2012-06-30 leap second
+20120312
+	bug: some sysdeps tested libc behaviour instead of kernel behaviour
+	  impact: some kernel/libc combinations would get the wrong sysdeps
+	  fix: added more run tests instead of relying on load tests
+	version: 1.2.7
+20120518
+	ui: changed skagetlnsep to handle non-empty target strallocs
+	  (used in execline-1.1.5's forbacktickx)
+20120527
+	bug: off-by-10 TAI values with some libcs
+	  fix: tai_unix() is now sysclock-agnostic
+20120606
+	bug: splice() (in iobufferk) sometimes blocks
+	  fix: add non-blocking handling in iobufferk and SPLICE_F_NONBLOCK
+	  also fixed include files order for proper _GNU_SOURCE scope
+	portability: no HASOPENAT detection with newer glibcs
+	  fix: change _ATFILE_SOURCE to _GNU_SOURCE, modify tryopenat.c
+20120612
+	version: 1.2.8
+20120712
+	code: added ipv6 sysdep
+20120818
+	code: added ipv6 fmt, scan and socket functions
+20120824
+	code: added ip6_scanlist, changed ip4_scanlist API
+20120827
+	code: added support for flag-noipv6 and flag-forcedevr
+20120905
+	ui: simplified libancillary UI by autoallocating buffers
+20121015
+	portability: some libcs still mess up basename and dirname prototypes
+	  fix: forget trying to write "standard" (oh the irony) stuff,
+	  just get rid of basename.o, dirname.o and realpath.o in libstddjb.
+	code: added ip46 lesser evil
+20121215
+	bug: strerr_warn functions didn't preserve errno
+	  fix: obvious
+20121218
+	internal: renamed strerr_die.c to strerr.c
+20121231
+	ui: added STAMP global and _g macros to timed functions
+	ui: marked non-STAMP-compatible functions as deprecated
+	ui: marked dns_random* as deprecated
+20130103
+	portability: added support for uint64_t
+	ui: rewrote libbiguint UI for arbitrary size handling.
+	  (Still no heap. Heap is for noobs.)
+20130111
+	bug: stralloc_cat and stralloc_copy were incorrectly defined
+	  fix: obvious
+20130124
+	build: added non-slashpackage support
+	doc: added rants about the change
+20130206
+	ui: defined PROG global in libstddjb
+20130212
+	version: 1.3.0
+20130320
+	code: added freelist
+	code: changed genset(dyn) bits from bitarray to freelist
+	  impact: more space taken, but adding a new cell is now
+          amortized O(1) instead of O(n).
+20130403
+	code: added ip46_scanlist and a bit more ip46 stuff
+	bug: ip6_fmt didn't collapse trailing 0s
+	 fix: add final iszero test in find_colcol
+20130413
+	bug: alloc() was incorrectly defined as gccattr_malloc
+	  impact: could leak 0-sized cells (yeah...)
+	  fix: remove the attribute
+	ui: made alloc_re a macro
+20130415
+	ui: removed unused SKACLIENT_BANNER_MAXLEN macro
+	internal: increased SKACLIENTIN_BUFSIZE to 4096
+20130422
+	internal: used sin_addr.s_addr instead of s_addr in socket_*
+	ui: removed deprecated socket_deadlineconn()
+20130709
+	ui: removed socket_ipoptionskill()
+	  rationale: IP_OPTIONS is not POSIX and the value isn't
+	  even proto-standardized - it's not 1 anymore on Linux
+	code: more stuff in ip46.h
+20130710
+	ui: removed pflocal.h
+	ui: added nonposix.h
+	internal: cleaned up ipc_* and socket_*
+	licensing: cleaned up a lot of legacy "public domain" in sysdeps
+20130711
+	internal: gathered most portability problems into nonposix.h
+20130912
+	internal: reworked scan architecture to avoid uint64 pointers
+	ui: added ushort.h, uint.h, ulong.h
+	ui: removed deprecated stuff in fmtscan.h and librandom
+	internal: cleaned up legacy code relying on it
+	internal: /dev/(u)random is now bufferized
+	internal: rrandom_readint now only reads the necessary amount
+20130913
+	ui: removed deprecated deepsleep and deepmillisleep
+	ui: changed taia's nano and atto to uint32
+20130918
+	doc: pretended to add stralloc and genalloc pages
+20130926
+	version: 1.4.0
+20130927
+	bug: ulong-64 defined UINT_* instead of ULONG_*
+	  fix: trivial
+	version: 1.4.1
+20131003
+	code: added siovec and its uses in stralloc/netstring/skaclient
+20131012
+	bug: ip46_t instead of ip46full_t in ip46_scanlist.c
+	  fix: trivial
+20131019
+	version: 1.4.2
+20140214
+	doc: minor fixes
+	code: added kolbak and skaclient4
+20140301
+	code: added skaclient3 and needed infrastructure
+	internal: ancil sandwich protocol changed to pass # of fds in before
+20140322
+	bug: typos in bitarray_clearsetn
+	  impact: freelist-based iterators failed
+	  fix: trivial
+	internal: scrapped complex byte optimizations in freelist. unsigned ints ftw.
+	ui: removed freelist.h
+	version: 1.5.0
+20140327
+	bug: sysdeps.h missing in sysdeps/ - important for crosscompilation
+	  fix: meh. It belongs in include/. Quick and dirty fix: added a copy
+          to sysdeps/ with a line in package/sysdeps.
+	version: 1.5.1
+20140409
+	portability: MacOSX echo doesn't support -n.
+	  fix: replace echo -n with echo | tr -d '\n'.
+	build: moved to 4-number versioning
+20140413
+	ui: better avltree API
+20140429
+	code: added correct supplementary group management in prot
+	ui: prot_gid() and prot_uid() are now macros
+20140430
+	doc: updated
+20140503
+	internal: cleaned up sysdeps usage in exported headers
+	ui: added setgroups.h, gidstuff.h, and *_fmtlist/scanlist
+	ui: sysdeps.h removed from stddjb.h
+20140504
+	ui: timed_ancil_* now reports actual # of fds sent/received
+20140506
+	internal: netstring_get cleanup
+	ui: made buffer_getall and netstring_get interfaces more consistent
+	internal: this impacts skaclient2+
+	ui: added timed_netstring_get
+20140508
+	internal: better timeout rounding for poll()
+	ui: added ppoll sysdep
+	internal: added ppoll() iopause backend
+20140514
+	internal: made time*_from_tai_relative work with IA-32
+	version: 1.6.0.0
+20140515
+	portability: getpeereid uses unsigned types on MacOS X
+	  fix: change getpeereid signature to use uid_t and gid_t
+20140612
+	build: fixed libexec installation
