@@ -61,9 +61,9 @@ distclean: clean
 tgz: distclean
 	@. package/info && \
         rm -rf /tmp/$$package-$$version && \
-        cp -a .  /tmp/$$package-$$version && \
+        cp -a . /tmp/$$package-$$version && \
         cd /tmp && \
-	tar -zpcv --owner=0 --group=0 --numeric-owner -f /tmp/$$package-$$version.tar.gz $$package-$$version && \
+	tar -zpcv --owner=0 --group=0 --numeric-owner --exclude=.git* -f /tmp/$$package-$$version.tar.gz $$package-$$version && \
 	exec rm -rf /tmp/$$package-$$version
 
 strip: $(ALL_LIBS)
