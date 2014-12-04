@@ -100,4 +100,20 @@ extern int unixmessage_handle (unixmessage_receiver_t *, unixmessage_handler_fun
 extern int unixmessage_timed_handle (unixmessage_receiver_t *, unixmessage_handler_func_t *, void *, tain_t const *, tain_t *) ;
 #define unixmessage_timed_handle_g(b, f, p, deadline) unixmessage_timed_handle(b, f, p, (deadline), &STAMP)
 
+
+ /* Globals */
+
+#define UNIXMESSAGE_RECEIVER_MAINBUFSIZE 4097
+#define UNIXMESSAGE_RECEIVER_AUXBUFSIZE 4097
+
+extern unixmessage_receiver_t unixmessage_receiver_0_ ;
+#define unixmessage_receiver_0 (&unixmessage_receiver_0_)
+extern int unixmessage_receiver_0_init (void) ;
+
+extern unixmessage_sender_t unixmessage_sender_1_ ;
+#define unixmessage_sender_1 (&unixmessage_sender_1_)
+
+extern unixmessage_sender_t unixmessage_sender_x_ ;
+#define unixmessage_sender_x (&unixmessage_sender_x_)
+
 #endif
