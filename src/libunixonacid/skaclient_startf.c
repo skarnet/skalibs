@@ -33,6 +33,13 @@ int skaclient_startf (
   unixmessage_t m ;
   register int r ;
   if (!skaclient_startf_async(a, bufss, bufsn, auxbufss, auxbufsn, bufas, bufan, auxbufas, auxbufan, q, qlen, prog, argv, envp, options, before, beforelen, after, afterlen, &blah)) return 0 ;
+  if (!skaclient_timed_flush(a, deadline, stamp))
+  {
+    register int e = errno ;
+    skaclient_end(a) ;
+    errno = e ;
+    return 0 ;
+  }
   r = unixmessage_timed_receive(&a->syncin, &m, deadline, stamp) ;
   if (r < 1)
   {
