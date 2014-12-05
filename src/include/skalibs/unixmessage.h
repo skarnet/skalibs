@@ -11,6 +11,9 @@
 #include <skalibs/stralloc.h>
 #include <skalibs/tai.h>
 
+
+ /* Message */
+
 typedef struct unixmessage_s unixmessage_t, *unixmessage_t_ref ;
 struct unixmessage_s
 {
@@ -33,11 +36,13 @@ struct unixmessage_v_s
 #define UNIXMESSAGE_V_ZERO { .v = 0, .vlen = 0, .fds = 0, .nfds = 0 }
 extern unixmessage_v_t const unixmessage_v_zero ;
 
-
 #define UNIXMESSAGE_BUFSIZE 2049
 #define UNIXMESSAGE_AUXBUFSIZE 2049
 #define UNIXMESSAGE_MAXFDS 256
 #define UNIXMESSAGE_MAXREADS 32
+
+
+ /* Sender */
 
 typedef struct unixmessage_sender_s unixmessage_sender_t, *unixmessage_sender_t_ref ;
 struct unixmessage_sender_s
@@ -56,6 +61,7 @@ extern void unixmessage_sender_init (unixmessage_sender_t *, int) ;
 extern void unixmessage_sender_free (unixmessage_sender_t *) ;
 #define unixmessage_sender_fd(b) ((b)->fd)
 extern int unixmessage_sender_getfd (unixmessage_sender_t const *) gccattr_pure ;
+#define unixmessage_sender_isempty(b) (!genalloc_len(unsigned int, &(b)->offsets))
 
 extern int unixmessage_put_and_close (unixmessage_sender_t *, unixmessage_t const *, unsigned char const *) ;
 #define unixmessage_put(b, m) unixmessage_put_and_close(b, m, unixmessage_bits_closenone)
@@ -69,6 +75,8 @@ extern int unixmessage_sender_flush (unixmessage_sender_t *) ;
 extern int unixmessage_sender_timed_flush (unixmessage_sender_t *, tain_t const *, tain_t *) ;
 #define unixmessage_sender_timed_flush_g(sender, deadline) unixmessage_sender_timed_flush(sender, (deadline), &STAMP)
 
+
+ /* Receiver */
 
 typedef struct unixmessage_receiver_s unixmessage_receiver_t, *unixmessage_receiver_t_ref ;
 struct unixmessage_receiver_s
@@ -86,6 +94,7 @@ struct unixmessage_receiver_s
 extern int unixmessage_receiver_init (unixmessage_receiver_t *, int, char *, unsigned int, char *, unsigned int) ;
 extern void unixmessage_receiver_free (unixmessage_receiver_t *) ;
 #define unixmessage_receiver_fd(b) buffer_fd(&(b)->mainb)
+#define unixmessage_receiver_isempty(b) (buffer_isempty(&(b)->mainb) && cbuffer_isempty(&(b)->auxb))
 
 extern int unixmessage_receive (unixmessage_receiver_t *, unixmessage_t *) ;
 extern int unixmessage_timed_receive (unixmessage_receiver_t *, unixmessage_t *, tain_t const *, tain_t *) ;
@@ -102,9 +111,6 @@ extern int unixmessage_timed_handle (unixmessage_receiver_t *, unixmessage_handl
 
 
  /* Globals */
-
-#define UNIXMESSAGE_RECEIVER_MAINBUFSIZE 4097
-#define UNIXMESSAGE_RECEIVER_AUXBUFSIZE 4097
 
 extern unixmessage_receiver_t unixmessage_receiver_0_ ;
 #define unixmessage_receiver_0 (&unixmessage_receiver_0_)

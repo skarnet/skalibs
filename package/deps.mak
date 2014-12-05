@@ -21,6 +21,7 @@ src/include/skalibs/djbtime.h: src/include/skalibs/config.h src/include/skalibs/
 src/include/skalibs/djbunix.h: src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
 src/include/skalibs/env.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/envalloc.h: src/include/skalibs/genalloc.h
+src/include/skalibs/error.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/fmtscan.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint32.h
 src/include/skalibs/genalloc.h: src/include/skalibs/functypes.h src/include/skalibs/stralloc.h
 src/include/skalibs/genset.h: src/include/skalibs/functypes.h
@@ -49,6 +50,9 @@ src/include/skalibs/strerr.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/surf.h: src/include/skalibs/uint32.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
+src/include/skalibs/uint.h: src/include/skalibs/uint32.h
+src/include/skalibs/uint16.h: src/include/skalibs/uint64.h
+src/include/skalibs/uint32.h: src/include/skalibs/uint64.h
 src/include/skalibs/unirandom.h: src/include/skalibs/buffer.h src/include/skalibs/surf.h
 src/include/skalibs/unirandomdev.h: src/include/skalibs/unirandom.h
 src/include/skalibs/unirandomegd.h: src/include/skalibs/unirandom.h
@@ -723,6 +727,7 @@ src/libunixonacid/skaclient_send.o src/libunixonacid/skaclient_send.lo: src/libu
 src/libunixonacid/skaclient_sendmsg.o src/libunixonacid/skaclient_sendmsg.lo: src/libunixonacid/skaclient_sendmsg.c src/include/skalibs/skaclient.h src/include/skalibs/tai.h src/include/skalibs/unixmessage.h
 src/libunixonacid/skaclient_sendmsgv.o src/libunixonacid/skaclient_sendmsgv.lo: src/libunixonacid/skaclient_sendmsgv.c src/include/skalibs/skaclient.h src/include/skalibs/tai.h src/include/skalibs/unixmessage.h
 src/libunixonacid/skaclient_sendv.o src/libunixonacid/skaclient_sendv.lo: src/libunixonacid/skaclient_sendv.c src/include/skalibs/siovec.h src/include/skalibs/skaclient.h src/include/skalibs/tai.h src/include/skalibs/unixmessage.h
+src/libunixonacid/skaclient_server_01x.o src/libunixonacid/skaclient_server_01x.lo: src/libunixonacid/skaclient_server_01x.c src/include/skalibs/skaclient.h src/include/skalibs/tai.h src/include/skalibs/unixmessage.h
 src/libunixonacid/skaclient_server_ack.o src/libunixonacid/skaclient_server_ack.lo: src/libunixonacid/skaclient_server_ack.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/error.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h src/include/skalibs/webipc.h
 src/libunixonacid/skaclient_server_bidi_ack.o src/libunixonacid/skaclient_server_bidi_ack.lo: src/libunixonacid/skaclient_server_bidi_ack.c src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
 src/libunixonacid/skaclient_server_init.o src/libunixonacid/skaclient_server_init.lo: src/libunixonacid/skaclient_server_init.c src/include/skalibs/skaclient.h src/include/skalibs/tai.h src/include/skalibs/unixmessage.h
@@ -742,13 +747,16 @@ src/libunixonacid/unixmessage_handle.o src/libunixonacid/unixmessage_handle.lo: 
 src/libunixonacid/unixmessage_put.o src/libunixonacid/unixmessage_put.lo: src/libunixonacid/unixmessage_put.c src/include/skalibs/bitarray.h src/include/skalibs/bytestr.h src/include/skalibs/diuint.h src/include/skalibs/genalloc.h src/include/skalibs/siovec.h src/include/skalibs/stralloc.h src/include/skalibs/sysdeps.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_read.o src/libunixonacid/unixmessage_read.lo: src/libunixonacid/unixmessage_read.c src/include/skalibs/buffer.h src/include/skalibs/cbuffer.h src/include/skalibs/djbunix.h src/include/skalibs/error.h src/include/skalibs/nonposix.h src/include/skalibs/siovec.h src/include/skalibs/sysdeps.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_receive.o src/libunixonacid/unixmessage_receive.lo: src/libunixonacid/unixmessage_receive.c src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/cbuffer.h src/include/skalibs/error.h src/include/skalibs/stralloc.h src/include/skalibs/uint.h src/include/skalibs/unixmessage.h
+src/libunixonacid/unixmessage_receiver_0.o src/libunixonacid/unixmessage_receiver_0.lo: src/libunixonacid/unixmessage_receiver_0.c src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_receiver_free.o src/libunixonacid/unixmessage_receiver_free.lo: src/libunixonacid/unixmessage_receiver_free.c src/include/skalibs/stralloc.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_receiver_init.o src/libunixonacid/unixmessage_receiver_init.lo: src/libunixonacid/unixmessage_receiver_init.c src/include/skalibs/buffer.h src/include/skalibs/cbuffer.h src/include/skalibs/stralloc.h src/include/skalibs/unixmessage.h
+src/libunixonacid/unixmessage_sender_1.o src/libunixonacid/unixmessage_sender_1.lo: src/libunixonacid/unixmessage_sender_1.c src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_sender_flush.o src/libunixonacid/unixmessage_sender_flush.lo: src/libunixonacid/unixmessage_sender_flush.c src/include/skalibs/diuint.h src/include/skalibs/djbunix.h src/include/skalibs/genalloc.h src/include/skalibs/nonposix.h src/include/skalibs/stralloc.h src/include/skalibs/sysdeps.h src/include/skalibs/uint.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_sender_free.o src/libunixonacid/unixmessage_sender_free.lo: src/libunixonacid/unixmessage_sender_free.c src/include/skalibs/diuint.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h src/include/skalibs/sysdeps.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_sender_getfd.o src/libunixonacid/unixmessage_sender_getfd.lo: src/libunixonacid/unixmessage_sender_getfd.c src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_sender_init.o src/libunixonacid/unixmessage_sender_init.lo: src/libunixonacid/unixmessage_sender_init.c src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h src/include/skalibs/unixmessage.h
-src/libunixonacid/unixmessage_sender_timed_flush.o src/libunixonacid/unixmessage_sender_timed_flush.lo: src/libunixonacid/unixmessage_sender_timed_flush.c src/include/skalibs/functypes.h src/include/skalibs/genalloc.h src/include/skalibs/tai.h src/include/skalibs/unix-timed.h src/include/skalibs/unixmessage.h
+src/libunixonacid/unixmessage_sender_timed_flush.o src/libunixonacid/unixmessage_sender_timed_flush.lo: src/libunixonacid/unixmessage_sender_timed_flush.c src/include/skalibs/functypes.h src/include/skalibs/tai.h src/include/skalibs/unix-timed.h src/include/skalibs/unixmessage.h
+src/libunixonacid/unixmessage_sender_x.o src/libunixonacid/unixmessage_sender_x.lo: src/libunixonacid/unixmessage_sender_x.c src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_sender_zero.o src/libunixonacid/unixmessage_sender_zero.lo: src/libunixonacid/unixmessage_sender_zero.c src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_timed_handle.o src/libunixonacid/unixmessage_timed_handle.lo: src/libunixonacid/unixmessage_timed_handle.c src/include/skalibs/functypes.h src/include/skalibs/tai.h src/include/skalibs/unix-timed.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_timed_receive.o src/libunixonacid/unixmessage_timed_receive.lo: src/libunixonacid/unixmessage_timed_receive.c src/include/skalibs/functypes.h src/include/skalibs/tai.h src/include/skalibs/unix-timed.h src/include/skalibs/unixmessage.h
