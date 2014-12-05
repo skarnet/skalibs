@@ -90,7 +90,16 @@ struct unixmessage_receiver_s
   unsigned int auxw ;
 } ;
 #define UNIXMESSAGE_RECEIVER_ZERO { .mainb = BUFFER_ZERO, .auxb = CBUFFER_ZERO, .mainlen = 0, .auxlen = 0, .data = STRALLOC_ZERO, .fds = { -1 }, .auxw = 0 }
-
+#define UNIXMESSAGE_RECEIVER_INIT(var, fd, s, n, auxs, auxn) \
+{ \
+  .mainb = BUFFER_INIT_AUX(&unixmessage_read, fd, s, n, &(var).auxb), \
+  .auxb = CBUFFER_INIT(auxs, auxn), \
+  .mainlen = 0, \
+  .auxlen = 0, \
+  .data = STRALLOC_ZERO, \
+  .auxw = 0 \
+}
+#define UNIXMESSAGE_RECEIVER_DECLARE_AND_INIT(var, fd, s, n, auxs, auxn) unixmessage_receiver_t var = UNIXMESSAGE_RECEIVER_INIT(var, fd, s, n, auxs, auxn)
 extern int unixmessage_receiver_init (unixmessage_receiver_t *, int, char *, unsigned int, char *, unsigned int) ;
 extern void unixmessage_receiver_free (unixmessage_receiver_t *) ;
 #define unixmessage_receiver_fd(b) buffer_fd(&(b)->mainb)
@@ -114,7 +123,6 @@ extern int unixmessage_timed_handle (unixmessage_receiver_t *, unixmessage_handl
 
 extern unixmessage_receiver_t unixmessage_receiver_0_ ;
 #define unixmessage_receiver_0 (&unixmessage_receiver_0_)
-extern int unixmessage_receiver_0_init (void) ;
 
 extern unixmessage_sender_t unixmessage_sender_1_ ;
 #define unixmessage_sender_1 (&unixmessage_sender_1_)

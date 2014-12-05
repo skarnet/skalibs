@@ -17,7 +17,7 @@ extern int skaclient_server_ack (unixmessage_t const *, unixmessage_sender_t *, 
 extern int skaclient_server_bidi_ack (unixmessage_t const *, unixmessage_sender_t *, unixmessage_sender_t *, unixmessage_receiver_t *, char *, unsigned int, char *, unsigned int, char const *, unsigned int, char const *, unsigned int) ;
 extern int skaclient_server_init (unixmessage_receiver_t *, unixmessage_sender_t *, unixmessage_sender_t *, char const *, unsigned int, char const *, unsigned int, tain_t const *, tain_t *) ;
 #define skaclient_server_init_g(in, out, asyncout, before, beforelen, after, afterlen, deadline) skaclient_server_init(in, out, asyncout, before, beforelen, after, afterlen, (deadline), &STAMP)
-extern int skaclient_server_01x_init (char const *, unsigned int, char const *, unsigned int, tain_t const *, tain_t *) ;
+#define skaclient_server_01x_init(before, beforelen, after, afterlen, deadline, stamp) skaclient_server_init(unixmessage_receiver_0, unixmessage_sender_1, unixmessage_sender_x, before, beforelen, after, afterlen, deadline, stamp)
 #define skaclient_server_01x_init_g(before, beforelen, after, afterlen, deadline) skaclient_server_01x_init(before, beforelen, after, afterlen, (deadline), &STAMP)
 
 
