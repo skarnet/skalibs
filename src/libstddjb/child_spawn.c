@@ -46,9 +46,10 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
 #ifdef SKALIBS_HASPOSIXSPAWN
   posix_spawn_file_actions_t actions ;
   posix_spawnattr_t attr ;
+#else
+  int syncpipe[2] ;
 #endif
   int p[n ? n : 1][2] ;
-  int syncpipe[2] ;
   pid_t pid ;
   int e ;
   unsigned int m = sizeof(NOFDVAR) ;
@@ -63,8 +64,6 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
   {
     for (i = 0 ; i < n ; i++) if (pipe(p[i]) < 0) { e = errno ; goto errp ; }
   }
-  if (pipe(syncpipe) < 0) { e = errno ; goto errp ; }
-  if (coe(syncpipe[1]) < 0) { e = errno ; goto errsp ; }
   for (i = 0 ; i < n ; i++)
     if ((ndelay_on(p[i][i & 1]) < 0) || (coe(p[i][i & 1]) < 0))
     {
@@ -89,8 +88,6 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
   if (e) goto errattr ;
   e = posix_spawn_file_actions_init(&actions) ;
   if (e) goto errattr ;
-  e = posix_spawn_file_actions_addclose(&actions, syncpipe[0]) ;
-  if (e) goto erractions ;
   switch (n)
   {
     case 0 :
@@ -132,6 +129,8 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
   posix_spawnattr_destroy(&attr) ;
 
 #else
+  if (pipe(syncpipe) < 0) { e = errno ; goto errp ; }
+  if (coe(syncpipe[1]) < 0) { e = errno ; goto errsp ; }
 
   pid = fork() ;
   if (pid < 0) { e = errno ; goto errsp ; }
@@ -174,8 +173,6 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
     _exit(127) ;
   }
 
-#endif
-
   fd_close(syncpipe[1]) ;
   {
     char c ;
@@ -192,14 +189,10 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
       goto errsp0 ;
     }
   }
-  if (waitpid_nointr(pid, &e, WNOHANG))
-  {
-    e = WEXITSTATUS(e) == 127 ? EIO : 0 ;
-    goto errsp0 ;
-  }
-
   fd_close(syncpipe[0]) ;
-  for (i = n ; i ; i--)
+#endif
+
+  for (; i ; i--)
   {
     fd_close(p[i-1][i & 1]) ;
     fds[i-1] = p[i-1][!(i & 1)] ;
@@ -213,9 +206,11 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
   posix_spawnattr_destroy(&attr) ;
 #endif
  errsp:
+#ifndef SKALIBS_HASPOSIXSPAWN
   fd_close(syncpipe[1]) ;
  errsp0:
   fd_close(syncpipe[0]) ;
+#endif
   i = n ;
  errp:
   while (i--)
