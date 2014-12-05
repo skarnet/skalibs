@@ -21,7 +21,6 @@ src/include/skalibs/djbtime.h: src/include/skalibs/config.h src/include/skalibs/
 src/include/skalibs/djbunix.h: src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
 src/include/skalibs/env.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/envalloc.h: src/include/skalibs/genalloc.h
-src/include/skalibs/error.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/fmtscan.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint32.h
 src/include/skalibs/genalloc.h: src/include/skalibs/functypes.h src/include/skalibs/stralloc.h
 src/include/skalibs/genset.h: src/include/skalibs/functypes.h
@@ -50,9 +49,6 @@ src/include/skalibs/strerr.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/surf.h: src/include/skalibs/uint32.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
-src/include/skalibs/uint.h: src/include/skalibs/uint32.h
-src/include/skalibs/uint16.h: src/include/skalibs/uint64.h
-src/include/skalibs/uint32.h: src/include/skalibs/uint64.h
 src/include/skalibs/unirandom.h: src/include/skalibs/buffer.h src/include/skalibs/surf.h
 src/include/skalibs/unirandomdev.h: src/include/skalibs/unirandom.h
 src/include/skalibs/unirandomegd.h: src/include/skalibs/unirandom.h
@@ -493,7 +489,8 @@ src/libstddjb/siovec_gather.o src/libstddjb/siovec_gather.lo: src/libstddjb/siov
 src/libstddjb/siovec_len.o src/libstddjb/siovec_len.lo: src/libstddjb/siovec_len.c src/include/skalibs/siovec.h
 src/libstddjb/siovec_scatter.o src/libstddjb/siovec_scatter.lo: src/libstddjb/siovec_scatter.c src/include/skalibs/bytestr.h src/include/skalibs/siovec.h
 src/libstddjb/siovec_seek.o src/libstddjb/siovec_seek.lo: src/libstddjb/siovec_seek.c src/include/skalibs/bytestr.h src/include/skalibs/siovec.h
-src/libstddjb/skagetln.o src/libstddjb/skagetln.lo: src/libstddjb/skagetln.c src/include/skalibs/buffer.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
+src/libstddjb/skagetln.o src/libstddjb/skagetln.lo: src/libstddjb/skagetln.c src/include/skalibs/buffer.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
+src/libstddjb/skagetln_nofill.o src/libstddjb/skagetln_nofill.lo: src/libstddjb/skagetln_nofill.c src/include/skalibs/buffer.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/skagetlnsep.o src/libstddjb/skagetlnsep.lo: src/libstddjb/skagetlnsep.c src/include/skalibs/buffer.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/skasig_dfl.o src/libstddjb/skasig_dfl.lo: src/libstddjb/skasig_dfl.c src/include/skalibs/sig.h
 src/libstddjb/skasigaction.o src/libstddjb/skasigaction.lo: src/libstddjb/skasigaction.c src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
@@ -619,6 +616,7 @@ src/libstddjb/tain_to_millisecs.o src/libstddjb/tain_to_millisecs.lo: src/libstd
 src/libstddjb/tain_ulong.o src/libstddjb/tain_ulong.lo: src/libstddjb/tain_ulong.c src/include/skalibs/tai.h
 src/libstddjb/tain_unpack.o src/libstddjb/tain_unpack.lo: src/libstddjb/tain_unpack.c src/include/skalibs/tai.h src/include/skalibs/uint32.h
 src/libstddjb/tain_unpack_little.o src/libstddjb/tain_unpack_little.lo: src/libstddjb/tain_unpack_little.c src/include/skalibs/tai.h src/include/skalibs/uint32.h
+src/libstddjb/tain_zero.o src/libstddjb/tain_zero.lo: src/libstddjb/tain_zero.c src/include/skalibs/tai.h
 src/libstddjb/timespec_from_tai.o src/libstddjb/timespec_from_tai.lo: src/libstddjb/timespec_from_tai.c src/include/skalibs/tai.h
 src/libstddjb/timespec_from_tai_relative.o src/libstddjb/timespec_from_tai_relative.lo: src/libstddjb/timespec_from_tai_relative.c src/include/skalibs/sysdeps.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/timespec_from_tain.o src/libstddjb/timespec_from_tain.lo: src/libstddjb/timespec_from_tain.c src/include/skalibs/tai.h

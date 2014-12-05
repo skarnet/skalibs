@@ -9,6 +9,7 @@
 extern stralloc satmp ;
 
 extern int skagetln (buffer *, stralloc *, char) ;
+extern int skagetln_nofill (buffer *, stralloc *, char) ;
 extern int skagetlnsep (buffer *, stralloc *, char const *, unsigned int) ;
 extern int getlnmax (buffer *, char *, unsigned int, unsigned int *, char) ;
 extern int getlnmaxsep (buffer *, char *, unsigned int, unsigned int *, char const *, unsigned int) ;
