@@ -7,7 +7,6 @@
 #include <sys/socket.h>
 #include <sys/uio.h>
 #include <skalibs/uint.h>
-#include <skalibs/diuint.h>
 #include <skalibs/cbuffer.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/error.h>
@@ -16,7 +15,7 @@
 #include <skalibs/siovec.h>
 #include <skalibs/unixmessage.h>
 
-static int unixmessage_receiver_fill (unixmessage_receiver_t *b, diuint *d)
+static int unixmessage_receiver_fill (unixmessage_receiver_t *b)
 {
   char ancilbuf[CMSG_SPACE(b->auxb.a - 1)] ;
   struct iovec iov[2] ;
@@ -62,11 +61,8 @@ static int unixmessage_receiver_fill (unixmessage_receiver_t *b, diuint *d)
       if (msghdr.msg_flags & MSG_CTRUNC) return (errno = EPROTO, -1) ;
       if (cbuffer_put(&b->auxb, (char *)CMSG_DATA(c), auxlen) < auxlen)
         return (errno = ENOBUFS, -1) ;
-      d->right = auxlen / sizeof(int) ;
-      r -= msghdr.msg_controllen ;
     }
   }
-  d->left = cbuffer_WSEEK(&b->mainb, r) ;
   return 1 ;
 }
 
@@ -77,8 +73,7 @@ int unixmessage_receive (unixmessage_receiver_t *b, unixmessage_t *m)
     char pack[sizeof(unsigned int) << 1] ;
     if (cbuffer_len(&b->mainb) < sizeof(unsigned int) << 1)
     {
-      diuint d ;
-      register int r = sanitize_read(unixmessage_receiver_fill(b, &d)) ;
+      register int r = sanitize_read(unixmessage_receiver_fill(b)) ;
       if (r <= 0) return r ;
       if (cbuffer_len(&b->mainb) < sizeof(unsigned int) << 1)
         return (errno = EWOULDBLOCK, 0) ;
@@ -95,12 +90,11 @@ int unixmessage_receive (unixmessage_receiver_t *b, unixmessage_t *m)
 
   for (;;)
   {
-    diuint d ;
     register int r ;
     b->maindata.len += cbuffer_get(&b->mainb, b->maindata.s + b->maindata.len, cbuffer_len(&b->mainb)) ;
     b->auxdata.len += cbuffer_get(&b->auxb, b->auxdata.s + b->auxdata.len, cbuffer_len(&b->auxb)) ;
     if (b->maindata.len == b->mainlen && b->auxdata.len == b->auxlen) break ;
-    r = sanitize_read(unixmessage_receiver_fill(b, &d)) ;
+    r = sanitize_read(unixmessage_receiver_fill(b)) ;
     if (r <= 0) return r ;
   }
 
