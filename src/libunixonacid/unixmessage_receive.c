@@ -63,7 +63,7 @@ static int unixmessage_receiver_fill (unixmessage_receiver_t *b, diuint *d)
       if (cbuffer_put(&b->auxb, (char *)CMSG_DATA(c), auxlen) < auxlen)
         return (errno = ENOBUFS, -1) ;
       d->right = auxlen / sizeof(int) ;
-      r -= c->cmsg_len ;
+      r -= msghdr.msg_controllen ;
     }
   }
   d->left = cbuffer_WSEEK(&b->mainb, r) ;
