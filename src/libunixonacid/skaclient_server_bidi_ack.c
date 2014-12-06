@@ -7,6 +7,6 @@ int skaclient_server_bidi_ack (unixmessage_t const *clientmsg, unixmessage_sende
 {
   if (!unixmessage_receiver_init(asyncin, -1, mainbuf, mainlen, auxbuf, auxlen)) return 0 ;
   if (!skaclient_server_ack(clientmsg, out, asyncout, before, beforelen, after, afterlen)) return 0 ;
-  asyncin->mainb.fd = unixmessage_sender_fd(asyncout) ;
+  asyncin->fd = unixmessage_sender_fd(asyncout) ;
   return 1 ;
 }

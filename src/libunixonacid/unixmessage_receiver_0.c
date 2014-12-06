@@ -7,4 +7,4 @@
 static char mainbuf[UNIXMESSAGE_BUFSIZE] ;
 static char auxbuf[UNIXMESSAGE_AUXBUFSIZE] ;
 
-UNIXMESSAGE_RECEIVER_DECLARE_AND_INIT(unixmessage_receiver_0_, 0, mainbuf, UNIXMESSAGE_BUFSIZE, auxbuf, UNIXMESSAGE_AUXBUFSIZE) ;
+unixmessage_receiver_t unixmessage_receiver_0_ = UNIXMESSAGE_RECEIVER_INIT(0, mainbuf, UNIXMESSAGE_BUFSIZE, auxbuf, UNIXMESSAGE_AUXBUFSIZE) ;

@@ -5,7 +5,8 @@
 
 void unixmessage_receiver_free (unixmessage_receiver_t *b)
 {
-  stralloc_free(&b->data) ;
-  b->mainb.fd = -1 ;
-  b->mainlen = b->auxlen = b->auxw = 0 ;
+  b->fd = -1 ;
+  stralloc_free(&b->maindata) ;
+  stralloc_free(&b->auxdata) ;
+  b->mainlen = b->auxlen = 0 ;
 }

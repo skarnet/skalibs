@@ -9,7 +9,7 @@
 #include <skalibs/diuint.h>
 #include <skalibs/siovec.h>
 
-typedef int buffer_io_func_t (int, siovec_t const *, unsigned int, void *) ;
+typedef int buffer_io_func_t (int, siovec_t const *, unsigned int) ;
 typedef buffer_io_func_t *buffer_io_func_t_ref ;
 
 typedef struct buffer_s buffer, buffer_t, *buffer_ref, *buffer_t_ref ;
@@ -18,14 +18,13 @@ struct buffer_s
   buffer_io_func_t *op ;
   int fd ;
   cbuffer_t c ;
-  void *aux ;
 } ;
-#define BUFFER_ZERO { .op = 0, .fd = -1, .c = CBUFFER_ZERO, .aux = 0 }
+#define BUFFER_ZERO { .op = 0, .fd = -1, .c = CBUFFER_ZERO }
 
 
  /*
     Circular buffers need to be 1 char bigger than the storage space,
-    so that the head == tail case is nonambiguous (empty).
+    so that the head == tail case is nonambiguous (empty, not full).
  */
 
 #define BUFFER_INSIZE 8193
@@ -34,10 +33,8 @@ struct buffer_s
 #define BUFFER_INSIZE_SMALL 513
 #define BUFFER_OUTSIZE_SMALL 513
 
-#define BUFFER_INIT_AUX(f, d, buf, len, data) { .op = (f), .fd = (d), .c = CBUFFER_INIT(buf, len), .aux = (data) }
-#define BUFFER_INIT(f, d, buf, len) BUFFER_INIT_AUX(f, d, buf, (len), 0)
-extern int buffer_init_aux (buffer *, buffer_io_func_t *, int, char *, unsigned int, void *) ;
-#define buffer_init(b, f, d, buf, len) buffer_init_aux(b, f, d, buf, len, 0)
+#define BUFFER_INIT(f, d, buf, len) { .op = (f), .fd = (d), .c = CBUFFER_INIT(buf, len) }
+extern int buffer_init (buffer *, buffer_io_func_t *, int, char *, unsigned int) ;
 
 
  /* Writing */

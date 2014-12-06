@@ -6,6 +6,7 @@
 #include <skalibs/buffer.h>
 #include <skalibs/cbuffer.h>
 #include <skalibs/gccattributes.h>
+#include <skalibs/stralloc.h>
 #include <skalibs/genalloc.h>
 #include <skalibs/siovec.h>
 #include <skalibs/stralloc.h>
@@ -81,35 +82,33 @@ extern int unixmessage_sender_timed_flush (unixmessage_sender_t *, tain_t const 
 typedef struct unixmessage_receiver_s unixmessage_receiver_t, *unixmessage_receiver_t_ref ;
 struct unixmessage_receiver_s
 {
-  buffer mainb ;
+  int fd ;
+  cbuffer_t mainb ;
   cbuffer_t auxb ;
   unsigned int mainlen ;
   unsigned int auxlen ;
-  stralloc data ;
-  int fds[UNIXMESSAGE_MAXFDS] ;
-  unsigned int auxw ;
+  stralloc maindata ;
+  stralloc auxdata ;
 } ;
-#define UNIXMESSAGE_RECEIVER_ZERO { .mainb = BUFFER_ZERO, .auxb = CBUFFER_ZERO, .mainlen = 0, .auxlen = 0, .data = STRALLOC_ZERO, .fds = { -1 }, .auxw = 0 }
-#define UNIXMESSAGE_RECEIVER_INIT(var, fd, s, n, auxs, auxn) \
+#define UNIXMESSAGE_RECEIVER_ZERO { .fd = -1, .mainb = CBUFFER_ZERO, .auxb = CBUFFER_ZERO, .mainlen = 0, .auxlen = 0, .maindata = STRALLOC_ZERO, .auxdata = STRALLOC_ZERO }
+#define UNIXMESSAGE_RECEIVER_INIT(d, mains, mainn, auxs, auxn) \
 { \
-  .mainb = BUFFER_INIT_AUX(&unixmessage_read, fd, s, n, &(var).auxb), \
+  .fd = d, \
+  .mainb = CBUFFER_INIT(mains, mainn), \
   .auxb = CBUFFER_INIT(auxs, auxn), \
   .mainlen = 0, \
   .auxlen = 0, \
-  .data = STRALLOC_ZERO, \
-  .auxw = 0 \
+  .maindata = STRALLOC_ZERO, \
+  .auxdata = STRALLOC_ZERO \
 }
-#define UNIXMESSAGE_RECEIVER_DECLARE_AND_INIT(var, fd, s, n, auxs, auxn) unixmessage_receiver_t var = UNIXMESSAGE_RECEIVER_INIT(var, fd, s, n, auxs, auxn)
 extern int unixmessage_receiver_init (unixmessage_receiver_t *, int, char *, unsigned int, char *, unsigned int) ;
 extern void unixmessage_receiver_free (unixmessage_receiver_t *) ;
-#define unixmessage_receiver_fd(b) buffer_fd(&(b)->mainb)
-#define unixmessage_receiver_isempty(b) (buffer_isempty(&(b)->mainb) && cbuffer_isempty(&(b)->auxb))
+#define unixmessage_receiver_fd(b) ((b)->fd)
+#define unixmessage_receiver_isempty(b) (cbuffer_isempty(&(b)->mainb) && cbuffer_isempty(&(b)->auxb))
 
 extern int unixmessage_receive (unixmessage_receiver_t *, unixmessage_t *) ;
 extern int unixmessage_timed_receive (unixmessage_receiver_t *, unixmessage_t *, tain_t const *, tain_t *) ;
 #define unixmessage_timed_receive_g(receiver, msg, deadline) unixmessage_timed_receive(receiver, msg, (deadline), &STAMP)
-
-extern buffer_io_func_t unixmessage_read ;
 
 typedef int unixmessage_handler_func_t (unixmessage_t const *, void *) ;
 typedef unixmessage_handler_func_t *unixmessage_handler_func_t_ref ;

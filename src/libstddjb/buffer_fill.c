@@ -10,7 +10,7 @@ int buffer_fill (buffer *b)
   register int r ;
   if (buffer_isfull(b)) return (errno = ENOBUFS, -1) ;
   buffer_wpeek(b, v) ;
-  r = (*b->op)(b->fd, v, 2, b->aux) ;
+  r = (*b->op)(b->fd, v, 2) ;
   if (r <= 0) return r ;
   cbuffer_WSEEK(&b->c, r) ;
   return r ;
