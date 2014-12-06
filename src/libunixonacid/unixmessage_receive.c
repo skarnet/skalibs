@@ -63,6 +63,7 @@ static int unixmessage_receiver_fill (unixmessage_receiver_t *b)
         return (errno = ENOBUFS, -1) ;
     }
   }
+  cbuffer_WSEEK(&b->mainb, r) ;
   return 1 ;
 }
 
