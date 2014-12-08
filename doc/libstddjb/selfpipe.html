@@ -39,12 +39,9 @@ screw up, and write buggy code.
 </p>
 
 <p>
- Unix is tricky enough with interruptions. Most of libstddjb's wrappers
-are there to protect system calls from EINTR. (And no, the SA_RESTART
-option in sigaction() <a href="safewrappers.html">isn't protection
-enough</a>.) But signal handlers are
-more than just pesky interruptions: they can totally change the
-execution flow. They mess up the logic of linear and structured code,
+ Unix is tricky enough with interruptions. Even when you have a single
+thread, signals can make the execution flow very non-intuitive.
+They mess up the logic of linear and structured code,
 they introduce non-determinism; you always have to think "and what
 if I get interrupted here and the flow goes into a handler...". This
 is annoying.
@@ -109,9 +106,13 @@ environment (the "bottom half" of the handler).
 <p>
  The selfpipe library does it all for you - you don't even have to write
 the top half yourself. You can forget their existence and recover
-some peace of mind. Of course, you <em>still</em> need to protect your
-system calls against EINTR: the self-pipe trick doesn't prevent signals
-from happening.
+some peace of mind.
+</p>
+
+<p>
+ Note that in an asynchronous event loop, you need to protect your
+system calls against EINTR by using <a href="safewrappers.html">safe
+wrappers</a>.
 </p>
 
 <h2> How do I use it&nbsp;? </h2>
@@ -167,14 +168,14 @@ r = selfpipe_trapset(&set) ;
 <p>
 <tt>selfpipe_trap()</tt> and <tt>selfpipe_untrap()</tt> handle signals one
 by one. Alternatively (and often preferrably), you can use
-<tt>selfpipe_trapset()</tt> to directly handle signal sets. When you call
+<tt>selfpipe_trapset()</tt> to directly handle signal sets. When you call
 <tt>selfpipe_trapset()</tt>, signals that are present in <tt>set</tt> will
 be caught by the selfpipe, and signals that are absent from <tt>set</tt>
 will be uncaught. <tt>r</tt> is 0 if the operation succeeded and -1 if it
 failed.
 </p>
 
-<h3> Handling events </h3>
+<h3> Handling events </h3>
 
 <pre>
 int c = selfpipe_read() ;

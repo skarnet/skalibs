@@ -40,51 +40,55 @@ handler, if any, has been executed).
 </p>
 
 <p>
- This means that the intended execution of the process is at the mercy
-of a stray signal. If a signal happens at the wrong time, a system call
-fails when it could have succeeded. This is not acceptable.
+ Most of the time, this is not an issue: unignored signals usually kill
+the process anyway. Or stop it - and when it resumes, system calls are
+simply restarted, not interrupted. EINTR can only happen when a signal
+handler has been installed, and a signal is actually caught by the
+signal handler during an interruptible system call. And to avoid EINTR,
+users can use the SA_RESTART flag when installing the signal handler with
+<a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/sigaction.html">sigaction()</a>.
+</p>
+
+<p>
+ However, there is a common case where using SA_RESTART is a bad idea:
+when writing an asynchronous event loop.
+</p>
+
+<p>
+ An asynchronous event loop is organized around a
+<a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/select.html">select()</a> or
+<a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/poll.html">poll()</a>
+system call that is the only blocking operation in the whole loop. That call takes a
+timeout as an argument. If a signal handler is installed with SA_RESTART and a
+signal arrives in the middle of the select/poll call - which happens often
+since it is blocking - then the select/poll is restarted with the same arguments,
+including the timeout. This is not good: time has elapsed, the timeout should be
+recomputed. Some versions of select update the values in the struct timeval even
+when select() is interrupted, but it is not portable, and not applicable to poll().
+So it is necessary, in this case, to have select/poll return -1 EINTR when a
+signal is caught. And that means SA_RESTART should not be used.
+</p>
+
+<p>
+ Which means that other system calls performed when the signal handler has
+been installed, for instance in the body of the loop, will <em>not</em> be
+protected, and can return -1 EINTR if a signal is caught at the wrong time.
 </p>
 
 <h2> The solution </h2>
 
 <p>
- So, in order to be perfectly reliable, when a program makes an interruptible
-system call, it <em>must</em> check whether the return value is -1 EINTR,
-and restart the system call if it is the case. This is annoying to write;
-so, <tt>libstddjb</tt> provides small wrappers around interruptible system
-calls, so that programmers can just call those <em>safe wrappers</em> and
-never bother with this again.
+ So, in order to be perfectly reliable, when a program has caught a signal
+without SA_RESTART and makes an interruptible system call, it must check whether
+the return value is -1 EINTR, and restart the system call if it is the case.
+This is annoying to write; so, skalibs provides small wrappers around
+interruptible system calls, so that programmers can just call those safe wrappers
+and never bother with this again.
 </p>
 
 <p>
  The performance loss from having a wrapper layer is totally negligible
 compared to the cost of using a system call in the first place.
-</p>
-
-<h2> But isn't it what the SA_RESTART flag is meant to address? </h2>
-
-<p>
- Yes, it is. Unfortunately, SA_RESTART only protects interruptible
-system calls from signals you actually have control over, and set a
-handler for with
-<a href="http://www.opengroup.org/onlinepubs/9699919799/functions/sigaction.html">sigaction()</a>.
-This is not enough. You cannot decide that <em>every</em> signal sent
-to your process should have SA_RESTART behaviour; and the Single Unix
-specification says nothing about signals you do not control. For instance,
-you cannot trap SIGSTOP; SIGSTOP does not kill your process, which
-should resume flawlessly at the next SIGCONT; and according to the
-specification, it is valid for SIGSTOP and SIGCONT to <em>not</em>
-have SA_RESTART behaviour. So if you get a SIGSTOP while performing
-an interruptible system call, that system call may return -1 EINTR,
-this is not an OS bug, and there's nothing you can do about it with
-<tt>sigaction()</tt>.
-</p>
-
-<p>
- SA_RESTART is only a partial solution: in other words, it doesn't work.
-Until the Single Unix specification explicitly states that untrapped
-non-lethal signals MUST have SA_RESTART behaviour by default, you
-<em>need</em> safe wrappers to protect interruptible system calls.
 </p>
 
 </body>
