@@ -311,7 +311,6 @@ src/libstddjb/fd_move2.o src/libstddjb/fd_move2.lo: src/libstddjb/fd_move2.c src
 src/libstddjb/fd_read.o src/libstddjb/fd_read.lo: src/libstddjb/fd_read.c src/include/skalibs/allreadwrite.h
 src/libstddjb/fd_readv.o src/libstddjb/fd_readv.lo: src/libstddjb/fd_readv.c src/include/skalibs/allreadwrite.h
 src/libstddjb/fd_recv.o src/libstddjb/fd_recv.lo: src/libstddjb/fd_recv.c src/include/skalibs/allreadwrite.h
-src/libstddjb/fd_select.o src/libstddjb/fd_select.lo: src/libstddjb/fd_select.c
 src/libstddjb/fd_send.o src/libstddjb/fd_send.lo: src/libstddjb/fd_send.c src/include/skalibs/allreadwrite.h
 src/libstddjb/fd_sync.o src/libstddjb/fd_sync.lo: src/libstddjb/fd_sync.c src/include/skalibs/djbunix.h
 src/libstddjb/fd_write.o src/libstddjb/fd_write.lo: src/libstddjb/fd_write.c src/include/skalibs/allreadwrite.h
@@ -467,7 +466,6 @@ src/libstddjb/selfpipe_trapset.o src/libstddjb/selfpipe_trapset.lo: src/libstddj
 src/libstddjb/selfpipe_untrap.o src/libstddjb/selfpipe_untrap.lo: src/libstddjb/selfpipe_untrap.c src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
 src/libstddjb/sgetopt.o src/libstddjb/sgetopt.lo: src/libstddjb/sgetopt.c src/include/skalibs/buffer.h src/include/skalibs/sgetopt.h
 src/libstddjb/short_scan.o src/libstddjb/short_scan.lo: src/libstddjb/short_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/ushort.h
-src/libstddjb/sig.o src/libstddjb/sig.lo: src/libstddjb/sig.c src/include/skalibs/sig.h
 src/libstddjb/sig_block.o src/libstddjb/sig_block.lo: src/libstddjb/sig_block.c src/include/skalibs/sig.h
 src/libstddjb/sig_blocknone.o src/libstddjb/sig_blocknone.lo: src/libstddjb/sig_blocknone.c src/include/skalibs/sig.h
 src/libstddjb/sig_blockset.o src/libstddjb/sig_blockset.lo: src/libstddjb/sig_blockset.c src/include/skalibs/sig.h
@@ -742,7 +740,7 @@ src/libunixonacid/unixmessage_bits_closeall.o src/libunixonacid/unixmessage_bits
 src/libunixonacid/unixmessage_bits_closenone.o src/libunixonacid/unixmessage_bits_closenone.lo: src/libunixonacid/unixmessage_bits_closenone.c src/include/skalibs/bitarray.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_handle.o src/libunixonacid/unixmessage_handle.lo: src/libunixonacid/unixmessage_handle.c src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_put.o src/libunixonacid/unixmessage_put.lo: src/libunixonacid/unixmessage_put.c src/include/skalibs/bitarray.h src/include/skalibs/bytestr.h src/include/skalibs/diuint.h src/include/skalibs/genalloc.h src/include/skalibs/siovec.h src/include/skalibs/stralloc.h src/include/skalibs/sysdeps.h src/include/skalibs/unixmessage.h
-src/libunixonacid/unixmessage_receive.o src/libunixonacid/unixmessage_receive.lo: src/libunixonacid/unixmessage_receive.c src/include/skalibs/allreadwrite.h src/include/skalibs/cbuffer.h src/include/skalibs/diuint.h src/include/skalibs/djbunix.h src/include/skalibs/error.h src/include/skalibs/nonposix.h src/include/skalibs/siovec.h src/include/skalibs/stralloc.h src/include/skalibs/sysdeps.h src/include/skalibs/uint.h src/include/skalibs/unixmessage.h
+src/libunixonacid/unixmessage_receive.o src/libunixonacid/unixmessage_receive.lo: src/libunixonacid/unixmessage_receive.c src/include/skalibs/allreadwrite.h src/include/skalibs/cbuffer.h src/include/skalibs/djbunix.h src/include/skalibs/error.h src/include/skalibs/nonposix.h src/include/skalibs/siovec.h src/include/skalibs/stralloc.h src/include/skalibs/sysdeps.h src/include/skalibs/uint.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_receiver_0.o src/libunixonacid/unixmessage_receiver_0.lo: src/libunixonacid/unixmessage_receiver_0.c src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_receiver_free.o src/libunixonacid/unixmessage_receiver_free.lo: src/libunixonacid/unixmessage_receiver_free.c src/include/skalibs/stralloc.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_receiver_init.o src/libunixonacid/unixmessage_receiver_init.lo: src/libunixonacid/unixmessage_receiver_init.c src/include/skalibs/cbuffer.h src/include/skalibs/stralloc.h src/include/skalibs/unixmessage.h

@@ -6,21 +6,6 @@
 #include <signal.h>
 #include <skalibs/gccattributes.h>
 
-extern int sig_alarm gccattr_deprecated ;
-extern int sig_child gccattr_deprecated ;
-extern int sig_stop gccattr_deprecated ;
-extern int sig_cont gccattr_deprecated ;
-extern int sig_hangup gccattr_deprecated ;
-extern int sig_int gccattr_deprecated ;
-extern int sig_kill gccattr_deprecated ;
-extern int sig_pipe gccattr_deprecated ;
-extern int sig_term gccattr_deprecated ;
-extern int sig_usr1 gccattr_deprecated ;
-extern int sig_usr2 gccattr_deprecated ;
-extern int sig_quit gccattr_deprecated ;
-extern int sig_abort gccattr_deprecated ;
-
-
 typedef void skasighandler_t (int) ;
 typedef skasighandler_t *skasighandler_t_ref ;
 
