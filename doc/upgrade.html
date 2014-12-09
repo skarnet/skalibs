@@ -15,20 +15,25 @@
 <a href="http://skarnet.org/">skarnet.org</a>
 </p>
 
-<h1> Upgrade incompatibilities: notes for developers </h1>
+<h1> What has changed in skalibs </h1>
 
-<h2> From previous versions to 2.0.0.0 </h2>
+<h2> in 2.0.0.0 </h2>
 
 <ul>
- <li> The packaging system has changed. </li>
+ <li> The packaging system has completely changed. </li>
+ <li> Programs should now link with <tt>-lskarnet</tt> followed by the appropriate
+sysdeps links. </li>
  <li> No compatibility is ensured. Most APIs haven't changed, but no guarantee
 is offered. </li>
  <li> The most important change is probably the disparition of <tt>struct tai</tt>
 and <tt>struct taia</tt>, replaced with the <tt>tai_t</tt> and <tt>tain_t</tt>
 types. Attosecond precision has been removed - processor speed is almost capped now,
 and it looks like nanosecond precision will be enough for the foreseeable future. </li>
- <li> Programs should now link with <tt>-lskarnet</tt> followed by the appropriate
-sysdeps links. </li>
+ <li> Buffer implementation has changed, and some interfaces too, mainly the
+buffer_flush and bufalloc_flush return code. </li>
+ <li> skaclient, skalibs' client-server communication suite, has been
+entirely reimplemented: it's now using the new "unixmessage" set of primitives
+for easier fd-passing. </li>
 </ul>
 
 </body>
