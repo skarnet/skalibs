@@ -192,7 +192,7 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
   fd_close(syncpipe[0]) ;
 #endif
 
-  for (; i ; i--)
+  for (i = n ; i ; i--)
   {
     fd_close(p[i-1][i & 1]) ;
     fds[i-1] = p[i-1][!(i & 1)] ;
