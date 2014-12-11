@@ -84,7 +84,7 @@ update:
 global-links: $(DESTDIR)$(exthome) $(SHARED_LIBS:lib%.so=$(DESTDIR)$(sproot)/library.so/lib%.so)
 
 $(DESTDIR)$(sproot)/library.so/lib%.so: $(DESTDIR)$(home)/library.so/lib%.so
-	exec $(INSTALL) -D -l ..$(exthome)/library.so/$(<F) $@
+	exec $(INSTALL) -D -l ..$(subst $(sproot),,$(exthome))/library.so/$(<F) $@
 
 .PHONY: update global-links
 
