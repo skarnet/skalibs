@@ -15,8 +15,7 @@ int timed_get (void *b, initfunc_t *getfd, initfunc_t *get, tain_t const *deadli
   {
     r = iopause_stamp(&x, 1, deadline, stamp) ;
     if (!r) return (errno = ETIMEDOUT, -1) ;
-    else if (r > 0 && x.revents & (IOPAUSE_READ | IOPAUSE_EXCEPT))
-      r = (*get)(b) ;
+    else if (r > 0 && x.revents & (IOPAUSE_READ | IOPAUSE_EXCEPT)) r = (*get)(b) ;
   }
   return unsanitize_read(r) ;
 }
