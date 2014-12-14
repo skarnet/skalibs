@@ -60,7 +60,7 @@ int unixmessage_sender_flush (unixmessage_sender_t *b)
         ((int *)CMSG_DATA(cp))[i] = fd < 0 ? -(fd+1) : fd ;
       }
     }
-    if (sendmsg(b->fd, &hdr, MSG_NOSIGNAL) < len + (sizeof(unsigned int) << 1))
+    if (sendmsg(b->fd, &hdr, MSG_NOSIGNAL) < (int)(len + (sizeof(unsigned int) << 1)))
       return -(int)(b->head-oldhead)-1 ;
 #ifndef SKALIBS_HASANCILAUTOCLOSE
     if (nfds)
