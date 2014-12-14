@@ -92,8 +92,12 @@ int unixmessage_receive (unixmessage_receiver_t *b, unixmessage_t *m)
   for (;;)
   {
     register int r ;
-    b->maindata.len += cbuffer_get(&b->mainb, b->maindata.s + b->maindata.len, cbuffer_len(&b->mainb)) ;
-    b->auxdata.len += cbuffer_get(&b->auxb, b->auxdata.s + b->auxdata.len, cbuffer_len(&b->auxb)) ;
+    register unsigned int n = cbuffer_len(&b->mainb) ;
+    if (n > b->mainlen - b->maindata.len) n = b->mainlen - b->maindata.len ;
+    b->maindata.len += cbuffer_get(&b->mainb, b->maindata.s + b->maindata.len, n) ;
+    n = cbuffer_len(&b->auxb) ;
+    if (n > b->auxlen - b->auxdata.len) n = b->auxlen - b->auxdata.len ;
+    b->auxdata.len += cbuffer_get(&b->auxb, b->auxdata.s + b->auxdata.len, n) ;
     if (b->maindata.len == b->mainlen && b->auxdata.len == b->auxlen) break ;
     r = sanitize_read(unixmessage_receiver_fill(b)) ;
     if (r <= 0) return r ;
