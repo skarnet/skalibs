@@ -9,9 +9,6 @@ it: all
 
 CC = $(error Please use ./configure first)
 
-SHARED_LIBS := libskarnet.so
-STATIC_LIBS := libskarnet.a
-
 -include config.mak
 include package/deps.mak
 
