@@ -6,6 +6,8 @@
 #include <skalibs/skamisc.h>
 #include <skalibs/djbunix.h>
 
+ BUG
+
 int sarealpath (stralloc *sa, char const *path)
 {
   return sarealpath_tmp(sa, path, &satmp) ;
