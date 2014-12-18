@@ -5,7 +5,7 @@ Build Instructions
   ------------
 
   - A POSIX-compliant C development environment
-  - GNU make version 4.0 or later
+  - GNU make version 3.81 or later
   - If cross-compiling: the sysdeps for your target architecture
     (see the "Cross-compilation" section below)
 
