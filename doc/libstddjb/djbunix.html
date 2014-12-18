@@ -458,10 +458,17 @@ on systems that support it.
 </p>
 
 <p>
-<code> pid_t child_spawn1 (char const *file, char const *const *argv, char const *const *envp, int *fd, int w) </code> <br />
+<code> pid_t child_spawn1_pipe (char const *file, char const *const *argv, char const *const *envp, int *fd, int w) </code> <br />
 Like <tt>child_spawn0()</tt>, except that a pipe is created between the child's
 stdin (if <em>w</em> is 0) or stdout (if <em>w</em> is nonzero) and the parent.
 The parent's end of the pipe will be stored in *<em>fd</em>.
+</p>
+
+<p>
+<code> pid_t child_spawn1_socket (char const *file, char const *const *argv, char const *const *envp, int *fd)
+Like <tt>child_spawn0</tt>, except that a socket is created between the parent
+and the child. Both the child's stdin and stdout point to the socket; the parent has
+its end of the socket available in *<em>fd</em>.
 </p>
 
 <p>
@@ -472,10 +479,8 @@ file descriptors reading from or writing to the child will be stored there. The 
 </p>
 <ul>
  <li> If <em>nfds</em> is 0, then the function behaves like <tt>child_spawn0</tt>, except
-all signals will be reset to the default behaviour in the child </li>
- <li> If <em>nfds</em> is 1, then <em>fds</em>[0] will contain a Unix domain socket
-connected to the child's stdin and stdout. </li>
- <li> If <em>nfds</em> is 2 or more, then <em>fds</em> will contain pipes between the
+all ignored signals will be un-ignored in the child </li>
+ <li> If <em>nfds</em> is 1 or more, then <em>fds</em> will contain pipes between the
 child and the parent. The parent will read on even-numbered ones (starting on <em>fds</em>[0])
 and write on odd-numbered ones. </li>
 </ul>
