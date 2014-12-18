@@ -15,7 +15,6 @@
 #include <skalibs/env.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/uint.h>
-#include <skalibs/webipc.h>
 
 #ifdef SKALIBS_HASPOSIXSPAWN
 
@@ -35,9 +34,7 @@
 
  /*
     If n = 0 : child's stdin and stdout are the same as the parent's
-    If n = 1 : Unix socket between parent and child.
-               Additional canals, if needed, may be fd-passed through it.
-    If n >= 2 : pipes between parent and child.
+    If n >= 1 : pipes between parent and child.
                 Parent reads on even ones, writes on odd ones.
  */
 
@@ -53,17 +50,10 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
   pid_t pid ;
   int e ;
   unsigned int m = sizeof(NOFDVAR) ;
-  unsigned int i ;
+  unsigned int i = 0 ;
   char modifs[m + 1 + n * UINT_FMT] ;
   byte_copy(modifs, sizeof(NOFDVAR), NOFDVAR "=") ;
-  if (n == 1)
-  {
-    if (ipc_pair_b(p[0]) < 0) return 0 ;
-  }
-  else if (n >= 2)
-  {
-    for (i = 0 ; i < n ; i++) if (pipe(p[i]) < 0) { e = errno ; goto errp ; }
-  }
+  for (; i < n ; i++) if (pipe(p[i]) < 0) { e = errno ; goto errp ; }
   for (i = 0 ; i < n ; i++)
     if ((ndelay_on(p[i][i & 1]) < 0) || (coe(p[i][i & 1]) < 0))
     {
@@ -88,28 +78,19 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
   if (e) goto errattr ;
   e = posix_spawn_file_actions_init(&actions) ;
   if (e) goto errattr ;
-  switch (n)
+  if (n >= 2)
   {
-    case 0 :
-       break ;
-    case 1 :
-      e = posix_spawn_file_actions_adddup2(&actions, p[0][1], 1) ;
-      if (e) goto erractions ;
-      e = posix_spawn_file_actions_addclose(&actions, p[0][1]) ;
-      if (e) goto erractions ;
-      e = posix_spawn_file_actions_adddup2(&actions, 1, 0) ;
-      if (e) goto erractions ;
-      break ;
-    default : 
-      e = posix_spawn_file_actions_adddup2(&actions, p[1][0], 0) ;
-      if (e) goto erractions ;
-      e = posix_spawn_file_actions_addclose(&actions, p[1][0]) ;
-      if (e) goto erractions ;
-      e = posix_spawn_file_actions_adddup2(&actions, p[0][1], 1) ;
-      if (e) goto erractions ;
-      e = posix_spawn_file_actions_addclose(&actions, p[0][1]) ;
-      if (e) goto erractions ;
-      break ;
+    e = posix_spawn_file_actions_adddup2(&actions, p[1][0], 0) ;
+    if (e) goto erractions ;
+    e = posix_spawn_file_actions_addclose(&actions, p[1][0]) ;
+    if (e) goto erractions ;
+  }
+  if (n)
+  {
+    e = posix_spawn_file_actions_adddup2(&actions, p[0][1], 1) ;
+    if (e) goto erractions ;
+    e = posix_spawn_file_actions_addclose(&actions, p[0][1]) ;
+    if (e) goto erractions ;
   }
   {
     int haspath = !!env_get("PATH") ;
@@ -142,25 +123,13 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
     byte_copy(name + len, 9, " (child)") ;
     PROG = name ;
     fd_close(syncpipe[0]) ;
-    switch (n)
+    if (n >= 2)
     {
-      case 0 :
-      {
-        int fd = open2("/dev/null", O_RDONLY) ;
-        if (fd < 0) goto syncdie ;
-        if (fd_move(0, fd) < 0) goto syncdie ;
-        fd = open2("/dev/null", O_WRONLY) ;
-        if (fd < 0) goto syncdie ;
-        if (fd_move(1, fd) < 0) goto syncdie ;
-        break ;
-      }
-      case 1 :
-        if (fd_move(1, p[0][1]) < 0) goto syncdie ;
-        if (fd_copy(0, 1) < 0) goto syncdie ;
-        break ;
-      default :
-        if (fd_move2(0, p[1][0], 1, p[0][1]) < 0) goto syncdie ;
-        break ;
+      if (fd_move2(0, p[1][0], 1, p[0][1]) < 0) goto syncdie ;
+    }
+    else if (n)
+    {
+      if (fd_move(1, p[0][1]) < 0) goto syncdie ;
     }
     sig_blocknone() ;
     pathexec_r_name(prog, argv, envp, env_len(envp), modifs, m) ;

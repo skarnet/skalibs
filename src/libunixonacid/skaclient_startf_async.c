@@ -32,7 +32,7 @@ int skaclient_startf_async (
   skaclient_cbdata_t *blah)
 {
   int fd ;
-  pid_t pid = child_spawn(prog, argv, envp, &fd, 1) ;
+  pid_t pid = child_spawn1_socket(prog, argv, envp, &fd) ;
   if (!pid) return 0 ;
   if (!skaclient_init(a, fd, bufss, bufsn, auxbufss, auxbufsn, bufas, bufan, auxbufas, auxbufan, q, qlen, before, beforelen))
   {

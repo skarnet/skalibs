@@ -8,37 +8,48 @@
 
 #ifdef SKALIBS_HASPOSIXSPAWN
 
+#include <signal.h>
 #include <spawn.h>
 #include <stdlib.h>
 #include <skalibs/config.h>
 #include <skalibs/env.h>
 
-pid_t child_spawn1 (char const *prog, char const *const *argv, char const *const *envp, int *fd, int to)
+pid_t child_spawn1_internal (char const *prog, char const *const *argv, char const *const *envp, int *p, int to)
 {
   posix_spawn_file_actions_t actions ;
+  posix_spawnattr_t attr ;
   int e ;
-  int p[2] ;
   pid_t pid ;
   int haspath = !!env_get("PATH") ;
-  if (pipe(p) < 0) return 0 ;
   to = !!to ;
-  e = posix_spawn_file_actions_init(&actions) ;
+  if (coe(p[!to]) < 0) { e = errno ; goto err ; }
+  e = posix_spawnattr_init(&attr) ;
   if (e) goto err ;
+  {
+    sigset_t set ;
+    sigemptyset(&set) ;
+    e = posix_spawnattr_setsigmask(&attr, &set) ;
+  }
+  if (e) goto errattr ;
+  e = posix_spawn_file_actions_init(&actions) ;
+  if (e) goto errattr ;
   e = posix_spawn_file_actions_addclose(&actions, p[!to]) ;
   if (e) goto erractions ;
   e = posix_spawn_file_actions_adddup2(&actions, p[to], to) ;
   if (e) goto erractions ;
   if (!haspath && (setenv("PATH", SKALIBS_DEFAULTPATH, 0) < 0)) { e = errno ; goto erractions ; }
-  e = posix_spawnp(&pid, prog, &actions, 0, (char *const *)argv, (char *const *)envp) ;
+  e = posix_spawnp(&pid, prog, &actions, &attr, (char *const *)argv, (char *const *)envp) ;
   if (!haspath) unsetenv("PATH") ;
   posix_spawn_file_actions_destroy(&actions) ;
+  posix_spawnattr_destroy(&attr) ;
   fd_close(p[to]) ;
   if (e) goto errp ;
-  *fd = p[!to] ;
   return pid ;
 
  erractions:
   posix_spawn_file_actions_destroy(&actions) ;
+ errattr:
+  posix_spawnattr_destroy(&attr) ;
  err:
   fd_close(p[to]) ;
  errp:
@@ -50,15 +61,14 @@ pid_t child_spawn1 (char const *prog, char const *const *argv, char const *const
 #else
 
 #include <skalibs/allreadwrite.h>
+#include <skalibs/sig.h>
 
-pid_t child_spawn1 (char const *prog, char const *const *argv, char const *const *envp, int *fd, int to)
+pid_t child_spawn1_internal (char const *prog, char const *const *argv, char const *const *envp, int *p, int to)
 {
   int e ;
   int syncp[2] ;
-  int p[2] ;
   pid_t pid ;
-  if (pipe(p) < 0) return 0 ;
-  if (pipecoe(syncp) < 0)
+  if (coe(p[0]) < 0 || pipecoe(syncp) < 0)
   {
     e = errno ;
     fd_close(p[1]) ;
@@ -83,6 +93,7 @@ pid_t child_spawn1 (char const *prog, char const *const *argv, char const *const
     fd_close(syncp[0]) ;
     fd_close(p[!to]) ;
     if (fd_move(to, p[to]) < 0) goto err ;
+    sig_blocknone() ;
     pathexec_run(prog, argv, envp) ;
 err:
     e = errno ;
@@ -108,7 +119,6 @@ err:
     errno = e ;
     return 0 ;
   }
-  *fd = p[!to] ;
   return pid ;
 }
 

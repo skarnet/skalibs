@@ -129,18 +129,18 @@ extern int rmstar (char const *) ;
 extern int rmstar_tmp (char const *, stralloc *) ;
 
 
- /* Simple spawn functions. 0 for no communication, 1 for a child/parent pipe. */
+ /* Simple spawn functions with 0 or 1 communicating fds. */
 
 extern pid_t child_spawn0 (char const *, char const *const *, char const *const *) ;
-extern pid_t child_spawn1 (char const *, char const *const *, char const *const *, int *, int) ;
+extern pid_t child_spawn1_pipe (char const *, char const *const *, char const *const *, int *, int) ;
+extern pid_t child_spawn1_socket (char const *, char const *const *, char const *const *, int *) ;
 
 
  /*
     Unified function to fork a child with communication canals.
     * uses posix_spawn() if available, else uses fork+exec
     * requests n (the last arg) communication fds between parent and child
-    * if n=1, the fd is a Unix socket. If more canals are needed, you can
-      pass them through that socket.
+    * if n=1, equivalent to child_spawn1_pipe; child writes, parent reads.
     * if n>=2, the fds are pipes, parent reads on even and writes on odd.
  */
 
