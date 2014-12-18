@@ -28,6 +28,8 @@ static int get (struct blah_s *blah)
 
 int timed_getlnmax (buffer *b, char *d, unsigned int max, unsigned int *w, char sep, tain_t const *deadline, tain_t *stamp)
 {
-  struct blah_s blah = { .b = b, .d = d, .max = max, .w = 0, .sep = sep } ;
-  return timed_get(&blah, (initfunc_t_ref)&getfd, (initfunc_t_ref)&get, deadline, stamp) ;
+  struct blah_s blah = { .b = b, .d = d, .max = max, .w = *w, .sep = sep } ;
+  register int r = timed_get(&blah, (initfunc_t_ref)&getfd, (initfunc_t_ref)&get, deadline, stamp) ;
+  *w = blah.w ;
+  return r ;
 }
