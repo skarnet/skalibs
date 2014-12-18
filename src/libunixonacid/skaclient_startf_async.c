@@ -34,7 +34,7 @@ int skaclient_startf_async (
   int fd ;
   pid_t pid = child_spawn1_socket(prog, argv, envp, &fd) ;
   if (!pid) return 0 ;
-  if (!skaclient_init(a, fd, bufss, bufsn, auxbufss, auxbufsn, bufas, bufan, auxbufas, auxbufan, q, qlen, before, beforelen))
+  if (ndelay_on(fd) < 0 || !skaclient_init(a, fd, bufss, bufsn, auxbufss, auxbufsn, bufas, bufan, auxbufas, auxbufan, q, qlen, before, beforelen))
   {
     register int e = errno ;
     fd_close(fd) ;

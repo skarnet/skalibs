@@ -21,8 +21,7 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
   int e ;
   pid_t pid ;
   int haspath = !!env_get("PATH") ;
-  to = !!to ;
-  if (coe(p[!to]) < 0) { e = errno ; goto err ; }
+  if (coe(p[!(to & 1)]) < 0) { e = errno ; goto err ; }
   e = posix_spawnattr_init(&attr) ;
   if (e) goto err ;
   {
@@ -33,16 +32,21 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
   if (e) goto errattr ;
   e = posix_spawn_file_actions_init(&actions) ;
   if (e) goto errattr ;
-  e = posix_spawn_file_actions_adddup2(&actions, p[to], to) ;
+  e = posix_spawn_file_actions_adddup2(&actions, p[to & 1], to & 1) ;
   if (e) goto erractions ;
-  e = posix_spawn_file_actions_addclose(&actions, p[to]) ;
+  e = posix_spawn_file_actions_addclose(&actions, p[to & 1]) ;
   if (e) goto erractions ;
+  if (to & 2)
+  {
+    e = posix_spawn_file_actions_adddup2(&actions, to & 1, !(to & 1)) ;
+    if (e) goto erractions ;
+  }
   if (!haspath && (setenv("PATH", SKALIBS_DEFAULTPATH, 0) < 0)) { e = errno ; goto erractions ; }
   e = posix_spawnp(&pid, prog, &actions, &attr, (char *const *)argv, (char *const *)envp) ;
   if (!haspath) unsetenv("PATH") ;
   posix_spawn_file_actions_destroy(&actions) ;
   posix_spawnattr_destroy(&attr) ;
-  fd_close(p[to]) ;
+  fd_close(p[to & 1]) ;
   if (e) goto errp ;
   return pid ;
 
@@ -51,9 +55,9 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
  errattr:
   posix_spawnattr_destroy(&attr) ;
  err:
-  fd_close(p[to]) ;
+  fd_close(p[to & 1]) ;
  errp:
-  fd_close(p[!to]) ;
+  fd_close(p[!(to & 1)]) ;
   errno = e ;
   return 0 ;
 }
@@ -76,7 +80,6 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
     errno = e ;
     return 0 ;
   }
-  to = !!to ;
   pid = fork() ;
   if (pid < 0)
   {
@@ -91,8 +94,9 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
   if (pid)
   {
     fd_close(syncp[0]) ;
-    fd_close(p[!to]) ;
-    if (fd_move(to, p[to]) < 0) goto err ;
+    fd_close(p[!(to & 1)]) ;
+    if (fd_move(to & 1, p[to & 1]) < 0) goto err ;
+    if ((to & 2) && (fd_copy(!(to & 1), to & 1) < 0)) goto err ;
     sig_blocknone() ;
     pathexec_run(prog, argv, envp) ;
 err:
@@ -101,20 +105,20 @@ err:
     _exit(127) ;
   }
   fd_close(syncp[1]) ;
-  fd_close(p[to]) ;
+  fd_close(p[to & 1]) ;
   syncp[1] = fd_read(syncp[0], (char *)&e, sizeof(e)) ;
   if (syncp[1] < 0)
   {
     e = errno ;
     fd_close(syncp[0]) ;
-    fd_close(p[!to]) ;
+    fd_close(p[!(to & 1)]) ;
     errno = e ;
     return 0 ;
   }
   fd_close(syncp[0]) ;
   if (syncp[1] == sizeof(e))
   {
-    fd_close(p[!to]) ;
+    fd_close(p[!(to & 1)]) ;
     wait_pid(pid, &syncp[1]) ;
     errno = e ;
     return 0 ;
