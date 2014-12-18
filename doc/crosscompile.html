@@ -76,8 +76,10 @@ architecture</strong>, via the --with-sysdeps option to configure.
 
 <p>
  The easiest way to get the correct sysdeps for a target achitecture is
-to natively compile skalibs on that target, and steal the produced sysdeps
-files. It can be easily done with a virtual machine, qemu for instance.
+to natively run skalibs' <tt>./configure</tt> script on that target,
+and steal the produced sysdeps files, which are normally written to the
+<tt>./sysdeps.cfg</tt> directory.
+Doing this is easy with a virtual machine, qemu for instance.
 You could also (politely) ask for precompiled sysdeps on the
 skaware mailing-list, if you cannot find them anywhere on the Internet.
 </p>

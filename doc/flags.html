@@ -43,6 +43,10 @@ symbolic link to point to <tt>skalibs-$v</tt> </li>
 to the installed skalibs shared libraries. </li>
 </ul>
 
+<p>
+ If this option is not given, no slashpackage support will be provided.
+</p>
+
 <a name="replace-libc"><h3> --enable-libc-replacements </h3></a>
 
 <p>
@@ -260,8 +264,8 @@ support.
 
 <p>
  If you don't set this option, then skalibs will include IPv6 support in the
-relevant networking functions, if the target architecture supports it.
-The safe option is to let this flag clear.
+relevant networking functions if and only if the target architecture supports it.
+This is the default, and it is safe.
 </p>
 
 <a name="forcedevr"><h3> --enable-force-devr </h3></a>
@@ -275,9 +279,9 @@ its autodetection.
 <p>
  Otherwise, <tt>/dev/random</tt> will be autodetected
 and tested; if entropy generation is low on the host, the compilation
-process might hang for several minutes. It is safe to let this flag
+process might hang for several minutes. It is safe to leave this flag
 clear; it should only be set to speed up the compilation process in a
-known environment and for testing purposes.
+known environment or for testing purposes.
 </p>
 
 <p>

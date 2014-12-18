@@ -60,14 +60,14 @@ to run <tt>ldconfig</tt> if needed. </li>
 installed: by default, it's <tt>/usr/lib/skalibs/sysdeps</tt>. Let's call
 it <tt>$sysdeps</tt>. </li>
  <li> Link with <tt>-lskarnet</tt>. If you are using socket functions, you
-will also need to link with <tt>-l$sysdeps/socket.lib</tt>. If you are using
+will also need to link with <tt>-l`cat $sysdeps/socket.lib`</tt>. If you are using
 time functions such as <tt>tain_now()</tt>, you will also need to link with
-<tt>-l$sysdeps/tainnow.lib</tt>. </li>
+<tt>-l`cat $sysdeps/tainnow.lib`</tt>. </li>
 </ul>
 
 <p>
- The <em>skarnet</em> library as a whole is big (833k for libskarnet.a and
-257k for libskarnet.so.2.0.0.0 on x86_64), but the utmost care has been
+ The <em>skarnet</em> library as a whole is big (826k for libskarnet.a and
+233k for libskarnet.so.2.0.0.0 on x86_64-linux), but the utmost care has been
 given to separate functions so that linkers never pull in any more than they
 need. Linking against the static version of libskarnet actually produces
 very small executables, and if your libc is suited for that, since skalibs

@@ -70,7 +70,7 @@ signal is caught. And that means SA_RESTART should not be used.
 </p>
 
 <p>
- Which means that other system calls performed when the signal handler has
+ Which also means that other system calls performed when the signal handler has
 been installed, for instance in the body of the loop, will <em>not</em> be
 protected, and can return -1 EINTR if a signal is caught at the wrong time.
 </p>
