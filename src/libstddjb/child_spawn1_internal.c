@@ -33,9 +33,9 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
   if (e) goto errattr ;
   e = posix_spawn_file_actions_init(&actions) ;
   if (e) goto errattr ;
-  e = posix_spawn_file_actions_addclose(&actions, p[!to]) ;
-  if (e) goto erractions ;
   e = posix_spawn_file_actions_adddup2(&actions, p[to], to) ;
+  if (e) goto erractions ;
+  e = posix_spawn_file_actions_addclose(&actions, p[to]) ;
   if (e) goto erractions ;
   if (!haspath && (setenv("PATH", SKALIBS_DEFAULTPATH, 0) < 0)) { e = errno ; goto erractions ; }
   e = posix_spawnp(&pid, prog, &actions, &attr, (char *const *)argv, (char *const *)envp) ;
