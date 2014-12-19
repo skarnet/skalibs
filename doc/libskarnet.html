@@ -60,9 +60,9 @@ to run <tt>ldconfig</tt> if needed. </li>
 installed: by default, it's <tt>/usr/lib/skalibs/sysdeps</tt>. Let's call
 it <tt>$sysdeps</tt>. </li>
  <li> Link with <tt>-lskarnet</tt>. If you are using socket functions, you
-will also need to link with <tt>-l`cat $sysdeps/socket.lib`</tt>. If you are using
+will also need to link with <tt>`cat $sysdeps/socket.lib`</tt>. If you are using
 time functions such as <tt>tain_now()</tt>, you will also need to link with
-<tt>-l`cat $sysdeps/tainnow.lib`</tt>. </li>
+<tt>`cat $sysdeps/tainnow.lib`</tt>. </li>
 </ul>
 
 <p>
