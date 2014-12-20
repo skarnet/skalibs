@@ -48,7 +48,8 @@ static int ancil_send_fd (int sock, int fd)
   cmsg->cmsg_level = SOL_SOCKET ;
   cmsg->cmsg_type = SCM_RIGHTS ;
   *((int *)CMSG_DATA(cmsg)) = fd ;
-  return (sendmsg(sock, &msghdr, 0) >= 0) ;
+  if (sendmsg(sock, &msghdr, 0) < 0) return 0 ;
+  return 1 ;
 }
 
 static int ancil_recv_fd (int sock)
