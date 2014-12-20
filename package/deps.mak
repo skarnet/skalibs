@@ -49,7 +49,6 @@ src/include/skalibs/strerr.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/surf.h: src/include/skalibs/uint32.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
-src/include/skalibs/uint32.h: src/include/skalibs/uint64.h
 src/include/skalibs/unirandom.h: src/include/skalibs/buffer.h src/include/skalibs/surf.h
 src/include/skalibs/unirandomdev.h: src/include/skalibs/unirandom.h
 src/include/skalibs/unirandomegd.h: src/include/skalibs/unirandom.h
@@ -150,7 +149,7 @@ src/librandom/rrandom_add.o src/librandom/rrandom_add.lo: src/librandom/rrandom_
 src/librandom/rrandom_finish.o src/librandom/rrandom_finish.lo: src/librandom/rrandom_finish.c src/include/skalibs/rrandom.h src/include/skalibs/unirandom.h
 src/librandom/rrandom_name.o src/librandom/rrandom_name.lo: src/librandom/rrandom_name.c src/include/skalibs/rrandom.h src/include/skalibs/unirandom.h
 src/librandom/rrandom_read.o src/librandom/rrandom_read.lo: src/librandom/rrandom_read.c src/include/skalibs/allreadwrite.h src/include/skalibs/error.h src/include/skalibs/rrandom.h src/include/skalibs/unirandom.h
-src/librandom/rrandom_readint.o src/librandom/rrandom_readint.lo: src/librandom/rrandom_readint.c src/librandom/random-internal.h src/include/skalibs/rrandom.h src/include/skalibs/uint.h src/include/skalibs/unirandom.h
+src/librandom/rrandom_readint.o src/librandom/rrandom_readint.lo: src/librandom/rrandom_readint.c src/include/skalibs/bytestr.h src/librandom/random-internal.h src/include/skalibs/rrandom.h src/include/skalibs/uint.h src/include/skalibs/unirandom.h
 src/librandom/surf.o src/librandom/surf.lo: src/librandom/surf.c src/include/skalibs/bytestr.h src/include/skalibs/surf.h src/include/skalibs/uint32.h
 src/librandom/surf_autoinit.o src/librandom/surf_autoinit.lo: src/librandom/surf_autoinit.c src/include/skalibs/surf.h
 src/librandom/surf_here.o src/librandom/surf_here.lo: src/librandom/surf_here.c src/librandom/random-internal.h src/include/skalibs/surf.h

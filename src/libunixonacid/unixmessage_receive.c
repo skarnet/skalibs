@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#define _XPG4_2
 #include <skalibs/sysdeps.h>
 #include <skalibs/nonposix.h>
 #include <errno.h>
@@ -14,6 +13,20 @@
 #include <skalibs/stralloc.h>
 #include <skalibs/siovec.h>
 #include <skalibs/unixmessage.h>
+
+#ifdef SKALIBS_HASOKWAITALL
+# ifdef SKALIBS_HASCMSGCLOEXEC
+#  define RECV(fd, hdr) recvmsg(fd, (hdr), MSG_WAITALL | MSG_CMSG_CLOEXEC)
+# else
+#  define RECV(fd, hdr) recvmsg(fd, (hdr), MSG_WAITALL)
+# endif
+#else
+# ifdef SKALIBS_HASCMSGCLOEXEC
+#  define RECV(fd, hdr) recvmsg(fd, (hdr), MSG_CMSG_CLOEXEC)
+# else
+#  define RECV(fd, hdr) recvmsg(fd, (hdr), 0)
+# endif
+#endif
 
 static int unixmessage_receiver_fill (unixmessage_receiver_t *b)
 {
@@ -38,11 +51,7 @@ static int unixmessage_receiver_fill (unixmessage_receiver_t *b)
     cbuffer_wpeek(&b->mainb, v) ;
     iovec_from_siovec(iov, v, 2) ;
   }
-#ifdef SKALIBS_HASCMSGCLOEXEC
-  r = recvmsg(b->fd, &msghdr, MSG_WAITALL | MSG_CMSG_CLOEXEC) ;
-#else
-  r = recvmsg(b->fd, &msghdr, MSG_WAITALL) ;
-#endif
+  r = RECV(b->fd, &msghdr) ;
   if (r <= 0) return r ;
   {
     struct cmsghdr *c = CMSG_FIRSTHDR(&msghdr) ;

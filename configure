@@ -133,7 +133,12 @@ choose () {
   fi
   if $r ; then
     case "$1" in
-     *r*) ./try$2 >/dev/null 2>&1 || r=false ;;
+     *r*) ./try$2 >/dev/null 2>&1 ; r=$?
+          case "$r" in
+           111) echo "  ... test crashed, aborting." ; exit 111 ;;
+           0) r=true ;;
+           *) r=false ;;
+          esac
     esac
   fi
   rm -f try$2.o try$2
@@ -437,6 +442,7 @@ EOF
   choose cl getpeerucred GETPEERUCRED 'getpeerucred()'
   choose cl ipv6 IPV6 'IPv6 support' $socket_lib
   choose clr malloc0 MALLOC0 'non-NULL malloc(0)'
+  choose clr okwaitall OKWAITALL 'a usable MSG_WAITALL flag'
   choose cl openat OPENAT 'openat()'
   choose cl linkat LINKAT 'linkat()'
   choose clr pipe2 PIPE2 'pipe2()'
