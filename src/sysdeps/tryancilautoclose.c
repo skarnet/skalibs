@@ -3,11 +3,16 @@
 #undef _POSIX_C_SOURCE
 #undef _XOPEN_SOURCE
 
+#ifndef _BSD_SOURCE
+#define _BSD_SOURCE
+#endif
+
 #ifndef _XPG4_2
 # define _XPG4_2
 #endif
 
 #include <sys/types.h>
+#include <string.h>
 #include <unistd.h>
 #include <errno.h>
 #include <sys/socket.h>
@@ -25,22 +30,20 @@ struct ancilbuf_s
 
 static int ancil_send_fd (int sock, int fd)
 {
-  struct msghdr msghdr ;
-  struct iovec nothing_ptr ;
   ancilbuf_t buf ;
-  struct cmsghdr *cmsg ;
-  char nothing = '!' ;
-  
-  nothing_ptr.iov_base = &nothing ;
-  nothing_ptr.iov_len = 1 ;
-  msghdr.msg_name = 0 ;
-  msghdr.msg_namelen = 0 ;
-  msghdr.msg_iov = &nothing_ptr ;
-  msghdr.msg_iovlen = 1 ;
-  msghdr.msg_flags = 0 ;
-  msghdr.msg_control = &buf ;
-  msghdr.msg_controllen = sizeof(ancilbuf_t) ;
-  cmsg = CMSG_FIRSTHDR(&msghdr) ;
+  char s[8] = "blahblah" ;
+  struct iovec v = { .iov_base = s, .iov_len = 8 } ;
+  struct msghdr msghdr =
+  {
+    .msg_name = 0,
+    .msg_namelen = 0,
+    .msg_iov = &v,
+    .msg_iovlen = 1,
+    .msg_flags = 0,
+    .msg_control = &buf,
+    .msg_controllen = sizeof(ancilbuf_t)
+  } ;
+  struct cmsghdr *cmsg = CMSG_FIRSTHDR(&msghdr) ;
   cmsg->cmsg_len = msghdr.msg_controllen ;
   cmsg->cmsg_level = SOL_SOCKET ;
   cmsg->cmsg_type = SCM_RIGHTS ;
@@ -50,27 +53,26 @@ static int ancil_send_fd (int sock, int fd)
 
 static int ancil_recv_fd (int sock)
 {
-  struct msghdr msghdr ;
-  struct iovec nothing_ptr ;
   ancilbuf_t buf ;
-  struct cmsghdr *cmsg ;
-  char nothing ;
-
-  nothing_ptr.iov_base = &nothing ;
-  nothing_ptr.iov_len = 1 ;
-  msghdr.msg_name = 0 ;
-  msghdr.msg_namelen = 0 ;
-  msghdr.msg_iov = &nothing_ptr ;
-  msghdr.msg_iovlen = 1 ;
-  msghdr.msg_flags = 0 ;
-  msghdr.msg_control = &buf ;
-  msghdr.msg_controllen = sizeof(ancilbuf_t) ;
-  cmsg = CMSG_FIRSTHDR(&msghdr) ;
+  char s[8] ;
+  struct iovec v = { .iov_base = s, .iov_len = 8 } ;
+  struct msghdr msghdr =
+  {
+    .msg_name = 0,
+    .msg_namelen = 0,
+    .msg_iov = &v,
+    .msg_iovlen = 1,
+    .msg_flags = 0,
+    .msg_control = &buf,
+    .msg_controllen = sizeof(ancilbuf_t)
+  } ;
+  struct cmsghdr *cmsg = CMSG_FIRSTHDR(&msghdr) ;
   cmsg->cmsg_len = msghdr.msg_controllen ;
   cmsg->cmsg_level = SOL_SOCKET ;
   cmsg->cmsg_type = SCM_RIGHTS ;
   *((int *)CMSG_DATA(cmsg)) = -1 ;
-  if (recvmsg(sock, &msghdr, 0) < 0) return -1 ;
+  if (recvmsg(sock, &msghdr, 0) != 8) return -1 ;
+  if (memcmp(s, "blahblah", 8)) return -1 ;
   return *((int *)CMSG_DATA(cmsg)) ;
 }
 
