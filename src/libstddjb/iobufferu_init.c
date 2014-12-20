@@ -4,7 +4,7 @@
 #include <skalibs/buffer.h>
 #include <skalibs/iobuffer.h>
 
-int iobufferu_init (iobufferu_ref b, int fdin, int fdout)
+int iobufferu_init (iobufferu *b, int fdin, int fdout)
 {
   register char *x = alloc(IOBUFFERU_SIZE) ;
   if (!x) return 0 ;

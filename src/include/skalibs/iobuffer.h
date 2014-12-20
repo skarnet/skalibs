@@ -3,7 +3,7 @@
 #ifndef IOBUFFER_H
 #define IOBUFFER_H
 
-#define IOBUFFER_SIZE 65536U
+#define IOBUFFER_SIZE 65537U
 
  /* iobufferu */
 
@@ -19,10 +19,10 @@ struct iobufferu_s
   char *buf ;
 } ;
 
-extern int iobufferu_init (iobufferu_ref, int, int) ;
-extern int iobufferu_fill (iobufferu_ref) ;
-extern int iobufferu_flush (iobufferu_ref) ;
-extern void iobufferu_finish (iobufferu_ref) ;
+extern int iobufferu_init (iobufferu *, int, int) ;
+extern int iobufferu_fill (iobufferu *) ;
+extern int iobufferu_flush (iobufferu *) ;
+extern void iobufferu_finish (iobufferu *) ;
 
 #define iobufferu_len(u) buffer_len(&(u)->b[0])
 #define iobufferu_available(u) buffer_available(&(u)->b[1])
@@ -50,9 +50,9 @@ struct iobufferk_s
   unsigned int nb : 2 ;
 } ;
 
-typedef int iobufferk_io_func_t (iobufferk_ref) ;
+typedef int iobufferk_io_func_t (iobufferk *) ;
 typedef iobufferk_io_func_t *iobufferk_io_func_t_ref ;
-typedef void iobufferk_finish_func_t (iobufferk_ref) ;
+typedef void iobufferk_finish_func_t (iobufferk *) ;
 typedef iobufferk_finish_func_t *iobufferk_finish_func_t_ref ;
 
 extern iobufferk_io_func_t iobufferk_nosys ;
@@ -94,13 +94,13 @@ struct iobuffer_s
   unsigned int isk : 1 ;
 } ;
 
-extern int iobuffer_ufromk (iobufferu_ref, iobufferk_ref) ;
-extern int iobuffer_kfromu (iobufferk_ref, iobufferu_ref) ;
-extern int iobuffer_salvage (iobuffer_ref) ;
+extern int iobuffer_ufromk (iobufferu *, iobufferk *) ;
+extern int iobuffer_kfromu (iobufferk *, iobufferu *) ;
+extern int iobuffer_salvage (iobuffer *) ;
 
-extern int iobuffer_init (iobuffer_ref, int, int) ;
-extern int iobuffer_fill (iobuffer_ref) ;
-extern int iobuffer_flush (iobuffer_ref) ;
+extern int iobuffer_init (iobuffer *, int, int) ;
+extern int iobuffer_fill (iobuffer *) ;
+extern int iobuffer_flush (iobuffer *) ;
 
 #define iobuffer_finish(b) ((b)->isk ? iobufferk_finish(&(b)->x.k) : iobufferu_finish(&(b)->x.u))
 #define iobuffer_len(b) ((b)->isk ? iobufferk_len(&(b)->x.k) : iobufferu_len(&(b)->x.u))

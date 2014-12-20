@@ -9,7 +9,7 @@
 #include <errno.h>
 #include <skalibs/iobuffer.h>
 
-static int iobufferk_flush_0 (iobufferk_ref k)
+static int iobufferk_flush_0 (iobufferk *k)
 {
   while (k->n)
   {
@@ -21,13 +21,13 @@ static int iobufferk_flush_0 (iobufferk_ref k)
   return 1 ;
 }
 
-static int fakeflush (iobufferk_ref k)
+static int fakeflush (iobufferk *k)
 {
   k->n = 0 ;
   return 1 ;
 }
 
-static int iobufferk_flush_3 (iobufferk_ref k)
+static int iobufferk_flush_3 (iobufferk *k)
 {
   while (k->n)
   {
