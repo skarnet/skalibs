@@ -2,7 +2,7 @@
 
 #include <skalibs/iobuffer.h>
 
-int iobuffer_init (iobuffer_ref b, int fdin, int fdout)
+int iobuffer_init (iobuffer *b, int fdin, int fdout)
 {
   if (!iobufferk_init(&b->x.k, fdin, fdout)) goto user ;
   if (!iobufferk_isworking(&b->x.k)) goto fk ;

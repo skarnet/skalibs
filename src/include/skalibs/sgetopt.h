@@ -19,12 +19,12 @@ struct subgetopt_s
 
 #define SUBGETOPT_ZERO { .ind = 1, .err = 1, .problem = 0, .arg = 0, .pos = 0, .prog = 0 }
 
-extern int subgetopt_r (int, char const *const *, char const *, subgetopt_t_ref) ;
+extern int subgetopt_r (int, char const *const *, char const *, subgetopt_t *) ;
 
 
  /* non-reentrant */
 
-extern int sgetopt_r (int, char const *const *, char const *, subgetopt_t_ref) ;
+extern int sgetopt_r (int, char const *const *, char const *, subgetopt_t *) ;
 
 extern subgetopt_t subgetopt_here ;
 

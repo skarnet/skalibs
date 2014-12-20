@@ -5,7 +5,7 @@
 #include <skalibs/djbunix.h>
 #include <skalibs/unix-transactional.h>
 
-void dd_cancel (dirdescriptor_t_ref dd)
+void dd_cancel (dirdescriptor_t *dd)
 {
   dirdescriptor_t zero = DIRDESCRIPTOR_ZERO ;
   register int e = errno ;

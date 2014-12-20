@@ -3,7 +3,7 @@
 #include <skalibs/avlnode.h>
 #include "avlnode-internal.h"
 
-unsigned int avlnode_rotate (avlnode_ref s, unsigned int max, unsigned int i, int h)
+unsigned int avlnode_rotate (avlnode *s, unsigned int max, unsigned int i, int h)
 {
   register unsigned int j = s[i].child[!h] ;
   s[i].child[!h] = s[j].child[h] ;

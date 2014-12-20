@@ -16,7 +16,7 @@ static char const *mybasename (char const *s, unsigned int len)
   return s ;
 }
 
-int dd_commit (dirdescriptor_t_ref dd)
+int dd_commit (dirdescriptor_t *dd)
 {
   dirdescriptor_t zero = DIRDESCRIPTOR_ZERO ;
   unsigned int len = str_len(dd->lnkfn) ;

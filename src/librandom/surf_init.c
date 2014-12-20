@@ -2,7 +2,7 @@
 
 #include <skalibs/surf.h>
 
-void surf_init (SURFSchedule_ref ctx)
+void surf_init (SURFSchedule *ctx)
 {
   char s[160] ;
   surf_makeseed(s) ;

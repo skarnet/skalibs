@@ -35,10 +35,10 @@ extern int avlnode_extreme (avlnode const *, unsigned int, unsigned int, int, un
 #define avlnode_min(s, max, r, data) avlnode_extreme(s, max, (r), 0, data)
 #define avlnode_max(s, max, r, data) avlnode_extreme(s, max, (r), 1, data)
 
-extern unsigned int avlnode_insertnode (avlnode_ref, unsigned int, unsigned int, unsigned int, dtokfunc_t_ref, cmpfunc_t_ref, void *) ;
-extern unsigned int avlnode_delete (avlnode_ref, unsigned int, unsigned int *, void const *, dtokfunc_t_ref, cmpfunc_t_ref, void *) ;
+extern unsigned int avlnode_insertnode (avlnode *, unsigned int, unsigned int, unsigned int, dtokfunc_t_ref, cmpfunc_t_ref, void *) ;
+extern unsigned int avlnode_delete (avlnode *, unsigned int, unsigned int *, void const *, dtokfunc_t_ref, cmpfunc_t_ref, void *) ;
 #define avlnode_deletenode(s, max, r, i, dtok, f, p) avlnode_delete(s, max, r, (*(dtok))((s)[i].data), dtok, f, p)
 
-extern int avlnode_iter (avlnode_ref, unsigned int, unsigned int, avliterfunc_t_ref, void *) ;
+extern int avlnode_iter (avlnode *, unsigned int, unsigned int, avliterfunc_t_ref, void *) ;
 
 #endif

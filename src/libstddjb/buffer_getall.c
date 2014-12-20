@@ -4,7 +4,7 @@
 #include <skalibs/allreadwrite.h>
 #include <skalibs/buffer.h>
 
-int buffer_getall (buffer_ref b, char *buf, unsigned int len, unsigned int *w)
+int buffer_getall (buffer *b, char *buf, unsigned int len, unsigned int *w)
 {
   if (*w > len) return (errno = EINVAL, -1) ;
   *w += buffer_getnofill(b, buf + *w, len - *w) ;

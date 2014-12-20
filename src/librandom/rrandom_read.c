@@ -6,7 +6,7 @@
 #include <skalibs/unirandom.h>
 #include <skalibs/rrandom.h>
 
-unsigned int rrandom_read (rrandom_ref z, char *s, unsigned int n, unsigned int (*f) (unirandom_ref, char *, unsigned int))
+unsigned int rrandom_read (rrandom *z, char *s, unsigned int n, unsigned int (*f) (unirandom *, char *, unsigned int))
 {
   unsigned int i = 0 ;
   for (; i < 3 ; i++)

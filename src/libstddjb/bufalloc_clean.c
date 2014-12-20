@@ -3,7 +3,7 @@
 #include <skalibs/bytestr.h>
 #include <skalibs/bufalloc.h>
 
-void bufalloc_clean (register bufalloc_ref ba)
+void bufalloc_clean (register bufalloc *ba)
 {
   if (ba->p)
   {

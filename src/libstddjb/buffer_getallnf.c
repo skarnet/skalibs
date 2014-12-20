@@ -3,7 +3,7 @@
 #include <errno.h>
 #include <skalibs/buffer.h>
 
-int buffer_getallnofill (buffer_ref b, char *s, unsigned int len)
+int buffer_getallnofill (buffer *b, char *s, unsigned int len)
 {
   register unsigned int r = buffer_getnofill(b, s, len) ;
   if (r < len)

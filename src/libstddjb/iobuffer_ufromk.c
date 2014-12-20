@@ -6,7 +6,7 @@
 
 #include <skalibs/iobuffer.h>
 
-int iobuffer_ufromk (iobufferu_ref u, iobufferk_ref k)
+int iobuffer_ufromk (iobufferu *u, iobufferk *k)
 {
   int in = u->b[0].fd ;
   u->b[0].fd = k->p[0] ;
@@ -29,7 +29,7 @@ int iobuffer_ufromk (iobufferu_ref u, iobufferk_ref k)
 #include <errno.h>
 #include <skalibs/iobuffer.h>
 
-int iobuffer_ufromk (iobufferu_ref u, iobufferk_ref k)
+int iobuffer_ufromk (iobufferu *u, iobufferk *k)
 {
   (void)u ;
   (void)k ;

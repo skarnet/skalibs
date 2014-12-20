@@ -3,7 +3,7 @@
 #include <skalibs/genalloc.h>
 #include <skalibs/gensetdyn.h>
 
-int gensetdyn_new (gensetdyn_ref g, unsigned int *i)
+int gensetdyn_new (gensetdyn *g, unsigned int *i)
 {
   register unsigned int n ;
   if (!genalloc_len(unsigned int, &g->freelist) && !gensetdyn_readyplus(g, 1)) return 0 ;

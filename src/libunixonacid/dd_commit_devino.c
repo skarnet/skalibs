@@ -5,7 +5,7 @@
 #include <skalibs/uint64.h>
 #include <skalibs/unix-transactional.h>
 
-int dd_commit_devino (dirdescriptor_t_ref dd, uint64 *dev, uint64 *ino)
+int dd_commit_devino (dirdescriptor_t *dd, uint64 *dev, uint64 *ino)
 {
   struct stat st ;
   if (fstat(dd->fd, &st) < 0) return 0 ;

@@ -4,7 +4,7 @@
 #include <skalibs/genalloc.h>
 #include <skalibs/gensetdyn.h>
 
-int gensetdyn_ready (gensetdyn_ref g, unsigned int n)
+int gensetdyn_ready (gensetdyn *g, unsigned int n)
 {
   int wasnull = !g->storage.s ;
   unsigned int i = g->storage.len ;

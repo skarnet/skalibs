@@ -11,7 +11,7 @@
 #include <skalibs/iobuffer.h>
 #include <skalibs/siovec.h>
 
-int iobuffer_kfromu (iobufferk_ref k, iobufferu_ref u)
+int iobuffer_kfromu (iobufferk *k, iobufferu *u)
 {
   struct iovec iov[2] ;
   siovec_t v[2] ;
@@ -31,7 +31,7 @@ int iobuffer_kfromu (iobufferk_ref k, iobufferu_ref u)
 #include <errno.h>
 #include <skalibs/iobuffer.h>
 
-int iobuffer_kfromu (iobufferk_ref k, iobufferu_ref u)
+int iobuffer_kfromu (iobufferk *k, iobufferu *u)
 {
   (void)k ;
   (void)u ;

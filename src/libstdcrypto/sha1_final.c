@@ -4,7 +4,7 @@
 #include <skalibs/sha1.h>
 #include "sha1-internal.h"
 
-void sha1_final (SHA1Schedule_ref ctx, char *digest)
+void sha1_final (SHA1Schedule *ctx, char *digest)
 {
   char pack[8] ;
   register unsigned int i = 0 ;

@@ -13,7 +13,7 @@ struct RC4Schedule
   unsigned char x, y ;
 } ;
 
-extern void rc4_init (RC4Schedule_ref, char const *, unsigned int) ;
-extern void rc4 (RC4Schedule_ref, char const *, char *, unsigned int) ;
+extern void rc4_init (RC4Schedule *, char const *, unsigned int) ;
+extern void rc4 (RC4Schedule *, char const *, char *, unsigned int) ;
 
 #endif

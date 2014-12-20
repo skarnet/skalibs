@@ -23,14 +23,14 @@ struct rrandom
 
 #define RRANDOM_ZERO { .tries = { RRANDOMINFO_ZERO, RRANDOMINFO_ZERO, RRANDOMINFO_ZERO }, .n = 0 }
 
-extern int rrandom_add (rrandom_ref, int (*) (unirandom_ref)) ;
-extern int rrandom_finish (rrandom_ref) ;
+extern int rrandom_add (rrandom *, int (*) (unirandom *)) ;
+extern int rrandom_finish (rrandom *) ;
 
-extern unsigned int rrandom_read (rrandom_ref, char *, unsigned int, unsigned int (*) (unirandom_ref, char *, unsigned int)) ;
-extern unsigned int rrandom_readint (rrandom_ref, unsigned int, unsigned int (*) (unirandom_ref, char *, unsigned int)) ;
+extern unsigned int rrandom_read (rrandom *, char *, unsigned int, unsigned int (*) (unirandom *, char *, unsigned int)) ;
+extern unsigned int rrandom_readint (rrandom *, unsigned int, unsigned int (*) (unirandom *, char *, unsigned int)) ;
 #define rrandom_readb(z, s, n) rrandom_read((z), (s), (n), &unirandom_readb)
 #define rrandom_readnb(z, s, n) rrandom_read((z), (s), (n), &unirandom_readnb)
 
-extern unsigned int rrandom_name (rrandom_ref, char *, unsigned int, int) ;
+extern unsigned int rrandom_name (rrandom *, char *, unsigned int, int) ;
 
 #endif

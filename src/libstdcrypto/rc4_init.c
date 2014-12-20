@@ -4,7 +4,7 @@
 #include <skalibs/bytestr.h>
 #include <skalibs/rc4.h>
 
-void rc4_init (RC4Schedule_ref r, char const *key, unsigned int ksize)
+void rc4_init (RC4Schedule *r, char const *key, unsigned int ksize)
 {
   register unsigned int i = 0, j = 0 ;
   register unsigned char c = 0;

@@ -5,7 +5,7 @@
 #include <skalibs/sha256.h>
 #include "sha256-internal.h"
 
-void sha256_final (SHA256Schedule_ref ctx, char *digest)
+void sha256_final (SHA256Schedule *ctx, char *digest)
 {
   register unsigned int i = 0 ;
   register unsigned char *p = (unsigned char *)digest ;

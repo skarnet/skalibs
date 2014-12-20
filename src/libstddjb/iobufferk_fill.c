@@ -9,14 +9,14 @@
 #include <errno.h>
 #include <skalibs/iobuffer.h>
 
-static int iobufferk_tee (iobufferk_ref k)
+static int iobufferk_tee (iobufferk *k)
 {
   register int r = tee(k->fd[0], k->fd[1], IOBUFFERK_SIZE - k->n, k->nb & 1 ? SPLICE_F_NONBLOCK : 0) ;
   if (r > 0) k->n += r ;
   return r ;
 }
 
-static int iobufferk_splice (iobufferk_ref k)
+static int iobufferk_splice (iobufferk *k)
 {
   register int r = splice(k->fd[0], 0, k->fd[1], 0, IOBUFFERK_SIZE, k->nb ? SPLICE_F_NONBLOCK : 0) ;
   if (r > 0) k->n += r ;
@@ -24,7 +24,7 @@ static int iobufferk_splice (iobufferk_ref k)
   return r ;
 }
 
-static int iobufferk_fill_3 (iobufferk_ref k)
+static int iobufferk_fill_3 (iobufferk *k)
 {
   register int r = splice(k->fd[0], 0, k->p[1], 0, IOBUFFERK_SIZE - k->n, k->nb & 1 ? SPLICE_F_NONBLOCK : 0) ;
   if (r > 0) k->n += r ;

@@ -1,11 +1,12 @@
 /* ISC license. */
 
 #include <skalibs/uint.h>
+#include <skalibs/bytestr.h>
 #include <skalibs/unirandom.h>
 #include "random-internal.h"
 #include <skalibs/rrandom.h>
 
-unsigned int rrandom_readint (rrandom_ref z, unsigned int n, unsigned int (*f) (unirandom_ref, char *, unsigned int))
+unsigned int rrandom_readint (rrandom *z, unsigned int n, unsigned int (*f) (unirandom *, char *, unsigned int))
 {
   if (!n) return 0 ;
   else

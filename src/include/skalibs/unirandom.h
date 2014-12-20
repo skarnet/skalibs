@@ -43,15 +43,14 @@ struct unirandom
 
 #define UNIRANDOM_ZERO { .readb = 0, .readnb = 0, .init = 0, .finish = 0, .data = UNIRANDOMINFO_ZERO, .initted = 0 }
 
-extern int unirandom_register_devrandom (unirandom_ref) ;
-extern int unirandom_register_devurandom (unirandom_ref) ;
-extern int unirandom_register_hasegd (unirandom_ref) ;
-extern int unirandom_register_surf (unirandom_ref) ;
+extern int unirandom_register_devrandom (unirandom *) ;
+extern int unirandom_register_devurandom (unirandom *) ;
+extern int unirandom_register_hasegd (unirandom *) ;
+extern int unirandom_register_surf (unirandom *) ;
 
-extern int unirandom_init (unirandom_ref) ;
-extern unsigned int unirandom_readb (unirandom_ref, char *, unsigned int) ;
-extern unsigned int unirandom_readnb (unirandom_ref, char *, unsigned int) ;
-extern int unirandom_finish (unirandom_ref) ;
-
+extern int unirandom_init (unirandom *) ;
+extern unsigned int unirandom_readb (unirandom *, char *, unsigned int) ;
+extern unsigned int unirandom_readnb (unirandom *, char *, unsigned int) ;
+extern int unirandom_finish (unirandom *) ;
 
 #endif

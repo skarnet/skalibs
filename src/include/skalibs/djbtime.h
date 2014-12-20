@@ -54,9 +54,9 @@ extern int utc_from_localtm (uint64 *, struct tm const *) ;
 extern int localtm_from_tai (struct tm *, tai_t const *, int) ;
 extern int tai_from_localtm (tai_t *, struct tm const *) ;
 
-extern int localtmn_from_tain (localtmn_t_ref, tain_t const *, int) ;
+extern int localtmn_from_tain (localtmn_t *, tain_t const *, int) ;
 extern int tain_from_localtmn (tain_t *, localtmn_t const *) ;
-extern int localtmn_from_sysclock (localtmn_t_ref, tain_t const *, int) ;
+extern int localtmn_from_sysclock (localtmn_t *, tain_t const *, int) ;
 extern int sysclock_from_localtmn (tain_t *, localtmn_t const *) ;
 
 #define LOCALTM_FMT 21
@@ -65,6 +65,6 @@ extern unsigned int localtm_scan (char const *, struct tm *) ;
 
 #define LOCALTMN_FMT 31
 extern unsigned int localtmn_fmt (char *, localtmn_t const *) ;
-extern unsigned int localtmn_scan (char const *, localtmn_t_ref) ;
+extern unsigned int localtmn_scan (char const *, localtmn_t *) ;
 
 #endif

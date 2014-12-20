@@ -4,7 +4,7 @@
 #include <skalibs/genalloc.h>
 #include <skalibs/gensetdyn.h>
 
-void gensetdyn_init (gensetdyn_ref g, unsigned int esize, unsigned int base, unsigned int fracnum, unsigned int fracden)
+void gensetdyn_init (gensetdyn *g, unsigned int esize, unsigned int base, unsigned int fracnum, unsigned int fracden)
 {
   g->storage = stralloc_zero ;
   g->freelist = genalloc_zero ;

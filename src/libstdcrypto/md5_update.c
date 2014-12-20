@@ -5,7 +5,7 @@
 #include <skalibs/md5.h>
 #include "md5-internal.h"
 
-void md5_update (MD5Schedule_ref ctx, char const *s, unsigned int len)
+void md5_update (MD5Schedule *ctx, char const *s, unsigned int len)
 {
   register uint32 t = ctx->bits[0] ;
   if ((ctx->bits[0] = t + (len << 3)) < t)

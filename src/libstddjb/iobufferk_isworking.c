@@ -9,7 +9,7 @@
 #include <fcntl.h>
 #include <skalibs/iobuffer.h>
 
-int iobufferk_isworking (iobufferk_ref k)
+int iobufferk_isworking (iobufferk *k)
 {
  /* for now splice() with a length of 0 returns 0 no matter what, so this */
  /* test is useless. splice() should test the underlying filesystems even */
@@ -38,7 +38,7 @@ int iobufferk_isworking (iobufferk_ref k)
 
 #include <skalibs/iobuffer.h>
 
-int iobufferk_isworking (iobufferk_ref k)
+int iobufferk_isworking (iobufferk *k)
 {
   (void)k ;
   return 0 ;

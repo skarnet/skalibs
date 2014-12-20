@@ -13,9 +13,9 @@
 # define PLM(...) (bprintf(buffer_2, "%s: debug_alloc: ", PROG), bprintf(buffer_2, __VA_ARGS__), buffer_putflush(buffer_2, "\n", 1))
 #endif
 
-aligned_char_ref alloc (unsigned int n)
+aligned_char *alloc (unsigned int n)
 {
-  register aligned_char_ref p = n ? (aligned_char_ref)malloc(n) : (aligned_char_ref)alloc_0 ;
+  register aligned_char *p = n ? (aligned_char *)malloc(n) : (aligned_char *)alloc_0 ;
 #ifdef DEBUG_ALLOC
   static unsigned int counter = 0 ;
   PLM("alloc(%u): %p. Allocated: %u", n, p, ++counter) ;
@@ -37,9 +37,9 @@ void alloc_free (void *p)
   errno = e ;
 }
 
-int alloc_realloc (aligned_char_ref *x, unsigned int n)
+int alloc_realloc (aligned_char **x, unsigned int n)
 {
-  aligned_char_ref y = n ? (aligned_char_ref)realloc(*x, n) : (free(*x), alloc_0) ;
+  aligned_char *y = n ? (aligned_char *)realloc(*x, n) : (free(*x), alloc_0) ;
 #ifdef DEBUG_ALLOC
   PLM("alloc_realloc(&%p) -> new address = %p", *x, y) ;
 #endif

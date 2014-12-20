@@ -5,7 +5,7 @@
 #include <skalibs/sha1.h>
 #include "sha1-internal.h"
 
-void sha1_feed (SHA1Schedule_ref ctx, unsigned char inb)
+void sha1_feed (SHA1Schedule *ctx, unsigned char inb)
 {
   register uint32 tmp ;
 

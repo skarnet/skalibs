@@ -4,7 +4,7 @@
 
 struct avlnode_iter_s
 {
-  avlnode_ref s ;
+  avlnode *s ;
   unsigned int max ;
   avliterfunc_t_ref f ;
   void *p ;
@@ -19,7 +19,7 @@ static int avlnode_iter_rec (struct avlnode_iter_s const *blah, unsigned int r, 
    : 1 ;
 }
 
-int avlnode_iter (avlnode_ref s, unsigned int max, unsigned int r, avliterfunc_t_ref f, void *p)
+int avlnode_iter (avlnode *s, unsigned int max, unsigned int r, avliterfunc_t_ref f, void *p)
 {
   struct avlnode_iter_s blah = { s, max, f, p } ;
   return avlnode_iter_rec(&blah, r, 0) ;

@@ -9,7 +9,7 @@
 #include <skalibs/djbunix.h>
 #include <skalibs/iobuffer.h>
 
-static int iobufferk_init_0 (iobufferk_ref k)
+static int iobufferk_init_0 (iobufferk *k)
 {
   register int fd = open_write("/dev/null") ;
   if (fd < 0) return 0 ;
@@ -23,13 +23,13 @@ static int iobufferk_init_0 (iobufferk_ref k)
   return 1 ;
 }
 
-static int iobufferk_nofd (iobufferk_ref k)
+static int iobufferk_nofd (iobufferk *k)
 {
   k->p[0] = k->p[1] = -1 ;
   return 1 ;
 }
 
-static int iobufferk_init_3 (iobufferk_ref k)
+static int iobufferk_init_3 (iobufferk *k)
 {
   return (pipenbcoe(k->p) >= 0) ;
 }
@@ -39,7 +39,7 @@ static iobufferk_io_func_t_ref iobufferk_init_f[4] =
   &iobufferk_init_0, &iobufferk_nofd, &iobufferk_nofd, &iobufferk_init_3
 } ;
 
-int iobufferk_init (iobufferk_ref k, int fdin, int fdout)
+int iobufferk_init (iobufferk *k, int fdin, int fdout)
 {
   iobufferk tmp ;
   struct stat st ;
@@ -67,7 +67,7 @@ int iobufferk_init (iobufferk_ref k, int fdin, int fdout)
 #include <errno.h>
 #include <skalibs/iobuffer.h>
 
-int iobufferk_init (iobufferk_ref k, int fdin, int fdout)
+int iobufferk_init (iobufferk *k, int fdin, int fdout)
 {
   (void)k ;
   (void)fdin ;

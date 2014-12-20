@@ -4,7 +4,7 @@
 #include <skalibs/unirandom.h>
 #include "random-internal.h"
 
-void unirandom_register (unirandom_ref u, int (*init) (union unirandominfo *), int (*finish) (union unirandominfo *), unsigned int (*readb) (union unirandominfo *, char *, unsigned int), unsigned int (*readnb) (union unirandominfo *, char *, unsigned int))
+void unirandom_register (unirandom *u, int (*init) (union unirandominfo *), int (*finish) (union unirandominfo *), unsigned int (*readb) (union unirandominfo *, char *, unsigned int), unsigned int (*readnb) (union unirandominfo *, char *, unsigned int))
 {
   unirandom zero = UNIRANDOM_ZERO ;
   *u = zero ;

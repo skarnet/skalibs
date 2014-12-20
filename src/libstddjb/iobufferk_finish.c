@@ -8,19 +8,19 @@
 #include <skalibs/djbunix.h>
 #include <skalibs/iobuffer.h>
 
-static void iobufferk_nop (iobufferk_ref k)
+static void iobufferk_nop (iobufferk *k)
 {
   (void)k ;
 }
 
-static void iobufferk_finish_0 (iobufferk_ref k)
+static void iobufferk_finish_0 (iobufferk *k)
 {
   register int e = errno ;
   fd_close(k->p[1]) ;
   errno = e ;
 }
 
-static void iobufferk_finish_3 (iobufferk_ref k)
+static void iobufferk_finish_3 (iobufferk *k)
 {
   register int e = errno ;
   fd_close(k->p[1]) ;
@@ -37,7 +37,7 @@ iobufferk_finish_func_t_ref const iobufferk_finish_f[4] =
 
 #include <skalibs/iobuffer.h>
 
-static void iobufferk_nop (iobufferk_ref k)
+static void iobufferk_nop (iobufferk *k)
 {
   (void)k ;
 }

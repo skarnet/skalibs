@@ -2,7 +2,7 @@
 
 #include <skalibs/iobuffer.h>
 
-int iobuffer_salvage (iobuffer_ref b)
+int iobuffer_salvage (iobuffer *b)
 {
   iobufferu u ;
   if (!b->isk) return 1 ;

@@ -26,9 +26,9 @@ extern int buffer_timed_flush (buffer *, tain_t const *, tain_t *) ;
 extern unsigned int buffer_timed_get (buffer *, char *, unsigned int, tain_t const *, tain_t *) ;
 #define buffer_timed_get_g(b, buf, buflen, deadline) buffer_timed_get(b, buf, buflen, (deadline), &STAMP)
 
-extern int timed_getln (buffer_ref, stralloc *, char, tain_t const *, tain_t *) ;
+extern int timed_getln (buffer *, stralloc *, char, tain_t const *, tain_t *) ;
 #define timed_getln_g(b, sa, sep, deadline) timed_getln(b, sa, sep, (deadline), &STAMP)
-extern int timed_getlnmax (buffer_ref, char *, unsigned int, unsigned int *, char, tain_t const *, tain_t *) ;
+extern int timed_getlnmax (buffer *, char *, unsigned int, unsigned int *, char, tain_t const *, tain_t *) ;
 #define timed_getlnmax_g(b, max, maxlen, len, sep, deadline) timed_getlnmax(b, max, maxlen, len, sep, (deadline), &STAMP)
 extern int netstring_timed_get (buffer *, stralloc *, tain_t const *, tain_t *) ;
 #define netstring_timed_get_g(b, sa, deadline) netstring_timed_get(b, sa, (deadline), &STAMP)

@@ -3,7 +3,7 @@
 #include <skalibs/uint32.h>
 #include <skalibs/djbtime.h>
 
-unsigned int localtmn_scan (char const *s, localtmn_t_ref l)
+unsigned int localtmn_scan (char const *s, localtmn_t *l)
 {
   localtmn_t m ;
   unsigned int n = localtm_scan(s, &m.tm) ;

@@ -22,19 +22,19 @@ struct gensetdyn_s
 extern gensetdyn const gensetdyn_zero ;
 
 #define GENSETDYN_INIT(type, b, num, den) { .storage = STRALLOC_ZERO, .freelist = GENALLOC_ZERO, .esize = sizeof(type), .base = (b), .fracnum = (num), .fracden = (den) }
-extern void gensetdyn_init (gensetdyn_ref, unsigned int, unsigned int, unsigned int, unsigned int) ;
+extern void gensetdyn_init (gensetdyn *, unsigned int, unsigned int, unsigned int, unsigned int) ;
 
 #define gensetdyn_n(g) ((g)->storage.len - genalloc_len(unsigned int, &(g)->freelist))
-extern int gensetdyn_ready (gensetdyn_ref, unsigned int) ;
+extern int gensetdyn_ready (gensetdyn *, unsigned int) ;
 #define gensetdyn_readyplus(x, n) gensetdyn_ready(x, gensetdyn_n(x) + (n))
-extern void gensetdyn_free (gensetdyn_ref) ;
+extern void gensetdyn_free (gensetdyn *) ;
 
-extern int gensetdyn_new (gensetdyn_ref, unsigned int *) ;
-extern int gensetdyn_delete (gensetdyn_ref, unsigned int) ;
+extern int gensetdyn_new (gensetdyn *, unsigned int *) ;
+extern int gensetdyn_delete (gensetdyn *, unsigned int) ;
 
 #define gensetdyn_p(g, i) ((g)->storage.s + (i) * (g)->esize)
 #define GENSETDYN_P(type, g, i) ((type *)gensetdyn_p(g, i))
 
-extern unsigned int gensetdyn_iter (gensetdyn_ref, iterfunc_t_ref, void *) ;
+extern unsigned int gensetdyn_iter (gensetdyn *, iterfunc_t_ref, void *) ;
 
 #endif

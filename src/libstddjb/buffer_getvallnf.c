@@ -4,7 +4,7 @@
 #include <skalibs/buffer.h>
 #include <skalibs/siovec.h>
 
-int buffer_getvallnofill (buffer_ref b, siovec_t const *v, unsigned int n)
+int buffer_getvallnofill (buffer *b, siovec_t const *v, unsigned int n)
 {
   register unsigned int r = buffer_getvnofill(b, v, n) ;
   if (r < siovec_len(v, n))

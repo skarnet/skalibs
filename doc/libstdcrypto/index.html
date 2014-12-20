@@ -28,6 +28,7 @@ operations are provided:
   <li> rc4 </li>
   <li> md5 </li>
   <li> sha1 </li>
+  <li> sha256 </li>
 </ul>
 
 <h2> Compiling </h2>
@@ -105,6 +106,27 @@ SHA1 </h3>
   <li> <tt>sha1_update()</tt> adds <em>message</em> to the message to be digested </li>
   <li> <tt>sha1_final()</tt> computes the digest </li>
 </ul>
+
+<h3> <a name="sha256"></a>
+SHA256 </h3>
+
+<pre>
+  SHA256Schedule ctx ;
+  char const *message ;
+  unsigned int messagelen ;
+  char digest[32] ;
+
+  sha256_init(&amp;ctx) ;
+  sha256_update(&amp;ctx, message, messagelen) ;
+  sha256_final(&amp;ctx, digest) ;
+</pre>
+
+<ul>
+  <li> <tt>sha256_init()</tt> prepares a SHA256Schedule structure for computation </li>
+  <li> <tt>sha256_update()</tt> adds <em>message</em> to the message to be digested </li>
+  <li> <tt>sha256_final()</tt> computes the digest </li>
+</ul>
+
 
 </body>
 </html>

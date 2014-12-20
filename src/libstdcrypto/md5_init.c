@@ -2,7 +2,7 @@
 
 #include <skalibs/md5.h>
 
-void md5_init (MD5Schedule_ref ctx)
+void md5_init (MD5Schedule *ctx)
 {
   ctx->buf[0] = 0x67452301UL ;
   ctx->buf[1] = 0xefcdab89UL ;

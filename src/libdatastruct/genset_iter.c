@@ -4,7 +4,7 @@
 #include <skalibs/functypes.h>
 #include <skalibs/genset.h>
 
-unsigned int genset_iter (genset_ref g, iterfunc_t_ref f, void *stuff)
+unsigned int genset_iter (genset *g, iterfunc_t_ref f, void *stuff)
 {
   unsigned char bits[bitarray_div8(g->max)] ;
   unsigned int i = 0, j = 0, n = 0, m = genset_n(g) ;

@@ -3,7 +3,7 @@
 #include <skalibs/unirandom.h>
 #include <skalibs/rrandom.h>
 
-int rrandom_finish (rrandom_ref z)
+int rrandom_finish (rrandom *z)
 {
   rrandom zero = RRANDOM_ZERO ;
   unsigned int i = z->n ;

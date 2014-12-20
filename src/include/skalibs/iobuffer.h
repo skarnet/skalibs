@@ -58,7 +58,7 @@ typedef iobufferk_finish_func_t *iobufferk_finish_func_t_ref ;
 extern iobufferk_io_func_t iobufferk_nosys ;
 extern iobufferk_io_func_t iobufferk_isworking ;
 
-extern int iobufferk_init (iobufferk_ref, int, int) ;
+extern int iobufferk_init (iobufferk *, int, int) ;
 extern iobufferk_io_func_t_ref const iobufferk_fill_f[4] ;
 extern iobufferk_io_func_t_ref const iobufferk_flush_f[4] ;
 extern iobufferk_finish_func_t_ref const iobufferk_finish_f[4] ;

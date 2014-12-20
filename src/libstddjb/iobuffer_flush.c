@@ -3,7 +3,7 @@
 #include <errno.h>
 #include <skalibs/iobuffer.h>
 
-int iobuffer_flush (iobuffer_ref b)
+int iobuffer_flush (iobuffer *b)
 {
   if (b->isk)
   {

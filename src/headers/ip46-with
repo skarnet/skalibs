@@ -17,8 +17,8 @@ typedef ip46full_t ip46_t, *ip46_t_ref ;
 #define socket_udp46(h) ((h) ? socket_udp6() : socket_udp4())
 #define socket_recv46(fd, s, len, i, port) ((i)->is6 ? socket_recv6(fd, s, len, (i)->ip, port) : socket_recv4(fd, s, len, (i)->ip, port))
 #define socket_send46(fd, s, len, i, port) ((i)->is6 ? socket_send6(fd, s, len, (i)->ip, port) : socket_send4(fd, s, len, (i)->ip, port))
-extern int socket_local46 (int, ip46_t_ref, uint16 *) ;
-extern int socket_remote46 (int, ip46_t_ref, uint16 *) ;
+extern int socket_local46 (int, ip46_t *, uint16 *) ;
+extern int socket_remote46 (int, ip46_t *, uint16 *) ;
 
 #define socket_recvnb46(fd, buf, len, i, port, deadline, stamp) ((i)->is6 ? socket_recvnb6(fd, buf, len, (i)->ip, port, deadline, stamp) : socket_recvnb4(fd, buf, len, (i)->ip, port, deadline, stamp))
 #define socket_sendnb46(fd, buf, len, i, port, deadline, stamp) ((i)->is6 ? socket_sendnb6(fd, buf, len, (i)->ip, port, deadline, stamp) : socket_sendnb4(fd, buf, len, (i)->ip, port, deadline, stamp))

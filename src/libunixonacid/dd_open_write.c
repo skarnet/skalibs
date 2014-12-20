@@ -9,7 +9,7 @@
 #include <skalibs/random.h>
 #include <skalibs/unix-transactional.h>
 
-int dd_open_write (dirdescriptor_t_ref dd, char const *lnkfn, unsigned int mode)
+int dd_open_write (dirdescriptor_t *dd, char const *lnkfn, unsigned int mode)
 {
   dirdescriptor_t d = DIRDESCRIPTOR_ZERO ;
   d.lnkfn = lnkfn ;

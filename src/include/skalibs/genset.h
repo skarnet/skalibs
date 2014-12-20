@@ -16,14 +16,14 @@ struct genset_s
 } ;
 
 #define GENSET_ZERO { .storage = 0, .freelist = 0, .esize = 1, .max = 0, .sp = 0 }
-extern void genset_init (genset_ref, void *, unsigned int *, unsigned int, unsigned int) ;
+extern void genset_init (genset *, void *, unsigned int *, unsigned int, unsigned int) ;
 #define GENSET_init(g, type, storage, fl, size) genset_init(g, storage, fl, sizeof(type), size)
 
 #define genset_p(type, g, i) ((type *)((g)->storage + (i) * (g)->esize))
-extern unsigned int genset_new (genset_ref) ;
-extern int genset_delete (genset_ref, unsigned int) ;
+extern unsigned int genset_new (genset *) ;
+extern int genset_delete (genset *, unsigned int) ;
 #define genset_n(g) ((g)->max - (g)->sp)
-extern unsigned int genset_iter (genset_ref, iterfunc_t_ref, void *) ;
+extern unsigned int genset_iter (genset *, iterfunc_t_ref, void *) ;
 
 
 #define GENSETB_TYPE(type, size) struct { type storage[size] ; unsigned int freelist[size] ; genset info ; }

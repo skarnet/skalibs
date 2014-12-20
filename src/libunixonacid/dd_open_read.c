@@ -3,7 +3,7 @@
 #include <skalibs/djbunix.h>
 #include <skalibs/unix-transactional.h>
 
-int dd_open_read (dirdescriptor_t_ref dd, char const *path)
+int dd_open_read (dirdescriptor_t *dd, char const *path)
 {
   dirdescriptor_t d = DIRDESCRIPTOR_ZERO ;
   d.fd = open_read(path) ;

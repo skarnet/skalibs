@@ -7,7 +7,7 @@
 #define ROTATE(x, b) (((x) << (b)) | ((x) >> (32 - (b))))
 #define MUSH(i, b) x = t[i] += (((x ^ ctx->seed[i]) + sum) ^ ROTATE(x, b))
 
-static void surfit (SURFSchedule_ref ctx)
+static void surfit (SURFSchedule *ctx)
 {
   uint32 t[12] ;
   uint32 z[8] ;
@@ -33,7 +33,7 @@ static void surfit (SURFSchedule_ref ctx)
   for (i = 0 ; i < 8 ; i++) uint32_pack(ctx->out + (i<<2), z[i]) ;
 }
 
-void surf (SURFSchedule_ref ctx, char *s, unsigned int n)
+void surf (SURFSchedule *ctx, char *s, unsigned int n)
 {
   {
     register unsigned int i = 32 - ctx->pos ;

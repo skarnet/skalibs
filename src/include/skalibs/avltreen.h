@@ -23,11 +23,11 @@ struct avltreen_s
 #define AVLTREEN_ZERO { .x = GENSET_ZERO, .root = (unsigned int)-1, .dtok = 0, .kcmp = 0, .external = 0 }
 #define avltreen_totalsize(t) ((t)->x.max)
 #define avltreen_len(t) genset_n(&(t)->x)
-#define avltreen_nodes(t) ((avlnode_ref)(t)->x.storage)
+#define avltreen_nodes(t) ((avlnode *)(t)->x.storage)
 #define avltreen_data(t, i) (avltreen_nodes(t)[i].data)
 #define avltreen_root(t) ((t)->root)
 #define avltreen_setroot(t, r) ((t)->root = (r))
-extern void avltreen_init (avltreen_ref, avlnode_ref, unsigned int *, unsigned int, dtokfunc_t_ref, cmpfunc_t_ref, void *) ;
+extern void avltreen_init (avltreen *, avlnode *, unsigned int *, unsigned int, dtokfunc_t_ref, cmpfunc_t_ref, void *) ;
 
 #define avltreen_searchnode(t, k) avlnode_searchnode(avltreen_nodes(t), avltreen_totalsize(t), avltreen_root(t), (k), (t)->dtok, (t)->kcmp, (t)->external)
 #define avltreen_search(t, k, data) avlnode_search(avltreen_nodes(t), avltreen_totalsize(t), avltreen_root(t), k, (data), (t)->dtok, (t)->kcmp, (t)->external)
@@ -42,12 +42,12 @@ extern void avltreen_init (avltreen_ref, avlnode_ref, unsigned int *, unsigned i
 #define avltreen_min(t, data) avltreen_extreme((t), 0, data)
 #define avltreen_max(t, data) avltreen_extreme((t), 1, data)
 
-extern unsigned int avltreen_newnode (avltreen_ref, unsigned int) ;
+extern unsigned int avltreen_newnode (avltreen *, unsigned int) ;
 #define avltreen_insertnode(t, i) avltreen_setroot(t, avlnode_insertnode(avltreen_nodes(t), avltreen_totalsize(t), avltreen_root(t), i, (t)->dtok, (t)->kcmp, (t)->external))
-extern int avltreen_insert (avltreen_ref, unsigned int) ;
+extern int avltreen_insert (avltreen *, unsigned int) ;
 
 #define avltreen_deletenode(t, i) avltreen_delete(t, avltreen_data(t, i))
-extern int avltreen_delete (avltreen_ref, void const *) ;
+extern int avltreen_delete (avltreen *, void const *) ;
 
 #define avltreen_iter(t, f, p) avlnode_iter(avltreen_nodes(t), avltreen_totalsize(t), avltreen_root(t), f, p)
 
@@ -58,7 +58,7 @@ extern int avltreen_delete (avltreen_ref, void const *) ;
 #define avltreeb_init(t, size, dtk, f, p) avltreen_init(&(t)->info, (t)->storage, (t)->freelist, size, dtk, f, p)
 #define avltreeb_totalsize(t) avltreen_totalsize(&(t)->info)
 #define avltreeb_len(t) avltreen_len(&(t)->info)
-#define avltreeb_nodes(t) ((avlnode_ref)(t)->storage)
+#define avltreeb_nodes(t) ((avlnode *)(t)->storage)
 #define avltreeb_data(t, i) (avltreeb_nodes(t)[i].data)
 #define avltreeb_root(t) ((t)->info.root)
 #define avltreeb_setroot(t, r) ((t)->info.root = (r))

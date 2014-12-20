@@ -5,7 +5,7 @@
 #include <skalibs/bytestr.h>
 #include <skalibs/fmtscan.h>
 
-unsigned int ip46full_scanlist (ip46full_t_ref out, unsigned int max, char const *s, unsigned int *num)
+unsigned int ip46full_scanlist (ip46full_t *out, unsigned int max, char const *s, unsigned int *num)
 {
   unsigned int n = 0, w = 0 ;
   for (; s[w] && (n < max) ; n++)

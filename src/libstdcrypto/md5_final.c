@@ -5,7 +5,7 @@
 #include <skalibs/md5.h>
 #include "md5-internal.h"
 
-void md5_final (MD5Schedule_ref ctx, char *digest /* 16 chars */)
+void md5_final (MD5Schedule *ctx, char *digest /* 16 chars */)
 {
   register unsigned int count = (ctx->bits[0] >> 3) & 0x3F ;
   register unsigned char *p = ctx->in + count ;

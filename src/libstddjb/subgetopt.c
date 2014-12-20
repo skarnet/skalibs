@@ -3,7 +3,7 @@
 #undef SUBGETOPT_SHORT
 #include <skalibs/sgetopt.h>
 
-int subgetopt_r (int argc, char const *const *argv, char const *opts, subgetopt_t_ref o)
+int subgetopt_r (int argc, char const *const *argv, char const *opts, subgetopt_t *o)
 {
   o->arg = 0 ;
   if ((o->ind >= argc) || !argv[o->ind]) return -1 ;

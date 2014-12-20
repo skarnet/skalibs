@@ -5,7 +5,7 @@
 #include <skalibs/sha256.h>
 #include "sha256-internal.h"
 
-void sha256_feed (SHA256Schedule_ref ctx, unsigned char inb)
+void sha256_feed (SHA256Schedule *ctx, unsigned char inb)
 {
   register uint32 tmp ;
   ctx->in[ctx->b>>2] <<= 8 ;

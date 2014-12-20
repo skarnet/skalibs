@@ -8,7 +8,7 @@
 #include <skalibs/unirandom.h>
 #include <skalibs/rrandom.h>
 
-extern void unirandom_register (unirandom_ref, int (*) (union unirandominfo *), int (*) (union unirandominfo *), unsigned int (*) (union unirandominfo *, char *, unsigned int), unsigned int (*) (union unirandominfo *, char *, unsigned int)) ;
+extern void unirandom_register (unirandom *, int (*) (union unirandominfo *), int (*) (union unirandominfo *), unsigned int (*) (union unirandominfo *, char *, unsigned int), unsigned int (*) (union unirandominfo *, char *, unsigned int)) ;
 
 extern unsigned int random_mask2 (unsigned int) gccattr_const ;
 extern unsigned int random_nchars (unsigned int) gccattr_const ;

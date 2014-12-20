@@ -3,7 +3,7 @@
 #include <skalibs/uint32.h>
 #include <skalibs/surf.h>
 
-void surf_sinit (SURFSchedule_ref ctx, char const *s)
+void surf_sinit (SURFSchedule *ctx, char const *s)
 {
   SURFSchedule zero = SURFSCHEDULE_ZERO ;
   register unsigned int i = 4 ;

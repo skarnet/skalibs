@@ -5,7 +5,7 @@
 #include <skalibs/avlnode.h>
 #include <skalibs/avltreen.h>
 
-int avltreen_delete (avltreen_ref t, void const *k)
+int avltreen_delete (avltreen *t, void const *k)
 {
   unsigned int r = avltreen_root(t) ;
   unsigned int i = avlnode_delete(avltreen_nodes(t), avltreen_totalsize(t), &r, k, t->dtok, t->kcmp, t->external) ;

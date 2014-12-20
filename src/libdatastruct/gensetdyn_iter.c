@@ -4,7 +4,7 @@
 #include <skalibs/functypes.h>
 #include <skalibs/gensetdyn.h>
 
-unsigned int gensetdyn_iter (gensetdyn_ref g, iterfunc_t_ref f, void *stuff)
+unsigned int gensetdyn_iter (gensetdyn *g, iterfunc_t_ref f, void *stuff)
 {
  /*
     XXX: we may be called by a freeing function, so we cannot alloc -

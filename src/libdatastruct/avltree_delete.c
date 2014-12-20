@@ -5,7 +5,7 @@
 #include <skalibs/avlnode.h>
 #include <skalibs/avltree.h>
 
-int avltree_delete (avltree_ref t, void const *k)
+int avltree_delete (avltree *t, void const *k)
 {
   unsigned int r = avltree_root(t) ;
   unsigned int i = avlnode_delete(avltree_nodes(t), avltree_totalsize(t), &r, k, t->dtok, t->kcmp, t->external) ;

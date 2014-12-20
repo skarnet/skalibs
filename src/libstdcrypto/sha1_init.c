@@ -2,7 +2,7 @@
 
 #include <skalibs/sha1.h>
 
-void sha1_init (SHA1Schedule_ref ctx)
+void sha1_init (SHA1Schedule *ctx)
 {
   register unsigned int i = 0 ;
   ctx->buf[0] = 0x67452301UL ;

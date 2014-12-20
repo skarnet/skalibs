@@ -10,7 +10,7 @@
 
 #ifdef SKALIBS_IPV6_ENABLED
 
-int socket_local46 (int s, ip46_t_ref ip, uint16 *port)
+int socket_local46 (int s, ip46_t *ip, uint16 *port)
 {
   struct sockaddr sa ;
   socklen_t dummy = sizeof sa ;

@@ -3,7 +3,7 @@
 #include <errno.h>
 #include <skalibs/genset.h>
 
-void genset_init (genset_ref x, void *storage, unsigned int *freelist, unsigned int esize, unsigned int max)
+void genset_init (genset *x, void *storage, unsigned int *freelist, unsigned int esize, unsigned int max)
 {
   register unsigned int i = 0 ;
   x->storage = (char *)storage ;
@@ -14,12 +14,12 @@ void genset_init (genset_ref x, void *storage, unsigned int *freelist, unsigned 
   for (; i < max ; i++) freelist[i] = max - 1 - i ;
 }
 
-unsigned int genset_new (genset_ref x)
+unsigned int genset_new (genset *x)
 {
   return x->sp ? x->freelist[--x->sp] : (errno = ENOSPC, x->max) ;
 }
 
-int genset_delete (genset_ref x, unsigned int i)
+int genset_delete (genset *x, unsigned int i)
 {
   if ((i >= x->max) || (x->sp >= x->max)) return (errno = EINVAL, 0) ;
   x->freelist[x->sp++] = i ;
