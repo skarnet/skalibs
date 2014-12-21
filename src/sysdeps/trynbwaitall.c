@@ -27,6 +27,11 @@
 #define MSG_NOSIGNAL 0
 #endif
 
+#ifndef MSG_DONTWAIT
+#define MSG_DONTWAIT 0
+#endif
+
+
 static int ndelay_on (int fd)
 {
   register int got = fcntl(fd, F_GETFL) ;
@@ -35,8 +40,8 @@ static int ndelay_on (int fd)
 
 static int child (int p, int fd)
 {
-  char c ;
-  struct iovec v = { .iov_base = &c, .iov_len = 1 } ;
+  char buf[8] ;
+  struct iovec v = { .iov_base = buf, .iov_len = 8 } ;
   struct msghdr msg =
   {
     .msg_name = 0,
@@ -56,7 +61,7 @@ static int child (int p, int fd)
   /* The following recvmsg may block, despite setting the fd
      non-blocking. That is what we're testing. */
 
-  if (recvmsg(fd, &msg, MSG_WAITALL) < 1) return 111 ;
+  if (recvmsg(fd, &msg, MSG_WAITALL | MSG_DONTWAIT) < 1) return 111 ;
   if (write(p, "", 1) < 1) return 111 ;
   return 0 ;
 }
