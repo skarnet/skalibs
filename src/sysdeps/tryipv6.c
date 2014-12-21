@@ -7,11 +7,6 @@
 #define _XPG6
 
 #include <sys/types.h>
-
-#if defined(__FreeBSD__)
-# include <sys/param.h>
-#endif
-
 #include <errno.h>
 #include <string.h>
 #include <sys/socket.h>
