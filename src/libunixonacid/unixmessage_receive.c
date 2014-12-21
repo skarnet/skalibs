@@ -16,14 +16,21 @@
 
 static int const awesomeflags =
 #ifdef SKALIBS_HASMSGDONTWAIT
-  MSG_WAITALL | MSG_DONTWAIT
-#elif defined (SKALIBS_HASNBWAITALL)
+  MSG_DONTWAIT
+#else
+  0
+#endif
+  |
+#ifdef SKALIBS_HASNBWAITALL
   MSG_WAITALL
 #else
   0
 #endif
+  |
 #ifdef SKALIBS_HASCMSGCLOEXEC
-  | MSG_CMSG_CLOEXEC
+  MSG_CMSG_CLOEXEC
+#else
+  0
 #endif
   ;
 

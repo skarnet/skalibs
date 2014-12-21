@@ -21,16 +21,9 @@
 # include <sys/param.h>
 #endif
 
-typedef struct ancilbuf_s ancilbuf_t, *ancilbuf_t_ref ;
-struct ancilbuf_s
-{
-  struct cmsghdr h ;
-  int fd ;
-} ;
-
 static int ancil_send_fd (int sock, int fd)
 {
-  ancilbuf_t buf ;
+  char ancilbuf[CMSG_SPACE(sizeof(int))] ;
   char s[8] = "blahblah" ;
   struct iovec v = { .iov_base = s, .iov_len = 8 } ;
   struct msghdr msghdr =
@@ -40,8 +33,8 @@ static int ancil_send_fd (int sock, int fd)
     .msg_iov = &v,
     .msg_iovlen = 1,
     .msg_flags = 0,
-    .msg_control = &buf,
-    .msg_controllen = sizeof(ancilbuf_t)
+    .msg_control = ancilbuf,
+    .msg_controllen = sizeof(ancilbuf)
   } ;
   struct cmsghdr *cmsg = CMSG_FIRSTHDR(&msghdr) ;
   cmsg->cmsg_len = msghdr.msg_controllen ;
@@ -54,7 +47,7 @@ static int ancil_send_fd (int sock, int fd)
 
 static int ancil_recv_fd (int sock)
 {
-  ancilbuf_t buf ;
+  char ancilbuf[CMSG_SPACE(sizeof(int))] ;
   char s[8] ;
   struct iovec v = { .iov_base = s, .iov_len = 8 } ;
   struct msghdr msghdr =
@@ -64,8 +57,8 @@ static int ancil_recv_fd (int sock)
     .msg_iov = &v,
     .msg_iovlen = 1,
     .msg_flags = 0,
-    .msg_control = &buf,
-    .msg_controllen = sizeof(ancilbuf_t)
+    .msg_control = ancilbuf,
+    .msg_controllen = sizeof(ancilbuf)
   } ;
   struct cmsghdr *cmsg = CMSG_FIRSTHDR(&msghdr) ;
   cmsg->cmsg_len = msghdr.msg_controllen ;
