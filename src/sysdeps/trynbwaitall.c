@@ -53,8 +53,8 @@ static int child (int p, int fd)
   if (write(p, "", 1) < 1) return 111 ; /* sync with the parent */
   if (select(fd+1, &rfds, 0, 0, 0) < 1) return 111 ;
 
-  /* On buggy systems, the following recvmsg will block, despite
-     setting the fd non-blocking */
+  /* The following recvmsg may block, despite setting the fd
+     non-blocking. That is what we're testing. */
 
   if (recvmsg(fd, &msg, MSG_WAITALL) < 1) return 111 ;
   if (write(p, "", 1) < 1) return 111 ;

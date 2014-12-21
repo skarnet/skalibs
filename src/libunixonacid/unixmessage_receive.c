@@ -14,19 +14,18 @@
 #include <skalibs/siovec.h>
 #include <skalibs/unixmessage.h>
 
-#ifdef SKALIBS_HASOKWAITALL
-# ifdef SKALIBS_HASCMSGCLOEXEC
-#  define RECV(fd, hdr) recvmsg(fd, (hdr), MSG_WAITALL | MSG_CMSG_CLOEXEC)
-# else
-#  define RECV(fd, hdr) recvmsg(fd, (hdr), MSG_WAITALL)
-# endif
+static int const awesomeflags =
+#ifdef SKALIBS_HASMSGDONTWAIT
+  MSG_WAITALL | MSG_DONTWAIT
+#elif defined (SKALIBS_HASNBWAITALL)
+  MSG_WAITALL
 #else
-# ifdef SKALIBS_HASCMSGCLOEXEC
-#  define RECV(fd, hdr) recvmsg(fd, (hdr), MSG_CMSG_CLOEXEC)
-# else
-#  define RECV(fd, hdr) recvmsg(fd, (hdr), 0)
-# endif
+  0
 #endif
+#ifdef SKALIBS_HASCMSGCLOEXEC
+  | MSG_CMSG_CLOEXEC
+#endif
+  ;
 
 static int unixmessage_receiver_fill (unixmessage_receiver_t *b)
 {
@@ -51,7 +50,7 @@ static int unixmessage_receiver_fill (unixmessage_receiver_t *b)
     cbuffer_wpeek(&b->mainb, v) ;
     iovec_from_siovec(iov, v, 2) ;
   }
-  r = RECV(b->fd, &msghdr) ;
+  r = recvmsg(b->fd, &msghdr, awesomeflags) ;
   if (r <= 0) return r ;
   {
     struct cmsghdr *c = CMSG_FIRSTHDR(&msghdr) ;

@@ -442,7 +442,8 @@ EOF
   choose cl getpeerucred GETPEERUCRED 'getpeerucred()'
   choose cl ipv6 IPV6 'IPv6 support' $socket_lib
   choose clr malloc0 MALLOC0 'non-NULL malloc(0)'
-  choose clr okwaitall OKWAITALL 'a usable MSG_WAITALL flag'
+  choose c msgdontwait MSGDONTWAIT 'MSG_DONTWAIT'
+  choose clr nbwaitall NBWAITALL 'non-blocking MSG_WAITALL'
   choose cl openat OPENAT 'openat()'
   choose cl linkat LINKAT 'linkat()'
   choose clr pipe2 PIPE2 'pipe2()'
