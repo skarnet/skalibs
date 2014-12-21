@@ -4,7 +4,7 @@
 #undef _XOPEN_SOURCE
 
 #ifndef _XPG4_2
-# define _XPG4_2
+#define _XPG4_2
 #endif
 
 #ifndef _BSD_SOURCE
@@ -19,9 +19,6 @@
 #include <sys/socket.h>
 #include <sys/select.h>
 #include <sys/uio.h>
-#if defined(__FreeBSD__)
-#include <sys/param.h>
-#endif
 
 #ifndef MSG_NOSIGNAL
 #define MSG_NOSIGNAL 0

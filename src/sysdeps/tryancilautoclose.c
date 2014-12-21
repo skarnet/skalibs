@@ -8,7 +8,7 @@
 #endif
 
 #ifndef _XPG4_2
-# define _XPG4_2
+#define _XPG4_2
 #endif
 
 #include <sys/types.h>
@@ -17,9 +17,6 @@
 #include <errno.h>
 #include <sys/socket.h>
 #include <sys/uio.h>
-#if defined(__FreeBSD__)
-# include <sys/param.h>
-#endif
 
 static int ancil_send_fd (int sock, int fd)
 {
@@ -37,7 +34,7 @@ static int ancil_send_fd (int sock, int fd)
     .msg_controllen = sizeof(ancilbuf)
   } ;
   struct cmsghdr *cmsg = CMSG_FIRSTHDR(&msghdr) ;
-  cmsg->cmsg_len = msghdr.msg_controllen ;
+  cmsg->cmsg_len = CMSG_LEN(sizeof(int)) ;
   cmsg->cmsg_level = SOL_SOCKET ;
   cmsg->cmsg_type = SCM_RIGHTS ;
   *((int *)CMSG_DATA(cmsg)) = fd ;
