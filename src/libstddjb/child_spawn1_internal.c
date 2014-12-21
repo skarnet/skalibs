@@ -91,7 +91,7 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
     errno = e ;
     return 0 ;
   }
-  if (pid)
+  if (!pid)
   {
     fd_close(syncp[0]) ;
     fd_close(p[!(to & 1)]) ;
