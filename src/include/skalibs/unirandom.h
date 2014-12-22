@@ -6,7 +6,7 @@
 #include <skalibs/buffer.h>
 #include <skalibs/surf.h>
 
-#define RANDOMBUF_BUFSIZE 257
+#define RANDOMBUF_BUFSIZE 256
 
 struct randombuf_s
 {

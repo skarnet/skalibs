@@ -27,11 +27,11 @@ struct buffer_s
     so that the head == tail case is nonambiguous (empty, not full).
  */
 
-#define BUFFER_INSIZE 8193
-#define BUFFER_OUTSIZE 8193
-#define BUFFER_ERRSIZE 1025
-#define BUFFER_INSIZE_SMALL 513
-#define BUFFER_OUTSIZE_SMALL 513
+#define BUFFER_INSIZE 8192
+#define BUFFER_OUTSIZE 8192
+#define BUFFER_ERRSIZE 1024
+#define BUFFER_INSIZE_SMALL 512
+#define BUFFER_OUTSIZE_SMALL 512
 
 #define BUFFER_INIT(f, d, buf, len) { .op = (f), .fd = (d), .c = CBUFFER_INIT(buf, len) }
 extern int buffer_init (buffer *, buffer_io_func_t *, int, char *, unsigned int) ;

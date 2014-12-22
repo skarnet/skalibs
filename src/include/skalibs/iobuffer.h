@@ -3,7 +3,7 @@
 #ifndef IOBUFFER_H
 #define IOBUFFER_H
 
-#define IOBUFFER_SIZE 65537U
+#define IOBUFFER_SIZE 65536U
 
  /* iobufferu */
 

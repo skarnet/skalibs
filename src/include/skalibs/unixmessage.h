@@ -37,9 +37,9 @@ struct unixmessage_v_s
 #define UNIXMESSAGE_V_ZERO { .v = 0, .vlen = 0, .fds = 0, .nfds = 0 }
 extern unixmessage_v_t const unixmessage_v_zero ;
 
-#define UNIXMESSAGE_BUFSIZE 2049
-#define UNIXMESSAGE_AUXBUFSIZE 2049
-#define UNIXMESSAGE_MAXFDS 256
+#define UNIXMESSAGE_BUFSIZE 2048
+#define UNIXMESSAGE_MAXFDS 255
+#define UNIXMESSAGE_AUXBUFSIZE (sizeof(int) * UNIXMESSAGE_MAXFDS + 1)
 #define UNIXMESSAGE_MAXREADS 32
 
 
