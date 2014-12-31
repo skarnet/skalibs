@@ -9,6 +9,7 @@
 #include <sys/socket.h>
 #include <sys/uio.h>
 #include <unistd.h>
+#include <errno.h>
 #include <skalibs/uint.h>
 #include <skalibs/diuint.h>
 #include <skalibs/stralloc.h>
@@ -63,8 +64,14 @@ int unixmessage_sender_flush (unixmessage_sender_t *b)
         ((int *)CMSG_DATA(cp))[i] = fd < 0 ? -(fd+1) : fd ;
       }
     }
-    if (sendmsg(b->fd, &hdr, MSG_NOSIGNAL) < (int)(len + (sizeof(unsigned int) << 1)))
-      return -(int)(b->head-oldhead)-1 ;
+    for (;;)
+    {
+      register int r = sendmsg(b->fd, &hdr, MSG_NOSIGNAL) ;
+      if (r == -1 && errno == EINTR) continue ;
+      if (r < (int)(len + (sizeof(unsigned int) << 1)))
+        return -(int)(b->head-oldhead)-1 ;
+      break ;
+    }
 #ifndef SKALIBS_HASANCILAUTOCLOSE
     if (nfds)
     {
