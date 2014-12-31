@@ -358,8 +358,8 @@ error that happened.
 <code> void pathexec_run (char const *file, char const *const *argv, char const *const *envp) </code> <br />
 Performs <tt>execvep(file, argv, envp, path)</tt>, <em>path</em> being the
 contents of the PATH environment variable. If PATH is not set, <em>path</em>
-is set to the contents of the <tt>conf-compile/conf-defaultpath</tt> file in
-the skalibs distribution.
+is set to the value given to the <tt>--with-default-path</tt> option of the
+skalibs' <tt>./configure</tt> script, or to <tt>/usr/bin:/bin</tt> by default.
 The function returns if it fails, and sets errno appropriately.
 </p>
 
