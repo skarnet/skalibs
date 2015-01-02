@@ -1,23 +1,16 @@
 /* ISC license. */
 
-#include <skalibs/config.h>
 #include <skalibs/uint64.h>
 #include <skalibs/tai.h>
 #include <skalibs/djbtime.h>
-
-#ifdef SKALIBS_FLAG_TZISRIGHT
-
-int tai_from_ltm64 (tai_t *t, uint64 u)
-{
-  tai_u64(t, u + 10U) ;
-  return 1 ;
-}
-
-#else
+#include "djbtime-internal.h"
 
 int tai_from_ltm64 (tai_t *t, uint64 u)
 {
-  return tai_from_utc(t, u) ;
+  switch (skalibs_tzisright())
+  {
+    case 1 : tai_u64(t, u + 10U) ; return 1 ;
+    case 0 : return tai_from_utc(t, u) ;
+    default : return 0 ;
+  }
 }
-
-#endif

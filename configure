@@ -41,7 +41,6 @@ skalibs options:
   --disable-ipv6                do not build IPv6 support [enabled]
   --enable-iopause-select       prefer select() over poll() for iopause implementation [disabled]
   --enable-tai-clock            assume the system clock is TAI-10 instead of UTC [disabled]
-  --enable-right-tz             assume the timezone is Olson's right/ instead of posix/ [disabled]
   --enable-clock                use clock_gettime() instead of gettimeofday() [disabled]
   --enable-monotonic            count time with CLOCK_MONOTONIC instead of CLOCK_REALTIME
   --enable-force-devr           assume /dev/random exists and is valid [autodetection takes time]
@@ -187,7 +186,6 @@ egd=
 ipv6=true
 select=false
 taiclock=false
-righttz=false
 clockrt=false
 clockmon=false
 forcedevr=false
@@ -237,8 +235,6 @@ for arg ; do
     --disable-iopause-select|--enable-iopause-select=no) select=false ;;
     --enable-tai-clock|--enable-tai-clock=yes) taiclock=true ;;
     --disable-tai-clock|--enable-tai-clock=no) taiclock=false ;;
-    --enable-right-tz|--enable-right-tz=yes) righttz=true ;;
-    --disable-right-tz|--enable-right-tz=no) righttz=false ;;
     --enable-clock|--enable-clock=yes) clockrt=true ;;
     --disable-clock|--enable-clock=no) clockrt=false ;;
     --enable-monotonic|--enable-monotonic=yes) clockmon=true ;;
@@ -561,11 +557,6 @@ if $taiclock ; then
   echo "#define ${package_macro_name}_FLAG_CLOCKISTAI"
 else
   echo "#undef ${package_macro_name}_FLAG_CLOCKISTAI"
-fi
-if $righttz ; then
-  echo "#define ${package_macro_name}_FLAG_TZISRIGHT"
-else
-  echo "#undef ${package_macro_name}_FLAG_TZISRIGHT"
 fi
 if $clockrt ; then
   echo "#define ${package_macro_name}_FLAG_USERT"

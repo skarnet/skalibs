@@ -6,7 +6,7 @@
 #include <skalibs/uint64.h>
 
 
-/* Leap second handling, for UTC <--> TAI conversions */
+ /* Leap second handling, for UTC <--> TAI conversions */
 
 #define LEAPSECS_MAX 39
 #define LEAPSECS_FILE SKALIBS_ETC "/leapsecs.dat"
@@ -19,5 +19,9 @@ extern int leapsecs_add_r (uint64 *, char const *, uint64 *, int) ;
 extern int leapsecs_sub_r (uint64 *, char const *, uint64 *) ;
 #define leapsecs_sub(t) leapsecs_sub_r((t), LEAPSECS_FILE, leapsecs_here)
 
+
+ /* Run-time test: does the current timezone handle leap seconds ? */
+
+extern int skalibs_tzisright (void) ;
 
 #endif

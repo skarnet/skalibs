@@ -71,7 +71,7 @@ tested, so it's usually safe, and faster, to stick to the default.
 <a name="clockistai"><h3> --enable-tai-clock </h3></a>
 
 <p>
- To understand what this flag is about - and the next three flags too - you
+ To understand what this flag is about - and the next two flags too - you
 should start by reading
 <a href="http://www.madore.org/~david/computers/unix-leap-seconds.html">this
 page about Unix time</a>,
@@ -105,10 +105,13 @@ and makes event loop handling (with functions such as
    <li> &uarr; skalibs uses TAI internally; setting your system clock to TAI-10
 saves a lot of conversions and makes time computations with skalibs more
 efficient. </li>
-   <li> &rarr; In order to display GMT or local time properly, you have to
-use the <tt>right/</tt> timezones from Arthur David Olson's timezone
-library. If your libc does not support them, see the
-<a href="#tzisright">next flag</a>. </li>
+   <li> &rarr; skalibs-aware software will display GMT or local time properly in
+every case, but you have to
+use the <tt>right/</tt> timezones, from Arthur David Olson's timezone
+library, to prevent your other software from being confused by a TAI-10 system clock.
+If you do not use <tt>right/</tt> timezones, utilities such as <tt>date</tt>
+will not compute the proper time - they will have an offset of 24 seconds
+or so. </li>
    <li> &darr; This setup is arguably not SUSv4 conformant (a strict
 interpretation of Single Unix requires the system clock to be set to UTC). </li>
    <li> &darr; This setup is <em>not</em> compatible with
@@ -126,7 +129,8 @@ POSIX setup:
    <li> &uarr; This is strictly SUSv4-compliant. Most Unix machines all over
 the world are set up like this. </li>
    <li> &uarr; This is compatible with ntpd. </li>
-   <li> &rarr; You should not use Olson's time library in that case. </li>
+   <li> &rarr; You should use <tt>posix/</tt> time zones in that case,
+not <tt>right/</tt> time zones. </li>
    <li> &darr; skalibs time computations will take a bit more processing power. </li>
    <li> &darr; Most importantly, you forsake all linearity - and even monotonicity
 - on your system clock, which can now only be used as a wall clock,
@@ -152,48 +156,6 @@ sensible choice.
 you're in none of the above cases: you are a
 POSIX freak, or your Unix distribution is running ntpd for you, or
 other software is assuming you're on UTC. This is the default.
-</p>
-
-
-<a name="tzisright"><h3> --enable-right-tz </h3>
-
-<p>
- This option instructs skalibs that you're using Olson's time
-library, i.e. "right/" timezones.
-</p>
-
-<p>
- Normally, if you set <a href="#clockistai">--enable-tai-clock</a>, you
-<em>should</em> also set up your timezone to a "right/" one, and
-set <tt>flag-tzisright</tt>. And if you don't use
-<a href="#clockistai">--enable-tai-clock</a>, you should also use a POSIX
-timezone, and NOT use <tt>--enable-right-tz</tt>. Those two options
-should always be used together.
-</p>
-
-<p>
- <em>But</em> some C libraries do not support the Olson time library's
-timezone format, and just do not provide the "right/" timezones! For
-instance, <a href="http://musl-libc.org/">musl</a>,
-an alternative libc for Linux, only supports POSIX timezones. And you
-might want to use such a libc, and <em>still</em> set up your clock to
-TAI-10, for instance in embedded environments where accurate timekeeping
-is important. In such cases, you'll set up a POSIX timezone, and use the
-<tt>--enable-tai-clock</tt> option without the <tt>--enable-right-tz</tt> one.
-</p>
-
-<p>
- Be aware that setting your system clock to TAI-10 without having a
-"right/" timezone will cause non-skalibs-using software to display
-local time incorrectly; in such a setup, only skalibs-using software
-will understand what is going on and do the proper computations to
-display the correct local time. Keep your settings as consistent as
-possible.
-</p>
-
-<p>
- By default, skalibs will consider you are using POSIX timezones (as well
-as a UTC system clock).
 </p>
 
 <a name="usert"><h3> --enable-clock </h3></a>

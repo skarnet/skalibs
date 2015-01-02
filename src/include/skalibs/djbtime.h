@@ -27,7 +27,7 @@ extern int tain_from_ntp (tain_t *, uint64) ;
 
 
 /* localtime handling - replaces caltimedate functions */
-/* ltm64 can be either TAI-10 or UTC depending on --enable-right-tz */
+/* ltm64 can be either TAI-10 or UTC depending on the current timezone */
 /* normally ltm64 is the same as sysclock, but we allow it to be different */
 /* for instance for musl TAI-10 systems */
 

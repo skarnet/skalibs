@@ -403,8 +403,8 @@ src/libstddjb/long_fmt.o src/libstddjb/long_fmt.lo: src/libstddjb/long_fmt.c src
 src/libstddjb/long_scan.o src/libstddjb/long_scan.lo: src/libstddjb/long_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/ulong.h
 src/libstddjb/ltm64_from_localtm.o src/libstddjb/ltm64_from_localtm.lo: src/libstddjb/ltm64_from_localtm.c src/include/skalibs/djbtime.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/ltm64_from_sysclock.o src/libstddjb/ltm64_from_sysclock.lo: src/libstddjb/ltm64_from_sysclock.c src/include/skalibs/config.h src/include/skalibs/djbtime.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
-src/libstddjb/ltm64_from_tai.o src/libstddjb/ltm64_from_tai.lo: src/libstddjb/ltm64_from_tai.c src/include/skalibs/config.h src/include/skalibs/djbtime.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
-src/libstddjb/ltm64_from_utc.o src/libstddjb/ltm64_from_utc.lo: src/libstddjb/ltm64_from_utc.c src/include/skalibs/config.h src/libstddjb/djbtime-internal.h src/include/skalibs/djbtime.h src/include/skalibs/uint64.h
+src/libstddjb/ltm64_from_tai.o src/libstddjb/ltm64_from_tai.lo: src/libstddjb/ltm64_from_tai.c src/libstddjb/djbtime-internal.h src/include/skalibs/djbtime.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
+src/libstddjb/ltm64_from_utc.o src/libstddjb/ltm64_from_utc.lo: src/libstddjb/ltm64_from_utc.c src/libstddjb/djbtime-internal.h src/include/skalibs/djbtime.h src/include/skalibs/uint64.h
 src/libstddjb/mininetstring_read.o src/libstddjb/mininetstring_read.lo: src/libstddjb/mininetstring_read.c src/include/skalibs/allreadwrite.h src/include/skalibs/mininetstring.h src/include/skalibs/stralloc.h src/include/skalibs/uint32.h
 src/libstddjb/mininetstring_write.o src/libstddjb/mininetstring_write.lo: src/libstddjb/mininetstring_write.c src/include/skalibs/allreadwrite.h src/include/skalibs/mininetstring.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h
 src/libstddjb/ndelay_off.o src/libstddjb/ndelay_off.lo: src/libstddjb/ndelay_off.c src/include/skalibs/djbunix.h
@@ -492,6 +492,7 @@ src/libstddjb/siovec_seek.o src/libstddjb/siovec_seek.lo: src/libstddjb/siovec_s
 src/libstddjb/skagetln.o src/libstddjb/skagetln.lo: src/libstddjb/skagetln.c src/include/skalibs/buffer.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/skagetln_nofill.o src/libstddjb/skagetln_nofill.lo: src/libstddjb/skagetln_nofill.c src/include/skalibs/buffer.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/skagetlnsep.o src/libstddjb/skagetlnsep.lo: src/libstddjb/skagetlnsep.c src/include/skalibs/buffer.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
+src/libstddjb/skalibs_tzisright.o src/libstddjb/skalibs_tzisright.lo: src/libstddjb/skalibs_tzisright.c src/libstddjb/djbtime-internal.h
 src/libstddjb/skasig_dfl.o src/libstddjb/skasig_dfl.lo: src/libstddjb/skasig_dfl.c src/include/skalibs/sig.h
 src/libstddjb/skasigaction.o src/libstddjb/skasigaction.lo: src/libstddjb/skasigaction.c src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
 src/libstddjb/slurp.o src/libstddjb/slurp.lo: src/libstddjb/slurp.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
@@ -575,7 +576,7 @@ src/libstddjb/sysclock_get.o src/libstddjb/sysclock_get.lo: src/libstddjb/sysclo
 src/libstddjb/sysclock_set.o src/libstddjb/sysclock_set.lo: src/libstddjb/sysclock_set.c src/include/skalibs/config.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/tai.h
 src/libstddjb/tai_add.o src/libstddjb/tai_add.lo: src/libstddjb/tai_add.c src/include/skalibs/tai.h
 src/libstddjb/tai_from_localtm.o src/libstddjb/tai_from_localtm.lo: src/libstddjb/tai_from_localtm.c src/include/skalibs/djbtime.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
-src/libstddjb/tai_from_ltm64.o src/libstddjb/tai_from_ltm64.lo: src/libstddjb/tai_from_ltm64.c src/include/skalibs/config.h src/include/skalibs/djbtime.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
+src/libstddjb/tai_from_ltm64.o src/libstddjb/tai_from_ltm64.lo: src/libstddjb/tai_from_ltm64.c src/libstddjb/djbtime-internal.h src/include/skalibs/djbtime.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/tai_from_sysclock.o src/libstddjb/tai_from_sysclock.lo: src/libstddjb/tai_from_sysclock.c src/include/skalibs/config.h src/include/skalibs/djbtime.h src/include/skalibs/tai.h
 src/libstddjb/tai_from_timespec.o src/libstddjb/tai_from_timespec.lo: src/libstddjb/tai_from_timespec.c src/include/skalibs/tai.h
 src/libstddjb/tai_from_timeval.o src/libstddjb/tai_from_timeval.lo: src/libstddjb/tai_from_timeval.c src/include/skalibs/tai.h

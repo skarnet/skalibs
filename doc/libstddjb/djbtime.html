@@ -107,15 +107,10 @@ error occurs (for instance: the leap second table cannot be found).
 
 <p>
  The following functions convert time between an internal representation
-and a broken-down <tt>struct tm</tt>. The
-<a href="../flags.html#tzisright">--enable-right-tz</a> configure option is used in
-determining how the conversion should proceed. If the <tt>--enable-tai-clock</tt>
-and <tt>--enable-right-tz</tt> configure options have been both enabled
-or both disabled, everything is naturally
-converted as it should be. If only one of them has been enabled,
-unholy magic happens here
-to get the correct broken-down time despite the timezone definition being
-wrong.
+and a broken-down <tt>struct tm</tt>. Conversions are performed to
+get leap seconds handling right, depending on whether skalibs has been
+configured for a TAI-10 or a UTC system clock, and on whether the current
+timezone takes leap seconds into account or not.
 </p>
 
 <p>
