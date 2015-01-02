@@ -30,7 +30,7 @@ before the "make install" phase. It will shave a few bytes off them.
 * Customization
   -------------
 
- You can customize paths via flags given to configure.
+ You can customize the installation process via flags given to configure.
  See ./configure --help for a list of all available configure options.
 
 
@@ -51,7 +51,7 @@ detection by configure.
 
  The values of CFLAGS, CPPFLAGS and LDFLAGS will be appended to flags
 auto-detected by configure. To entirely override the flags set by
-configure, use make -e.
+configure instead, use make -e.
 
  The Makefile supports the DESTDIR convention for staging.
 
@@ -115,17 +115,30 @@ absolute pathnames. skarnet.org packages support it: use the
 --enable-slashpackage option to configure, or
 --enable-slashpackage=DIR for a prefixed DIR/package tree.
 This option will activate slashpackage support during the build
-and set slashpackage-compatible installation directories.
-Other options setting individual installation directories will be
-ignored.
+and set slashpackage-compatible installation directories. If
+$version is the current skalibs version number:
+
+ --bindir will be set to /package/prog/skalibs-$version/command
+ --includedir will be set to /package/prog/skalibs-$version/include
+ --libdir will be set to /package/prog/skalibs-$version/library
+ --dynlibdir will be set to /package/prog/skalibs-$version/library.so
+ --sysdepdir will be set to /package/prog/skalibs-$version/sysdeps
+
+ Note that --datadir will be unchanged, because the data exported
+by skalibs, i.e. the leap second table, is system-wide. You should
+manually specify --datadir=... if you want to deviate from the default.
+
+ --prefix is pretty much ignored when you use --enable-slashpackage:
+it will only impact --datadir. You should probably not use both
+--enable-slashpackage and --prefix.
 
  When using slashpackage, two additional Makefile targets are
 available after "make install":
  - "make -L update" changes the default version of the software to the
 freshly installed one. (This is useful when you have several installed
 versions of the same software, which slashpackage supports.)
- - "make -L global-links" adds links from /command and /library.so to the
-default version of the binaries and shared libraries.
+ - "make -L global-links" adds links from DIR/command and DIR/library.so
+to the default version of the binaries and shared libraries.
  The "-L" option to make is necessary because targets are symbolic links,
 and the default make behaviour is to check the pointed file's timestamp
 and not the symlink's timestamp.
