@@ -1,8 +1,8 @@
 /* ISC license. */
 
-#include <skalibs/skaclient.h>
 #include <skalibs/tai.h>
 #include <skalibs/unixmessage.h>
+#include <skalibs/skaclient.h>
 
 int skaclient_send (skaclient_t *a, char const *s, unsigned int len, unixmessage_handler_func_t *cb, void *result, tain_t const *deadline, tain_t *stamp)
 {

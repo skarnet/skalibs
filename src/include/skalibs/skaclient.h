@@ -107,6 +107,8 @@ extern int skaclient_sendv (skaclient_t *, siovec_t const *, unsigned int, unixm
 #define skaclient_timed_supdate(a, deadline, stamp) unixmessage_timed_handle(&(a)->syncin, (unixmessage_handler_func_t *)&kolbak_call, &(a)->kq, deadline, stamp)
 #define skaclient_timed_supdate_g(a, deadline) skaclient_timed_supdate(a, (deadline), &STAMP)
 
+extern int skaclient_syncify (skaclient_t *, tain_t const *, tain_t *) ;
+
 #define skaclient_fd(a) skaclient_afd(a)
 #define skaclient_afd(a) unixmessage_receiver_fd(&(a)->asyncin)
 #define skaclient_update(a, f, p) skaclient_aupdate(a, f, p)
