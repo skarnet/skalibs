@@ -13,7 +13,7 @@ int unixmessage_handle (unixmessage_receiver_t *b, unixmessage_handler_func_t *f
     if (r < 0) return -1 ;
     if (!r) break ;
     r = (*f)(&m, p) ;
-    if (r <= 0) return r ;
+    if (r <= 0) return r-2 ;
     count++ ;
   }
   return count ;
