@@ -1,9 +1,5 @@
 /* ISC license. */
 
-#ifndef _XPG4_2
-#define _XPG4_2
-#endif
-
 #include <skalibs/sysdeps.h>
 #include <skalibs/nonposix.h>
 #include <sys/socket.h>
