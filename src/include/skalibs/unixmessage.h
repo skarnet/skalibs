@@ -105,6 +105,7 @@ extern int unixmessage_receiver_init (unixmessage_receiver_t *, int, char *, uns
 extern void unixmessage_receiver_free (unixmessage_receiver_t *) ;
 #define unixmessage_receiver_fd(b) ((b)->fd)
 #define unixmessage_receiver_isempty(b) (cbuffer_isempty(&(b)->mainb) && cbuffer_isempty(&(b)->auxb))
+#define unixmessage_receiver_isfull(b) (cbuffer_isfull(&(b)->mainb) || cbuffer_isfull(&(b)->auxb))
 
 extern int unixmessage_receive (unixmessage_receiver_t *, unixmessage_t *) ;
 extern int unixmessage_timed_receive (unixmessage_receiver_t *, unixmessage_t *, tain_t const *, tain_t *) ;
