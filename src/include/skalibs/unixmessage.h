@@ -26,6 +26,8 @@ struct unixmessage_s
 #define UNIXMESSAGE_ZERO { .s = 0, .len = 0, .fds = 0, .nfds = 0 }
 extern unixmessage_t const unixmessage_zero ;
 
+extern void unixmessage_drop (unixmessage_t const *) ;
+
 typedef struct unixmessage_v_s unixmessage_v_t, *unixmessage_v_t_ref ;
 struct unixmessage_v_s
 {

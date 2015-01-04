@@ -99,6 +99,7 @@ extern int skaclient_sendv (skaclient_t *, siovec_t const *, unsigned int, unixm
 #define skaclient_sendv_g(a, v, vlen, cb, result, deadline) skaclient_sendv(a, v, vlen, cb, result, (deadline), &STAMP)
 
 #define skaclient_sfd(a) unixmessage_receiver_fd(&(a)->syncin)
+#define skaclient_siswritable(a) (!unixmessage_sender_isempty(&(a)->syncout))
 #define skaclient_flush(a) unixmessage_sender_flush(&(a)->syncout)
 #define skaclient_timed_flush(a, deadline, stamp) unixmessage_sender_timed_flush(&(a)->syncout, deadline, stamp)
 #define skaclient_timed_flush_g(a, deadline) skaclient_timed_flush(a, (deadline), &STAMP)
@@ -116,6 +117,7 @@ extern int skaclient_syncify (skaclient_t *, tain_t const *, tain_t *) ;
 
 extern unixmessage_handler_func_t skaclient_default_cb ;
 
+#define skaclient_aiswritable(a) (!unixmessage_sender_isempty(&(a)->asyncout))
 #define skaclient_aput_and_close(a, m, bits) unixmessage_put_and_close(&(a)->asyncout, m, bits)
 #define skaclient_aputv_and_close(a, m, bits) unixmessage_putv_and_close(&(a)->asyncout, m, bits)
 #define skaclient_aput(a, m) unixmessage_put(&(a)->asyncout, m)
