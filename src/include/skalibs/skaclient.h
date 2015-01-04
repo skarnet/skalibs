@@ -116,4 +116,10 @@ extern int skaclient_syncify (skaclient_t *, tain_t const *, tain_t *) ;
 
 extern unixmessage_handler_func_t skaclient_default_cb ;
 
+#define skaclient_aput_and_close(a, m, bits) unixmessage_put_and_close(&(a)->asyncout, m, bits)
+#define skaclient_aputv_and_close(a, m, bits) unixmessage_putv_and_close(&(a)->asyncout, m, bits)
+#define skaclient_aput(a, m) unixmessage_put(&(a)->asyncout, m)
+#define skaclient_aputv(a, m) unixmessage_putv(&(a)->asyncout, m)
+#define skaclient_aflush(a) unixmessage_sender_flush(&(a)->asyncout)
+
 #endif
