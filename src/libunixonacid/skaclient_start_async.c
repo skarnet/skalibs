@@ -1,6 +1,7 @@
 /* ISC license. */
 
 #include <errno.h>
+#include <skalibs/uint32.h>
 #include <skalibs/error.h>
 #include <skalibs/kolbak.h>
 #include <skalibs/skaclient.h>
@@ -21,6 +22,7 @@ int skaclient_start_async (
   kolbak_closure_t *q,
   unsigned int qlen,
   char const *path,
+  uint32 options,
   char const *before,
   unsigned int beforelen,
   char const *after,
@@ -38,14 +40,13 @@ int skaclient_start_async (
     return 0 ;
   }
   a->pid = 0 ;
-  a->options = 0 ;
+  a->options = options & ~SKACLIENT_OPTION_WAITPID ;
   if (!kolbak_enqueue(&a->kq, (unixmessage_handler_func_t_ref)&skaclient_start_cb, blah))
   {
     skaclient_end(a) ;
     return 0 ;
   }
-  blah->asyncin = &a->asyncin ;
-  blah->asyncout = &a->asyncout ;
+  blah->a = a ;
   blah->after = after ;
   blah->afterlen = afterlen ;
   return 1 ;

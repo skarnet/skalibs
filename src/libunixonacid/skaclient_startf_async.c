@@ -53,8 +53,7 @@ int skaclient_startf_async (
     skaclient_end(a) ;
     return 0 ;
   }
-  blah->asyncin = &a->asyncin ;
-  blah->asyncout = &a->asyncout ;
+  blah->a = a ;
   blah->after = after ;
   blah->afterlen = afterlen ;
   return 1 ;

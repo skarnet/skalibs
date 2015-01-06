@@ -13,5 +13,6 @@ int unixmessage_receiver_init (unixmessage_receiver_t *b, int fd, char *mainbuf,
   b->mainlen = b->auxlen = 0 ;
   b->maindata = stralloc_zero ;
   b->auxdata = stralloc_zero ;
+  b->fds_ok = 3 ;
   return 1 ;
 }

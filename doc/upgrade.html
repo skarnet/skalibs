@@ -17,6 +17,15 @@
 
 <h1> What has changed in skalibs </h1>
 
+<h2> in 2.1.0.0 </h2>
+
+<ul>
+ <li> unixmessage_drop added, part of unixmessage/skaclient hardening against fd leakage </li>
+ <li> unixmessage_sender_flush return code aligned with the convention in the rest of skalibs </li>
+ <li> unixmessage_sender_flush now handles short writes </li>
+ <li> skaclient_start(_async) prototype changed: now takes an option argument </li>
+</ul>
+
 <h2> in 2.0.0.0 </h2>
 
 <ul>

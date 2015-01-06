@@ -8,6 +8,7 @@
 #include <skalibs/bitarray.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/diuint.h>
+#include <skalibs/error.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/genalloc.h>
 #include <skalibs/siovec.h>
@@ -49,6 +50,8 @@ static inline int copyfds (char *s, int const *fds, unsigned int n, unsigned cha
 static int reserve_and_copy (unixmessage_sender_t *b, unsigned int len, int const *fds, unsigned int nfds, unsigned char const *bits)
 {
   diuint cur = { .left = b->data.len, .right = b->fds.len } ;
+  if (len > UNIXMESSAGE_MAXSIZE || nfds > UNIXMESSAGE_MAXFDS)
+    return (errno = EPROTO, 0) ;
   if (!genalloc_readyplus(diuint, &b->offsets, 1)
    || !genalloc_readyplus(int, &b->fds, nfds)
    || !stralloc_readyplus(&b->data, len))
