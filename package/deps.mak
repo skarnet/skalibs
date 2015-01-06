@@ -646,23 +646,23 @@ src/libstddjb/uint16_scanlist.o src/libstddjb/uint16_scanlist.lo: src/libstddjb/
 src/libstddjb/uint16_unpack.o src/libstddjb/uint16_unpack.lo: src/libstddjb/uint16_unpack.c src/include/skalibs/bytestr.h src/include/skalibs/uint16.h
 src/libstddjb/uint16_unpack_big.o src/libstddjb/uint16_unpack_big.lo: src/libstddjb/uint16_unpack_big.c src/include/skalibs/bytestr.h src/include/skalibs/uint16.h
 src/libstddjb/uint320_scan.o src/libstddjb/uint320_scan.lo: src/libstddjb/uint320_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint32.h
-src/libstddjb/uint32_fmtlist.o src/libstddjb/uint32_fmtlist.lo: src/libstddjb/uint32_fmtlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint16.h
+src/libstddjb/uint32_fmtlist.o src/libstddjb/uint32_fmtlist.lo: src/libstddjb/uint32_fmtlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint32.h
 src/libstddjb/uint32_pack.o src/libstddjb/uint32_pack.lo: src/libstddjb/uint32_pack.c src/include/skalibs/bytestr.h src/include/skalibs/uint32.h
 src/libstddjb/uint32_pack_big.o src/libstddjb/uint32_pack_big.lo: src/libstddjb/uint32_pack_big.c src/include/skalibs/bytestr.h src/include/skalibs/uint32.h
 src/libstddjb/uint32_reverse.o src/libstddjb/uint32_reverse.lo: src/libstddjb/uint32_reverse.c src/include/skalibs/uint32.h
 src/libstddjb/uint32_scan.o src/libstddjb/uint32_scan.lo: src/libstddjb/uint32_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint32.h
-src/libstddjb/uint32_scanlist.o src/libstddjb/uint32_scanlist.lo: src/libstddjb/uint32_scanlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint16.h
+src/libstddjb/uint32_scanlist.o src/libstddjb/uint32_scanlist.lo: src/libstddjb/uint32_scanlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint32.h
 src/libstddjb/uint32_unpack.o src/libstddjb/uint32_unpack.lo: src/libstddjb/uint32_unpack.c src/include/skalibs/bytestr.h src/include/skalibs/uint32.h
 src/libstddjb/uint32_unpack_big.o src/libstddjb/uint32_unpack_big.lo: src/libstddjb/uint32_unpack_big.c src/include/skalibs/bytestr.h src/include/skalibs/uint32.h
 src/libstddjb/uint640_fmt.o src/libstddjb/uint640_fmt.lo: src/libstddjb/uint640_fmt.c src/include/skalibs/uint64.h
 src/libstddjb/uint640_scan.o src/libstddjb/uint640_scan.lo: src/libstddjb/uint640_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint64.h
 src/libstddjb/uint64_fmt.o src/libstddjb/uint64_fmt.lo: src/libstddjb/uint64_fmt.c src/include/skalibs/fmtscan.h src/include/skalibs/uint64.h
-src/libstddjb/uint64_fmtlist.o src/libstddjb/uint64_fmtlist.lo: src/libstddjb/uint64_fmtlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint16.h
+src/libstddjb/uint64_fmtlist.o src/libstddjb/uint64_fmtlist.lo: src/libstddjb/uint64_fmtlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint64.h
 src/libstddjb/uint64_pack.o src/libstddjb/uint64_pack.lo: src/libstddjb/uint64_pack.c src/include/skalibs/bytestr.h src/include/skalibs/uint64.h
 src/libstddjb/uint64_pack_big.o src/libstddjb/uint64_pack_big.lo: src/libstddjb/uint64_pack_big.c src/include/skalibs/bytestr.h src/include/skalibs/uint64.h
 src/libstddjb/uint64_reverse.o src/libstddjb/uint64_reverse.lo: src/libstddjb/uint64_reverse.c src/include/skalibs/uint64.h
 src/libstddjb/uint64_scan.o src/libstddjb/uint64_scan.lo: src/libstddjb/uint64_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint64.h
-src/libstddjb/uint64_scanlist.o src/libstddjb/uint64_scanlist.lo: src/libstddjb/uint64_scanlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint16.h
+src/libstddjb/uint64_scanlist.o src/libstddjb/uint64_scanlist.lo: src/libstddjb/uint64_scanlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint64.h
 src/libstddjb/uint64_unpack.o src/libstddjb/uint64_unpack.lo: src/libstddjb/uint64_unpack.c src/include/skalibs/bytestr.h src/include/skalibs/uint64.h
 src/libstddjb/uint64_unpack_big.o src/libstddjb/uint64_unpack_big.lo: src/libstddjb/uint64_unpack_big.c src/include/skalibs/bytestr.h src/include/skalibs/uint64.h
 src/libstddjb/uncoe.o src/libstddjb/uncoe.lo: src/libstddjb/uncoe.c src/include/skalibs/djbunix.h
@@ -729,8 +729,8 @@ src/libunixonacid/skaclient_sendv.o src/libunixonacid/skaclient_sendv.lo: src/li
 src/libunixonacid/skaclient_server_ack.o src/libunixonacid/skaclient_server_ack.lo: src/libunixonacid/skaclient_server_ack.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/error.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h src/include/skalibs/webipc.h
 src/libunixonacid/skaclient_server_bidi_ack.o src/libunixonacid/skaclient_server_bidi_ack.lo: src/libunixonacid/skaclient_server_bidi_ack.c src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
 src/libunixonacid/skaclient_server_init.o src/libunixonacid/skaclient_server_init.lo: src/libunixonacid/skaclient_server_init.c src/include/skalibs/skaclient.h src/include/skalibs/tai.h src/include/skalibs/unixmessage.h
-src/libunixonacid/skaclient_start.o src/libunixonacid/skaclient_start.lo: src/libunixonacid/skaclient_start.c src/include/skalibs/kolbak.h src/libunixonacid/skaclient-internal.h src/include/skalibs/skaclient.h src/include/skalibs/tai.h
-src/libunixonacid/skaclient_start_async.o src/libunixonacid/skaclient_start_async.lo: src/libunixonacid/skaclient_start_async.c src/include/skalibs/error.h src/include/skalibs/kolbak.h src/libunixonacid/skaclient-internal.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h src/include/skalibs/webipc.h
+src/libunixonacid/skaclient_start.o src/libunixonacid/skaclient_start.lo: src/libunixonacid/skaclient_start.c src/include/skalibs/kolbak.h src/libunixonacid/skaclient-internal.h src/include/skalibs/skaclient.h src/include/skalibs/tai.h src/include/skalibs/uint32.h
+src/libunixonacid/skaclient_start_async.o src/libunixonacid/skaclient_start_async.lo: src/libunixonacid/skaclient_start_async.c src/include/skalibs/error.h src/include/skalibs/kolbak.h src/libunixonacid/skaclient-internal.h src/include/skalibs/skaclient.h src/include/skalibs/uint32.h src/include/skalibs/unixmessage.h src/include/skalibs/webipc.h
 src/libunixonacid/skaclient_start_cb.o src/libunixonacid/skaclient_start_cb.lo: src/libunixonacid/skaclient_start_cb.c src/include/skalibs/bytestr.h src/include/skalibs/error.h src/libunixonacid/skaclient-internal.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
 src/libunixonacid/skaclient_startf.o src/libunixonacid/skaclient_startf.lo: src/libunixonacid/skaclient_startf.c src/include/skalibs/kolbak.h src/libunixonacid/skaclient-internal.h src/include/skalibs/skaclient.h src/include/skalibs/tai.h
 src/libunixonacid/skaclient_startf_async.o src/libunixonacid/skaclient_startf_async.lo: src/libunixonacid/skaclient_startf_async.c src/include/skalibs/djbunix.h src/include/skalibs/kolbak.h src/libunixonacid/skaclient-internal.h src/include/skalibs/skaclient.h src/include/skalibs/uint32.h
