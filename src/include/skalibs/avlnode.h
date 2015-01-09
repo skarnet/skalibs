@@ -39,6 +39,8 @@ extern unsigned int avlnode_insertnode (avlnode *, unsigned int, unsigned int, u
 extern unsigned int avlnode_delete (avlnode *, unsigned int, unsigned int *, void const *, dtokfunc_t_ref, cmpfunc_t_ref, void *) ;
 #define avlnode_deletenode(s, max, r, i, dtok, f, p) avlnode_delete(s, max, r, (*(dtok))((s)[i].data), dtok, f, p)
 
-extern int avlnode_iter (avlnode *, unsigned int, unsigned int, avliterfunc_t_ref, void *) ;
+extern unsigned int avlnode_iter_nocancel (avlnode *, unsigned int, unsigned int, unsigned int, avliterfunc_t_ref, void *) ;
+#define avlnode_iter(tree, max, root, f, stuff) (avlnode_iter_nocancel(tree, max, max, root, f, stuff) == (max))
+extern int avlnode_iter_withcancel (avlnode *, unsigned int, unsigned int, avliterfunc_t_ref, avliterfunc_t_ref, void *) ;
 
 #endif

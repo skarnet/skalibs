@@ -50,6 +50,8 @@ extern int avltreen_insert (avltreen *, unsigned int) ;
 extern int avltreen_delete (avltreen *, void const *) ;
 
 #define avltreen_iter(t, f, p) avlnode_iter(avltreen_nodes(t), avltreen_totalsize(t), avltreen_root(t), f, p)
+#define avltreen_iter_nocancel(t, cut, f, p) avlnode_iter_nocancel(avltreen_nodes(t), avltreen_totalsize(t), cut, avltreen_root(t), f, p)
+#define avltreen_iter_withcancel(t, f, cancelf, p) avlnode_iter_withcancel(avltreen_nodes(t), avltreen_totalsize(t), avltreen_root(t), f, cancelf, p)
 
 
  /* avltreeb: everything in one place. Stack or BSS, or heap if you insist */
@@ -83,5 +85,7 @@ extern int avltreen_delete (avltreen *, void const *) ;
 #define avltreeb_delete(t, k) avltreen_delete(&(t)->info, k)
 
 #define avltreeb_iter(t, f, p) avlnode_iter(avltreeb_nodes(t), avltreeb_totalsize(t), avltreeb_root(t), f, p)
+#define avltreeb_iter_nocancel(t, cut, f, p) avlnode_iter_nocancel(avltreeb_nodes(t), avltreeb_totalsize(t), cut, avltreeb_root(t), f, p)
+#define avltreeb_iter_withcancel(t, f, cancelf, p) avlnode_iter_withcancel(avltreeb_nodes(t), avltreeb_totalsize(t), avltreeb_root(t), f, cancelf, p)
 
 #endif

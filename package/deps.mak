@@ -103,6 +103,7 @@ src/libdatastruct/avlnode_extremenode.o src/libdatastruct/avlnode_extremenode.lo
 src/libdatastruct/avlnode_height.o src/libdatastruct/avlnode_height.lo: src/libdatastruct/avlnode_height.c src/include/skalibs/avlnode.h
 src/libdatastruct/avlnode_insertnode.o src/libdatastruct/avlnode_insertnode.lo: src/libdatastruct/avlnode_insertnode.c src/libdatastruct/avlnode-internal.h src/include/skalibs/avlnode.h src/include/skalibs/functypes.h
 src/libdatastruct/avlnode_iter.o src/libdatastruct/avlnode_iter.lo: src/libdatastruct/avlnode_iter.c src/include/skalibs/avlnode.h
+src/libdatastruct/avlnode_iter_withcancel.o src/libdatastruct/avlnode_iter_withcancel.lo: src/libdatastruct/avlnode_iter_withcancel.c src/include/skalibs/avlnode.h
 src/libdatastruct/avlnode_rotate.o src/libdatastruct/avlnode_rotate.lo: src/libdatastruct/avlnode_rotate.c src/libdatastruct/avlnode-internal.h src/include/skalibs/avlnode.h
 src/libdatastruct/avlnode_search.o src/libdatastruct/avlnode_search.lo: src/libdatastruct/avlnode_search.c src/include/skalibs/avlnode.h
 src/libdatastruct/avlnode_searchnode.o src/libdatastruct/avlnode_searchnode.lo: src/libdatastruct/avlnode_searchnode.c src/libdatastruct/avlnode-internal.h src/include/skalibs/avlnode.h src/include/skalibs/functypes.h
@@ -119,10 +120,12 @@ src/libdatastruct/avltreen_insert.o src/libdatastruct/avltreen_insert.lo: src/li
 src/libdatastruct/avltreen_newnode.o src/libdatastruct/avltreen_newnode.lo: src/libdatastruct/avltreen_newnode.c src/include/skalibs/avlnode.h src/include/skalibs/avltreen.h src/include/skalibs/genset.h
 src/libdatastruct/genset.o src/libdatastruct/genset.lo: src/libdatastruct/genset.c src/include/skalibs/genset.h
 src/libdatastruct/genset_iter.o src/libdatastruct/genset_iter.lo: src/libdatastruct/genset_iter.c src/include/skalibs/bitarray.h src/include/skalibs/functypes.h src/include/skalibs/genset.h
+src/libdatastruct/genset_iter_withcancel.o src/libdatastruct/genset_iter_withcancel.lo: src/libdatastruct/genset_iter_withcancel.c src/include/skalibs/functypes.h src/include/skalibs/genset.h
 src/libdatastruct/gensetdyn_delete.o src/libdatastruct/gensetdyn_delete.lo: src/libdatastruct/gensetdyn_delete.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h
 src/libdatastruct/gensetdyn_free.o src/libdatastruct/gensetdyn_free.lo: src/libdatastruct/gensetdyn_free.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h src/include/skalibs/stralloc.h
 src/libdatastruct/gensetdyn_init.o src/libdatastruct/gensetdyn_init.lo: src/libdatastruct/gensetdyn_init.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h src/include/skalibs/stralloc.h
 src/libdatastruct/gensetdyn_iter.o src/libdatastruct/gensetdyn_iter.lo: src/libdatastruct/gensetdyn_iter.c src/include/skalibs/bitarray.h src/include/skalibs/functypes.h src/include/skalibs/gensetdyn.h
+src/libdatastruct/gensetdyn_iter_withcancel.o src/libdatastruct/gensetdyn_iter_withcancel.lo: src/libdatastruct/gensetdyn_iter_withcancel.c src/include/skalibs/functypes.h src/include/skalibs/gensetdyn.h
 src/libdatastruct/gensetdyn_new.o src/libdatastruct/gensetdyn_new.lo: src/libdatastruct/gensetdyn_new.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h
 src/libdatastruct/gensetdyn_ready.o src/libdatastruct/gensetdyn_ready.lo: src/libdatastruct/gensetdyn_ready.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h src/include/skalibs/stralloc.h
 src/libdatastruct/gensetdyn_zero.o src/libdatastruct/gensetdyn_zero.lo: src/libdatastruct/gensetdyn_zero.c src/include/skalibs/gensetdyn.h

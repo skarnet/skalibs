@@ -23,8 +23,9 @@ extern void genset_init (genset *, void *, unsigned int *, unsigned int, unsigne
 extern unsigned int genset_new (genset *) ;
 extern int genset_delete (genset *, unsigned int) ;
 #define genset_n(g) ((g)->max - (g)->sp)
-extern unsigned int genset_iter (genset *, iterfunc_t_ref, void *) ;
-
+extern unsigned int genset_iter_nocancel (genset *, unsigned int, iterfunc_t_ref, void *) ;
+#define genset_iter(g, f, stuff) genset_iter_nocancel(g, (g)->max, f, stuff)
+extern int genset_iter_withcancel (genset *, iterfunc_t_ref, iterfunc_t_ref, void *) ;
 
 #define GENSETB_TYPE(type, size) struct { type storage[size] ; unsigned int freelist[size] ; genset info ; }
 #define GENSETB_init(type, g, size) GENSET_init(&(g)->info, type, (g)->storage, (g)->freelist, size)
