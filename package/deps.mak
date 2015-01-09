@@ -764,5 +764,6 @@ src/libunixonacid/unixmessage_sender_x.o src/libunixonacid/unixmessage_sender_x.
 src/libunixonacid/unixmessage_sender_zero.o src/libunixonacid/unixmessage_sender_zero.lo: src/libunixonacid/unixmessage_sender_zero.c src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_timed_handle.o src/libunixonacid/unixmessage_timed_handle.lo: src/libunixonacid/unixmessage_timed_handle.c src/include/skalibs/functypes.h src/include/skalibs/tai.h src/include/skalibs/unix-timed.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_timed_receive.o src/libunixonacid/unixmessage_timed_receive.lo: src/libunixonacid/unixmessage_timed_receive.c src/include/skalibs/functypes.h src/include/skalibs/tai.h src/include/skalibs/unix-timed.h src/include/skalibs/unixmessage.h
+src/libunixonacid/unixmessage_unput.o src/libunixonacid/unixmessage_unput.lo: src/libunixonacid/unixmessage_unput.c src/include/skalibs/diuint.h src/include/skalibs/djbunix.h src/include/skalibs/genalloc.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_v_zero.o src/libunixonacid/unixmessage_v_zero.lo: src/libunixonacid/unixmessage_v_zero.c src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_zero.o src/libunixonacid/unixmessage_zero.lo: src/libunixonacid/unixmessage_zero.c src/include/skalibs/unixmessage.h

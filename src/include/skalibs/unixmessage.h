@@ -75,6 +75,10 @@ extern int unixmessage_put_and_close (unixmessage_sender_t *, unixmessage_t cons
 extern int unixmessage_putv_and_close (unixmessage_sender_t *, unixmessage_v_t const *, unsigned char const *) ;
 #define unixmessage_putv(b, m) unixmessage_putv_and_close(b, m, unixmessage_bits_closenone)
 
+extern int unixmessage_unput_and_maybe_drop (unixmessage_sender_t *, int) ;
+#define unixmessage_unput(b) unixmessage_unput_and_maybe_drop((b), 0)
+#define unixmessage_unput_and_drop(b) unixmessage_unput_and_maybe_drop((b), 1)
+
 extern unsigned char const *const unixmessage_bits_closenone ;
 extern unsigned char const *const unixmessage_bits_closeall ;
 
