@@ -49,7 +49,7 @@ static inline int copyfds (char *s, int const *fds, unsigned int n, unsigned cha
 
 static int reserve_and_copy (unixmessage_sender_t *b, unsigned int len, int const *fds, unsigned int nfds, unsigned char const *bits)
 {
-  diuint cur = { .left = b->data.len, .right = b->fds.len } ;
+  diuint cur = { .left = b->data.len, .right = genalloc_len(int, &b->fds) } ;
   if (len > UNIXMESSAGE_MAXSIZE || nfds > UNIXMESSAGE_MAXFDS)
     return (errno = EPROTO, 0) ;
   if (!genalloc_readyplus(diuint, &b->offsets, 1)
@@ -57,7 +57,7 @@ static int reserve_and_copy (unixmessage_sender_t *b, unsigned int len, int cons
    || !stralloc_readyplus(&b->data, len))
     return 0 ;
   if (!copyfds(b->fds.s + b->fds.len, fds, nfds, bits)) return 0 ;
-  b->fds.len += nfds * sizeof(int) ;
+  genalloc_setlen(int, &b->fds, cur.right + nfds) ;
   byte_copy(b->offsets.s + b->offsets.len, sizeof(diuint), (char const *)&cur) ;
   b->offsets.len += sizeof(diuint) ;
   return 1 ;

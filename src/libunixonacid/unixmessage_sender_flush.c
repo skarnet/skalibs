@@ -26,7 +26,7 @@
 
 int unixmessage_sender_flush (unixmessage_sender_t *b)
 {
-  diuint last = { .left = (uint32)b->data.len, .right = genalloc_len(int, &b->fds) } ;
+  diuint last = { .left = b->data.len, .right = genalloc_len(int, &b->fds) } ;
   diuint *offsets = genalloc_s(diuint, &b->offsets) ;
   unsigned int n = genalloc_len(diuint, &b->offsets) ;
   register int r ;
