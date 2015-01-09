@@ -1,13 +1,11 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <time.h>
-#include <errno.h>
 #include <skalibs/tai.h>
 
-int tain_from_timespec (tain_t *a, struct timespec const *ts)
+int tain_from_timespec (tain_t *t, struct timespec const *ts)
 {
-  if (!tai_from_timespec(tain_secp(a), ts)) return 0 ;
-  a->nano = ts->tv_nsec ;
+  if (!tai_from_time(&t->sec, ts->tv_sec)) return 0 ;
+  t->nano = ts->tv_nsec ;
   return 1 ;
 }

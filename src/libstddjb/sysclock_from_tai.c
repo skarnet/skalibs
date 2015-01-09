@@ -1,5 +1,6 @@
 /* ISC license. */
 
+#include <errno.h>
 #include <skalibs/config.h>
 #include <skalibs/tai.h>
 
@@ -7,6 +8,7 @@
 
 int sysclock_from_tai (uint64 *u, tai_t const *t)
 {
+  if (t->x < 10U) return (errno = EINVAL, 0) ;
   *u = t->x - 10U ;
   return 1 ;
 }

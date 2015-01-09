@@ -6,7 +6,7 @@
 
 int tain_from_ntp (tain_t *a, uint64 u)
 {
-  tai_t secs = { u >> 32 } ;
+  tai_t secs = { .x = u >> 32 } ;
   if (secs.x <= 0x7FFFFFFFUL) secs.x |= ((uint64)1 << 32) ;
   secs.x += TAI_MAGIC ;
   secs.x -= NTP_OFFSET ;

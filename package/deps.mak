@@ -571,6 +571,7 @@ src/libstddjb/sysclock_from_localtm.o src/libstddjb/sysclock_from_localtm.lo: sr
 src/libstddjb/sysclock_from_localtmn.o src/libstddjb/sysclock_from_localtmn.lo: src/libstddjb/sysclock_from_localtmn.c src/include/skalibs/djbtime.h src/include/skalibs/tai.h
 src/libstddjb/sysclock_from_ltm64.o src/libstddjb/sysclock_from_ltm64.lo: src/libstddjb/sysclock_from_ltm64.c src/include/skalibs/config.h src/include/skalibs/djbtime.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/sysclock_from_tai.o src/libstddjb/sysclock_from_tai.lo: src/libstddjb/sysclock_from_tai.c src/include/skalibs/config.h src/include/skalibs/djbtime.h src/include/skalibs/tai.h
+src/libstddjb/sysclock_from_tain.o src/libstddjb/sysclock_from_tain.lo: src/libstddjb/sysclock_from_tain.c src/include/skalibs/tai.h
 src/libstddjb/sysclock_from_utc.o src/libstddjb/sysclock_from_utc.lo: src/libstddjb/sysclock_from_utc.c src/include/skalibs/config.h src/include/skalibs/djbtime.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/sysclock_get.o src/libstddjb/sysclock_get.lo: src/libstddjb/sysclock_get.c src/include/skalibs/config.h src/include/skalibs/sysdeps.h src/include/skalibs/tai.h
 src/libstddjb/sysclock_set.o src/libstddjb/sysclock_set.lo: src/libstddjb/sysclock_set.c src/include/skalibs/config.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/tai.h
@@ -578,15 +579,12 @@ src/libstddjb/tai_add.o src/libstddjb/tai_add.lo: src/libstddjb/tai_add.c src/in
 src/libstddjb/tai_from_localtm.o src/libstddjb/tai_from_localtm.lo: src/libstddjb/tai_from_localtm.c src/include/skalibs/djbtime.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/tai_from_ltm64.o src/libstddjb/tai_from_ltm64.lo: src/libstddjb/tai_from_ltm64.c src/libstddjb/djbtime-internal.h src/include/skalibs/djbtime.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/tai_from_sysclock.o src/libstddjb/tai_from_sysclock.lo: src/libstddjb/tai_from_sysclock.c src/include/skalibs/config.h src/include/skalibs/djbtime.h src/include/skalibs/tai.h
-src/libstddjb/tai_from_timespec.o src/libstddjb/tai_from_timespec.lo: src/libstddjb/tai_from_timespec.c src/include/skalibs/tai.h
-src/libstddjb/tai_from_timeval.o src/libstddjb/tai_from_timeval.lo: src/libstddjb/tai_from_timeval.c src/include/skalibs/tai.h
 src/libstddjb/tai_from_utc.o src/libstddjb/tai_from_utc.lo: src/libstddjb/tai_from_utc.c src/libstddjb/djbtime-internal.h src/include/skalibs/djbtime.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
-src/libstddjb/tai_now.o src/libstddjb/tai_now.lo: src/libstddjb/tai_now.c src/include/skalibs/tai.h src/include/skalibs/uint64.h
+src/libstddjb/tai_now.o src/libstddjb/tai_now.lo: src/libstddjb/tai_now.c src/include/skalibs/tai.h
 src/libstddjb/tai_pack.o src/libstddjb/tai_pack.lo: src/libstddjb/tai_pack.c src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/tai_pack_little.o src/libstddjb/tai_pack_little.lo: src/libstddjb/tai_pack_little.c src/include/skalibs/tai.h src/include/skalibs/uint64.h
-src/libstddjb/tai_relative_from_timespec.o src/libstddjb/tai_relative_from_timespec.lo: src/libstddjb/tai_relative_from_timespec.c src/include/skalibs/tai.h
-src/libstddjb/tai_relative_from_timeval.o src/libstddjb/tai_relative_from_timeval.lo: src/libstddjb/tai_relative_from_timeval.c src/include/skalibs/tai.h
 src/libstddjb/tai_sub.o src/libstddjb/tai_sub.lo: src/libstddjb/tai_sub.c src/include/skalibs/tai.h
+src/libstddjb/tai_u64.o src/libstddjb/tai_u64.lo: src/libstddjb/tai_u64.c src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/tai_unpack.o src/libstddjb/tai_unpack.lo: src/libstddjb/tai_unpack.c src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/tai_unpack_little.o src/libstddjb/tai_unpack_little.lo: src/libstddjb/tai_unpack_little.c src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/tain_add.o src/libstddjb/tain_add.lo: src/libstddjb/tain_add.c src/include/skalibs/tai.h
@@ -598,8 +596,11 @@ src/libstddjb/tain_frac.o src/libstddjb/tain_frac.lo: src/libstddjb/tain_frac.c 
 src/libstddjb/tain_from_localtmn.o src/libstddjb/tain_from_localtmn.lo: src/libstddjb/tain_from_localtmn.c src/include/skalibs/djbtime.h src/include/skalibs/tai.h
 src/libstddjb/tain_from_millisecs.o src/libstddjb/tain_from_millisecs.lo: src/libstddjb/tain_from_millisecs.c src/include/skalibs/tai.h
 src/libstddjb/tain_from_ntp.o src/libstddjb/tain_from_ntp.lo: src/libstddjb/tain_from_ntp.c src/include/skalibs/djbtime.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
+src/libstddjb/tain_from_sysclock.o src/libstddjb/tain_from_sysclock.lo: src/libstddjb/tain_from_sysclock.c src/include/skalibs/tai.h
 src/libstddjb/tain_from_timespec.o src/libstddjb/tain_from_timespec.lo: src/libstddjb/tain_from_timespec.c src/include/skalibs/tai.h
+src/libstddjb/tain_from_timespec_sysclock.o src/libstddjb/tain_from_timespec_sysclock.lo: src/libstddjb/tain_from_timespec_sysclock.c src/include/skalibs/tai.h
 src/libstddjb/tain_from_timeval.o src/libstddjb/tain_from_timeval.lo: src/libstddjb/tain_from_timeval.c src/include/skalibs/tai.h
+src/libstddjb/tain_from_timeval_sysclock.o src/libstddjb/tain_from_timeval_sysclock.lo: src/libstddjb/tain_from_timeval_sysclock.c src/include/skalibs/tai.h
 src/libstddjb/tain_half.o src/libstddjb/tain_half.lo: src/libstddjb/tain_half.c src/include/skalibs/tai.h
 src/libstddjb/tain_infinite_relative.o src/libstddjb/tain_infinite_relative.lo: src/libstddjb/tain_infinite_relative.c src/include/skalibs/tai.h
 src/libstddjb/tain_less.o src/libstddjb/tain_less.lo: src/libstddjb/tain_less.c src/include/skalibs/tai.h
@@ -618,18 +619,19 @@ src/libstddjb/tain_ulong.o src/libstddjb/tain_ulong.lo: src/libstddjb/tain_ulong
 src/libstddjb/tain_unpack.o src/libstddjb/tain_unpack.lo: src/libstddjb/tain_unpack.c src/include/skalibs/tai.h src/include/skalibs/uint32.h
 src/libstddjb/tain_unpack_little.o src/libstddjb/tain_unpack_little.lo: src/libstddjb/tain_unpack_little.c src/include/skalibs/tai.h src/include/skalibs/uint32.h
 src/libstddjb/tain_zero.o src/libstddjb/tain_zero.lo: src/libstddjb/tain_zero.c src/include/skalibs/tai.h
-src/libstddjb/timespec_from_tai.o src/libstddjb/timespec_from_tai.lo: src/libstddjb/timespec_from_tai.c src/include/skalibs/tai.h
-src/libstddjb/timespec_from_tai_relative.o src/libstddjb/timespec_from_tai_relative.lo: src/libstddjb/timespec_from_tai_relative.c src/include/skalibs/sysdeps.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
+src/libstddjb/time_from_tai.o src/libstddjb/time_from_tai.lo: src/libstddjb/time_from_tai.c src/include/skalibs/sysdeps.h src/include/skalibs/tai.h
+src/libstddjb/time_from_tai_relative.o src/libstddjb/time_from_tai_relative.lo: src/libstddjb/time_from_tai_relative.c src/include/skalibs/sysdeps.h src/include/skalibs/tai.h
+src/libstddjb/time_sysclock_from_tai.o src/libstddjb/time_sysclock_from_tai.lo: src/libstddjb/time_sysclock_from_tai.c src/include/skalibs/sysdeps.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/timespec_from_tain.o src/libstddjb/timespec_from_tain.lo: src/libstddjb/timespec_from_tain.c src/include/skalibs/tai.h
 src/libstddjb/timespec_from_tain_relative.o src/libstddjb/timespec_from_tain_relative.lo: src/libstddjb/timespec_from_tain_relative.c src/include/skalibs/tai.h
+src/libstddjb/timespec_sysclock_from_tain.o src/libstddjb/timespec_sysclock_from_tain.lo: src/libstddjb/timespec_sysclock_from_tain.c src/include/skalibs/tai.h
 src/libstddjb/timestamp.o src/libstddjb/timestamp.lo: src/libstddjb/timestamp.c src/include/skalibs/tai.h
 src/libstddjb/timestamp_fmt.o src/libstddjb/timestamp_fmt.lo: src/libstddjb/timestamp_fmt.c src/include/skalibs/tai.h
 src/libstddjb/timestamp_r.o src/libstddjb/timestamp_r.lo: src/libstddjb/timestamp_r.c src/include/skalibs/tai.h
 src/libstddjb/timestamp_scan.o src/libstddjb/timestamp_scan.lo: src/libstddjb/timestamp_scan.c src/include/skalibs/tai.h
-src/libstddjb/timeval_from_tai.o src/libstddjb/timeval_from_tai.lo: src/libstddjb/timeval_from_tai.c src/include/skalibs/tai.h
-src/libstddjb/timeval_from_tai_relative.o src/libstddjb/timeval_from_tai_relative.lo: src/libstddjb/timeval_from_tai_relative.c src/include/skalibs/sysdeps.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/timeval_from_tain.o src/libstddjb/timeval_from_tain.lo: src/libstddjb/timeval_from_tain.c src/include/skalibs/tai.h
 src/libstddjb/timeval_from_tain_relative.o src/libstddjb/timeval_from_tain_relative.lo: src/libstddjb/timeval_from_tain_relative.c src/include/skalibs/tai.h
+src/libstddjb/timeval_sysclock_from_tain.o src/libstddjb/timeval_sysclock_from_tain.lo: src/libstddjb/timeval_sysclock_from_tain.c src/include/skalibs/tai.h
 src/libstddjb/ucharn_findlen.o src/libstddjb/ucharn_findlen.lo: src/libstddjb/ucharn_findlen.c src/include/skalibs/fmtscan.h
 src/libstddjb/ucharn_fmt.o src/libstddjb/ucharn_fmt.lo: src/libstddjb/ucharn_fmt.c src/include/skalibs/fmtscan.h
 src/libstddjb/ucharn_fmt_little.o src/libstddjb/ucharn_fmt_little.lo: src/libstddjb/ucharn_fmt_little.c src/include/skalibs/fmtscan.h

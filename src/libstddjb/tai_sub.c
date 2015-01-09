@@ -2,7 +2,7 @@
 
 #include <skalibs/tai.h>
 
-void tai_sub (tai_t *t, tai_t const *u, tai_t const *v)
+int tai_sub (tai_t *t, tai_t const *u, tai_t const *v)
 {
-  tai_u64(t, tai_sec(u) - tai_sec(v)) ;
+  return tai_u64(t, tai_sec(u) - tai_sec(v)) ;
 }

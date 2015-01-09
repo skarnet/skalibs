@@ -7,8 +7,7 @@
 
 int tai_from_sysclock (tai_t *t, uint64 u)
 {
-  tai_u64(t, u + 10U) ;
-  return 1 ;
+  return tai_u64(t, u + 10U) ;
 }
 
 #else

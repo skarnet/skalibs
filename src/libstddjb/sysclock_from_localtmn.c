@@ -5,9 +5,7 @@
 
 int sysclock_from_localtmn (tain_t *a, localtmn_t const *l)
 {
-  uint64 u ;
-  if (!sysclock_from_localtm(&u, &l->tm)) return 0 ;
-  tai_u64(&a->sec, u) ;
+  if (!sysclock_from_localtm(&a->sec.x, &l->tm)) return 0 ;
   a->nano = l->nano ;
   return 1 ;
 }

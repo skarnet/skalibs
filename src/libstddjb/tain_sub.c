@@ -2,14 +2,16 @@
 
 #include <skalibs/tai.h>
 
-void tain_sub (tain_t *t, tain_t const *u, tain_t const *v)
+int tain_sub (tain_t *t, tain_t const *u, tain_t const *v)
 {
-  tain_t uu = *u ;
-  tai_sub(&t->sec, &uu.sec, &v->sec) ;
-  t->nano = uu.nano - v->nano ;
-  if (t->nano > uu.nano)
+  tain_t tt = *u ;
+  if (!tai_sub(&tt.sec, &u->sec, &v->sec)) return 0 ;
+  tt.nano = u->nano - v->nano ;
+  if (tt.nano > u->nano)
   {
-    t->nano += 1000000000U ;
-    tai_u64(&t->sec, tai_sec(&t->sec)-1) ;
+    if (!tai_u64(&tt.sec, tai_sec(&tt.sec) - 1)) return 0 ;
+    tt.nano += 1000000000U ;
   }
+  *t = tt ;
+  return 1 ;
 }

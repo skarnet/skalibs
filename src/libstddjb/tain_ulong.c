@@ -2,8 +2,9 @@
 
 #include <skalibs/tai.h>
 
-void tain_ulong (tain_t *t, unsigned long s)
+int tain_ulong (tain_t *t, unsigned long s)
 {
-  tai_u64(&t->sec, s) ;
+  if (!tai_u64(&t->sec, s)) return 0 ;
   t->nano = 0 ;
+  return 1 ;
 }

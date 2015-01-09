@@ -178,7 +178,7 @@ has been configured with (resp. without) the
 <a href="../flags.html#usert">--enable-clock</a>
 option. Returns 1 if it succeeds or 0 (and sets errno) if it
 fails.
- Here <em>a</em> contains a valid TAI stamp, no matter what the
+ Here <em>a</em> contains a valid TAI64N stamp, no matter what the
 system clock is set to: arithmetic operations can be performed
 on it.
 </p>
@@ -190,7 +190,7 @@ Sets the current time to *<em>a</em>, with a 1-nanosecond
 with (resp. without) the
 <a href="../flags.html#usert">--enable-clock</a>
 option. Returns 1 if it succeeds or 0 (and sets errno) if it
-fails. <em>a</em> must contain a valid TAI stamp; proper
+fails. <em>a</em> must contain a valid TAI64N stamp; proper
 operations will be automatically run to convert that stamp into
 the right format for the system clock.
 </p>
@@ -273,43 +273,92 @@ computations.
 <h3> Converting to/from libc representations </h3>
 
 <p>
-<code> int tai_from_timeval (tai_t *t, struct timeval const *tv) <br />
-int tai_from_timespec (tai_t *t, struct timespec const *ts) <br />
-int tai_relative_from_timeval (tai_t *t, struct timeval const *tv) <br />
-int tai_relative_from_timespec (tai_t *t, struct timespec const *ts) </code> <br />
-Those functions convert an absolute (resp. relative) time in a
-struct timeval (resp. struct timespec) to an absolute (resp. relative)
-time in a tai_t, with a 1-second precision. They return 1.
+ The following functions only convert from a certain structure
+format to another; they do not make any assumption about the
+format of the time contained in those structures. For instance,
+for the <tt>tai_from_timeval</tt> function, if the struct timeval
+contains an absolute UTC time, then the tai_t will also contain
+the same UTC time. Despite being a tai_t, it may contain
+something else than TAI time.
 </p>
 
 <p>
-<code> int timeval_from_tai (struct timeval *tv, tai_t const *t) <br />
-int timespec_from_tai (struct timespec *ts, tai_t const *t) <br />
-int timeval_from_tai_relative (struct timeval *tv, tai_t const *t) <br />
-int timespec_from_tai_relative (struct timespec *ts, tai_t const *t) </code> <br />
-Those functions do the opposite conversion. They normally return 1;
-however, <tt>struct timeval</tt> and <tt>struct timespec</tt> cannot
-represent an absolute date before the Epoch, or a negative relative time;
-if *<em>t</em> cannot be converted, 0 EINVAL is returned.
+If you need conversion from the native machine
+system clock format to TAI, see the next section.
+</p>
+
+<p>
+<code> int tai_from_time (tai_t *t, time_t u) <br />
+int tai_relative_from_time (tai_t *t, time_t u) </code> <br />
+Those functions convert an absolute (resp. relative) time in a
+time_t to an absolute (resp. relative)
+time in a tai_t, with a 1-second precision. They return 1,
+unless the time_t value is invalid (in which case they return 0).
+</p>
+
+<p>
+<code> int time_from_tai (time_t *u, tai_t const *t) <br />
+int time_from_tai_relative (time_t *u, tai_t const *t) </code> <br />
+The inverse functions of the previous ones. Be aware that
+time_t is 32 bits on some systems and cannot store all values
+of a tai_t (in which case the functions will return 0 EOVERFLOW).
 </p>
 
 <p>
 <code> int tain_from_timeval (tain_t *a, struct timeval const *tv) <br />
-int tain_from_timespec (tain_t *a, struct timespec const *ts) <br />
 int tain_relative_from_timeval (tain_t *a, struct timeval const *tv) <br />
+int tain_from_timespec (tain_t *a, struct timespec const *ts) <br />
 int tain_relative_from_timespec (tain_t *a, struct timespec const *ts) <br />
 int timeval_from_tain (struct timeval *tv, tain_t const *a) <br />
-int timespec_from_tain (struct timespec *ts, tain_t const *a) <br />
 int timeval_from_tain_relative (struct timeval *tv, tain_t const *a) <br />
+int timespec_from_tain (struct timespec *ts, tain_t const *a) <br />
 int timespec_from_tain_relative (struct timespec *ts, tain_t const *a) </code> <br />
-Same conversion operations, but with a <tt>tain_t</tt>. The 1-microsecond
+Same conversion operations, between <tt>tain_t</tt> and a
+<tt>struct timeval</tt> or <tt>struct timespec</tt>. The 1-microsecond
 (for <tt>struct timeval</tt>) or 1-nanosecond (for <tt>struct timespec</tt>)
 precision is preserved.
 </p>
 
+<h3> Conversion between TAI and the system clock format </h3>
+
 <p>
-<code> void tain_uint (tain_t *a, unsigned int c) </code> <br />
+ Unlike the previous functions, the functions listed here will
+always operate on valid absolute timestamps. Only TAI64 time is
+stored in tai_t structures, and only TAI64N time is stored in
+tain_t structures. These functions will convert to/from TAI,
+from/to the machine system clock format, i.e. TAI-10 or UTC
+depending on whether skalibs was
+compiled with the --enable-tai-clock configure option).
+This is useful to get valid TAI/TAI64N timestamps out of
+information exported by the system, for instance the time_t
+returned by <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/time.html">time()</a>,
+or in the <tt>st_atim</tt>, <tt>st_mtim</tt> or
+<tt>st_ctim</tt> fields of a <tt>struct stat</tt>.
+</p>
+
+<p>
+ The functions return 1 in case of success, or 0 if the conversion
+could not be performed; in which case errno is set to EINVAL if
+the input argument was not a valid timestamp, to EOVERFLOW if the
+output could not be represented in the chosen format (which may
+happen on systems with a 32 bit <tt>time_t</tt>), or other error
+codes - for instance related to the leap second table when a
+lookup was necessary.
+</p>
+
+<code> int tai_from_time_sysclock (tai_t *a, time_t t) <br />
+int time_sysclock_from_tai (time_t *t, tai_t const *a) <br />
+int tain_from_timeval_sysclock (tain_t *a, struct timeval const *tv) <br />
+int timeval_sysclock_from_tain (struct timeval *tv, tain_t const *a) <br /
+int tain_from_timespec_sysclock (tain_t *a, struct timespec const *ts) <br />
+int timespec_sysclock_from_tain (struct timespec *ts, tain_t const *a) </code>
+
+<h3> Conversions to/from basic types </h3>
+
+<p>
+<code> int tain_uint (tain_t *a, unsigned int c) </code> <br />
 Stores a relative time of <em>c</em> seconds into <em>a</em>.
+Normally returns 1, but may return 0 EINVAL on pathological numbers.
 </p>
 
 <p>
@@ -330,26 +379,28 @@ number. Else it returns -1 EINVAL.
 <h3> Time computations </h3>
 
 <p>
-<code> void tai_add (tai_t *t, tai_t const *t1, tai_t const *t2) </code> <br />
+<code> int tai_add (tai_t *t, tai_t const *t1, tai_t const *t2) </code> <br />
 Stores *<em>t1</em> + *<em>t2</em> into <em>t</em>. Of course, *<em>t1</em>
 and *<em>t2</em> must not both represent absolute times.
+The function normally returns 1, but will return 0 on bad inputs.
 </p>
 
 <p>
-<code> void tai_sub (tai_t *t, tai_t const *t1, tai_t const *t2) </code> <br />
-Stores *<em>t1</em> - *<em>t2</em> into <em>t</em>. Of course, *<em>t1</em>
-and *<em>t2</em> must be of the same type (relative or absolute), and
-*<em>t</em> will always be relative.
+<code> int tai_sub (tai_t *t, tai_t const *t1, tai_t const *t2) </code> <br />
+Stores *<em>t1</em> - *<em>t2</em> into <em>t</em>. *<em>t1</em> cannot
+be relative if *<em>t2</em> is absolute. If they are both relative or
+both absolute, then *<em>t</em> is relative, else it's absolute.
+The function normally returns 1, but will return 0 on bad inputs.
 </p>
 
 <p>
-<code> void tain_add (tain_t *a, tain_t const *a1, tain_t const *a2) <br />
-void tain_sub (tain_t *a, tain_t const *a1, tain_t const *a2) </code> <br />
+<code> int tain_add (tain_t *a, tain_t const *a1, tain_t const *a2) <br />
+int tain_sub (tain_t *a, tain_t const *a1, tain_t const *a2) </code> <br />
 Same thing with <tt>tain_t</tt>.
 </p>
 
 <p>
-<code> void tain_addsec (tain_t *a, tain_t const *a1, int c) </code> <br />
+<code> int tain_addsec (tain_t *a, tain_t const *a1, int c) </code> <br />
 Adds <em>c</em> seconds to *<em>a1</em> and stores the result into <em>a</em>.
 <em>c</em> may be negative.
 </p>

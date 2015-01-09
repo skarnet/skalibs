@@ -1,5 +1,6 @@
 /* ISC license. */
 
+#include <errno.h>
 #include <skalibs/config.h>
 #include <skalibs/uint64.h>
 #include <skalibs/djbtime.h>
@@ -12,6 +13,7 @@ int sysclock_from_utc (uint64 *u)
 {
   tai_t t ;
   if (!tai_from_utc(&t, *u)) return 0 ;
+  if (t.x < 10) return (errno = EINVAL, 0) ;
   *u = t.x - 10 ;
   return 1 ;
 }

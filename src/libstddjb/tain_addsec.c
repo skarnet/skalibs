@@ -2,19 +2,20 @@
 
 #include <skalibs/tai.h>
 
-void tain_addsec (tain_t *b, tain_t const *a, int c)
+int tain_addsec (tain_t *b, tain_t const *a, int c)
 {
-  b->nano = a->nano ;
   if (c >= 0)
   {
     tai_t t ;
-    tai_u64(&t, c) ;
-    tai_add(&b->sec, &a->sec, &t) ;
+    if (!tai_u64(&t, c)) return 0 ;
+    if (!tai_add(&b->sec, &a->sec, &t)) return 0 ;
   }
   else
   {
     tai_t t ;
-    tai_u64(&t, -c) ;
-    tai_sub(&b->sec, &a->sec, &t) ;
+    if (!tai_u64(&t, -c)) return 0 ;
+    if (!tai_sub(&b->sec, &a->sec, &t)) return 0 ;
   }
+  b->nano = a->nano ;
+  return 1 ;
 }
