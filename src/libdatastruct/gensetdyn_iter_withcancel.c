@@ -6,7 +6,7 @@
 
 int gensetdyn_iter_withcancel (gensetdyn *g, iterfunc_t_ref f, iterfunc_t_ref cancelf, void *stuff)
 {
-  unsigned int n = gensetdyn_iter(g, f, stuff) ;
+  unsigned int n = gensetdyn_iter_nocancel(g, g->storage.len, f, stuff) ;
   if (n < g->storage.len)
   {
     int e = errno ;
