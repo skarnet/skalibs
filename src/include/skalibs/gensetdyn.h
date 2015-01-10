@@ -36,7 +36,7 @@ extern int gensetdyn_delete (gensetdyn *, unsigned int) ;
 #define GENSETDYN_P(type, g, i) ((type *)gensetdyn_p(g, i))
 
 extern unsigned int gensetdyn_iter_nocancel (gensetdyn *, unsigned int, iterfunc_t_ref, void *) ;
-#define gensetdyn_iter(g, f, stuff) (gensetdyn_iter_nocancel(g, (g)->storage.len, f, stuff) == (g)->storage.len)
+#define gensetdyn_iter(g, f, stuff) gensetdyn_iter_nocancel(g, gensetdyn_n(g), f, stuff)
 extern int gensetdyn_iter_withcancel (gensetdyn *, iterfunc_t_ref, iterfunc_t_ref, void *) ;
 
 #endif
