@@ -1,5 +1,6 @@
 /* ISC license. */
 
+#include <skalibs/cbuffer.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/unixmessage.h>

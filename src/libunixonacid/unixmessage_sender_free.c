@@ -4,24 +4,21 @@
 #include <skalibs/diuint.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/genalloc.h>
+#include <skalibs/djbunix.h>
 #include <skalibs/unixmessage.h>
 
 void unixmessage_sender_free (unixmessage_sender_t *b)
 {
-#ifdef SKALIBS_HASANCILAUTOCLOSE
+  unsigned int i = genalloc_s(diuint, &b->offsets)[b->head].right ;
+  unsigned int n = genalloc_len(int, &b->fds) ;
+  for (; i < n ; i++)
   {
-    diuint *offsets = genalloc_s(unsigned int, &b->offsets) ;
-    unsigned int n = genalloc_len(unsigned int, &b->offsets) ;
-    int *fds = genalloc_s(int, &b->fds) ;
-    unsigned int nfds = genalloc_len(int, &b->fds) ;
-    for (; b->head < n ; b->head++)
-    {
-      register unsigned int last = b->head+1 < n ? offsets[b->head+1].right : nfds ;
-      register unsigned int i = offsets[b->head].right ;
-      for (; i < last ; i++) if (fds[i] >= 0) fd_close(fds[i]) ;
-    }
-  }
+    register int fd = genalloc_s(int, &b->fds)[i] ;
+    if (fd < 0) fd_close(-(fd+1)) ;
+#ifdef SKALIBS_HASANCILAUTOCLOSE
+    else fd_close(fd) ;
 #endif
+  }
   genalloc_free(diuint, &b->offsets) ;
   genalloc_free(int, &b->fds) ;
   stralloc_free(&b->data) ;

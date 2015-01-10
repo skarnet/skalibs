@@ -19,5 +19,6 @@ int unixmessage_unput_and_maybe_drop (unixmessage_sender_t *b, int drop)
   }
   b->data.len = start->left ;
   genalloc_setlen(int, &b->fds, start->right) ;
+  genalloc_setlen(diuint, &b->offsets, n-1) ;
   return 1 ;
 }
