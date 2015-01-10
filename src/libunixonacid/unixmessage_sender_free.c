@@ -9,15 +9,18 @@
 
 void unixmessage_sender_free (unixmessage_sender_t *b)
 {
-  unsigned int i = genalloc_s(diuint, &b->offsets)[b->head].right ;
   unsigned int n = genalloc_len(int, &b->fds) ;
-  for (; i < n ; i++)
+  if (n)
   {
-    register int fd = genalloc_s(int, &b->fds)[i] ;
-    if (fd < 0) fd_close(-(fd+1)) ;
+    unsigned int i = genalloc_s(diuint, &b->offsets)[b->head].right ;
+    for (; i < n ; i++)
+    {
+      register int fd = genalloc_s(int, &b->fds)[i] ;
+      if (fd < 0) fd_close(-(fd+1)) ;
 #ifdef SKALIBS_HASANCILAUTOCLOSE
-    else fd_close(fd) ;
+      else fd_close(fd) ;
 #endif
+    }
   }
   genalloc_free(diuint, &b->offsets) ;
   genalloc_free(int, &b->fds) ;
