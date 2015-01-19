@@ -43,4 +43,7 @@ extern void sig_pause (void) ;
 extern void sig_shield (void) ;
 extern void sig_unshield (void) ;
 
+extern char const *sig_name (int) ;
+extern int sig_number (char const *) ;
+
 #endif

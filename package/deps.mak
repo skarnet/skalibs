@@ -55,8 +55,9 @@ src/include/skalibs/unirandomegd.h: src/include/skalibs/unirandom.h
 src/include/skalibs/unisurf.h: src/include/skalibs/unirandom.h
 src/include/skalibs/unix-timed.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
 src/include/skalibs/unix-transactional.h: src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
+src/include/skalibs/unixconnection.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/unixmessage.h: src/include/skalibs/buffer.h src/include/skalibs/cbuffer.h src/include/skalibs/gccattributes.h src/include/skalibs/genalloc.h src/include/skalibs/siovec.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h
-src/include/skalibs/unixonacid.h: src/include/skalibs/kolbak.h src/include/skalibs/skaclient.h src/include/skalibs/unix-timed.h src/include/skalibs/unix-transactional.h src/include/skalibs/unixmessage.h
+src/include/skalibs/unixonacid.h: src/include/skalibs/kolbak.h src/include/skalibs/skaclient.h src/include/skalibs/unix-timed.h src/include/skalibs/unix-transactional.h src/include/skalibs/unixconnection.h src/include/skalibs/unixmessage.h
 src/include/skalibs/webipc.h: src/include/skalibs/djbunix.h src/include/skalibs/tai.h
 src/libdatastruct/avlnode-internal.h: src/include/skalibs/avlnode.h
 src/librandom/random-internal.h: src/include/skalibs/gccattributes.h src/include/skalibs/rrandom.h src/include/skalibs/surf.h src/include/skalibs/unirandom.h
@@ -475,11 +476,14 @@ src/libstddjb/sig_block.o src/libstddjb/sig_block.lo: src/libstddjb/sig_block.c 
 src/libstddjb/sig_blocknone.o src/libstddjb/sig_blocknone.lo: src/libstddjb/sig_blocknone.c src/include/skalibs/sig.h
 src/libstddjb/sig_blockset.o src/libstddjb/sig_blockset.lo: src/libstddjb/sig_blockset.c src/include/skalibs/sig.h
 src/libstddjb/sig_catch.o src/libstddjb/sig_catch.lo: src/libstddjb/sig_catch.c src/include/skalibs/sig.h
+src/libstddjb/sig_name.o src/libstddjb/sig_name.lo: src/libstddjb/sig_name.c src/libstddjb/sig-internal.h src/include/skalibs/sig.h
+src/libstddjb/sig_number.o src/libstddjb/sig_number.lo: src/libstddjb/sig_number.c src/include/skalibs/bytestr.h src/libstddjb/sig-internal.h src/include/skalibs/sig.h
 src/libstddjb/sig_pause.o src/libstddjb/sig_pause.lo: src/libstddjb/sig_pause.c src/include/skalibs/sig.h
 src/libstddjb/sig_push.o src/libstddjb/sig_push.lo: src/libstddjb/sig_push.c src/include/skalibs/sig.h
 src/libstddjb/sig_restoreto.o src/libstddjb/sig_restoreto.lo: src/libstddjb/sig_restoreto.c src/include/skalibs/sig.h
 src/libstddjb/sig_shield.o src/libstddjb/sig_shield.lo: src/libstddjb/sig_shield.c src/include/skalibs/sig.h
 src/libstddjb/sig_stack.o src/libstddjb/sig_stack.lo: src/libstddjb/sig_stack.c src/include/skalibs/nsig.h src/include/skalibs/sig.h
+src/libstddjb/sig_table.o src/libstddjb/sig_table.lo: src/libstddjb/sig_table.c src/libstddjb/sig-internal.h
 src/libstddjb/sig_unblock.o src/libstddjb/sig_unblock.lo: src/libstddjb/sig_unblock.c src/include/skalibs/sig.h
 src/libstddjb/sig_unshield.o src/libstddjb/sig_unshield.lo: src/libstddjb/sig_unshield.c src/include/skalibs/sig.h
 src/libstddjb/sigfpe.o src/libstddjb/sigfpe.lo: src/libstddjb/sigfpe.c src/include/skalibs/segfault.h
@@ -745,6 +749,9 @@ src/libunixonacid/timed_flush.o src/libunixonacid/timed_flush.lo: src/libunixona
 src/libunixonacid/timed_get.o src/libunixonacid/timed_get.lo: src/libunixonacid/timed_get.c src/include/skalibs/allreadwrite.h src/include/skalibs/functypes.h src/include/skalibs/iopause.h src/include/skalibs/tai.h src/include/skalibs/unix-timed.h
 src/libunixonacid/timed_getln.o src/libunixonacid/timed_getln.lo: src/libunixonacid/timed_getln.c src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h src/include/skalibs/unix-timed.h
 src/libunixonacid/timed_getlnmax.o src/libunixonacid/timed_getlnmax.lo: src/libunixonacid/timed_getlnmax.c src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/skamisc.h src/include/skalibs/tai.h src/include/skalibs/unix-timed.h
+src/libunixonacid/unixconnection_free.o src/libunixonacid/unixconnection_free.lo: src/libunixonacid/unixconnection_free.c src/include/skalibs/unixconnection.h src/include/skalibs/unixmessage.h
+src/libunixonacid/unixconnection_init.o src/libunixonacid/unixconnection_init.lo: src/libunixonacid/unixconnection_init.c src/include/skalibs/unixconnection.h src/include/skalibs/unixmessage.h
+src/libunixonacid/unixconnection_zero.o src/libunixonacid/unixconnection_zero.lo: src/libunixonacid/unixconnection_zero.c src/include/skalibs/unixconnection.h
 src/libunixonacid/unixmessage_bits_closeall.o src/libunixonacid/unixmessage_bits_closeall.lo: src/libunixonacid/unixmessage_bits_closeall.c src/include/skalibs/bitarray.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_bits_closenone.o src/libunixonacid/unixmessage_bits_closenone.lo: src/libunixonacid/unixmessage_bits_closenone.c src/include/skalibs/bitarray.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_drop.o src/libunixonacid/unixmessage_drop.lo: src/libunixonacid/unixmessage_drop.c src/include/skalibs/djbunix.h src/include/skalibs/unixmessage.h
