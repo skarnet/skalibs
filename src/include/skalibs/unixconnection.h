@@ -13,7 +13,7 @@ struct unixconnection_s
   char mainbuf[UNIXMESSAGE_BUFSIZE] ;
   char auxbuf[UNIXMESSAGE_AUXBUFSIZE] ;
 } ;
-#define UNIXCONNECTION_ZERO { .out = UNIXMESSAGE_SENDER_ZERO, .in = UNIXMESSAGE_RECEIVER_ZERO } ;
+#define UNIXCONNECTION_ZERO { .out = UNIXMESSAGE_SENDER_ZERO, .in = UNIXMESSAGE_RECEIVER_ZERO }
 extern unixconnection_t const unixconnection_zero ;
 
 extern void unixconnection_init (unixconnection_t *, int, int) ;
