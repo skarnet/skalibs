@@ -73,7 +73,7 @@ extern int avltreen_delete (avltreen *, void const *) ;
 #define avltreeb_minnode(t) avltreeb_extremenode((t), 0)
 #define avltreeb_maxnode(t) avltreeb_extremenode((t), 1)
 
-#define avltreeb_extreme(t, h, data) avlnode_extremenode(avltreeb_nodes(t), avltreeb_totalsize(t), avltreeb_root(t), h, data)
+#define avltreeb_extreme(t, h, data) avlnode_extreme(avltreeb_nodes(t), avltreeb_totalsize(t), avltreeb_root(t), h, data)
 #define avltreeb_min(t, data) avltreeb_extreme((t), 0, data)
 #define avltreeb_max(t, data) avltreeb_extreme((t), 1, data)
 
