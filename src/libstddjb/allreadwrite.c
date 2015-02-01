@@ -9,7 +9,6 @@ unsigned int allreadwrite (iofunc_t_ref op, int fd, register char *buf, register
   while (len)
   {
     register int w = (*op)(fd, buf, len) ;
-    if (!w) errno = EPIPE ;
     if (w <= 0) break ;
     written += w ;
     buf += w ;
