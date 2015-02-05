@@ -5,20 +5,20 @@
 
 #include <skalibs/uint32.h>
 #include <skalibs/diuint32.h>
+#include <skalibs/allreadwrite.h>
 #include <skalibs/genalloc.h>
 #include <skalibs/buffer.h>
 
 typedef struct cdb_make cdb_make, *cdb_make_ref ;
 struct cdb_make
 {
-  char buf[BUFFER_OUTSIZE] ;
-  genalloc hplist ; /* diuint32 */
-  buffer b ;
+  genalloc hplist ; /* array of diuint32 */
   uint32 pos ;
-  int fd ;
+  buffer b ;
+  char buf[BUFFER_OUTSIZE] ;
 } ;
 
-#define CDB_MAKE_ZERO { .buf = "", .hplist = GENALLOC_ZERO, .b = BUFFER_INIT(&buffer_write, -1, 0, 0), .pos = 2048, .fd = -1 }
+#define CDB_MAKE_ZERO { .hplist = GENALLOC_ZERO, .pos = 2048, .b = BUFFER_INIT(&fd_writesv, -1, 0, 0) }
 
 extern int cdb_make_start (struct cdb_make *, int) ;
 extern int cdb_make_add (struct cdb_make *, char const *, unsigned int, char const *, unsigned int) ;

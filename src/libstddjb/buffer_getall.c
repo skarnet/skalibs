@@ -7,12 +7,13 @@
 int buffer_getall (buffer *b, char *buf, unsigned int len, unsigned int *w)
 {
   if (*w > len) return (errno = EINVAL, -1) ;
-  *w += buffer_getnofill(b, buf + *w, len - *w) ;
-  while (*w < len)
+  for (;;)
   {
-    register int r = sanitize_read(buffer_fill(b)) ;
-    if (r <= 0) return r ;
+    register int r ;
     *w += buffer_getnofill(b, buf + *w, len - *w) ;
+    if (*w >= len) break ;
+    r = sanitize_read(buffer_fill(b)) ;
+    if (r <= 0) return r ;
   }
   return 1 ;
 }

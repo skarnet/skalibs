@@ -10,7 +10,7 @@ unsigned int allreadwritev (iovfunc_t_ref op, int fd, siovec_t const *v, unsigne
   siovec_t vv[vlen] ;
   for (; written < vlen ; written++) vv[written] = v[written] ;
   written = 0 ;
-  while (siovec_len(v, vlen))
+  while (siovec_len(vv, vlen))
   {
     register int w = (*op)(fd, vv, vlen) ;
     if (w <= 0) break ;

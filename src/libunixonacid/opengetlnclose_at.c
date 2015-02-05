@@ -1,6 +1,7 @@
 /* ISC license. */
 
 #include <errno.h>
+#include <skalibs/allreadwrite.h>
 #include <skalibs/buffer.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/djbunix.h>
@@ -15,7 +16,7 @@ int opengetlnclose_at (int dirfd, char const *fn, stralloc *sa, int sep)
   register int e ;
   int fd = open_readatb(dirfd, fn) ;
   if (fd < 0) return -1 ;
-  buffer_init(&b, &buffer_read, fd, buf, BUFFER_INSIZE) ;
+  buffer_init(&b, &fd_readsv, fd, buf, BUFFER_INSIZE) ;
   r = skagetln(&b, sa, sep) ;
   e = errno ;
   fd_close(fd) ;

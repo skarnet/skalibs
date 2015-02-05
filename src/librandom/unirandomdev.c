@@ -1,6 +1,7 @@
 /* ISC license. */
 
 #include <errno.h>
+#include <skalibs/allreadwrite.h>
 #include <skalibs/buffer.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/unirandom.h>
@@ -17,7 +18,7 @@ int unirandomdev_sinit (union unirandominfo *u, char const *file)
     errno = e ;
     return 0 ;
   }
-  buffer_init(&u->device.b, &buffer_read, fd, u->device.buf, RANDOMBUF_BUFSIZE) ;
+  buffer_init(&u->device.b, &fd_readsv, fd, u->device.buf, RANDOMBUF_BUFSIZE) ;
   u->device.nb = 1 ;
   return 1 ;
 }

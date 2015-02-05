@@ -4,18 +4,16 @@
 #define BUFFER_H
 
 #include <skalibs/gccattributes.h>
+#include <skalibs/allreadwrite.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/cbuffer.h>
-#include <skalibs/diuint.h>
+#include <skalibs/functypes.h>
 #include <skalibs/siovec.h>
-
-typedef int buffer_io_func_t (int, siovec_t const *, unsigned int) ;
-typedef buffer_io_func_t *buffer_io_func_t_ref ;
 
 typedef struct buffer_s buffer, buffer_t, *buffer_ref, *buffer_t_ref ;
 struct buffer_s
 {
-  buffer_io_func_t *op ;
+  iovfunc_t_ref op ;
   int fd ;
   cbuffer_t c ;
 } ;
@@ -34,7 +32,7 @@ struct buffer_s
 #define BUFFER_OUTSIZE_SMALL 512
 
 #define BUFFER_INIT(f, d, buf, len) { .op = (f), .fd = (d), .c = CBUFFER_INIT(buf, len) }
-extern int buffer_init (buffer *, buffer_io_func_t *, int, char *, unsigned int) ;
+extern int buffer_init (buffer *, iovfunc_t_ref, int, char *, unsigned int) ;
 
 
  /* Writing */
@@ -50,7 +48,7 @@ extern int buffer_putvallnoflush (buffer *, siovec_t const *, unsigned int) ;
 #define buffer_putsallnoflush(b, s) buffer_putallnoflush(b, (s), str_len(s))
 
 extern int buffer_putall (buffer *, char const *, unsigned int, unsigned int *) ;
-extern int buffer_putvall (buffer *, siovec_t const *, unsigned int, diuint *) ;
+extern int buffer_putvall (buffer *, siovec_t const *, unsigned int, unsigned int *) ;
 #define buffer_putsall(b, s, w) buffer_putall(b, s, str_len(s), w)
 
 #define buffer_putallflush(b, s, len, w) (buffer_putall(b, s, len, w) && buffer_flush(b))
@@ -68,7 +66,6 @@ extern int buffer_putvflush (buffer *, siovec_t const *, unsigned int) ;
 #define buffer_unput(b, n) cbuffer_unput(&(b)->c, n)
 #define buffer_wpeek(b, v) cbuffer_wpeek(&(b)->c, v)
 #define buffer_wseek(b, n) cbuffer_wseek(&(b)->c, n)
-extern buffer_io_func_t buffer_write ;
 
 
  /* Reading */
@@ -82,7 +79,7 @@ extern int buffer_getallnofill (buffer *, char *, unsigned int) ;
 extern int buffer_getvallnofill (buffer *, siovec_t const *, unsigned int) ;
 
 extern int buffer_getall (buffer *, char *, unsigned int, unsigned int *) ;
-extern int buffer_getvall (buffer *, siovec_t const *, unsigned int, diuint *) ;
+extern int buffer_getvall (buffer *, siovec_t const *, unsigned int, unsigned int *) ;
 
 extern int buffer_get (buffer *, char *, unsigned int) ;
 extern int buffer_getv (buffer *, siovec_t const *, unsigned int) ;
@@ -90,7 +87,6 @@ extern int buffer_getv (buffer *, siovec_t const *, unsigned int) ;
 #define buffer_unget(b, n) cbuffer_unget(&(b)->c, n)
 #define buffer_rpeek(b, n) cbuffer_rpeek(&(b)->c, n)
 #define buffer_rseek(b, n) cbuffer_rseek(&(b)->c, n)
-extern buffer_io_func_t buffer_read ;
 
 
  /* Utility */
@@ -108,7 +104,9 @@ extern int buffer_getfd (buffer const *) gccattr_pure ;
 
  /* Globals */
 
-extern buffer_io_func_t buffer_flush1read ;
+#define buffer_read fd_readsv
+#define buffer_write fd_writesv
+extern iovfunc_t buffer_flush1read ;
 
 extern buffer buffer_0_ ;
 #define buffer_0 (&buffer_0_)

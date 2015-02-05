@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <skalibs/gccattributes.h>
 #include <skalibs/uint64.h>
+#include <skalibs/siovec.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/envalloc.h>
 #include <skalibs/env.h>        /* compatibility */
@@ -121,6 +122,18 @@ extern int openwritenclose_unsafe_internal (char const *, char const *, unsigned
 #define openwritenclose_suffix_devino(f, s, n, t, dev, ino) openwritenclose_suffix_internal(f, s, n, dev, (ino), 0, t)
 #define openwritenclose_suffix_devino_sync(f, s, n, t, dev, ino) openwritenclose_suffix_internal(f, s, n, dev, (ino), 1, t)
 extern int openwritenclose_suffix_internal (char const *, char const *, unsigned int, uint64 *, uint64 *, int, char const *) ;
+
+#define openwritevnclose_unsafe(f, v, n) openwritevnclose_unsafe_internal(f, v, (n), 0, 0, 0)
+#define openwritevnclose_unsafe_sync(f, v, n) openwritevnclose_unsafe_internal(f, v, (n), 0, 0, 1)
+#define openwritevnclose_unsafe_devino(f, v, n, dev, ino) openwritevnclose_unsafe_internal(f, v, n, dev, (ino), 0)
+#define openwritevnclose_unsafe_devino_sync(f, v, n, dev, ino) openwritevnclose_unsafe_internal(f, v, n, dev, (ino), 1)
+extern int openwritevnclose_unsafe_internal (char const *, siovec_t const *, unsigned int, uint64 *, uint64 *, int) ;
+
+#define openwritevnclose_suffix(f, v, n, t) openwritevnclose_suffix_internal(f, v, n, 0, 0, 0, t)
+#define openwritevnclose_suffix_sync(f, v, n, t) openwritevnclose_suffix_internal(f, v, n, 0, 0, 1, t)
+#define openwritevnclose_suffix_devino(f, v, n, t, dev, ino) openwritevnclose_suffix_internal(f, v, n, dev, (ino), 0, t)
+#define openwritevnclose_suffix_devino_sync(f, v, n, t, dev, ino) openwritevnclose_suffix_internal(f, v, n, dev, (ino), 1, t)
+extern int openwritevnclose_suffix_internal (char const *, siovec_t const *, unsigned int, uint64 *, uint64 *, int, char const *) ;
 
 extern int rm_rf (char const *) ;
 extern int rm_rf_tmp (char const *, stralloc *) ;

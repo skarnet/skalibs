@@ -2,14 +2,23 @@
 
 #include <errno.h>
 #include <skalibs/buffer.h>
-#include <skalibs/diuint.h>
 #include <skalibs/siovec.h>
 
-int buffer_putvall (buffer *b, siovec_t const *v, unsigned int n, diuint *w)
+int buffer_putvall (buffer *b, siovec_t const *v, unsigned int n, unsigned int *written)
 {
-  if (w->left > n || (w->left == n && w->right) || w->right >= v[w->left].len)
-    return (errno = EINVAL, 0) ;
-  for (; w->left < n ; w->left++, w->right = 0)
-    if (!buffer_putall(b, v[w->left].s, v[w->left].len, &w->right)) return 0 ;
-  return 1 ;
+  unsigned int len = siovec_len(v, n) ;
+  unsigned int w = n ;
+  siovec_t vv[n] ;
+  if (*written > len) return (errno = EINVAL, 0) ;
+  while (w--) vv[w] = v[w] ;
+  w = *written ;
+  for (;;)
+  {
+    siovec_seek(vv, n, w) ;
+    w = buffer_putvnoflush(b, vv, n) ;
+    *written += w ;
+    if (*written >= len) return 1 ;
+    buffer_flush(b) ;
+    if (buffer_isfull(b)) return 0 ;
+  }
 }

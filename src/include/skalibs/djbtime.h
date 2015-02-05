@@ -23,6 +23,7 @@ extern int sysclock_from_utc (uint64 *) ;
 
 #define NTP_OFFSET 2208988800UL
 extern int ntp_from_tain (uint64 *, tain_t const *) ;
+#define ntp_from_tain_g(u) ntp_from_tain((u), &STAMP)
 extern int tain_from_ntp (tain_t *, uint64) ;
 
 
@@ -55,6 +56,7 @@ extern int localtm_from_tai (struct tm *, tai_t const *, int) ;
 extern int tai_from_localtm (tai_t *, struct tm const *) ;
 
 extern int localtmn_from_tain (localtmn_t *, tain_t const *, int) ;
+#define localtmn_from_tain_g(l, h) localtmn_from_tain(l, &STAMP, h)
 extern int tain_from_localtmn (tain_t *, localtmn_t const *) ;
 extern int localtmn_from_sysclock (localtmn_t *, tain_t const *, int) ;
 extern int sysclock_from_localtmn (tain_t *, localtmn_t const *) ;
