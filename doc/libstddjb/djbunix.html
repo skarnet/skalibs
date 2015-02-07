@@ -192,7 +192,7 @@ Returns 1 if it succeeds and 0 if it fails.
 
 <p>
 <code> int fd_sanitize (void) </code> <br />
-Ensures stdin and stdout are open. If one of those
+Ensures stdin, stdout and stderr are open. If one of those
 file descriptors was closed, it now points to <tt>/dev/null</tt>.
 Returns 1 if it succeeds and 0 if it fails.
 </p>
@@ -296,19 +296,6 @@ Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
 <code> int open_write (char const *file) </code> <br />
 Opens <em>file</em> in write-only, non-blocking mode.
 Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
-</p>
-
-<h3> Seek operations </h3>
-
-<p>
-<code> long seek_cur (int fd) </code> <br />
-Returns the current file offset for descriptor <em>fd</em>.
-</p>
-
-<p>
-<code> int seek_set (int fd, long pos) </code> <br />
-Sets the current file offset for <em>fd</em> to <em>pos</em>.
-Returns 0 if it succeeds, or -1 (and sets errno) if it fails.
 </p>
 
 <h3> Privilege management </h3>
@@ -645,6 +632,38 @@ int openwritenclose_suffix_devino (char const *file, char const *s, unsigned int
 int openwritenclose_suffix_devino_sync (char const *file, char const *s, unsigned int len, uint64 *dev, uint64 *ino, char const *suffix) </code> <br />
 Trivial shortcuts around <tt>openwritenclose_suffix_internal()</tt>. The
 reader can easily figure out what they do.
+</p>
+
+<p>
+<code> int openwritevnclose_unsafe_internal (char const *file, siovec_t const *v, unsigned int vlen, uint64 *dev, uint64 *ino, unsigned char dosync) </code> <br />
+Like <tt>openwritenclose_unsafe_internal</tt>, but the content to
+write is taken from a
+<a href="siovec.html">siovec_t</a> scatter/gather array of <em>vlen</em>
+elements instead of a single string.
+</p>
+
+<p>
+<code> int openwritevnclose_unsafe (char const *file, siovec_t const *v, unsigned int vlen) <br />
+int openwritevnclose_unsafe_sync (char const *file, siovec_t const *v, unsigned int vlen) <br />
+int openwritevnclose_unsafe_devino (char const *file, siovec_t const *v, unsigned int vlen, uint64 *dev, uint64 *ino) <br />
+int openwritevnclose_unsafe_devino_sync (char const *file, siovec_t const *v, unsigned int vlen, uint64 *dev, uint64 *ino) </code> <br />
+Trivial wrappers around <tt>openwritevnclose_unsafe_internal()</tt>.
+</p>
+
+<p>
+<code> int openwritevnclose_suffix_internal (char const *file, siovec_t const *v, unsigned int vlen, uint64 *dev, uint64 *ino, unsigned char dosync, char const *suffix) </code> <br />
+Like <tt>openwritenclose_suffix_internal</tt>, but the content to
+write is taken from a
+<a href="siovec.html">siovec_t</a> scatter/gather array of <em>vlen</em>
+elements instead of a single string.
+</p>
+
+<p>
+<code> int openwritenclose_suffix (char const *file, char const *s, unsigned int len, char const *suffix) <br />
+int openwritenclose_suffix_sync (char const *file, char const *s, unsigned int len, char const *suffix) <br />
+int openwritenclose_suffix_devino (char const *file, char const *s, unsigned int len, uint64 *dev, uint64 *ino, char const *suffix) <br />
+int openwritenclose_suffix_devino_sync (char const *file, char const *s, unsigned int len, uint64 *dev, uint64 *ino, char const *suffix) </code> <br />
+Trivial wrappers around <tt>openwritevnclose_suffix_internal()</tt>.
 </p>
 
 <h3> Filesystem deletion </h3>
