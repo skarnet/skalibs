@@ -3,6 +3,7 @@
 #ifndef DJBTIME_INTERNAL_H
 #define DJBTIME_INTERNAL_H
 
+#include <skalibs/config.h>
 #include <skalibs/uint64.h>
 
 

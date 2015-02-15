@@ -66,7 +66,7 @@ src/libstdcrypto/md5-internal.h: src/include/skalibs/md5.h src/include/skalibs/u
 src/libstdcrypto/sha1-internal.h: src/include/skalibs/sha1.h src/include/skalibs/uint32.h
 src/libstdcrypto/sha256-internal.h: src/include/skalibs/sha256.h src/include/skalibs/uint32.h
 src/libstddjb/alloc-internal.h: src/include/skalibs/alloc.h src/include/skalibs/sysdeps.h
-src/libstddjb/djbtime-internal.h: src/include/skalibs/uint64.h
+src/libstddjb/djbtime-internal.h: src/include/skalibs/config.h src/include/skalibs/uint64.h
 src/libstddjb/fmtscan-internal.h: src/include/skalibs/bytestr.h src/include/skalibs/fmtscan.h
 src/libstddjb/selfpipe-internal.h: src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
 src/libunixonacid/skaclient-internal.h: src/include/skalibs/kolbak.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
