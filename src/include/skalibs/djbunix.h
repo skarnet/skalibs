@@ -83,7 +83,7 @@ extern pid_t waitpid_nointr (pid_t, int *, int) ;
 #define wait_nohang(wstat) waitpid_nointr(-1, (wstat), WNOHANG)
 extern pid_t wait_pid_nohang (pid_t, int *) ;
 extern int wait_pids_nohang (pid_t const *, unsigned int, int *) ;
-#define wait_status(w) (WIFSIGNALED(w) ? 126 : WEXITSTATUS(w))
+#define wait_status(w) (WIFSIGNALED(w) ? 256 : WEXITSTATUS(w))
 extern unsigned int wait_reap (void) ;
 extern int waitn (pid_t *, unsigned int) ;
 extern int waitn_reap (pid_t *, unsigned int) ;
