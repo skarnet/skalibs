@@ -11,4 +11,5 @@ void unixmessage_sender_init (unixmessage_sender_t *b, int fd)
   b->fds = genalloc_zero ;
   b->offsets = genalloc_zero ;
   b->head = 0 ;
+  b->shorty = 0 ;
 }

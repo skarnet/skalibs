@@ -8,6 +8,7 @@
 #include <errno.h>
 #include <skalibs/uint16.h>
 #include <skalibs/uint32.h>
+#include <skalibs/bytestr.h>
 #include <skalibs/diuint.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/genalloc.h>
@@ -82,6 +83,7 @@ int unixmessage_sender_flush (unixmessage_sender_t *b)
     {
       struct cmsghdr *cp = CMSG_FIRSTHDR(&hdr) ;
       register unsigned int i = 0 ;
+      byte_zero(ancilbuf, sizeof(ancilbuf)) ;
       cp->cmsg_level = SOL_SOCKET ;
       cp->cmsg_type = SCM_RIGHTS ;
       cp->cmsg_len = CMSG_LEN(nfds * sizeof(int)) ;
