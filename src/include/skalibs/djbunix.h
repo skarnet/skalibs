@@ -142,6 +142,9 @@ extern int rm_rf_in_tmp (stralloc *, unsigned int) ; /* caution ! */
 extern int rmstar (char const *) ;
 extern int rmstar_tmp (char const *, stralloc *) ;
 
+extern int hiercopy (char const *, char const *) ;
+extern int hiercopy_tmp (char const *, char const *, stralloc *) ;
+
 
  /* Simple spawn functions with 0 or 1 communicating fds. */
 

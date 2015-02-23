@@ -708,6 +708,23 @@ using *<em>tmp</em> as heap-allocated temporary space.
 Returns 0 if it succeeds or -1 (and sets errno) if it fails.
 </p>
 
+<h3> Filesystem copy </h3>
+
+<p>
+<code> int hiercopy_tmp (char const *src, char const *dst, stralloc *tmp) </code> <br />
+Recursively copies the filesystem hierarchy at <em>src</em> into
+<em>dst</em>, preserving modes, and also preserving the uids/gids if the
+process is running as the super-user.
+Uses *<em>tmp</em> as heap-allocated temporary space.
+Returns 1 if it succeeds or 0 (and sets errno) if it fails.
+</p>
+
+<p>
+<code> int hiercopy (char const *src, char const *dst) </code> <br />
+Same as above, using the <tt>satmp</tt> global stralloc as
+heap-allocated temporary space.
+</p>
+
 <h3> Variable length wrappers around Single Unix calls </h3>
 
 <p>
