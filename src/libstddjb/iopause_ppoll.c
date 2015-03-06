@@ -20,7 +20,7 @@ int iopause_ppoll (iopause_fd *x, unsigned int len, tain_t const *deadline, tain
     tain_sub(&delta, deadline, stamp) ;
     if (!timespec_from_tain_relative(&ts, &delta))
     {
-      if (errno != ERANGE) return -1 ;
+      if (errno != EOVERFLOW) return -1 ;
       else deadline = 0 ;
     }
   }

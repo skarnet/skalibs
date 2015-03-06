@@ -23,7 +23,7 @@ int iopause_select (iopause_fd *x, unsigned int len, tain_t const *deadline, tai
     tain_sub(&delta, deadline, stamp) ;
     if (!timeval_from_tain_relative(&tv, &delta))
     {
-      if (errno != ERANGE) return -1 ;
+      if (errno != EOVERFLOW) return -1 ;
       else deadline = 0 ;
     }
   }
