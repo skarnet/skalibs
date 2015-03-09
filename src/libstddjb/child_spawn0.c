@@ -6,6 +6,7 @@
 
 #ifdef SKALIBS_HASPOSIXSPAWN
 
+#include <signal.h>
 #include <spawn.h>
 #include <stdlib.h>
 #include <skalibs/config.h>
@@ -13,13 +14,33 @@
 
 pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const *envp)
 {
-  pid_t pid ;
+  posix_spawnattr_t attr ;
   int e ;
+  pid_t pid ;
   int haspath = !!env_get("PATH") ;
-  if (!haspath && (setenv("PATH", SKALIBS_DEFAULTPATH, 0) < 0)) return 0 ;
-  e = posix_spawnp(&pid, prog, 0, 0, (char *const *)argv, (char *const *)envp) ;
+  e = posix_spawnattr_init(&attr) ;
+  if (e) goto err ;
+  {
+    sigset_t set ;
+    sigemptyset(&set) ;
+    e = posix_spawnattr_setsigmask(&attr, &set) ;
+    if (e) goto errattr ;
+    sigfillset(&set) ;
+    e = posix_spawnattr_setsigdefault(&attr, &set) ;
+    if (e) goto errattr ;
+  }
+  if (!haspath && (setenv("PATH", SKALIBS_DEFAULTPATH, 0) < 0)) { e = errno ; goto errattr ; }
+  e = posix_spawnp(&pid, prog, 0, &attr, (char *const *)argv, (char *const *)envp) ;
   if (!haspath) unsetenv("PATH") ;
-  return e ? (errno = e, 0) : pid ;
+  posix_spawnattr_destroy(&attr) ;
+  if (e) goto err ;
+  return pid ;
+
+ errattr:
+  posix_spawnattr_destroy(&attr) ;
+ err:
+  errno = e ;
+  return 0 ;
 }
 
 #else

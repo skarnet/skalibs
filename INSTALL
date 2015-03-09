@@ -34,7 +34,6 @@ before the "make install" phase. It will shave a few bytes off them.
  See ./configure --help for a list of all available configure options.
 
 
-
 * Environment variables
   ---------------------
 

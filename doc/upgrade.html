@@ -17,6 +17,15 @@
 
 <h1> What has changed in skalibs </h1>
 
+<h2> in 2.3.1.2 </h2>
+
+<ul>
+ <li> The child_spawn* family of functions now resets all signals
+to their default values when spawning a program on systems with
+<a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/posix_spawn.html">posix_spawn()</a>.
+This should not change anything - it's just paranoia. </li>
+</ul>
+
 <h2> in 2.3.1.1 </h2>
 
 <ul>

@@ -28,8 +28,11 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
     sigset_t set ;
     sigemptyset(&set) ;
     e = posix_spawnattr_setsigmask(&attr, &set) ;
+    if (e) goto errattr ;
+    sigfillset(&set) ;
+    e = posix_spawnattr_setsigdefault(&attr, &set) ;
+    if (e) goto errattr ;
   }
-  if (e) goto errattr ;
   e = posix_spawn_file_actions_init(&actions) ;
   if (e) goto errattr ;
   e = posix_spawn_file_actions_adddup2(&actions, p[to & 1], to & 1) ;
