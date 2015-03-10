@@ -90,8 +90,8 @@ but both ends of the created pipe are in non-blocking mode <em>and</em> close-on
 
 <p>
 <code> int fd_copy (int to, int from) </code> <br />
-Copies the open fd <em>from</em> to number <em>to</em>. <em>to</em>
-must not refer to an already open fd.
+Copies the open fd <em>from</em> to number <em>to</em>. If <em>to</em>
+was already open, it is closed before the copy.
 Returns 0 if it succeeds, or -1 (and sets errno) if it fails.
 </p>
 
@@ -104,8 +104,8 @@ Returns 0 if it succeeds, or -1 (and sets errno) if it fails.
 
 <p>
 <code> int fd_move (int to, int from) </code> <br />
-Moves the open fd <em>from</em> to number <em>to</em>. <em>to</em>
-must not refer to an already open fd, unless it's equal to <em>from</em>.
+Moves the open fd <em>from</em> to number <em>to</em>. If <em>to</em>
+was already open, it is closed before the move.
 Returns 0 if it succeeds, or -1 (and sets errno) if it fails.
 </p>
 
