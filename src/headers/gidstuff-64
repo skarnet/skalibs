@@ -3,5 +3,6 @@
 #define GID_FMT UINT64_FMT
 #define gid_fmt(s, u) uint64_fmt(s, u)
 #define gid_scan(s, u) uint64_scan(s, u)
+#define gid0_scan(s, u) uint640_scan(s, u)
 #define gid_fmtlist(s, tab, n) uint64_fmtlist(s, tab, n)
 #define gid_scanlist(tab, max, s, num) uint64_scanlist(tab, max, s, num)
