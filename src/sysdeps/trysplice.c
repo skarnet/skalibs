@@ -10,7 +10,6 @@
 
 int main (void)
 {
-  char buf[N] ;
   int p[2] ;
   int fd ;
   if (pipe(p) < 0) return 111 ;

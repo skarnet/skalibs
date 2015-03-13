@@ -49,7 +49,6 @@ static int unixmessage_receiver_fill (unixmessage_receiver_t *b)
     .msg_control = b->fds_ok & 1 ? ancilbuf : 0,
     .msg_controllen = b->fds_ok & 1 ? sizeof(ancilbuf) : 0
   } ;
-  unsigned int auxlen ;
   int r = -1 ;
   if (cbuffer_isfull(&b->mainb) || ((b->fds_ok & 1) && cbuffer_isfull(&b->auxb)))
     return (errno = ENOBUFS, -1) ;
@@ -68,6 +67,7 @@ static int unixmessage_receiver_fill (unixmessage_receiver_t *b)
     struct cmsghdr *c = CMSG_FIRSTHDR(&msghdr) ;
     if (c)
     {
+      unsigned int auxlen ;
       if (c->cmsg_level != SOL_SOCKET
        || c->cmsg_type != SCM_RIGHTS) return (errno = EPROTO, -1) ;
       auxlen = (unsigned int)(c->cmsg_len - (CMSG_DATA(c) - (unsigned char *)c)) ;

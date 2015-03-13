@@ -57,7 +57,7 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
   for (i = 0 ; i < n ; i++)
     if ((ndelay_on(p[i][i & 1]) < 0) || (coe(p[i][i & 1]) < 0))
     {
-      e = errno ; goto errsp ;
+      e = errno ; goto errp ;
     }
   for (i = 2 ; i < n ; i++)
   {
@@ -183,8 +183,8 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
  errsp0:
   fd_close(syncpipe[0]) ;
 #endif
-  i = n ;
  errp:
+  i = n ;
   while (i--)
   {
     fd_close(p[i][1]) ;

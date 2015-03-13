@@ -14,7 +14,7 @@ unsigned int localtmn_scan (char const *s, localtmn_t *l)
   {
     register unsigned int b = uint32_scan(s, &m.nano) ;
     if (!b) return 0 ;
-    s += b ; n += b ;
+    n += b ;
   }
   *l = m ;
   return n ;

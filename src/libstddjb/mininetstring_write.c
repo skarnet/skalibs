@@ -8,7 +8,7 @@
 
 int mininetstring_write (int fd, char const *s, uint16 len, uint32 *w)
 {
-  if (!w)
+  if (!*w)
   {
     char pack[2] ;
     uint16_pack_big(pack, len) ;
