@@ -17,7 +17,7 @@ void sha512_final (SHA512Schedule *ctx, char *digest)
     sha512_transform(ctx, ctx->buf) ;
     pad = 0 ;
   }
-  byte_zero(ctx + pad, 120 - pad) ;
+  byte_zero(ctx->buf + pad, 120 - pad) ;
   uint64_pack_big((char *)ctx->buf + 120, ctx->len << 3) ;
   sha512_transform(ctx, ctx->buf) ;
 
