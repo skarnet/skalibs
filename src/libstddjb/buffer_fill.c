@@ -2,7 +2,6 @@
 
 #include <errno.h>
 #include <skalibs/buffer.h>
-#include <skalibs/cbuffer.h>
 
 int buffer_fill (buffer *b)
 {
@@ -12,6 +11,6 @@ int buffer_fill (buffer *b)
   buffer_wpeek(b, v) ;
   r = (*b->op)(b->fd, v, 2) ;
   if (r <= 0) return r ;
-  cbuffer_WSEEK(&b->c, r) ;
+  buffer_wseek(b, r) ;
   return r ;
 }
