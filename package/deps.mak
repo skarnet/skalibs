@@ -37,13 +37,14 @@ src/include/skalibs/random.h: src/include/skalibs/gccattributes.h src/include/sk
 src/include/skalibs/rrandom.h: src/include/skalibs/unirandom.h
 src/include/skalibs/sha1.h: src/include/skalibs/uint32.h
 src/include/skalibs/sha256.h: src/include/skalibs/uint32.h
+src/include/skalibs/sha512.h: src/include/skalibs/uint64.h
 src/include/skalibs/sig.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/siovec.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/skaclient.h: src/include/skalibs/kolbak.h src/include/skalibs/siovec.h src/include/skalibs/tai.h src/include/skalibs/uint32.h src/include/skalibs/unixmessage.h
 src/include/skalibs/skalibs.h: src/include/skalibs/biguint.h src/include/skalibs/datastruct.h src/include/skalibs/random.h src/include/skalibs/stdcrypto.h src/include/skalibs/stddjb.h src/include/skalibs/unixonacid.h
 src/include/skalibs/skamisc.h: src/include/skalibs/buffer.h src/include/skalibs/stralloc.h
 src/include/skalibs/socket.h: src/include/skalibs/djbunix.h src/include/skalibs/gccattributes.h src/include/skalibs/tai.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/webipc.h
-src/include/skalibs/stdcrypto.h: src/include/skalibs/md5.h src/include/skalibs/rc4.h src/include/skalibs/sha1.h src/include/skalibs/sha256.h
+src/include/skalibs/stdcrypto.h: src/include/skalibs/md5.h src/include/skalibs/rc4.h src/include/skalibs/sha1.h src/include/skalibs/sha256.h src/include/skalibs/sha512.h
 src/include/skalibs/stddjb.h: src/include/skalibs/alloc.h src/include/skalibs/allreadwrite.h src/include/skalibs/bitarray.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/bytestr.h src/include/skalibs/cbuffer.h src/include/skalibs/cdb.h src/include/skalibs/cdb_make.h src/include/skalibs/config.h src/include/skalibs/direntry.h src/include/skalibs/diuint.h src/include/skalibs/diuint32.h src/include/skalibs/djbtime.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/environ.h src/include/skalibs/error.h src/include/skalibs/fmtscan.h src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h src/include/skalibs/genalloc.h src/include/skalibs/genwrite.h src/include/skalibs/getpeereid.h src/include/skalibs/gidstuff.h src/include/skalibs/iobuffer.h src/include/skalibs/iopause.h src/include/skalibs/ip46.h src/include/skalibs/lolstdio.h src/include/skalibs/mininetstring.h src/include/skalibs/netstring.h src/include/skalibs/nsig.h src/include/skalibs/segfault.h src/include/skalibs/selfpipe.h src/include/skalibs/setgroups.h src/include/skalibs/sgetopt.h src/include/skalibs/sig.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/socket.h src/include/skalibs/stralloc.h src/include/skalibs/strerr.h src/include/skalibs/strerr2.h src/include/skalibs/tai.h src/include/skalibs/uint.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h src/include/skalibs/ulong.h src/include/skalibs/ushort.h src/include/skalibs/webipc.h
 src/include/skalibs/stralloc.h: src/include/skalibs/bytestr.h src/include/skalibs/siovec.h
 src/include/skalibs/strerr.h: src/include/skalibs/gccattributes.h
@@ -65,6 +66,7 @@ src/librandom/random-internal.h: src/include/skalibs/gccattributes.h src/include
 src/libstdcrypto/md5-internal.h: src/include/skalibs/md5.h src/include/skalibs/uint32.h
 src/libstdcrypto/sha1-internal.h: src/include/skalibs/sha1.h src/include/skalibs/uint32.h
 src/libstdcrypto/sha256-internal.h: src/include/skalibs/sha256.h src/include/skalibs/uint32.h
+src/libstdcrypto/sha512-internal.h: src/include/skalibs/sha512.h
 src/libstddjb/alloc-internal.h: src/include/skalibs/alloc.h src/include/skalibs/sysdeps.h
 src/libstddjb/djbtime-internal.h: src/include/skalibs/config.h src/include/skalibs/uint64.h
 src/libstddjb/fmtscan-internal.h: src/include/skalibs/bytestr.h src/include/skalibs/fmtscan.h
@@ -189,6 +191,10 @@ src/libstdcrypto/sha256_final.o src/libstdcrypto/sha256_final.lo: src/libstdcryp
 src/libstdcrypto/sha256_init.o src/libstdcrypto/sha256_init.lo: src/libstdcrypto/sha256_init.c src/include/skalibs/sha256.h
 src/libstdcrypto/sha256_transform.o src/libstdcrypto/sha256_transform.lo: src/libstdcrypto/sha256_transform.c src/libstdcrypto/sha256-internal.h src/include/skalibs/uint32.h
 src/libstdcrypto/sha256_update.o src/libstdcrypto/sha256_update.lo: src/libstdcrypto/sha256_update.c src/libstdcrypto/sha256-internal.h src/include/skalibs/sha256.h
+src/libstdcrypto/sha512_final.o src/libstdcrypto/sha512_final.lo: src/libstdcrypto/sha512_final.c src/include/skalibs/bytestr.h src/libstdcrypto/sha512-internal.h src/include/skalibs/sha512.h src/include/skalibs/uint64.h
+src/libstdcrypto/sha512_init.o src/libstdcrypto/sha512_init.lo: src/libstdcrypto/sha512_init.c src/include/skalibs/sha512.h
+src/libstdcrypto/sha512_transform.o src/libstdcrypto/sha512_transform.lo: src/libstdcrypto/sha512_transform.c src/libstdcrypto/sha512-internal.h src/include/skalibs/sha512.h src/include/skalibs/uint64.h
+src/libstdcrypto/sha512_update.o src/libstdcrypto/sha512_update.lo: src/libstdcrypto/sha512_update.c src/include/skalibs/bytestr.h src/libstdcrypto/sha512-internal.h src/include/skalibs/sha512.h
 src/libstddjb/absolutepath.o src/libstddjb/absolutepath.lo: src/libstddjb/absolutepath.c src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/absolutepath_tmp.o src/libstddjb/absolutepath_tmp.lo: src/libstddjb/absolutepath_tmp.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/alloc.o src/libstddjb/alloc.lo: src/libstddjb/alloc.c src/libstddjb/alloc-internal.h src/include/skalibs/alloc.h src/include/skalibs/sysdeps.h

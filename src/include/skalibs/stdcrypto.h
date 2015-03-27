@@ -7,5 +7,6 @@
 #include <skalibs/md5.h>
 #include <skalibs/sha1.h>
 #include <skalibs/sha256.h>
+#include <skalibs/sha512.h>
 
 #endif

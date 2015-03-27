@@ -29,6 +29,7 @@ operations are provided:
   <li> md5 </li>
   <li> sha1 </li>
   <li> sha256 </li>
+  <li> sha512 </li>
 </ul>
 
 <h2> Compiling </h2>
@@ -127,6 +128,25 @@ SHA256 </h3>
   <li> <tt>sha256_final()</tt> computes the digest </li>
 </ul>
 
+<h3> <a name="sha512"></a>
+SHA512 </h3>
+
+<pre>
+  SHA512Schedule ctx ;
+  char const *message ;
+  unsigned int messagelen ;
+  char digest[64] ;
+
+  sha512_init(&amp;ctx) ;
+  sha512_update(&amp;ctx, message, messagelen) ;
+  sha512_final(&amp;ctx, digest) ;
+</pre>
+
+<ul>
+  <li> <tt>sha512_init()</tt> prepares a SHA512Schedule structure for computation </li>
+  <li> <tt>sha512_update()</tt> adds <em>message</em> to the message to be digested </li>
+  <li> <tt>sha512_final()</tt> computes the digest </li>
+</ul>
 
 </body>
 </html>
