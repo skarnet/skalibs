@@ -36,7 +36,7 @@ int socket_accept6_internal (int s, char *ip6, uint16 *port, unsigned int option
     return -1 ;
   }
 #endif
-  byte_copy(ip6, 16, sa.sin6_addr.s6_addr) ;
+  byte_copy(ip6, 16, (char const *)sa.sin6_addr.s6_addr) ;
   uint16_unpack_big((char *)&sa.sin6_port, port) ;
   return fd ;
 }

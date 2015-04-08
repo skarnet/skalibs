@@ -17,7 +17,7 @@ int socket_bind6 (int s, char const *ip6, uint16 port)
   byte_zero(&sa, sizeof sa) ;
   sa.sin6_family = AF_INET6 ;
   uint16_pack_big((char *)&sa.sin6_port, port) ;
-  byte_copy(sa.sin6_addr.s6_addr, 16, ip6) ;
+  byte_copy((char *)sa.sin6_addr.s6_addr, 16, ip6) ;
   return bind(s, (struct sockaddr *)&sa, sizeof sa) ;
 }
 

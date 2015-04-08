@@ -19,7 +19,7 @@ int socket_recv6 (int s, char *buf, unsigned int len, char *ip6, uint16 *port)
   do r = recvfrom(s, buf, len, 0, (struct sockaddr *)&sa, &dummy) ;
   while ((r == -1) && (errno == EINTR)) ;
   if (r == -1) return -1 ;
-  byte_copy(ip6, 16, sa.sin6_addr.s6_addr) ;
+  byte_copy(ip6, 16, (char const *)sa.sin6_addr.s6_addr) ;
   uint16_unpack_big((char *)&sa.sin6_port, port) ;
   return r ;
 }

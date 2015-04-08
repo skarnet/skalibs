@@ -21,8 +21,8 @@ void md5_final (MD5Schedule *ctx, char *digest /* 16 chars */)
   else byte_zero(p, count - 8) ;
   uint32_little_endian((char *)ctx->in, 14) ;
 
-  byte_copy(ctx->in + 56, 4, (char *)&ctx->bits[0]) ;
-  byte_copy(ctx->in + 60, 4, (char *)&ctx->bits[1]) ;
+  byte_copy((char *)ctx->in + 56, 4, (char *)&ctx->bits[0]) ;
+  byte_copy((char *)ctx->in + 60, 4, (char *)&ctx->bits[1]) ;
 
   md5_transform(ctx->buf, (uint32 *)ctx->in) ;
   uint32_little_endian((char *)ctx->buf, 4) ;

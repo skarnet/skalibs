@@ -17,7 +17,7 @@ int socket_local6 (int s, char *ip, uint16 *port)
 
   if (getsockname(s, (struct sockaddr *)&sa, &dummy) == -1)
     return -1 ;
-  byte_copy(ip, 16, sa.sin6_addr.s6_addr) ;
+  byte_copy(ip, 16, (char const *)sa.sin6_addr.s6_addr) ;
   uint16_unpack_big((char *)&sa.sin6_port, port) ;
   return 0 ;
 }

@@ -19,6 +19,7 @@
 #define byte_diff(a, n, b) memcmp(a, (b), n)
 #define byte_zero(p, n) memset(p, 0, n)
 #define str_len(s) strlen(s)
+#define str_nlen(s, max) strnlen(s, max)
 #define str_diff(a, b) strcmp(a, b)
 #define str_diffn(a, b, n) strncmp(a, b, n)
 #define str_copy(to, from) strlen(strcpy(to, from))
@@ -30,6 +31,7 @@ extern void byte_copyr (char *, unsigned int, char const *) ;
 extern int byte_diff (char const *, unsigned int, char const *) gccattr_pure ;
 extern void byte_zero (void *, unsigned int) ;
 extern unsigned int str_len (char const *) gccattr_pure ;
+#define str_nlen(s, max) byte_chr(s, (max), 0)
 extern int str_diff (char const *, char const *) gccattr_pure ;
 extern int str_diffn (char const *, char const *, unsigned int) gccattr_pure ;
 extern unsigned int str_copy (char *, char const *) ;

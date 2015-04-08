@@ -17,17 +17,10 @@ unsigned int byte_chr (char const *s, unsigned int n, int c)
 
 unsigned int byte_chr (char const *s, unsigned int n, int c)
 {
+  register unsigned int i = 0 ;
   register char ch = c ;
-  register char const *t = s ;
-
-  for (;;)
-  {
-    if (!n) break; if (*t == ch) break; ++t; --n;
-    if (!n) break; if (*t == ch) break; ++t; --n;
-    if (!n) break; if (*t == ch) break; ++t; --n;
-    if (!n) break; if (*t == ch) break; ++t; --n;
-  }
-  return t - s ;
+  for (; i < n && *s++ != ch ; i++) ;
+  return i ;
 }
 
 #endif

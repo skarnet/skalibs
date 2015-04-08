@@ -10,7 +10,7 @@ void sha512_update (SHA512Schedule *ctx, char const *buf, unsigned int len)
   ctx->len += len ;
   if (pad && len >= 128 - pad)
   {
-    byte_copy(ctx->buf + pad, 128 - pad, buf) ;
+    byte_copy((char *)ctx->buf + pad, 128 - pad, buf) ;
     buf += 128 - pad ; len -= 128 - pad ; pad = 0 ;
     sha512_transform(ctx, ctx->buf) ;
   }
@@ -20,5 +20,5 @@ void sha512_update (SHA512Schedule *ctx, char const *buf, unsigned int len)
     sha512_transform(ctx, (unsigned char const *)buf) ;
     buf += 128 ; len -= 128 ;
   }
-  byte_copy(ctx->buf + pad, len, buf) ;
+  byte_copy((char *)ctx->buf + pad, len, buf) ;
 }

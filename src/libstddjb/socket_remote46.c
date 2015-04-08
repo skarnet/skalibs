@@ -18,14 +18,14 @@ int socket_remote46 (int s, ip46_t *ip, uint16 *port)
   if (sa.sa_family == AF_INET6)
   {
     register struct sockaddr_in6 *sa6 = (struct sockaddr_in6 *)&sa ;
-    byte_copy(ip->ip, 16, sa6->sin6_addr.s6_addr) ;
+    byte_copy(ip->ip, 16, (char const *)sa6->sin6_addr.s6_addr) ;
     uint16_unpack_big((char *)&sa6->sin6_port, port) ;
     ip->is6 = 1 ;
   }
   else if (sa.sa_family == AF_INET)
   {
     register struct sockaddr_in *sa4 = (struct sockaddr_in *)&sa ;
-    byte_copy(ip->ip, 4, &sa4->sin_addr.s_addr) ;
+    byte_copy(ip->ip, 4, (char const *)&sa4->sin_addr.s_addr) ;
     uint16_unpack_big((char *)&sa4->sin_port, port) ;
     ip->is6 = 0 ;
   }

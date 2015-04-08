@@ -18,7 +18,7 @@ int socket_send6 (int s, char const *buf, unsigned int len, char const *ip6, uin
   byte_zero((char *)&sa, sizeof sa) ;
   sa.sin6_family = AF_INET6 ;
   uint16_pack_big((char *)&sa.sin6_port, port) ;
-  byte_copy(sa.sin6_addr.s6_addr, 16, ip6) ;
+  byte_copy((char *)sa.sin6_addr.s6_addr, 16, ip6) ;
   do r = sendto(s, buf, len, 0, (struct sockaddr *)&sa, sizeof sa) ;
   while ((r == -1) && (errno == EINTR)) ;
   return r ;
