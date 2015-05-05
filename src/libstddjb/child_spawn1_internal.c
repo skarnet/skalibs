@@ -29,8 +29,7 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
     sigemptyset(&set) ;
     e = posix_spawnattr_setsigmask(&attr, &set) ;
     if (e) goto errattr ;
-    sigfillset(&set) ;
-    e = posix_spawnattr_setsigdefault(&attr, &set) ;
+    e = posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSIGMASK) ;
     if (e) goto errattr ;
   }
   e = posix_spawn_file_actions_init(&actions) ;

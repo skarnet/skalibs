@@ -1,6 +1,10 @@
 /* ISC license. */
 
+#include <skalibs/config.h>
 #include <skalibs/bytestr.h>
+
+#ifdef SKALIBS_FLAG_REPLACE_LIBC
+
 
 int case_diffs (char const *s, char const *t)
 {
@@ -16,3 +20,5 @@ int case_diffs (char const *s, char const *t)
   }
   return (int)(x - y) ;
 }
+
+#endif

@@ -13,16 +13,19 @@
 
 #include <sys/types.h>
 #include <string.h>
+#include <strings.h>
 
 #define byte_copy(to, n, from) memmove(to, (from), n)
 #define byte_copyr(to, n, from) memmove(to, (from), n)
 #define byte_diff(a, n, b) memcmp(a, (b), n)
 #define byte_zero(p, n) memset(p, 0, n)
-#define str_len(s) strlen(s)
-#define str_nlen(s, max) strnlen(s, max)
-#define str_diff(a, b) strcmp(a, b)
-#define str_diffn(a, b, n) strncmp(a, b, n)
+#define str_len strlen
+#define str_nlen strnlen
+#define str_diff strcmp
+#define str_diffn strncmp
 #define str_copy(to, from) strlen(strcpy(to, from))
+#define case_diffs strcasecmp
+#define case_diffb(a, n, b) strncasecmp(a, (b), n)
 
 #else
 
@@ -35,6 +38,8 @@ extern unsigned int str_len (char const *) gccattr_pure ;
 extern int str_diff (char const *, char const *) gccattr_pure ;
 extern int str_diffn (char const *, char const *, unsigned int) gccattr_pure ;
 extern unsigned int str_copy (char *, char const *) ;
+extern int case_diffs (char const *, char const *) gccattr_pure ;
+extern int case_diffb (char const *, unsigned int, char const *) gccattr_pure ;
 
 #endif	
 
@@ -58,8 +63,6 @@ extern void case_uppers (char *) ;
 extern void case_upperb (char *, unsigned int) ;
 #define case_equals(a, b) (!case_diffs(a, b))
 #define case_equalb(a, n, b) (!case_diffb(a, n, b))
-extern int case_diffs (char const *, char const *) gccattr_pure ;
-extern int case_diffb (char const *, unsigned int, char const *) gccattr_pure ;
 #define case_starts(s, t) case_startb(s, str_len(s), t)
 extern int case_startb (char const *, unsigned int, char const *) gccattr_pure ;
 extern unsigned int case_str (char const *, char const *) gccattr_pure ;

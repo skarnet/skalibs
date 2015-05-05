@@ -3,6 +3,8 @@
 #ifndef UNIX_TRANSACTIONAL_H
 #define UNIX_TRANSACTIONAL_H
 
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <skalibs/uint64.h>
 #include <skalibs/stralloc.h>
 
@@ -21,6 +23,9 @@ extern int open_truncat (int, char const *) ;
 extern int open_truncatb (int, char const *) ;
 extern int open_appendat (int, char const *) ;
 extern int open_appendatb (int, char const *) ;
+
+extern int stat_at (int, char const *, struct stat *) ;
+extern int lstat_at (int, char const *, struct stat *) ;
 
 extern unsigned int openreadnclose_at (int, char const *, char *, unsigned int) ;
 extern int openslurpclose_at (int, char const *, stralloc *) ;

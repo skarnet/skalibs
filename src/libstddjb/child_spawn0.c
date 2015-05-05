@@ -25,8 +25,7 @@ pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const
     sigemptyset(&set) ;
     e = posix_spawnattr_setsigmask(&attr, &set) ;
     if (e) goto errattr ;
-    sigfillset(&set) ;
-    e = posix_spawnattr_setsigdefault(&attr, &set) ;
+    e = posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSIGMASK) ;
     if (e) goto errattr ;
   }
   if (!haspath && (setenv("PATH", SKALIBS_DEFAULTPATH, 0) < 0)) { e = errno ; goto errattr ; }
@@ -47,6 +46,7 @@ pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const
 
 #include <unistd.h>
 #include <skalibs/allreadwrite.h>
+#include <skalibs/sig.h>
 #include <skalibs/djbunix.h>
 
 pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const *envp)
@@ -67,6 +67,7 @@ pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const
   if (pid)
   {
     fd_close(p[0]) ;
+    sig_blocknone() ;
     pathexec_run(prog, argv, envp) ;
     e = errno ;
     fd_write(p[1], (char *)&e, sizeof(e)) ;
