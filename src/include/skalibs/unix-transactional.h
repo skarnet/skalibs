@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <skalibs/uint64.h>
+#include <skalibs/siovec.h>
 #include <skalibs/stralloc.h>
 
  /* Transactional/reliable filesystem operations */
@@ -36,6 +37,7 @@ extern int openwritenclose_devino (char const *, char const *, unsigned int, uin
 extern int openwritenclose_tmp (char const *, char const *, unsigned int, stralloc *) ;
 extern int openwritenclose_devino_tmp (char const *, char const *, unsigned int, uint64 *, uint64 *, stralloc *) ;
 extern unsigned int openwritenclose_at (int, char const *, char const *, unsigned int) ;
+extern unsigned int openwritevnclose_at (int, char const *, siovec_t const *, unsigned int) ;
 
 extern int mkdir_unique (stralloc *, char const *, unsigned int) ;
 
