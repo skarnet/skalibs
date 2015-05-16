@@ -5,7 +5,7 @@
 
 #ifdef SKALIBS_FLAG_REPLACE_LIBC
 
-int case_diffb (char const *s, unsigned int len, char const *t)
+int case_diffn (char const *s, char const *t, unsigned int len)
 {
   register unsigned char x = 0, y = 0 ;
   unsigned char const d = 'a' - 'A' ;
@@ -18,15 +18,6 @@ int case_diffb (char const *s, unsigned int len, char const *t)
     if (('a' <= y) && (y <= 'z')) y -= d ;
   }
   return (int)(x - y) ;
-}
-
-#else
-
-#include <strings.h>
-
-int case_diffb (char const *s, unsigned int len, char const *t)
-{
-  return strncasecmp(s, t, len) ;
 }
 
 #endif

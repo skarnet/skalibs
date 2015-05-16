@@ -21,16 +21,13 @@ src/include/skalibs/djbtime.h: src/include/skalibs/config.h src/include/skalibs/
 src/include/skalibs/djbunix.h: src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/gccattributes.h src/include/skalibs/siovec.h src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
 src/include/skalibs/env.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/envalloc.h: src/include/skalibs/genalloc.h
-src/include/skalibs/error.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/fmtscan.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint32.h
 src/include/skalibs/functypes.h: src/include/skalibs/siovec.h
 src/include/skalibs/genalloc.h: src/include/skalibs/functypes.h src/include/skalibs/stralloc.h
 src/include/skalibs/genset.h: src/include/skalibs/functypes.h
 src/include/skalibs/gensetdyn.h: src/include/skalibs/functypes.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
-src/include/skalibs/gidstuff.h: src/include/skalibs/uint32.h
 src/include/skalibs/iobuffer.h: src/include/skalibs/buffer.h src/include/skalibs/djbunix.h
 src/include/skalibs/iopause.h: src/include/skalibs/tai.h
-src/include/skalibs/ip46.h: src/include/skalibs/bytestr.h src/include/skalibs/fmtscan.h src/include/skalibs/socket.h src/include/skalibs/tai.h src/include/skalibs/uint16.h
 src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr2.h
 src/include/skalibs/md5.h: src/include/skalibs/uint32.h
@@ -54,10 +51,6 @@ src/include/skalibs/strerr.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/surf.h: src/include/skalibs/uint32.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
-src/include/skalibs/uint.h: src/include/skalibs/uint32.h
-src/include/skalibs/uint16.h: src/include/skalibs/uint64.h
-src/include/skalibs/uint32.h: src/include/skalibs/uint64.h
-src/include/skalibs/ulong.h: src/include/skalibs/uint64.h
 src/include/skalibs/unirandom.h: src/include/skalibs/buffer.h src/include/skalibs/surf.h
 src/include/skalibs/unirandomdev.h: src/include/skalibs/unirandom.h
 src/include/skalibs/unirandomegd.h: src/include/skalibs/unirandom.h
@@ -67,7 +60,6 @@ src/include/skalibs/unix-transactional.h: src/include/skalibs/siovec.h src/inclu
 src/include/skalibs/unixconnection.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/unixmessage.h: src/include/skalibs/buffer.h src/include/skalibs/cbuffer.h src/include/skalibs/gccattributes.h src/include/skalibs/genalloc.h src/include/skalibs/siovec.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h
 src/include/skalibs/unixonacid.h: src/include/skalibs/kolbak.h src/include/skalibs/skaclient.h src/include/skalibs/unix-timed.h src/include/skalibs/unix-transactional.h src/include/skalibs/unixconnection.h src/include/skalibs/unixmessage.h
-src/include/skalibs/ushort.h: src/include/skalibs/uint16.h
 src/include/skalibs/webipc.h: src/include/skalibs/djbunix.h src/include/skalibs/tai.h
 src/libdatastruct/avlnode-internal.h: src/include/skalibs/avlnode.h
 src/librandom/random-internal.h: src/include/skalibs/gccattributes.h src/include/skalibs/rrandom.h src/include/skalibs/surf.h src/include/skalibs/unirandom.h
@@ -266,7 +258,7 @@ src/libstddjb/byte_diff.o src/libstddjb/byte_diff.lo: src/libstddjb/byte_diff.c 
 src/libstddjb/byte_in.o src/libstddjb/byte_in.lo: src/libstddjb/byte_in.c src/include/skalibs/bytestr.h
 src/libstddjb/byte_rchr.o src/libstddjb/byte_rchr.lo: src/libstddjb/byte_rchr.c src/include/skalibs/bytestr.h
 src/libstddjb/byte_zero.o src/libstddjb/byte_zero.lo: src/libstddjb/byte_zero.c src/include/skalibs/bytestr.h src/include/skalibs/config.h
-src/libstddjb/case_diffb.o src/libstddjb/case_diffb.lo: src/libstddjb/case_diffb.c src/include/skalibs/bytestr.h src/include/skalibs/config.h
+src/libstddjb/case_diffn.o src/libstddjb/case_diffn.lo: src/libstddjb/case_diffn.c src/include/skalibs/bytestr.h src/include/skalibs/config.h
 src/libstddjb/case_diffs.o src/libstddjb/case_diffs.lo: src/libstddjb/case_diffs.c src/include/skalibs/bytestr.h src/include/skalibs/config.h
 src/libstddjb/case_lowerb.o src/libstddjb/case_lowerb.lo: src/libstddjb/case_lowerb.c src/include/skalibs/bytestr.h
 src/libstddjb/case_lowers.o src/libstddjb/case_lowers.lo: src/libstddjb/case_lowers.c src/include/skalibs/bytestr.h

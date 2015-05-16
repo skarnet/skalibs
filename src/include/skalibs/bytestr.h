@@ -25,7 +25,7 @@
 #define str_diffn strncmp
 #define str_copy(to, from) strlen(strcpy(to, from))
 #define case_diffs strcasecmp
-#define case_diffb(a, n, b) strncasecmp(a, (b), n)
+#define case_diffn strncasecmp
 
 #else
 
@@ -39,10 +39,9 @@ extern int str_diff (char const *, char const *) gccattr_pure ;
 extern int str_diffn (char const *, char const *, unsigned int) gccattr_pure ;
 extern unsigned int str_copy (char *, char const *) ;
 extern int case_diffs (char const *, char const *) gccattr_pure ;
-extern int case_diffb (char const *, unsigned int, char const *) gccattr_pure ;
+extern int case_diffn (char const *, char const *, unsigned int) gccattr_pure ;
 
 #endif	
-
 
 extern unsigned int byte_chr (char const *, unsigned int, int) gccattr_pure ;
 extern unsigned int byte_rchr (char const *, unsigned int, int) gccattr_pure ;
@@ -61,6 +60,7 @@ extern void case_lowers (char *) ;
 extern void case_lowerb (char *, unsigned int) ;
 extern void case_uppers (char *) ;
 extern void case_upperb (char *, unsigned int) ;
+#define case_diffb(a, n, b) case_diffn(a, (b), n)
 #define case_equals(a, b) (!case_diffs(a, b))
 #define case_equalb(a, n, b) (!case_diffb(a, n, b))
 #define case_starts(s, t) case_startb(s, str_len(s), t)
