@@ -5,7 +5,6 @@
 
 #ifdef SKALIBS_FLAG_REPLACE_LIBC
 
-
 int case_diffs (char const *s, char const *t)
 {
   register unsigned char x = 1, y = 1 ;
