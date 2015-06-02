@@ -246,6 +246,12 @@ src/libstddjb/buffer_put.o src/libstddjb/buffer_put.lo: src/libstddjb/buffer_put
 src/libstddjb/buffer_putall.o src/libstddjb/buffer_putall.lo: src/libstddjb/buffer_putall.c src/include/skalibs/buffer.h
 src/libstddjb/buffer_putallnf.o src/libstddjb/buffer_putallnf.lo: src/libstddjb/buffer_putallnf.c src/include/skalibs/buffer.h
 src/libstddjb/buffer_putflush.o src/libstddjb/buffer_putflush.lo: src/libstddjb/buffer_putflush.c src/include/skalibs/buffer.h
+src/libstddjb/buffer_puts.o src/libstddjb/buffer_puts.lo: src/libstddjb/buffer_puts.c src/include/skalibs/buffer.h src/include/skalibs/bytestr.h
+src/libstddjb/buffer_putsall.o src/libstddjb/buffer_putsall.lo: src/libstddjb/buffer_putsall.c src/include/skalibs/buffer.h src/include/skalibs/bytestr.h
+src/libstddjb/buffer_putsallflush.o src/libstddjb/buffer_putsallflush.lo: src/libstddjb/buffer_putsallflush.c src/include/skalibs/buffer.h src/include/skalibs/bytestr.h
+src/libstddjb/buffer_putsallnoflush.o src/libstddjb/buffer_putsallnoflush.lo: src/libstddjb/buffer_putsallnoflush.c src/include/skalibs/buffer.h src/include/skalibs/bytestr.h
+src/libstddjb/buffer_putsflush.o src/libstddjb/buffer_putsflush.lo: src/libstddjb/buffer_putsflush.c src/include/skalibs/buffer.h src/include/skalibs/bytestr.h
+src/libstddjb/buffer_putsnoflush.o src/libstddjb/buffer_putsnoflush.lo: src/libstddjb/buffer_putsnoflush.c src/include/skalibs/buffer.h src/include/skalibs/bytestr.h
 src/libstddjb/buffer_putv.o src/libstddjb/buffer_putv.lo: src/libstddjb/buffer_putv.c src/include/skalibs/buffer.h src/include/skalibs/siovec.h
 src/libstddjb/buffer_putvall.o src/libstddjb/buffer_putvall.lo: src/libstddjb/buffer_putvall.c src/include/skalibs/buffer.h src/include/skalibs/siovec.h
 src/libstddjb/buffer_putvallnf.o src/libstddjb/buffer_putvallnf.lo: src/libstddjb/buffer_putvallnf.c src/include/skalibs/buffer.h

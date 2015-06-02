@@ -41,27 +41,27 @@ extern int buffer_flush (buffer *) ;
 
 #define buffer_putnoflush(b, s, len) cbuffer_put(&(b)->c, s, len)
 #define buffer_putvnoflush(b, v, n) cbuffer_putv(&(b)->c, v, n)
-#define buffer_putsnoflush(b, s) buffer_putnoflush(b, (s), str_len(s))
+extern int buffer_putsnoflush (buffer *, char const *) ;
 
 extern int buffer_putallnoflush (buffer *, char const *, unsigned int) ;
 extern int buffer_putvallnoflush (buffer *, siovec_t const *, unsigned int) ;
-#define buffer_putsallnoflush(b, s) buffer_putallnoflush(b, (s), str_len(s))
+extern int buffer_putsallnoflush (buffer *, char const *) ;
 
 extern int buffer_putall (buffer *, char const *, unsigned int, unsigned int *) ;
 extern int buffer_putvall (buffer *, siovec_t const *, unsigned int, unsigned int *) ;
-#define buffer_putsall(b, s, w) buffer_putall(b, s, str_len(s), w)
+extern int buffer_putsall (buffer *, char const *, unsigned int *) ;
 
 #define buffer_putallflush(b, s, len, w) (buffer_putall(b, s, len, w) && buffer_flush(b))
 #define buffer_putvallflush(b, v, n, w) (buffer_putvall(b, v, n, w) && buffer_flush(b))
-#define buffer_putsallflush(b, s, w) buffer_putallflush(b, s, str_len(s), w)
+extern int buffer_putsallflush (buffer *, char const *, unsigned int *) ;
 
 extern int buffer_put (buffer *, char const *, unsigned int) ;
 extern int buffer_putv (buffer *, siovec_t const *, unsigned int) ;
-#define buffer_puts(b, s) buffer_put(b, (s), str_len(s))
+extern int buffer_puts (buffer *, char const *) ;
 
 extern int buffer_putflush (buffer *, char const *, unsigned int) ;
 extern int buffer_putvflush (buffer *, siovec_t const *, unsigned int) ;
-#define buffer_putsflush(b, s) buffer_putflush(b, (s), str_len(s))
+extern int buffer_putsflush (buffer *, char const *) ;
 
 #define buffer_unput(b, n) cbuffer_unput(&(b)->c, n)
 #define buffer_wpeek(b, v) cbuffer_wpeek(&(b)->c, v)
