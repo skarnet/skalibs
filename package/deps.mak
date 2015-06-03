@@ -617,7 +617,7 @@ src/libstddjb/tai_u64.o src/libstddjb/tai_u64.lo: src/libstddjb/tai_u64.c src/in
 src/libstddjb/tai_unpack.o src/libstddjb/tai_unpack.lo: src/libstddjb/tai_unpack.c src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/tai_unpack_little.o src/libstddjb/tai_unpack_little.lo: src/libstddjb/tai_unpack_little.c src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/tain_add.o src/libstddjb/tain_add.lo: src/libstddjb/tain_add.c src/include/skalibs/tai.h
-src/libstddjb/tain_addsec.o src/libstddjb/tain_addsec.lo: src/libstddjb/tain_addsec.c src/include/skalibs/tai.h
+src/libstddjb/tain_addsec.o src/libstddjb/tain_addsec.lo: src/libstddjb/tain_addsec.c src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/tain_approx.o src/libstddjb/tain_approx.lo: src/libstddjb/tain_approx.c src/include/skalibs/tai.h
 src/libstddjb/tain_clockmon.o src/libstddjb/tain_clockmon.lo: src/libstddjb/tain_clockmon.c src/include/skalibs/sysdeps.h src/include/skalibs/tai.h
 src/libstddjb/tain_fmt.o src/libstddjb/tain_fmt.lo: src/libstddjb/tain_fmt.c src/include/skalibs/fmtscan.h src/include/skalibs/tai.h
