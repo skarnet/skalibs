@@ -10,7 +10,7 @@
 
 int ipc_recv (int fd, char *s, unsigned int len, char *path)
 {
-  struct sockaddr_un sa ;
+  struct sockaddr_un sa = { .sun_family = AF_UNIX } ;
   socklen_t total = sizeof sa ;
   char tmp[len] ;
   register int r ;
