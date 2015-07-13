@@ -11,6 +11,7 @@
 
 #ifndef SKALIBS_FLAG_REPLACE_LIBC
 
+#include <skalibs/sysdeps.h>
 #include <sys/types.h>
 #include <string.h>
 #include <strings.h>
@@ -20,7 +21,13 @@
 #define byte_diff(a, n, b) memcmp(a, (b), n)
 #define byte_zero(p, n) memset(p, 0, n)
 #define str_len strlen
-#define str_nlen strnlen
+
+#ifdef SKALIBS_HASSTRNLEN
+# define str_nlen strnlen
+#else
+# define str_nlen(s, max) byte_chr(s, (max), 0)
+#endif
+
 #define str_diff strcmp
 #define str_diffn strncmp
 #define str_copy(to, from) strlen(strcpy(to, from))
