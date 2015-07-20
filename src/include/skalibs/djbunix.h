@@ -110,6 +110,7 @@ extern int slurp (stralloc *, int) ;
 extern int openslurpclose (stralloc *, char const *) ;
 extern int openreadclose (char const *, stralloc *, unsigned int) ;
 extern int openreadnclose (char const *, char *, unsigned int) ;
+extern int openreadnclose_nb (char const *, char *, unsigned int) ;
 extern int openreadfileclose (char const *, stralloc *, unsigned int) ;
 
 #define openwritenclose_unsafe(f, s, n) openwritenclose_unsafe_internal(f, s, (n), 0, 0, 0)

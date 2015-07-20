@@ -4,18 +4,24 @@
 #include <skalibs/allreadwrite.h>
 #include <skalibs/djbunix.h>
 
+static int readnclose (int fd, char *s, unsigned int n)
+{
+  register int r = allread(fd, s, n) ;
+  register int e = errno ;
+  fd_close(fd) ;
+  if ((r > 0) && (r < (int)n)) e = EPIPE ;
+  errno = e ;
+  return r ;
+}
+
 int openreadnclose (char const *file, char *s, unsigned int n)
 {
-  register int r ;
-  int fd = open_readb(file) ;
-  if (fd == -1) return -1 ;
-  r = allread(fd, s, n) ;
-  if (r == -1)
-  {
-    fd_close(fd) ;
-    return -1 ;
-  }
-  fd_close(fd) ;
-  if ((r > 0) && (r < (int)n)) errno = EPIPE ;
-  return r ;
+  register int fd = open_readb(file) ;
+  return fd < 0 ? fd : readnclose(fd, s, n) ;
+}
+
+int openreadnclose_nb (char const *file, char *s, unsigned int n)
+{
+  register int fd = open_read(file) ;
+  return fd < 0 ? fd : readnclose(fd, s, n) ;
 }

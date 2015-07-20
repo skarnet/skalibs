@@ -588,6 +588,12 @@ number of read bytes. If that number is not <em>n</em>, errno is set to EPIPE.
 </p>
 
 <p>
+<code> int openreadnclose_nb (char const *file, char *s, unsigned int n) </code> <br />
+Like <tt>openreadnclose</tt>, but can fail with EAGAIN if the file cannot be
+immediately read (for instance if it's a named pipe or other special file).
+</p>
+
+<p>
 <code> int openreadfileclose (char const *file, stralloc *sa, unsigned int n) </code> <br />
 Reads at most <em>n</em> bytes from file <em>file</em> into the *<em>sa</em>
 stralloc, which is grown (if needed) to <em>just</em> accommodate the file
