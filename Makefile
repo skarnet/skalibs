@@ -74,8 +74,8 @@ strip: $(ALL_LIBS)
 install: install-data install-sysdeps install-dynlib install-lib install-include
 install-data: $(ALL_DATA:src/etc/%=$(DESTDIR)$(datadir)/%)
 install-sysdeps: $(ALL_SYSDEPS:$(sysdeps)/%=$(DESTDIR)$(sysdepdir)/%)
-install-dynlib: $(SHARED_LIBS:lib%.so=$(DESTDIR)$(dynlibdir)/lib%.so)
-install-lib: $(STATIC_LIBS:lib%.a=$(DESTDIR)$(libdir)/lib%.a)
+install-dynlib: $(SHARED_LIBS:lib%.so.xyzzy=$(DESTDIR)$(dynlibdir)/lib%.so)
+install-lib: $(STATIC_LIBS:lib%.a.xyzzy=$(DESTDIR)$(libdir)/lib%.a)
 install-include: $(ALL_INCLUDES:src/include/$(package)/%.h=$(DESTDIR)$(includedir)/$(package)/%.h)
 
 ifneq ($(exthome),)
@@ -83,7 +83,7 @@ ifneq ($(exthome),)
 update:
 	exec $(INSTALL) -l $(notdir $(home)) $(DESTDIR)$(exthome)
 
-global-links: $(DESTDIR)$(exthome) $(SHARED_LIBS:lib%.so=$(DESTDIR)$(sproot)/library.so/lib%.so)
+global-links: $(DESTDIR)$(exthome) $(SHARED_LIBS:lib%.so.xyzzy=$(DESTDIR)$(sproot)/library.so/lib%.so)
 
 $(DESTDIR)$(sproot)/library.so/lib%.so: $(DESTDIR)$(home)/library.so/lib%.so
 	exec $(INSTALL) -D -l ..$(subst $(sproot),,$(exthome))/library.so/$(<F) $@
@@ -98,14 +98,14 @@ $(DESTDIR)$(datadir)/%: src/etc/%
 $(DESTDIR)$(sysdepdir)/%: $(sysdeps)/%
 	exec $(INSTALL) -D -m 644 $< $@
 
-$(DESTDIR)$(dynlibdir)/%.so: %.so
+$(DESTDIR)$(dynlibdir)/%.so: %.so.xyzzy
 	$(INSTALL) -D -m 755 $< $@.$(version) && \
-	$(INSTALL) -l $<.$(version) $@.$(version_m) && \
-	$(INSTALL) -l $<.$(version_m) $@.$(version_M) && \
-	$(INSTALL) -l $<.$(version_M) $@.$(version_l) && \
-	exec $(INSTALL) -l $<.$(version_l) $@
+	$(INSTALL) -l $(@F).$(version) $@.$(version_m) && \
+	$(INSTALL) -l $(@F).$(version_m) $@.$(version_M) && \
+	$(INSTALL) -l $(@F).$(version_M) $@.$(version_l) && \
+	exec $(INSTALL) -l $(@F).$(version_l) $@
 
-$(DESTDIR)$(libdir)/lib%.a: lib%.a
+$(DESTDIR)$(libdir)/lib%.a: lib%.a.xyzzy
 	exec $(INSTALL) -D -m 644 $< $@
 
 $(DESTDIR)$(includedir)/$(package)/%.h: src/include/$(package)/%.h
@@ -117,12 +117,12 @@ $(DESTDIR)$(includedir)/$(package)/%.h: src/include/$(package)/%.h
 %.lo: %.c
 	exec $(REALCC) $(CPPFLAGS_ALL) $(CFLAGS_ALL) $(CFLAGS_SHARED) -c -o $@ $<
 
-libskarnet.a: $(ALL_SOBJS)
+libskarnet.a.xyzzy: $(ALL_SOBJS)
 	exec $(AR) rc $@ $^
 	exec $(RANLIB) $@
 
-libskarnet.so: $(ALL_DOBJS)
-	exec $(REALCC) -o $@ $(CFLAGS_ALL) $(CFLAGS_SHARED) $(LDFLAGS_ALL) $(LDFLAGS_SHARED) -Wl,-soname,$@.$(version_l) $^
+libskarnet.so.xyzzy: $(ALL_DOBJS)
+	exec $(REALCC) -o $@ $(CFLAGS_ALL) $(CFLAGS_SHARED) $(LDFLAGS_ALL) $(LDFLAGS_SHARED) -Wl,-soname,libskarnet.so.$(version_l) $^
 
 .PHONY: it all clean distclean tgz strip install install-data install-sysdeps install-dynlib install-lib install-include
 
