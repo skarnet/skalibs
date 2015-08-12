@@ -83,9 +83,9 @@ ifneq ($(exthome),)
 update:
 	exec $(INSTALL) -l $(notdir $(home)) $(DESTDIR)$(exthome)
 
-global-links: $(DESTDIR)$(exthome) $(SHARED_LIBS:lib%.so.xyzzy=$(DESTDIR)$(sproot)/library.so/lib%.so)
+global-links: $(DESTDIR)$(exthome) $(SHARED_LIBS:lib%.so.xyzzy=$(DESTDIR)$(sproot)/library.so/lib%.so.$(version_M))
 
-$(DESTDIR)$(sproot)/library.so/lib%.so: $(DESTDIR)$(home)/library.so/lib%.so
+$(DESTDIR)$(sproot)/library.so/lib%.so.$(version_M): $(DESTDIR)$(home)/library.so/lib%.so.$(version_M)
 	exec $(INSTALL) -D -l ..$(subst $(sproot),,$(exthome))/library.so/$(<F) $@
 
 .PHONY: update global-links
@@ -122,7 +122,7 @@ libskarnet.a.xyzzy: $(ALL_SOBJS)
 	exec $(RANLIB) $@
 
 libskarnet.so.xyzzy: $(ALL_DOBJS)
-	exec $(REALCC) -o $@ $(CFLAGS_ALL) $(CFLAGS_SHARED) $(LDFLAGS_ALL) $(LDFLAGS_SHARED) -Wl,-soname,libskarnet.so.$(version_l) $^
+	exec $(REALCC) -o $@ $(CFLAGS_ALL) $(CFLAGS_SHARED) $(LDFLAGS_ALL) $(LDFLAGS_SHARED) -Wl,-soname,libskarnet.so.$(version_M) $^ $(SOCKET_LIB) $(RT_LIB)
 
 .PHONY: it all clean distclean tgz strip install install-data install-sysdeps install-dynlib install-lib install-include
 
