@@ -172,6 +172,7 @@ CFLAGS_AUTO="$CFLAGS"
 CPPFLAGS_AUTO="-D_POSIX_C_SOURCE=200809L -D_XOPEN_SOURCE=700 -O2 $CPPFLAGS"
 LDFLAGS_AUTO="$LDFLAGS"
 LDFLAGS_NOSHARED=
+LDFLAGS_SHARED=-shared
 prefix=
 dynlibdir='$prefix/lib'
 libdir='$prefix/lib/$package'
@@ -334,6 +335,7 @@ tryflag CPPFLAGS_AUTO -Werror=pointer-arith
 
 if $shared ; then
   tryldflag LDFLAGS_AUTO -Wl,--hash-style=both
+  tryldflag LDFLAGS_SHARED -Wl,-Bsymbolic
 fi
 
 if test -n "$sysdeps" ; then
@@ -525,6 +527,7 @@ CFLAGS := $CFLAGS_AUTO
 CPPFLAGS := $CPPFLAGS_AUTO
 LDFLAGS := $LDFLAGS_AUTO
 LDFLAGS_NOSHARED := $LDFLAGS_NOSHARED
+LDFLAGS_SHARED := $LDFLAGS_SHARED
 CROSS_COMPILE := $cross
 EOF
 if test -n "$vpaths" ; then
