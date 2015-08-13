@@ -40,6 +40,9 @@ extern unsigned int openwritenclose_at (int, char const *, char const *, unsigne
 extern unsigned int openwritevnclose_at (int, char const *, siovec_t const *, unsigned int) ;
 
 extern int mkdir_unique (stralloc *, char const *, unsigned int) ;
+extern int atomic_rm_rf (char const *) ;
+extern int atomic_rm_rf_tmp (char const *, stralloc *) ;
+
 
 typedef struct dirdescriptor_s dirdescriptor_t, *dirdescriptor_t_ref ;
 struct dirdescriptor_s

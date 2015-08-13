@@ -21,13 +21,16 @@ src/include/skalibs/djbtime.h: src/include/skalibs/config.h src/include/skalibs/
 src/include/skalibs/djbunix.h: src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/gccattributes.h src/include/skalibs/siovec.h src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
 src/include/skalibs/env.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/envalloc.h: src/include/skalibs/genalloc.h
+src/include/skalibs/error.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/fmtscan.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint32.h
 src/include/skalibs/functypes.h: src/include/skalibs/siovec.h
 src/include/skalibs/genalloc.h: src/include/skalibs/functypes.h src/include/skalibs/stralloc.h
 src/include/skalibs/genset.h: src/include/skalibs/functypes.h
 src/include/skalibs/gensetdyn.h: src/include/skalibs/functypes.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
+src/include/skalibs/gidstuff.h: src/include/skalibs/uint32.h
 src/include/skalibs/iobuffer.h: src/include/skalibs/buffer.h src/include/skalibs/djbunix.h
 src/include/skalibs/iopause.h: src/include/skalibs/tai.h
+src/include/skalibs/ip46.h: src/include/skalibs/bytestr.h src/include/skalibs/fmtscan.h src/include/skalibs/socket.h src/include/skalibs/tai.h src/include/skalibs/uint16.h
 src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr2.h
 src/include/skalibs/md5.h: src/include/skalibs/uint32.h
@@ -51,6 +54,10 @@ src/include/skalibs/strerr.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/surf.h: src/include/skalibs/uint32.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
+src/include/skalibs/uint.h: src/include/skalibs/uint32.h
+src/include/skalibs/uint16.h: src/include/skalibs/uint64.h
+src/include/skalibs/uint32.h: src/include/skalibs/uint64.h
+src/include/skalibs/ulong.h: src/include/skalibs/uint64.h
 src/include/skalibs/unirandom.h: src/include/skalibs/buffer.h src/include/skalibs/surf.h
 src/include/skalibs/unirandomdev.h: src/include/skalibs/unirandom.h
 src/include/skalibs/unirandomegd.h: src/include/skalibs/unirandom.h
@@ -60,6 +67,7 @@ src/include/skalibs/unix-transactional.h: src/include/skalibs/siovec.h src/inclu
 src/include/skalibs/unixconnection.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/unixmessage.h: src/include/skalibs/buffer.h src/include/skalibs/cbuffer.h src/include/skalibs/gccattributes.h src/include/skalibs/genalloc.h src/include/skalibs/siovec.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h
 src/include/skalibs/unixonacid.h: src/include/skalibs/kolbak.h src/include/skalibs/skaclient.h src/include/skalibs/unix-timed.h src/include/skalibs/unix-transactional.h src/include/skalibs/unixconnection.h src/include/skalibs/unixmessage.h
+src/include/skalibs/ushort.h: src/include/skalibs/uint16.h
 src/include/skalibs/webipc.h: src/include/skalibs/djbunix.h src/include/skalibs/tai.h
 src/libdatastruct/avlnode-internal.h: src/include/skalibs/avlnode.h
 src/librandom/random-internal.h: src/include/skalibs/gccattributes.h src/include/skalibs/rrandom.h src/include/skalibs/surf.h src/include/skalibs/unirandom.h
@@ -711,6 +719,8 @@ src/libstddjb/wait_reap.o src/libstddjb/wait_reap.lo: src/libstddjb/wait_reap.c 
 src/libstddjb/waitn.o src/libstddjb/waitn.lo: src/libstddjb/waitn.c src/include/skalibs/djbunix.h
 src/libstddjb/waitn_reap.o src/libstddjb/waitn_reap.lo: src/libstddjb/waitn_reap.c src/include/skalibs/djbunix.h
 src/libstddjb/waitpid_nointr.o src/libstddjb/waitpid_nointr.lo: src/libstddjb/waitpid_nointr.c src/include/skalibs/djbunix.h
+src/libunixonacid/atomic_rm_rf.o src/libunixonacid/atomic_rm_rf.lo: src/libunixonacid/atomic_rm_rf.c src/include/skalibs/skamisc.h src/include/skalibs/unix-transactional.h
+src/libunixonacid/atomic_rm_rf_tmp.o src/libunixonacid/atomic_rm_rf_tmp.lo: src/libunixonacid/atomic_rm_rf_tmp.c src/include/skalibs/djbunix.h src/include/skalibs/random.h src/include/skalibs/stralloc.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/bufalloc_timed_flush.o src/libunixonacid/bufalloc_timed_flush.lo: src/libunixonacid/bufalloc_timed_flush.c src/include/skalibs/bufalloc.h src/include/skalibs/functypes.h src/include/skalibs/tai.h src/include/skalibs/unix-timed.h
 src/libunixonacid/buffer_timed_fill.o src/libunixonacid/buffer_timed_fill.lo: src/libunixonacid/buffer_timed_fill.c src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/tai.h src/include/skalibs/unix-timed.h
 src/libunixonacid/buffer_timed_flush.o src/libunixonacid/buffer_timed_flush.lo: src/libunixonacid/buffer_timed_flush.c src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/tai.h src/include/skalibs/unix-timed.h
