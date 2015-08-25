@@ -143,6 +143,9 @@ extern int rm_rf_in_tmp (stralloc *, unsigned int) ; /* caution ! */
 extern int rmstar (char const *) ;
 extern int rmstar_tmp (char const *, stralloc *) ;
 
+extern int touch (char const *) ;
+extern int filecopy_unsafe (char const *, char const *, unsigned int) ;
+extern int filecopy_suffix (char const *, char const *, unsigned int, char const *) ;
 extern int hiercopy (char const *, char const *) ;
 extern int hiercopy_tmp (char const *, char const *, stralloc *) ;
 

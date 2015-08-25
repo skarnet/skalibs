@@ -11,32 +11,6 @@
 #include <skalibs/direntry.h>
 #include <skalibs/djbunix.h>
 
-static int filecopy (char const *src, char const *dst, mode_t mode)
-{
-  int d ;
-  int s = open_readb(src) ;
-  if (s < 0) return 0 ;
-  d = open3(dst, O_WRONLY | O_CREAT | O_TRUNC, mode) ;
-  if (d < 0)
-  {
-    fd_close(s) ;
-    return 0 ;
-  }
-  if (fd_cat(s, d) < 0) goto err ;
-  fd_close(s) ;
-  fd_close(d) ;
-  return 1 ;
-
-err:
-  {
-    register int e = errno ;
-    fd_close(s) ;
-    fd_close(d) ;
-    errno = e ;
-  }
-  return 0 ;
-}
-
 static int dircopy (char const *src, char const *dst, mode_t mode, stralloc *tmp)
 {
   unsigned int tmpbase = tmp->len ;
@@ -108,7 +82,7 @@ int hiercopy_tmp (char const *src, char const *dst, stralloc *tmp)
   if (lstat(src, &st) < 0) return 0 ;
   if (S_ISREG(st.st_mode))
   {
-    if (!filecopy(src, dst, st.st_mode)) return 0 ;
+    if (!filecopy_unsafe(src, dst, st.st_mode)) return 0 ;
   }
   else if (S_ISDIR(st.st_mode))
   {
