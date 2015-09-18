@@ -103,6 +103,13 @@ purposes are available at Aboriginal Linux: http://landley.net/aboriginal/
  Precomputed sysdeps for various targets may also be available on
 skarnet.org or on third-party sites.
 
+ Once you have gathered your sysdeps, for any skarnet.org package:
+ * give the correct --with-sysdeps option to ./configure
+ * give the correct --enable-cross option
+ * for --prefix, --bindir and other paths, always use the run-time path
+ * to install the cross-compiled package in a staging directory /your/stage,
+   perform "make install DESTDIR=/your/stage/"
+
 
 * The slashpackage convention
   ---------------------------
