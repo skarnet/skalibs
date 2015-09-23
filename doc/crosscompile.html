@@ -40,6 +40,23 @@ to perform parallel builds. If the source code tree grows significantly
 larger, out-of-tree build support will be considered.
 </p>
 
+<h3> Support for staging </h3>
+
+<p>
+ The skalibs Makefile, as well as every other
+<a href="http://skarnet.org/software/">skarnet.org package</a>'s
+Makefile, supports the DESTDIR convention for staging. To install
+skalibs under a <em>stage</em> fake root:
+</p>
+
+<ul>
+ <li> Give the options you need to <tt>./configure</tt>.
+The arguments to the <tt>--prefix</tt>, <tt>--libdir</tt> and similar
+options must be the valid paths for <strong>run-time</tt>. </li>
+ <li> To install the software, run <tt>make install
+DESTDIR=<em>stage</em></tt>. </li>
+</ul>
+
 <h2> Support for build-time options </h2>
 
 <p>
