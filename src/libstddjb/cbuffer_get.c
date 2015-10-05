@@ -6,6 +6,8 @@
 unsigned int cbuffer_get (cbuffer_t *b, char *s, unsigned int len)
 {
   siovec_t v[2] ;
+  register unsigned int w ;
   cbuffer_rpeek(b, v) ;
-  return cbuffer_RSEEK(b, siovec_gather(v, 2, s, len)) ;
+  w = siovec_gather(v, 2, s, len) ;
+  return cbuffer_RSEEK(b, w) ;
 }

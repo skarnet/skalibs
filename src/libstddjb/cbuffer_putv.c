@@ -6,6 +6,8 @@
 unsigned int cbuffer_putv (cbuffer_t *b, siovec_t const *v, unsigned int n)
 {
   siovec_t vdest[2] ;
+  register unsigned int w ;
   cbuffer_wpeek(b, vdest) ;
-  return cbuffer_WSEEK(b, siovec_deal(vdest, 2, v, n)) ;
+  w = siovec_deal(vdest, 2, v, n) ;
+  return cbuffer_WSEEK(b, w) ;
 }

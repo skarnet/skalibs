@@ -6,6 +6,8 @@
 unsigned int cbuffer_put (cbuffer_t *b, char const *s, unsigned int len)
 {
   siovec_t v[2] ;
+  register unsigned int w ;
   cbuffer_wpeek(b, v) ;
-  return cbuffer_WSEEK(b, siovec_scatter(v, 2, s, len)) ;
+  w = siovec_scatter(v, 2, s, len) ;
+  return cbuffer_WSEEK(b, w) ;
 }
