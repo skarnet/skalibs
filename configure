@@ -335,7 +335,6 @@ tryflag CPPFLAGS_AUTO -Werror=pointer-arith
 
 if $shared ; then
   tryldflag LDFLAGS_AUTO -Wl,--hash-style=both
-  tryldflag LDFLAGS_SHARED -Wl,-Bsymbolic
 fi
 
 if test -n "$sysdeps" ; then
