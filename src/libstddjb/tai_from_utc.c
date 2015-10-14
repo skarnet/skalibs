@@ -7,6 +7,6 @@
 
 int tai_from_utc (tai_t *t, uint64 u)
 {
-  if (leapsecs_add(&u, 0) < 0) return 0 ;
+  leapsecs_add(&u, 0) ;
   return tai_u64(t, u + 10) ;
 }

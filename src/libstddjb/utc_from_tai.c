@@ -10,7 +10,7 @@ int utc_from_tai (uint64 *u, tai_t const *t)
 {
   uint64 tt = t->x - 10 ;
   if (t->x < 10U) return (errno = EINVAL, 0) ;
-  if (leapsecs_sub(&tt) < 0) return 0 ;
+  leapsecs_sub(&tt) ;
   *u = tt ;
   return 1 ;
 }

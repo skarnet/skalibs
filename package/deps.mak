@@ -68,7 +68,7 @@ src/libstdcrypto/sha1-internal.h: src/include/skalibs/sha1.h src/include/skalibs
 src/libstdcrypto/sha256-internal.h: src/include/skalibs/sha256.h src/include/skalibs/uint32.h
 src/libstdcrypto/sha512-internal.h: src/include/skalibs/sha512.h
 src/libstddjb/alloc-internal.h: src/include/skalibs/alloc.h src/include/skalibs/sysdeps.h
-src/libstddjb/djbtime-internal.h: src/include/skalibs/config.h src/include/skalibs/uint64.h
+src/libstddjb/djbtime-internal.h: src/include/skalibs/uint64.h
 src/libstddjb/fmtscan-internal.h: src/include/skalibs/bytestr.h src/include/skalibs/fmtscan.h
 src/libstddjb/selfpipe-internal.h: src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
 src/libunixonacid/skaclient-internal.h: src/include/skalibs/kolbak.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
@@ -405,9 +405,8 @@ src/libstddjb/ipc_send.o src/libstddjb/ipc_send.lo: src/libstddjb/ipc_send.c src
 src/libstddjb/ipc_stream.o src/libstddjb/ipc_stream.lo: src/libstddjb/ipc_stream.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/webipc.h
 src/libstddjb/ipc_timed_connect.o src/libstddjb/ipc_timed_connect.lo: src/libstddjb/ipc_timed_connect.c src/include/skalibs/error.h src/include/skalibs/iopause.h src/include/skalibs/tai.h src/include/skalibs/webipc.h
 src/libstddjb/leapsecs_add.o src/libstddjb/leapsecs_add.lo: src/libstddjb/leapsecs_add.c src/libstddjb/djbtime-internal.h src/include/skalibs/uint64.h
-src/libstddjb/leapsecs_here.o src/libstddjb/leapsecs_here.lo: src/libstddjb/leapsecs_here.c src/libstddjb/djbtime-internal.h src/include/skalibs/uint64.h
-src/libstddjb/leapsecs_init.o src/libstddjb/leapsecs_init.lo: src/libstddjb/leapsecs_init.c src/libstddjb/djbtime-internal.h src/include/skalibs/djbunix.h src/include/skalibs/uint64.h
 src/libstddjb/leapsecs_sub.o src/libstddjb/leapsecs_sub.lo: src/libstddjb/leapsecs_sub.c src/libstddjb/djbtime-internal.h src/include/skalibs/uint64.h
+src/libstddjb/leapsecs_table.o src/libstddjb/leapsecs_table.lo: src/libstddjb/leapsecs_table.c src/libstddjb/djbtime-internal.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/localtm_fmt.o src/libstddjb/localtm_fmt.lo: src/libstddjb/localtm_fmt.c src/include/skalibs/djbtime.h src/include/skalibs/uint.h
 src/libstddjb/localtm_from_ltm64.o src/libstddjb/localtm_from_ltm64.lo: src/libstddjb/localtm_from_ltm64.c src/include/skalibs/djbtime.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/localtm_from_sysclock.o src/libstddjb/localtm_from_sysclock.lo: src/libstddjb/localtm_from_sysclock.c src/include/skalibs/djbtime.h src/include/skalibs/uint64.h

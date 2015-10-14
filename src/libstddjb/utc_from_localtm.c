@@ -7,9 +7,7 @@
 
 int utc_from_localtm (uint64 *uu, struct tm const *l)
 {
-  uint64 u ;
-  if (!ltm64_from_localtm(&u, l)) return 0 ;
-  if (!utc_from_ltm64(&u)) return 0 ;
-  *uu = u ;
+  if (!ltm64_from_localtm(uu, l)) return 0 ;
+  utc_from_ltm64(uu) ;
   return 1 ;
 }

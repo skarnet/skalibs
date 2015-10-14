@@ -34,21 +34,6 @@ and implemented in the <tt>libskarnet.a</tt> or <tt>libskarnet.so</tt> library.
 other time formats and user-friendly representations.
 </p>
 
-<h2> The <tt>/etc/leapsecs.dat</tt> file </h2>
-
-<p>
- User-friendly time is calculated from UTC. Internal time computations
-should be performed on TAI time - because TAI flows linearly whereas
-UTC does not. To convert between UTC and TAI time, you need a
-<em>leap second table</em>. skalibs provides such a file in its
-<tt>src/etc/leapsecs.dat</tt> subdirectory, which is copied
-to <tt>/etc/leapsecs.dat</tt> at installation time (unless you specify
-a --prefix or --datadir option to configure).
-<strong>The <tt>/etc/leapsecs.dat</tt> file must remain accessible
-on your system, else time conversions will not be computed
-properly.</strong>
-</p>
-
 <h2> Data structures </h2>
 
 <ul>
@@ -72,7 +57,7 @@ Converts the absolute TAI64 time in *<em>t</em> to an UTC time, stored in
 *<em>u</em> as an unsigned 64-bit integer. *<em>u</em> is actually 2^62
 plus the number of seconds since the Epoch.
 The function returns 1 if it succeeds, or 0 (and sets errno) if an
-error occurs (for instance: the leap second table cannot be found).
+error occurs.
 </p>
 
 <p>
@@ -81,7 +66,7 @@ Converts the UTC time in <em>u</em>, stored
 as an unsigned 64-bit integer (2^62 plus the number of seconds since
 the Epoch), to a TAI64 time in *<em>t</em>.
 The function returns 1 if it succeeds, or 0 (and sets errno) if an
-error occurs (for instance: the leap second table cannot be found).
+error occurs.
 </p>
 
 <h3> NTP </h3>
@@ -92,7 +77,7 @@ Converts the absolute TAI64N time in *<em>a</em> to a 64-bit NTP timestamp,
 stored in *<em>ntp</em>. The higher 32 bits of *<em>ntp</em> represent a number
 of seconds ; the lower 32 bits are the fractional part of the timestamp.
 The function returns 1 if it succeeds, or 0 (and sets errno) if an
-error occurs (for instance: the leap second table cannot be found, or
+error occurs (for instance:
 *<em>a</em> cannot be represented in the valid NTP range).
 </p>
 
@@ -101,7 +86,7 @@ error occurs (for instance: the leap second table cannot be found, or
 Converts the NTP timestamp in <em>ntp</em> to a TAI64N time in
 *<em>a</em>.
 The function returns 1 if it succeeds, or 0 (and sets errno) if an
-error occurs (for instance: the leap second table cannot be found).
+error occurs.
 </p>
 
 <h3> Local time </h3>

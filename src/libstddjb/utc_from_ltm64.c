@@ -5,19 +5,11 @@
 #include <skalibs/djbtime.h>
 #include "djbtime-internal.h"
 
+
+int utc_from_ltm64 (uint64 *u)
+{
 #ifdef SKALIBS_FLAG_CLOCKISTAI
-
-int utc_from_ltm64 (uint64 *u)
-{
-  return (leapsecs_sub(u) > 0) ;
-}
-
-#else
-
-int utc_from_ltm64 (uint64 *u)
-{
-  (void)u ;
+  leapsecs_sub(u) ;
+#endif
   return 1 ;
 }
-
-#endif

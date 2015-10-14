@@ -112,28 +112,6 @@ dates. It is up to the programmer to make sure that a relative time is
 never interpreted as an absolute TAI64 date, and vice-versa.
 </p>
 
-<h3> The leap second table </h3>
-
-<p>
- skalibs provides a <tt>src/etc/leapsecs.dat</tt> file,
-which is copied to <tt>/etc/leapsecs.dat</tt> at installation time
-(or wherever you specified with the <tt>--prefix</tt> or <tt>--datadir</tt>
-options to configure).
-<strong>Make sure this file is always present and readable.</strong>
-This file contains the <em>leap second table</em>, which is needed for
-conversions between TAI and UTC. If you call a function that needs such
-a conversion (for instance, you call <tt>tain_sysclock()</tt> and your
-system clock is set to UTC) and the file cannot be read, the function
-call will fail.
-</p>
-
-<p>
- The leap second table is read once in every process that needs it
-(the first time a TAI &harr; UTC conversion is made) and then is
-stored in memory. If the <tt>leapsecs.dat</tt> file changes, long-lived
-processes will need to be restarted to take the change into account.
-</p>
-
 <h2> Functions </h2>
 
 <h3> Wallclock operations </h3>
@@ -343,8 +321,7 @@ could not be performed; in which case errno is set to EINVAL if
 the input argument was not a valid timestamp, to EOVERFLOW if the
 output could not be represented in the chosen format (which may
 happen on systems with a 32 bit <tt>time_t</tt>), or other error
-codes - for instance related to the leap second table when a
-lookup was necessary.
+codes.
 </p>
 
 <code> int tai_from_time_sysclock (tai_t *a, time_t t) <br />
