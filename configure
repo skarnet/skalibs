@@ -332,7 +332,11 @@ tryflag CPPFLAGS_AUTO -Werror=implicit-function-declaration
 tryflag CPPFLAGS_AUTO -Werror=implicit-int
 tryflag CPPFLAGS_AUTO -Werror=pointer-sign
 tryflag CPPFLAGS_AUTO -Werror=pointer-arith
+tryflag CFLAGS_AUTO -ffunction-sections
+tryflag CFLAGS_AUTO -fdata-sections
 
+tryldflag LDFLAGS_AUTO -Wl,--sort-section=alignment
+tryldflag LDFLAGS_AUTO -Wl,--sort-common
 if $shared ; then
   tryldflag LDFLAGS_AUTO -Wl,--hash-style=both
 fi
