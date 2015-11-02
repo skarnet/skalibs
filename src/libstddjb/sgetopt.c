@@ -16,8 +16,6 @@ int sgetopt_r (int argc, char const *const *argv, char const *opts, subgetopt_t 
     buffer_put(buffer_2, ": ", 2) ;
     buffer_puts(buffer_2, ((c == '?') && argv[o->ind] && (o->ind < argc)) ?
      "illegal option" : "option requires an argument") ;
-    buffer_put(buffer_2, " -- ", 4) ;
-    buffer_put(buffer_2, &c, 1) ;
     buffer_putflush(buffer_2, "\n", 1) ;
   }
   return (int)c ;
