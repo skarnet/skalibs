@@ -57,18 +57,18 @@ clean:
 	@exec rm -f $(ALL_LIBS) $(ALL_BINS) $(ALL_SOBJS) $(ALL_DOBJS) $(BUILT_INCLUDES)
 
 distclean: clean
-	@exec rm -rf config.mak src/include/${package}/config.h sysdeps.cfg
+	@exec rm -rf config.mak src/include/$(package)/config.h sysdeps.cfg
 
 tgz: distclean
-	@. package/info && \
-        rm -rf /tmp/$$package-$$version && \
-        cp -a . /tmp/$$package-$$version && \
-        cd /tmp && \
-	tar -zpcv --owner=0 --group=0 --numeric-owner --exclude=.git* -f /tmp/$$package-$$version.tar.gz $$package-$$version && \
-	exec rm -rf /tmp/$$package-$$version
+	@rm -rf /tmp/$(package)-$(version) && \
+	cp -a . /tmp/$(package)-$(version) && \
+	cd /tmp && \
+	tar -zpcv --owner=0 --group=0 --numeric-owner --exclude=.git* -f /tmp/$(package)-$(version).tar.gz $$package-$$version && \
+	exec rm -rf /tmp/$(package)-$(version)
 
 strip: $(ALL_LIBS)
-	exec ${STRIP} -x -R .note -R .comment -R .note.GNU-stack $(ALL_LIBS)
+	exec $(STRIP) -x -R .note -R .comment -R .note.GNU-stack $(STATIC_LIBS)
+	exec $(STRIP) -R .note -R .comment -R .note.GNU-stack $(SHARED_LIBS)
 
 install: install-data install-sysdeps install-dynlib install-lib install-include
 install-data: $(ALL_DATA:src/etc/%=$(DESTDIR)$(datadir)/%)
@@ -101,8 +101,7 @@ $(DESTDIR)$(dynlibdir)/%.so: %.so.xyzzy
 	$(INSTALL) -D -m 755 $< $@.$(version) && \
 	$(INSTALL) -l $(@F).$(version) $@.$(version_m) && \
 	$(INSTALL) -l $(@F).$(version_m) $@.$(version_M) && \
-	$(INSTALL) -l $(@F).$(version_M) $@.$(version_l) && \
-	exec $(INSTALL) -l $(@F).$(version_l) $@
+	exec $(INSTALL) -l $(@F).$(version_M) $@
 
 $(DESTDIR)$(libdir)/lib%.a: lib%.a.xyzzy
 	exec $(INSTALL) -D -m 644 $< $@
@@ -127,10 +126,10 @@ libskarnet.so.xyzzy: $(ALL_DOBJS)
 
 .DELETE_ON_ERROR:
 
-src/include/${package}/sysdeps.h: $(sysdeps)/sysdeps.h
+src/include/$(package)/sysdeps.h: $(sysdeps)/sysdeps.h
 	exec cat < $< > $@
 
-src/include/${package}/uint16.h: src/include/${package}/uint64.h $(sysdeps)/sysdeps src/headers/uint16-header src/headers/uint16-footer src/headers/uint16-lendian src/headers/uint16-bendian
+src/include/$(package)/uint16.h: src/include/$(package)/uint64.h $(sysdeps)/sysdeps src/headers/uint16-header src/headers/uint16-footer src/headers/uint16-lendian src/headers/uint16-bendian
 	@{ \
 	  cat src/headers/uint16-header ; \
 	  if grep -qF 'endianness: little' $(sysdeps)/sysdeps ; then cat src/headers/uint16-lendian ; \
@@ -140,7 +139,7 @@ src/include/${package}/uint16.h: src/include/${package}/uint64.h $(sysdeps)/sysd
 	  exec cat src/headers/uint16-footer ; \
 	} > $@
 
-src/include/${package}/uint32.h: src/include/${package}/uint64.h $(sysdeps)/sysdeps src/headers/uint32-header src/headers/uint32-footer src/headers/uint32-lendian src/headers/uint32-bendian
+src/include/$(package)/uint32.h: src/include/$(package)/uint64.h $(sysdeps)/sysdeps src/headers/uint32-header src/headers/uint32-footer src/headers/uint32-lendian src/headers/uint32-bendian
 	@{ \
 	  cat src/headers/uint32-header ; \
 	  if grep -qF 'endianness: little' $(sysdeps)/sysdeps ; then cat src/headers/uint32-lendian ; \
@@ -150,7 +149,7 @@ src/include/${package}/uint32.h: src/include/${package}/uint64.h $(sysdeps)/sysd
 	  exec cat src/headers/uint32-footer ; \
 	} > $@
 
-src/include/${package}/uint64.h: $(sysdeps)/sysdeps src/headers/uint64-header src/headers/uint64-footer src/headers/uint64-ulong64 src/headers/uint64-noulong64 src/headers/uint64-lendian src/headers/uint64-bendian
+src/include/$(package)/uint64.h: $(sysdeps)/sysdeps src/headers/uint64-header src/headers/uint64-footer src/headers/uint64-ulong64 src/headers/uint64-noulong64 src/headers/uint64-lendian src/headers/uint64-bendian
 	@{ \
 	  cat src/headers/uint64-header ; \
 	  if grep -qF 'uint64t: yes' $(sysdeps)/sysdeps ; then cat src/headers/uint64-stdinth ; \
@@ -164,7 +163,7 @@ src/include/${package}/uint64.h: $(sysdeps)/sysdeps src/headers/uint64-header sr
 	  exec cat src/headers/uint64-footer ; \
 	} > $@
 
-src/include/${package}/ushort.h: src/include/${package}/uint16.h src/include/${package}/uint32.h $(sysdeps)/sysdeps src/headers/ushort-header src/headers/ushort-footer src/headers/ushort-16 src/headers/ushort-32
+src/include/$(package)/ushort.h: src/include/$(package)/uint16.h src/include/$(package)/uint32.h $(sysdeps)/sysdeps src/headers/ushort-header src/headers/ushort-footer src/headers/ushort-16 src/headers/ushort-32
 	@{ \
 	  cat src/headers/ushort-header ; \
 	  if grep -qF 'sizeofushort: 2' $(sysdeps)/sysdeps ; then cat src/headers/ushort-16 ; \
@@ -174,7 +173,7 @@ src/include/${package}/ushort.h: src/include/${package}/uint16.h src/include/${p
 	  exec cat src/headers/ushort-footer ; \
 	} > $@
 
-src/include/${package}/uint.h: src/include/${package}/uint16.h src/include/${package}/uint32.h src/include/${package}/uint64.h $(sysdeps)/sysdeps src/headers/uint-header src/headers/uint-footer src/headers/uint-16 src/headers/uint-32 src/headers/uint-64
+src/include/$(package)/uint.h: src/include/$(package)/uint16.h src/include/$(package)/uint32.h src/include/$(package)/uint64.h $(sysdeps)/sysdeps src/headers/uint-header src/headers/uint-footer src/headers/uint-16 src/headers/uint-32 src/headers/uint-64
 	@{ \
 	  cat src/headers/uint-header ; \
 	  if grep -qF 'sizeofuint: 2' $(sysdeps)/sysdeps ; then cat src/headers/uint-16 ; \
@@ -185,7 +184,7 @@ src/include/${package}/uint.h: src/include/${package}/uint16.h src/include/${pac
 	  exec cat src/headers/uint-footer ; \
 	} > $@
 
-src/include/${package}/ulong.h: src/include/${package}/uint32.h src/include/${package}/uint64.h $(sysdeps)/sysdeps src/headers/ulong-header src/headers/ulong-footer src/headers/ulong-32 src/headers/ulong-64
+src/include/$(package)/ulong.h: src/include/$(package)/uint32.h src/include/$(package)/uint64.h $(sysdeps)/sysdeps src/headers/ulong-header src/headers/ulong-footer src/headers/ulong-32 src/headers/ulong-64
 	@{ \
 	  cat src/headers/ulong-header ; \
 	  if grep -qF 'sizeofulong: 4' $(sysdeps)/sysdeps ; then cat src/headers/ulong-32 ; \
@@ -195,7 +194,7 @@ src/include/${package}/ulong.h: src/include/${package}/uint32.h src/include/${pa
 	  exec cat src/headers/ulong-footer ; \
 	} > $@
 
-src/include/${package}/error.h: src/include/${package}/gccattributes.h $(sysdeps)/sysdeps src/headers/error-addrinuse src/headers/error-already src/headers/error-proto src/headers/error-header src/headers/error-footer
+src/include/$(package)/error.h: src/include/$(package)/gccattributes.h $(sysdeps)/sysdeps src/headers/error-addrinuse src/headers/error-already src/headers/error-proto src/headers/error-header src/headers/error-footer
 	@{ \
 	  cat src/headers/error-header ; \
 	  if grep -F target: $(sysdeps)/sysdeps | grep -qiF bsd ; then cat src/headers/error-addrinuse ; \
@@ -207,7 +206,7 @@ src/include/${package}/error.h: src/include/${package}/gccattributes.h $(sysdeps
 	  exec cat src/headers/error-footer ; \
 	} > $@
 
-src/include/${package}/gidstuff.h: src/include/${package}/uint16.h src/include/${package}/uint32.h src/include/${package}/uint64.h $(sysdeps)/sysdeps src/headers/gidstuff-header src/headers/gidstuff-footer src/headers/gidstuff-16 src/headers/gidstuff-32 src/headers/gidstuff-64
+src/include/$(package)/gidstuff.h: src/include/$(package)/uint16.h src/include/$(package)/uint32.h src/include/$(package)/uint64.h $(sysdeps)/sysdeps src/headers/gidstuff-header src/headers/gidstuff-footer src/headers/gidstuff-16 src/headers/gidstuff-32 src/headers/gidstuff-64
 	@{ \
 	  cat src/headers/gidstuff-header ; \
 	  if grep -qF 'sizeofgid: 2' $(sysdeps)/sysdeps ; then cat src/headers/gidstuff-16 ; \
@@ -218,7 +217,7 @@ src/include/${package}/gidstuff.h: src/include/${package}/uint16.h src/include/$
 	  exec cat src/headers/gidstuff-footer ; \
 	} > $@
 
-src/include/${package}/ip46.h: src/include/${package}/uint16.h src/include/${package}/bytestr.h src/include/${package}/fmtscan.h src/include/${package}/tai.h src/include/${package}/socket.h $(sysdeps)/sysdeps src/headers/ip46-header src/headers/ip46-footer src/headers/ip46-with src/headers/ip46-without
+src/include/$(package)/ip46.h: src/include/$(package)/uint16.h src/include/$(package)/bytestr.h src/include/$(package)/fmtscan.h src/include/$(package)/tai.h src/include/$(package)/socket.h $(sysdeps)/sysdeps src/headers/ip46-header src/headers/ip46-footer src/headers/ip46-with src/headers/ip46-without
 	@{ \
 	  cat src/headers/ip46-header ; \
 	  if $(ipv6) && grep -qF 'ipv6: yes' $(sysdeps)/sysdeps ; then cat src/headers/ip46-with ; \
@@ -227,7 +226,7 @@ src/include/${package}/ip46.h: src/include/${package}/uint16.h src/include/${pac
 	  exec cat src/headers/ip46-footer ; \
 	} > $@
 
-src/include/${package}/setgroups.h: $(sysdeps)/sysdeps src/headers/setgroups-header src/headers/setgroups-footer src/headers/setgroups-stub
+src/include/$(package)/setgroups.h: $(sysdeps)/sysdeps src/headers/setgroups-header src/headers/setgroups-footer src/headers/setgroups-stub
 	@{ \
 	  cat src/headers/setgroups-header ; \
 	  if grep -qF 'setgroups: yes' $(sysdeps)/sysdeps ; then : ; \
