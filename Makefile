@@ -60,11 +60,12 @@ distclean: clean
 	@exec rm -rf config.mak src/include/$(package)/config.h sysdeps.cfg
 
 tgz: distclean
-	@rm -rf /tmp/$(package)-$(version) && \
-	cp -a . /tmp/$(package)-$(version) && \
+	@. package/info && \
+	rm -rf /tmp/$$package-$$version && \
+	cp -a . /tmp/$$package-$$version && \
 	cd /tmp && \
-	tar -zpcv --owner=0 --group=0 --numeric-owner --exclude=.git* -f /tmp/$(package)-$(version).tar.gz $$package-$$version && \
-	exec rm -rf /tmp/$(package)-$(version)
+	tar -zpcv --owner=0 --group=0 --numeric-owner --exclude=.git* -f /tmp/$$package-$$version.tar.gz $$package-$$version && \
+	exec rm -rf /tmp/$$package-$$version
 
 strip: $(ALL_LIBS)
 	exec $(STRIP) -x -R .note -R .comment -R .note.GNU-stack $(STATIC_LIBS)
