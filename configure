@@ -167,7 +167,7 @@ trytypesize() {
 
 # Actual script
 
-CC_AUTO="$CC"
+CC_AUTO=
 CFLAGS_AUTO="$CFLAGS"
 CPPFLAGS_AUTO="-D_POSIX_C_SOURCE=200809L -D_XOPEN_SOURCE=700 -O2 $CPPFLAGS"
 LDFLAGS_AUTO="$LDFLAGS"
@@ -224,7 +224,7 @@ for arg ; do
     --enable-slashpackage) sproot= ; slashpackage=true ;;
     --disable-slashpackage) sproot= ; slashpackage=false ;;
     --enable-cross=*) cross=${arg#*=} ;;
-    --enable-cross) cross= ;;
+    --enable-cross) ;;
     --disable-cross) cross= ;;
     --enable-libc-replacements|--enable-libc-replacements=yes) replacements=true ;;
     --disable-libc-replacements|--enable-libc-replacements=no) replacements=false ;;
@@ -302,6 +302,7 @@ fi
 
 # Find a C compiler to use
 echo "Checking for C compiler..."
+trycc ${cross}${CC}
 trycc ${cross}gcc
 trycc ${cross}c99
 trycc ${cross}cc
@@ -518,20 +519,20 @@ sysdeps := $sysdeps
 version := $version
 sproot := $sproot
 home := $home
-exthome := $exthome
-ipv6 := $ipv6
+exthome := ${exthome}
+ipv6 := ${ipv6}
 RT_LIB := ${rt_lib}
 SOCKET_LIB := ${socket_lib}
 SYSCLOCK_LIB := ${sysclock_lib}
 TAINNOW_LIB := ${tainnow_lib}
 UTIL_LIB := ${util_lib}
-CC := $CC_AUTO
+CC := ${CC_AUTO##${cross}}
 CFLAGS := $CFLAGS_AUTO
 CPPFLAGS := $CPPFLAGS_AUTO
 LDFLAGS := $LDFLAGS_AUTO
 LDFLAGS_NOSHARED := $LDFLAGS_NOSHARED
 LDFLAGS_SHARED := $LDFLAGS_SHARED
-CROSS_COMPILE := $cross
+CROSS_COMPILE := ${cross}
 EOF
 if test -n "$vpaths" ; then
   echo "vpath lib%a$vpaths"
