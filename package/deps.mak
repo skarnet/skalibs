@@ -211,7 +211,9 @@ src/libstddjb/bitarray_and.o src/libstddjb/bitarray_and.lo: src/libstddjb/bitarr
 src/libstddjb/bitarray_clearsetn.o src/libstddjb/bitarray_clearsetn.lo: src/libstddjb/bitarray_clearsetn.c src/include/skalibs/bitarray.h
 src/libstddjb/bitarray_count.o src/libstddjb/bitarray_count.lo: src/libstddjb/bitarray_count.c src/include/skalibs/bitarray.h
 src/libstddjb/bitarray_firstclear.o src/libstddjb/bitarray_firstclear.lo: src/libstddjb/bitarray_firstclear.c src/include/skalibs/bitarray.h
+src/libstddjb/bitarray_firstclear_skip.o src/libstddjb/bitarray_firstclear_skip.lo: src/libstddjb/bitarray_firstclear_skip.c src/include/skalibs/bitarray.h
 src/libstddjb/bitarray_firstset.o src/libstddjb/bitarray_firstset.lo: src/libstddjb/bitarray_firstset.c src/include/skalibs/bitarray.h
+src/libstddjb/bitarray_firstset_skip.o src/libstddjb/bitarray_firstset_skip.lo: src/libstddjb/bitarray_firstset_skip.c src/include/skalibs/bitarray.h
 src/libstddjb/bitarray_not.o src/libstddjb/bitarray_not.lo: src/libstddjb/bitarray_not.c src/include/skalibs/bitarray.h
 src/libstddjb/bitarray_or.o src/libstddjb/bitarray_or.lo: src/libstddjb/bitarray_or.c src/include/skalibs/bitarray.h
 src/libstddjb/bitarray_testandpoke.o src/libstddjb/bitarray_testandpoke.lo: src/libstddjb/bitarray_testandpoke.c src/include/skalibs/bitarray.h

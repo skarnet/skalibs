@@ -24,6 +24,11 @@ extern int bitarray_testandpoke (unsigned char *, unsigned int, int) ;
 extern unsigned int bitarray_firstclear (unsigned char const *, unsigned int) gccattr_pure ;
 extern unsigned int bitarray_firstset (unsigned char const *, unsigned int) gccattr_pure ;
 #define bitarray_first(s, n, h) ((h) ? bitarray_firstset(s, n) : bitarray_firstclear(s, n))
+
+extern unsigned int bitarray_firstclear_skip (unsigned char const *, unsigned int, unsigned int) gccattr_pure ;
+extern unsigned int bitarray_firstset_skip (unsigned char const *, unsigned int, unsigned int) gccattr_pure ;
+#define bitarray_first_skip(s, n, k, h) ((h) ? bitarray_firstset_skip(s, n, k) : bitarray_firstclear_skip(s, n, k))
+
 extern unsigned int bitarray_countones (unsigned char const *, unsigned int) gccattr_pure ;
 
 extern void bitarray_not (unsigned char *, unsigned int, unsigned int) ;

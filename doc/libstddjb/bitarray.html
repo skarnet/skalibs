@@ -123,9 +123,23 @@ the total number of bits. If all bits in <em>s</em> are set, <em>len</em> is ret
 </p>
 
 <p>
+<code> unsigned int bitarray_firstclear_skip (unsigned char const *s, unsigned int len, unsigned int skip) </code> <br />
+Like <tt>bitarray_firstclear</tt>, but the first <em>skip</em> bits are
+ignored: the function cannot return less than <em>skip</em>. It is a
+programming error if <em>skip</em> &gt; <em>len</em>.
+</p>
+
+<p>
 <code> unsigned int bitarray_firstset (unsigned char const *s, unsigned int len) </code> <br />
 Returns the number of the first set bit in <em>s</em>, <em>len</em> being
 the total number of bits. If all bits in <em>s</em> are clear, <em>len</em> is returned.
+</p>
+
+<p>
+<code> unsigned int bitarray_firstset_skip (unsigned char const *s, unsigned int len, unsigned int skip) </code> <br />
+Like <tt>bitarray_firstset</tt>, but the first <em>skip</em> bits are
+ignored: the function cannot return less than <em>skip</em>. It is a
+programming error if <em>skip</em> &gt; <em>len</em>.
 </p>
 
 </body>
