@@ -35,7 +35,6 @@ ALL_SRCS := $(wildcard src/lib*/*.c)
 ALL_SOBJS := $(ALL_SRCS:%.c=%.o)
 ALL_DOBJS := $(ALL_SRCS:%.c=%.lo)
 ALL_LIBS := $(SHARED_LIBS) $(STATIC_LIBS)
-ALL_INCLUDES := $(wildcard src/include/$(package)/*.h)
 BUILT_INCLUDES := \
 src/include/$(package)/sysdeps.h \
 src/include/$(package)/uint16.h \
@@ -48,6 +47,7 @@ src/include/$(package)/error.h \
 src/include/$(package)/gidstuff.h \
 src/include/$(package)/ip46.h \
 src/include/$(package)/setgroups.h
+ALL_INCLUDES := $(sort $(BUILT_INCLUDES) $(wildcard src/include/$(package)/*.h))
 ALL_SYSDEPS := $(wildcard $(sysdeps)/*)
 ALL_DATA := $(wildcard src/etc/*)
 
