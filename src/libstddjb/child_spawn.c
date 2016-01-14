@@ -138,8 +138,8 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
 
   syncdie:
     {
-      char c = errno ;
-      fd_write(syncpipe[1], &c, 1) ;
+      unsigned char c = errno ;
+      fd_write(syncpipe[1], (char const *)&c, 1) ;
     }
     _exit(127) ;
   }

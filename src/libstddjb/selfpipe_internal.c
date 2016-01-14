@@ -22,8 +22,8 @@ int selfpipe[2] = { -1, -1 } ;
 
 static void selfpipe_trigger (int s)
 {
-  char c = (char)s ;
-  fd_write(selfpipe[1], &c, 1) ;
+  unsigned char c = (unsigned char)s ;
+  fd_write(selfpipe[1], (char *)&c, 1) ;
 }
 
 struct skasigaction const selfpipe_ssa = { &selfpipe_trigger, SKASA_NOCLDSTOP | SKASA_MASKALL } ;

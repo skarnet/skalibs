@@ -22,8 +22,8 @@ int mininetstring_read (int fd, stralloc *sa, uint32 *w)
   }
   if (*w & (1U << 31))
   {
-    char c ;
-    switch (fd_read(fd, &c, 1))
+    unsigned char c ;
+    switch (fd_read(fd, (char *)&c, 1))
     {
       case -1 : return -1 ;
       case 0 : return (errno = EPIPE, -1) ;

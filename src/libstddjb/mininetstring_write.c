@@ -23,8 +23,8 @@ int mininetstring_write (int fd, char const *s, uint16 len, uint32 *w)
   }
   if (*w & (1U << 31))
   {
-    char c = len & 0xFFU ;
-    switch (fd_write(fd, &c, 1))
+    unsigned char c = len & 0xFFU ;
+    switch (fd_write(fd, (char const *)&c, 1))
     {
       case -1 : return -1 ;
       case 0 : return (errno = EAGAIN, -1) ;
