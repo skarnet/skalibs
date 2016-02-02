@@ -97,13 +97,13 @@ int unixmessage_sender_flush (unixmessage_sender_t *b)
     while (r < 0 && errno == EINTR) ;
     if (r <= 0) return 0 ;
 #ifndef SKALIBS_HASANCILAUTOCLOSE
-    if (nfds)
+    if (nfds && b->closecb)
     {
       register unsigned int i = 0 ;
       for (; i < nfds ; i++)
       {
         register int fd = genalloc_s(int, &b->fds)[offsets[b->head].right + i] ;
-        if (fd < 0) fd_close(-(fd+1)) ;
+        if (fd < 0) (*b->closecb)(-(fd+1), b->closecbdata) ;
       }
     }
 #endif

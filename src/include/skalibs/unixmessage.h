@@ -49,6 +49,9 @@ extern unixmessage_v_t const unixmessage_v_zero ;
 
  /* Sender */
 
+typedef void unixmessage_sender_closecb_func_t (int, void *) ;
+typedef unixmessage_sender_closecb_func_t *unixmessage_sender_closecb_func_t_ref ;
+
 typedef struct unixmessage_sender_s unixmessage_sender_t, *unixmessage_sender_t_ref ;
 struct unixmessage_sender_s
 {
@@ -58,12 +61,17 @@ struct unixmessage_sender_s
   genalloc offsets ; /* diuint */
   unsigned int head ;
   unsigned int shorty ;
+  unixmessage_sender_closecb_func_t_ref closecb ;
+  void *closecbdata ;
 } ;
 #define UNIXMESSAGE_SENDER_ZERO UNIXMESSAGE_SENDER_INIT(-1)
-#define UNIXMESSAGE_SENDER_INIT(s) { .fd = (s), .data = STRALLOC_ZERO, .fds = GENALLOC_ZERO, .offsets = GENALLOC_ZERO, .head = 0, .shorty = 0 }
+#define UNIXMESSAGE_SENDER_INIT(s) UNIXMESSAGE_SENDER_INIT_WITHCLOSECB((s), &unixmessage_sender_closecb, 0)
+#define UNIXMESSAGE_SENDER_INIT_WITHCLOSECB(s, f, p) { .fd = (s), .data = STRALLOC_ZERO, .fds = GENALLOC_ZERO, .offsets = GENALLOC_ZERO, .head = 0, .shorty = 0, .closecb = (f), .closecbdata = (p) }
 
 extern unixmessage_sender_t const unixmessage_sender_zero ;
+extern unixmessage_sender_closecb_func_t unixmessage_sender_closecb ;
 extern void unixmessage_sender_init (unixmessage_sender_t *, int) ;
+extern void unixmessage_sender_init_withclosecb (unixmessage_sender_t *, int, unixmessage_sender_closecb_func_t_ref, void *) ;
 extern void unixmessage_sender_free (unixmessage_sender_t *) ;
 #define unixmessage_sender_fd(b) ((b)->fd)
 extern int unixmessage_sender_getfd (unixmessage_sender_t const *) gccattr_pure ;
