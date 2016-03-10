@@ -34,7 +34,17 @@ If you enable it, and $v is the version of skalibs you're compiling,
 <tt>/package/prog/skalibs-$v/library</tt>, the dynamic libraries in
 <tt>/package/prog/skalibs-$v/library.so</tt> and the data files in
 <tt>/package/prog/skalibs-$v/etc</tt>, all prefixed by <em>sproot</em>
-if present. It will also add two more "make" targets:
+if present.
+</p>
+
+<p>
+  It will also prepend the default path with <tt>/command</tt>, unless an
+explicit default path has been given via the
+<a href="#defaultpath"><tt>--with-default-path</tt></a> option.
+</p>
+
+<p>
+ Additionally, it will add two more "make" targets:
 </p>
 
 <ul>
@@ -273,7 +283,7 @@ the value of the PATH environment variable as its executable search path.
 Specifying this option to configure tells execvep() what executable
 search path to use when PATH is undefined (which should not happen
 often anyway).
- The default is <tt>/usr/bin:/bin</tt>, which is usually safe.
+ The default is <tt>/usr/bin:/usr/sbin:/bin:/sbin</tt>, which is usually safe.
 </p>
 
 </body>

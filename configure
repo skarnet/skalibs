@@ -46,7 +46,7 @@ $package options:
   --enable-clock                use clock_gettime() instead of gettimeofday() [disabled]
   --enable-monotonic            count time with CLOCK_MONOTONIC instead of CLOCK_REALTIME
   --enable-force-devr           assume /dev/random exists and is valid [autodetection takes time]
-  --with-default-path=PATH      default executable search path [/usr/bin:/bin]
+  --with-default-path=PATH      default executable search path [/usr/bin:/usr/sbin:/bin:/sbin]
 
 EOF
   exit 0
@@ -191,7 +191,9 @@ taiclock=false
 clockrt=false
 clockmon=false
 forcedevr=false
-defaultpath=/usr/bin:/bin
+ddefaultpath=/usr/bin:/usr/sbin:/bin:/sbin
+defaultpath=$ddefaultpath
+dpathorig=true
 sproot=
 home=
 exthome=
@@ -242,8 +244,8 @@ for arg ; do
     --disable-monotonic|--enable-monotonic=no) clockmon=false ;;
     --enable-force-devr|--enable-force-devr=yes) forcedevr=true ;;
     --disable-force-devr|--enable-force-devr=no) forcedevr=false ;;
-    --with-default-path=*) defaultpath=${arg#*=} ;;
-    --without-default-path) defaultpath=/usr/bin:/bin ;;
+    --with-default-path=*) defaultpath=${arg#*=} ; dpathorig=false ;;
+    --without-default-path) defaultpath=$ddefaultpath ; dpathorig=true ;;
     --enable-*|--disable-*|--with-*|--without-*|--*dir=*|--build=*) ;;
     --host=*|--target=*) target=${arg#*=} ;;
     -* ) echo "$0: unknown option $arg" ;;
@@ -298,6 +300,11 @@ if $slashpackage ; then
   dynlibdir=${home}/library.so
   libdir=${home}/library
   includedir=${home}/include
+  if $dpathorig ; then
+    if echo $defaultpath | tr : '\n' | grep -q '^/command$' ; then : ; else
+      defaultpath="/command:$defaultpath"
+    fi
+  fi
 fi
 
 # Find a C compiler to use
