@@ -84,7 +84,7 @@ install-include: $(ALL_INCLUDES:src/include/$(package)/%.h=$(DESTDIR)$(includedi
 
 ifneq ($(exthome),)
 
-$(DESTDIR)$(exthome): $(home)
+$(DESTDIR)$(exthome): $(DESTDIR)$(home)
 	exec $(INSTALL) -l $(notdir $(home)) $(DESTDIR)$(exthome)
 
 update: $(DESTDIR)$(exthome)
