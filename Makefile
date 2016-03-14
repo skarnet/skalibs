@@ -84,8 +84,10 @@ install-include: $(ALL_INCLUDES:src/include/$(package)/%.h=$(DESTDIR)$(includedi
 
 ifneq ($(exthome),)
 
-update:
+$(DESTDIR)$(exthome): $(home)
 	exec $(INSTALL) -l $(notdir $(home)) $(DESTDIR)$(exthome)
+
+update: $(DESTDIR)$(exthome)
 
 global-links: $(DESTDIR)$(exthome) $(SHARED_LIBS:lib%.so.xyzzy=$(DESTDIR)$(sproot)/library.so/lib%.so.$(version_M))
 
