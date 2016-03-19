@@ -35,7 +35,6 @@ Optional features:
   --disable-shared              do not build shared libraries [enabled]
   --disable-static              do not build static libraries [enabled]
   --enable-slashpackage[=ROOT]  assume /package installation at ROOT [disabled]
-  --enable-cross=PREFIX         prefix toolchain executable names with PREFIX [none]
 
 $package options:
   --enable-libc-replacements    use independent low-level primitives [disabled]
@@ -202,7 +201,7 @@ addlibspath=''
 addlibdpath=''
 vpaths=''
 vpathd=''
-cross="$CROSS_COMPILE"
+build=
 
 
 for arg ; do
@@ -225,9 +224,6 @@ for arg ; do
     --enable-slashpackage=*) sproot=${arg#*=} ; slashpackage=true ; ;;
     --enable-slashpackage) sproot= ; slashpackage=true ;;
     --disable-slashpackage) sproot= ; slashpackage=false ;;
-    --enable-cross=*) cross=${arg#*=} ;;
-    --enable-cross) ;;
-    --disable-cross) cross= ;;
     --enable-libc-replacements|--enable-libc-replacements=yes) replacements=true ;;
     --disable-libc-replacements|--enable-libc-replacements=no) replacements=false ;;
     --enable-egd=*) egd=${arg#*=} ;;
@@ -246,8 +242,9 @@ for arg ; do
     --disable-force-devr|--enable-force-devr=no) forcedevr=false ;;
     --with-default-path=*) defaultpath=${arg#*=} ; dpathorig=false ;;
     --without-default-path) defaultpath=$ddefaultpath ; dpathorig=true ;;
-    --enable-*|--disable-*|--with-*|--without-*|--*dir=*|--build=*) ;;
+    --enable-*|--disable-*|--with-*|--without-*|--*dir=*) ;;
     --host=*|--target=*) target=${arg#*=} ;;
+    --build=*) build=${arg#*=} ;;
     -* ) echo "$0: unknown option $arg" ;;
     *=*) ;;
     *) target=$arg ;;
@@ -308,6 +305,11 @@ if $slashpackage ; then
 fi
 
 # Find a C compiler to use
+if test -n "$target" && test x${build} != x${target} ; then
+  cross=${target}-
+else
+  cross=
+fi
 echo "Checking for C compiler..."
 trycc ${cross}${CC}
 trycc ${cross}gcc
@@ -326,7 +328,13 @@ else
 fi
 
 echo "Checking target system type..."
-test -n "$target" || target=$($CC_AUTO -dumpmachine 2>/dev/null) || target=unknown
+if test -z "$target" ; then
+  if test -n "$build" ; then
+    target=$build ;
+  else
+    target=$($CC_AUTO -dumpmachine 2>/dev/null) || target=unknown
+  fi
+fi
 echo "  ... $target"
 
 tryflag CPPFLAGS_AUTO -std=c99

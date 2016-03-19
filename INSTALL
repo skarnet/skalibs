@@ -39,20 +39,30 @@ before the "make install" phase. It will shave a few bytes off them.
 
  Controlling a build process via environment variables is a big and
 dangerous hammer. You should try and pass flags to configure instead;
-nevertheless, the standard environment variables are recognized.
+nevertheless, a few standard environment variables are recognized.
 
- The value of the CROSS_COMPILE environment variable will prefix the
-building tools' names. The --enable-cross option is preferred, see
-"Cross-compilation" below.
- 
  If the CC environment variable is set, its value will override compiler
-detection by configure.
+detection by configure. The --host=HOST option will still add a HOST-
+prefix to the value of CC.
 
  The values of CFLAGS, CPPFLAGS and LDFLAGS will be appended to flags
 auto-detected by configure. To entirely override the flags set by
-configure instead, use make -e.
+configure instead, use make variables.
 
- The Makefile supports the DESTDIR convention for staging.
+
+* Make variables
+  --------------
+
+ You can invoke make with a few variables for more configuration.
+
+ CC, CFLAGS, CPPFLAGS, LDFLAGS, LDLIBS, AR, RANLIB, STRIP, INSTALL and
+CROSS_COMPILE can all be overridden on the make command line. This is
+an even bigger hammer than running ./configure with environment
+variables, so it is advised to only do this when it is the only way of
+obtaining the behaviour you want.
+ 
+ DESTDIR can be given on the "make install" command line in order to
+install to a staging directory.
 
 
 * Shared libraries
@@ -90,9 +100,8 @@ configure with a precomputed sysdeps directory, containing valid
 sysdeps values for your target.
 
  Use the --with-sysdeps=DIR option to specify DIR as a sysdeps
-directory for your target. Also use the --enable-cross=PREFIX option
-to specify a cross-compiling PREFIX for your toolchain's binaries,
-or simply --enable-cross if your default toolchain is a cross-compiler.
+directory for your target. Also use the --host=HOST option, HOST being
+the triplet for your target.
 
  If you know the peculiarities of your target system, you can build
 a sysdeps directory by hand. However, a much easier, and recommended,
@@ -104,11 +113,13 @@ purposes are available at Aboriginal Linux: http://landley.net/aboriginal/
 skarnet.org or on third-party sites.
 
  Once you have gathered your sysdeps, for any skarnet.org package:
+ * make sure the binaries of your cross-toolchain (HOST-gcc, HOST-ld,
+HOST-ar, etc.) are accessible via your PATH environment variable
  * give the correct --with-sysdeps option to ./configure
- * give the correct --enable-cross option
+ * give the correct --host option
  * for --prefix, --bindir and other paths, always use the run-time path
  * to install the cross-compiled package in a staging directory /your/stage,
-   perform "make install DESTDIR=/your/stage/"
+   perform "make install DESTDIR=/your/staging/directory"
 
 
 * The slashpackage convention
