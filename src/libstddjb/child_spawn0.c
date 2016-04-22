@@ -64,7 +64,7 @@ pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const
     errno = e ;
     return 0 ;
   }
-  if (pid)
+  if (!pid)
   {
     fd_close(p[0]) ;
     sig_blocknone() ;
