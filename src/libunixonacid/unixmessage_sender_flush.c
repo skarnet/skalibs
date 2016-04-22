@@ -97,7 +97,7 @@ int unixmessage_sender_flush (unixmessage_sender_t *b)
     while (r < 0 && errno == EINTR) ;
     if (r <= 0) return 0 ;
 #ifndef SKALIBS_HASANCILAUTOCLOSE
-    if (nfds && b->closecb)
+    if (nfds)
     {
       register unsigned int i = 0 ;
       for (; i < nfds ; i++)

@@ -16,9 +16,9 @@ void unixmessage_sender_free (unixmessage_sender_t *b)
     for (; i < n ; i++)
     {
       register int fd = genalloc_s(int, &b->fds)[i] ;
-      if (fd < 0) fd_close(-(fd+1)) ;
+      if (fd < 0) (*b->closecb)(-(fd+1), b->closecbdata) ;
 #ifdef SKALIBS_HASANCILAUTOCLOSE
-      else fd_close(fd) ;
+      else (*b->closecb)(fd, b->closecbdata) ;
 #endif
     }
   }

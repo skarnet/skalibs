@@ -14,7 +14,7 @@
 #include <skalibs/siovec.h>
 #include <skalibs/unixmessage.h>
 
-static inline int copyfds (char *s, int const *fds, unsigned int n, unsigned char const *bits)
+static inline int copyfds (char *s, int const *fds, unsigned int n, unsigned char const *bits, unixmessage_sender_closecb_func_t_ref closecb, void *closecbdata)
 {
   register unsigned int i = 0 ;
   for (; i < n ; i++)
@@ -33,13 +33,12 @@ static inline int copyfds (char *s, int const *fds, unsigned int n, unsigned cha
         {
           s -= sizeof(int) ;
           byte_copy((char *)fd, sizeof(int), s) ;
-          if (fd >= 0) fd_close(fd) ;
+          if (fd >= 0) (*closecb)(fd, closecbdata) ;
         }
         errno = e ;
         return 0 ;
       }
     }
-#else
 #endif
     byte_copy(s, sizeof(int), (char const *)&fd) ;
     s += sizeof(int) ;
@@ -56,7 +55,7 @@ static int reserve_and_copy (unixmessage_sender_t *b, unsigned int len, int cons
    || !genalloc_readyplus(int, &b->fds, nfds)
    || !stralloc_readyplus(&b->data, len))
     return 0 ;
-  if (!copyfds(b->fds.s + b->fds.len, fds, nfds, bits)) return 0 ;
+  if (!copyfds(b->fds.s + b->fds.len, fds, nfds, bits, b->closecb, b->closecbdata)) return 0 ;
   genalloc_setlen(int, &b->fds, cur.right + nfds) ;
   byte_copy(b->offsets.s + b->offsets.len, sizeof(diuint), (char const *)&cur) ;
   b->offsets.len += sizeof(diuint) ;

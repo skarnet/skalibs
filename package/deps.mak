@@ -123,7 +123,7 @@ src/libdatastruct/avltreen_init.o src/libdatastruct/avltreen_init.lo: src/libdat
 src/libdatastruct/avltreen_insert.o src/libdatastruct/avltreen_insert.lo: src/libdatastruct/avltreen_insert.c src/include/skalibs/avltreen.h
 src/libdatastruct/avltreen_newnode.o src/libdatastruct/avltreen_newnode.lo: src/libdatastruct/avltreen_newnode.c src/include/skalibs/avlnode.h src/include/skalibs/avltreen.h src/include/skalibs/genset.h
 src/libdatastruct/genset.o src/libdatastruct/genset.lo: src/libdatastruct/genset.c src/include/skalibs/genset.h
-src/libdatastruct/genset_iter.o src/libdatastruct/genset_iter.lo: src/libdatastruct/genset_iter.c src/include/skalibs/bitarray.h src/include/skalibs/functypes.h src/include/skalibs/genset.h
+src/libdatastruct/genset_iter_nocancel.o src/libdatastruct/genset_iter_nocancel.lo: src/libdatastruct/genset_iter_nocancel.c src/include/skalibs/bitarray.h src/include/skalibs/functypes.h src/include/skalibs/genset.h
 src/libdatastruct/genset_iter_withcancel.o src/libdatastruct/genset_iter_withcancel.lo: src/libdatastruct/genset_iter_withcancel.c src/include/skalibs/functypes.h src/include/skalibs/genset.h
 src/libdatastruct/gensetdyn_delete.o src/libdatastruct/gensetdyn_delete.lo: src/libdatastruct/gensetdyn_delete.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h
 src/libdatastruct/gensetdyn_free.o src/libdatastruct/gensetdyn_free.lo: src/libdatastruct/gensetdyn_free.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h src/include/skalibs/stralloc.h
@@ -781,6 +781,7 @@ src/libunixonacid/timed_getln.o src/libunixonacid/timed_getln.lo: src/libunixona
 src/libunixonacid/timed_getlnmax.o src/libunixonacid/timed_getlnmax.lo: src/libunixonacid/timed_getlnmax.c src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/skamisc.h src/include/skalibs/tai.h src/include/skalibs/unix-timed.h
 src/libunixonacid/unixconnection_free.o src/libunixonacid/unixconnection_free.lo: src/libunixonacid/unixconnection_free.c src/include/skalibs/unixconnection.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixconnection_init.o src/libunixonacid/unixconnection_init.lo: src/libunixonacid/unixconnection_init.c src/include/skalibs/unixconnection.h src/include/skalibs/unixmessage.h
+src/libunixonacid/unixconnection_init_withclosecb.o src/libunixonacid/unixconnection_init_withclosecb.lo: src/libunixonacid/unixconnection_init_withclosecb.c src/include/skalibs/unixconnection.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixconnection_zero.o src/libunixonacid/unixconnection_zero.lo: src/libunixonacid/unixconnection_zero.c src/include/skalibs/unixconnection.h
 src/libunixonacid/unixmessage_bits_closeall.o src/libunixonacid/unixmessage_bits_closeall.lo: src/libunixonacid/unixmessage_bits_closeall.c src/include/skalibs/bitarray.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_bits_closenone.o src/libunixonacid/unixmessage_bits_closenone.lo: src/libunixonacid/unixmessage_bits_closenone.c src/include/skalibs/bitarray.h src/include/skalibs/unixmessage.h

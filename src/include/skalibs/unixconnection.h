@@ -17,6 +17,7 @@ struct unixconnection_s
 extern unixconnection_t const unixconnection_zero ;
 
 extern void unixconnection_init (unixconnection_t *, int, int) ;
+extern void unixconnection_init_withclosecb (unixconnection_t *, int, int, unixmessage_sender_closecb_func_t_ref, void *) ;
 extern void unixconnection_free (unixconnection_t *) ;
 
 #define unixconnection_flush(io) unixmessage_sender_flush(&(io)->out)
