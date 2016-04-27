@@ -1,12 +1,12 @@
 /* ISC license. */
 
 #include <skalibs/sysdeps.h>
-#include <skalibs/djbunix.h>
 
 #ifdef SKALIBS_HASFUTIMENS
 
 #include <time.h>
 #include <sys/stat.h>
+#include <skalibs/djbunix.h>
 
 int touch (char const *file)
 {
@@ -20,7 +20,9 @@ int touch (char const *file)
 #else
 #ifdef SKALIBS_HASFUTIMES
 
+#include <skalibs/nonposix.h>
 #include <sys/time.h>
+#include <skalibs/djbunix.h>
 
 int touch (char const *file)
 {
@@ -34,6 +36,7 @@ int touch (char const *file)
 #else
 
 #include <sys/time.h>
+#include <skalibs/djbunix.h>
 
 int touch (char const *file)
 {
