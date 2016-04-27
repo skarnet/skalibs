@@ -491,6 +491,8 @@ EOF
   choose cl strcasestr STRCASESTR 'strcasestr()'
   choose cl strnlen STRNLEN 'strnlen()'
   choose c uint64t UINT64T 'uint64_t'
+  choose cl futimens FUTIMENS 'futimens()'
+  choose cl futimes FUTIMES 'futimes()'
 
   if $forcedevr ; then
     echo "/dev/random detection override required, assuming it exists and is working."

@@ -664,7 +664,7 @@ src/libstddjb/timestamp_scan.o src/libstddjb/timestamp_scan.lo: src/libstddjb/ti
 src/libstddjb/timeval_from_tain.o src/libstddjb/timeval_from_tain.lo: src/libstddjb/timeval_from_tain.c src/include/skalibs/tai.h
 src/libstddjb/timeval_from_tain_relative.o src/libstddjb/timeval_from_tain_relative.lo: src/libstddjb/timeval_from_tain_relative.c src/include/skalibs/tai.h
 src/libstddjb/timeval_sysclock_from_tain.o src/libstddjb/timeval_sysclock_from_tain.lo: src/libstddjb/timeval_sysclock_from_tain.c src/include/skalibs/tai.h
-src/libstddjb/touch.o src/libstddjb/touch.lo: src/libstddjb/touch.c src/include/skalibs/djbunix.h
+src/libstddjb/touch.o src/libstddjb/touch.lo: src/libstddjb/touch.c src/include/skalibs/djbunix.h src/include/skalibs/sysdeps.h
 src/libstddjb/ucharn_findlen.o src/libstddjb/ucharn_findlen.lo: src/libstddjb/ucharn_findlen.c src/include/skalibs/fmtscan.h
 src/libstddjb/ucharn_fmt.o src/libstddjb/ucharn_fmt.lo: src/libstddjb/ucharn_fmt.c src/include/skalibs/fmtscan.h
 src/libstddjb/ucharn_fmt_little.o src/libstddjb/ucharn_fmt_little.lo: src/libstddjb/ucharn_fmt_little.c src/include/skalibs/fmtscan.h
