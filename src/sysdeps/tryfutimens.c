@@ -1,8 +1,10 @@
 /* ISC license. */
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <time.h>
+#undef _POSIX_C_SOURCE
+#undef _XOPEN_SOURCE
+#ifndef __EXTENSIONS__
+#define __EXTENSIONS__
+#endif
 
 int main (void)
 {

@@ -4,6 +4,7 @@
 
 #ifdef SKALIBS_HASFUTIMENS
 
+#include <skalibs/nonposix.h>
 #include <time.h>
 #include <sys/stat.h>
 #include <skalibs/djbunix.h>
