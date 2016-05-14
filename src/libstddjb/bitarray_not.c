@@ -12,7 +12,7 @@ void bitarray_not (register unsigned char *s, register unsigned int a, register 
   {
     register unsigned int i = (a>>3) + 1 ;
     s[a>>3] ^= ~((1 << (a & 7)) - 1) ;
-    for (; i < (b>>3) - 1 ; i++) s[i] = ~s[i] ;
+    for (; i < (b>>3) ; i++) s[i] = ~s[i] ;
     s[b>>3] ^= (1 << (b & 7)) - 1 ;
   }
 }
