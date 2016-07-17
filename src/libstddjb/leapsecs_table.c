@@ -6,8 +6,8 @@
 #include <skalibs/tai.h>
 #include "djbtime-internal.h"
 
-unsigned int const leapsecs_table_len = 26 ;
-static uint64 const leapsecs_table_[26] =
+unsigned int const leapsecs_table_len = 27 ;
+static uint64 const leapsecs_table_[27] =
 {
   TAI_MAGIC + 78796809,
   TAI_MAGIC + 94694410,
@@ -34,6 +34,7 @@ static uint64 const leapsecs_table_[26] =
   TAI_MAGIC + 1136073631,
   TAI_MAGIC + 1230768032,
   TAI_MAGIC + 1341100833,
-  TAI_MAGIC + 1435708834
+  TAI_MAGIC + 1435708834,
+  TAI_MAGIC + 1483228835
 } ;
 uint64 const *const leapsecs_table = leapsecs_table_ ;
