@@ -35,7 +35,7 @@ extern int netstring_timed_get (buffer *, stralloc *, tain_t const *, tain_t *) 
 
 extern int ipc_timed_send (int, char const *, unsigned int, tain_t const *, tain_t *) ;
 #define ipc_timed_send_g(fd, s, len, deadline) ipc_timed_send(fd, s, len, (deadline), &STAMP)
-extern int ipc_timed_get (int, char *, unsigned int, char *, tain_t const *, tain_t *) ;
-#define ipc_timed_get_g(fd, s, len, path, deadline) ipc_timed_get(fd, s, len, path, (deadline), &STAMP)
+extern int ipc_timed_recv (int, char *, unsigned int, char *, tain_t const *, tain_t *) ;
+#define ipc_timed_recv_g(fd, s, len, path, deadline) ipc_timed_recv(fd, s, len, path, (deadline), &STAMP)
 
 #endif

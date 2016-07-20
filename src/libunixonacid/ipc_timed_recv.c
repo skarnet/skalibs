@@ -23,7 +23,7 @@ static int get (struct blah_s *blah)
   return sanitize_read(ipc_recv(blah->fd, blah->s, blah->len, blah->path)) ;
 }
 
-int ipc_timed_get (int fd, char *s, unsigned int len, char *path, tain_t const *deadline, tain_t *stamp)
+int ipc_timed_recv (int fd, char *s, unsigned int len, char *path, tain_t const *deadline, tain_t *stamp)
 {
   struct blah_s blah = { .fd = fd, .s = s, .len = len, .path = path } ;
   return timed_get(&blah, (initfunc_t_ref)&getfd, (initfunc_t_ref)&get, deadline, stamp) ;
