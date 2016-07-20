@@ -727,6 +727,7 @@ src/libunixonacid/dd_commit.o src/libunixonacid/dd_commit.lo: src/libunixonacid/
 src/libunixonacid/dd_commit_devino.o src/libunixonacid/dd_commit_devino.lo: src/libunixonacid/dd_commit_devino.c src/include/skalibs/uint64.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/dd_open_read.o src/libunixonacid/dd_open_read.lo: src/libunixonacid/dd_open_read.c src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/dd_open_write.o src/libunixonacid/dd_open_write.lo: src/libunixonacid/dd_open_write.c src/include/skalibs/djbunix.h src/include/skalibs/random.h src/include/skalibs/stralloc.h src/include/skalibs/unix-transactional.h
+src/libunixonacid/ipc_timed_send.o src/libunixonacid/ipc_timed_send.lo: src/libunixonacid/ipc_timed_send.c src/include/skalibs/error.h src/include/skalibs/iopause.h src/include/skalibs/tai.h src/include/skalibs/unix-timed.h
 src/libunixonacid/kolbak_call.o src/libunixonacid/kolbak_call.lo: src/libunixonacid/kolbak_call.c src/include/skalibs/kolbak.h src/include/skalibs/unixmessage.h
 src/libunixonacid/kolbak_enqueue.o src/libunixonacid/kolbak_enqueue.lo: src/libunixonacid/kolbak_enqueue.c src/include/skalibs/kolbak.h src/include/skalibs/unixmessage.h
 src/libunixonacid/kolbak_queue_init.o src/libunixonacid/kolbak_queue_init.lo: src/libunixonacid/kolbak_queue_init.c src/include/skalibs/kolbak.h

@@ -33,4 +33,7 @@ extern int timed_getlnmax (buffer *, char *, unsigned int, unsigned int *, char,
 extern int netstring_timed_get (buffer *, stralloc *, tain_t const *, tain_t *) ;
 #define netstring_timed_get_g(b, sa, deadline) netstring_timed_get(b, sa, (deadline), &STAMP)
 
+extern int ipc_timed_send (int, char const *, unsigned int, tain_t const *, tain_t *) ;
+#define ipc_timed_send_g(fd, s, len, deadline) ipc_timed_send(fd, s, len, (deadline), &STAMP)
+
 #endif
