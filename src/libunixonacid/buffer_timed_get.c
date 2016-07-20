@@ -1,6 +1,7 @@
 /* ISC license. */
 
 #include <skalibs/buffer.h>
+#include <skalibs/buffer.h>
 #include <skalibs/tai.h>
 #include <skalibs/unix-timed.h>
 
