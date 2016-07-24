@@ -1,5 +1,8 @@
 /* ISC license. */
 
+ /* For OpenBSD, that still doesn't know what self-contained headers are */
+#include <sys/types.h>
+
 #include <sys/socket.h>
 #include <errno.h>
 #include <skalibs/error.h>
@@ -7,7 +10,7 @@
 #include <skalibs/iopause.h>
 #include <skalibs/unix-timed.h>
 
- /* Yay MacOS */
+ /* For MacOS, that still doesn't know what POSIX says */
 #ifndef MSG_NOSIGNAL
 #define MSG_NOSIGNAL 0
 #endif
