@@ -480,7 +480,7 @@ EOF
   choose cl openat OPENAT 'openat()'
   choose cl linkat LINKAT 'linkat()'
   choose clr pipe2 PIPE2 'pipe2()'
-  choose cl posixspawn POSIXSPAWN 'posix_spawn()'
+  choose cl posixspawn POSIXSPAWN 'posix_spawn()' $rt_lib
   choose clr ppoll PPOLL 'ppoll()'
   choose cl revoke REVOKE 'revoke()'
   choose cl sendfile SENDFILE 'sendfile()'
