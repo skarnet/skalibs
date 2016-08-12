@@ -429,9 +429,14 @@ EOF
   echo "$socket_lib" > $sysdeps/socket.lib
 
   hasclock=true
-  clock_lib=`trylibs clockrt 'clock_gettime()' -lrt` || hasclock=false
-  echo "$clock_lib" > $sysdeps/sysclock.lib
-  echo "$clock_lib" > $sysdeps/tainnow.lib
+  sysclock_lib=`trylibs clockrt 'clock_gettime()' -lrt` || hasclock=false
+  if $clockrt ; then
+    tainnow_lib=$sysclock_lib
+  else
+    tainnow_lib=
+  fi
+  echo "$sysclock_lib" > $sysdeps/sysclock.lib
+  echo "$tainnow_lib" > $sysdeps/tainnow.lib
   if $hasclock ; then
     echo 'clockrt: yes' >> $sysdeps/sysdeps
     echo "#define ${package_macro_name}_HASCLOCKRT" >> $sysdeps/sysdeps.h
