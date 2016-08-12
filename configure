@@ -164,6 +164,33 @@ trytypesize() {
   echo "  ... $type_size"
 }
 
+tryrtlib () {
+  echo "Checking whether system has $3..."
+  if $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO -c -o try$2.o src/sysdeps/try$2.c 2>/dev/null ; then
+    if $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o /dev/null try$2.o 2>/dev/null ; then
+      rm -f try$2.o
+      eval "$1="
+      echo "  ... yes"
+      return 0
+    elif $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o /dev/null try$2.o -lrt 2>/dev/null ; then
+      rm -f try$2.o
+      eval "$1=-lrt"
+      echo "  ... yes, with -lrt"
+      rm -f try$1.o
+      return 0
+    else
+      rm -f try$2.o
+      eval "$1="
+      echo "  ... no"
+      return 1
+    fi
+  else
+    eval "$1="
+    echo "  ... no"
+    return 1
+  fi
+}
+
 # Actual script
 
 CC_AUTO=
@@ -410,45 +437,39 @@ EOF
   rm -f trylsock.o
   echo "$socket_lib" > $sysdeps/socket.lib
 
-  echo "Checking whether clock functions are available..."
-  rt_lib=
-  if $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO -c -o tryclockrt.o src/sysdeps/tryclockrt.c 2>/dev/null ; then
-    if $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o /dev/null tryclockrt.o 2>/dev/null ; then
-      hasclock=true
-      echo "  ... yes"
-    elif $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o /dev/null tryclockrt.o -lrt 2>/dev/null ; then
-      hasclock=true
-      echo "  ... yes, with -lrt"
-      rt_lib=-lrt
-    else
-      hasclock=false
-    fi
-    rm -f tryclockrt.o
-  else
-    hasclock=false
-  fi
-  echo "$rt_lib" > $sysdeps/rt.lib
+  hasclock=true
+  tryrtlib clock_lib clockrt 'clock_gettime()' || hasclock=false
   if $clockrt ; then
-    echo "$rt_lib" > $sysdeps/sysclock.lib
-    echo "$rt_lib" > $sysdeps/tainnow.lib
+    echo "$clock_lib" > $sysdeps/sysclock.lib
+    echo "$clock_lib" > $sysdeps/tainnow.lib
   else
     echo > $sysdeps/sysclock.lib
     if $clockmon ; then
-      echo "$rt_lib" > $sysdeps/tainnow.lib
+      echo "$clock_lib" > $sysdeps/tainnow.lib
     else
       echo > $sysdeps/tainnow.lib
     fi
   fi
   if $hasclock ; then
-    rm -f tryclockrt
     echo 'clockrt: yes' >> $sysdeps/sysdeps
     echo "#define ${package_macro_name}_HASCLOCKRT" >> $sysdeps/sysdeps.h
-    choose cl clockmon CLOCKMON CLOCK_MONOTONIC $rt_lib
+    choose cl clockmon CLOCKMON CLOCK_MONOTONIC $clock_lib
   else
     echo 'clockrt: no' >> $sysdeps/sysdeps
     echo "#undef ${package_macro_name}_HASCLOCKRT" >> $sysdeps/sysdeps.h
-    echo '  ... no'
   fi
+
+  hasspawn=true
+  tryrtlib spawn_lib posixspawn 'posix_spawn()' || hasspawn=false
+  echo "$spawn_lib" > $sysdeps/spawn.lib
+  if $hasspawn ; then
+    echo 'posixspawn: yes' >> $sysdeps/sysdeps
+    echo "#define ${package_macro_name}_HASPOSIXSPAWN" >> $sysdeps/sysdeps.h
+  else
+    echo 'posixspawn: no' >> $sysdeps/sysdeps
+    echo "#undef ${package_macro_name}_HASPOSIXSPAWN" >> $sysdeps/sysdeps.h
+  fi
+
 
   echo "Checking system endianness..."
   $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO -o tryendianness src/sysdeps/tryendianness.c
@@ -480,7 +501,6 @@ EOF
   choose cl openat OPENAT 'openat()'
   choose cl linkat LINKAT 'linkat()'
   choose clr pipe2 PIPE2 'pipe2()'
-  choose cl posixspawn POSIXSPAWN 'posix_spawn()' $rt_lib
   choose clr ppoll PPOLL 'ppoll()'
   choose cl revoke REVOKE 'revoke()'
   choose cl sendfile SENDFILE 'sendfile()'
@@ -538,7 +558,7 @@ sproot := $sproot
 home := $home
 exthome := ${exthome}
 ipv6 := ${ipv6}
-RT_LIB := ${rt_lib}
+SPAWN_LIB := ${spawn_lib}
 SOCKET_LIB := ${socket_lib}
 SYSCLOCK_LIB := ${sysclock_lib}
 TAINNOW_LIB := ${tainnow_lib}
