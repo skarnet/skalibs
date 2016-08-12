@@ -164,26 +164,32 @@ trytypesize() {
   echo "  ... $type_size"
 }
 
+trycl () {
+  name=$1
+  shift
+  if $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO -c -o try$name.o src/sysdeps/try$name.c 2>/dev/null ; then
+    if $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o /dev/null try$name.o 2>/dev/null ; then
+      echo 1
+    elif $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o /dev/null try$name.o $* 2>/dev/null ; then
+      echo 2
+    fi
+    rm -f try$name.o
+  else
+    echo 0
+  fi
+}
+
 tryrtlib () {
   echo "Checking whether system has $3..."
-  if $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO -c -o try$2.o src/sysdeps/try$2.c 2>/dev/null ; then
-    if $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o /dev/null try$2.o 2>/dev/null ; then
-      rm -f try$2.o
-      eval "$1="
-      echo "  ... yes"
-      return 0
-    elif $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o /dev/null try$2.o -lrt 2>/dev/null ; then
-      rm -f try$2.o
-      eval "$1=-lrt"
-      echo "  ... yes, with -lrt"
-      rm -f try$1.o
-      return 0
-    else
-      rm -f try$2.o
-      eval "$1="
-      echo "  ... no"
-      return 1
-    fi
+  r=`trycl $2 -lrt`
+  if test $r = 1 ; then
+    eval "$1="
+    echo "  ... yes"
+    return 0
+  elif test $r = 2 ; then
+    eval "$1=-lrt"
+    echo "  ... yes, with -lrt"
+    return 0
   else
     eval "$1="
     echo "  ... no"
