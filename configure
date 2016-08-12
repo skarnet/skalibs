@@ -420,11 +420,11 @@ EOF
   util_lib=
   echo > $sysdeps/util.lib
 
-  socket_lib=`trylibs lsock 'accessible socket functions' -lsocket -lnsl` 3>&1 || fail "$0: unable to determine socket.lib sysdep"
+  3>&1 socket_lib=`trylibs lsock 'accessible socket functions' -lsocket -lnsl` || fail "$0: unable to determine socket.lib sysdep"
   echo "$socket_lib" > $sysdeps/socket.lib
 
   hasclock=true
-  clock_lib=`trylibs clockrt 'clock_gettime()' -lrt` 3>&1 || hasclock=false
+  3>&1 clock_lib=`trylibs clockrt 'clock_gettime()' -lrt` || hasclock=false
   if $clockrt ; then
     echo "$clock_lib" > $sysdeps/sysclock.lib
     echo "$clock_lib" > $sysdeps/tainnow.lib
@@ -446,7 +446,7 @@ EOF
   fi
 
   hasspawn=true
-  spawn_lib=`trylibs posixspawn 'posix_spawn()' -lrt` 3>&1 || hasspawn=false
+  3>&1 spawn_lib=`trylibs posixspawn 'posix_spawn()' -lrt` || hasspawn=false
   echo "$spawn_lib" > $sysdeps/spawn.lib
   if $hasspawn ; then
     echo 'posixspawn: yes' >> $sysdeps/sysdeps
