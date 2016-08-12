@@ -164,36 +164,30 @@ trytypesize() {
   echo "  ... $type_size"
 }
 
-trycl () {
+trylibs () {
+  args=
   name=$1
-  shift
+  echo "Checking whether system has $2..." >&3
+  shift 2
   if $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO -c -o try$name.o src/sysdeps/try$name.c 2>/dev/null ; then
-    if $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o /dev/null try$name.o 2>/dev/null ; then
-      echo 1
-    elif $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o /dev/null try$name.o $* 2>/dev/null ; then
-      echo 2
+    until $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o /dev/null try$name.o $args 2>/dev/null ; do
+      if test -z "$*" ; then
+        rm -f try$name.o
+        echo
+        echo "  ... no" >&3
+        return 1
+      fi
+      args="$args $1"
+      shift
+    done
+    echo "$args"
+    if test -z "$args" ; then
+      echo "  ... yes" >&3
+    else
+      echo "  ... yes, with $*" >&3
     fi
     rm -f try$name.o
-  else
-    echo 0
-  fi
-}
-
-tryrtlib () {
-  echo "Checking whether system has $3..."
-  r=`trycl $2 -lrt`
-  if test $r = 1 ; then
-    eval "$1="
-    echo "  ... yes"
     return 0
-  elif test $r = 2 ; then
-    eval "$1=-lrt"
-    echo "  ... yes, with -lrt"
-    return 0
-  else
-    eval "$1="
-    echo "  ... no"
-    return 1
   fi
 }
 
@@ -400,7 +394,7 @@ if test -n "$sysdeps" ; then
     exit 1
   fi
   echo "Using pre-computed sysdeps in $sysdeps."
-  rt_lib=$(cat $sysdeps/rt.lib)
+  spawn_lib=$(cat $sysdeps/spawn.lib)
   socket_lib=$(cat $sysdeps/socket.lib)
   sysclock_lib=$(cat $sysdeps/sysclock.lib)
   tainnow_lib=$(cat $sysdeps/tainnow.lib)
@@ -426,25 +420,11 @@ EOF
   util_lib=
   echo > $sysdeps/util.lib
 
-  echo "Checking whether socket functions need an additional library..."
-  $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO -c -o trylsock.o src/sysdeps/trylsock.c || fail "$0: compiler cannot compile src/sysdeps/trylsock.c"
-  if $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o /dev/null trylsock.o 2>/dev/null ; then
-    socket_lib=
-    echo "  ... no"
-  elif $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o /dev/null trylsock.o -lsocket 2>/dev/null ; then
-    socket_lib=-lsocket
-    echo "  ... -lsocket"
-  elif $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o /dev/null trylsock.o -lsocket -lnsl 2>/dev/null ; then
-    socket_lib="-lsocket -lnsl"
-    echo "  ... -lsocket -lnsl"
-  else
-    fail "$0: unable to determine socket.lib sysdep"
-  fi
-  rm -f trylsock.o
+  socket_lib=`trylibs lsock 'accessible socket functions' -lsocket -lnsl` 3>&1 || fail "$0: unable to determine socket.lib sysdep"
   echo "$socket_lib" > $sysdeps/socket.lib
 
   hasclock=true
-  tryrtlib clock_lib clockrt 'clock_gettime()' || hasclock=false
+  clock_lib=`trylibs clockrt 'clock_gettime()' -lrt` 3>&1 || hasclock=false
   if $clockrt ; then
     echo "$clock_lib" > $sysdeps/sysclock.lib
     echo "$clock_lib" > $sysdeps/tainnow.lib
@@ -466,7 +446,7 @@ EOF
   fi
 
   hasspawn=true
-  tryrtlib spawn_lib posixspawn 'posix_spawn()' || hasspawn=false
+  spawn_lib=`trylibs posixspawn 'posix_spawn()' -lrt` 3>&1 || hasspawn=false
   echo "$spawn_lib" > $sysdeps/spawn.lib
   if $hasspawn ; then
     echo 'posixspawn: yes' >> $sysdeps/sysdeps
