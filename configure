@@ -152,7 +152,7 @@ choose () {
   fi
 }
 
-trytypesize() {
+trytypesize () {
   echo "Checking size of $3..."
   $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o trysizeof$1 src/sysdeps/trysizeof$1.c
   type_size=$(./trysizeof$1) || fail "$0: unable to determine size of $3"
@@ -184,7 +184,7 @@ trylibs () {
     if test -z "$args" ; then
       echo "  ... yes" >&3
     else
-      echo "  ... yes, with $*" >&3
+      echo "  ... yes, with $args" >&3
     fi
     rm -f try$name.o
     return 0
@@ -417,14 +417,15 @@ else
 #define SKALIBS_TARGET "$target"
 EOF
 
+  exec 3>&1
   util_lib=
   echo > $sysdeps/util.lib
 
-  3>&1 socket_lib=`trylibs lsock 'accessible socket functions' -lsocket -lnsl` || fail "$0: unable to determine socket.lib sysdep"
+  socket_lib=`trylibs lsock 'accessible socket functions' -lsocket -lnsl` || fail "$0: unable to determine socket.lib sysdep"
   echo "$socket_lib" > $sysdeps/socket.lib
 
   hasclock=true
-  3>&1 clock_lib=`trylibs clockrt 'clock_gettime()' -lrt` || hasclock=false
+  clock_lib=`trylibs clockrt 'clock_gettime()' -lrt` || hasclock=false
   if $clockrt ; then
     echo "$clock_lib" > $sysdeps/sysclock.lib
     echo "$clock_lib" > $sysdeps/tainnow.lib
@@ -446,7 +447,7 @@ EOF
   fi
 
   hasspawn=true
-  3>&1 spawn_lib=`trylibs posixspawn 'posix_spawn()' -lrt` || hasspawn=false
+  spawn_lib=`trylibs posixspawn 'posix_spawn()' -lrt` || hasspawn=false
   echo "$spawn_lib" > $sysdeps/spawn.lib
   if $hasspawn ; then
     echo 'posixspawn: yes' >> $sysdeps/sysdeps
@@ -455,7 +456,7 @@ EOF
     echo 'posixspawn: no' >> $sysdeps/sysdeps
     echo "#undef ${package_macro_name}_HASPOSIXSPAWN" >> $sysdeps/sysdeps.h
   fi
-
+  exec 3>&-
 
   echo "Checking system endianness..."
   $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO -o tryendianness src/sysdeps/tryendianness.c
