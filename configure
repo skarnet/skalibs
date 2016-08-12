@@ -180,14 +180,18 @@ trylibs () {
       args="$args $1"
       shift
     done
-    echo "$args"
+    echo ${args# }
     if test -z "$args" ; then
       echo "  ... yes" >&3
     else
-      echo "  ... yes, with $args" >&3
+      echo "  ... yes, with$args" >&3
     fi
     rm -f try$name.o
     return 0
+  else
+    echo
+    echo "  ... no" >&3
+    return 1
   fi
 }
 
@@ -426,17 +430,8 @@ EOF
 
   hasclock=true
   clock_lib=`trylibs clockrt 'clock_gettime()' -lrt` || hasclock=false
-  if $clockrt ; then
-    echo "$clock_lib" > $sysdeps/sysclock.lib
-    echo "$clock_lib" > $sysdeps/tainnow.lib
-  else
-    echo > $sysdeps/sysclock.lib
-    if $clockmon ; then
-      echo "$clock_lib" > $sysdeps/tainnow.lib
-    else
-      echo > $sysdeps/tainnow.lib
-    fi
-  fi
+  echo "$clock_lib" > $sysdeps/sysclock.lib
+  echo "$clock_lib" > $sysdeps/tainnow.lib
   if $hasclock ; then
     echo 'clockrt: yes' >> $sysdeps/sysdeps
     echo "#define ${package_macro_name}_HASCLOCKRT" >> $sysdeps/sysdeps.h
