@@ -12,7 +12,7 @@ int random_init ()
 {
   char seed[160] ;
   random_makeseed(seed) ;
-  arc4random_addrandom(seed, 160) ;
+  arc4random_addrandom((unsigned char *)seed, 160) ;
   return 1 ;
 }
 
