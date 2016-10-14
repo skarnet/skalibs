@@ -4,6 +4,7 @@
 
 #ifdef SKALIBS_HASARC4RANDOM
 
+#include <skalibs/nonposix.h>
 #include <stdlib.h>
 #include <skalibs/random.h>
 

@@ -4,6 +4,7 @@
 
 #ifdef SKALIBS_HASARC4RANDOM
 
+#include <skalibs/nonposix.h>
 #include <stdlib.h>
 #include <skalibs/random.h>
 
@@ -15,6 +16,7 @@ uint32 random_uint32 (uint32 n)
 #else
 
 #include <skalibs/uint32.h>
+#include <skalibs/bytestr.h>
 #include <skalibs/random.h>
 
 static inline uint32 random_mask2 (register uint32 n)

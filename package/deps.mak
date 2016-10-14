@@ -130,12 +130,12 @@ src/libdatastruct/gensetdyn_ready.o src/libdatastruct/gensetdyn_ready.lo: src/li
 src/libdatastruct/gensetdyn_zero.o src/libdatastruct/gensetdyn_zero.lo: src/libdatastruct/gensetdyn_zero.c src/include/skalibs/gensetdyn.h
 src/librandom/random_char.o src/librandom/random_char.lo: src/librandom/random_char.c src/include/skalibs/random.h
 src/librandom/random_finish.o src/librandom/random_finish.lo: src/librandom/random_finish.c src/include/skalibs/djbunix.h src/librandom/random-internal.h src/include/skalibs/random.h src/include/skalibs/sysdeps.h
-src/librandom/random_init.o src/librandom/random_init.lo: src/librandom/random_init.c src/include/skalibs/djbunix.h src/librandom/random-internal.h src/include/skalibs/random.h src/include/skalibs/sysdeps.h
+src/librandom/random_init.o src/librandom/random_init.lo: src/librandom/random_init.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/librandom/random-internal.h src/include/skalibs/random.h src/include/skalibs/sysdeps.h
 src/librandom/random_makeseed.o src/librandom/random_makeseed.lo: src/librandom/random_makeseed.c src/include/skalibs/sha1.h src/include/skalibs/tai.h src/include/skalibs/uint32.h
 src/librandom/random_name.o src/librandom/random_name.lo: src/librandom/random_name.c src/include/skalibs/random.h
 src/librandom/random_sauniquename.o src/librandom/random_sauniquename.lo: src/librandom/random_sauniquename.c src/include/skalibs/random.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/librandom/random_string.o src/librandom/random_string.lo: src/librandom/random_string.c src/include/skalibs/allreadwrite.h src/include/skalibs/nonposix.h src/librandom/random-internal.h src/include/skalibs/random.h src/include/skalibs/sysdeps.h
-src/librandom/random_uint32.o src/librandom/random_uint32.lo: src/librandom/random_uint32.c src/include/skalibs/random.h src/include/skalibs/sysdeps.h src/include/skalibs/uint32.h
+src/librandom/random_uint32.o src/librandom/random_uint32.lo: src/librandom/random_uint32.c src/include/skalibs/bytestr.h src/include/skalibs/nonposix.h src/include/skalibs/random.h src/include/skalibs/sysdeps.h src/include/skalibs/uint32.h
 src/librandom/random_unsort.o src/librandom/random_unsort.lo: src/librandom/random_unsort.c src/include/skalibs/bytestr.h src/include/skalibs/random.h src/include/skalibs/uint32.h
 src/librandom/surf.o src/librandom/surf.lo: src/librandom/surf.c src/include/skalibs/bytestr.h src/include/skalibs/surf.h src/include/skalibs/uint32.h
 src/librandom/surf_init.o src/librandom/surf_init.lo: src/librandom/surf_init.c src/include/skalibs/surf.h src/include/skalibs/uint32.h
