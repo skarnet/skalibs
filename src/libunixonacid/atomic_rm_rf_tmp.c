@@ -16,7 +16,7 @@ int atomic_rm_rf_tmp (char const *filename, stralloc *tmp)
   start = tmp->len ;
   for (;;)
   {
-    if (random_sauniquename(tmp, 64) < 0) goto err ;
+    if (!random_sauniquename(tmp, 64)) goto err ;
     if (!stralloc_0(tmp)) goto err ;
     if (!rename(filename, tmp->s + tmpbase)) break ;
     if (errno != EEXIST && errno != ENOTEMPTY) goto err ;

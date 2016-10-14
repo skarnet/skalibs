@@ -14,7 +14,7 @@ int openwritenclose_devino_tmp (char const *fn, char const *s, unsigned int len,
   uint64 tmpdev, tmpino ;
   unsigned int base = tmp->len ;
   if (!stralloc_cats(tmp, fn)) return 0 ;
-  if (random_sauniquename(tmp, 8) < 0) goto fail ;
+  if (!random_sauniquename(tmp, 8)) goto fail ;
   if (!stralloc_0(tmp)) goto fail ;
   if (!openwritenclose_unsafe_devino_sync(tmp->s + base, s, len, &tmpdev, &tmpino)) goto fail ;
   if (rename(tmp->s + base, fn) < 0)

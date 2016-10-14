@@ -30,7 +30,7 @@ int dd_commit (dirdescriptor_t *dd)
     unsigned int lnkbnbase = dd->new.len ;
     if (errno != EINVAL) goto fail ;
     if (!stralloc_cats(&dd->new, lnkbn)) goto fail ;
-    if (random_sauniquename(&dd->new, 8) < 0) goto fail ;
+    if (!random_sauniquename(&dd->new, 8)) goto fail ;
     if (!stralloc_0(&dd->new)) goto fail ;
     if (rename(dd->lnkfn, dd->new.s + oldbase) < 0) goto fail ;
     /* /!\ race condition right here: there's no lnkfn in the fs */
@@ -45,7 +45,7 @@ int dd_commit (dirdescriptor_t *dd)
   if (!stralloc_0(&dd->new)) goto fail ;
   newlnkbase = dd->new.len ;
   if (!stralloc_catb(&dd->new, dd->lnkfn, len)) goto fail ;
-  if (random_sauniquename(&dd->new, 8) < 0) goto fail ;
+  if (!random_sauniquename(&dd->new, 8)) goto fail ;
   if (!stralloc_0(&dd->new)) goto fail ;
   if (symlink(dd->new.s, dd->new.s + newlnkbase) < 0) goto fail ;
   if (rename(dd->new.s + newlnkbase, dd->lnkfn) < 0)

@@ -4,14 +4,21 @@
 #include <skalibs/uint32.h>
 #include <skalibs/tai.h>
 #include <skalibs/sha1.h>
-#include <skalibs/surf.h>
 
-void surf_makeseed (char *s)
+/*
+   Writes 160 bytes of crap into s.
+   Certainly not cryptographically secure or 100% unpredictable,
+   but we're only using this to speed up /dev/urandom
+   initialization or to init an internal SURF PRNG. 
+   iow: we are CS iff the system's RNG is CS.
+*/
+
+void random_makeseed (char *s)
 {
   SHA1Schedule bak = SHA1_INIT() ;
   {
     tain_t now ;
-    char tmp[20 + TAIN_PACK] ;
+    char tmp[256] ;
     uint32 x = getpid() ;
     uint32_pack(tmp, x) ;
     x = getppid() ;
@@ -19,6 +26,8 @@ void surf_makeseed (char *s)
     tain_now(&now) ;
     tain_pack(tmp + 8, &now) ;
     sha1_update(&bak, tmp, 8 + TAIN_PACK) ;
+    gethostname(tmp, 256) ;
+    sha1_update(&bak, tmp, 256) ;
     sha1_final(&bak, tmp) ;
     sha1_init(&bak) ;
     sha1_update(&bak, tmp, 20) ;

@@ -1,33 +1,20 @@
 /* ISC license. */
 
-/* MT-unsafe functions only. Use rrandom for MT-safety. */
-
 #ifndef RANDOM_H
 #define RANDOM_H
 
-#include <skalibs/gccattributes.h>
+#include <skalibs/uint32.h>
 #include <skalibs/stralloc.h>
 
-extern int badrandom_init (void) ;
-extern unsigned char badrandom_char (void) ;
-extern unsigned int badrandom_int (unsigned int) ;
-extern unsigned int badrandom_string (char *, unsigned int) ;
-extern void badrandom_finish (void) ;
+extern void random_makeseed (char *) ; /* fills 160 bytes */
 
-extern int goodrandom_init (void) ;
-extern unsigned char goodrandom_char (void) ;
-extern unsigned int goodrandom_int (unsigned int) ;
-extern unsigned int goodrandom_string (char *, unsigned int) ;
-extern void goodrandom_finish (void) ;
+extern int random_init (void) ;
+extern void random_finish (void) ;
 
-#define random_init badrandom_init
-#define random_char badrandom_char
-#define random_int badrandom_int
-#define random_string badrandom_string
-#define random_finish badrandom_finish
-
-extern int random_name (char *, unsigned int) ;
-extern int random_sauniquename (stralloc *, unsigned int) ;
+extern void random_string (char *, unsigned int) ;
+extern uint32 random_uint32 (uint32) ;
+extern void random_name (char *, unsigned int) ;
 extern void random_unsort (char *, unsigned int, unsigned int) ;
+extern int random_sauniquename (stralloc *, unsigned int) ;
 
 #endif

@@ -38,13 +38,11 @@ Optional features:
 
 $package options:
   --enable-libc-replacements    use independent low-level primitives [disabled]
-  --enable-egd=PATH             support an EGD daemon listening on PATH as RNG [disabled]
   --disable-ipv6                do not build IPv6 support [enabled]
   --enable-iopause-select       prefer select() over poll() for iopause implementation [disabled]
   --enable-tai-clock            assume the system clock is TAI-10 instead of UTC [disabled]
   --enable-clock                use clock_gettime() instead of gettimeofday() [disabled]
   --enable-monotonic            count time with CLOCK_MONOTONIC instead of CLOCK_REALTIME
-  --enable-force-devr           assume /dev/random exists and is valid [autodetection takes time]
   --with-default-path=PATH      default executable search path [/usr/bin:/usr/sbin:/bin:/sbin]
 
 EOF
@@ -214,13 +212,11 @@ shared=true
 static=true
 slashpackage=false
 replacements=false
-egd=
 ipv6=true
 select=false
 taiclock=false
 clockrt=false
 clockmon=false
-forcedevr=false
 ddefaultpath=/usr/bin:/usr/sbin:/bin:/sbin
 defaultpath=$ddefaultpath
 dpathorig=true
@@ -257,8 +253,6 @@ for arg ; do
     --disable-slashpackage) sproot= ; slashpackage=false ;;
     --enable-libc-replacements|--enable-libc-replacements=yes) replacements=true ;;
     --disable-libc-replacements|--enable-libc-replacements=no) replacements=false ;;
-    --enable-egd=*) egd=${arg#*=} ;;
-    --disable-egd) egd= ;;
     --enable-ipv6|--enable-ipv6=yes) ipv6=true ;;
     --disable-ipv6|--enable-ipv6=no) ipv6=false ;;
     --enable-iopause-select|--enable-iopause-select=yes) select=true ;;
@@ -269,8 +263,6 @@ for arg ; do
     --disable-clock|--enable-clock=no) clockrt=false ;;
     --enable-monotonic|--enable-monotonic=yes) clockmon=true ;;
     --disable-monotonic|--enable-monotonic=no) clockmon=false ;;
-    --enable-force-devr|--enable-force-devr=yes) forcedevr=true ;;
-    --disable-force-devr|--enable-force-devr=no) forcedevr=false ;;
     --with-default-path=*) defaultpath=${arg#*=} ; dpathorig=false ;;
     --without-default-path) defaultpath=$ddefaultpath ; dpathorig=true ;;
     --enable-*|--disable-*|--with-*|--without-*|--*dir=*) ;;
@@ -403,10 +395,6 @@ if test -n "$sysdeps" ; then
   sysclock_lib=$(cat $sysdeps/sysclock.lib)
   tainnow_lib=$(cat $sysdeps/tainnow.lib)
   util_lib=$(cat $sysdeps/util.lib)
-  if test -n "$egd" ; then
-    egd=$(grep -F egd: $sysdeps/sysdeps | cut -d' ' -f2-)
-    echo "warning: --enable-egd option ignored, using sysdeps-provided value instead: $egd"
-  fi
 else
   sysdeps=sysdeps.cfg
   mkdir -p $sysdeps
@@ -500,21 +488,9 @@ EOF
   choose c uint64t UINT64T 'uint64_t'
   choose cl futimens FUTIMENS 'futimens()'
   choose cl futimes FUTIMES 'futimes()'
+  choose cl arc4random ARC4RANDOM 'arc4random()'
+  choose cl getrandom GETRANDOM 'getrandom()'
 
-  if $forcedevr ; then
-    echo "/dev/random detection override required, assuming it exists and is working."
-    echo "devrandom: yes" >> $sysdeps/sysdeps
-    echo "#define ${package_macro_name}_HASDEVRANDOM" >> $sysdeps/sysdeps.h
-  else
-    choose clr devrandom DEVRANDOM /dev/random
-  fi
-  if test -n "$egd" ; then
-    if echo "$egd" | grep -q '[^[:alnum:]/_-]' ; then
-      fail "$0: invalid EGD path: $egd"
-    fi
-    echo "egd: $egd" >> $sysdeps/sysdeps
-    echo "#define ${package_macro_name}_HASEGD \"$egd\"" >> $sysdeps/sysdeps.h
-  fi
   echo '#endif' >> $sysdeps/sysdeps.h
 fi
 
@@ -625,11 +601,6 @@ if $select ; then
   echo "#define ${package_macro_name}_FLAG_PREFERSELECT"
 else
   echo "#undef ${package_macro_name}_FLAG_PREFERSELECT"
-fi
-if test -n "$egd" ; then
-  echo "#define ${package_macro_name}_EGD $egd"
-else
-  echo "#undef ${package_macro_name}_EGD"
 fi
 
 echo

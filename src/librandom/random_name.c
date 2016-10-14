@@ -2,12 +2,11 @@
 
 /* MT-unsafe */
 
-#include "random-internal.h"
 #include <skalibs/random.h>
 
-int random_name (char *s, unsigned int n)
+void random_name (char *s, unsigned int n)
 {
-  register unsigned int r = rrandom_name(&badrandom_here, s, n, 1) ;
-  if (r < n) return -1 ;
-  return n ;
+  static char const oklist[64] = "ABCDEFGHIJKLMNOPQRSTUVWXYZghijklmnopqrstuvwxyz-_0123456789abcdef" ;
+  random_string(s, n) ;
+  while (n--) s[n] = oklist[s[n] & 63] ;
 }

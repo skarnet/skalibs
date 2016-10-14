@@ -51,64 +51,85 @@ If the EGD connection fails, a SURF PRNG is used.
 function prototypes.
 </p>
 
- <h3> High quality, cryptographically strong random data </h3>
+<h3> Basic functions </h3>
 
 <pre>
   unsigned char c ;
-  unsigned int max ;
-  unsigned int n ;
+  uint32_t max ;
+  uint32_t n ;
   unsigned int b ;
   char data[at least b] ;
   int r ;
 
-  goodrandom_init() ;
-  c = goodrandom_char() ;
-  n = goodrandom_int(max) ;
-  r = goodrandom_string(data, b) ;
-  goodrandom_finish() ;
+  r = random_init() ;
+  c = random_char() ;
+  n = random_uint32(max) ;
+  random_string(data, b) ;
+  random_finish() ;
 </pre>    
 
 <p>
- <tt>goodrandom_init()</tt> becomes optional with skalibs-0.43.
+ <tt>random_init()</tt> must be called before any other function in
+the random library. It returns 0 (and sets errno) on failure, and
+nonzero on success.
+</p>
+
+<p>
  It is recommended that you let the library perform cleanups after you
-have used it, by calling <tt>goodrandom_finish()</tt>.
+are done using it, by calling <tt>random_finish()</tt> - unless your
+process exits right away.
 </p>
 
 <ul>
-  <li> <tt>goodrandom_char()</tt> returns a random character </li>
-  <li> <tt>goodrandom_int(<em>max</em>)</tt> returns a random integer
-between 0 and <em>max</em>-1 </li>
-  <li> <tt>goodrandom_string(<em>data</em>, <em>b</em>)</tt> puts
-<em>b</em> random bytes in <em>data</em>, which must be preallocated.
-It returns <em>b</em> if it succeeds, or a non-negative integer lesser
-than <em>b</em> if it fails for any reason. </li>
+  <li> <tt>random_char()</tt> returns a random character. </li>
+  <li> <tt>random_uint32(<em>max</em>)</tt> returns a random integer
+between 0 and <em>max</em>-1. </li>
+  <li> <tt>random_string(<em>data</em>, <em>b</em>)</tt> fills
+<em>b</em> bytes in <em>data</em> (which must be preallocated)
+with random data. </li>
 </ul>
 
-<p>
- If you have neither <tt>/dev/random</tt> nor EGD, a software PRNG is
-used. This PRNG is based on the
-<a href="http://cr.yp.to/antiforgery.html#surf">SURF</a> function, which
-is unpredictable enough for most uses.
-</p>
-
- <h3> Lower quality random data </h3>
+<h3> Advanced functions </h3>
 
 <p>
- It works basically the same, by replacing <tt>goodrandom_*</tt> with
-<tt>badrandom_*</tt>. It uses <tt>/dev/urandom</tt> on systems that
-support it; on systems that do not, but support EGD, non-blocking calls
-to EGD are made ; if that is not enough, or EGD is not supported,
-the SURF generator is used.
+<code> void random_unsort (char *s, unsigned int n, unsigned int chunksize) </code> <br />
+Shuffles the array <em>s</em> (of size at least <em>n</em>*<em>chunksize</em>) by
+performing a random permutation of the <em>n</em> blocks of <em>chunksize</em> bytes.
+Bytes are not permuted inside chunks.
 </p>
 
 <p>
- The point of <tt>badrandom</tt> is to get random bytes <em>instantly</em>,
-even at the expense of quality; whereas <tt>goodrandom</tt> always returns
-high-quality random bytes, but may block if entropy is insufficient. In
-practice, in spite of its name, <tt>badrandom</tt> will return quite
-unpredictable pseudo-random data, so <tt>goodrandom</tt> should be used
-only when paranoia is the rule and blocking is an option.
+<code> void random_name (char *s, unsigned int n) </code> <br />
+Writes <em>n</em> random readable ASCII characters into <em>s</em>:
+letters, numbers, hyphens or underscores. Does not terminate with a
+null character.
 </p>
+
+<p>
+<code> int random_sauniquename (stralloc *sa, unsigned int n) </code> <br />
+Appends a (non-null-terminated) unique, unpredictable ASCII name to the
+<a href="../libstddjb/stralloc.html">stralloc</a> <em>*sa</em>. That
+name includes <em>n</em> randomly generated ASCII characters.
+</p>
+
+<h2> Notes </h2>
+
+<ul>
+ <li> The <tt>random</tt> library is a thin wrapper around the best
+available random generator provided by the underlying system. By
+decreasing order of preference, it will use the following
+implementations if available:
+ <ul>
+  <li> <a href="http://man.openbsd.org/arc4random.3">arc4random()</a> </li>
+  <li> <a href="http://man7.org/linux/man-pages/man2/getrandom.2.html">getrandom()</a> </li>
+  <li> <tt>/dev/urandom</tt> </li>
+  <li> a basic <a href="https://cr.yp.to/papers/surf.pdf">SURF</a> pseudo-random generator</li>
+ </ul> </li>
+ <li> The <tt>random_init()</tt> function tries to automatically add some
+reasonably random data to the underlying random generator's entropy pool.
+However, that pseudorandom data is not 100% unpredictable, so it will not
+replace proper seeding of the random generator at boot time. </li>
+</ul>
 
 </body>
 </html>

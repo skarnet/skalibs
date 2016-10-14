@@ -11,7 +11,7 @@ int mkdir_unique (stralloc *sa, char const *fn, unsigned int mode)
   int wasnull = !sa->s ;
   if (!stralloc_cats(sa, fn)) return 0 ;
   if (!stralloc_cats(sa, "/mkdir_unique:")) goto fail ;
-  if (random_sauniquename(sa, 64) < 0) goto fail ;
+  if (!random_sauniquename(sa, 64)) goto fail ;
   if (!stralloc_0(sa)) goto fail ;
   if (mkdir(sa->s + base, mode) < 0) goto fail ;
   sa->len-- ;

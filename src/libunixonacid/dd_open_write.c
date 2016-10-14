@@ -14,7 +14,7 @@ int dd_open_write (dirdescriptor_t *dd, char const *lnkfn, unsigned int mode)
   dirdescriptor_t d = DIRDESCRIPTOR_ZERO ;
   d.lnkfn = lnkfn ;
   if (!stralloc_cats(&d.new, lnkfn)) return 0 ;
-  if (random_sauniquename(&d.new, 8) < 0) goto fail ;
+  if (!random_sauniquename(&d.new, 8)) goto fail ;
   if (!stralloc_0(&d.new)) goto fail ;
   if (mkdir(d.new.s, mode) < 0) goto fail ;
   d.fd = open_read(d.new.s) ;

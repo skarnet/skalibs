@@ -33,8 +33,7 @@ src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skali
 src/include/skalibs/md5.h: src/include/skalibs/uint32.h
 src/include/skalibs/mininetstring.h: src/include/skalibs/stralloc.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h
 src/include/skalibs/netstring.h: src/include/skalibs/buffer.h src/include/skalibs/siovec.h src/include/skalibs/stralloc.h
-src/include/skalibs/random.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
-src/include/skalibs/rrandom.h: src/include/skalibs/unirandom.h
+src/include/skalibs/random.h: src/include/skalibs/stralloc.h src/include/skalibs/uint32.h
 src/include/skalibs/sha1.h: src/include/skalibs/uint32.h
 src/include/skalibs/sha256.h: src/include/skalibs/uint32.h
 src/include/skalibs/sha512.h: src/include/skalibs/uint64.h
@@ -51,10 +50,6 @@ src/include/skalibs/strerr.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/surf.h: src/include/skalibs/uint32.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
-src/include/skalibs/unirandom.h: src/include/skalibs/buffer.h src/include/skalibs/surf.h
-src/include/skalibs/unirandomdev.h: src/include/skalibs/unirandom.h
-src/include/skalibs/unirandomegd.h: src/include/skalibs/unirandom.h
-src/include/skalibs/unisurf.h: src/include/skalibs/unirandom.h
 src/include/skalibs/unix-timed.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
 src/include/skalibs/unix-transactional.h: src/include/skalibs/siovec.h src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
 src/include/skalibs/unixconnection.h: src/include/skalibs/unixmessage.h
@@ -62,7 +57,7 @@ src/include/skalibs/unixmessage.h: src/include/skalibs/buffer.h src/include/skal
 src/include/skalibs/unixonacid.h: src/include/skalibs/kolbak.h src/include/skalibs/skaclient.h src/include/skalibs/unix-timed.h src/include/skalibs/unix-transactional.h src/include/skalibs/unixconnection.h src/include/skalibs/unixmessage.h
 src/include/skalibs/webipc.h: src/include/skalibs/djbunix.h src/include/skalibs/tai.h
 src/libdatastruct/avlnode-internal.h: src/include/skalibs/avlnode.h
-src/librandom/random-internal.h: src/include/skalibs/gccattributes.h src/include/skalibs/rrandom.h src/include/skalibs/surf.h src/include/skalibs/unirandom.h
+src/librandom/random-internal.h: src/include/skalibs/surf.h
 src/libstdcrypto/md5-internal.h: src/include/skalibs/md5.h src/include/skalibs/uint32.h
 src/libstdcrypto/sha1-internal.h: src/include/skalibs/sha1.h src/include/skalibs/uint32.h
 src/libstdcrypto/sha256-internal.h: src/include/skalibs/sha256.h src/include/skalibs/uint32.h
@@ -133,48 +128,17 @@ src/libdatastruct/gensetdyn_iter_withcancel.o src/libdatastruct/gensetdyn_iter_w
 src/libdatastruct/gensetdyn_new.o src/libdatastruct/gensetdyn_new.lo: src/libdatastruct/gensetdyn_new.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h
 src/libdatastruct/gensetdyn_ready.o src/libdatastruct/gensetdyn_ready.lo: src/libdatastruct/gensetdyn_ready.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h src/include/skalibs/stralloc.h
 src/libdatastruct/gensetdyn_zero.o src/libdatastruct/gensetdyn_zero.lo: src/libdatastruct/gensetdyn_zero.c src/include/skalibs/gensetdyn.h
-src/librandom/badrandom_char.o src/librandom/badrandom_char.lo: src/librandom/badrandom_char.c src/librandom/random-internal.h src/include/skalibs/random.h
-src/librandom/badrandom_finish.o src/librandom/badrandom_finish.lo: src/librandom/badrandom_finish.c src/librandom/random-internal.h src/include/skalibs/random.h src/include/skalibs/rrandom.h
-src/librandom/badrandom_here.o src/librandom/badrandom_here.lo: src/librandom/badrandom_here.c src/include/skalibs/config.h src/librandom/random-internal.h src/include/skalibs/sysdeps.h src/include/skalibs/unisurf.h
-src/librandom/badrandom_init.o src/librandom/badrandom_init.lo: src/librandom/badrandom_init.c src/include/skalibs/random.h
-src/librandom/badrandom_int.o src/librandom/badrandom_int.lo: src/librandom/badrandom_int.c src/librandom/random-internal.h src/include/skalibs/random.h src/include/skalibs/rrandom.h
-src/librandom/badrandom_string.o src/librandom/badrandom_string.lo: src/librandom/badrandom_string.c src/librandom/random-internal.h src/include/skalibs/random.h src/include/skalibs/rrandom.h
-src/librandom/goodrandom_char.o src/librandom/goodrandom_char.lo: src/librandom/goodrandom_char.c src/librandom/random-internal.h src/include/skalibs/random.h
-src/librandom/goodrandom_finish.o src/librandom/goodrandom_finish.lo: src/librandom/goodrandom_finish.c src/librandom/random-internal.h src/include/skalibs/random.h src/include/skalibs/rrandom.h
-src/librandom/goodrandom_here.o src/librandom/goodrandom_here.lo: src/librandom/goodrandom_here.c src/include/skalibs/config.h src/librandom/random-internal.h src/include/skalibs/sysdeps.h src/include/skalibs/unisurf.h
-src/librandom/goodrandom_init.o src/librandom/goodrandom_init.lo: src/librandom/goodrandom_init.c src/include/skalibs/random.h
-src/librandom/goodrandom_int.o src/librandom/goodrandom_int.lo: src/librandom/goodrandom_int.c src/librandom/random-internal.h src/include/skalibs/random.h src/include/skalibs/rrandom.h
-src/librandom/goodrandom_string.o src/librandom/goodrandom_string.lo: src/librandom/goodrandom_string.c src/librandom/random-internal.h src/include/skalibs/random.h src/include/skalibs/rrandom.h
-src/librandom/random_mask2.o src/librandom/random_mask2.lo: src/librandom/random_mask2.c src/librandom/random-internal.h src/include/skalibs/sysdeps.h
-src/librandom/random_name.o src/librandom/random_name.lo: src/librandom/random_name.c src/librandom/random-internal.h src/include/skalibs/random.h
+src/librandom/random_char.o src/librandom/random_char.lo: src/librandom/random_char.c src/include/skalibs/random.h
+src/librandom/random_finish.o src/librandom/random_finish.lo: src/librandom/random_finish.c src/include/skalibs/djbunix.h src/librandom/random-internal.h src/include/skalibs/random.h src/include/skalibs/sysdeps.h
+src/librandom/random_init.o src/librandom/random_init.lo: src/librandom/random_init.c src/include/skalibs/djbunix.h src/librandom/random-internal.h src/include/skalibs/random.h src/include/skalibs/sysdeps.h
+src/librandom/random_makeseed.o src/librandom/random_makeseed.lo: src/librandom/random_makeseed.c src/include/skalibs/sha1.h src/include/skalibs/tai.h src/include/skalibs/uint32.h
+src/librandom/random_name.o src/librandom/random_name.lo: src/librandom/random_name.c src/include/skalibs/random.h
 src/librandom/random_sauniquename.o src/librandom/random_sauniquename.lo: src/librandom/random_sauniquename.c src/include/skalibs/random.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
-src/librandom/random_unsort.o src/librandom/random_unsort.lo: src/librandom/random_unsort.c src/include/skalibs/bytestr.h src/include/skalibs/random.h
-src/librandom/randomegd_open.o src/librandom/randomegd_open.lo: src/librandom/randomegd_open.c src/include/skalibs/djbunix.h src/include/skalibs/randomegd.h src/include/skalibs/webipc.h
-src/librandom/randomegd_readb.o src/librandom/randomegd_readb.lo: src/librandom/randomegd_readb.c src/include/skalibs/allreadwrite.h src/include/skalibs/randomegd.h
-src/librandom/randomegd_readnb.o src/librandom/randomegd_readnb.lo: src/librandom/randomegd_readnb.c src/include/skalibs/allreadwrite.h src/include/skalibs/randomegd.h
-src/librandom/rrandom_add.o src/librandom/rrandom_add.lo: src/librandom/rrandom_add.c src/include/skalibs/rrandom.h src/include/skalibs/unirandom.h
-src/librandom/rrandom_finish.o src/librandom/rrandom_finish.lo: src/librandom/rrandom_finish.c src/include/skalibs/rrandom.h src/include/skalibs/unirandom.h
-src/librandom/rrandom_name.o src/librandom/rrandom_name.lo: src/librandom/rrandom_name.c src/include/skalibs/rrandom.h src/include/skalibs/unirandom.h
-src/librandom/rrandom_read.o src/librandom/rrandom_read.lo: src/librandom/rrandom_read.c src/include/skalibs/allreadwrite.h src/include/skalibs/error.h src/include/skalibs/rrandom.h src/include/skalibs/unirandom.h
-src/librandom/rrandom_readint.o src/librandom/rrandom_readint.lo: src/librandom/rrandom_readint.c src/include/skalibs/bytestr.h src/librandom/random-internal.h src/include/skalibs/rrandom.h src/include/skalibs/uint.h src/include/skalibs/unirandom.h
+src/librandom/random_string.o src/librandom/random_string.lo: src/librandom/random_string.c src/include/skalibs/allreadwrite.h src/include/skalibs/nonposix.h src/librandom/random-internal.h src/include/skalibs/random.h src/include/skalibs/sysdeps.h
+src/librandom/random_uint32.o src/librandom/random_uint32.lo: src/librandom/random_uint32.c src/include/skalibs/random.h src/include/skalibs/sysdeps.h src/include/skalibs/uint32.h
+src/librandom/random_unsort.o src/librandom/random_unsort.lo: src/librandom/random_unsort.c src/include/skalibs/bytestr.h src/include/skalibs/random.h src/include/skalibs/uint32.h
 src/librandom/surf.o src/librandom/surf.lo: src/librandom/surf.c src/include/skalibs/bytestr.h src/include/skalibs/surf.h src/include/skalibs/uint32.h
-src/librandom/surf_autoinit.o src/librandom/surf_autoinit.lo: src/librandom/surf_autoinit.c src/include/skalibs/surf.h
-src/librandom/surf_here.o src/librandom/surf_here.lo: src/librandom/surf_here.c src/librandom/random-internal.h src/include/skalibs/surf.h
-src/librandom/surf_init.o src/librandom/surf_init.lo: src/librandom/surf_init.c src/include/skalibs/surf.h
-src/librandom/surf_makeseed.o src/librandom/surf_makeseed.lo: src/librandom/surf_makeseed.c src/include/skalibs/sha1.h src/include/skalibs/surf.h src/include/skalibs/tai.h src/include/skalibs/uint32.h
-src/librandom/surf_sinit.o src/librandom/surf_sinit.lo: src/librandom/surf_sinit.c src/include/skalibs/surf.h src/include/skalibs/uint32.h
-src/librandom/unidevrandom.o src/librandom/unidevrandom.lo: src/librandom/unidevrandom.c src/librandom/random-internal.h src/include/skalibs/sysdeps.h src/include/skalibs/unirandom.h src/include/skalibs/unirandomdev.h
-src/librandom/unidevurandom.o src/librandom/unidevurandom.lo: src/librandom/unidevurandom.c src/librandom/random-internal.h src/include/skalibs/sysdeps.h src/include/skalibs/unirandom.h src/include/skalibs/unirandomdev.h
-src/librandom/unihasegd.o src/librandom/unihasegd.lo: src/librandom/unihasegd.c src/include/skalibs/config.h src/librandom/random-internal.h src/include/skalibs/unirandom.h src/include/skalibs/unirandomegd.h
-src/librandom/unirandom_finish.o src/librandom/unirandom_finish.lo: src/librandom/unirandom_finish.c src/include/skalibs/unirandom.h
-src/librandom/unirandom_init.o src/librandom/unirandom_init.lo: src/librandom/unirandom_init.c src/include/skalibs/unirandom.h
-src/librandom/unirandom_readb.o src/librandom/unirandom_readb.lo: src/librandom/unirandom_readb.c src/include/skalibs/unirandom.h
-src/librandom/unirandom_readnb.o src/librandom/unirandom_readnb.lo: src/librandom/unirandom_readnb.c src/include/skalibs/unirandom.h
-src/librandom/unirandom_register.o src/librandom/unirandom_register.lo: src/librandom/unirandom_register.c src/librandom/random-internal.h src/include/skalibs/unirandom.h
-src/librandom/unirandomdev.o src/librandom/unirandomdev.lo: src/librandom/unirandomdev.c src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/djbunix.h src/include/skalibs/unirandom.h src/include/skalibs/unirandomdev.h
-src/librandom/unirandomegd.o src/librandom/unirandomegd.lo: src/librandom/unirandomegd.c src/include/skalibs/djbunix.h src/include/skalibs/randomegd.h src/include/skalibs/unirandom.h src/include/skalibs/unirandomegd.h
-src/librandom/unisurf.o src/librandom/unisurf.lo: src/librandom/unisurf.c src/include/skalibs/surf.h src/include/skalibs/unirandom.h src/include/skalibs/unisurf.h
-src/librandom/unisurf_init.o src/librandom/unisurf_init.lo: src/librandom/unisurf_init.c src/librandom/random-internal.h src/include/skalibs/surf.h src/include/skalibs/unirandom.h src/include/skalibs/unisurf.h
+src/librandom/surf_init.o src/librandom/surf_init.lo: src/librandom/surf_init.c src/include/skalibs/surf.h src/include/skalibs/uint32.h
 src/libstdcrypto/md5_final.o src/libstdcrypto/md5_final.lo: src/libstdcrypto/md5_final.c src/include/skalibs/bytestr.h src/libstdcrypto/md5-internal.h src/include/skalibs/md5.h src/include/skalibs/uint32.h
 src/libstdcrypto/md5_init.o src/libstdcrypto/md5_init.lo: src/libstdcrypto/md5_init.c src/include/skalibs/md5.h
 src/libstdcrypto/md5_transform.o src/libstdcrypto/md5_transform.lo: src/libstdcrypto/md5_transform.c src/libstdcrypto/md5-internal.h src/include/skalibs/uint32.h

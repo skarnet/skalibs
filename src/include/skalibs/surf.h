@@ -16,11 +16,7 @@ struct SURFSchedule
 
 #define SURFSCHEDULE_ZERO { .seed = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, .in = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, .out = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0", .pos = 32 }
 
-extern void surf_sinit (SURFSchedule *, char const *) ; /* 160 chars */
+extern void surf_init (SURFSchedule *, char const *) ; /* 160 chars */
 extern void surf (SURFSchedule *, char *, unsigned int) ;
-
-extern void surf_makeseed (char *) ; /* fills 160 chars */
-extern void surf_init (SURFSchedule *) ;
-extern void surf_autoinit (SURFSchedule *, char *, unsigned int) ;
 
 #endif
