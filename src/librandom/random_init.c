@@ -24,15 +24,20 @@ int random_init ()
 
 int random_init ()
 {
+#ifdef SKALIBS_HASDEVURANDOM
   char seed[160] ;
   random_makeseed(seed) ;
   return openwritenclose_unsafe("/dev/urandom", seed, 160) ;
+#else
+  return 1 ;
+#endif
 }
 
 #else
 #ifdef SKALIBS_HASDEVURANDOM
 
 #include <skalibs/djbunix.h>
+#include <skalibs/surf.h>
 #include <skalibs/random.h>
 #include "random-internal.h"
 
@@ -58,6 +63,7 @@ int random_init ()
 
 #else /* default */
 
+#include <skalibs/surf.h>
 #include <skalibs/random.h>
 #include "random-internal.h"
 
