@@ -43,7 +43,7 @@ $package options:
   --enable-tai-clock            assume the system clock is TAI-10 instead of UTC [disabled]
   --enable-clock                use clock_gettime() instead of gettimeofday() [disabled]
   --enable-monotonic            count time with CLOCK_MONOTONIC instead of CLOCK_REALTIME
-  --with-default-path=PATH      default executable search path [/usr/bin:/usr/sbin:/bin:/sbin]
+  --with-default-path=PATH      default executable search path [/usr/bin:/bin]
 
 EOF
   exit 0
@@ -217,7 +217,7 @@ select=false
 taiclock=false
 clockrt=false
 clockmon=false
-ddefaultpath=/usr/bin:/usr/sbin:/bin:/sbin
+ddefaultpath=/usr/bin:/bin
 defaultpath=$ddefaultpath
 dpathorig=true
 sproot=
