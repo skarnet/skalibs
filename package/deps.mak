@@ -135,7 +135,7 @@ src/librandom/random_makeseed.o src/librandom/random_makeseed.lo: src/librandom/
 src/librandom/random_name.o src/librandom/random_name.lo: src/librandom/random_name.c src/include/skalibs/random.h
 src/librandom/random_sauniquename.o src/librandom/random_sauniquename.lo: src/librandom/random_sauniquename.c src/include/skalibs/random.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/librandom/random_string.o src/librandom/random_string.lo: src/librandom/random_string.c src/include/skalibs/allreadwrite.h src/include/skalibs/nonposix.h src/librandom/random-internal.h src/include/skalibs/random.h src/include/skalibs/sysdeps.h
-src/librandom/random_uint32.o src/librandom/random_uint32.lo: src/librandom/random_uint32.c src/include/skalibs/bytestr.h src/include/skalibs/nonposix.h src/include/skalibs/random.h src/include/skalibs/sysdeps.h src/include/skalibs/uint32.h
+src/librandom/random_uint32.o src/librandom/random_uint32.lo: src/librandom/random_uint32.c src/include/skalibs/nonposix.h src/include/skalibs/random.h src/include/skalibs/sysdeps.h src/include/skalibs/uint32.h
 src/librandom/random_unsort.o src/librandom/random_unsort.lo: src/librandom/random_unsort.c src/include/skalibs/bytestr.h src/include/skalibs/random.h src/include/skalibs/uint32.h
 src/librandom/surf.o src/librandom/surf.lo: src/librandom/surf.c src/include/skalibs/bytestr.h src/include/skalibs/surf.h src/include/skalibs/uint32.h
 src/librandom/surf_init.o src/librandom/surf_init.lo: src/librandom/surf_init.c src/include/skalibs/surf.h src/include/skalibs/uint32.h
