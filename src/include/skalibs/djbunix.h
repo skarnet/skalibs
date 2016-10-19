@@ -158,6 +158,15 @@ extern pid_t child_spawn1_socket (char const *, char const *const *, char const 
 
 
  /*
+    Spawn function with 2 communicating pipes. The int * points to 2 fds.
+    Input: fds[0] and fds[1] are the fds to move the pipes to in the child.
+    Output: fds[0] and fds[1] contain the pipes to the child.
+ */
+
+extern pid_t child_spawn2 (char const *, char const *const *, char const *const *, int *) ;
+
+
+ /*
     Unified function to fork a child with communication canals.
     * uses posix_spawn() if available, else uses fork+exec
     * requests n (the last arg) communication fds between parent and child
