@@ -53,7 +53,7 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
   unsigned int i = 0 ;
   char modifs[m + 1 + n * UINT_FMT] ;
   byte_copy(modifs, sizeof(NOFDVAR), NOFDVAR "=") ;
-  for (; i < n ; i++) if (pipe(p[i]) < 0) { e = errno ; goto errp ; }
+  for (; i < n ; i++) if (pipe(p[i]) < 0) { e = errno ; goto errpi ; }
   for (i = 0 ; i < n ; i++)
     if ((ndelay_on(p[i][i & 1]) < 0) || (coe(p[i][i & 1]) < 0))
     {
@@ -184,6 +184,7 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
 #endif
  errp:
   i = n ;
+ errpi:
   while (i--)
   {
     fd_close(p[i][1]) ;
