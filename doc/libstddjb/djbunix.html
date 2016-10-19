@@ -460,6 +460,18 @@ its end of the socket available in *<em>fd</em>.
 </p>
 
 <p>
+<code> pid_t child_spawn2 (char const *file, char const *const *argv, char const *const *envp, int *fds) </code> <br />
+Like <tt>child_spawn0()</tt>, except that two pipes are created between the
+parent and the child. <em>fds</em> must point to an array of 2 ints: this
+array is read as well as written by <tt>child_spawn2()</tt>. On function
+call, the numbers in <em>fds</em> must describe what fds should be used
+in the child to contain the communication pipes (for instance, if the child
+will read from its parent on stdin and writes to its parent on stdout, <em>fds</em>
+must contain 0 and 1). On function return, <em>fds</em> contains the
+descriptors for the pipes that read from / write to the child.
+</p>
+
+<p>
 <code> pid_t child_spawn (char const *file, char const *const *argv, char const *const *envp, int *fds, unsigned int nfds) </code> <br />
 More generic spawning function. <em>fds</em> must point to an array of at least <em>nfds</em> ints;
 file descriptors reading from or writing to the child will be stored there. The function returns
