@@ -118,19 +118,24 @@ tryldflag () {
 }
 
 choose () {
+  what="$1"
+  name="$2"
+  macro="$3"
   echo "Checking whether system has $4..."
+  shift 4
+  libs="$*"
   r=true
-  case "$1" in
-    *c*) $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO -o try$2.o -c src/sysdeps/try$2.c 2>/dev/null || r=false ;;
+  case "$what" in
+    *c*) $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO -o try$name.o -c src/sysdeps/try$name.c 2>/dev/null || r=false ;;
   esac
   if $r ; then
-    case "$1" in
-      *l*) $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o try$2 try$2.o $5 2>/dev/null || r=false ;;
+    case "$what" in
+      *l*) $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o try$name try$name.o $libs 2>/dev/null || r=false ;;
     esac
   fi
   if $r ; then
-    case "$1" in
-     *r*) ./try$2 >/dev/null 2>&1 ; r=$?
+    case "$what" in
+     *r*) ./try$name >/dev/null 2>&1 ; r=$?
           case "$r" in
            111) echo "  ... test crashed, aborting." ; exit 111 ;;
            0) r=true ;;
@@ -138,14 +143,14 @@ choose () {
           esac
     esac
   fi
-  rm -f try$2.o try$2
+  rm -f try$name.o try$name
   if $r ; then
-    echo "$2: yes" >> $sysdeps/sysdeps
-    echo "#define ${package_macro_name}_HAS$3" >> $sysdeps/sysdeps.h
+    echo "$name: yes" >> $sysdeps/sysdeps
+    echo "#define ${package_macro_name}_HAS$macro" >> $sysdeps/sysdeps.h
     echo "  ... yes"
   else
-    echo "$2: no" >> $sysdeps/sysdeps
-    echo "#undef ${package_macro_name}_HAS$3" >> $sysdeps/sysdeps.h
+    echo "$name: no" >> $sysdeps/sysdeps
+    echo "#undef ${package_macro_name}_HAS$macro" >> $sysdeps/sysdeps.h
     echo "  ... no"
   fi
 }
@@ -490,6 +495,8 @@ EOF
   choose cl futimes FUTIMES 'futimes()'
   choose cl arc4random ARC4RANDOM 'arc4random()'
   choose cl getrandom GETRANDOM 'getrandom()'
+  choose cl timer TIMER 'timer_create()' $sysclock_lib
+  choose cl itimer ITIMER 'setitimer()'
 
   echo '#endif' >> $sysdeps/sysdeps.h
 fi

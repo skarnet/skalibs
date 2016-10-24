@@ -15,6 +15,7 @@
 #include <skalibs/ip46.h>
 #include <skalibs/setgroups.h>
 
+#include <skalibs/alarm.h>
 #include <skalibs/alloc.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/bitarray.h>

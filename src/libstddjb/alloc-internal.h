@@ -1,7 +1,7 @@
 /* ISC license. */
 
-#ifndef ALLOC_0_H
-#define ALLOC_0_H
+#ifndef ALLOC_INTERNAL_H
+#define ALLOC_INTERNAL_H
 
 #include <skalibs/sysdeps.h>
 #include <skalibs/alloc.h>
