@@ -449,6 +449,17 @@ EOF
     echo 'posixspawn: no' >> $sysdeps/sysdeps
     echo "#undef ${package_macro_name}_HASPOSIXSPAWN" >> $sysdeps/sysdeps.h
   fi
+
+  hastimer=true
+  timer_lib=`trylibs timer 'timer_create()' -lrt` || hastimer=false
+  echo "$timer_lib" > $sysdeps/timer.lib
+  if $hastimer ; then
+    echo 'timer: yes' >> $sysdeps/sysdeps
+    echo "#define ${package_macro_name}_HASTIMER" >> $sysdeps/sysdeps.h
+  else
+    echo 'timer: no' >> $sysdeps/sysdeps
+    echo "#undef ${package_macro_name}_HASTIMER" >> $sysdeps/sysdeps.h
+  fi
   exec 3>&-
 
   echo "Checking system endianness..."
@@ -495,7 +506,6 @@ EOF
   choose cl futimes FUTIMES 'futimes()'
   choose cl arc4random ARC4RANDOM 'arc4random()'
   choose cl getrandom GETRANDOM 'getrandom()'
-  choose cl timer TIMER 'timer_create()' $sysclock_lib
   choose cl itimer ITIMER 'setitimer()'
 
   echo '#endif' >> $sysdeps/sysdeps.h
@@ -532,6 +542,7 @@ SPAWN_LIB := ${spawn_lib}
 SOCKET_LIB := ${socket_lib}
 SYSCLOCK_LIB := ${sysclock_lib}
 TAINNOW_LIB := ${tainnow_lib}
+TIMER_LIB := ${timer_lib}
 UTIL_LIB := ${util_lib}
 CC := ${CC_AUTO##${cross}}
 CFLAGS := $CFLAGS_AUTO
