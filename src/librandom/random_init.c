@@ -34,15 +34,19 @@ int random_init ()
 }
 
 #else
-#ifdef SKALIBS_HASDEVURANDOM
 
-#include <skalibs/djbunix.h>
 #include <skalibs/surf.h>
 #include <skalibs/random.h>
 #include "random-internal.h"
 
-int random_fd = -1 ;
 SURFSchedule surf_here = SURFSCHEDULE_ZERO ;
+
+#ifdef SKALIBS_HASDEVURANDOM
+
+#include <errno.h>
+#include <skalibs/djbunix.h>
+
+int random_fd = -1 ;
 
 int random_init ()
 {
@@ -55,19 +59,19 @@ int random_init ()
   {
     fd = open_readb("/dev/urandom") ;
     if (fd < 0) return 0 ;
-    if (coe(fd) < 0) { fd_close(fd) ; return 0 ; }
+    if (coe(fd) < 0)
+    {
+      int e = errno ;
+      fd_close(fd) ;
+      errno = e ;
+      return 0 ;
+    }
     random_fd = fd ;
   }
   return 1 ;
 }
 
 #else /* default */
-
-#include <skalibs/surf.h>
-#include <skalibs/random.h>
-#include "random-internal.h"
-
-SURFSchedule surf_here = SURFSCHEDULE_ZERO ;
 
 int random_init ()
 {
