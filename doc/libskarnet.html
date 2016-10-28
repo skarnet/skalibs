@@ -63,12 +63,19 @@ it <tt>$sysdeps</tt>. </li>
  <li> Link with <tt>-lskarnet</tt>. If you are using socket functions, you
 will also need to link with <tt>`cat $sysdeps/socket.lib`</tt>. If you are using
 time functions such as <tt>tain_now()</tt>, you will also need to link with
-<tt>`cat $sysdeps/tainnow.lib`</tt>. </li>
+<tt>`cat $sysdeps/tainnow.lib`</tt>. Also
+<tt>`cat $sysdeps/spawn.lib`</tt>` for <tt>posix_spawn()</tt> functions,
+<tt>timer.lib</tt> for <tt>timer_create</tt> functions, and so on. This
+is, unfortunately, the only way to work with all the idiosyncrasies and
+whimsies of various libcs; only
+<a href="http://www.musl-libc.org/">musl</a> does the sensible thing and
+exports all its functions from <tt>libc.a</tt> and <tt>libc.so</tt>,
+without requiring any additional linker command line flags. </li>
 </ul>
 
 <p>
- The <em>skarnet</em> library as a whole is big (826k for libskarnet.a and
-233k for libskarnet.so.2.0.0.0 on x86_64-linux), but the utmost care has been
+ The <em>skarnet</em> library as a whole is big (945k for libskarnet.a and
+179k for libskarnet.so.2.4.0.0 on x86_64-linux), but the utmost care has been
 given to separate functions so that linkers never pull in any more than they
 need. Linking against the static version of libskarnet actually produces
 very small executables, and if your libc is suited for that, since skalibs
