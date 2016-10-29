@@ -399,6 +399,7 @@ if test -n "$sysdeps" ; then
   socket_lib=$(cat $sysdeps/socket.lib)
   sysclock_lib=$(cat $sysdeps/sysclock.lib)
   tainnow_lib=$(cat $sysdeps/tainnow.lib)
+  timer_lib=$(cat $sysdeps/timer.lib)
   util_lib=$(cat $sysdeps/util.lib)
 else
   sysdeps=sysdeps.cfg
