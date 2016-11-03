@@ -27,10 +27,9 @@ int random_init ()
 #ifdef SKALIBS_HASDEVURANDOM
   char seed[160] ;
   random_makeseed(seed) ;
-  return openwritenclose_unsafe("/dev/urandom", seed, 160) ;
-#else
-  return 1 ;
+  openwritenclose_unsafe("/dev/urandom", seed, 160) ;
 #endif
+  return 1 ;
 }
 
 #else
@@ -54,7 +53,7 @@ int random_init ()
   char seed[160] ;
   random_makeseed(seed) ;
   surf_init(&surf_here, seed) ;
-  if (!openwritenclose_unsafe("/dev/urandom", seed, 160)) return 0 ;
+  openwritenclose_unsafe("/dev/urandom", seed, 160) ;
   if (random_fd < 0)
   {
     fd = open_readb("/dev/urandom") ;
