@@ -22,20 +22,9 @@
 <p>
 <tt>librandom</tt> is a small library designed to provide an
 interface to some reasonable-quality pseudorandom number
-generation. Some libcs have a bad
-<tt>random()</tt> implementation; <tt>librandom</tt> is designed
-to use system pseudorandom number generation when it's provided
-via <tt>/dev/random</tt> and <tt>/dev/urandom</tt>, and to use
-a good default PRNG otherwise.
-</p>
-
-<p>
- <tt>librandom</tt> also supports
-<a href="http://egd.sourceforge.net/">EGD</a>. If you have built
-skalibs with  <tt>--enable-egd</tt>, then the librandom
-primitives will try and connect to an EGD service to get random bytes
-if there is no kernel-based entropy generator such as <tt>/dev/random</tt>.
-If the EGD connection fails, a SURF PRNG is used.
+generation. <tt>librandom</tt> uses arc4random when available,
+or getrandom - else it defaults to  <tt>/dev/urandom</tt> and a
+a SURF PRNG.
 </p>
 
 <h2> Compiling </h2>
