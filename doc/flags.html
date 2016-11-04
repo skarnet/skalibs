@@ -241,40 +241,6 @@ relevant networking functions if and only if the target architecture supports it
 This is the default, and it is safe.
 </p>
 
-<a name="forcedevr"><h3> --enable-force-devr </h3></a>
-
-<p>
- If this option is set, then the automatic sysdeps tests will assume the
-target architecture has a working <tt>/dev/random</tt> and will skip
-its autodetection.
-</p>
-
-<p>
- Otherwise, <tt>/dev/random</tt> will be autodetected
-and tested; if entropy generation is low on the host, the compilation
-process might hang for several minutes. It is safe to leave this flag
-clear; it should only be set to speed up the compilation process in a
-known environment or for testing purposes.
-</p>
-
-<p>
- If skalibs is being cross-compiled, this flag obviously has no effect:
-the presence of a working <tt>/dev/random</tt> is read from the user-provided
-sysdeps.
-</p>
-
-<a name="forcedevr"><h3> --enable-egd=<em>path</em> </h3></a>
-
-<p>
- If you set this option, then the <a href="librandom/">librandom</a> functions
-will assume the presence of an EGD daemon listening on <em>path</em>,
-and use it to get random data.
-</p>
-
-<p>
- By default, skalibs will not include EGD support.
-</p>
-
 <a name="defaultpath"><h3> --with-default-path=<em>path</em> </h3></a>
 
 <p>
