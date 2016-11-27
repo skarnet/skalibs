@@ -9,7 +9,11 @@ unsigned int allreadwrite (iofunc_t_ref op, int fd, register char *buf, register
   while (len)
   {
     register int w = (*op)(fd, buf, len) ;
-    if (w <= 0) break ;
+    if (w <= 0)
+    {
+      if (!w) errno = 0 ;
+      break ;
+    }
     written += w ;
     buf += w ;
     len -= w ;
