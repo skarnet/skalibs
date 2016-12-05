@@ -18,6 +18,7 @@ void random_string (char *s, unsigned int n)
 
 #include <skalibs/nonposix.h>
 #include <sys/types.h>
+#include <unistd.h>
 #include <sys/syscall.h>
 #include <skalibs/random.h>
 
