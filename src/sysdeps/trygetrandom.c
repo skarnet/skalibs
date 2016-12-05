@@ -8,6 +8,7 @@
 #endif
 
 #include <sys/types.h>
+#include <unistd.h>
 #include <sys/syscall.h>
 
 static int getrandom (void *buf, size_t buflen, unsigned int flags)
