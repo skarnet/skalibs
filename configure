@@ -76,7 +76,15 @@ fnmatch () {
 }
 
 cmdexists () {
-  type "$1" >/dev/null 2>&1
+  local status=0;
+  for cmdpart in $1; do
+    type "$cmdpart" 2>&1 >/dev/null
+    status=$?
+    if [ $status -ne 0 ]; then
+      break
+    fi
+  done
+  return $status
 }
 
 trycc () {
@@ -339,7 +347,7 @@ else
   cross=
 fi
 echo "Checking for C compiler..."
-trycc ${cross}${CC}
+trycc "${cross}${CC}"
 trycc ${cross}gcc
 trycc ${cross}clang
 trycc ${cross}cc
