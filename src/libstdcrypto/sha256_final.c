@@ -1,7 +1,7 @@
 /* ISC license. */
 
+#include <stdint.h>
 #include <skalibs/bytestr.h>
-#include <skalibs/uint32.h>
 #include <skalibs/sha256.h>
 #include "sha256-internal.h"
 
@@ -9,7 +9,7 @@ void sha256_final (SHA256Schedule *ctx, char *digest)
 {
   register unsigned int i = 0 ;
   register unsigned char *p = (unsigned char *)digest ;
-  uint32 bits[2] = { ctx->bits[0], ctx->bits[1] } ;
+  uint32_t bits[2] = { ctx->bits[0], ctx->bits[1] } ;
 
   sha256_feed(ctx, 0x80) ;
   while (ctx->b != 56) sha256_feed(ctx, 0) ;

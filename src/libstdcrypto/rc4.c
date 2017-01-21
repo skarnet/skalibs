@@ -1,12 +1,13 @@
 /* ISC license. */
 /* Thanks to Thomas Pornin <pornin@bolet.org> */
 
+#include <sys/types.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/rc4.h>
 
-void rc4 (RC4Schedule *r, char const *in, char *out, unsigned int n)
+void rc4 (RC4Schedule *r, char const *in, char *out, size_t n)
 {
-  register unsigned int i = 0 ;
+  register size_t i = 0 ;
   for (; i < n ; i++)
   {
     register unsigned char t ;

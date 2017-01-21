@@ -1,6 +1,7 @@
 /* ISC license. */
 
 #include <unistd.h>
+#include <stdint.h>
 #include <skalibs/uint32.h>
 #include <skalibs/tai.h>
 #include <skalibs/sha1.h>
@@ -19,7 +20,7 @@ void random_makeseed (char *s)
   {
     tain_t now ;
     char tmp[256] ;
-    uint32 x = getpid() ;
+    uint32_t x = getpid() ;
     uint32_pack(tmp, x) ;
     x = getppid() ;
     uint32_pack(tmp + 4, x) ;

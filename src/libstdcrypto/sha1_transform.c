@@ -1,6 +1,6 @@
 /* ISC license. */
 
-#include <skalibs/uint32.h>
+#include <stdint.h>
 #include "sha1-internal.h"
 
 #define F1(x, y, z) ((x & y) | ((~x) & z))
@@ -10,7 +10,7 @@
 
 #define SHA1STEP(f, data) \
 { \
-  register uint32 tmp = e + f(b, c, d) + data + ((a<<5) | (a>>27)); \
+  register uint32_t tmp = e + f(b, c, d) + data + ((a<<5) | (a>>27)); \
   e = d ; \
   d = c ; \
   c = (b<<30) | (b>>2) ; \
@@ -18,10 +18,10 @@
   a = tmp ; \
 }
 
-void sha1_transform (uint32 *buf, uint32 const *in)
+void sha1_transform (uint32_t *buf, uint32_t const *in)
 {
-  register uint32 a = buf[0], b = buf[1], c = buf[2], d = buf[3], e = buf[4] ;
-  uint32 w[80] ;
+  register uint32_t a = buf[0], b = buf[1], c = buf[2], d = buf[3], e = buf[4] ;
+  uint32_t w[80] ;
   register unsigned int i = 0 ;
 
   for (; i < 16 ; i++) w[i] = in[i] ;
@@ -31,12 +31,12 @@ void sha1_transform (uint32 *buf, uint32 const *in)
     w[i] = (w[i]<<1) | (w[i]>>31) ;
   }
   for (i = 0 ; i < 20 ; i++)
-    SHA1STEP(F1, w[i] + 0x5a827999UL) ;
+    SHA1STEP(F1, w[i] + 0x5a827999U) ;
   for (; i < 40 ; i++)
-    SHA1STEP(F2, w[i] + 0x6ed9eba1UL) ;
+    SHA1STEP(F2, w[i] + 0x6ed9eba1U) ;
   for (; i < 60 ; i++)
-    SHA1STEP(F3, w[i] + 0x8f1bbcdcUL) ;
+    SHA1STEP(F3, w[i] + 0x8f1bbcdcU) ;
   for (; i < 80 ; i++)
-    SHA1STEP(F4, w[i] + 0xca62c1d6UL) ;
+    SHA1STEP(F4, w[i] + 0xca62c1d6U) ;
   buf[0] += a ; buf[1] += b ; buf[2] += c ; buf[3] += d ; buf[4] += e ;
 }

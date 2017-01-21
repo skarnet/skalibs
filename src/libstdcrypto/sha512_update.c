@@ -1,12 +1,13 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/sha512.h>
 #include "sha512-internal.h"
 
-void sha512_update (SHA512Schedule *ctx, char const *buf, unsigned int len)
+void sha512_update (SHA512Schedule *ctx, char const *buf, size_t len)
 {
-  register unsigned int pad = ctx->len & 0x7fu ;
+  register unsigned int pad = ctx->len & 0x7fU ;
   ctx->len += len ;
   if (pad && len >= 128 - pad)
   {

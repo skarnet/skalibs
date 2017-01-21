@@ -5,23 +5,24 @@
 #ifdef SKALIBS_HASARC4RANDOM
 
 #include <skalibs/nonposix.h>
+#include <stdint.h>
 #include <stdlib.h>
-#include <skalibs/uint32.h>
 #include <skalibs/random.h>
 
-uint32 random_uint32 (uint32 n)
+uint32_t random_uint32 (uint32_t n)
 {
   return arc4random_uniform(n) ;
 }
 
 #else
 
+#include <stdint.h>
 #include <skalibs/uint32.h>
 #include <skalibs/random.h>
 
-uint32 random_uint32 (uint32 n)
+uint32_t random_uint32 (uint32_t n)
 {
-  uint32 min, x ;
+  uint32_t min, x ;
   if (n < 2) return 0 ;
   min = -n % n ;
   for (;;)

@@ -8,7 +8,7 @@ src/include/skalibs/allreadwrite.h: src/include/skalibs/functypes.h src/include/
 src/include/skalibs/avlnode.h: src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h
 src/include/skalibs/avltree.h: src/include/skalibs/avlnode.h src/include/skalibs/functypes.h src/include/skalibs/gensetdyn.h
 src/include/skalibs/avltreen.h: src/include/skalibs/avlnode.h src/include/skalibs/functypes.h src/include/skalibs/genset.h
-src/include/skalibs/biguint.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint32.h
+src/include/skalibs/biguint.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/bitarray.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/bufalloc.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/buffer.h: src/include/skalibs/allreadwrite.h src/include/skalibs/bytestr.h src/include/skalibs/cbuffer.h src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h src/include/skalibs/siovec.h
@@ -31,12 +31,9 @@ src/include/skalibs/iobuffer.h: src/include/skalibs/buffer.h src/include/skalibs
 src/include/skalibs/iopause.h: src/include/skalibs/tai.h
 src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr2.h
-src/include/skalibs/md5.h: src/include/skalibs/uint32.h
 src/include/skalibs/mininetstring.h: src/include/skalibs/stralloc.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h
 src/include/skalibs/netstring.h: src/include/skalibs/buffer.h src/include/skalibs/siovec.h src/include/skalibs/stralloc.h
-src/include/skalibs/random.h: src/include/skalibs/stralloc.h src/include/skalibs/uint32.h
-src/include/skalibs/sha1.h: src/include/skalibs/uint32.h
-src/include/skalibs/sha256.h: src/include/skalibs/uint32.h
+src/include/skalibs/random.h: src/include/skalibs/stralloc.h
 src/include/skalibs/sha512.h: src/include/skalibs/uint64.h
 src/include/skalibs/sig.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/siovec.h: src/include/skalibs/gccattributes.h
@@ -49,7 +46,6 @@ src/include/skalibs/stddjb.h: src/include/skalibs/alarm.h src/include/skalibs/al
 src/include/skalibs/stralloc.h: src/include/skalibs/bytestr.h src/include/skalibs/siovec.h
 src/include/skalibs/strerr.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
-src/include/skalibs/surf.h: src/include/skalibs/uint32.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
 src/include/skalibs/unix-timed.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
 src/include/skalibs/unix-transactional.h: src/include/skalibs/siovec.h src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
@@ -59,43 +55,43 @@ src/include/skalibs/unixonacid.h: src/include/skalibs/kolbak.h src/include/skali
 src/include/skalibs/webipc.h: src/include/skalibs/djbunix.h src/include/skalibs/tai.h
 src/libdatastruct/avlnode-internal.h: src/include/skalibs/avlnode.h
 src/librandom/random-internal.h: src/include/skalibs/surf.h
-src/libstdcrypto/md5-internal.h: src/include/skalibs/md5.h src/include/skalibs/uint32.h
-src/libstdcrypto/sha1-internal.h: src/include/skalibs/sha1.h src/include/skalibs/uint32.h
-src/libstdcrypto/sha256-internal.h: src/include/skalibs/sha256.h src/include/skalibs/uint32.h
+src/libstdcrypto/md5-internal.h: src/include/skalibs/md5.h
+src/libstdcrypto/sha1-internal.h: src/include/skalibs/sha1.h
+src/libstdcrypto/sha256-internal.h: src/include/skalibs/sha256.h
 src/libstdcrypto/sha512-internal.h: src/include/skalibs/sha512.h
 src/libstddjb/alloc-internal.h: src/include/skalibs/alloc.h src/include/skalibs/sysdeps.h
 src/libstddjb/djbtime-internal.h: src/include/skalibs/uint64.h
 src/libstddjb/fmtscan-internal.h: src/include/skalibs/bytestr.h src/include/skalibs/fmtscan.h
 src/libstddjb/selfpipe-internal.h: src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
 src/libunixonacid/skaclient-internal.h: src/include/skalibs/kolbak.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
-src/libbiguint/bu_addc.o src/libbiguint/bu_addc.lo: src/libbiguint/bu_addc.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_addmod.o src/libbiguint/bu_addmod.lo: src/libbiguint/bu_addmod.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_cmp.o src/libbiguint/bu_cmp.lo: src/libbiguint/bu_cmp.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_copy.o src/libbiguint/bu_copy.lo: src/libbiguint/bu_copy.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_copy_internal.o src/libbiguint/bu_copy_internal.lo: src/libbiguint/bu_copy_internal.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_div.o src/libbiguint/bu_div.lo: src/libbiguint/bu_div.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_div_internal.o src/libbiguint/bu_div_internal.lo: src/libbiguint/bu_div_internal.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_divmod.o src/libbiguint/bu_divmod.lo: src/libbiguint/bu_divmod.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_divmod_internal.o src/libbiguint/bu_divmod_internal.lo: src/libbiguint/bu_divmod_internal.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
+src/libbiguint/bu_addc.o src/libbiguint/bu_addc.lo: src/libbiguint/bu_addc.c src/include/skalibs/biguint.h
+src/libbiguint/bu_addmod.o src/libbiguint/bu_addmod.lo: src/libbiguint/bu_addmod.c src/include/skalibs/biguint.h
+src/libbiguint/bu_cmp.o src/libbiguint/bu_cmp.lo: src/libbiguint/bu_cmp.c src/include/skalibs/biguint.h
+src/libbiguint/bu_copy.o src/libbiguint/bu_copy.lo: src/libbiguint/bu_copy.c src/include/skalibs/biguint.h
+src/libbiguint/bu_copy_internal.o src/libbiguint/bu_copy_internal.lo: src/libbiguint/bu_copy_internal.c src/include/skalibs/biguint.h
+src/libbiguint/bu_div.o src/libbiguint/bu_div.lo: src/libbiguint/bu_div.c src/include/skalibs/biguint.h
+src/libbiguint/bu_div_internal.o src/libbiguint/bu_div_internal.lo: src/libbiguint/bu_div_internal.c src/include/skalibs/biguint.h
+src/libbiguint/bu_divmod.o src/libbiguint/bu_divmod.lo: src/libbiguint/bu_divmod.c src/include/skalibs/biguint.h
+src/libbiguint/bu_divmod_internal.o src/libbiguint/bu_divmod_internal.lo: src/libbiguint/bu_divmod_internal.c src/include/skalibs/biguint.h
 src/libbiguint/bu_fmt.o src/libbiguint/bu_fmt.lo: src/libbiguint/bu_fmt.c src/include/skalibs/biguint.h src/include/skalibs/bytestr.h src/include/skalibs/uint32.h
-src/libbiguint/bu_gcd.o src/libbiguint/bu_gcd.lo: src/libbiguint/bu_gcd.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_invmod.o src/libbiguint/bu_invmod.lo: src/libbiguint/bu_invmod.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_len.o src/libbiguint/bu_len.lo: src/libbiguint/bu_len.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_mod.o src/libbiguint/bu_mod.lo: src/libbiguint/bu_mod.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_mul.o src/libbiguint/bu_mul.lo: src/libbiguint/bu_mul.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
-src/libbiguint/bu_mulmod.o src/libbiguint/bu_mulmod.lo: src/libbiguint/bu_mulmod.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
+src/libbiguint/bu_gcd.o src/libbiguint/bu_gcd.lo: src/libbiguint/bu_gcd.c src/include/skalibs/biguint.h
+src/libbiguint/bu_invmod.o src/libbiguint/bu_invmod.lo: src/libbiguint/bu_invmod.c src/include/skalibs/biguint.h
+src/libbiguint/bu_len.o src/libbiguint/bu_len.lo: src/libbiguint/bu_len.c src/include/skalibs/biguint.h
+src/libbiguint/bu_mod.o src/libbiguint/bu_mod.lo: src/libbiguint/bu_mod.c src/include/skalibs/biguint.h
+src/libbiguint/bu_mul.o src/libbiguint/bu_mul.lo: src/libbiguint/bu_mul.c src/include/skalibs/biguint.h src/include/skalibs/uint64.h
+src/libbiguint/bu_mulmod.o src/libbiguint/bu_mulmod.lo: src/libbiguint/bu_mulmod.c src/include/skalibs/biguint.h
 src/libbiguint/bu_pack.o src/libbiguint/bu_pack.lo: src/libbiguint/bu_pack.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
 src/libbiguint/bu_pack_big.o src/libbiguint/bu_pack_big.lo: src/libbiguint/bu_pack_big.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_scan.o src/libbiguint/bu_scan.lo: src/libbiguint/bu_scan.c src/include/skalibs/biguint.h src/include/skalibs/bitarray.h src/include/skalibs/uint32.h
+src/libbiguint/bu_scan.o src/libbiguint/bu_scan.lo: src/libbiguint/bu_scan.c src/include/skalibs/biguint.h src/include/skalibs/bitarray.h
 src/libbiguint/bu_scan_internal.o src/libbiguint/bu_scan_internal.lo: src/libbiguint/bu_scan_internal.c src/include/skalibs/biguint.h src/include/skalibs/bytestr.h src/include/skalibs/uint32.h
 src/libbiguint/bu_scanlen.o src/libbiguint/bu_scanlen.lo: src/libbiguint/bu_scanlen.c src/include/skalibs/biguint.h src/include/skalibs/fmtscan.h
-src/libbiguint/bu_slbc.o src/libbiguint/bu_slbc.lo: src/libbiguint/bu_slbc.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_srbc.o src/libbiguint/bu_srbc.lo: src/libbiguint/bu_srbc.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_subc.o src/libbiguint/bu_subc.lo: src/libbiguint/bu_subc.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_submod.o src/libbiguint/bu_submod.lo: src/libbiguint/bu_submod.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
+src/libbiguint/bu_slbc.o src/libbiguint/bu_slbc.lo: src/libbiguint/bu_slbc.c src/include/skalibs/biguint.h
+src/libbiguint/bu_srbc.o src/libbiguint/bu_srbc.lo: src/libbiguint/bu_srbc.c src/include/skalibs/biguint.h
+src/libbiguint/bu_subc.o src/libbiguint/bu_subc.lo: src/libbiguint/bu_subc.c src/include/skalibs/biguint.h
+src/libbiguint/bu_submod.o src/libbiguint/bu_submod.lo: src/libbiguint/bu_submod.c src/include/skalibs/biguint.h
 src/libbiguint/bu_unpack.o src/libbiguint/bu_unpack.lo: src/libbiguint/bu_unpack.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
 src/libbiguint/bu_unpack_big.o src/libbiguint/bu_unpack_big.lo: src/libbiguint/bu_unpack_big.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_zero.o src/libbiguint/bu_zero.lo: src/libbiguint/bu_zero.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
+src/libbiguint/bu_zero.o src/libbiguint/bu_zero.lo: src/libbiguint/bu_zero.c src/include/skalibs/biguint.h
 src/libdatastruct/avlnode_delete.o src/libdatastruct/avlnode_delete.lo: src/libdatastruct/avlnode_delete.c src/libdatastruct/avlnode-internal.h src/include/skalibs/avlnode.h src/include/skalibs/functypes.h
 src/libdatastruct/avlnode_doublerotate.o src/libdatastruct/avlnode_doublerotate.lo: src/libdatastruct/avlnode_doublerotate.c src/libdatastruct/avlnode-internal.h src/include/skalibs/avlnode.h
 src/libdatastruct/avlnode_extreme.o src/libdatastruct/avlnode_extreme.lo: src/libdatastruct/avlnode_extreme.c src/include/skalibs/avlnode.h
@@ -137,24 +133,24 @@ src/librandom/random_name.o src/librandom/random_name.lo: src/librandom/random_n
 src/librandom/random_sauniquename.o src/librandom/random_sauniquename.lo: src/librandom/random_sauniquename.c src/include/skalibs/random.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/librandom/random_string.o src/librandom/random_string.lo: src/librandom/random_string.c src/include/skalibs/allreadwrite.h src/include/skalibs/nonposix.h src/librandom/random-internal.h src/include/skalibs/random.h src/include/skalibs/sysdeps.h
 src/librandom/random_uint32.o src/librandom/random_uint32.lo: src/librandom/random_uint32.c src/include/skalibs/nonposix.h src/include/skalibs/random.h src/include/skalibs/sysdeps.h src/include/skalibs/uint32.h
-src/librandom/random_unsort.o src/librandom/random_unsort.lo: src/librandom/random_unsort.c src/include/skalibs/bytestr.h src/include/skalibs/random.h src/include/skalibs/uint32.h
+src/librandom/random_unsort.o src/librandom/random_unsort.lo: src/librandom/random_unsort.c src/include/skalibs/bytestr.h src/include/skalibs/random.h
 src/librandom/surf.o src/librandom/surf.lo: src/librandom/surf.c src/include/skalibs/bytestr.h src/include/skalibs/surf.h src/include/skalibs/uint32.h
 src/librandom/surf_init.o src/librandom/surf_init.lo: src/librandom/surf_init.c src/include/skalibs/surf.h src/include/skalibs/uint32.h
 src/libstdcrypto/md5_final.o src/libstdcrypto/md5_final.lo: src/libstdcrypto/md5_final.c src/include/skalibs/bytestr.h src/libstdcrypto/md5-internal.h src/include/skalibs/md5.h src/include/skalibs/uint32.h
 src/libstdcrypto/md5_init.o src/libstdcrypto/md5_init.lo: src/libstdcrypto/md5_init.c src/include/skalibs/md5.h
-src/libstdcrypto/md5_transform.o src/libstdcrypto/md5_transform.lo: src/libstdcrypto/md5_transform.c src/libstdcrypto/md5-internal.h src/include/skalibs/uint32.h
+src/libstdcrypto/md5_transform.o src/libstdcrypto/md5_transform.lo: src/libstdcrypto/md5_transform.c src/libstdcrypto/md5-internal.h
 src/libstdcrypto/md5_update.o src/libstdcrypto/md5_update.lo: src/libstdcrypto/md5_update.c src/include/skalibs/bytestr.h src/libstdcrypto/md5-internal.h src/include/skalibs/md5.h src/include/skalibs/uint32.h
 src/libstdcrypto/rc4.o src/libstdcrypto/rc4.lo: src/libstdcrypto/rc4.c src/include/skalibs/bytestr.h src/include/skalibs/rc4.h
 src/libstdcrypto/rc4_init.o src/libstdcrypto/rc4_init.lo: src/libstdcrypto/rc4_init.c src/include/skalibs/bytestr.h src/include/skalibs/rc4.h
-src/libstdcrypto/sha1_feed.o src/libstdcrypto/sha1_feed.lo: src/libstdcrypto/sha1_feed.c src/include/skalibs/bytestr.h src/libstdcrypto/sha1-internal.h src/include/skalibs/sha1.h src/include/skalibs/uint32.h
+src/libstdcrypto/sha1_feed.o src/libstdcrypto/sha1_feed.lo: src/libstdcrypto/sha1_feed.c src/include/skalibs/bytestr.h src/libstdcrypto/sha1-internal.h src/include/skalibs/sha1.h
 src/libstdcrypto/sha1_final.o src/libstdcrypto/sha1_final.lo: src/libstdcrypto/sha1_final.c src/libstdcrypto/sha1-internal.h src/include/skalibs/sha1.h src/include/skalibs/uint32.h
 src/libstdcrypto/sha1_init.o src/libstdcrypto/sha1_init.lo: src/libstdcrypto/sha1_init.c src/include/skalibs/sha1.h
-src/libstdcrypto/sha1_transform.o src/libstdcrypto/sha1_transform.lo: src/libstdcrypto/sha1_transform.c src/libstdcrypto/sha1-internal.h src/include/skalibs/uint32.h
+src/libstdcrypto/sha1_transform.o src/libstdcrypto/sha1_transform.lo: src/libstdcrypto/sha1_transform.c src/libstdcrypto/sha1-internal.h
 src/libstdcrypto/sha1_update.o src/libstdcrypto/sha1_update.lo: src/libstdcrypto/sha1_update.c src/libstdcrypto/sha1-internal.h src/include/skalibs/sha1.h
-src/libstdcrypto/sha256_feed.o src/libstdcrypto/sha256_feed.lo: src/libstdcrypto/sha256_feed.c src/include/skalibs/bytestr.h src/libstdcrypto/sha256-internal.h src/include/skalibs/sha256.h src/include/skalibs/uint32.h
-src/libstdcrypto/sha256_final.o src/libstdcrypto/sha256_final.lo: src/libstdcrypto/sha256_final.c src/include/skalibs/bytestr.h src/libstdcrypto/sha256-internal.h src/include/skalibs/sha256.h src/include/skalibs/uint32.h
+src/libstdcrypto/sha256_feed.o src/libstdcrypto/sha256_feed.lo: src/libstdcrypto/sha256_feed.c src/include/skalibs/bytestr.h src/libstdcrypto/sha256-internal.h src/include/skalibs/sha256.h
+src/libstdcrypto/sha256_final.o src/libstdcrypto/sha256_final.lo: src/libstdcrypto/sha256_final.c src/include/skalibs/bytestr.h src/libstdcrypto/sha256-internal.h src/include/skalibs/sha256.h
 src/libstdcrypto/sha256_init.o src/libstdcrypto/sha256_init.lo: src/libstdcrypto/sha256_init.c src/include/skalibs/sha256.h
-src/libstdcrypto/sha256_transform.o src/libstdcrypto/sha256_transform.lo: src/libstdcrypto/sha256_transform.c src/libstdcrypto/sha256-internal.h src/include/skalibs/uint32.h
+src/libstdcrypto/sha256_transform.o src/libstdcrypto/sha256_transform.lo: src/libstdcrypto/sha256_transform.c src/libstdcrypto/sha256-internal.h
 src/libstdcrypto/sha256_update.o src/libstdcrypto/sha256_update.lo: src/libstdcrypto/sha256_update.c src/libstdcrypto/sha256-internal.h src/include/skalibs/sha256.h
 src/libstdcrypto/sha512_final.o src/libstdcrypto/sha512_final.lo: src/libstdcrypto/sha512_final.c src/include/skalibs/bytestr.h src/libstdcrypto/sha512-internal.h src/include/skalibs/sha512.h src/include/skalibs/uint64.h
 src/libstdcrypto/sha512_init.o src/libstdcrypto/sha512_init.lo: src/libstdcrypto/sha512_init.c src/include/skalibs/sha512.h

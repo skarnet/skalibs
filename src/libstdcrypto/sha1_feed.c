@@ -1,13 +1,13 @@
 /* ISC license. */
 
-#include <skalibs/uint32.h>
+#include <stdint.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/sha1.h>
 #include "sha1-internal.h"
 
 void sha1_feed (SHA1Schedule *ctx, unsigned char inb)
 {
-  register uint32 tmp ;
+  register uint32_t tmp ;
 
   ctx->in[ctx->b>>2] <<= 8 ;
   ctx->in[ctx->b>>2] |= T8(inb) ;

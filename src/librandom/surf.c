@@ -1,5 +1,7 @@
 /* ISC license. */
 
+#include <sys/types.h>
+#include <stdint.h>
 #include <skalibs/uint32.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/surf.h>
@@ -9,10 +11,10 @@
 
 static void surfit (SURFSchedule *ctx)
 {
-  uint32 t[12] ;
-  uint32 z[8] ;
-  uint32 x ;
-  uint32 sum = 0 ;
+  uint32_t t[12] ;
+  uint32_t z[8] ;
+  uint32_t x ;
+  uint32_t sum = 0 ;
   unsigned int i = 0, loop = 0 ; ;
 
   if (!++ctx->in[0] && !++ctx->in[1] && !++ctx->in[2]) ++ctx->in[3] ;
@@ -33,10 +35,10 @@ static void surfit (SURFSchedule *ctx)
   for (i = 0 ; i < 8 ; i++) uint32_pack(ctx->out + (i<<2), z[i]) ;
 }
 
-void surf (SURFSchedule *ctx, char *s, unsigned int n)
+void surf (SURFSchedule *ctx, char *s, size_t n)
 {
   {
-    register unsigned int i = 32 - ctx->pos ;
+    register size_t i = 32 - ctx->pos ;
     if (n < i) i = n ;
     byte_copy(s, i, ctx->out + ctx->pos) ;
     s += i ; n -= i ; ctx->pos += i ;

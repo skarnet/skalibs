@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <skalibs/random.h>
 
-void random_string (char *s, unsigned int n)
+void random_string (char *s, size_t n)
 {
   arc4random_buf(s, n) ;
 }
@@ -27,7 +27,7 @@ static int getrandom (void *buf, size_t buflen, unsigned int flags)
   return syscall(SYS_getrandom, buf, buflen, flags) ;
 }
 
-void random_string (char *s, unsigned int n)
+void random_string (char *s, size_t n)
 {
   while (n)
   {
@@ -47,9 +47,9 @@ void random_string (char *s, unsigned int n)
 #include <skalibs/random.h>
 #include "random-internal.h"
 
-void random_string (char *s, unsigned int n)
+void random_string (char *s, size_t n)
 {
-  unsigned int r = allread(random_fd, s, n) ;
+  size_t r = allread(random_fd, s, n) ;
   if (r < n) surf(&surf_here, s+r, n-r) ;
 }
 
@@ -58,7 +58,7 @@ void random_string (char *s, unsigned int n)
 #include <skalibs/random.h>
 #include "random-internal.h"
 
-void random_string (char *s, unsigned int n)
+void random_string (char *s, size_t n)
 {
   surf(&surf_here, s, n) ;
 }

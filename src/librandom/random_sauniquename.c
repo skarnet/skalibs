@@ -2,13 +2,14 @@
 
 /* MT-unsafe */
 
+#include <sys/types.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/skamisc.h>
 #include <skalibs/random.h>
 
-int random_sauniquename (stralloc *sa, unsigned int n)
+int random_sauniquename (stralloc *sa, size_t n)
 {
-  unsigned int base = sa->len ;
+  size_t base = sa->len ;
   int wasnull = !sa->s ;
   if (!sauniquename(sa)) return 0 ;
   if (!stralloc_readyplus(sa, n+1)) goto err ;

@@ -74,7 +74,7 @@ void sha512_transform (SHA512Schedule *ctx, unsigned char const *block)
   register unsigned int i = 0 ;
 
   for (; i < 16 ; i++) uint64_unpack_big((char const *)block + (i << 3), w + i) ;
-  for (; i < 80; i++) w[i] = R1(w[i-2]) + w[i-7] + R0(w[i-15]) + w[i-16] ;
+  for (; i < 80 ; i++) w[i] = R1(w[i-2]) + w[i-7] + R0(w[i-15]) + w[i-16] ;
   for (i = 0 ; i < 8 ; i++) h[i] = ctx->h[i] ;
   for (i = 0 ; i < 80 ; i++)
   {

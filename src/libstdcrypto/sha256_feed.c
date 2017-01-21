@@ -1,13 +1,13 @@
 /* ISC license. */
 
-#include <skalibs/uint32.h>
+#include <stdint.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/sha256.h>
 #include "sha256-internal.h"
 
 void sha256_feed (SHA256Schedule *ctx, unsigned char inb)
 {
-  register uint32 tmp ;
+  register uint32_t tmp ;
   ctx->in[ctx->b>>2] <<= 8 ;
   ctx->in[ctx->b>>2] |= T8(inb) ;
   if (++ctx->b >= 64)
