@@ -1,9 +1,9 @@
 /* ISC license. */
 
-#include <skalibs/uint32.h>
+#include <stdint.h>
 #include <skalibs/biguint.h>
 
-int bu_slbc (register uint32 *a, register unsigned int n, register int carry)
+int bu_slbc (register uint32_t *a, register unsigned int n, register int carry)
 {
   register unsigned int i = 0 ;
   carry = !!carry ;

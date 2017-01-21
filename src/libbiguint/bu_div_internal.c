@@ -1,21 +1,21 @@
 /* ISC license. */
 
+#include <stdint.h>
 #include <errno.h>
-#include <skalibs/uint32.h>
 #include <skalibs/biguint.h>
 
 /*
    q = a/b, a = a mod b. Assumes b != 0 and qn >= alen - blen + 1.
 */
 
-void bu_div_internal (uint32 *a, unsigned int an, uint32 const *b, unsigned int bn, uint32 *q, unsigned int qn)
+void bu_div_internal (uint32_t *a, unsigned int an, uint32_t const *b, unsigned int bn, uint32_t *q, unsigned int qn)
 {
   unsigned int alen = bu_len(a, an) ;
   unsigned int blen = bu_len(b, bn) ;
   bu_zero(q, qn) ;
   if (alen < blen) return ;
   {
-    uint32 bb[alen + 1] ;
+    uint32_t bb[alen + 1] ;
     unsigned int i = 1 + ((alen - blen) << 5) ;
     bu_zero(bb, alen - blen) ;
     bu_copy_internal(bb + alen - blen, b, blen) ;

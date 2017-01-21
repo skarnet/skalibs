@@ -1,16 +1,18 @@
 /* ISC license. */
 
+#include <sys/types.h>
+#include <stdint.h>
 #include <skalibs/uint32.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/biguint.h>
 
-unsigned int bu_fmt (char *s, uint32 const *x, unsigned int n)
+size_t bu_fmt (char *s, uint32_t const *x, unsigned int n)
 {
-  unsigned int len = 0 ;
+  size_t len = 0 ;
   while (n--)
   {
     char fmt[8] ;
-    unsigned int i = uint32_xfmt(fmt, x[n]) ;
+    size_t i = uint32_xfmt(fmt, x[n]) ;
     byte_copy(s+len, 8-i, "00000000") ;
     byte_copy(s+len+8-i, i, fmt) ;
     len += 8 ;

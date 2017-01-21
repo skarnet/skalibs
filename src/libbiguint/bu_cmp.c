@@ -1,9 +1,9 @@
 /* ISC license. */
 
-#include <skalibs/uint32.h>
+#include <stdint.h>
 #include <skalibs/biguint.h>
 
-int bu_cmp (register uint32 const *a, register unsigned int an, register uint32 const *b, register unsigned int bn)
+int bu_cmp (register uint32_t const *a, register unsigned int an, register uint32_t const *b, register unsigned int bn)
 {
   an = bu_len(a, an) ;
   bn = bu_len(b, bn) ;

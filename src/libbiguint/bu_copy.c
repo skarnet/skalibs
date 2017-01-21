@@ -5,11 +5,11 @@
 #define _BSD_SOURCE
 #endif
 
+#include <stdint.h>
 #include <errno.h>
-#include <skalibs/uint32.h>
 #include <skalibs/biguint.h>
 
-int bu_copy (uint32 *b, unsigned int bn, uint32 const *a, unsigned int an)
+int bu_copy (uint32_t *b, unsigned int bn, uint32_t const *a, unsigned int an)
 {
   register unsigned int alen = bu_len(a, an) ;
   if (bn < alen)

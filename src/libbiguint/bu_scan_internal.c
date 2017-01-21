@@ -1,13 +1,15 @@
 /* ISC license. */
 
+#include <sys/types.h>
+#include <stdint.h>
 #include <skalibs/uint32.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/biguint.h>
 
-void bu_scan_internal (char const *s, unsigned int len, uint32 *x)
+void bu_scan_internal (char const *s, size_t len, uint32_t *x)
 {
   char fmt[9] = "\0\0\0\0\0\0\0\0" ;
-  unsigned int i = 0 ;
+  size_t i = 0 ;
   if (len & 7)
   {
     byte_copy(fmt, len & 7, s) ;

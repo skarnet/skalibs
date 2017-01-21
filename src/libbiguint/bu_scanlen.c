@@ -3,9 +3,9 @@
 #include <skalibs/fmtscan.h>
 #include <skalibs/biguint.h>
 
-unsigned int bu_scanlen (char const *s, unsigned int *zeron)
+size_t bu_scanlen (char const *s, size_t *zeron)
 {
-  unsigned int n = ucharn_findlen(s) ;
+  size_t n = ucharn_findlen(s) ;
   *zeron = n ;
   while (*s == '0') { s++ ; (*zeron)-- ; }
   return n ;
