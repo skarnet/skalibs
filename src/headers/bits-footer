@@ -1,0 +1,4 @@
+
+typedef uint@BITS@_t uint@BITS@ ;
+
+#endif

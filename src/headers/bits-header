@@ -1,0 +1,6 @@
+/* ISC license. */
+
+#ifndef UINT@BITS@_H
+#define UINT@BITS@_H
+
+#include <sys/types.h>

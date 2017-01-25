@@ -1,15 +1,16 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/uint32.h>
 #include <skalibs/fmtscan.h>
 
-unsigned int ip4_fmt (char *s, char const *ip)
+size_t ip4_fmt (char *s, char const *ip)
 {
-  unsigned int len = 0 ;
-  unsigned int i, j ;
-  for (j = 0 ; j < 4 ; j++)
+  size_t len = 0 ;
+  unsigned int j = 0 ;
+  for (; j < 4 ; j++)
   {
-    i = uint32_fmt(s, (uint32)(unsigned char) ip[j]) ;
+    size_t i = uint32_fmt(s, (unsigned char)ip[j]) ;
     len += i ;
     if (s) s += i ;
     if (j == 3) break ;

@@ -1,9 +1,0 @@
-/* ISC license. */
-
-#ifndef UINT16_H
-#define UINT16_H
-
-#include <stdint.h>
-#include <skalibs/uint64.h>
-
-typedef uint16_t uint16 ;

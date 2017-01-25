@@ -31,6 +31,8 @@ RANLIB := $(CROSS_COMPILE)ranlib
 STRIP := $(CROSS_COMPILE)strip
 INSTALL := ./tools/install.sh
 
+TYPES := uid gid pid time dev ino
+
 ALL_SRCS := $(wildcard src/lib*/*.c)
 ALL_SOBJS := $(ALL_SRCS:%.c=%.o)
 ALL_DOBJS := $(ALL_SRCS:%.c=%.lo)
@@ -40,11 +42,8 @@ src/include/$(package)/sysdeps.h \
 src/include/$(package)/uint16.h \
 src/include/$(package)/uint32.h \
 src/include/$(package)/uint64.h \
-src/include/$(package)/ushort.h \
-src/include/$(package)/uint.h \
-src/include/$(package)/ulong.h \
+src/include/$(package)/types.h \
 src/include/$(package)/error.h \
-src/include/$(package)/gidstuff.h \
 src/include/$(package)/ip46.h \
 src/include/$(package)/setgroups.h
 ALL_INCLUDES := $(sort $(BUILT_INCLUDES) $(wildcard src/include/$(package)/*.h))
@@ -136,70 +135,17 @@ libskarnet.so.xyzzy: $(ALL_DOBJS)
 src/include/$(package)/sysdeps.h: $(sysdeps)/sysdeps.h
 	exec cat < $< > $@
 
-src/include/$(package)/uint16.h: src/include/$(package)/uint64.h $(sysdeps)/sysdeps src/headers/uint16-header src/headers/uint16-footer src/headers/uint16-lendian src/headers/uint16-bendian
-	@{ \
-	  cat src/headers/uint16-header ; \
-	  if grep -qF 'endianness: little' $(sysdeps)/sysdeps ; then cat src/headers/uint16-lendian ; \
-	  elif grep -qF 'endianness: big' $(sysdeps)/sysdeps ; then cat src/headers/uint16-bendian ; \
-	  else echo 'Error ! Unsupported endianness' 1>&2 ; ./crash ; \
-	  fi ; \
-	  exec cat src/headers/uint16-footer ; \
-	} > $@
+src/include/$(package)/uint16.h: $(sysdeps)/sysdeps src/headers/bits-header src/headers/bits-footer src/headers/bits-lendian src/headers/bits-bendian src/headers/bits-stdint src/headers/bits-template
+	exec tools/gen-bits.sh $(sysdeps)/sysdeps 16 6 7 5 17 > $@
 
-src/include/$(package)/uint32.h: src/include/$(package)/uint64.h $(sysdeps)/sysdeps src/headers/uint32-header src/headers/uint32-footer src/headers/uint32-lendian src/headers/uint32-bendian
-	@{ \
-	  cat src/headers/uint32-header ; \
-	  if grep -qF 'endianness: little' $(sysdeps)/sysdeps ; then cat src/headers/uint32-lendian ; \
-	  elif grep -qF 'endianness: big' $(sysdeps)/sysdeps ; then cat src/headers/uint32-bendian ; \
-	  else echo 'Error ! Unsupported endianness' 1>&2 ; ./crash ; \
-	  fi ; \
-	  exec cat src/headers/uint32-footer ; \
-	} > $@
+src/include/$(package)/uint32.h: $(sysdeps)/sysdeps src/headers/bits-header src/headers/bits-footer src/headers/bits-lendian src/headers/bits-bendian src/headers/bits-stdint src/headers/bits-template
+	exec tools/gen-bits.sh $(sysdeps)/sysdeps 32 11 13 9 33 > $@
 
-src/include/$(package)/uint64.h: $(sysdeps)/sysdeps src/headers/uint64-header src/headers/uint64-footer src/headers/uint64-ulong64 src/headers/uint64-noulong64 src/headers/uint64-lendian src/headers/uint64-bendian
-	@{ \
-	  cat src/headers/uint64-header ; \
-	  if grep -qF 'uint64t: yes' $(sysdeps)/sysdeps ; then cat src/headers/uint64-stdinth ; \
-	  elif grep -qF 'sizeofulong: 8' $(sysdeps)/sysdeps ; then cat src/headers/uint64-ulong64 ; \
-	  else cat uint64-noulong64 ; \
-	  fi ; \
-	  if grep -qF 'endianness: little' $(sysdeps)/sysdeps ; then cat src/headers/uint64-lendian ; \
-	  elif grep -qF 'endianness: big' $(sysdeps)/sysdeps ; then cat src/headers/uint64-bendian ; \
-	  else echo 'Error ! Unsupported endianness' 1>&2 ; ./crash ; \
-	  fi ; \
-	  exec cat src/headers/uint64-footer ; \
-	} > $@
+src/include/$(package)/uint64.h: $(sysdeps)/sysdeps src/headers/bits-header src/headers/bits-footer src/headers/bits-lendian src/headers/bits-bendian src/headers/bits-stdint src/headers/bits-template src/headers/uint64-ulong64 src/headers/uint64-noulong64
+	exec tools/gen-bits.sh $(sysdeps)/sysdeps 64 21 25 17 65 > $@
 
-src/include/$(package)/ushort.h: src/include/$(package)/uint16.h src/include/$(package)/uint32.h $(sysdeps)/sysdeps src/headers/ushort-header src/headers/ushort-footer src/headers/ushort-16 src/headers/ushort-32
-	@{ \
-	  cat src/headers/ushort-header ; \
-	  if grep -qF 'sizeofushort: 2' $(sysdeps)/sysdeps ; then cat src/headers/ushort-16 ; \
-	  elif grep -qF 'sizeofushort: 4' $(sysdeps)/sysdeps ; then cat src/headers/ushort-32 ; \
-	  else echo 'Error ! Unsupported unsigned short size' 1>&2 ; ./crash ; \
-	  fi ; \
-	  exec cat src/headers/ushort-footer ; \
-	} > $@
-
-src/include/$(package)/uint.h: src/include/$(package)/uint16.h src/include/$(package)/uint32.h src/include/$(package)/uint64.h $(sysdeps)/sysdeps src/headers/uint-header src/headers/uint-footer src/headers/uint-16 src/headers/uint-32 src/headers/uint-64
-	@{ \
-	  cat src/headers/uint-header ; \
-	  if grep -qF 'sizeofuint: 2' $(sysdeps)/sysdeps ; then cat src/headers/uint-16 ; \
-	  elif grep -qF 'sizeofuint: 4' $(sysdeps)/sysdeps ; then cat src/headers/uint-32 ; \
-	  elif grep -qF 'sizeofuint: 8' $(sysdeps)/sysdeps ; then cat src/headers/uint-64 ; \
-	  else echo 'Error ! Unsupported unsigned int size' 1>&2 ; ./crash ; \
-	  fi ; \
-	  exec cat src/headers/uint-footer ; \
-	} > $@
-
-src/include/$(package)/ulong.h: src/include/$(package)/uint32.h src/include/$(package)/uint64.h $(sysdeps)/sysdeps src/headers/ulong-header src/headers/ulong-footer src/headers/ulong-32 src/headers/ulong-64
-	@{ \
-	  cat src/headers/ulong-header ; \
-	  if grep -qF 'sizeofulong: 4' $(sysdeps)/sysdeps ; then cat src/headers/ulong-32 ; \
-	  elif grep -qF 'sizeofulong: 8' $(sysdeps)/sysdeps ; then cat src/headers/ulong-64 ; \
-	  else echo 'Error ! Unsupported unsigned long size' 1>&2 ; ./crash ; \
-	  fi ; \
-	  exec cat src/headers/ulong-footer ; \
-	} > $@
+src/include/$(package)/types.h: src/include/$(package)/uint16.h src/include/$(package)/uint32.h src/include/$(package)/uint64.h $(sysdeps)/sysdeps src/headers/types-header src/headers/types-footer src/headers/unsigned-template src/headers/signed-template
+	exec tools/gen-types.sh $(sysdeps)/sysdeps $(TYPES) > $@
 
 src/include/$(package)/error.h: src/include/$(package)/gccattributes.h $(sysdeps)/sysdeps src/headers/error-addrinuse src/headers/error-already src/headers/error-proto src/headers/error-header src/headers/error-footer
 	@{ \
@@ -211,17 +157,6 @@ src/include/$(package)/error.h: src/include/$(package)/gccattributes.h $(sysdeps
 	  else cat src/headers/error-proto ; \
 	  fi ; \
 	  exec cat src/headers/error-footer ; \
-	} > $@
-
-src/include/$(package)/gidstuff.h: src/include/$(package)/uint16.h src/include/$(package)/uint32.h src/include/$(package)/uint64.h $(sysdeps)/sysdeps src/headers/gidstuff-header src/headers/gidstuff-footer src/headers/gidstuff-16 src/headers/gidstuff-32 src/headers/gidstuff-64
-	@{ \
-	  cat src/headers/gidstuff-header ; \
-	  if grep -qF 'sizeofgid: 2' $(sysdeps)/sysdeps ; then cat src/headers/gidstuff-16 ; \
-	  elif grep -qF 'sizeofgid: 4' $(sysdeps)/sysdeps ; then cat src/headers/gidstuff-32 ; \
-	  elif grep -qF 'sizeofgid: 8' $(sysdeps)/sysdeps ; then cat src/headers/gidstuff-64 ; \
-	  else echo 'Error ! Unsupported gid_t size' 1>&2 ; ./crash ; \
-	  fi ; \
-	  exec cat src/headers/gidstuff-footer ; \
 	} > $@
 
 src/include/$(package)/ip46.h: src/include/$(package)/uint16.h src/include/$(package)/bytestr.h src/include/$(package)/fmtscan.h src/include/$(package)/tai.h src/include/$(package)/socket.h $(sysdeps)/sysdeps src/headers/ip46-header src/headers/ip46-footer src/headers/ip46-with src/headers/ip46-without

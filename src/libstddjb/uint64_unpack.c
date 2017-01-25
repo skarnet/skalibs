@@ -3,9 +3,9 @@
 #include <skalibs/uint64.h>
 #include <skalibs/bytestr.h>
 
-void uint64_unpack (char const *s, uint64 *u)
+void uint64_unpack (char const *s, uint64_t *u)
 {
-  uint64 r = T8((unsigned char)s[7]) ; r <<= 8 ;
+  uint64_t r = T8((unsigned char)s[7]) ; r <<= 8 ;
   r += T8((unsigned char)s[6]) ; r <<= 8 ;
   r += T8((unsigned char)s[5]) ; r <<= 8 ;
   r += T8((unsigned char)s[4]) ; r <<= 8 ;

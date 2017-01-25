@@ -155,16 +155,26 @@ choose () {
   fi
 }
 
-trytypesize () {
-  echo "Checking size of $3..."
-  $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o trysizeof$1 src/sysdeps/trysizeof$1.c
-  type_size=$(./trysizeof$1) || fail "$0: unable to determine size of $3"
-  type_bits=$(expr 8 \* $type_size)
-  rm -f trysizeof$1
-  echo "sizeof$1: $type_size" >> $sysdeps/sysdeps
-  echo "#define ${package_macro_name}_SIZEOF$2 $type_size" >> $sysdeps/sysdeps.h
-  echo "#define ${package_macro_name}_$2_BITS $type_bits" >> $sysdeps/sysdeps.h
-  echo "  ... $type_size"
+trytypes () {
+  echo "Checking size and signedness of standard types..."
+  $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o output-types src/sysdeps/output-types.c
+  ./output-types >> $sysdeps/sysdeps
+  ./output-types | grep -F sizeof | while read key value ; do
+    caps=$(echo $key | sed s/:\$// | tr a-z A-Z)
+    echo "#define ${package_macro_name}_${caps} $value" >> $sysdeps/sysdeps.h
+  done
+  ./output-types | grep -F signed | while read key value ; do
+    caps=$(echo $key | sed s/:\$// | tr a-z A-Z)
+    if test $value = yes ; then
+      echo "#define ${package_macro_name}_HASSIGNED${caps}"
+      echo "#undef ${package_macro_name}_HASUNSIGNED${caps}"
+    else
+      echo "#undef ${package_macro_name}_HASSIGNED${caps}"
+      echo "#define ${package_macro_name}_HASUNSIGNED${caps}"
+    fi >> $sysdeps/sysdeps.h
+  done
+  rm -f output-types
+  echo "  ... done"
 }
 
 trylibs () {
@@ -471,11 +481,7 @@ EOF
   echo "  ... $endianness"
   rm -f tryendianness
 
-  trytypesize ushort USHORT "unsigned short"
-  trytypesize uint UINT "unsigned int"
-  trytypesize ulong ULONG "unsigned long"
-  trytypesize gid GID "gid_t"
-  trytypesize time TIME "time_t"
+  trytypes
   choose clr accept4 ACCEPT4 'accept4()'
   choose clr ancilautoclose ANCILAUTOCLOSE 'auto-close after fd-passing'
   choose c cmsgcloexec CMSGCLOEXEC 'MSG_CMSG_CLOEXEC'

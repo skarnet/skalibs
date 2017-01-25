@@ -1,17 +1,17 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <errno.h>
-#include <skalibs/fmtscan.h>
+#include <skalibs/uint64.h>
 #include <skalibs/netstring.h>
 #include <skalibs/stralloc.h>
-#include <skalibs/uint.h>
 
-int netstring_decode (stralloc *sa, char const *s, unsigned int len)
+ssize_t netstring_decode (stralloc *sa, char const *s, size_t len)
 {
-  unsigned int nlen ;
-  register unsigned int pos ;
+  uint64_t nlen ;
+  register size_t pos ;
   if (!len) return 0 ;
-  pos = uint_scan(s, &nlen) ;
+  pos = uint64_scan(s, &nlen) ;
   if (pos >= len) return (errno = EINVAL, -1) ;
   if (s[pos] != ':') return (errno = EINVAL, -1) ;
   s += pos+1 ; len -= pos+1 ;

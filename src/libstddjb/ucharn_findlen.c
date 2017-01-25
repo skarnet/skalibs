@@ -1,10 +1,11 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/fmtscan.h>
 
-unsigned int ucharn_findlen (char const *s)
+size_t ucharn_findlen (char const *s)
 {
-  register unsigned int i = 0 ;
+  register size_t i = 0 ;
   while (fmtscan_num(s[i], 16) <= 0xF) i++ ;
   return i ;
 }

@@ -1,3 +1,0 @@
-#define uint16_little_endian(s, n)
-#define uint16_big_endian(s, n) uint16_reverse((s), (n))
-

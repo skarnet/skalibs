@@ -1,8 +1,9 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/uint64.h>
 
-void uint64_reverse (char *s, unsigned int n)
+void uint64_reverse (char *s, size_t n)
 {
   while (n--)
   {

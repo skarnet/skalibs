@@ -1,13 +1,14 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/diuint.h>
 #include <skalibs/fmtscan.h>
 
 #define px(c) ((j || (c)) ? (*s++ = fmtscan_asc(c), 1) : 0)
 
-static inline unsigned int xfmt16 (char *s, char const *key)
+static inline size_t xfmt16 (char *s, char const *key)
 {
-  register unsigned int j = 0 ;
+  register size_t j = 0 ;
   j += px((unsigned char)key[0] >> 4) ;
   j += px((unsigned char)key[0] & 15) ;
   j += px((unsigned char)key[1] >> 4) ;
@@ -55,9 +56,9 @@ static inline unsigned int find_colcol (char const *key, unsigned int *pos)
   return 0 ; 
 }
 
-unsigned int ip6_fmt (char *s, char const *ip6)
+size_t ip6_fmt (char *s, char const *ip6)
 {
-  unsigned int w = 0 ;
+  size_t w = 0 ;
   register unsigned int i = 0 ;
   unsigned int pos = 8 ;
   unsigned int len = find_colcol(ip6, &pos) ;

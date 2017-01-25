@@ -1,10 +1,11 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <time.h>
-#include <skalibs/uint.h>
+#include <skalibs/types.h>
 #include <skalibs/djbtime.h>
 
-unsigned int localtm_fmt (char *s, struct tm const *l)
+size_t localtm_fmt (char *s, struct tm const *l)
 {
   char *p = s ;
   p += uint_fmt(p, 1900 + l->tm_year) ; *p++ = '-' ;

@@ -1,9 +1,9 @@
 /* ISC license. */
 
-#include <skalibs/bytestr.h>
+#include <string.h>
 #include <skalibs/fmtscan.h>
 
-unsigned int str_fmt (register char *d, char const *s)
+size_t str_fmt (char *d, char const *s)
 {
-  return strn_fmt(d, s, str_len(s)) ;
+  return strn_fmt(d, s, strlen(s)) ;
 }

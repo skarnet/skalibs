@@ -1,10 +1,11 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/fmtscan.h>
 
-unsigned int ucharn_scan_little (char const *s, char *key, unsigned int n)
+size_t ucharn_scan_little (char const *s, char *key, size_t n)
 {
-  register unsigned int i = 0 ;
+  register size_t i = 0 ;
   for (; i < n ; i++)
   {
     unsigned char c = fmtscan_num(s[(i<<1)+1], 16) ;

@@ -1,6 +1,6 @@
 /* ISC license. */
 
-#include <skalibs/uint32.h>
 #include "fmtscan-internal.h"
+#include <skalibs/uint32.h>
 
 FMTL(32)

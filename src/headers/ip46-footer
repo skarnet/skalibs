@@ -4,7 +4,7 @@
 #define socket_recvnb46_g(fd, buf, len, i, port, deadline) socket_recvnb46(fd, buf, len, i, port, (deadline), &STAMP)
 #define socket_sendnb46_g(fd, buf, len, i, port, deadline) socket_sendnb46(fd, buf, len, i, port, (deadline), &STAMP)
 
-extern int socket_deadlineconnstamp46 (int, ip46_t const *, uint16, tain_t const *, tain_t *) ;
+extern int socket_deadlineconnstamp46 (int, ip46_t const *, uint16_t, tain_t const *, tain_t *) ;
 #define socket_deadlineconnstamp46_g(fd, ip, port, deadline) socket_deadlineconnstamp46(fd, ip, port, (deadline), &STAMP)
 
 #endif

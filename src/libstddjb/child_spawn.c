@@ -10,11 +10,11 @@
 #include <unistd.h>
 #include <errno.h>
 #include <signal.h>
+#include <skalibs/types.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/env.h>
 #include <skalibs/djbunix.h>
-#include <skalibs/uint.h>
 
 #ifdef SKALIBS_HASPOSIXSPAWN
 

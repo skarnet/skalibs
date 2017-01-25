@@ -1,15 +1,18 @@
 /* ISC license. */
 
+#include <sys/types.h>
+#include <stdint.h>
 #include <errno.h>
 #include <skalibs/uint16.h>
 #include <skalibs/fmtscan.h>
 
-unsigned int ip6_scan (char const *s, char *ip6)
+size_t ip6_scan (char const *s, char *ip6)
 {
   static const unsigned char class[256] = "2222222222222222222222222222222222222222222222220000000000122222200000022222222222222222222222222000000222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222" ;
   static const unsigned char table[5][3] = { "\024#\005", "\024\"\005", "\024\005\006", "\005\002\005", "\024\t\016" } ;
-  uint16 tmp[8] = { 0, 0, 0, 0, 0, 0, 0, 0 } ;
-  unsigned int pos = 8, j = 0, state = 0, i = 0 ;
+  uint16_t tmp[8] = { 0, 0, 0, 0, 0, 0, 0, 0 } ;
+  size_t i = 0 ;
+  unsigned int pos = 8, j = 0, state = 0 ;
 
   while (state < 5)
   {

@@ -1,13 +1,12 @@
 /* ISC license. */
 
-#include <skalibs/ip46.h>
-
+#include <sys/types.h>
 #include <skalibs/fmtscan.h>
 #include <skalibs/ip46.h>
 
-unsigned int ip46full_scan (char const *s, ip46full_t_ref ip)
+size_t ip46full_scan (char const *s, ip46full_t *ip)
 {
-  unsigned int len = ip6_scan(s, ip->ip) ;
+  size_t len = ip6_scan(s, ip->ip) ;
   if (len) ip->is6 = 1 ;
   else
   {

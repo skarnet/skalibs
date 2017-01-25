@@ -1,8 +1,0 @@
-#include <skalibs/uint16.h>
-
-#define GID_FMT UINT16_FMT
-#define gid_fmt(s, u) uint16_fmt(s, u)
-#define gid_scan(s, u) uint16_scan(s, u)
-#define gid0_scan(s, u) uint160_scan(s, u)
-#define gid_fmtlist(s, tab, n) uint16_fmtlist(s, tab, n)
-#define gid_scanlist(tab, max, s, num) uint16_scanlist(tab, max, s, num)

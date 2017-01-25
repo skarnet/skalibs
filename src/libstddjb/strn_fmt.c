@@ -1,12 +1,13 @@
 /* ISC license. */
 
+#include <sys/types.h>
+#include <skalibs/types.h>
 #include <skalibs/fmtscan.h>
-#include <skalibs/uint.h>
 
-unsigned int strn_fmt (char *blah, register char const *s, unsigned int len)
+size_t strn_fmt (char *blah, register char const *s, size_t len)
 {
   register char *d = blah ;
-  unsigned int i ;
+  size_t i ;
   for (i = 0 ; i < len ; i++)
     if ((s[i] >= 32) && ((unsigned char)s[i] < 127)) *d++ = s[i] ;
     else

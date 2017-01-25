@@ -1,9 +1,11 @@
 /* ISC license. */
 
+#include <sys/types.h>
+#include <stdint.h>
 #include <skalibs/uint32.h>
 #include <skalibs/fmtscan.h>
 
-unsigned int ip4_fmtu32 (char *s, uint32 ip)
+size_t ip4_fmtu32 (char *s, uint32_t ip)
 {
   char pack[4] ;
   uint32_pack_big(pack, ip) ;

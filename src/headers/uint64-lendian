@@ -1,3 +1,0 @@
-#define uint64_little_endian(s, n)
-#define uint64_big_endian(s, n) uint64_reverse((s), (n))
-

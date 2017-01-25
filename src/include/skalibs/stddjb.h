@@ -7,11 +7,8 @@
 #include <skalibs/uint16.h>
 #include <skalibs/uint32.h>
 #include <skalibs/uint64.h>
-#include <skalibs/ushort.h>
-#include <skalibs/uint.h>
-#include <skalibs/ulong.h>
+#include <skalibs/types.h>
 #include <skalibs/error.h>
-#include <skalibs/gidstuff.h>
 #include <skalibs/ip46.h>
 #include <skalibs/setgroups.h>
 
