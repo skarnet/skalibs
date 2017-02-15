@@ -3,7 +3,9 @@
 #ifndef GENWRITE_H
 #define GENWRITE_H
 
-typedef int genwrite_put_func_t (void *, char const *, unsigned int) ;
+#include <sys/types.h>
+
+typedef ssize_t genwrite_put_func_t (void *, char const *, size_t) ;
 typedef genwrite_put_func_t *genwrite_put_func_t_ref ;
 
 typedef int genwrite_flush_func_t (void *) ;

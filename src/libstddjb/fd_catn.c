@@ -1,20 +1,21 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <errno.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/iobuffer.h>
 #include <skalibs/djbunix.h>
 
-unsigned int fd_catn (int from, int to, unsigned int n)
+size_t fd_catn (int from, int to, size_t n)
 {
-  unsigned int w = 0 ;
+  size_t w = 0 ;
   if (n >= IOBUFFER_SIZE)
   {
     iobuffer b ;
     if (!iobuffer_init(&b, from, to)) return 0 ;
     while (n >= IOBUFFER_SIZE)
     {
-      register int r = iobuffer_fill(&b) ;
+      register ssize_t r = iobuffer_fill(&b) ;
       if (r <= 0)
       {
         iobuffer_finish(&b) ;
@@ -33,8 +34,8 @@ unsigned int fd_catn (int from, int to, unsigned int n)
 
   {
     char buf[n] ;
-    unsigned int r = allread(from, buf, n) ;
-    unsigned int v = 0 ;
+    size_t r = allread(from, buf, n) ;
+    size_t v = 0 ;
     if (r) v = allwrite(to, buf, r) ;
     w += v ;
   }

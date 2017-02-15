@@ -10,9 +10,11 @@
 
 int random_init ()
 {
+#ifdef SKALIBS_HASARC4RANDOM_ADDRANDOM
   char seed[160] ;
   random_makeseed(seed) ;
   arc4random_addrandom((unsigned char *)seed, 160) ;
+#endif
   return 1 ;
 }
 

@@ -1,11 +1,12 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/bytestr.h>
 
-unsigned int byte_rchr (register char const *s, unsigned int n, int c)
+size_t byte_rchr (char const *s, size_t n, int c)
 {
-  register unsigned int i = n ;
-  register char ch = c ;
+  size_t i = n ;
+  char ch = c ;
   s += n ;
   while (i--) if (*--s == ch) return i ;
   return n ;

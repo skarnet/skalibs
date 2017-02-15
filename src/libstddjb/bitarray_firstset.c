@@ -1,11 +1,12 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/bitarray.h>
 
-unsigned int bitarray_firstset (register unsigned char const *s, unsigned int max)
+size_t bitarray_firstset (register unsigned char const *s, size_t max)
 {
-  unsigned int n = bitarray_div8(max) ;
-  register unsigned int i = 0 ;
+  size_t n = bitarray_div8(max) ;
+  register size_t i = 0 ;
   for (; i < n ; i++) if (s[i]) break ;
   if (i == n) return max ;
   i <<= 3 ;

@@ -1,10 +1,11 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/bytestr.h>
 
-unsigned int byte_count (register char const *s, register unsigned int len, register char b)
+size_t byte_count (char const *s, size_t len, char b)
 {
-  register unsigned int n = 0 ;
+  size_t n = 0 ;
   while (len--) if (*s++ == b) n++ ;
   return n ;
 }

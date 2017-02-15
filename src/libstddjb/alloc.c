@@ -1,5 +1,6 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <errno.h>
 #include <stdlib.h>
 #include <skalibs/sysdeps.h>
@@ -13,7 +14,7 @@
 # define PLM(...) (bprintf(buffer_2, "%s: debug_alloc: ", PROG), bprintf(buffer_2, __VA_ARGS__), buffer_putflush(buffer_2, "\n", 1))
 #endif
 
-aligned_char *alloc (unsigned int n)
+aligned_char *alloc (size_t n)
 {
   register aligned_char *p = n ? (aligned_char *)malloc(n) : (aligned_char *)alloc_0 ;
 #ifdef DEBUG_ALLOC
@@ -37,7 +38,7 @@ void alloc_free (void *p)
   errno = e ;
 }
 
-int alloc_realloc (aligned_char **x, unsigned int n)
+int alloc_realloc (aligned_char **x, size_t n)
 {
   aligned_char *y = n ? (aligned_char *)realloc(*x, n) : (free(*x), alloc_0) ;
 #ifdef DEBUG_ALLOC

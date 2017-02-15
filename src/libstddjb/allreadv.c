@@ -1,9 +1,10 @@
 /* ISC license. */
 
+#include <sys/types.h>
+#include <sys/uio.h>
 #include <skalibs/allreadwrite.h>
-#include <skalibs/siovec.h>
 
-unsigned int allreadv (int fd, siovec_t const *v, unsigned int vlen)
+size_t allreadv (int fd, struct iovec const *v, unsigned int vlen)
 {
-  return allreadwritev(&fd_readsv, fd, v, vlen) ;
+  return allreadwritev(&fd_readv, fd, v, vlen) ;
 }

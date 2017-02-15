@@ -1,5 +1,6 @@
 /* ISC license. */
 
+#include <skalibs/functypes.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/bufalloc.h>
 

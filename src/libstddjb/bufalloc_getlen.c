@@ -1,8 +1,9 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/bufalloc.h>
 
-unsigned int bufalloc_getlen (bufalloc const *ba)
+size_t bufalloc_getlen (bufalloc const *ba)
 {
   return bufalloc_len(ba) ;
 }

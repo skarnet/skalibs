@@ -2,7 +2,7 @@
 
 #include <skalibs/allreadwrite.h>
 
-unsigned int allwrite (int fd, char const *buf, unsigned int len)
+size_t allwrite (int fd, char const *buf, size_t len)
 {
   return allreadwrite((iofunc_t_ref)&fd_write, fd, (char *)buf, len) ;
 }

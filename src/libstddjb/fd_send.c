@@ -5,9 +5,9 @@
 #include <errno.h>
 #include <skalibs/allreadwrite.h>
 
-int fd_send (int fd, char const *buf, unsigned int len, unsigned int flags)
+ssize_t fd_send (int fd, char const *buf, size_t len, unsigned int flags)
 {
-  register int r ;
+  register ssize_t r ;
   do r = send(fd, buf, len, (int)flags) ;
   while ((r == -1) && (errno == EINTR)) ;
   return r ;

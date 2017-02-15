@@ -1,11 +1,11 @@
 /* ISC license. */
 
-#include <skalibs/bytestr.h>
+#include <sys/types.h>
 #include <skalibs/stralloc.h>
 
 void stralloc_reverse (stralloc *sa)
 {
-  register unsigned int i = 0 ;
+  register size_t i = 0 ;
   for (; i < sa->len >> 1 ; i++)
   {
     char tmp = sa->s[i] ;

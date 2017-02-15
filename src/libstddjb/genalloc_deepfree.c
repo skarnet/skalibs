@@ -1,12 +1,13 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/genalloc.h>
 
-void genalloc_deepfree_size (genalloc *g, freefunc_t_ref f, unsigned int size)
+void genalloc_deepfree_size (genalloc *g, freefunc_t_ref f, size_t size)
 {
-  unsigned int len = g->len / size ;
-  register unsigned int i = 0 ;
+  size_t len = g->len / size ;
+  register size_t i = 0 ;
   for (; i < len ; i++) (*f)(g->s + i * size) ;
   stralloc_free(g) ;
 }

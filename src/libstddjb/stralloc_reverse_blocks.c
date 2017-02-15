@@ -1,17 +1,18 @@
 /* ISC license. */
 
-#include <skalibs/bytestr.h>
+#include <sys/types.h>
+#include <string.h>
 #include <skalibs/stralloc.h>
 
-void stralloc_reverse_blocks (stralloc *sa, unsigned int size)
+void stralloc_reverse_blocks (stralloc *sa, size_t size)
 {
-  register unsigned int n = sa->len / (size << 1) ;
-  register unsigned int i = 0 ;
+  register size_t n = sa->len / (size << 1) ;
+  register size_t i = 0 ;
   char tmp[size] ;
   for (; i < n ; i++)
   {
-    byte_copy(tmp, size, sa->s + i * size) ;
-    byte_copy(sa->s + i * size, size, sa->s + (2*n - 1 - i) * size) ;
-    byte_copy(sa->s + (2*n - 1 - i) * size, size, tmp) ;
+    memcpy(tmp, sa->s + i * size, size) ;
+    memcpy(sa->s + i * size, sa->s + (2*n - 1 - i) * size, size) ;
+    memcpy(sa->s + (2*n - 1 - i) * size, tmp, size) ;
   }
 }

@@ -1,9 +1,11 @@
 /* ISC license. */
 
+#include <sys/types.h>
+#include <string.h>
 #include <skalibs/bytestr.h>
 
-int case_startb (register char const *s, unsigned int slen, register char const *t)
+int case_startb (register char const *s, size_t slen, register char const *t)
 {
-  register unsigned int tlen = str_len(t) ;
+  size_t tlen = strlen(t) ;
   return slen < tlen ? 0 : !case_diffb(s, tlen, t) ;
 }

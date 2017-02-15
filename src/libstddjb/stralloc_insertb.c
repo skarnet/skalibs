@@ -1,15 +1,15 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <errno.h>
-#include <skalibs/bytestr.h>
 #include <skalibs/stralloc.h>
 
-int stralloc_insertb (stralloc *sa, unsigned int offset, char const *s, unsigned int n)
+int stralloc_insertb (stralloc *sa, size_t offset, char const *s, size_t n)
 {
   if (offset > sa->len) return (errno = EINVAL, 0) ;
   if (!stralloc_readyplus(sa, n)) return 0 ;
-  byte_copyr(sa->s + offset + n, sa->len - offset, sa->s + offset) ;
+  memmove(sa->s + offset + n, sa->s + offset, sa->len - offset) ;
   sa->len += n ;
-  byte_copyr(sa->s + offset, n, s) ;
+  memmove(sa->s + offset, s, n) ;
   return 1 ;
 }

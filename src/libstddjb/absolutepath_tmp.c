@@ -1,5 +1,6 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <unistd.h>
 #include <errno.h>
 #include <skalibs/bytestr.h>
@@ -8,8 +9,8 @@
 
 int sarealpath_tmp (stralloc *sa, char const *path, stralloc *tmp)
 {
-  unsigned int tmpbase = tmp->len ;
-  unsigned int base = sa->len ;
+  size_t tmpbase = tmp->len ;
+  size_t base = sa->len ;
   unsigned int loop = 48 ;
   int fdhere ;
   int wasnull = !sa->s ;

@@ -1,8 +1,9 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/allreadwrite.h>
 
-unsigned int allread (int fd, char *buf, unsigned int len)
+size_t allread (int fd, char *buf, size_t len)
 {
-  return allreadwrite(&fd_read, fd, buf, len) ;
+  return allreadwrite(&fd_readv, fd, buf, len) ;
 }

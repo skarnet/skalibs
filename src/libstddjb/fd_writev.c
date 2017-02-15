@@ -5,9 +5,9 @@
 #include <errno.h>
 #include <skalibs/allreadwrite.h>
 
-int fd_writev (int fd, struct iovec const *v, unsigned int vlen)
+ssize_t fd_writev (int fd, struct iovec const *v, unsigned int vlen)
 {
-  register int r ;
+  register ssize_t r ;
   do r = writev(fd, v, vlen) ;
   while ((r == -1) && (errno == EINTR)) ;
   return r ;

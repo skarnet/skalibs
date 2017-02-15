@@ -15,7 +15,7 @@ int cdb_make_start (struct cdb_make *c, int fd)
 {
   c->hplist = genalloc_zero ;
   c->pos = 2048 ;
-  buffer_init(&c->b, &fd_writesv, fd, c->buf, BUFFER_OUTSIZE) ;
+  buffer_init(&c->b, &fd_writev, fd, c->buf, BUFFER_OUTSIZE) ;
   return (int)lseek(fd, c->pos, SEEK_SET) ;
 }
 

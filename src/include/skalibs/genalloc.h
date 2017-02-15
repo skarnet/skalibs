@@ -3,6 +3,7 @@
 #ifndef GENALLOC_H
 #define GENALLOC_H
 
+#include <sys/types.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/functypes.h>
 
@@ -30,6 +31,6 @@ typedef stralloc genalloc, *genalloc_ref ;
 #define genalloc_insert(type, g1, offset, g2) stralloc_insert((g1), (offset)*sizeof(type), (g2))
 
 #define genalloc_deepfree(type, g, f) genalloc_deepfree_size(g, (freefunc_t_ref)(f), sizeof(type))
-extern void genalloc_deepfree_size (genalloc *, freefunc_t_ref, unsigned int) ;
+extern void genalloc_deepfree_size (genalloc *, freefunc_t_ref, size_t) ;
 
 #endif

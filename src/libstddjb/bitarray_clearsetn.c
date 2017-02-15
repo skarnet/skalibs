@@ -1,8 +1,9 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/bitarray.h>
 
-void bitarray_clearsetn (register unsigned char *s, register unsigned int a, register unsigned int b, register int h)
+void bitarray_clearsetn (register unsigned char *s, register size_t a, register size_t b, register int h)
 {
   if (!b) return ;
   b += a ;
@@ -14,7 +15,7 @@ void bitarray_clearsetn (register unsigned char *s, register unsigned int a, reg
   else
   {
     register unsigned char mask = ~((1 << (a & 7)) - 1) ;
-    register unsigned int i = (a>>3) + 1 ;
+    register size_t i = (a>>3) + 1 ;
     if (h) s[a>>3] |= mask ; else s[a>>3] &= ~mask ;
     mask = h ? 0xff : 0x00 ;
     for (; i < b>>3 ; i++) s[i] = mask ;

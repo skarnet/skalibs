@@ -1,8 +1,9 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/bytestr.h>
 
-unsigned int byte_in (char const *s, register unsigned int n, register char const *sep, register unsigned int len)
+size_t byte_in (char const *s, size_t n, char const *sep, size_t len)
 {
   register char const *t = s ;
   while (n--)

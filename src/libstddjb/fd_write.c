@@ -1,12 +1,13 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <unistd.h>
 #include <errno.h>
 #include <skalibs/allreadwrite.h>
 
-int fd_write (int fd, char const *buf, unsigned int len)
+ssize_t fd_write (int fd, char const *buf, size_t len)
 {
-  register int r ;
+  register ssize_t r ;
   do r = write(fd, buf, len) ;
   while ((r == -1) && (errno == EINTR)) ;
   return r ;

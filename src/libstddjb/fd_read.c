@@ -1,12 +1,13 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <unistd.h>
 #include <errno.h>
 #include <skalibs/allreadwrite.h>
 
-int fd_read (int fd, char *buf, unsigned int len)
+ssize_t fd_read (int fd, char *buf, size_t len)
 {
-  register int r ;
+  register ssize_t r ;
   do r = read(fd, buf, len) ;
   while ((r == -1) && (errno == EINTR)) ;
   return r ;

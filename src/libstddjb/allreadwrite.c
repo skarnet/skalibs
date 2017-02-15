@@ -1,14 +1,16 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <errno.h>
+#include <skalibs/functypes.h>
 #include <skalibs/allreadwrite.h>
 
-unsigned int allreadwrite (iofunc_t_ref op, int fd, register char *buf, register unsigned int len)
+size_t allreadwrite (iofunc_t_ref op, int fd, char *buf, size_t len)
 {
-  register unsigned int written = 0 ;
+  size_t written = 0 ;
   while (len)
   {
-    register int w = (*op)(fd, buf, len) ;
+    register ssize_t w = (*op)(fd, buf, len) ;
     if (w <= 0)
     {
       if (!w) errno = 0 ;

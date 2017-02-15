@@ -1,12 +1,13 @@
 /* ISC license. */
 
-#include <skalibs/bytestr.h>
+#include <sys/types.h>
+#include <string.h>
 #include <skalibs/stralloc.h>
 
-int stralloc_copyb (stralloc *sa, char const *s, unsigned int n)
+int stralloc_copyb (stralloc *sa, char const *s, size_t n)
 {
   if (!stralloc_ready(sa, n)) return 0 ;
-  byte_copy(sa->s, n, s) ;
+  memmove(sa->s, s, n) ;
   sa->len = n ;
   return 1 ;
 }
