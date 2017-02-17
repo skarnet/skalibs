@@ -1,5 +1,6 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <errno.h>
 #include <stdio.h>
 #include <skalibs/stralloc.h>
@@ -9,8 +10,8 @@
 
 int atomic_rm_rf_tmp (char const *filename, stralloc *tmp)
 {
-  unsigned int tmpbase = tmp->len ;
-  unsigned int start ;
+  size_t tmpbase = tmp->len ;
+  size_t start ;
   if (!stralloc_cats(tmp, ".skalibs-rmrf-")
    || !stralloc_cats(tmp, filename)) return -1 ;
   start = tmp->len ;

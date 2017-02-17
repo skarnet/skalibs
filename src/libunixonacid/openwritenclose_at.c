@@ -6,15 +6,15 @@
 #include <skalibs/djbunix.h>
 #include <skalibs/unix-transactional.h>
 
-unsigned int openwritenclose_at (int dirfd, char const *file, char const *s, unsigned int n)
+size_t openwritenclose_at (int dirfd, char const *file, char const *s, size_t n)
 {
-  register unsigned int r ;
+  size_t r ;
   int fd = open_truncatb(dirfd, file) ;
   if (fd < 0) return 0 ;
   r = allwrite(fd, s, n) ;
   if ((r < n) || (fsync(fd) < 0))
   {
-    register int e = errno ;
+    int e = errno ;
     fd_close(fd) ;
     errno = e ;
     return r ;

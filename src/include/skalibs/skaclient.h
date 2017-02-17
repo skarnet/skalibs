@@ -4,18 +4,18 @@
 #define SKACLIENT_H
 
 #include <sys/types.h>
+#include <sys/uio.h>
+#include <stdint.h>
 #include <skalibs/kolbak.h>
-#include <skalibs/siovec.h>
 #include <skalibs/tai.h>
-#include <skalibs/uint32.h>
 #include <skalibs/unixmessage.h>
 
 
  /* Server part */
 
-extern int skaclient_server_ack (unixmessage_t const *, unixmessage_sender_t *, unixmessage_sender_t *, char const *, unsigned int, char const *, unsigned int) ;
-extern int skaclient_server_bidi_ack (unixmessage_t const *, unixmessage_sender_t *, unixmessage_sender_t *, unixmessage_receiver_t *, char *, unsigned int, char *, unsigned int, char const *, unsigned int, char const *, unsigned int) ;
-extern int skaclient_server_init (unixmessage_receiver_t *, unixmessage_sender_t *, unixmessage_sender_t *, char const *, unsigned int, char const *, unsigned int, tain_t const *, tain_t *) ;
+extern int skaclient_server_ack (unixmessage_t const *, unixmessage_sender_t *, unixmessage_sender_t *, char const *, size_t, char const *, size_t) ;
+extern int skaclient_server_bidi_ack (unixmessage_t const *, unixmessage_sender_t *, unixmessage_sender_t *, unixmessage_receiver_t *, char *, size_t, char *, size_t, char const *, size_t, char const *, size_t) ;
+extern int skaclient_server_init (unixmessage_receiver_t *, unixmessage_sender_t *, unixmessage_sender_t *, char const *, size_t, char const *, size_t, tain_t const *, tain_t *) ;
 #define skaclient_server_init_g(in, out, asyncout, before, beforelen, after, afterlen, deadline) skaclient_server_init(in, out, asyncout, before, beforelen, after, afterlen, (deadline), &STAMP)
 #define skaclient_server_01x_init(before, beforelen, after, afterlen, deadline, stamp) skaclient_server_init(unixmessage_receiver_0, unixmessage_sender_1, unixmessage_sender_x, before, beforelen, after, afterlen, deadline, stamp)
 #define skaclient_server_01x_init_g(before, beforelen, after, afterlen, deadline) skaclient_server_01x_init(before, beforelen, after, afterlen, (deadline), &STAMP)
@@ -43,7 +43,7 @@ struct skaclient_s
   unixmessage_receiver_t asyncin ;
   unixmessage_sender_t asyncout ;
   pid_t pid ;
-  uint32 options ;
+  uint32_t options ;
 } ;
 #define SKACLIENT_ZERO { .syncin = UNIXMESSAGE_RECEIVER_ZERO, .syncout = UNIXMESSAGE_SENDER_ZERO, .kq = KOLBAK_QUEUE_ZERO, .asyncin = UNIXMESSAGE_RECEIVER_ZERO, .asyncout = UNIXMESSAGE_SENDER_ZERO, .pid = 0, .options = 0 }
 extern skaclient_t const skaclient_zero ;
@@ -56,7 +56,7 @@ struct skaclient_cbdata_s
 {
   skaclient_t *a ;
   char const *after ;
-  unsigned int afterlen ;
+  size_t afterlen ;
 } ;
 
 
@@ -64,17 +64,17 @@ struct skaclient_cbdata_s
 
 extern void skaclient_end (skaclient_t *) ;
 
-extern int skaclient_start_async (skaclient_t *, char *, unsigned int, char *, unsigned int, char *, unsigned int, char *, unsigned int, kolbak_closure_t *, unsigned int, char const *, uint32, char const *, unsigned int, char const *, unsigned int, skaclient_cbdata_t *) ;
+extern int skaclient_start_async (skaclient_t *, char *, size_t, char *, size_t, char *, size_t, char *, size_t, kolbak_closure_t *, size_t, char const *, uint32_t, char const *, size_t, char const *, size_t, skaclient_cbdata_t *) ;
 #define skaclient_start_async_b(a, sb, path, options, before, beforelen, after, afterlen, blah) skaclient_start_async(a, (sb)->bufs, sizeof((sb)->bufs), (sb)->auxbufs, sizeof((sb)->auxbufs), (sb)->bufa, sizeof((sb)->bufa), (sb)->auxbufa, sizeof((sb)->auxbufa), (sb)->q, sizeof((sb)->q), path, options, before, beforelen, after, afterlen, blah)
-extern int skaclient_startf_async (skaclient_t *, char *, unsigned int, char *, unsigned int, char *, unsigned int, char *, unsigned int, kolbak_closure_t *, unsigned int, char const *, char const *const *, char const *const *, uint32, char const *, unsigned int, char const *, unsigned int, skaclient_cbdata_t *) ;
+extern int skaclient_startf_async (skaclient_t *, char *, size_t, char *, size_t, char *, size_t, char *, size_t, kolbak_closure_t *, size_t, char const *, char const *const *, char const *const *, uint32_t, char const *, size_t, char const *, size_t, skaclient_cbdata_t *) ;
 #define skaclient_startf_async_b(a, sb, prog, argv, envp, options, before, beforelen, after, afterlen, blah) skaclient_startf_async(a, (sb)->bufs, sizeof((sb)->bufs), (sb)->auxbufs, sizeof((sb)->auxbufs), (sb)->bufa, sizeof((sb)->bufa), (sb)->auxbufa, sizeof((sb)->auxbufa), (sb)->q, sizeof((sb)->q) / sizeof(kolbak_closure_t), prog, argv, envp, options, before, beforelen, after, afterlen, blah)
 
-extern int skaclient_start (skaclient_t *, char *, unsigned int, char *, unsigned int, char *, unsigned int, char *, unsigned int, kolbak_closure_t *, unsigned int, char const *, uint32, char const *, unsigned int, char const *, unsigned int, tain_t const *, tain_t *) ;
+extern int skaclient_start (skaclient_t *, char *, size_t, char *, size_t, char *, size_t, char *, size_t, kolbak_closure_t *, size_t, char const *, uint32_t, char const *, size_t, char const *, size_t, tain_t const *, tain_t *) ;
 #define skaclient_start_b(a, sb, path, options, before, beforelen, after, afterlen, deadline, stamp) skaclient_start(a, (sb)->bufs, sizeof((sb)->bufs), (sb)->auxbufs, sizeof((sb)->auxbufs), (sb)->bufa, sizeof((sb)->bufa), (sb)->auxbufa, sizeof((sb)->auxbufa), (sb)->q, sizeof((sb)->q) / sizeof(kolbak_closure_t), path, options, before, beforelen, after, afterlen, deadline, stamp)
 #define skaclient_start_g(a, bufs, bufsn, auxbufs, auxbufsn, bufa, bufan, auxbufa, auxbufan, q, qlen, path, options, before, beforelen, after, afterlen, deadline)  skaclient_start(a, bufs, bufsn, auxbufs, auxbufsn, bufa, bufan, auxbufa, auxbufan, q, qlen, path, options, before, beforelen, after, afterlen, (deadline), &STAMP)
 #define skaclient_start_b_g(a, sb, path, options, before, beforelen, after, afterlen, deadline) skaclient_start_b(a, sb, path, options, before, beforelen, after, afterlen, (deadline), &STAMP)
 
-extern int skaclient_startf (skaclient_t *, char *, unsigned int, char *, unsigned int, char *, unsigned int, char *, unsigned int, kolbak_closure_t *, unsigned int, char const *, char const *const *, char const *const *, uint32, char const *, unsigned int, char const *, unsigned int, tain_t const *, tain_t *) ;
+extern int skaclient_startf (skaclient_t *, char *, size_t, char *, size_t, char *, size_t, char *, size_t, kolbak_closure_t *, size_t, char const *, char const *const *, char const *const *, uint32_t, char const *, size_t, char const *, size_t, tain_t const *, tain_t *) ;
 #define skaclient_startf_b(a, sb, prog, argv, envp, options, before, beforelen, after, afterlen, deadline, stamp) skaclient_startf(a, (sb)->bufs, sizeof((sb)->bufs), (sb)->auxbufs, sizeof((sb)->auxbufs), (sb)->bufa, sizeof((sb)->bufa), (sb)->auxbufa, sizeof((sb)->auxbufa), (sb)->q, sizeof((sb)->q) / sizeof(kolbak_closure_t), prog, argv, envp, options, before, beforelen, after, afterlen, deadline, stamp)
 #define skaclient_startf_g(a, bufs, bufsn, auxbufs, auxbufsn, bufa, bufan, auxbufa, auxbufan, q, qlen, prog, argv, envp, options, before, beforelen, after, afterlen, deadline) skaclient_startf(a, bufs, bufsn, auxbufs, auxbufsn, bufa, bufan, auxbufa, auxbufan, q, qlen, prog, argv, envp, options, before, beforelen, after, afterlen, (deadline), &STAMP)
 #define skaclient_startf_b_g(a, sb, prog, argv, envp, options, before, beforelen, after, afterlen, deadline) skaclient_startf_b(a, sb, prog, argv, envp, options, before, beforelen, after, afterlen, (deadline), &STAMP)
@@ -87,8 +87,8 @@ extern int skaclient_putmsg_and_close (skaclient_t *, unixmessage_t const *, uns
 extern int skaclient_putmsgv_and_close (skaclient_t *, unixmessage_v_t const *, unsigned char const *, unixmessage_handler_func_t *, void *) ;
 #define skaclient_putmsgv(a, m, cb, result) skaclient_putmsgv_and_close(a, m, unixmessage_bits_closenone, cb, result)
 
-extern int skaclient_put (skaclient_t *, char const *, unsigned int, unixmessage_handler_func_t *, void *) ;
-extern int skaclient_putv (skaclient_t *, siovec_t const *, unsigned int, unixmessage_handler_func_t *, void *) ;
+extern int skaclient_put (skaclient_t *, char const *, size_t, unixmessage_handler_func_t *, void *) ;
+extern int skaclient_putv (skaclient_t *, struct iovec const *, unsigned int, unixmessage_handler_func_t *, void *) ;
 
 
  /* Writing and flushing */
@@ -103,9 +103,9 @@ extern int skaclient_sendmsgv_and_close (skaclient_t *, unixmessage_v_t const *,
 #define skaclient_sendmsgv(a, m, cb, result, deadline, stamp) skaclient_sendmsgv_and_close(a, m, unixmessage_bits_closenone, cb, result, deadline, stamp)
 #define skaclient_sendmsgv_g(a, m, cb, result, deadline) skaclient_sendmsgv(a, m, cb, result, (deadline), &STAMP)
 
-extern int skaclient_send (skaclient_t *, char const *, unsigned int, unixmessage_handler_func_t *, void *, tain_t const *, tain_t *) ;
+extern int skaclient_send (skaclient_t *, char const *, size_t, unixmessage_handler_func_t *, void *, tain_t const *, tain_t *) ;
 #define skaclient_send_g(a, s, len, cb, result, deadline) skaclient_send(a, s, len, cb, result, (deadline), &STAMP)
-extern int skaclient_sendv (skaclient_t *, siovec_t const *, unsigned int, unixmessage_handler_func_t *, void *, tain_t const *, tain_t *) ;
+extern int skaclient_sendv (skaclient_t *, struct iovec const *, unsigned int, unixmessage_handler_func_t *, void *, tain_t const *, tain_t *) ;
 #define skaclient_sendv_g(a, v, vlen, cb, result, deadline) skaclient_sendv(a, v, vlen, cb, result, (deadline), &STAMP)
 
 

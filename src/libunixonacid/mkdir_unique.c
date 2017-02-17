@@ -1,5 +1,6 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <sys/stat.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/random.h>
@@ -7,7 +8,7 @@
 
 int mkdir_unique (stralloc *sa, char const *fn, unsigned int mode)
 {
-  unsigned int base = sa->len ;
+  size_t base = sa->len ;
   int wasnull = !sa->s ;
   if (!stralloc_cats(sa, fn)) return 0 ;
   if (!stralloc_cats(sa, "/mkdir_unique:")) goto fail ;

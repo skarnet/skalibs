@@ -1,19 +1,18 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <unistd.h>
 #include <errno.h>
-#include <skalibs/bytestr.h>
+#include <string.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/direntry.h>
 #include <skalibs/djbunix.h>
 
-static int rmstarindir (DIR *dir, stralloc *tmp, unsigned int ipos) /* WARNING: closes dir */
+static int rmstarindir (DIR *dir, stralloc *tmp, size_t ipos) /* WARNING: closes dir */
 {
-  unsigned int tmpbase = tmp->len ;
+  size_t tmpbase = tmp->len ;
   for (;;)
   {
-    register direntry *d ;
+    direntry *d ;
     errno = 0 ;
     d = readdir(dir) ;
     if (!d) break ;
@@ -26,16 +25,16 @@ static int rmstarindir (DIR *dir, stralloc *tmp, unsigned int ipos) /* WARNING: 
   dir_close(dir) ;
 
   {
-    unsigned int tmpstop = tmp->len ;
-    unsigned int fnbase = str_len(tmp->s + ipos) ;
-    unsigned int i = tmpbase ;
+    size_t tmpstop = tmp->len ;
+    size_t fnbase = strlen(tmp->s + ipos) ;
+    size_t i = tmpbase ;
     if (!stralloc_readyplus(tmp, fnbase+1)) goto err ;
     stralloc_catb(tmp, tmp->s + ipos, fnbase) ;
     stralloc_catb(tmp, "/", 1) ;
     fnbase = tmp->len ;
     for (; i < tmpstop ; i += tmp->len - fnbase)
     {
-      register unsigned int n = str_len(tmp->s + i) ;
+      size_t n = strlen(tmp->s + i) ;
       tmp->len = fnbase ;
       if (!stralloc_readyplus(tmp, n+1)) goto err ;
       stralloc_catb(tmp, tmp->s + i, n+1) ;
@@ -47,7 +46,7 @@ static int rmstarindir (DIR *dir, stralloc *tmp, unsigned int ipos) /* WARNING: 
 
 closeanderr:
   {
-    register int e = errno ;
+    int e = errno ;
     dir_close(dir) ;
     errno = e ;
   }
@@ -56,14 +55,14 @@ err:
   return -1 ;
 }
 
-int rm_rf_in_tmp (stralloc *tmp, unsigned int ipos)
+int rm_rf_in_tmp (stralloc *tmp, size_t ipos)
 {
   if (unlink(tmp->s + ipos) == 0) return 0 ;
   if (errno == ENOENT) return 0 ;
   if ((errno != EISDIR) && (errno != EPERM)) return -1 ;
   {
-    register int h = (errno == EPERM) ;
-    register DIR *dir = opendir(tmp->s + ipos) ;
+    int h = (errno == EPERM) ;
+    DIR *dir = opendir(tmp->s + ipos) ;
     if (!dir)
     {
       if (h && (errno == ENOTDIR)) errno = EPERM ;
@@ -76,11 +75,11 @@ int rm_rf_in_tmp (stralloc *tmp, unsigned int ipos)
 
 int rmstar_tmp (char const *dirname, stralloc *tmp)
 {
-  unsigned int tmpbase = tmp->len ;
+  size_t tmpbase = tmp->len ;
   if (!stralloc_cats(tmp, dirname)) return -1 ;
   if (!stralloc_0(tmp)) goto err ;
   {
-    register DIR *dir = opendir(dirname) ;
+    DIR *dir = opendir(dirname) ;
     if (!dir) goto err ;
     if (rmstarindir(dir, tmp, tmpbase) == -1) goto err ;
   }

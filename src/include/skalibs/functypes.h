@@ -24,8 +24,11 @@ typedef freefunc_t *freefunc_t_ref ;
 typedef int initfunc_t (void *) ;
 typedef initfunc_t *initfunc_t_ref ;
 
-typedef unsigned int uinitfunc_t (void *) ;
-typedef uinitfunc_t *uinitfunc_t_ref ;
+typedef ssize_t getfunc_t (void *) ;
+typedef getfunc_t *getfunc_t_ref ;
+
+typedef size_t ugetfunc_t (void *) ;
+typedef ugetfunc_t *ugetfunc_t_ref ;
 
 typedef ssize_t iofunc_t (int, char *, size_t) ;
 typedef iofunc_t *iofunc_t_ref ;

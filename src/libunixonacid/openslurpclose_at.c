@@ -11,7 +11,7 @@ int openslurpclose_at (int dirfd, char const *fn, stralloc *sa)
   if (fd < 0) return 0 ;
   if (!slurp(sa, fd))
   {
-    register int e = errno ;
+    int e = errno ;
     fd_close(fd) ;
     errno = e ;
     return 0 ;

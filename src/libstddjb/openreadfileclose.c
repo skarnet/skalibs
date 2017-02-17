@@ -7,9 +7,9 @@
 #include <skalibs/stralloc.h>
 #include <skalibs/djbunix.h>
 
-int openreadfileclose (char const *file, stralloc *sa, unsigned int limit)
+int openreadfileclose (char const *file, stralloc *sa, size_t limit)
 {
-  unsigned int n ;
+  size_t n ;
   int fd = open_readb(file) ;
   if (fd < 0) return 0 ;
   {
@@ -20,7 +20,7 @@ int openreadfileclose (char const *file, stralloc *sa, unsigned int limit)
   if (limit && (limit < n)) n = limit ;
   if (!stralloc_ready_tuned(sa, sa->len + n, 0, 0, 1)) goto err ;
   {
-    register unsigned int r = allread(fd, sa->s + sa->len, n) ;
+    size_t r = allread(fd, sa->s + sa->len, n) ;
     sa->len += r ;
     if (r < n) goto err ;
   }
@@ -29,7 +29,7 @@ int openreadfileclose (char const *file, stralloc *sa, unsigned int limit)
 
 err:
   {
-    register int e = errno ;
+    int e = errno ;
     fd_close(fd) ;
     errno = e ;
   }

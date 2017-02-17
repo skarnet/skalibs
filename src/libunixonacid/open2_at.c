@@ -33,7 +33,7 @@ int open2_at (int dirfd, char const *file, int flags)
   if (fdhere < 0) return -1 ;
   if (fd_chdir(dirfd) < 0)
   {
-    register int e = errno ;
+    int e = errno ;
     fd_close(fdhere) ;
     errno = e ;
     return -1 ;
@@ -41,7 +41,7 @@ int open2_at (int dirfd, char const *file, int flags)
   fd = open2(file, flags) ;
   if (fd < 0)
   {
-    register int e = errno ;
+    int e = errno ;
     fd_chdir(fdhere) ;
     fd_close(fdhere) ;
     errno = e ;
@@ -49,7 +49,7 @@ int open2_at (int dirfd, char const *file, int flags)
   }
   if (fd_chdir(fdhere) < 0)
   {
-    register int e = errno ;
+    int e = errno ;
     fd_close(fdhere) ;
     errno = e ;
     return -1 ;

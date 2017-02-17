@@ -1,14 +1,16 @@
 /* ISC license. */
 
+#include <sys/types.h>
+#include <sys/uio.h>
 #include <errno.h>
-#include <skalibs/buffer.h>
 #include <skalibs/siovec.h>
+#include <skalibs/buffer.h>
 
-int buffer_putvall (buffer *b, siovec_t const *v, unsigned int n, unsigned int *written)
+int buffer_putvall (buffer *b, struct iovec const *v, unsigned int n, size_t *written)
 {
-  unsigned int len = siovec_len(v, n) ;
-  unsigned int w = n ;
-  siovec_t vv[n] ;
+  size_t len = siovec_len(v, n) ;
+  size_t w = n ;
+  struct iovec vv[n ? n : 1] ;
   if (*written > len) return (errno = EINVAL, 0) ;
   while (w--) vv[w] = v[w] ;
   w = *written ;

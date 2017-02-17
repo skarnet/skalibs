@@ -1,6 +1,7 @@
 /* ISC license. */
 
 #include <unistd.h>
+#include <string.h>
 #include <errno.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/djbunix.h>
@@ -12,18 +13,18 @@ void execvep (char const *file, char const *const *argv, char const *const *envp
     execve(file, (char *const *)argv, (char *const *)envp) ; /* execve prototype sucks */
   else
   {
-    unsigned int pathlen = str_len(path) + 1 ;
-    unsigned int filelen = str_len(file) ;
+    size_t pathlen = strlen(path) + 1 ;
+    size_t filelen = strlen(file) ;
     int savederrno = 0 ;
     while (pathlen)
     {
-      unsigned int split = byte_chr(path, pathlen - 1, ':') ;
+      size_t split = byte_chr(path, pathlen - 1, ':') ;
       if (split)
       {
         char tmp[split + 2 + filelen] ;
-        byte_copy(tmp, split, path) ;
+        memcpy(tmp, path, split) ;
         tmp[split] = '/' ;
-        byte_copy(tmp + split + 1, filelen + 1, file) ;
+        memcpy(tmp + split + 1, file, filelen + 1) ;
         execve(tmp, (char *const *)argv, (char *const *)envp) ;
         if (errno != ENOENT)
         {

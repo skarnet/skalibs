@@ -1,5 +1,6 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <errno.h>
 #include <skalibs/buffer.h>
 #include <skalibs/stralloc.h>
@@ -7,10 +8,10 @@
 
 int skagetln (buffer *b, stralloc *sa, char sep)
 {
-  unsigned int start = sa->len ;
+  size_t start = sa->len ;
   for (;;)
   {
-    register int r = skagetln_nofill(b, sa, sep) ;
+    ssize_t r = skagetln_nofill(b, sa, sep) ;
     if (r) return r ;
     r = buffer_fill(b) ;
     if (r < 0) return r ;

@@ -1,5 +1,7 @@
 /* ISC license. */
 
+/* MT-unsafe (because of chdir) */
+
 #include <sys/types.h>
 #include <unistd.h>
 #include <errno.h>
@@ -52,7 +54,7 @@ int sarealpath_tmp (stralloc *sa, char const *path, stralloc *tmp)
 
 err:
   {
-    register int e = errno ;
+    int e = errno ;
     tmp->len = tmpbase ;
     fd_chdir(fdhere) ;
     fd_close(fdhere) ;

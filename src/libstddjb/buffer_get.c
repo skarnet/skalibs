@@ -1,12 +1,13 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <errno.h>
 #include <skalibs/buffer.h>
 
-int buffer_get (buffer *b, char *s, unsigned int len)
+ssize_t buffer_get (buffer *b, char *s, size_t len)
 {
-  unsigned int w = 0 ;
+  size_t w = 0 ;
   register int r = buffer_getall(b, s, len, &w) ;
-  return r == -1 ? errno == EPIPE ? (errno = 0, (int)w) : -1 :
-         !r ? (errno = EWOULDBLOCK, -1) : (int)w ;
+  return r == -1 ? errno == EPIPE ? (errno = 0, (ssize_t)w) : -1 :
+         !r ? (errno = EWOULDBLOCK, -1) : (ssize_t)w ;
 }

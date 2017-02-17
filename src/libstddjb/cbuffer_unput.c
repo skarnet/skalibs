@@ -1,10 +1,11 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/cbuffer.h>
 
-unsigned int cbuffer_unput (cbuffer_t *b, unsigned int len)
+size_t cbuffer_unput (cbuffer_t *b, size_t len)
 {
-  register unsigned int max = cbuffer_len(b) ;
+  size_t max = cbuffer_len(b) ;
   if (len > max) len = max ;
   return cbuffer_UNPUT(b, len) ;
 }

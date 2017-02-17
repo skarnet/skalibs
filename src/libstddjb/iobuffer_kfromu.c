@@ -13,15 +13,13 @@
 
 int iobuffer_kfromu (iobufferk *k, iobufferu *u)
 {
-  struct iovec iov[2] ;
-  siovec_t v[2] ;
-  int r ;
+  struct iovec v[2] ;
+  ssize_t r ;
   buffer_rpeek(&u->b[0], v) ;
-  iovec_from_siovec(iov, v, 2) ;
-  r = vmsplice(k->p[1], iov, 2, 0) ;
+  r = vmsplice(k->p[1], v, 2, 0) ;
   if (r < 0) return 0 ;
   k->n += r ;
-  buffer_rseek(&u->b[0], (unsigned int)r) ;
+  buffer_rseek(&u->b[0], r) ;
   u->b[1].c.p = u->b[0].c.p ;
   return iobufferu_isempty(u) ;
 }

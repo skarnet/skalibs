@@ -1,5 +1,7 @@
 /* ISC license. */
 
+#include <sys/types.h>
+#include <string.h>
 #include <errno.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/stralloc.h>
@@ -8,10 +10,10 @@ int string_format (stralloc *sa, char const *vars, char const *format, char cons
 {
   static unsigned char const tab[2][4] = { "1442", "4833" } ;
   char class[256] = "3222222222222222222222222222222222222022222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222" ;
-  unsigned int varlen = str_len(vars) ;
-  unsigned int base = sa->len ;
+  size_t varlen = strlen(vars) ;
+  size_t base = sa->len ;
+  size_t state = 0 ;
   int wasnull = !sa->s ;
-  unsigned int state = 0 ;
 
   for (; state < varlen ; state++)
     if (class[(unsigned char)vars[state]] == '2')

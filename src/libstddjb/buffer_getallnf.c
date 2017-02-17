@@ -1,11 +1,12 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <errno.h>
 #include <skalibs/buffer.h>
 
-int buffer_getallnofill (buffer *b, char *s, unsigned int len)
+int buffer_getallnofill (buffer *b, char *s, size_t len)
 {
-  register unsigned int r = buffer_getnofill(b, s, len) ;
+  size_t r = buffer_getnofill(b, s, len) ;
   if (r < len)
   {
     buffer_unget(b, r) ;

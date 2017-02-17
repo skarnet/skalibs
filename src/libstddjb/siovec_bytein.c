@@ -1,17 +1,19 @@
 /* ISC license. */
 
+#include <sys/types.h>
+#include <sys/uio.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/siovec.h>
 
-unsigned int siovec_bytein (siovec_t const *v, unsigned int n, char const *sep, unsigned int seplen)
+size_t siovec_bytein (struct iovec const *v, unsigned int n, char const *sep, size_t seplen)
 {
-  unsigned int w = 0 ;
+  size_t w = 0 ;
   unsigned int i = 0 ;
   for (; i < n ; i++)
   {
-    register unsigned int pos = byte_in(v[i].s, v[i].len, sep, seplen) ;
+    size_t pos = byte_in((char const *)v[i].iov_base, v[i].iov_len, sep, seplen) ;
     w += pos ;
-    if (pos < v[i].len) break ;
+    if (pos < v[i].iov_len) break ;
   }
   return w ;
 }

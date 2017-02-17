@@ -1,5 +1,6 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/kolbak.h>
 #include <skalibs/skaclient.h>
 #include <skalibs/unixmessage.h>
@@ -9,17 +10,17 @@ int skaclient_init (
   skaclient_t *a,
   int fd,
   char *bufss,
-  unsigned int bufsn,
+  size_t bufsn,
   char *auxbufss,
-  unsigned int auxbufsn,
+  size_t auxbufsn,
   char *bufas,
-  unsigned int bufan,
+  size_t bufan,
   char *auxbufas,
-  unsigned int auxbufan,
+  size_t auxbufan,
   kolbak_closure_t *q,
-  unsigned int qlen,
+  size_t qlen,
   char const *before,
-  unsigned int beforelen)
+  size_t beforelen)
 {
   unixmessage_t msg = { .s = (char *)before, .len = beforelen, .fds = 0, .nfds = 0 } ;
   if (!unixmessage_receiver_init(&a->syncin, fd, bufss, bufsn, auxbufss, auxbufsn)

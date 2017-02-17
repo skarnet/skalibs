@@ -17,7 +17,7 @@ extern int netstring_encode (stralloc *, char const *, size_t) ;
 extern ssize_t netstring_decode (stralloc *, char const *, size_t) ;
 
 extern int netstring_okeof (buffer *, size_t) ;
-extern ssize_t netstring_get (buffer *, stralloc *, size_t *) ;
+extern int netstring_get (buffer *, stralloc *, size_t *) ;
 extern int netstring_put (buffer *, char const *, size_t, size_t *) ;
 #define netstring_putba(ba, s, n) netstring_appendb(&(ba)->x, s, n)
 #define netstring_putbav(ba, v, n) netstring_appendv(&(ba)->x, v, n)

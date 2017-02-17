@@ -1,5 +1,6 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/functypes.h>
 #include <skalibs/tai.h>
 #include <skalibs/unix-timed.h>
@@ -17,7 +18,7 @@ static int getfd (unixmessage_get_t *g)
   return unixmessage_receiver_fd(g->b) ;
 }
 
-static int get (unixmessage_get_t *g)
+static ssize_t get (unixmessage_get_t *g)
 {
   return unixmessage_receive(g->b, g->m) ;
 }
@@ -25,5 +26,5 @@ static int get (unixmessage_get_t *g)
 int unixmessage_timed_receive (unixmessage_receiver_t *b, unixmessage_t *m, tain_t const *deadline, tain_t *stamp)
 {
   unixmessage_get_t g = { .b = b, .m = m } ;
-  return timed_get(&g, (initfunc_t *)&getfd, (initfunc_t *)&get, deadline, stamp) ;
+  return timed_get(&g, (initfunc_t_ref)&getfd, (getfunc_t_ref)&get, deadline, stamp) ;
 }

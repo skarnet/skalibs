@@ -7,24 +7,14 @@
 #include <sys/uio.h>
 #include <skalibs/gccattributes.h>
 
-typedef struct siovec_s siovec_t, *siovec_t_ref ;
-struct siovec_s
-{
-  char *s ;
-  unsigned int len ;
-} ;
+extern size_t siovec_len (struct iovec const *, unsigned int) gccattr_pure ;
+extern size_t siovec_gather (struct iovec const *, unsigned int, char *, size_t) ;
+extern size_t siovec_scatter (struct iovec const *, unsigned int, char const *, size_t) ;
+extern size_t siovec_deal (struct iovec const *, unsigned int, struct iovec const *, unsigned int) ;
+extern size_t siovec_seek (struct iovec *, unsigned int, size_t) ;
+extern unsigned int siovec_trunc (struct iovec *, unsigned int, size_t) ;
 
-extern unsigned int siovec_len (siovec_t const *, unsigned int) gccattr_pure ;
-extern unsigned int siovec_gather (siovec_t const *, unsigned int, char *, unsigned int) ;
-extern unsigned int siovec_scatter (siovec_t const *, unsigned int, char const *, unsigned int) ;
-extern unsigned int siovec_deal (siovec_t const *, unsigned int, siovec_t const *, unsigned int) ;
-extern unsigned int siovec_seek (siovec_t *, unsigned int, unsigned int) ;
-extern unsigned int siovec_trunc (siovec_t *, unsigned int, unsigned int) ;
-
-extern void siovec_from_iovec (siovec_t *, struct iovec const *, unsigned int) ;
-extern void iovec_from_siovec (struct iovec *, siovec_t const *, unsigned int) ;
-
-extern unsigned int siovec_bytechr (siovec_t const *, unsigned int, char) ;
-extern unsigned int siovec_bytein (siovec_t const *, unsigned int, char const *, unsigned int) ;
+extern size_t siovec_bytechr (struct iovec const *, unsigned int, char) ;
+extern size_t siovec_bytein (struct iovec const *, unsigned int, char const *, size_t) ;
 
 #endif

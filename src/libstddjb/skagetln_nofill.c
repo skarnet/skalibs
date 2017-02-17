@@ -1,5 +1,7 @@
 /* ISC license. */
 
+#include <sys/types.h>
+#include <sys/uio.h>
 #include <skalibs/buffer.h>
 #include <skalibs/siovec.h>
 #include <skalibs/stralloc.h>
@@ -7,8 +9,8 @@
 
 int skagetln_nofill (buffer *b, stralloc *sa, char sep)
 {
-  siovec_t v[2] ;
-  unsigned int pos ;
+  struct iovec v[2] ;
+  size_t pos ;
   int r ;
   buffer_rpeek(b, v) ;
   pos = siovec_bytechr(v, 2, sep) ;

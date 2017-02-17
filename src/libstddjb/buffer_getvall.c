@@ -1,14 +1,16 @@
 /* ISC license. */
 
+#include <sys/types.h>
+#include <sys/uio.h>
 #include <errno.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/buffer.h>
 #include <skalibs/siovec.h>
 
-int buffer_getvall (buffer *b, siovec_t const *v, unsigned int n, unsigned int *written)
+int buffer_getvall (buffer *b, struct iovec const *v, unsigned int n, size_t *written)
 {
-  unsigned int len = siovec_len(v, n) ;
-  siovec_t vv[n] ;
+  size_t len = siovec_len(v, n) ;
+  struct iovec vv[n ? n : 1] ;
   if (*written > len) return (errno = EINVAL, -1) ;
   {
     register unsigned int i = n ;
@@ -17,8 +19,8 @@ int buffer_getvall (buffer *b, siovec_t const *v, unsigned int n, unsigned int *
   siovec_seek(vv, n, *written) ;
   for (;;)
   {
-    register int r ;
-    unsigned int w = buffer_getvnofill(b, vv, n) ;
+    ssize_t r ;
+    size_t w = buffer_getvnofill(b, vv, n) ;
     *written += w ;
     if (*written >= len) break ;
     siovec_seek(vv, n, w) ;
@@ -27,4 +29,3 @@ int buffer_getvall (buffer *b, siovec_t const *v, unsigned int n, unsigned int *
   }
   return 1 ;
 }
-

@@ -1,5 +1,6 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/buffer.h>
 #include <skalibs/functypes.h>
@@ -20,7 +21,7 @@ static int getfd (struct blah_s *blah)
   return buffer_fd(blah->b) ;
 }
 
-static int get (struct blah_s *blah)
+static ssize_t get (struct blah_s *blah)
 {
   return sanitize_read(skagetln(blah->b, blah->sa, blah->sep)) ;
 }
@@ -28,5 +29,5 @@ static int get (struct blah_s *blah)
 int timed_getln (buffer *b, stralloc *sa, char sep, tain_t const *deadline, tain_t *stamp)
 {
   struct blah_s blah = { .b = b, .sa = sa, .sep = sep } ;
-  return timed_get(&blah, (initfunc_t_ref)&getfd, (initfunc_t_ref)&get, deadline, stamp) ;
+  return timed_get(&blah, (initfunc_t_ref)&getfd, (getfunc_t_ref)&get, deadline, stamp) ;
 }

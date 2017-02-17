@@ -19,7 +19,7 @@ pid_t doublefork ()
   {
     case -1:
     {
-      register int e = errno ;
+      int e = errno ;
       fd_close(fd[1]) ;
       fd_close(fd[0]) ;
       errno = e ;
@@ -35,13 +35,13 @@ pid_t doublefork ()
         case -1: _exit(errno) ;
         case 0: fd_close(fd[1]) ; return 0 ;
       }
-      uint64_pack_big(pack, (uint64)pid) ;
+      uint64_pack_big(pack, pid) ;
       _exit((allwrite(fd[1], pack, 8) < 8) ? errno : 0) ;
     }
   }
   fd_close(fd[1]) ;
   {
-    uint64 grandchild = 0 ;
+    uint64_t grandchild = 0 ;
     int wstat ;
     if (allread(fd[0], pack, 8) < 8) grandchild = 1 ;
     fd_close(fd[0]) ;

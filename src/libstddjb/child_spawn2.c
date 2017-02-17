@@ -21,7 +21,7 @@
 
 #else
 
-#include <skalibs/bytestr.h>
+#include <string.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/sig.h>
 #include <skalibs/strerr2.h>
@@ -87,10 +87,10 @@ pid_t child_spawn2 (char const *prog, char const *const *argv, char const *const
   if (pid < 0) { e = errno ; goto errsp ; }
   else if (!pid)
   {
-    unsigned int len = str_len(PROG) ;
+    size_t len = strlen(PROG) ;
     char name[len + 9] ;
-    byte_copy(name, len, PROG) ;
-    byte_copy(name + len, 9, " (child)") ;
+    memcpy(name, PROG, len) ;
+    memcpy(name + len, " (child)", 9) ;
     PROG = name ;
     fd_close(syncpipe[0]) ;
     if (fd_move2(fds[0], p[1][0], fds[1], p[0][1]) < 0) goto syncdie ;

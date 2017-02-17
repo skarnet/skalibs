@@ -45,7 +45,9 @@ pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const
 #else
 
 #include <unistd.h>
+#include <string.h>
 #include <skalibs/allreadwrite.h>
+#include <skalibs/strerr2.h>
 #include <skalibs/sig.h>
 #include <skalibs/djbunix.h>
 
@@ -66,6 +68,11 @@ pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const
   }
   if (!pid)
   {
+    size_t len = strlen(PROG) ;
+    char name[len + 9] ;
+    memcpy(name, PROG, len) ;
+    memcpy(name + len, " (child)", 9) ;
+    PROG = name ;
     fd_close(p[0]) ;
     sig_blocknone() ;
     pathexec_run(prog, argv, envp) ;

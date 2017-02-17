@@ -13,12 +13,12 @@ struct bufalloc
   stralloc x ;
   size_t p ;
   int fd ;
-  int (*op) (int, char const *, unsigned int) ;
+  ssize_t (*op) (int, char const *, size_t) ;
 } ;
 
 #define BUFALLOC_ZERO { .x = STRALLOC_ZERO, .p = 0, .fd = -1, .op = 0 }
 #define BUFALLOC_INIT(f, d) { .x = STRALLOC_ZERO, .p = 0, .fd = (d), .op = (f) }
-extern void bufalloc_init (bufalloc *, int (*)(int, char const *, size_t), int) ;
+extern void bufalloc_init (bufalloc *, ssize_t (*)(int, char const *, size_t), int) ;
 #define bufalloc_shrink(ba) stralloc_shrink(&(ba)->x)
 #define bufalloc_free(ba) stralloc_free(&(ba)->x)
 #define bufalloc_put(ba, s, n) stralloc_catb(&(ba)->x, s, n)

@@ -13,7 +13,7 @@ int timed_flush (void *b, initfunc_t_ref getfd, initfunc_t_ref isnonempty, initf
   iopause_fd x = { .fd = (*getfd)(b), .events = IOPAUSE_WRITE, .revents = 0 } ;
   while ((*isnonempty)(b))
   {
-    register int r = iopause_stamp(&x, 1, deadline, stamp) ;
+    int r = iopause_stamp(&x, 1, deadline, stamp) ;
     if (r < 0) return 0 ;
     else if (!r) return (errno = ETIMEDOUT, 0) ;
     else if (x.revents & IOPAUSE_WRITE)

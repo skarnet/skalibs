@@ -11,7 +11,7 @@ int pathexec_env (char const *s, char const *t) /* historic, bad name */
   return env_addmodif(&plus, s, t) ;
 }
 
-void pathexec_fromenv (char const *const *argv, char const *const *envp, unsigned int envlen)
+void pathexec_fromenv (char const *const *argv, char const *const *envp, size_t envlen)
 {
   pathexec_r(argv, envp, envlen, plus.s, plus.len) ;
 }

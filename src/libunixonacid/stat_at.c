@@ -9,7 +9,6 @@
 #endif
 
 #include <skalibs/nonposix.h>
-#include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <skalibs/unix-transactional.h>
@@ -43,7 +42,7 @@ static int fstat_at (int dirfd, char const *file, struct stat *st, int (*dostat)
   if (fdhere < 0) return -1 ;
   if (fd_chdir(dirfd) < 0)
   {
-    register int e = errno ;
+    int e = errno ;
     fd_close(fdhere) ;
     errno = e ;
     return -1 ;
@@ -51,7 +50,7 @@ static int fstat_at (int dirfd, char const *file, struct stat *st, int (*dostat)
   r = (*dostat)(file, st) ;
   if (r < 0)
   {
-    register int e = errno ;
+    int e = errno ;
     fd_chdir(fdhere) ;
     fd_close(fdhere) ;
     errno = e ;
@@ -59,7 +58,7 @@ static int fstat_at (int dirfd, char const *file, struct stat *st, int (*dostat)
   }
   if (fd_chdir(fdhere) < 0)
   {
-    register int e = errno ;
+    int e = errno ;
     fd_close(fdhere) ;
     errno = e ;
     return -1 ;

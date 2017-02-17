@@ -49,10 +49,10 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
   int p[n ? n : 1][2] ;
   pid_t pid ;
   int e ;
-  unsigned int m = sizeof(NOFDVAR) ;
+  size_t m = sizeof(NOFDVAR) ;
   unsigned int i = 0 ;
   char modifs[m + 1 + n * UINT_FMT] ;
-  byte_copy(modifs, sizeof(NOFDVAR), NOFDVAR "=") ;
+  memcpy(modifs, NOFDVAR "=", sizeof(NOFDVAR)) ;
   for (; i < n ; i++) if (pipe(p[i]) < 0) { e = errno ; goto errpi ; }
   for (i = 0 ; i < n ; i++)
     if ((ndelay_on(p[i][i & 1]) < 0) || (coe(p[i][i & 1]) < 0))
@@ -96,7 +96,7 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
   }
   {
     int haspath = !!env_get("PATH") ;
-    unsigned int envlen = env_len(envp) ;
+    size_t envlen = env_len(envp) ;
     char const *newenv[envlen + 2] ;
     if (!env_merge(newenv, envlen+2, envp, envlen, modifs, m)) goto errsp ;
     if (!haspath && (setenv("PATH", SKALIBS_DEFAULTPATH, 0) < 0))
@@ -119,10 +119,10 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
   if (pid < 0) { e = errno ; goto errsp ; }
   else if (!pid)
   {
-    unsigned int len = str_len(PROG) ;
+    size_t len = strlen(PROG) ;
     char name[len + 9] ;
-    byte_copy(name, len, PROG) ;
-    byte_copy(name + len, 9, " (child)") ;
+    memcpy(name, PROG, len) ;
+    memcpy(name + len, " (child)", 9) ;
     PROG = name ;
     fd_close(syncpipe[0]) ;
     if (n >= 2)

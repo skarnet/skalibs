@@ -12,6 +12,7 @@ int main (void)
   q(ushort, unsigned short) ;
   q(uint, unsigned int) ;
   q(ulong, unsigned long) ;
+  p(size) ;
   p(uid) ;
   p(gid) ;
   p(pid) ;

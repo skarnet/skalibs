@@ -1,18 +1,19 @@
 /* ISC license. */
 
-#include <skalibs/bytestr.h>
+#include <sys/types.h>
+#include <sys/uio.h>
 #include <skalibs/siovec.h>
 
-unsigned int siovec_trunc (siovec_t *v, unsigned int n, unsigned int len)
+unsigned int siovec_trunc (struct iovec *v, unsigned int n, size_t len)
 {
-  register unsigned int i = siovec_len(v, n) ;
-  if (i < len) return n ;
-  len = i - len ;
-  i = n ;
+  size_t w = siovec_len(v, n) ;
+  unsigned int i = n ;
+  if (w < len) return n ;
+  len = w - len ;
   while (len && i--)
   {
-    register unsigned int w = len > v[i].len ? v[i].len : len ;
-    v[i].len -= w ; len -= w ;
+    w = len > v[i].iov_len ? v[i].iov_len : len ;
+    v[i].iov_len -= w ; len -= w ;
   }
   return i ;
 }

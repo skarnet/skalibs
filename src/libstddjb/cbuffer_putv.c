@@ -1,12 +1,14 @@
 /* ISC license. */
 
-#include <skalibs/cbuffer.h>
+#include <sys/types.h>
+#include <sys/uio.h>
 #include <skalibs/siovec.h>
+#include <skalibs/cbuffer.h>
 
-unsigned int cbuffer_putv (cbuffer_t *b, siovec_t const *v, unsigned int n)
+size_t cbuffer_putv (cbuffer_t *b, struct iovec const *v, unsigned int n)
 {
-  siovec_t vdest[2] ;
-  register unsigned int w ;
+  struct iovec vdest[2] ;
+  size_t w ;
   cbuffer_wpeek(b, vdest) ;
   w = siovec_deal(vdest, 2, v, n) ;
   return cbuffer_WSEEK(b, w) ;

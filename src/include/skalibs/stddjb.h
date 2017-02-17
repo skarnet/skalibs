@@ -25,6 +25,7 @@
 #include <skalibs/direntry.h>
 #include <skalibs/diuint32.h>
 #include <skalibs/diuint.h>
+#include <skalibs/disize.h>
 #include <skalibs/djbtime.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/envalloc.h>

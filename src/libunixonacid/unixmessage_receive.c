@@ -12,7 +12,6 @@
 #include <skalibs/error.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/stralloc.h>
-#include <skalibs/siovec.h>
 #include <skalibs/unixmessage.h>
 
 static int const awesomeflags =
@@ -49,14 +48,10 @@ static int unixmessage_receiver_fill (unixmessage_receiver_t *b)
     .msg_control = b->fds_ok & 1 ? ancilbuf : 0,
     .msg_controllen = b->fds_ok & 1 ? sizeof(ancilbuf) : 0
   } ;
-  int r = -1 ;
+  ssize_t r = -1 ;
   if (cbuffer_isfull(&b->mainb) || ((b->fds_ok & 1) && cbuffer_isfull(&b->auxb)))
     return (errno = ENOBUFS, -1) ;
-  {
-    siovec_t v[2] ;
-    cbuffer_wpeek(&b->mainb, v) ;
-    iovec_from_siovec(iov, v, 2) ;
-  }
+  cbuffer_wpeek(&b->mainb, iov) ;
   while (r < 0)
   {
     r = recvmsg(b->fd, &msghdr, awesomeflags) ;
@@ -67,20 +62,20 @@ static int unixmessage_receiver_fill (unixmessage_receiver_t *b)
     struct cmsghdr *c = CMSG_FIRSTHDR(&msghdr) ;
     if (c)
     {
-      unsigned int auxlen ;
+      size_t auxlen ;
       if (c->cmsg_level != SOL_SOCKET
        || c->cmsg_type != SCM_RIGHTS) return (errno = EPROTO, -1) ;
-      auxlen = (unsigned int)(c->cmsg_len - (CMSG_DATA(c) - (unsigned char *)c)) ;
+      auxlen = (size_t)(c->cmsg_len - (CMSG_DATA(c) - (unsigned char *)c)) ;
       if (auxlen && !(b->fds_ok & 2))
       {
-        register unsigned int i = auxlen/sizeof(int) ;
+        size_t i = auxlen / sizeof(int) ;
         while (i--) fd_close(((int *)CMSG_DATA(c))[i]) ;
         return (errno = EPROTO, -1) ;
       }
 #ifndef SKALIBS_HASCMSGCLOEXEC
       {
-        register unsigned int i = 0 ;
-        for (; i < auxlen/sizeof(int) ; i++)
+        size_t i = 0 ;
+        for (; i < auxlen / sizeof(int) ; i++)
           if (coe(((int *)CMSG_DATA(c))[i]) < 0)
           {
             int e = errno ;
@@ -93,7 +88,7 @@ static int unixmessage_receiver_fill (unixmessage_receiver_t *b)
 #endif
       if ((msghdr.msg_flags & MSG_CTRUNC) || cbuffer_put(&b->auxb, (char *)CMSG_DATA(c), auxlen) < auxlen)
       {
-        register unsigned int i = auxlen/sizeof(int) ;
+        size_t i = auxlen/sizeof(int) ;
         while (i--) fd_close(((int *)CMSG_DATA(c))[i]) ;
         return (errno = ENOBUFS, -1) ;
       }
@@ -110,7 +105,7 @@ int unixmessage_receive (unixmessage_receiver_t *b, unixmessage_t *m)
     char pack[6] ;
     if (cbuffer_len(&b->mainb) < 6)
     {
-      register int r = sanitize_read(unixmessage_receiver_fill(b)) ;
+      ssize_t r = sanitize_read(unixmessage_receiver_fill(b)) ;
       if (r <= 0) return r ;
       if (cbuffer_len(&b->mainb) < 6) return (errno = EWOULDBLOCK, 0) ;
     }
@@ -131,8 +126,8 @@ int unixmessage_receive (unixmessage_receiver_t *b, unixmessage_t *m)
 
   for (;;)
   {
-    register int r ;
-    register unsigned int n = cbuffer_len(&b->mainb) ;
+    ssize_t r ;
+    size_t n = cbuffer_len(&b->mainb) ;
     if (n > b->mainlen - b->maindata.len) n = b->mainlen - b->maindata.len ;
     b->maindata.len += cbuffer_get(&b->mainb, b->maindata.s + b->maindata.len, n) ;
     n = cbuffer_len(&b->auxb) ;

@@ -1,10 +1,12 @@
 /* ISC license. */
 
+#include <sys/types.h>
+#include <sys/uio.h>
 #include <skalibs/siovec.h>
 
-unsigned int siovec_len (siovec_t const *v, register unsigned int n)
+size_t siovec_len (struct iovec const *v, unsigned int n)
 {
-  register unsigned int w = 0 ;
-  while (n--) w += v[n].len ;
+  size_t w = 0 ;
+  while (n--) w += v[n].iov_len ;
   return w ;
 }

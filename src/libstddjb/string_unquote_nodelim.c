@@ -1,11 +1,12 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <errno.h>
 #include <skalibs/skamisc.h>
 
-int string_unquote_nodelim (char *d, char const *s, unsigned int len)
+ssize_t string_unquote_nodelim (char *d, char const *s, size_t len)
 {
-  unsigned int rr, ww ;
+  size_t rr, ww ;
   if (!string_unquote_withdelim(d, &ww, s, len, &rr, 0, 0)) return -1 ;
-  return (int)ww ;
+  return (ssize_t)ww ;
 }

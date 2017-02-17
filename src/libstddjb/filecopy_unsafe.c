@@ -12,14 +12,14 @@ int filecopy_unsafe (char const *src, char const *dst, unsigned int mode)
   d = open3(dst, O_WRONLY | O_CREAT | O_TRUNC, mode) ;
   if (d < 0)
   {
-    register int e = errno ;
+    int e = errno ;
     fd_close(s) ;
     errno = e ;
     return 0 ;
   }
   if (fd_cat(s, d) < 0)
   {
-    register int e = errno ;
+    int e = errno ;
     fd_close(d) ;
     fd_close(s) ;
     errno = e ;

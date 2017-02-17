@@ -31,7 +31,7 @@ RANLIB := $(CROSS_COMPILE)ranlib
 STRIP := $(CROSS_COMPILE)strip
 INSTALL := ./tools/install.sh
 
-TYPES := uid gid pid time dev ino
+TYPES := size uid gid pid time dev ino
 
 ALL_SRCS := $(wildcard src/lib*/*.c)
 ALL_SOBJS := $(ALL_SRCS:%.c=%.o)

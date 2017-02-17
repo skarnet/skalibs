@@ -2,10 +2,10 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <string.h>
 #include <unistd.h>
 #include <errno.h>
 #include <fcntl.h>
-#include <skalibs/bytestr.h>
 #include <skalibs/strerr2.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/direntry.h>
@@ -13,22 +13,22 @@
 
 static int dircopy (char const *src, char const *dst, mode_t mode, stralloc *tmp)
 {
-  unsigned int tmpbase = tmp->len ;
-  unsigned int maxlen = 0 ;
+  size_t tmpbase = tmp->len ;
+  size_t maxlen = 0 ;
   {
     DIR *dir = opendir(src) ;
     if (!dir) return 0 ;
     for (;;)
     {
       direntry *d ;
-      register unsigned int n ;
+      size_t n ;
       errno = 0 ;
       d = readdir(dir) ;
       if (!d) break ;
       if (d->d_name[0] == '.')
         if (((d->d_name[1] == '.') && !d->d_name[2]) || !d->d_name[1])
           continue ;
-      n = str_len(d->d_name) ;
+      n = strlen(d->d_name) ;
       if (n > maxlen) maxlen = n ;
       if (!stralloc_catb(tmp, d->d_name, n+1)) break ;
     }
@@ -50,20 +50,20 @@ static int dircopy (char const *src, char const *dst, mode_t mode, stralloc *tmp
     if (!S_ISDIR(st.st_mode)) { errno = ENOTDIR ; goto err ; }
   }
   {
-    unsigned int srclen = str_len(src) ;
-    unsigned int dstlen = str_len(dst) ;
-    unsigned int i = tmpbase ;
+    size_t srclen = strlen(src) ;
+    size_t dstlen = strlen(dst) ;
+    size_t i = tmpbase ;
     char srcbuf[srclen + maxlen + 2] ;
     char dstbuf[dstlen + maxlen + 2] ;
-    byte_copy(srcbuf, srclen, src) ;
-    byte_copy(dstbuf, dstlen, dst) ;
+    memcpy(srcbuf, src, srclen) ;
+    memcpy(dstbuf, dst, dstlen) ;
     srcbuf[srclen] = '/' ;
     dstbuf[dstlen] = '/' ;
     while (i < tmp->len)
     {
-      register unsigned int n = str_len(tmp->s + i) + 1 ;
-      byte_copy(srcbuf + srclen + 1, n, tmp->s + i) ;
-      byte_copy(dstbuf + dstlen + 1, n, tmp->s + i) ;
+      size_t n = strlen(tmp->s + i) + 1 ;
+      memcpy(srcbuf + srclen + 1, tmp->s + i, n) ;
+      memcpy(dstbuf + dstlen + 1, tmp->s + i, n) ;
       i += n ;
       hiercopy_tmp(srcbuf, dstbuf, tmp) ;
     }
@@ -94,14 +94,9 @@ int hiercopy_tmp (char const *src, char const *dst, stralloc *tmp)
   }
   else if (S_ISLNK(st.st_mode))
   {
-    unsigned int tmpbase = tmp->len ;
+    size_t tmpbase = tmp->len ;
     if (sareadlink(tmp, src) < 0) return 0 ;
-    if (!stralloc_0(tmp))
-    {
-      tmp->len = tmpbase ;
-      return 0 ;
-    }
-    if (symlink(tmp->s + tmpbase, dst) < 0)
+    if (!stralloc_0(tmp) || symlink(tmp->s + tmpbase, dst) < 0)
     {
       tmp->len = tmpbase ;
       return 0 ;

@@ -1,9 +1,10 @@
 /* ISC license. */
 
-#include <skalibs/bytestr.h>
+#include <sys/types.h>
+#include <string.h>
 #include <skalibs/buffer.h>
 
-int buffer_puts (buffer *b, char const *s)
+ssize_t buffer_puts (buffer *b, char const *s)
 {
-  return buffer_put(b, s, str_len(s)) ;
+  return buffer_put(b, s, strlen(s)) ;
 }

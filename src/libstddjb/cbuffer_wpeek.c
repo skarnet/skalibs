@@ -1,22 +1,23 @@
 /* ISC license. */
 
+#include <sys/types.h>
+#include <sys/uio.h>
 #include <skalibs/cbuffer.h>
-#include <skalibs/siovec.h>
 
-void cbuffer_wpeek (cbuffer_t *b, siovec_t *v)
+void cbuffer_wpeek (cbuffer_t *b, struct iovec *v)
 {
-  unsigned int last = (b->a - 1 + b->p) % b->a ;
-  v[0].s = b->x + b->n ;
+  size_t last = (b->a - 1 + b->p) % b->a ;
+  v[0].iov_base = b->x + b->n ;
   if (last >= b->n)
   {
-    v[0].len = last - b->n ;
-    v[1].s = 0 ;
-    v[1].len = 0 ;
+    v[0].iov_len = last - b->n ;
+    v[1].iov_base = 0 ;
+    v[1].iov_len = 0 ;
   }
   else
   {
-    v[0].len = b->a - b->n ;
-    v[1].s = b->x ;
-    v[1].len = last ;
+    v[0].iov_len = b->a - b->n ;
+    v[1].iov_base = b->x ;
+    v[1].iov_len = last ;
   }
 }

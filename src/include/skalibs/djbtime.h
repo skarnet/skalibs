@@ -3,9 +3,8 @@
 #ifndef DJBTIME_H
 #define DJBTIME_H
 
-#include <sys/types.h>
+#include <stdint.h>
 #include <time.h>
-#include <skalibs/uint32.h>
 #include <skalibs/uint64.h>
 #include <skalibs/tai.h>
 

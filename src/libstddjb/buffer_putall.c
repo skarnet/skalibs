@@ -1,9 +1,10 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <errno.h>
 #include <skalibs/buffer.h>
 
-int buffer_putall (buffer *b, char const *s, unsigned int len, unsigned int *written)
+int buffer_putall (buffer *b, char const *s, size_t len, size_t *written)
 {
   if (*written > len) return (errno = EINVAL, 0) ;
   for (;;)

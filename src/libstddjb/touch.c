@@ -11,7 +11,7 @@
 
 int touch (char const *file)
 {
-  register int fd = open_create(file) ;
+  int fd = open_create(file) ;
   if (fd < 0) return 0 ;
   if (futimens(fd, 0) < 0) return 0 ;
   fd_close(fd) ;
@@ -27,7 +27,7 @@ int touch (char const *file)
 
 int touch (char const *file)
 {
-  register int fd = open_create(file) ;
+  int fd = open_create(file) ;
   if (fd < 0) return 0 ;
   if (futimes(fd, 0) < 0) return 0 ;
   fd_close(fd) ;
@@ -41,7 +41,7 @@ int touch (char const *file)
 
 int touch (char const *file)
 {
-  register int fd = open_create(file) ;
+  int fd = open_create(file) ;
   if (fd < 0) return 0 ;
   fd_close(fd) ;
   if (utimes(file, 0) < 0) return 0 ;

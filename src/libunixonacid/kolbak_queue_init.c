@@ -1,9 +1,10 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <errno.h>
 #include <skalibs/kolbak.h>
 
-int kolbak_queue_init (kolbak_queue_t *q, kolbak_closure_t *s, unsigned int len)
+int kolbak_queue_init (kolbak_queue_t *q, kolbak_closure_t *s, size_t len)
 {
   if (len < 2) return (errno = EINVAL, 0) ;
   q->x = s ;

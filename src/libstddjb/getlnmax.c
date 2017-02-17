@@ -1,19 +1,21 @@
 /* ISC license. */
 
+#include <sys/types.h>
+#include <sys/uio.h>
 #include <errno.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/buffer.h>
 #include <skalibs/skamisc.h>
 
-int getlnmax (buffer *b, char *d, unsigned int max, unsigned int *w, char sep)
+int getlnmax (buffer *b, char *d, size_t max, size_t *w, char sep)
 {
   if (max < *w) return (errno = EINVAL, -1) ;
   for (;;)
   {
-    siovec_t v[2] ;
-    unsigned int len = buffer_len(b) ;
-    unsigned int pos ;
-    int r ;
+    struct iovec v[2] ;
+    size_t len = buffer_len(b) ;
+    size_t pos ;
+    ssize_t r ;
     buffer_rpeek(b, v) ;
     if (len > max - *w) len = max - *w ;
     pos = siovec_bytechr(v, 2, sep) ;

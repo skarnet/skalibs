@@ -1,34 +1,34 @@
 /* ISC license. */
 
 #include <sys/types.h>
+#include <stdint.h>
 #include <errno.h>
 #include <signal.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/kolbak.h>
 #include <skalibs/skaclient.h>
-#include <skalibs/uint32.h>
 #include "skaclient-internal.h"
 
 int skaclient_startf_async (
   skaclient_t *a,
   char *bufss,
-  unsigned int bufsn,
+  size_t bufsn,
   char *auxbufss,
-  unsigned int auxbufsn,
+  size_t auxbufsn,
   char *bufas,
-  unsigned int bufan,
+  size_t bufan,
   char *auxbufas,
-  unsigned int auxbufan,
+  size_t auxbufan,
   kolbak_closure_t *q,
-  unsigned int qlen,
+  size_t qlen,
   char const *prog,
   char const *const *argv,
   char const *const *envp,
-  uint32 options,
+  uint32_t options,
   char const *before,
-  unsigned int beforelen,
+  size_t beforelen,
   char const *after,
-  unsigned int afterlen,
+  size_t afterlen,
   skaclient_cbdata_t *blah)
 {
   int fd ;
@@ -36,7 +36,7 @@ int skaclient_startf_async (
   if (!pid) return 0 ;
   if (ndelay_on(fd) < 0 || !skaclient_init(a, fd, bufss, bufsn, auxbufss, auxbufsn, bufas, bufan, auxbufas, auxbufan, q, qlen, before, beforelen))
   {
-    register int e = errno ;
+    int e = errno ;
     fd_close(fd) ;
     if (options & SKACLIENT_OPTION_WAITPID)
     {

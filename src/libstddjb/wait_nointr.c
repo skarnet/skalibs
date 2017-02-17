@@ -7,7 +7,7 @@
 
 pid_t wait_nointr (int *wstat)
 {
-  register pid_t r ;
+  pid_t r ;
   do
     r = wait(wstat) ;
   while ((r == (pid_t)-1) && (errno == EINTR)) ;

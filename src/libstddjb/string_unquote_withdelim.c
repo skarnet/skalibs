@@ -1,5 +1,6 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <errno.h>
 #include <skalibs/error.h>
 #include <skalibs/bytestr.h>
@@ -14,9 +15,8 @@
 #define SYNTAXERROR 0x02
 #define BROKENPIPE 0x01
 
-int string_unquote_withdelim (char *d, unsigned int *w, char const *s, unsigned int len, unsigned int *r, char const *delim, unsigned int delimlen)
+int string_unquote_withdelim (char *d, size_t *w, char const *s, size_t len, size_t *r, char const *delim, size_t delimlen)
 {
-  register unsigned int i = 0 ;
   static unsigned char const actions[5][9] =
   {
     { 0, 0, PUSH, PUSH, PUSH, PUSH, PUSH, PUSH, 0 },
@@ -34,6 +34,7 @@ int string_unquote_withdelim (char *d, unsigned int *w, char const *s, unsigned 
     { 6, 6, 0, 6, 0, 0, 6, 6, 6 }
   } ;
   unsigned char class[256] = "7777777777777777777777777777777777777777777777772555555555777777777777777777777777777777777707777445554777777767776767673777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777" ;
+  size_t i = 0 ;
   unsigned char store = 0 ;
   unsigned char state = 0 ;
   for (; i < delimlen ; i++)

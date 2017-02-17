@@ -5,5 +5,5 @@
 
 size_t allread (int fd, char *buf, size_t len)
 {
-  return allreadwrite(&fd_readv, fd, buf, len) ;
+  return allreadwrite(&fd_read, fd, buf, len) ;
 }

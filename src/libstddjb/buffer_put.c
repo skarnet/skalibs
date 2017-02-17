@@ -1,10 +1,11 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/buffer.h>
 
-int buffer_put (buffer *b, char const *s, unsigned int len)
+ssize_t buffer_put (buffer *b, char const *s, size_t len)
 {
-  unsigned int w = 0 ;
+  size_t w = 0 ;
   if (!buffer_putall(b, s, len, &w)) return -1 ;
-  return (int)w ;
+  return (ssize_t)w ;
 }

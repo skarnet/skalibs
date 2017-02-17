@@ -12,8 +12,8 @@ int opengetlnclose_at (int dirfd, char const *fn, stralloc *sa, int sep)
 {
   char buf[BUFFER_INSIZE] ;
   buffer b ;
-  register int r ;
-  register int e ;
+  int r ;
+  int e ;
   int fd = open_readatb(dirfd, fn) ;
   if (fd < 0) return -1 ;
   buffer_init(&b, &fd_readv, fd, buf, BUFFER_INSIZE) ;

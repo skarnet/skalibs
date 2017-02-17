@@ -9,8 +9,6 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <skalibs/gccattributes.h>
-#include <skalibs/uint64.h>
-#include <skalibs/siovec.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/envalloc.h>
 #include <skalibs/env.h>        /* compatibility */
@@ -32,7 +30,7 @@ extern int fd_move (int, int) ;
 extern int fd_move2 (int, int, int, int) ;
 extern int fd_close (int) ;
 extern int fd_chmod (int, unsigned int) ;
-extern int fd_chown (int, unsigned int, unsigned int) ;
+extern int fd_chown (int, uid_t, gid_t) ;
 extern int fd_sync (int) ;
 extern int fd_cat (int, int) ;
 extern size_t fd_catn (int, int, size_t) ;
@@ -56,9 +54,9 @@ extern int socket_internal (int, int, int, unsigned int) ;
 extern int socketpair_internal (int, int, int, unsigned int, int *) ;
 
 extern int pathexec_env (char const *, char const *) ;
-extern void pathexec_r (char const *const *, char const *const *, unsigned int, char const *, unsigned int) ;
-extern void pathexec_r_name (char const *, char const *const *, char const *const *, unsigned int, char const *, unsigned int) ;
-extern void pathexec_fromenv (char const *const *, char const *const *, unsigned int) ;
+extern void pathexec_r (char const *const *, char const *const *, size_t, char const *, size_t) ;
+extern void pathexec_r_name (char const *, char const *const *, char const *const *, size_t, char const *, size_t) ;
+extern void pathexec_fromenv (char const *const *, char const *const *, size_t) ;
 extern void execvep (char const *, char const *const *, char const *const *, char const *) ;
 extern void pathexec_run (char const *, char const *const *, char const *const *) ;
 extern void pathexec0_run (char const *const *, char const *const *) ;
@@ -72,9 +70,9 @@ extern int prot_grps (char const *) ;
 extern int prot_setuidgid (char const *) ;
 
 extern long seek_cur (int) ;
-extern int seek_set (int, long) ;
+extern int seek_set (int, off_t) ;
 extern int seek_end (int) ;
-extern int seek_trunc (int, long) ;
+extern int seek_trunc (int, off_t) ;
 #define seek_begin(fd) (seek_set((fd), 0))
 
 extern pid_t wait_nointr (int *) ;
@@ -98,48 +96,45 @@ extern int fd_chdir (int) ;
 extern char *realpath_tmp (char const *, char *, stralloc *) ;
 extern int sarealpath (stralloc *, char const *) ;
 extern int sarealpath_tmp (stralloc *, char const *, stralloc *) ;
-/* extern char *basename (char *) ; */
-extern int sabasename (stralloc *, char const *, unsigned int) ;
-/* extern char *dirname (char *) ; */
-extern int sadirname (stralloc *, char const *, unsigned int) ;
+extern int sabasename (stralloc *, char const *, size_t) ;
+extern int sadirname (stralloc *, char const *, size_t) ;
 extern int sagetcwd (stralloc *) ;
 extern int sareadlink (stralloc *, char const *) ;
 extern int sagethostname (stralloc *) ;
 
 extern int slurp (stralloc *, int) ;
 extern int openslurpclose (stralloc *, char const *) ;
-extern int openreadclose (char const *, stralloc *, unsigned int) ;
-extern int openreadnclose (char const *, char *, unsigned int) ;
-extern int openreadnclose_nb (char const *, char *, unsigned int) ;
-extern int openreadfileclose (char const *, stralloc *, unsigned int) ;
+extern ssize_t openreadnclose (char const *, char *, size_t) ;
+extern ssize_t openreadnclose_nb (char const *, char *, size_t) ;
+extern int openreadfileclose (char const *, stralloc *, size_t) ;
 
 #define openwritenclose_unsafe(f, s, n) openwritenclose_unsafe_internal(f, s, (n), 0, 0, 0)
 #define openwritenclose_unsafe_sync(f, s, n) openwritenclose_unsafe_internal(f, s, (n), 0, 0, 1)
 #define openwritenclose_unsafe_devino(f, s, n, dev, ino) openwritenclose_unsafe_internal(f, s, n, dev, (ino), 0)
 #define openwritenclose_unsafe_devino_sync(f, s, n, dev, ino) openwritenclose_unsafe_internal(f, s, n, dev, (ino), 1)
-extern int openwritenclose_unsafe_internal (char const *, char const *, unsigned int, uint64 *, uint64 *, int) ;
+extern int openwritenclose_unsafe_internal (char const *, char const *, size_t, dev_t *, ino_t *, int) ;
 
 #define openwritenclose_suffix(f, s, n, t) openwritenclose_suffix_internal(f, s, n, 0, 0, 0, t)
 #define openwritenclose_suffix_sync(f, s, n, t) openwritenclose_suffix_internal(f, s, n, 0, 0, 1, t)
 #define openwritenclose_suffix_devino(f, s, n, t, dev, ino) openwritenclose_suffix_internal(f, s, n, dev, (ino), 0, t)
 #define openwritenclose_suffix_devino_sync(f, s, n, t, dev, ino) openwritenclose_suffix_internal(f, s, n, dev, (ino), 1, t)
-extern int openwritenclose_suffix_internal (char const *, char const *, unsigned int, uint64 *, uint64 *, int, char const *) ;
+extern int openwritenclose_suffix_internal (char const *, char const *, size_t, dev_t *, ino_t *, int, char const *) ;
 
 #define openwritevnclose_unsafe(f, v, n) openwritevnclose_unsafe_internal(f, v, (n), 0, 0, 0)
 #define openwritevnclose_unsafe_sync(f, v, n) openwritevnclose_unsafe_internal(f, v, (n), 0, 0, 1)
 #define openwritevnclose_unsafe_devino(f, v, n, dev, ino) openwritevnclose_unsafe_internal(f, v, n, dev, (ino), 0)
 #define openwritevnclose_unsafe_devino_sync(f, v, n, dev, ino) openwritevnclose_unsafe_internal(f, v, n, dev, (ino), 1)
-extern int openwritevnclose_unsafe_internal (char const *, siovec_t const *, unsigned int, uint64 *, uint64 *, int) ;
+extern int openwritevnclose_unsafe_internal (char const *, struct iovec const *, unsigned int, dev_t *, ino_t *, int) ;
 
 #define openwritevnclose_suffix(f, v, n, t) openwritevnclose_suffix_internal(f, v, n, 0, 0, 0, t)
 #define openwritevnclose_suffix_sync(f, v, n, t) openwritevnclose_suffix_internal(f, v, n, 0, 0, 1, t)
 #define openwritevnclose_suffix_devino(f, v, n, t, dev, ino) openwritevnclose_suffix_internal(f, v, n, dev, (ino), 0, t)
 #define openwritevnclose_suffix_devino_sync(f, v, n, t, dev, ino) openwritevnclose_suffix_internal(f, v, n, dev, (ino), 1, t)
-extern int openwritevnclose_suffix_internal (char const *, siovec_t const *, unsigned int, uint64 *, uint64 *, int, char const *) ;
+extern int openwritevnclose_suffix_internal (char const *, struct iovec const *, unsigned int, dev_t *, ino_t *, int, char const *) ;
 
 extern int rm_rf (char const *) ;
 extern int rm_rf_tmp (char const *, stralloc *) ;
-extern int rm_rf_in_tmp (stralloc *, unsigned int) ; /* caution ! */
+extern int rm_rf_in_tmp (stralloc *, size_t) ; /* caution ! */
 extern int rmstar (char const *) ;
 extern int rmstar_tmp (char const *, stralloc *) ;
 

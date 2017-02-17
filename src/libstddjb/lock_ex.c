@@ -11,7 +11,7 @@
 
 int lock_ex (int fd)
 {
-  register int r ;
+  int r ;
   do
     r = flock(fd, LOCK_EX) ;
   while ((r == -1) && (errno == EINTR)) ;
@@ -27,7 +27,7 @@ int lock_ex (int fd)
 
 int lock_ex (int fd)
 {
-  register int r ;
+  int r ;
   do
     r = lockf(fd, F_LOCK, 0) ;
   while ((r == -1) && (errno == EINTR)) ;

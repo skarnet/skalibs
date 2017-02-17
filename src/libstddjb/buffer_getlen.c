@@ -1,8 +1,9 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/buffer.h>
 
-unsigned int buffer_getlen (buffer const *b)
+size_t buffer_getlen (buffer const *b)
 {
   return buffer_len(b) ;
 }

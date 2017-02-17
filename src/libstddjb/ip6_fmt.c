@@ -8,7 +8,7 @@
 
 static inline size_t xfmt16 (char *s, char const *key)
 {
-  register size_t j = 0 ;
+  size_t j = 0 ;
   j += px((unsigned char)key[0] >> 4) ;
   j += px((unsigned char)key[0] & 15) ;
   j += px((unsigned char)key[1] >> 4) ;
@@ -21,8 +21,8 @@ static inline unsigned int find_colcol (char const *key, unsigned int *pos)
   diuint z[4] = { DIUINT_ZERO, DIUINT_ZERO, DIUINT_ZERO, DIUINT_ZERO } ;
   unsigned int j = 0 ;
   unsigned int max = 0 ;
-  register int iszero = 0 ;
-  register unsigned int i = 0 ;
+  int iszero = 0 ;
+  unsigned int i = 0 ;
   for ( ; i < 8 ; i++)
   {
     if (key[i<<1] || key[(i<<1)+1])
@@ -59,9 +59,9 @@ static inline unsigned int find_colcol (char const *key, unsigned int *pos)
 size_t ip6_fmt (char *s, char const *ip6)
 {
   size_t w = 0 ;
-  register unsigned int i = 0 ;
   unsigned int pos = 8 ;
   unsigned int len = find_colcol(ip6, &pos) ;
+  unsigned int i = 0 ;
   for (; i < 8 ; i++)
   {
     if (i == pos)

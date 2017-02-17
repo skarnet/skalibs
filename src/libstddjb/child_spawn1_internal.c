@@ -66,7 +66,9 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
 
 #else
 
+#include <string.h>
 #include <skalibs/allreadwrite.h>
+#include <skalibs/strerr2.h>
 #include <skalibs/sig.h>
 
 pid_t child_spawn1_internal (char const *prog, char const *const *argv, char const *const *envp, int *p, int to)
@@ -95,6 +97,11 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
   }
   if (!pid)
   {
+    size_t len = strlen(PROG) ;
+    char name[len + 9] ;
+    memcpy(name, PROG, len) ;
+    memcpy(name + len, " (child)", 9) ;
+    PROG = name ;
     fd_close(syncp[0]) ;
     fd_close(p[!(to & 1)]) ;
     if (fd_move(to & 1, p[to & 1]) < 0) goto err ;

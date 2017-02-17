@@ -8,7 +8,7 @@
 void dd_cancel (dirdescriptor_t *dd)
 {
   dirdescriptor_t zero = DIRDESCRIPTOR_ZERO ;
-  register int e = errno ;
+  int e = errno ;
   fd_close(dd->fd) ;
   rm_rf_in_tmp(&dd->new, 0) ;
   stralloc_free(&dd->new) ;

@@ -1,17 +1,17 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <errno.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/fmtscan.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/skamisc.h>
 
-int string_quote_nodelim_mustquote (stralloc *sa, char const *s, unsigned int len, char const *delim, unsigned int delimlen)
+int string_quote_nodelim_mustquote (stralloc *sa, char const *s, size_t len, char const *delim, size_t delimlen)
 {
   char class[256] = "dddddddaaaaaaaddddddddddddddddddcccccccccccccccceeeeeeeeeeccccccccccccccccccccccccccccccccccbcccceeeeeecccccccecccececececcccccddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" ;
-
-  unsigned int base = sa->len ;
-  unsigned int i = 0 ;
+  size_t base = sa->len ;
+  size_t i = 0 ;
   int wasnull = !sa->s ;
 
   for (; i < delimlen ; i++)

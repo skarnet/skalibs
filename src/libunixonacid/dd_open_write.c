@@ -20,7 +20,7 @@ int dd_open_write (dirdescriptor_t *dd, char const *lnkfn, unsigned int mode)
   d.fd = open_read(d.new.s) ;
   if (d.fd < 0)
   {
-    register int e = errno ;
+    int e = errno ;
     rmdir(d.new.s) ;
     errno = e ;
     goto fail ;

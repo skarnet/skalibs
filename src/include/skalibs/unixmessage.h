@@ -3,14 +3,14 @@
 #ifndef UNIXMESSAGE_H
 #define UNIXMESSAGE_H
 
-#include <skalibs/uint16.h>
-#include <skalibs/uint32.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <stdint.h>
+#include <skalibs/gccattributes.h>
 #include <skalibs/buffer.h>
 #include <skalibs/cbuffer.h>
-#include <skalibs/gccattributes.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/genalloc.h>
-#include <skalibs/siovec.h>
 #include <skalibs/tai.h>
 
 
@@ -20,7 +20,7 @@ typedef struct unixmessage_s unixmessage_t, *unixmessage_t_ref ;
 struct unixmessage_s
 {
   char *s ;
-  unsigned int len ;
+  size_t len ;
   int *fds ;
   unsigned int nfds ;
 } ;
@@ -32,7 +32,7 @@ extern void unixmessage_drop (unixmessage_t const *) ;
 typedef struct unixmessage_v_s unixmessage_v_t, *unixmessage_v_t_ref ;
 struct unixmessage_v_s
 {
-  siovec_t *v ;
+  struct iovec *v ;
   unsigned int vlen ;
   int *fds ;
   unsigned int nfds ;
@@ -40,7 +40,7 @@ struct unixmessage_v_s
 #define UNIXMESSAGE_V_ZERO { .v = 0, .vlen = 0, .fds = 0, .nfds = 0 }
 extern unixmessage_v_t const unixmessage_v_zero ;
 
-#define UNIXMESSAGE_MAXSIZE (2U << 27)
+#define UNIXMESSAGE_MAXSIZE (1U << 28)
 #define UNIXMESSAGE_MAXFDS 255
 #define UNIXMESSAGE_BUFSIZE 2048
 #define UNIXMESSAGE_AUXBUFSIZE (sizeof(int) * UNIXMESSAGE_MAXFDS + 1)
@@ -58,9 +58,9 @@ struct unixmessage_sender_s
   int fd ;
   stralloc data ;
   genalloc fds ; /* int */
-  genalloc offsets ; /* diuint */
-  unsigned int head ;
-  unsigned int shorty ;
+  genalloc offsets ; /* disize */
+  size_t head ;
+  size_t shorty ;
   unixmessage_sender_closecb_func_t_ref closecb ;
   void *closecbdata ;
 } ;
@@ -104,8 +104,8 @@ struct unixmessage_receiver_s
   cbuffer_t auxb ;
   stralloc maindata ;
   stralloc auxdata ;
-  uint32 mainlen ;
-  uint16 auxlen ;
+  uint32_t mainlen ;
+  uint16_t auxlen ;
   unsigned int fds_ok : 2 ;
 } ;
 #define UNIXMESSAGE_RECEIVER_ZERO { .fd = -1, .mainb = CBUFFER_ZERO, .auxb = CBUFFER_ZERO, .maindata = STRALLOC_ZERO, .auxdata = STRALLOC_ZERO, .mainlen = 0, .auxlen = 0, .fds_ok = 3 }
@@ -120,7 +120,7 @@ struct unixmessage_receiver_s
   .auxlen = 0, \
   .fds_ok = 3 \
 }
-extern int unixmessage_receiver_init (unixmessage_receiver_t *, int, char *, unsigned int, char *, unsigned int) ;
+extern int unixmessage_receiver_init (unixmessage_receiver_t *, int, char *, size_t, char *, size_t) ;
 extern void unixmessage_receiver_free (unixmessage_receiver_t *) ;
 #define unixmessage_receiver_fd(b) ((b)->fd)
 #define unixmessage_receiver_isempty(b) (cbuffer_isempty(&(b)->mainb) && cbuffer_isempty(&(b)->auxb))
@@ -137,8 +137,8 @@ extern int unixmessage_timed_receive (unixmessage_receiver_t *, unixmessage_t *,
 typedef int unixmessage_handler_func_t (unixmessage_t const *, void *) ;
 typedef unixmessage_handler_func_t *unixmessage_handler_func_t_ref ;
 
-extern int unixmessage_handle (unixmessage_receiver_t *, unixmessage_handler_func_t *, void *) ;
-extern int unixmessage_timed_handle (unixmessage_receiver_t *, unixmessage_handler_func_t *, void *, tain_t const *, tain_t *) ;
+extern int unixmessage_handle (unixmessage_receiver_t *, unixmessage_handler_func_t_ref, void *) ;
+extern int unixmessage_timed_handle (unixmessage_receiver_t *, unixmessage_handler_func_t_ref, void *, tain_t const *, tain_t *) ;
 #define unixmessage_timed_handle_g(b, f, p, deadline) unixmessage_timed_handle(b, f, p, (deadline), &STAMP)
 
 

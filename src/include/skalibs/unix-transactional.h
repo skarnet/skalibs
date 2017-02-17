@@ -4,9 +4,9 @@
 #define UNIX_TRANSACTIONAL_H
 
 #include <sys/types.h>
+#include <sys/uio.h>
 #include <sys/stat.h>
 #include <skalibs/uint64.h>
-#include <skalibs/siovec.h>
 #include <skalibs/stralloc.h>
 
  /* Transactional/reliable filesystem operations */
@@ -28,16 +28,16 @@ extern int open_appendatb (int, char const *) ;
 extern int stat_at (int, char const *, struct stat *) ;
 extern int lstat_at (int, char const *, struct stat *) ;
 
-extern unsigned int openreadnclose_at (int, char const *, char *, unsigned int) ;
+extern size_t openreadnclose_at (int, char const *, char *, size_t) ;
 extern int openslurpclose_at (int, char const *, stralloc *) ;
 extern int opengetlnclose_at (int, char const *, stralloc *, int) ;
 
-extern int openwritenclose (char const *, char const *, unsigned int) ;
-extern int openwritenclose_devino (char const *, char const *, unsigned int, uint64 *, uint64 *) ;
-extern int openwritenclose_tmp (char const *, char const *, unsigned int, stralloc *) ;
-extern int openwritenclose_devino_tmp (char const *, char const *, unsigned int, uint64 *, uint64 *, stralloc *) ;
-extern unsigned int openwritenclose_at (int, char const *, char const *, unsigned int) ;
-extern unsigned int openwritevnclose_at (int, char const *, siovec_t const *, unsigned int) ;
+extern int openwritenclose (char const *, char const *, size_t) ;
+extern int openwritenclose_devino (char const *, char const *, size_t, dev_t *, ino_t *) ;
+extern int openwritenclose_tmp (char const *, char const *, size_t, stralloc *) ;
+extern int openwritenclose_devino_tmp (char const *, char const *, size_t, dev_t *, ino_t *, stralloc *) ;
+extern size_t openwritenclose_at (int, char const *, char const *, size_t) ;
+extern size_t openwritevnclose_at (int, char const *, struct iovec const *, unsigned int) ;
 
 extern int mkdir_unique (stralloc *, char const *, unsigned int) ;
 extern int atomic_rm_rf (char const *) ;

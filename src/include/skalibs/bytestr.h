@@ -37,7 +37,7 @@ extern size_t byte_chr (char const *, size_t, int) gccattr_pure ;
 extern size_t byte_rchr (char const *, size_t, int) gccattr_pure ;
 extern size_t byte_in (char const *, size_t, char const *, size_t) gccattr_pure ;
 #define byte_equal(s, n, t) (!byte_diff((s), (n), (t)))
-extern uint64_t byte_count (char const *, size_t, char) gccattr_pure ;
+extern size_t byte_count (char const *, size_t, char) gccattr_pure ;
 
 #define str_diffb(a, n, b) str_diffn(a, (b), n)
 extern size_t str_chr (char const *, int) gccattr_pure ;

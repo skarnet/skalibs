@@ -1,7 +1,8 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <errno.h>
-#include <skalibs/uint32.h>
+#include <stdint.h>
 #include <skalibs/error.h>
 #include <skalibs/kolbak.h>
 #include <skalibs/skaclient.h>
@@ -12,21 +13,21 @@
 int skaclient_start_async (
   skaclient_t *a,
   char *bufss,
-  unsigned int bufsn,
+  size_t bufsn,
   char *auxbufss,
-  unsigned int auxbufsn,
+  size_t auxbufsn,
   char *bufas,
-  unsigned int bufan,
+  size_t bufan,
   char *auxbufas,
-  unsigned int auxbufan,
+  size_t auxbufan,
   kolbak_closure_t *q,
-  unsigned int qlen,
+  size_t qlen,
   char const *path,
-  uint32 options,
+  uint32_t options,
   char const *before,
-  unsigned int beforelen,
+  size_t beforelen,
   char const *after,
-  unsigned int afterlen,
+  size_t afterlen,
   skaclient_cbdata_t *blah)
 {
   int fd = ipc_stream_nbcoe() ;
@@ -34,7 +35,7 @@ int skaclient_start_async (
   if ((!ipc_connect(fd, path) && !error_isalready(errno))
    || !skaclient_init(a, fd, bufss, bufsn, auxbufss, auxbufsn, bufas, bufan, auxbufas, auxbufan, q, qlen, before, beforelen))
   {
-    register int e = errno ;
+    int e = errno ;
     fd_close(fd) ;
     errno = e ;
     return 0 ;

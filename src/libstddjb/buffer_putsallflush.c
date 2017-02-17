@@ -1,9 +1,10 @@
 /* ISC license. */
 
-#include <skalibs/bytestr.h>
+#include <sys/types.h>
+#include <string.h>
 #include <skalibs/buffer.h>
 
-int buffer_putsallflush (buffer *b, char const *s, unsigned int *w)
+int buffer_putsallflush (buffer *b, char const *s, size_t *w)
 {
-  return buffer_putallflush(b, s, str_len(s), w) ;
+  return buffer_putallflush(b, s, strlen(s), w) ;
 }

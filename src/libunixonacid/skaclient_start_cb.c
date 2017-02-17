@@ -1,7 +1,7 @@
 /* ISC license. */
 
 #include <errno.h>
-#include <skalibs/bytestr.h>
+#include <string.h>
 #include <skalibs/error.h>
 #include <skalibs/unixmessage.h>
 #include <skalibs/skaclient.h>
@@ -10,7 +10,7 @@
 int skaclient_start_cb (unixmessage_t const *m, skaclient_cbdata_t *blah)
 {
   if (m->len != blah->afterlen
-   || byte_diff(m->s, m->len, blah->after)
+   || memcmp(m->s, blah->after, m->len)
    || m->nfds != 1)
   {
     unixmessage_drop(m) ;

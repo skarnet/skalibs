@@ -1,18 +1,20 @@
 /* ISC license. */
 
+#include <sys/types.h>
+#include <sys/uio.h>
 #include <errno.h>
 #include <skalibs/buffer.h>
 #include <skalibs/siovec.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/skamisc.h>
 
-int skagetlnsep (buffer *b, stralloc *sa, char const *sep, unsigned int seplen)
+int skagetlnsep (buffer *b, stralloc *sa, char const *sep, size_t seplen)
 {
-  unsigned int start = sa->len ;
+  size_t start = sa->len ;
   for (;;)
   {
-    siovec_t v[2] ;
-    unsigned int pos ;
+    struct iovec v[2] ;
+    size_t pos ;
     int r ;
     buffer_rpeek(b, v) ;
     pos = siovec_bytein(v, 2, sep, seplen) ;
