@@ -5,6 +5,5 @@
 
 int genwrite_flush_buffer (void *target)
 {
-  register buffer *b = target ;
-  return buffer_flush(b) ;
+  return buffer_flush((buffer *)target) ;
 }

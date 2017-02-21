@@ -14,7 +14,7 @@ int ipc_timed_connect (int s, char const *path, tain_t const *deadline, tain_t *
     if (!error_isagain(errno) && !error_isalready(errno)) return 0 ;
     for (;;)
     {
-      register int r = iopause_stamp(&x, 1, deadline, stamp) ;
+      int r = iopause_stamp(&x, 1, deadline, stamp) ;
       if (r < 0) return 0 ;
       else if (!r) return (errno = ETIMEDOUT, 0) ;
       else if (x.revents & IOPAUSE_EXCEPT) return 0 ;

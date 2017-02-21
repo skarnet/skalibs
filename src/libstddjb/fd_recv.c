@@ -7,8 +7,8 @@
 
 ssize_t fd_recv (int fd, char *buf, size_t len, unsigned int flags)
 {
-  register ssize_t r ;
-  do r = recv(fd, buf, len, (int)flags) ;
+  ssize_t r ;
+  do r = recv(fd, buf, len, flags) ;
   while ((r == -1) && (errno == EINTR)) ;
   return r ;
 }

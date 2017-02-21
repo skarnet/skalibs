@@ -3,10 +3,10 @@
 #include <skalibs/uint64.h>
 #include "djbtime-internal.h"
 
-void leapsecs_add (uint64 *t, int hit)
+void leapsecs_add (uint64_t *t, int hit)
 {
-  uint64 u = *t ;
-  register unsigned int i = 0 ;
+  uint64_t u = *t ;
+  unsigned int i = 0 ;
   for (; i < leapsecs_table_len ; i++)
   {
     if (u < leapsecs_table[i]) break ;

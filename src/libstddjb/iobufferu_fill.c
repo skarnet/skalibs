@@ -3,9 +3,9 @@
 #include <skalibs/buffer.h>
 #include <skalibs/iobuffer.h>
 
-int iobufferu_fill (iobufferu *b)
+ssize_t iobufferu_fill (iobufferu *b)
 {
-  register int r = buffer_fill(&b->b[0]) ;
+  ssize_t r = buffer_fill(&b->b[0]) ;
   b->b[1].c.n = b->b[0].c.n ;
   return r ;
 }

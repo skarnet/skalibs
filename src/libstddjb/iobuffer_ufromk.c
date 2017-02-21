@@ -4,6 +4,7 @@
 
 #ifdef SKALIBS_HASSPLICE
 
+#include <sys/types.h>
 #include <skalibs/iobuffer.h>
 
 int iobuffer_ufromk (iobufferu *u, iobufferk *k)
@@ -12,7 +13,7 @@ int iobuffer_ufromk (iobufferu *u, iobufferk *k)
   u->b[0].fd = k->p[0] ;
   while (k->n)
   {
-    register int r = iobufferu_fill(u) ;
+    ssize_t r = iobufferu_fill(u) ;
     if (r <= 0) goto err ;
     k->n -= r ;
   }

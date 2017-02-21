@@ -1,6 +1,6 @@
 /* ISC license. */
 
-#include <sys/types.h>
+#include <string.h>
 #include <skalibs/uint64.h>
 #include <skalibs/netstring.h>
 #include <skalibs/stralloc.h>

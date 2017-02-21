@@ -5,15 +5,15 @@
 #define _BSD_SOURCE
 #endif
 
-#include <sys/types.h>
-#include <errno.h>
 #include <skalibs/sysdeps.h>
+#include <time.h>
+#include <errno.h>
 #include <skalibs/uint64.h>
 #include <skalibs/tai.h>
 
 int time_sysclock_from_tai (time_t *u, tai_t const *t)
 {
-  uint64 uu ;
+  uint64_t uu ;
   if (!sysclock_from_tai(&uu, t)) return 0 ;
   uu -= TAI_MAGIC ;
 #if SKALIBS_SIZEOFTIME < 8

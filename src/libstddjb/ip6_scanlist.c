@@ -1,7 +1,6 @@
 /* ISC license. */
 
-#include <sys/types.h>
-#include <skalibs/bytestr.h>
+#include <string.h>
 #include <skalibs/fmtscan.h>
 
 size_t ip6_scanlist (char *out, size_t max, char const *s, size_t *num)
@@ -10,11 +9,11 @@ size_t ip6_scanlist (char *out, size_t max, char const *s, size_t *num)
   for (; s[w] && (n < max) ; n++)
   {
     char ip[16] ;
-    register size_t i = ip6_scan(s + w, ip) ;
+    size_t i = ip6_scan(s + w, ip) ;
     if (!i) break ;
-    byte_copy(out + (n << 4), 16, ip) ;
+    memcpy(out + (n << 4), ip, 16) ;
     w += i ;
-    while (byte_chr(",; \t\r\n", 6, s[w]) < 6) w++ ;
+    while (memchr(",; \t\r\n", s[w], 6)) w++ ;
   }
   *num = n ;
   return w ;

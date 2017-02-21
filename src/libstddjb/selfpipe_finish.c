@@ -2,8 +2,8 @@
 
 /* MT-unsafe */
 
-#include <signal.h>
 #include <skalibs/sysdeps.h>
+#include <signal.h>
 #include <skalibs/djbunix.h>
 #include "selfpipe-internal.h"
 #include <skalibs/selfpipe.h>

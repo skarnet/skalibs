@@ -7,8 +7,8 @@ int bu_gcd (uint32_t *r, unsigned int rn, uint32_t const *a, unsigned int an, ui
 {
   if (bu_cmp(a, an, b, bn) < 0)
   {
-    register uint32_t const *t = a ;
-    register unsigned int tn = an ;
+    uint32_t const *t = a ;
+    unsigned int tn = an ;
     a = b ; an = bn ;
     b = t ; bn = tn ;
   }
@@ -23,7 +23,7 @@ int bu_gcd (uint32_t *r, unsigned int rn, uint32_t const *a, unsigned int an, ui
 
     while (bu_len(bbb, an))
     {
-      register uint32_t *ttt = aaa ;
+      uint32_t *ttt = aaa ;
       bu_div_internal(aaa, an, bbb, an, trash, an) ;
       aaa = bbb ;
       bbb = ttt ;

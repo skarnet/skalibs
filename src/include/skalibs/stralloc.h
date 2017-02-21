@@ -3,7 +3,6 @@
 #ifndef STRALLOC_H
 #define STRALLOC_H
 
-#include <sys/types.h>
 #include <string.h>
 #include <sys/uio.h>
 

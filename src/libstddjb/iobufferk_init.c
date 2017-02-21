@@ -11,7 +11,7 @@
 
 static int iobufferk_init_0 (iobufferk *k)
 {
-  register int fd = open_write("/dev/null") ;
+  int fd = open_write("/dev/null") ;
   if (fd < 0) return 0 ;
   if (coe(fd) < 0)
   {
@@ -34,7 +34,7 @@ static int iobufferk_init_3 (iobufferk *k)
   return (pipenbcoe(k->p) >= 0) ;
 }
 
-static iobufferk_io_func_t_ref iobufferk_init_f[4] =
+static iobufferk_output_func_t_ref iobufferk_init_f[4] =
 {
   &iobufferk_init_0, &iobufferk_nofd, &iobufferk_nofd, &iobufferk_init_3
 } ;
@@ -43,7 +43,7 @@ int iobufferk_init (iobufferk *k, int fdin, int fdout)
 {
   iobufferk tmp ;
   struct stat st ;
-  register int r ;
+  int r ;
   if (fstat(fdin, &st) < 0) return 0 ;
   r = fcntl(fdin, F_GETFL) ;
   if (r < 0) return 0 ;

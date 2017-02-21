@@ -1,7 +1,5 @@
 /* ISC license. */
 
-/* MT-unsafe */
-
 #include <unistd.h>
 #include <skalibs/djbunix.h>
 

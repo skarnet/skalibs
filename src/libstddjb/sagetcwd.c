@@ -2,13 +2,13 @@
 
 #include <unistd.h>
 #include <errno.h>
-#include <skalibs/bytestr.h>
+#include <string.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/djbunix.h>
 
 int sagetcwd (stralloc *sa)
 {
-  unsigned int n = 128 ;
+  size_t n = 128 ;
   int wasnull = !sa->s ;
 
   for (;;)
@@ -18,7 +18,7 @@ int sagetcwd (stralloc *sa)
     if (errno != ERANGE) goto err ;
     n += 128 ;
   }
-  sa->len += str_len(sa->s + sa->len) ;
+  sa->len += strlen(sa->s + sa->len) ;
   return 0 ;
 
 err:

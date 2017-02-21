@@ -31,7 +31,7 @@ void random_string (char *s, size_t n)
 {
   while (n)
   {
-    register int r = getrandom(s, n, 0) ;
+    int r = getrandom(s, n, 0) ;
     if (r >= 0)
     {
       s += r ;

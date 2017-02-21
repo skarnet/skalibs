@@ -1,10 +1,11 @@
 /* ISC license. */
 
+#include <sys/types.h>
 #include <skalibs/env.h>
 #include <skalibs/genalloc.h>
 #include <skalibs/envalloc.h>
 
-int envalloc_make (genalloc *v, unsigned int argc, char const *s, unsigned int len)
+int envalloc_make (genalloc *v, size_t argc, char const *s, size_t len)
 {
   int wasnull = !v->s ;
   if (!genalloc_readyplus(char const *, v, argc+1)) return 0 ;

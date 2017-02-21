@@ -9,17 +9,17 @@
 
 int sauniquename (stralloc *sa)
 {
-  unsigned int base = sa->len ;
+  size_t base = sa->len ;
   int wasnull = !sa->s ;
 
-  if (!stralloc_readyplus(sa, TIMESTAMP + UINT_FMT + 131)) return 0 ;
+  if (!stralloc_readyplus(sa, TIMESTAMP + PID_FMT + 131)) return 0 ;
   sa->s[base] = ':' ;
   timestamp(sa->s + base + 1) ;
   sa->s[base + 1 + TIMESTAMP] = ':' ;
   sa->len = base + 2 + TIMESTAMP ;
   sa->len += pid_fmt(sa->s + sa->len, getpid()) ;
   sa->s[sa->len++] = ':' ;
-  if (sagethostname(sa) == -1) goto err ;
+  if (sagethostname(sa) < 0) goto err ;
   return 1 ;
 
 err:

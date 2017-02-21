@@ -1,6 +1,7 @@
 /* ISC license. */
 
 #include <unistd.h>
+#include <stdint.h>
 #include <errno.h>
 #include <skalibs/uint32.h>
 #include <skalibs/diuint32.h>
@@ -16,28 +17,29 @@ int cdb_make_start (struct cdb_make *c, int fd)
   c->hplist = genalloc_zero ;
   c->pos = 2048 ;
   buffer_init(&c->b, &fd_writev, fd, c->buf, BUFFER_OUTSIZE) ;
-  return (int)lseek(fd, c->pos, SEEK_SET) ;
+  if (lseek(fd, c->pos, SEEK_SET) < 0) return -1 ;
+  return 0 ;
 }
 
 static int posplus (struct cdb_make *c, uint32 len)
 {
-  register uint32 newpos = c->pos + len ;
+  uint32_t newpos = c->pos + len ;
   if (newpos < len) return (errno = ENOMEM, 0) ;
   c->pos = newpos ;
   return 1 ;
 }
 
-static inline int cdb_make_addend (struct cdb_make *c, unsigned int keylen, unsigned int datalen, uint32 h)
+static inline int cdb_make_addend (struct cdb_make *c, unsigned int keylen, unsigned int datalen, uint32_t h)
 {
   diuint32 blah = { .left = h, .right = c->pos } ;
   return genalloc_append(diuint32, &c->hplist, &blah) && posplus(c, 8) && posplus(c, keylen) && posplus(c, datalen) ;
 }
 
-static inline int cdb_make_addbegin (struct cdb_make *c, unsigned int keylen, unsigned int datalen)
+static inline ssize_t cdb_make_addbegin (struct cdb_make *c, unsigned int keylen, unsigned int datalen)
 {
   char buf[8] ;
-  uint32_pack(buf, (uint32)keylen) ;
-  uint32_pack(buf + 4, (uint32)datalen) ;
+  uint32_pack(buf, (uint32_t)keylen) ;
+  uint32_pack(buf + 4, (uint32_t)datalen) ;
   return buffer_put(&c->b, buf, 8) ;
 }
 
@@ -56,19 +58,19 @@ int cdb_make_add (struct cdb_make *c, char const *key, unsigned int keylen, char
 
 int cdb_make_finish (struct cdb_make *c)
 {
-  uint32 count[256] ;
-  uint32 start[256] ;
+  uint32_t count[256] ;
+  uint32_t start[256] ;
   char final[2048] ;
   unsigned int size = 1 ;
   unsigned int n = genalloc_len(diuint32, &c->hplist) ;
-  register unsigned int i = 0 ;
-  register diuint32 *hp = genalloc_s(diuint32, &c->hplist) ;
+  unsigned int i = 0 ;
+  diuint32 *hp = genalloc_s(diuint32, &c->hplist) ;
 
   for (; i < 256 ; i++) count[i] = 0 ;
   for (i = 0 ; i < n ; i++) ++count[hp[i].left & 255] ;
 
   {
-    register uint32 u = 0 ;
+    uint32_t u = 0 ;
     for (i = 0 ; i < 256 ; i++) start[i] = u += count[i] ; /* bounded by n */
     for (i = 0 ; i < 256 ; i++)
     {
@@ -89,10 +91,10 @@ int cdb_make_finish (struct cdb_make *c)
     for (i = 0 ; i < 256 ; ++i)
     {
       char buf[8] ;
-      register uint32 k = count[i] ;
-      register uint32 len = k << 1 ; /* no overflow possible */
-      register diuint32 *p = split + start[i] ;
-      register unsigned int j = 0 ;
+      uint32_t k = count[i] ;
+      uint32_t len = k << 1 ; /* no overflow possible */
+      diuint32 *p = split + start[i] ;
+      unsigned int j = 0 ;
 
       uint32_pack(final + (i << 3), c->pos) ;
       uint32_pack(final + (i << 3) + 4, len) ;
@@ -100,7 +102,7 @@ int cdb_make_finish (struct cdb_make *c)
       for (; j < len ; j++) hp[j].left = hp[j].right = 0 ;
       for (j = 0 ; j < k ; j++)
       {
-        register uint32 where = (p->left >> 8) % len ;
+        uint32_t where = (p->left >> 8) % len ;
         while (hp[where].right) if (++where == len) where = 0 ;
         hp[where] = *p++ ;
       }

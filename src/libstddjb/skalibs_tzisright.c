@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <time.h>
 #include "djbtime-internal.h"
 

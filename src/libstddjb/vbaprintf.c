@@ -1,8 +1,7 @@
 /* ISC license. */
 
-#include <sys/types.h>
-#include <stdarg.h>
 #include <stdio.h>
+#include <stdarg.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/bufalloc.h>
 #include <skalibs/lolstdio.h>
@@ -17,8 +16,8 @@ int vbaprintf (bufalloc *ba, char const *format, va_list args)
     va_end(ugly) ;
   }
   if (r < 0) return r ;
-  if (!stralloc_readyplus(&ba->x, (size_t)r + 1)) return -1 ;
-  r = vsnprintf(ba->x.s + ba->x.len, (size_t)r + 1, format, args) ;
+  if (!stralloc_readyplus(&ba->x, r + 1)) return -1 ;
+  r = vsnprintf(ba->x.s + ba->x.len, r + 1, format, args) ;
   if (r > 0) ba->x.len += r ;
   return r ;
 }

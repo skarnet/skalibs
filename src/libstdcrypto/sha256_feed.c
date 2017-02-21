@@ -7,12 +7,12 @@
 
 void sha256_feed (SHA256Schedule *ctx, unsigned char inb)
 {
-  register uint32_t tmp ;
+  uint32_t tmp ;
   ctx->in[ctx->b>>2] <<= 8 ;
   ctx->in[ctx->b>>2] |= T8(inb) ;
   if (++ctx->b >= 64)
   {
-    register unsigned int i = 0 ;
+    unsigned int i = 0 ;
     sha256_transform(ctx->buf, ctx->in) ;
     ctx->b = 0 ;
     for (; i < 16 ; i++) ctx->in[i] = 0 ;

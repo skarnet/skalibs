@@ -4,9 +4,9 @@
 #include <skalibs/types.h>
 #include <skalibs/fmtscan.h>
 
-size_t strn_fmt (char *blah, register char const *s, size_t len)
+size_t strn_fmt (char *blah, char const *s, size_t len)
 {
-  register char *d = blah ;
+  char *d = blah ;
   size_t i ;
   for (i = 0 ; i < len ; i++)
     if ((s[i] >= 32) && ((unsigned char)s[i] < 127)) *d++ = s[i] ;

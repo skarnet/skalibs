@@ -5,7 +5,7 @@
 #include <sys/types.h>
 #include <grp.h>
 #include <errno.h>
-#include <skalibs/bytestr.h>
+#include <string.h>
 #include <skalibs/djbunix.h>
 
 int prot_readgroups (char const *name, gid_t *tab, unsigned int max)
@@ -14,15 +14,15 @@ int prot_readgroups (char const *name, gid_t *tab, unsigned int max)
   for (;;)
   {
     struct group *gr ;
-    register char **member ;
+    char **member ;
     errno = 0 ;
     if (n >= max) break ;
     gr = getgrent() ;
     if (!gr) break ;
     for (member = gr->gr_mem ; *member ; member++)
-      if (!str_diff(name, *member)) break ;
+      if (!strcmp(name, *member)) break ;
     if (*member) tab[n++] = gr->gr_gid ;
   }
   endgrent() ;
-  return errno ? -1 : (int)n ;
+  return errno ? -1 : n ;
 }

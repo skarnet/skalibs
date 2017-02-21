@@ -7,7 +7,7 @@
 
 int iopause_poll (iopause_fd *x, unsigned int len, tain_t const *deadline, tain_t const *stamp)
 {
-  register int millisecs = 0 ;
+  int millisecs = 0 ;
   if (!deadline) millisecs = -1 ;
   else if (tain_less(stamp, deadline))
   {

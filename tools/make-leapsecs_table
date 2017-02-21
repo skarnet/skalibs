@@ -27,7 +27,7 @@ if
 #include \"djbtime-internal.h\"
 
 unsigned int const leapsecs_table_len = ${N} ;
-static uint64 const leapsecs_table_[${N}] =\n{"
+static uint64_t const leapsecs_table_[${N}] =\n{"
 }
 
 if
@@ -36,4 +36,4 @@ if
   ${PREFIX}/convert-leapsecs
 }
 
-s6-echo "} ;\nuint64 const *const leapsecs_table = leapsecs_table_ ;"
+s6-echo "} ;\nuint64_t const *const leapsecs_table = leapsecs_table_ ;"

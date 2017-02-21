@@ -14,8 +14,7 @@
 
 int main (void)
 {
-  int s ;
-  register int r ;
+  int s, r ;
   struct in6_addr foo ;
   struct sockaddr_in6 bar ;
   memset(&foo, 0, sizeof(struct sockaddr_in6)) ;

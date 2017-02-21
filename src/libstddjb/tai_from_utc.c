@@ -5,7 +5,7 @@
 #include <skalibs/djbtime.h>
 #include "djbtime-internal.h"
 
-int tai_from_utc (tai_t *t, uint64 u)
+int tai_from_utc (tai_t *t, uint64_t u)
 {
   leapsecs_add(&u, 0) ;
   return tai_u64(t, u + 10) ;

@@ -12,15 +12,13 @@
 int lock_ex (int fd)
 {
   int r ;
-  do
-    r = flock(fd, LOCK_EX) ;
+  do r = flock(fd, LOCK_EX) ;
   while ((r == -1) && (errno == EINTR)) ;
   return r ;
 }
 
 #else
 
-#include <sys/types.h>
 #include <unistd.h>
 #include <errno.h>
 #include <skalibs/djbunix.h>
@@ -28,8 +26,7 @@ int lock_ex (int fd)
 int lock_ex (int fd)
 {
   int r ;
-  do
-    r = lockf(fd, F_LOCK, 0) ;
+  do r = lockf(fd, F_LOCK, 0) ;
   while ((r == -1) && (errno == EINTR)) ;
   return r ;
 }

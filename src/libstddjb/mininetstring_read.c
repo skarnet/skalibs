@@ -1,12 +1,13 @@
 /* ISC license. */
 
+#include <sys/types.h>
+#include <stdint.h>
 #include <errno.h>
 #include <skalibs/allreadwrite.h>
-#include <skalibs/uint32.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/mininetstring.h>
 
-int mininetstring_read (int fd, stralloc *sa, uint32 *w)
+int mininetstring_read (int fd, stralloc *sa, uint32_t *w)
 {
   if (!*w)
   {
@@ -15,8 +16,8 @@ int mininetstring_read (int fd, stralloc *sa, uint32 *w)
     {
       case -1 : return -1 ;
       case 0 : return 0 ;
-      case 1 : *w = ((uint32)pack[0] << 8) | (1U << 31) ; break ;
-      case 2 : *w = ((uint32)pack[0] << 8) | (uint32)pack[1] | (1U << 30) ; break ;
+      case 1 : *w = ((uint32_t)pack[0] << 8) | (1U << 31) ; break ;
+      case 2 : *w = ((uint32_t)pack[0] << 8) | (uint32_t)pack[1] | (1U << 30) ; break ;
       default : return (errno = EDOM, -1) ;
     }
   }
@@ -27,7 +28,7 @@ int mininetstring_read (int fd, stralloc *sa, uint32 *w)
     {
       case -1 : return -1 ;
       case 0 : return (errno = EPIPE, -1) ;
-      case 1 : *w |= (uint32)c | (1U << 30) ; *w &= ~(1U << 31) ; break ;
+      case 1 : *w |= (uint32_t)c | (1U << 30) ; *w &= ~(1U << 31) ; break ;
       default : return (errno = EDOM, -1) ;
     }
   }
@@ -37,7 +38,7 @@ int mininetstring_read (int fd, stralloc *sa, uint32 *w)
     *w &= ~(1U << 30) ;
   }
   {
-    register unsigned int r = allread(fd, sa->s + sa->len, *w) ;
+    size_t r = allread(fd, sa->s + sa->len, *w) ;
     sa->len += r ; *w -= r ;
   }
   return *w ? -1 : 1 ;

@@ -3,13 +3,13 @@
 #include <sys/types.h>
 #include <errno.h>
 #include <skalibs/uint64.h>
-#include <skalibs/netstring.h>
 #include <skalibs/stralloc.h>
+#include <skalibs/netstring.h>
 
 ssize_t netstring_decode (stralloc *sa, char const *s, size_t len)
 {
   uint64_t nlen ;
-  register size_t pos ;
+  size_t pos ;
   if (!len) return 0 ;
   pos = uint64_scan(s, &nlen) ;
   if (pos >= len) return (errno = EINVAL, -1) ;

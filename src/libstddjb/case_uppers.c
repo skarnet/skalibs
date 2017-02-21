@@ -2,9 +2,9 @@
 
 #include <skalibs/bytestr.h>
 
-void case_uppers (register char *s)
+void case_uppers (char *s)
 {
-  register unsigned char const d = 'a' - 'A' ;
+  unsigned char const d = 'a' - 'A' ;
   while (*s)
   {
     if (('a' <= *s) && (*s <= 'z')) *s -= d ;

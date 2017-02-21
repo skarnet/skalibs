@@ -1,13 +1,13 @@
 /* ISC license. */
 
-#include <sys/types.h>
+#include <string.h>
 #include <errno.h>
 #include <skalibs/alloc.h>
 #include <skalibs/stralloc.h>
 
 int stralloc_ready_tuned (stralloc *sa, size_t n, size_t base, size_t a, size_t b)
 {
-  register size_t t ;
+  size_t t ;
   if (!b) return (errno = EINVAL, 0) ;
   t = n + base + a * n / b ;
   if (t < n) return (errno = ERANGE, 0) ;

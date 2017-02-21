@@ -10,7 +10,7 @@
 
 #define SHA1STEP(f, data) \
 { \
-  register uint32_t tmp = e + f(b, c, d) + data + ((a<<5) | (a>>27)); \
+  uint32_t tmp = e + f(b, c, d) + data + ((a<<5) | (a>>27)); \
   e = d ; \
   d = c ; \
   c = (b<<30) | (b>>2) ; \
@@ -20,9 +20,9 @@
 
 void sha1_transform (uint32_t *buf, uint32_t const *in)
 {
-  register uint32_t a = buf[0], b = buf[1], c = buf[2], d = buf[3], e = buf[4] ;
+  uint32_t a = buf[0], b = buf[1], c = buf[2], d = buf[3], e = buf[4] ;
   uint32_t w[80] ;
-  register unsigned int i = 0 ;
+  unsigned int i = 0 ;
 
   for (; i < 16 ; i++) w[i] = in[i] ;
   for (; i < 80 ; i++)

@@ -8,7 +8,7 @@
 
 #include <skalibs/tai.h>
 
-int sysclock_from_ltm64 (uint64 *u)
+int sysclock_from_ltm64 (uint64_t *u)
 {
   tai_t t ;
   if (!tai_from_ltm64(&t, *u)) return 0 ;
@@ -18,7 +18,7 @@ int sysclock_from_ltm64 (uint64 *u)
 
 #else
 
-int sysclock_from_ltm64 (uint64 *u)
+int sysclock_from_ltm64 (uint64_t *u)
 {
   return utc_from_sysclock(u) ;
 }

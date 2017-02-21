@@ -1,11 +1,11 @@
 /* ISC license. */
 
-#include <sys/types.h>
+#include <string.h>
 #include <skalibs/stralloc.h>
 
 void stralloc_reverse (stralloc *sa)
 {
-  register size_t i = 0 ;
+  size_t i = 0 ;
   for (; i < sa->len >> 1 ; i++)
   {
     char tmp = sa->s[i] ;

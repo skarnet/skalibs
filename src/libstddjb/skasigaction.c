@@ -12,7 +12,7 @@ int skasigaction (int sig, struct skasigaction const *new, struct skasigaction *
   if (sigaction(sig, &sanew, &saold) < 0) return -1 ;
   if (old)
   {
-    register int r = sigismember(&saold.sa_mask, (sig == SIGTERM) ? SIGPIPE : SIGTERM) ;
+    int r = sigismember(&saold.sa_mask, (sig == SIGTERM) ? SIGPIPE : SIGTERM) ;
     if (r < 0) return -1 ;
     old->flags = 0 ;
     if (r) old->flags |= SKASA_MASKALL ;

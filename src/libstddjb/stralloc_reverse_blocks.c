@@ -1,13 +1,12 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <string.h>
 #include <skalibs/stralloc.h>
 
 void stralloc_reverse_blocks (stralloc *sa, size_t size)
 {
-  register size_t n = sa->len / (size << 1) ;
-  register size_t i = 0 ;
+  size_t n = sa->len / (size << 1) ;
+  size_t i = 0 ;
   char tmp[size] ;
   for (; i < n ; i++)
   {

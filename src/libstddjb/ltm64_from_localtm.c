@@ -1,13 +1,12 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <errno.h>
 #include <time.h>
-#include <skalibs/tai.h>
 #include <skalibs/uint64.h>
+#include <skalibs/tai.h>
 #include <skalibs/djbtime.h>
 
-int ltm64_from_localtm (uint64 *uu, struct tm const *l)
+int ltm64_from_localtm (uint64_t *uu, struct tm const *l)
 {
   struct tm ll = *l ;
   time_t u = mktime(&ll) ;

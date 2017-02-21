@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <sys/uio.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/siovec.h>
@@ -8,7 +7,7 @@
 size_t siovec_seek (struct iovec *v, unsigned int n, size_t len)
 {
   size_t w = 0 ;
-  register unsigned int i = 0 ;
+  unsigned int i = 0 ;
   for (; i < n ; i++)
   {
     if (len < v[i].iov_len) break ;

@@ -11,7 +11,7 @@ size_t localtm_scan (char const *s, struct tm *l)
   struct tm ll = { .tm_isdst = -1 } ;
   size_t n = 0 ;
   unsigned int u ;
-  register size_t i = uint_scan(s+n, &u) ;
+  size_t i = uint_scan(s+n, &u) ;
   if (!i) goto fail ;
   n += i ;
   if (u < 1900) goto fail ;

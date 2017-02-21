@@ -9,10 +9,10 @@
    Original idea: see http://research.sun.com/techrep/2001/abstract-95.html
 */
 
-void bu_divmod_internal (register uint32_t *u, register uint32_t *a, register uint32_t const *m, unsigned int n)
+void bu_divmod_internal (uint32_t *u, uint32_t *a, uint32_t const *m, unsigned int n)
 {
-  uint32_t bb[n] ; register uint32_t *b = bb ;
-  uint32_t vv[n] ; register uint32_t *v = vv ;
+  uint32_t bb[n] ; uint32_t *b = bb ;
+  uint32_t vv[n] ; uint32_t *v = vv ;
   bu_copy_internal(b, m, n) ;
   bu_zero(v, n) ;
 
@@ -28,7 +28,7 @@ void bu_divmod_internal (register uint32_t *u, register uint32_t *a, register ui
     if ((a[0] == 1) && (bu_len(a, n) == 1)) break ;
     if (bu_cmp(a, n, b, n) < 0)
     {
-      register uint32_t *t = a ; a = b ; b = t ;
+      uint32_t *t = a ; a = b ; b = t ;
       t = u ; u = v ; v = t ;
     }
     bu_add(a, n, a, n, b, n) ;

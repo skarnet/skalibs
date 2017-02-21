@@ -7,7 +7,7 @@
 void sha1_final (SHA1Schedule *ctx, char *digest)
 {
   char pack[8] ;
-  register unsigned int i = 0 ;
+  unsigned int i = 0 ;
   uint32_pack_big(pack, ctx->bits[1]) ;
   uint32_pack_big(pack+4, ctx->bits[0]) ;
   sha1_feed(ctx, 0x80) ;

@@ -5,9 +5,9 @@
 #define _BSD_SOURCE
 #endif
 
-#include <sys/types.h>
-#include <errno.h>
 #include <skalibs/sysdeps.h>
+#include <time.h>
+#include <errno.h>
 #include <skalibs/tai.h>
 
 int time_from_tai_relative (time_t *u, tai_t const *t)

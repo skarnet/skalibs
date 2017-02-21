@@ -36,7 +36,7 @@ void sha256_transform (uint32_t *buf, uint32_t const *in)
 {
   uint32_t w[64] ;
   unsigned int i = 0 ;
-  register uint32_t a = buf[0], b = buf[1], c = buf[2], d = buf[3], e = buf[4], f = buf[5], g = buf[6], h = buf[7] ;
+  uint32_t a = buf[0], b = buf[1], c = buf[2], d = buf[3], e = buf[4], f = buf[5], g = buf[6], h = buf[7] ;
 
   for (; i < 16 ; i++) w[i] = in[i] ;
   for (; i < 64 ; i++)

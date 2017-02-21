@@ -2,8 +2,8 @@
 
 #include <sys/types.h>
 #include <errno.h>
-#include <skalibs/allreadwrite.h>
 #include <skalibs/error.h>
+#include <skalibs/allreadwrite.h>
 
 ssize_t unsanitize_read (ssize_t r)
 {

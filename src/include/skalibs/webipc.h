@@ -12,6 +12,8 @@
 
 #define IPCPATH_MAX 107
 
+#include <sys/types.h>
+#include <skalibs/getpeereid.h>
 #include <skalibs/tai.h>
 #include <skalibs/djbunix.h>
 
@@ -44,17 +46,17 @@ extern int ipc_listen (int, int) ;
 #define ipc_accept_nb(s, path, len, trunc) ipc_accept_internal(s, path, len, (trunc), DJBUNIX_FLAG_NB)
 #define ipc_accept_coe(s, path, len, trunc) ipc_accept_internal(s, path, len, (trunc), DJBUNIX_FLAG_COE)
 #define ipc_accept_nbcoe(s, path, len, trunc) ipc_accept_internal(s, path, len, (trunc), DJBUNIX_FLAG_NB|DJBUNIX_FLAG_COE)
-extern int ipc_accept_internal (int, char *, unsigned int, int *, unsigned int) ;
+extern int ipc_accept_internal (int, char *, size_t, int *, unsigned int) ;
 
-extern int ipc_eid (int, unsigned int *, unsigned int *) ;
-extern int ipc_local (int, char *, unsigned int, int *) ;
+#define ipc_eid getpeereid
+extern int ipc_local (int, char *, size_t, int *) ;
 
 extern int ipc_connect (int, char const *) ;
 extern int ipc_connected (int) ;
 extern int ipc_timed_connect (int, char const *, tain_t const *, tain_t *) ;
 #define ipc_timed_connect_g(fd, path, deadline) ipc_timed_connect(fd, path, (deadline), &STAMP)
 
-extern int ipc_send (int, char const *, unsigned int, char const *) ;
-extern int ipc_recv (int, char *, unsigned int, char *) ;
+extern ssize_t ipc_send (int, char const *, size_t, char const *) ;
+extern ssize_t ipc_recv (int, char *, size_t, char *) ;
 
 #endif

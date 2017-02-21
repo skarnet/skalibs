@@ -15,7 +15,7 @@ size_t fd_catn (int from, int to, size_t n)
     if (!iobuffer_init(&b, from, to)) return 0 ;
     while (n >= IOBUFFER_SIZE)
     {
-      register ssize_t r = iobuffer_fill(&b) ;
+      ssize_t r = iobuffer_fill(&b) ;
       if (r <= 0)
       {
         iobuffer_finish(&b) ;

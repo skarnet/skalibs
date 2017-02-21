@@ -29,7 +29,7 @@ uint32_t random_uint32 (uint32_t n)
   {
     char tmp[4] ;
     random_string(tmp, 4) ;
-    uint32_unpack(tmp, &x) ;
+    uint32_unpack_big(tmp, &x) ;
     if (x >= min) break ;
   }
   return x % n ;

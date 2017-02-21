@@ -6,11 +6,11 @@
 size_t ip4_scan (char const *s, char *ip)
 {
   size_t len = 0 ;
-  register unsigned int j = 0 ;
+  unsigned int j = 0 ;
   for (; j < 4 ; j++)
   {
     unsigned int u ;
-    register size_t i = uint_scan(s, &u) ;
+    size_t i = uint_scan(s, &u) ;
     if (!i) return 0 ;
     ip[j] = (char)u ;
     s += i ;

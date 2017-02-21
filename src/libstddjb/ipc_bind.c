@@ -3,18 +3,18 @@
 #include <skalibs/nonposix.h>
 #include <sys/socket.h>
 #include <sys/un.h>
+#include <string.h>
 #include <errno.h>
-#include <skalibs/bytestr.h>
 #include <skalibs/error.h>
 #include <skalibs/webipc.h>
 
 int ipc_bind (int s, char const *p)
 {
   struct sockaddr_un sa ;
-  register unsigned int l = str_len(p) ;
+  size_t l = strlen(p) ;
   if (l > IPCPATH_MAX) return (errno = EPROTO, -1) ;
-  byte_zero((char *)&sa, sizeof sa) ;
+  memset(&sa, 0, sizeof sa) ;
   sa.sun_family = AF_UNIX ;
-  byte_copy(sa.sun_path, l+1, p) ;
+  memcpy(sa.sun_path, p, l+1) ;
   return bind(s, (struct sockaddr *)&sa, sizeof sa) ;
 }

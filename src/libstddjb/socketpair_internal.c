@@ -45,7 +45,7 @@ int socketpair_internal (int domain, int type, int protocol, unsigned int flags,
 
  err:
   {
-    register int e = errno ;
+    int e = errno ;
     fd_close(fd[1]) ;
     fd_close(fd[0]) ;
     errno = e ;

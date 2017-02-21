@@ -6,6 +6,5 @@
 
 ssize_t genwrite_put_buffer (void *target, char const *s, size_t len)
 {
-  register buffer *b = target ;
-  return buffer_put(b, s, len) ;
+  return buffer_put((buffer *)target, s, len) ;
 }

@@ -1,9 +1,8 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <stdint.h>
+#include <string.h>
 #include <skalibs/uint32.h>
-#include <skalibs/bytestr.h>
 #include <skalibs/biguint.h>
 
 size_t bu_fmt (char *s, uint32_t const *x, unsigned int n)
@@ -13,8 +12,8 @@ size_t bu_fmt (char *s, uint32_t const *x, unsigned int n)
   {
     char fmt[8] ;
     size_t i = uint32_xfmt(fmt, x[n]) ;
-    byte_copy(s+len, 8-i, "00000000") ;
-    byte_copy(s+len+8-i, i, fmt) ;
+    memcpy(s+len, "00000000", 8-i) ;
+    memcpy(s+len+8-i, fmt, i) ;
     len += 8 ;
   }
   return len ;

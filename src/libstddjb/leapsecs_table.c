@@ -7,7 +7,7 @@
 #include "djbtime-internal.h"
 
 unsigned int const leapsecs_table_len = 27 ;
-static uint64 const leapsecs_table_[27] =
+static uint64_t const leapsecs_table_[27] =
 {
   TAI_MAGIC + 78796809,
   TAI_MAGIC + 94694410,
@@ -37,4 +37,4 @@ static uint64 const leapsecs_table_[27] =
   TAI_MAGIC + 1435708834,
   TAI_MAGIC + 1483228835
 } ;
-uint64 const *const leapsecs_table = leapsecs_table_ ;
+uint64_t const *const leapsecs_table = leapsecs_table_ ;

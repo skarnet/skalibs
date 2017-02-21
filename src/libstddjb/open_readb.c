@@ -4,9 +4,9 @@
 
 int open_readb (char const *fn)
 {
-  register int fd = open_read(fn) ;
-  if (fd == -1) return -1 ;
-  if (ndelay_off(fd) == -1)
+  int fd = open_read(fn) ;
+  if (fd < 0) return -1 ;
+  if (ndelay_off(fd) < 0)
   {
     fd_close(fd) ;
     return -1 ;

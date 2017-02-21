@@ -4,8 +4,13 @@
 
 #ifdef SKALIBS_HASPIPE2
 
+#ifndef _NETBSD_SOURCE
 #define _NETBSD_SOURCE
+#endif
+
+#ifndef _GNU_SOURCE
 #define _GNU_SOURCE
+#endif
 
 #include <unistd.h>
 #include <fcntl.h>
@@ -34,7 +39,7 @@ int pipe_internal (int *p, unsigned int flags)
   return 0 ;
  err:
   {
-    register int e = errno ;
+    int e = errno ;
     fd_close(pi[1]) ;
     fd_close(pi[0]) ;
     errno = e ;

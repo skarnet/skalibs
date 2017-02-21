@@ -2,7 +2,7 @@
 
 #include <skalibs/fmtscan.h>
 
-unsigned char fmtscan_num (register unsigned char c, unsigned char n)
+unsigned char fmtscan_num (unsigned char c, unsigned char n)
 {
   return
     ((c < '0') || (n > 36)) ? n :

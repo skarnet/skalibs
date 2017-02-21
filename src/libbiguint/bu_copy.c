@@ -11,7 +11,7 @@
 
 int bu_copy (uint32_t *b, unsigned int bn, uint32_t const *a, unsigned int an)
 {
-  register unsigned int alen = bu_len(a, an) ;
+  unsigned int alen = bu_len(a, an) ;
   if (bn < alen)
   {
     bu_copy_internal(b, a, bn) ;

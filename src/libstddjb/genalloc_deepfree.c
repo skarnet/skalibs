@@ -7,7 +7,7 @@
 void genalloc_deepfree_size (genalloc *g, freefunc_t_ref f, size_t size)
 {
   size_t len = g->len / size ;
-  register size_t i = 0 ;
+  size_t i = 0 ;
   for (; i < len ; i++) (*f)(g->s + i * size) ;
   stralloc_free(g) ;
 }

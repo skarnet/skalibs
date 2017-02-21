@@ -5,7 +5,7 @@
 
 size_t ucharn_findlen (char const *s)
 {
-  register size_t i = 0 ;
+  size_t i = 0 ;
   while (fmtscan_num(s[i], 16) <= 0xF) i++ ;
   return i ;
 }

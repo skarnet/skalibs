@@ -1,17 +1,16 @@
 /* ISC license. */
 
-#include <sys/types.h>
-#include <skalibs/bytestr.h>
+#include <string.h>
 #include <skalibs/sha512.h>
 #include "sha512-internal.h"
 
 void sha512_update (SHA512Schedule *ctx, char const *buf, size_t len)
 {
-  register unsigned int pad = ctx->len & 0x7fU ;
+  unsigned int pad = ctx->len & 0x7fU ;
   ctx->len += len ;
   if (pad && len >= 128 - pad)
   {
-    byte_copy((char *)ctx->buf + pad, 128 - pad, buf) ;
+    memcpy((char *)ctx->buf + pad, buf, 128 - pad) ;
     buf += 128 - pad ; len -= 128 - pad ; pad = 0 ;
     sha512_transform(ctx, ctx->buf) ;
   }
@@ -21,5 +20,5 @@ void sha512_update (SHA512Schedule *ctx, char const *buf, size_t len)
     sha512_transform(ctx, (unsigned char const *)buf) ;
     buf += 128 ; len -= 128 ;
   }
-  byte_copy((char *)ctx->buf + pad, len, buf) ;
+  memcpy((char *)ctx->buf + pad, buf, len) ;
 }

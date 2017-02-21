@@ -14,7 +14,7 @@
 
 void md5_transform (uint32_t *buf /* 4 uint32s */, uint32_t const *in /* 16 uint32s */)
 {
-  register uint32_t a = buf[0], b = buf[1], c = buf[2], d = buf[3] ;
+  uint32_t a = buf[0], b = buf[1], c = buf[2], d = buf[3] ;
 
   MD5STEP(F1, a, b, c, d, in[0] + 0xd76aa478U, 7) ;
   MD5STEP(F1, d, a, b, c, in[1] + 0xe8c7b756U, 12) ;

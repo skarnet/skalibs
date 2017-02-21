@@ -1,14 +1,15 @@
 /* ISC license. */
 
+#include <stdint.h>
 #include <skalibs/uint32.h>
 #include <skalibs/cdb.h>
 
 int cdb_successor (struct cdb *c, char const *key, unsigned int klen)
 {
-  uint32 kpos ;
+  uint32_t kpos ;
   if (key)
   {
-    register int r = cdb_find(c, key, klen) ;
+    int r = cdb_find(c, key, klen) ;
     if (r < 1) return r ;
     kpos = c->dpos + c->dlen ;
   }

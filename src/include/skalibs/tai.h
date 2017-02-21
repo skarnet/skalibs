@@ -4,41 +4,41 @@
 #define TAI_H
 
 #include <sys/types.h>
+#include <stdint.h>
 #include <time.h>
 #include <sys/time.h>
 #include <skalibs/gccattributes.h>
-#include <skalibs/uint32.h>
 #include <skalibs/uint64.h>
 
 typedef struct tai_s tai_t, *tai_t_ref ;
 struct tai_s
 {
-  uint64 x ;
+  uint64_t x ;
 } ;
 
 
 #define TAI_ZERO { .x = 0 }
-#define TAI_MAGIC ((uint64)4611686018427387904ULL)
+#define TAI_MAGIC ((uint64_t)4611686018427387904ULL)
 #define TAI_EPOCH { .x = TAI_MAGIC + 10UL }
-#define TAI_INFINITE_RELATIVE { .x = (uint64)1 << 60 }
-#define TAI_INFINITE { .x = TAI_MAGIC + ((uint64)1 << 61) }
+#define TAI_INFINITE_RELATIVE { .x = (uint64_t)1 << 60 }
+#define TAI_INFINITE { .x = TAI_MAGIC + ((uint64_t)1 << 61) }
 
 #define tai_sec(t) ((t)->x)
-extern int tai_u64 (tai_t *, uint64) ;
+extern int tai_u64 (tai_t *, uint64_t) ;
 #define tai_unix(t, u) tai_u64(t, (TAI_MAGIC + (u)))
-#define tai_uint(t, u) tai_u64(t, (uint64)(u))
+#define tai_uint(t, u) tai_u64(t, (uint64_t)(u))
 
 extern int tai_now (tai_t *) ;
 
-#define tai_relative_from_time(t, u) ((t)->x = (uint64)(u), 1)
+#define tai_relative_from_time(t, u) ((t)->x = (uint64_t)(u), 1)
 #define tai_from_time(t, u) tai_unix(t, u)
-#define tai_from_time_sysclock(t, u) tai_from_sysclock(t, (uint64)(u) + TAI_MAGIC)
+#define tai_from_time_sysclock(t, u) tai_from_sysclock(t, (uint64_t)(u) + TAI_MAGIC)
 extern int time_from_tai_relative (time_t *, tai_t const *) ;
 extern int time_from_tai (time_t *, tai_t const *) ;
 extern int time_sysclock_from_tai(time_t *, tai_t const *) ;
 
-extern int tai_from_sysclock (tai_t *, uint64) ;
-extern int sysclock_from_tai (uint64 *, tai_t const *) ;
+extern int tai_from_sysclock (tai_t *, uint64_t) ;
+extern int sysclock_from_tai (uint64_t *, tai_t const *) ;
 
 #define tai_approx(t) ((double)(tai_sec(t)))
 
@@ -56,7 +56,7 @@ typedef struct tain_s tain_t, *tain_t_ref ;
 struct tain_s
 {
   tai_t sec ;
-  uint32 nano ; /* 0..999999999U */
+  uint32_t nano ; /* 0..999999999U */
 } ;
 
 #define TAIN_ZERO { .sec = TAI_ZERO, .nano = 0 }
@@ -125,19 +125,19 @@ extern void tain_pack_little (char *, tain_t const *) ;
 extern void tain_unpack_little (char const *, tain_t *) ;
 
 #define TAIN_FMT 25
-extern unsigned int tain_fmt (char *, tain_t const *) ;
-extern unsigned int tain_scan (char const *, tain_t *) ;
+extern size_t tain_fmt (char *, tain_t const *) ;
+extern size_t tain_scan (char const *, tain_t *) ;
 
 #define TAIN_FMTFRAC 19
-extern unsigned int tain_fmtfrac (char *, tain_t const *) ;
+extern size_t tain_fmtfrac (char *, tain_t const *) ;
 
 #define tain_uint(a, u) tain_ulong(a, u)
 extern int tain_ulong (tain_t *, unsigned long) ;
 extern void tain_half (tain_t *, tain_t const *) ;
 
 #define TIMESTAMP (1 + (TAIN_PACK << 1))
-extern unsigned int timestamp_fmt (char *, tain_t const *) ;
-extern unsigned int timestamp_scan (char const *, tain_t *) ;
+extern size_t timestamp_fmt (char *, tain_t const *) ;
+extern size_t timestamp_scan (char const *, tain_t *) ;
 extern int timestamp_r (char *, tain_t *) ;
 extern int timestamp (char *) ;
 #define timestamp_g(s) timestamp_fmt((s), &STAMP)

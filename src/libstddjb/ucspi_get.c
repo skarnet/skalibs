@@ -1,7 +1,7 @@
 /* ISC license. */
 
 #include <errno.h>
-#include <skalibs/bytestr.h>
+#include <string.h>
 #include <skalibs/env.h>
 
 char const *ucspi_get (char const *s)
@@ -9,11 +9,11 @@ char const *ucspi_get (char const *s)
   char const *x = env_get("PROTO") ;
   if (x)
   {
-    unsigned int len = str_len(s) ;
-    unsigned int xlen = str_len(x) ;
+    size_t len = strlen(s) ;
+    size_t xlen = strlen(x) ;
     char tmp[len + xlen + 1] ;
-    byte_copy(tmp, xlen, x) ;
-    byte_copy(tmp + xlen, len + 1, s) ;
+    memcpy(tmp, x, xlen) ;
+    memcpy(tmp + xlen, s, len + 1) ;
     x = env_get(tmp) ;
     if (!x) errno = ENOENT ;
   }

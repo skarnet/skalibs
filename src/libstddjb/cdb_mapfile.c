@@ -10,7 +10,7 @@ int cdb_mapfile (struct cdb *c, char const *file)
   if (fd < 0) return 0 ;
   if (!cdb_init_map(c, fd, 1))
   {
-    register int e = errno ;
+    int e = errno ;
     fd_close(fd) ;
     errno = e ;
     return 0 ;

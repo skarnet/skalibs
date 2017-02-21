@@ -4,7 +4,7 @@
 #include <skalibs/djbtime.h>
 #include "djbtime-internal.h"
 
-int ltm64_from_utc (uint64 *u)
+int ltm64_from_utc (uint64_t *u)
 {
   switch (skalibs_tzisright())
   {

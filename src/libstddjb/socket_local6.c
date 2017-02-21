@@ -3,21 +3,21 @@
 #include <skalibs/nonposix.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <stdint.h>
+#include <string.h>
 #include <skalibs/uint16.h>
-#include <skalibs/bytestr.h>
 #include <skalibs/socket.h>
 #include <skalibs/ip46.h>
 
 #ifdef SKALIBS_IPV6_ENABLED
 
-int socket_local6 (int s, char *ip, uint16 *port)
+int socket_local6 (int s, char *ip, uint16_t *port)
 {
   struct sockaddr_in6 sa ;
   socklen_t dummy = sizeof sa ;
-
   if (getsockname(s, (struct sockaddr *)&sa, &dummy) == -1)
     return -1 ;
-  byte_copy(ip, 16, (char const *)sa.sin6_addr.s6_addr) ;
+  memcpy(ip, sa.sin6_addr.s6_addr, 16) ;
   uint16_unpack_big((char *)&sa.sin6_port, port) ;
   return 0 ;
 }
@@ -26,7 +26,7 @@ int socket_local6 (int s, char *ip, uint16 *port)
 
 #include <errno.h>
 
-int socket_local6 (int s, char *ip, uint16 *port)
+int socket_local6 (int s, char *ip, uint16_t *port)
 {
   (void)s ;
   (void)ip ;

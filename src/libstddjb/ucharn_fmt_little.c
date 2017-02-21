@@ -5,7 +5,7 @@
 
 size_t ucharn_fmt_little (char *s, char const *key, size_t n)
 {
-  register size_t i = 0 ;
+  size_t i = 0 ;
   for (; i < n ; i++)
   {
     s[i<<1] = fmtscan_asc((unsigned char)key[i] & 0xF) ;

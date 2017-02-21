@@ -11,7 +11,7 @@ int socket_waitconn (int s, tain_t const *deadline, tain_t *stamp)
   iopause_fd x = { s, IOPAUSE_WRITE, 0 } ;
   for (;;)
   {
-    register int r = iopause_stamp(&x, 1, deadline, stamp) ;
+    int r = iopause_stamp(&x, 1, deadline, stamp) ;
     if (r < 0) return 0 ;
     if (!r) return (errno = ETIMEDOUT, 0) ;
     if (x.revents & IOPAUSE_WRITE) break ;

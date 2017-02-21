@@ -9,7 +9,6 @@
 #include <sys/uio.h>
 #include <skalibs/buffer.h>
 #include <skalibs/iobuffer.h>
-#include <skalibs/siovec.h>
 
 int iobuffer_kfromu (iobufferk *k, iobufferu *u)
 {

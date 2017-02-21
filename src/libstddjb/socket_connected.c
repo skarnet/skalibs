@@ -13,7 +13,7 @@ int socket_connected (int s)
   if (getpeername(s, (struct sockaddr *)&sa, &dummy) == -1)
   {
     char ch ;
-    fd_read(s, &ch, 1) ; /* sets errno */
+    fd_read(s, &ch, 1) ;
     return 0 ;
   }
   return 1 ;

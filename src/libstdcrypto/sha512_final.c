@@ -7,8 +7,8 @@
 
 void sha512_final (SHA512Schedule *ctx, char *digest)
 {
-  register unsigned int i = 0 ;
-  register unsigned int pad = ctx->len % 128;
+  unsigned int i = 0 ;
+  unsigned int pad = ctx->len % 128;
 
   ctx->buf[pad++] = 0x80 ;
   if (pad > 112)

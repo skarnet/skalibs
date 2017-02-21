@@ -6,7 +6,7 @@
 
 int fd_copy (int to, int from)
 {
-  register int r ;
+  int r ;
   if (to == from) return (errno = EINVAL, -1) ;
   do
     r = dup2(from, to) ;

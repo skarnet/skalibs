@@ -9,8 +9,8 @@
 typedef struct SHA512Schedule_s SHA512Schedule, *SHA512Schedule_ref ;
 struct SHA512Schedule_s
 {
-  uint64 len ;
-  uint64 h[8] ;
+  uint64_t len ;
+  uint64_t h[8] ;
   unsigned char buf[128] ;
 } ;
 

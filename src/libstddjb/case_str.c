@@ -16,8 +16,8 @@ size_t case_str (char const *haystack, char const *needle)
 
 #else
 
-#include <sys/types.h>
 #include <string.h>
+#include <strings.h>
 #include <skalibs/bytestr.h>
 
 size_t case_str (char const *haystack, char const *needle)
@@ -26,7 +26,7 @@ size_t case_str (char const *haystack, char const *needle)
   char const *p = haystack ;
   if (!nlen) return 0 ;
   for (; *p ; p++)
-    if (!case_diffb(p, nlen, needle)) return p - haystack ;
+    if (!strncasecmp(p, needle, nlen)) return p - haystack ;
   return strlen(haystack) ;
 }
 

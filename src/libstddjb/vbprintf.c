@@ -1,8 +1,7 @@
 /* ISC license. */
 
-#include <sys/types.h>
-#include <stdarg.h>
 #include <stdio.h>
+#include <stdarg.h>
 #include <skalibs/buffer.h>
 #include <skalibs/lolstdio.h>
 
@@ -17,8 +16,8 @@ int vbprintf (buffer *b, char const *format, va_list args)
   }
   if (r < 0) return r ;
   {
-    char buf[(size_t)r + 1] ;
-    r = vsnprintf(buf, (size_t)r + 1, format, args) ;
+    char buf[r+1] ;
+    r = vsnprintf(buf, r + 1, format, args) ;
     if (r < 0) return r ;
     if (buffer_put(b, buf, r) < r) return -1 ;
   }

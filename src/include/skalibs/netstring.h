@@ -5,11 +5,12 @@
 
 #include <sys/types.h>
 #include <sys/uio.h>
+#include <string.h>
 #include <skalibs/buffer.h>
 #include <skalibs/stralloc.h>
 
 extern int netstring_appendb (stralloc *, char const *, size_t) ;
-#define netstring_appends(sa, s) netstring_appendb((sa), (s), str_len(s))
+#define netstring_appends(sa, s) netstring_appendb((sa), (s), strlen(s))
 #define netstring_append(to, from) netstring_appendb((to), (from)->s, (from)->len)
 extern int netstring_appendv (stralloc *, struct iovec const *, unsigned int) ;
 

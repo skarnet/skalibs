@@ -69,12 +69,6 @@ extern int prot_readgroups (char const *, gid_t *, unsigned int) ;
 extern int prot_grps (char const *) ;
 extern int prot_setuidgid (char const *) ;
 
-extern long seek_cur (int) ;
-extern int seek_set (int, off_t) ;
-extern int seek_end (int) ;
-extern int seek_trunc (int, off_t) ;
-#define seek_begin(fd) (seek_set((fd), 0))
-
 extern pid_t wait_nointr (int *) ;
 extern pid_t waitpid_nointr (pid_t, int *, int) ;
 #define wait_pid(pid, wstat) waitpid_nointr(pid, (wstat), 0)
@@ -92,8 +86,6 @@ extern pid_t doublefork (void) ;
 extern int fd_chdir (int) ;
 
 #define absolutepath(sa, s) sarealpath(sa, s)
-/* extern char *realpath (char const *, char *) ; */
-extern char *realpath_tmp (char const *, char *, stralloc *) ;
 extern int sarealpath (stralloc *, char const *) ;
 extern int sarealpath_tmp (stralloc *, char const *, stralloc *) ;
 extern int sabasename (stralloc *, char const *, size_t) ;

@@ -4,7 +4,7 @@
 #include <skalibs/sha512.h>
 #include "sha512-internal.h"
 
-static uint64 ror (uint64 n, unsigned int k)
+static uint64_t ror (uint64_t n, unsigned int k)
 {
   return (n >> k) | (n << (64 - k)) ;
 }
@@ -25,7 +25,7 @@ static uint64 ror (uint64 n, unsigned int k)
 
 void sha512_transform (SHA512Schedule *ctx, unsigned char const *block)
 {
-  static uint64 const K[80] =
+  static uint64_t const K[80] =
   {
     0x428a2f98d728ae22ULL, 0x7137449123ef65cdULL,
     0xb5c0fbcfec4d3b2fULL, 0xe9b5dba58189dbbcULL,
@@ -68,10 +68,10 @@ void sha512_transform (SHA512Schedule *ctx, unsigned char const *block)
     0x4cc5d4becb3e42b6ULL, 0x597f299cfc657e2aULL,
     0x5fcb6fab3ad6faecULL, 0x6c44198c4a475817ULL
   } ;
-  uint64 w[80] ;
-  uint64 h[8] ;
-  uint64 t[2] ;
-  register unsigned int i = 0 ;
+  uint64_t w[80] ;
+  uint64_t h[8] ;
+  uint64_t t[2] ;
+  unsigned int i = 0 ;
 
   for (; i < 16 ; i++) uint64_unpack_big((char const *)block + (i << 3), w + i) ;
   for (; i < 80 ; i++) w[i] = R1(w[i-2]) + w[i-7] + R0(w[i-15]) + w[i-16] ;

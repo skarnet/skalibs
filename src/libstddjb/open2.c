@@ -7,9 +7,8 @@
 
 int open2 (char const *s, unsigned int flags)
 {
-  register int r ;
-  do
-    r = open(s, (int)flags) ;
+  int r ;
+  do r = open(s, flags) ;
   while ((r == -1) && (errno == EINTR)) ;
   return r ;
 }

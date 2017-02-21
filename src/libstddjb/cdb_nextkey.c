@@ -1,12 +1,13 @@
 /* ISC license. */
 
+#include <stdint.h>
 #include <skalibs/uint32.h>
 #include <skalibs/cdb.h>
 
-int cdb_nextkey (struct cdb *c, uint32 *kpos)
+int cdb_nextkey (struct cdb *c, uint32_t *kpos)
 {
   char buf[8] ;
-  uint32 eod, klen ;
+  uint32_t eod, klen ;
   if (cdb_read(c, buf, 4, 0) < 0) return -1 ;
   uint32_unpack(buf, &eod) ;
   if (eod < 8 || eod - 8 < *kpos) return 0 ;

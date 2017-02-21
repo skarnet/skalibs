@@ -18,7 +18,7 @@ int socket_tcp6_internal (unsigned int flags)
     int option = 1 ;
     if (setsockopt(fd, IPPROTO_IPV6, IPV6_V6ONLY, &option, sizeof(option)) < 0)
     {
-      register int e = errno ;
+      int e = errno ;
       fd_close(fd) ;
       errno = e ;
       return -1 ;

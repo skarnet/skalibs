@@ -1,10 +1,10 @@
 /* ISC license. */
 
-#include <skalibs/uint16.h>
+#include <stdint.h>
 #include <skalibs/tai.h>
 #include <skalibs/socket.h>
 
-int socket_timeoutconn (int s, char const *ip, uint16 port, unsigned int timeout)
+int socket_timeoutconn (int s, char const *ip, uint16_t port, unsigned int timeout)
 {
   tain_t stamp, deadline ;
   tain_now(&stamp) ;

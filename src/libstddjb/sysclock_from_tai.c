@@ -2,11 +2,12 @@
 
 #include <errno.h>
 #include <skalibs/config.h>
+#include <skalibs/uint64.h>
 #include <skalibs/tai.h>
 
 #ifdef SKALIBS_FLAG_CLOCKISTAI
 
-int sysclock_from_tai (uint64 *u, tai_t const *t)
+int sysclock_from_tai (uint64_t *u, tai_t const *t)
 {
   if (t->x < 10U) return (errno = EINVAL, 0) ;
   *u = t->x - 10U ;
@@ -17,7 +18,7 @@ int sysclock_from_tai (uint64 *u, tai_t const *t)
 
 #include <skalibs/djbtime.h>
 
-int sysclock_from_tai (uint64 *u, tai_t const *t)
+int sysclock_from_tai (uint64_t *u, tai_t const *t)
 {
   return utc_from_tai(u, t) ;
 }

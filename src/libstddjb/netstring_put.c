@@ -15,21 +15,21 @@ int netstring_put (buffer *b, char const *s, size_t len, size_t *written)
   if (*written < n + 1)
   {
     size_t w = *written ;
-    ssize_t r = buffer_putall(b, fmt, n+1, &w) ;
+    int r = buffer_putall(b, fmt, n+1, &w) ;
     if (r < 0) return (*written = w, 0) ;
     *written = n+1 ;
   }
   if (*written < n+1 + len)
   {
     size_t w = *written - (n+1) ;
-    ssize_t r = buffer_putall(b, s, len, &w) ;
+    int r = buffer_putall(b, s, len, &w) ;
     *written = w + (n+1) ;
     if (r < 0) return (*written = n+1 + w, 0) ;
     *written = n+1 + len ;
   }
   {
     size_t w = 0 ;
-    ssize_t r = buffer_putall(b, ",", 1, &w) ;
+    int r = buffer_putall(b, ",", 1, &w) ;
     if (r < 0) return 0 ;
   }
   *written = 0 ;

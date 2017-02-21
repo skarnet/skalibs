@@ -13,7 +13,7 @@ size_t localtmn_scan (char const *s, localtmn_t *l)
   if (*s++ != '.') m.nano = 0 ;
   else
   {
-    register size_t b = uint32_scan(s, &m.nano) ;
+    size_t b = uint32_scan(s, &m.nano) ;
     if (!b) return 0 ;
     n += b ;
   }

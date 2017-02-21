@@ -34,7 +34,7 @@ int iopause_select (iopause_fd *x, unsigned int len, tain_t const *deadline, tai
   }
 
   {
-    register unsigned int i = 0 ;
+    unsigned int i = 0 ;
     for (; i < len ; i++)
     {
       x[i].revents = 0 ;
@@ -52,7 +52,7 @@ int iopause_select (iopause_fd *x, unsigned int len, tain_t const *deadline, tai
 
   if (r > 0)
   {
-    register unsigned int i = 0 ;
+    unsigned int i = 0 ;
     for (; i < len ; i++) if (x[i].fd >= 0)
     {
       if ((x[i].events & IOPAUSE_READ) && FD_ISSET(x[i].fd, &rfds))

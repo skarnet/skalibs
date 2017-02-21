@@ -1,12 +1,12 @@
 /* ISC license. */
 
+#include <stdint.h>
 #include <errno.h>
 #include <skalibs/uint16.h>
-#include <skalibs/uint32.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/mininetstring.h>
 
-int mininetstring_write (int fd, char const *s, uint16 len, uint32 *w)
+int mininetstring_write (int fd, char const *s, uint16_t len, uint32_t *w)
 {
   if (!*w)
   {

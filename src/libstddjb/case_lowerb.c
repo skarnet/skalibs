@@ -3,7 +3,7 @@
 #include <sys/types.h>
 #include <skalibs/bytestr.h>
 
-void case_lowerb (register char *s, size_t len)
+void case_lowerb (char *s, size_t len)
 {
   unsigned char const d = 'a' - 'A' ;
   while (len--)

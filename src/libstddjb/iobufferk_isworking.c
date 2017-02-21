@@ -17,7 +17,7 @@ int iobufferk_isworking (iobufferk *k)
 
 # if 0
 
-  register int e = errno ;
+  int e = errno ;
   if (splice(k->fd[0], 0, k->p[1], 0, 0, 0) < 0) goto no ;
   if (splice(k->p[0], 0, k->fd[1], 0, 0, 0) < 0) goto no ;
   errno = e ;
@@ -45,4 +45,3 @@ int iobufferk_isworking (iobufferk *k)
 }
 
 #endif
-

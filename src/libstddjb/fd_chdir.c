@@ -6,7 +6,7 @@
 
 int fd_chdir (int d)
 {
-  register int r ;
+  int r ;
   do
     r = fchdir(d) ;
   while ((r == -1) && (errno == EINTR)) ;

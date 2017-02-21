@@ -1,5 +1,6 @@
 /* ISC license. */
 
+#include <string.h>
 #include <errno.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/genalloc.h>
@@ -8,24 +9,24 @@
 int envalloc_uniq (genalloc *v, char delim)
 {
   unsigned int m = 0 ;
-  register unsigned int i = 0 ;
+  size_t i = 0 ;
   for (; i < genalloc_len(char const *, v) ; i++)
   {
-    register unsigned int j = i+1 ;
+    size_t j = i+1 ;
     char const *s = genalloc_s(char const *, v)[i] ;
-    unsigned int n = str_chr(s, delim) ;
+    size_t n = str_chr(s, delim) ;
     if (delim && !s[n]) return (errno = EINVAL, -1) ;
     for (; j < genalloc_len(char const *, v) ; j++)
     {
-      register char const **p = genalloc_s(char const *, v) ;
-      if (!str_diffn(s, p[j], n))
+      char const **p = genalloc_s(char const *, v) ;
+      if (!strncmp(s, p[j], n))
       {
-        register unsigned int len = genalloc_len(char const *, v) - 1 ;
+        size_t len = genalloc_len(char const *, v) - 1 ;
         genalloc_setlen(char const *, v, len) ;
         p[j] = p[len] ;
         m++ ;
       }
     }
   }
-  return (int)m ;
+  return m ;
 }

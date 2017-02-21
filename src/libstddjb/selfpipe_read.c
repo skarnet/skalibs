@@ -3,6 +3,7 @@
 /* MT-unsafe */
 
 #include <skalibs/sysdeps.h>
+#include <sys/types.h>
 #include <skalibs/allreadwrite.h>
 #include "selfpipe-internal.h"
 #include <skalibs/selfpipe.h>
@@ -14,7 +15,7 @@
 int selfpipe_read (void)
 {
   struct signalfd_siginfo buf ;
-  register int r = sanitize_read(fd_read(selfpipe_fd, (char *)&buf, sizeof(struct signalfd_siginfo))) ;
+  ssize_t r = sanitize_read(fd_read(selfpipe_fd, (char *)&buf, sizeof(struct signalfd_siginfo))) ;
   return (r <= 0) ? r : (int)buf.ssi_signo ;
 }
       
@@ -23,7 +24,7 @@ int selfpipe_read (void)
 int selfpipe_read (void)
 {
   char c ;
-  register int r = sanitize_read((fd_read(selfpipe_fd, &c, 1))) ;
+  ssize_t r = sanitize_read((fd_read(selfpipe_fd, &c, 1))) ;
   return (r <= 0) ? r : (int)c ;
 }
 

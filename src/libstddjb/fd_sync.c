@@ -6,7 +6,7 @@
 
 int fd_sync (int fd)
 {
-  register int r ;
+  int r ;
   do
     r = fsync(fd) ;
   while ((r == -1) && (errno == EINTR)) ;

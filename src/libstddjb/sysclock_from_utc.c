@@ -9,7 +9,7 @@
 
 #include <skalibs/tai.h>
 
-int sysclock_from_utc (uint64 *u)
+int sysclock_from_utc (uint64_t *u)
 {
   tai_t t ;
   if (!tai_from_utc(&t, *u)) return 0 ;
@@ -20,7 +20,7 @@ int sysclock_from_utc (uint64 *u)
 
 #else
 
-int sysclock_from_utc (uint64 *u)
+int sysclock_from_utc (uint64_t *u)
 {
   (void)u ;
   return 1 ;

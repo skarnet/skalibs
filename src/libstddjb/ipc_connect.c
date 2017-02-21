@@ -4,18 +4,18 @@
 #include <errno.h>
 #include <sys/socket.h>
 #include <sys/un.h>
-#include <skalibs/bytestr.h>
+#include <string.h>
 #include <skalibs/error.h>
 #include <skalibs/webipc.h>
 
 int ipc_connect (int s, char const *p)
 {
   struct sockaddr_un sa ;
-  unsigned int l = str_len(p) ;
+  size_t l = strlen(p) ;
   if (l > IPCPATH_MAX) return (errno = EPROTO, 0) ;
-  byte_zero((char *) &sa, sizeof sa) ;
+  memset(&sa, 0, sizeof sa) ;
   sa.sun_family = AF_UNIX ;
-  byte_copy(sa.sun_path, l+1, p) ;
+  memcpy(sa.sun_path, p, l+1) ;
   if (connect(s, (struct sockaddr *)&sa, sizeof sa) == -1)
   {
     if (errno == EINTR) errno = EINPROGRESS ;

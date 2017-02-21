@@ -13,7 +13,7 @@ int bu_div (uint32_t const *a, unsigned int an, uint32_t const *b, unsigned int 
   {
     uint32_t qq[alen] ;
     uint32_t rr[alen] ;
-    register int qh, rh ;
+    int qh, rh ;
     bu_copy_internal(rr, a, alen) ;
     bu_div_internal(rr, alen, b, blen, qq, alen) ;
     qh = bu_copy(q, qn, qq, alen) ;

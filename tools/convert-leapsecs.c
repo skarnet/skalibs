@@ -1,3 +1,6 @@
+/* ISC license. */
+
+#include <sys/types.h>
 #include <time.h>
 #include <skalibs/uint64.h>
 #include <skalibs/buffer.h>
@@ -8,11 +11,11 @@
 
 static genalloc table = GENALLOC_ZERO ; /* uint64 */
 
-static void add_leapsecs (uint64 *t)
+static void add_leapsecs (uint64_t *t)
 {
-  uint64 *tab = genalloc_s(uint64, &table) ;
-  unsigned int n = genalloc_len(uint64, &table) ;
-  unsigned int i = 0 ;
+  uint64_t *tab = genalloc_s(uint64, &table) ;
+  size_t n = genalloc_len(uint64, &table) ;
+  size_t i = 0 ;
   for (; i < n ; i++) if (*t >= tab[i]) (*t)++ ;
 }
 
@@ -22,7 +25,7 @@ int main (int argc, char const *const *argv)
   for (;;)
   {
     struct tm tm ;
-    uint64 tt ;
+    uint64_t tt ;
     time_t t ;
     char *p ;
     int r ;
@@ -40,7 +43,7 @@ int main (int argc, char const *const *argv)
     if (t < 0) strerr_diefu1sys(111, "mktime") ;
     tt = t + 10 ;
     add_leapsecs(&tt) ;
-    if (!genalloc_append(uint64, &table, &tt))
+    if (!genalloc_append(uint64_t, &table, &tt))
       strerr_diefu1sys(111, "genalloc_append") ;
     fmt[uint64_fmt(fmt, tt)] = 0 ;
     buffer_puts(buffer_1, "  TAI_MAGIC + ") ;

@@ -1,18 +1,19 @@
 /* ISC license. */
 
-#include <skalibs/bytestr.h>
+#include <stdint.h>
+#include <string.h>
 #include <skalibs/uint32.h>
 #include <skalibs/cdb.h>
 
-static int match (struct cdb *c, char const *key, unsigned int len, uint32 pos)
+static int match (struct cdb *c, char const *key, unsigned int len, uint32_t pos)
 {
   char buf[1024] ;
   while (len > 0)
   {
-    register unsigned int n = 1024 ;
+    unsigned int n = 1024 ;
     if (n > len) n = len ;
     if (cdb_read(c, buf, n, pos) < 0) return -1 ;
-    if (byte_diff(buf, n, key)) return 0 ;
+    if (memcmp(buf, key, n)) return 0 ;
     pos += n ; key += n ; len -= n ;
   }
   return 1 ;
@@ -21,8 +22,8 @@ static int match (struct cdb *c, char const *key, unsigned int len, uint32 pos)
 int cdb_findnext (struct cdb *c, char const *key, unsigned int len)
 {
   char buf[8] ;
-  uint32 pos ;
-  uint32 u ;
+  uint32_t pos ;
+  uint32_t u ;
 
   if (!c->loop)
   {

@@ -5,9 +5,9 @@
 
 #include <sys/types.h>
 #include <stdint.h>
+#include <string.h>
 #include <errno.h>
 #include <limits.h>
-#include <skalibs/bytestr.h>
 #include <skalibs/fmtscan.h>
 
 #define SCANB(bits) \
@@ -18,7 +18,7 @@ size_t uint##bits##_scan_base (char const *s, uint##bits##_t *u, unsigned int ba
   size_t pos = 0 ; \
   for (;; pos++) \
   { \
-    register unsigned char c = fmtscan_num(s[pos], base) ; \
+    unsigned char c = fmtscan_num(s[pos], base) ; \
     if ((c >= base) || (result > ((max - c) / base))) break ; \
     result = result * base + c ; \
   } \
@@ -29,7 +29,7 @@ size_t uint##bits##_scan_base (char const *s, uint##bits##_t *u, unsigned int ba
 #define SCANB0(bits) \
 size_t uint##bits##0_scan_base (char const *s, uint##bits##_t *u, unsigned int base) \
 { \
-  register size_t pos = uint##bits##_scan_base(s, u, base) ; \
+  size_t pos = uint##bits##_scan_base(s, u, base) ; \
   if (!pos) return (errno = EINVAL, 0) ; \
   if (!s[pos]) return pos ; \
   errno = (fmtscan_num(s[pos], base) < base) ? EDOM : EINVAL ; \
@@ -40,8 +40,8 @@ size_t uint##bits##0_scan_base (char const *s, uint##bits##_t *u, unsigned int b
 size_t int##bits##_scan (char const *s, int##bits##_t *n) \
 { \
   uint##bits##_t tmp ; \
-  register size_t r = 0 ; \
-  register unsigned int sign = 0 ; \
+  size_t r = 0 ; \
+  unsigned int sign = 0 ; \
   if (*s == '-') \
   { \
     r = 1 + uint##bits##_scan(s+1, &tmp) ; \
@@ -74,7 +74,7 @@ size_t int##bits##_scan (char const *s, int##bits##_t *n) \
 #define SCANS0(bits) \
 size_t int##bits##0_scan (char const *s, int##bits##_t *u) \
 { \
-  register size_t pos = int##bits##_scan(s, u) ; \
+  size_t pos = int##bits##_scan(s, u) ; \
   if (!pos) return (errno = EINVAL, 0) ; \
   if (!s[pos]) return pos ; \
   errno = (fmtscan_num(s[pos], 10) < 10) ? EDOM : EINVAL ; \
@@ -87,10 +87,10 @@ size_t uint##bits##_scanlist (uint##bits##_t *tab, size_t max, char const *s, si
   size_t i = 0, len = 0 ; \
   for (; s[len] && (i < max) ; i++) \
   { \
-    register size_t w = uint##bits##_scan(s + len, tab + i) ; \
+    size_t w = uint##bits##_scan(s + len, tab + i) ; \
     if (!w) break ; \
     len += w ; \
-    while (byte_chr(",:; \t\r\n", 7, s[len]) < 7) len++ ; \
+    while (memchr(",:; \t\r\n", s[len], 7)) len++ ; \
   } \
   *num = i ; \
   return len ; \
@@ -102,10 +102,10 @@ size_t int##bits##_scanlist (int##bits##_t *tab, size_t max, char const *s, size
   size_t i = 0, len = 0 ; \
   for (; s[len] && (i < max) ; i++) \
   { \
-    register size_t w = int##bits##_scan(s + len, tab + i) ; \
+    size_t w = int##bits##_scan(s + len, tab + i) ; \
     if (!w) break ; \
     len += w ; \
-    while (byte_chr(",:; \t\r\n", 7, s[len]) < 7) len++ ; \
+    while (memchr(",:; \t\r\n", s[len], 7)) len++ ; \
   } \
   *num = i ; \
   return len ; \
@@ -117,7 +117,7 @@ size_t uint##bits##_fmtlist (char *s, uint##bits##_t const *tab, size_t n) \
   size_t i = 0, len = 0 ; \
   for (; i < n ; i++) \
   { \
-    register size_t w = uint##bits##_fmt(s, tab[i]) ; \
+    size_t w = uint##bits##_fmt(s, tab[i]) ; \
     len += w ; \
     if (s) \
     { \
@@ -131,9 +131,9 @@ size_t uint##bits##_fmtlist (char *s, uint##bits##_t const *tab, size_t n) \
 #define FMTB(bits) \
 size_t uint##bits##_fmt_base (char *s, uint##bits##_t x, unsigned int base) \
 { \
-  register size_t len = 1 ; \
+  size_t len = 1 ; \
   { \
-    register uint##bits##_t q = x ; \
+    uint##bits##_t q = x ; \
     while (q >= base) { len++ ; q /= base ; } \
   } \
   if (s) \
@@ -145,9 +145,9 @@ size_t uint##bits##_fmt_base (char *s, uint##bits##_t x, unsigned int base) \
 } \
 
 #define FMTB0(bits) \
-size_t uint##bits##0_fmt_base (char *s, uint##bits##_t x, register size_t n, unsigned int base) \
+size_t uint##bits##0_fmt_base (char *s, uint##bits##_t x, size_t n, unsigned int base) \
 { \
-  register size_t len = uint##bits##_fmt_base(0, x, base) ; \
+  size_t len = uint##bits##_fmt_base(0, x, base) ; \
   while (n-- > len) *s++ = '0' ; \
   return uint##bits##_fmt_base(s, x, base) ; \
 } \
@@ -166,7 +166,7 @@ size_t int##bits##_fmtlist (char *s, int##bits##_t const *tab, size_t n) \
   size_t i = 0, len = 0 ; \
   for (; i < n ; i++) \
   { \
-    register size_t w = int##bits##_fmt(s, tab[i]) ; \
+    size_t w = int##bits##_fmt(s, tab[i]) ; \
     len += w ; \
     if (s) \
     { \

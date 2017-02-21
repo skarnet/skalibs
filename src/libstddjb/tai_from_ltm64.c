@@ -5,7 +5,7 @@
 #include <skalibs/djbtime.h>
 #include "djbtime-internal.h"
 
-int tai_from_ltm64 (tai_t *t, uint64 u)
+int tai_from_ltm64 (tai_t *t, uint64_t u)
 {
   switch (skalibs_tzisright())
   {

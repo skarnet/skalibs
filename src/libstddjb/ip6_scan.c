@@ -16,7 +16,7 @@ size_t ip6_scan (char const *s, char *ip6)
 
   while (state < 5)
   {
-    register unsigned char c = table[state][class[(unsigned char)s[i]] - '0'] ;
+    unsigned char c = table[state][class[(unsigned char)s[i]] - '0'] ;
     state = c & 7 ;
     if (c & 0x20) { if (pos < 8) state = 5 ; else pos = j ; }
     if (c & 0x10)

@@ -1,10 +1,9 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <sys/uio.h>
 #include <errno.h>
-#include <skalibs/bytestr.h>
 #include <skalibs/buffer.h>
+#include <skalibs/siovec.h>
 #include <skalibs/skamisc.h>
 
 int getlnmax (buffer *b, char *d, size_t max, size_t *w, char sep)

@@ -5,7 +5,7 @@
 
 int dir_close (DIR *dir)
 {
-  register unsigned int done = 0 ;
+  unsigned int done = 0 ;
 doit:
   done++ ;
   if (!closedir(dir)) return 0 ;

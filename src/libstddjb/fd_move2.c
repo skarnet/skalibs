@@ -6,7 +6,7 @@
 
 int fd_move2 (int to1, int from1, int to2, int from2)
 {
-  register int tmp = from2 ;
+  int tmp = from2 ;
   if (to1 == from1) return fd_move(to2, from2) ;
   if (to2 == from2) return fd_move(to1, from1) ;
   if (from1 == from2) return (to1 == to2) ? fd_move(to1, from1) : (errno = EINVAL, -1) ;
@@ -18,14 +18,14 @@ int fd_move2 (int to1, int from1, int to2, int from2)
   }
   if (fd_copy(to1, from1) == -1)
   {
-    register int e = errno ;
+    int e = errno ;
     if (from2 != tmp) fd_close(tmp) ;
     errno = e ;
     return -1 ;
   }
   if (fd_copy(to2, tmp) == -1)
   {
-    register int e = errno ;
+    int e = errno ;
     fd_close(to1) ;
     if (from2 != tmp) fd_move(from2, tmp) ;
     errno = e ;

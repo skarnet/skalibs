@@ -1,9 +1,8 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <stdint.h>
+#include <string.h>
 #include <skalibs/uint32.h>
-#include <skalibs/bytestr.h>
 #include <skalibs/surf.h>
 
 #define ROTATE(x, b) (((x) << (b)) | ((x) >> (32 - (b))))
@@ -38,19 +37,19 @@ static void surfit (SURFSchedule *ctx)
 void surf (SURFSchedule *ctx, char *s, size_t n)
 {
   {
-    register size_t i = 32 - ctx->pos ;
+    size_t i = 32 - ctx->pos ;
     if (n < i) i = n ;
-    byte_copy(s, i, ctx->out + ctx->pos) ;
+    memcpy(s, ctx->out + ctx->pos, i) ;
     s += i ; n -= i ; ctx->pos += i ;
   }
   while (n > 32)
   {
     surfit(ctx) ;
-    byte_copy(s, 32, ctx->out) ;
+    memcpy(s, ctx->out, 32) ;
     s += 32 ; n -= 32 ;
   }
   if (!n) return ;
   surfit(ctx) ;
-  byte_copy(s, n, ctx->out) ;
+  memcpy(s, ctx->out, n) ;
   ctx->pos = n ;
 }

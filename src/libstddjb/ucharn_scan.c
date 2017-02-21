@@ -5,7 +5,7 @@
 
 size_t ucharn_scan (char const *s, char *key, size_t n)
 {
-  register unsigned int i = 0 ;
+  size_t i = 0 ;
   for (; i < n ; i++)
   {
     unsigned char c = fmtscan_num(s[2*i], 16) ;

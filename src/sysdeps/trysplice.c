@@ -18,7 +18,7 @@ int main (void)
 
   for (;;)
   {
-    register int r = splice(fd, 0, p[1], 0, N, 0) ;
+    ssize_t r = splice(fd, 0, p[1], 0, N, 0) ;
     if (r < 0) return 1 ;
     if (!r) break ;
     if (splice(p[0], 0, 1, 0, r, 0) < r) return 2 ;

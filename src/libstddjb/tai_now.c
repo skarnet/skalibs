@@ -7,7 +7,7 @@
 
 int tai_now (tai_t *t)
 {
-  register time_t u = time(0) ;
+  time_t u = time(0) ;
   if (u == (time_t)-1) return 0 ;
   return tai_from_time_sysclock(t, u) ;
 }

@@ -39,7 +39,7 @@ int selfpipe_trapset (sigset_t const *set)
   if (selfpipe_fd < 0) return (errno = EBADF, -1) ;
   for (; i <= NSIG ; i++)
   {
-    register int h = sigismember(set, i) ;
+    int h = sigismember(set, i) ;
     if (h < 0) continue ;
     if (h)
     {

@@ -1,15 +1,14 @@
 /* ISC license. */
 
+#include <string.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/env.h>
 
 char const *env_get2 (char const *const *envp, char const *s)
 {
-  unsigned int i ;
-  unsigned int len ;
-
+  size_t len, i ;
   if (!s) return 0 ;
-  len = str_len(s) ;
+  len = strlen(s) ;
   for (i = 0 ; envp[i] ; ++i)
     if (str_start(envp[i], s)
      && (envp[i][len] == '='))

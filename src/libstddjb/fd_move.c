@@ -6,7 +6,7 @@
 
 int fd_move (int to, int from)
 {
-  register int r ;
+  int r ;
   if (to == from) return 0 ;
   do
     r = dup2(from, to) ;

@@ -2,6 +2,7 @@
 
 /* MT-unsafe */
 
+#include <sys/types.h>
 #include <skalibs/random.h>
 
 void random_name (char *s, size_t n)

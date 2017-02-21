@@ -8,8 +8,8 @@
 
 void md5_final (MD5Schedule *ctx, char *digest /* 16 chars */)
 {
-  register unsigned int count = (ctx->bits[0] >> 3) & 0x3F ;
-  register unsigned char *p = ctx->in + count ;
+  unsigned int count = (ctx->bits[0] >> 3) & 0x3F ;
+  unsigned char *p = ctx->in + count ;
   *p++ = 0x80;
   count = 63 - count ;
   if (count < 8)

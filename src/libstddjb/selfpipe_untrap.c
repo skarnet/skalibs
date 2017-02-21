@@ -16,7 +16,7 @@ int selfpipe_untrap (int sig)
 {
   sigset_t ss = selfpipe_caught ;
   sigset_t blah ;
-  register int r = sigismember(&selfpipe_caught, sig) ;
+  int r = sigismember(&selfpipe_caught, sig) ;
   if (selfpipe_fd < 0) return (errno = EBADF, -1) ;
   if (r < 0) return -1 ;
   if (!r) return (errno = EINVAL, -1) ;
@@ -42,7 +42,7 @@ int selfpipe_untrap (int sig)
 
 int selfpipe_untrap (int sig)
 {
-  register int r = sigismember(&selfpipe_caught, sig) ;
+  int r = sigismember(&selfpipe_caught, sig) ;
   if (selfpipe_fd < 0) return (errno = EBADF, -1) ;
   if (r < 0) return -1 ;
   if (!r) return (errno = EINVAL, -1) ;

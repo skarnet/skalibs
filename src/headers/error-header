@@ -4,9 +4,7 @@
 #define ERROR_H
 
 #include <errno.h>
-#include <string.h>
 #include <skalibs/gccattributes.h>
 
-#define error_str(e) ((char const *)strerror(e))
 extern int error_temp (int) gccattr_const ;
 #define error_isagain(e) (((e) == EAGAIN) || ((e) == EWOULDBLOCK))

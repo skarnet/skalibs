@@ -7,6 +7,7 @@
 
  /* iobufferu */
 
+#include <sys/types.h>
 #include <skalibs/buffer.h>
 #include <skalibs/djbunix.h>
 
@@ -20,7 +21,7 @@ struct iobufferu_s
 } ;
 
 extern int iobufferu_init (iobufferu *, int, int) ;
-extern int iobufferu_fill (iobufferu *) ;
+extern ssize_t iobufferu_fill (iobufferu *) ;
 extern int iobufferu_flush (iobufferu *) ;
 extern void iobufferu_finish (iobufferu *) ;
 
@@ -50,17 +51,18 @@ struct iobufferk_s
   unsigned int nb : 2 ;
 } ;
 
-typedef int iobufferk_io_func_t (iobufferk *) ;
-typedef iobufferk_io_func_t *iobufferk_io_func_t_ref ;
+typedef int iobufferk_output_func_t (iobufferk *) ;
+typedef iobufferk_output_func_t *iobufferk_output_func_t_ref ;
+typedef ssize_t iobufferk_input_func_t (iobufferk *) ;
+typedef iobufferk_input_func_t *iobufferk_input_func_t_ref ;
 typedef void iobufferk_finish_func_t (iobufferk *) ;
 typedef iobufferk_finish_func_t *iobufferk_finish_func_t_ref ;
 
-extern iobufferk_io_func_t iobufferk_nosys ;
-extern iobufferk_io_func_t iobufferk_isworking ;
+extern iobufferk_output_func_t iobufferk_isworking ;
 
 extern int iobufferk_init (iobufferk *, int, int) ;
-extern iobufferk_io_func_t_ref const iobufferk_fill_f[4] ;
-extern iobufferk_io_func_t_ref const iobufferk_flush_f[4] ;
+extern iobufferk_input_func_t_ref const iobufferk_fill_f[4] ;
+extern iobufferk_output_func_t_ref const iobufferk_flush_f[4] ;
 extern iobufferk_finish_func_t_ref const iobufferk_finish_f[4] ;
 
 #define iobufferk_fill(k) (*iobufferk_fill_f[(k)->type])(k)
@@ -99,7 +101,7 @@ extern int iobuffer_kfromu (iobufferk *, iobufferu *) ;
 extern int iobuffer_salvage (iobuffer *) ;
 
 extern int iobuffer_init (iobuffer *, int, int) ;
-extern int iobuffer_fill (iobuffer *) ;
+extern ssize_t iobuffer_fill (iobuffer *) ;
 extern int iobuffer_flush (iobuffer *) ;
 
 #define iobuffer_finish(b) ((b)->isk ? iobufferk_finish(&(b)->x.k) : iobufferu_finish(&(b)->x.u))

@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <sys/uio.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/siovec.h>

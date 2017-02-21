@@ -7,8 +7,8 @@
 void rc4_init (RC4Schedule *r, char const *key, size_t ksize)
 {
   size_t j = 0 ;
-  register unsigned int i = 0 ;
-  register unsigned char c = 0;
+  unsigned int i = 0 ;
+  unsigned char c = 0;
 
   r->x = r->y = 0 ;
   for (; i < 256 ; i++) r->tab[i] = i ;

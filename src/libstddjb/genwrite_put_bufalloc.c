@@ -6,6 +6,5 @@
 
 ssize_t genwrite_put_bufalloc (void *target, char const *s, size_t len)
 {
-  register bufalloc *ba = target ;
-  return bufalloc_put(ba, s, len) ? (ssize_t)len : -1 ;
+  return bufalloc_put((bufalloc *)target, s, len) ? (ssize_t)len : -1 ;
 }

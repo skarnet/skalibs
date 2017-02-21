@@ -3,7 +3,7 @@
 #include <errno.h>
 #include <skalibs/error.h>
 
-int error_temp (register int e)
+int error_temp (int e)
 {
   if (error_isagain(e)) return 1 ;
   switch (e)

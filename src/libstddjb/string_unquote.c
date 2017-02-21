@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <string.h>
 #include <errno.h>
 #include <skalibs/skamisc.h>

@@ -7,8 +7,8 @@
 
 void sha256_final (SHA256Schedule *ctx, char *digest)
 {
-  register unsigned int i = 0 ;
-  register unsigned char *p = (unsigned char *)digest ;
+  unsigned int i = 0 ;
+  unsigned char *p = (unsigned char *)digest ;
   uint32_t bits[2] = { ctx->bits[0], ctx->bits[1] } ;
 
   sha256_feed(ctx, 0x80) ;

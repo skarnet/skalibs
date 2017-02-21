@@ -6,6 +6,5 @@
 
 ssize_t genwrite_put_stralloc (void *target, char const *s, size_t len)
 {
-  register stralloc *sa = target ;
-  return stralloc_catb(sa, s, len) ? (ssize_t)len : -1 ;
+  return stralloc_catb((stralloc *)target, s, len) ? (ssize_t)len : -1 ;
 }
