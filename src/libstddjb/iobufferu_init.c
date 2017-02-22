@@ -7,7 +7,7 @@
 
 int iobufferu_init (iobufferu *b, int fdin, int fdout)
 {
-  register char *x = alloc(IOBUFFERU_SIZE) ;
+  char *x = alloc(IOBUFFERU_SIZE) ;
   if (!x) return 0 ;
   b->buf = x ;
   buffer_init(&b->b[0], &fd_readv, fdin, x, IOBUFFERU_SIZE) ;

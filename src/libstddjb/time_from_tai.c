@@ -13,7 +13,7 @@
 
 int time_from_tai (time_t *u, tai_t const *t)
 {
-  register uint64_t uu = t->x - TAI_MAGIC ;
+  uint64_t uu = t->x - TAI_MAGIC ;
 #if SKALIBS_SIZEOFTIME < 8
   if ((uu >> 32) && (uu >> 32) != 0xffffffffUL)
     return (errno = EOVERFLOW, 0) ;

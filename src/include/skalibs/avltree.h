@@ -3,6 +3,7 @@
 #ifndef AVLTREE_H
 #define AVLTREE_H
 
+#include <stdint.h>
 #include <skalibs/functypes.h>
 #include <skalibs/gensetdyn.h>
 #include <skalibs/avlnode.h>
@@ -11,24 +12,24 @@ typedef struct avltree_s avltree, *avltree_ref ;
 struct avltree_s
 {
   gensetdyn x ;
-  unsigned int root ;
+  uint32_t root ;
   dtokfunc_t_ref dtok ;
   cmpfunc_t_ref kcmp ;
   void *external ;
 } ;
 
-#define AVLTREE_ZERO { .x = GENSETDYN_ZERO, .root = (unsigned int)-1, .dtok = 0, .kcmp = 0, .external = 0 }
+#define AVLTREE_ZERO { .x = GENSETDYN_ZERO, .root = UINT32_MAX, .dtok = 0, .kcmp = 0, .external = 0 }
 extern avltree const avltree_zero ;
 #define avltree_len(t) gensetdyn_n(&(t)->x)
-#define avltree_totalsize(t) ((t)->x.storage.len)
+#define avltree_totalsize(t) ((uint32_t)(t)->x.storage.len)
 #define avltree_nodes(t) ((avlnode *)(t)->x.storage.s)
-#define avltree_data(t, i) (avltree_nodes(t)[i].data)
+#define avltree_data(t, i) ((uint32_t)avltree_nodes(t)[i].data)
 #define avltree_root(t) ((t)->root)
 #define avltree_setroot(t, r) ((t)->root = (r))
 
 extern void avltree_free (avltree *) ;
-extern void avltree_init (avltree *, unsigned int, unsigned int, unsigned int, dtokfunc_t_ref, cmpfunc_t_ref, void *) ;
-#define AVLTREE_INIT(b, num, den, dtk, f, p) { .x = GENSETDYN_INIT(avlnode, (b), num, den), .root = (unsigned int)-1, .dtok = (dtk), .kcmp = (f), .external = (p) }
+extern void avltree_init (avltree *, uint32_t, uint32_t, uint32_t, dtokfunc_t_ref, cmpfunc_t_ref, void *) ;
+#define AVLTREE_INIT(b, num, den, dtk, f, p) { .x = GENSETDYN_INIT(avlnode, (b), num, den), .root = UINT32_MAX, .dtok = (dtk), .kcmp = (f), .external = (p) }
 
 #define avltree_searchnode(t, k) avlnode_searchnode(avltree_nodes(t), avltree_totalsize(t), avltree_root(t), k, (t)->dtok, (t)->kcmp, (t)->external)
 #define avltree_search(t, k, data) avlnode_search(avltree_nodes(t), avltree_totalsize(t), avltree_root(t), k, (data), (t)->dtok,  (t)->kcmp, (t)->external)
@@ -43,9 +44,9 @@ extern void avltree_init (avltree *, unsigned int, unsigned int, unsigned int, d
 #define avltree_min(t, data) avltree_extreme((t), 0, data)
 #define avltree_max(t, data) avltree_extreme((t), 1, data)
 
-extern int avltree_newnode (avltree *, unsigned int, unsigned int *) ;
+extern int avltree_newnode (avltree *, uint32_t, uint32_t *) ;
 #define avltree_insertnode(t, i) avltree_setroot(t, avlnode_insertnode(avltree_nodes(t), avltree_totalsize(t), avltree_root(t), i, (t)->dtok, (t)->kcmp, (t)->external))
-extern int avltree_insert (avltree *, unsigned int) ;
+extern int avltree_insert (avltree *, uint32_t) ;
 
 #define avltree_deletenode(t, i) avltree_delete(t, (*(t)->dtok)(avltree_data(t, i)))
 extern int avltree_delete (avltree *, void const *) ;

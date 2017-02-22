@@ -15,14 +15,14 @@ static void iobufferk_nop (iobufferk *k)
 
 static void iobufferk_finish_0 (iobufferk *k)
 {
-  register int e = errno ;
+  int e = errno ;
   fd_close(k->p[1]) ;
   errno = e ;
 }
 
 static void iobufferk_finish_3 (iobufferk *k)
 {
-  register int e = errno ;
+  int e = errno ;
   fd_close(k->p[1]) ;
   fd_close(k->p[0]) ;
   errno = e ;

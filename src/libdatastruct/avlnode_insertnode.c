@@ -1,17 +1,18 @@
 /* ISC license. */
 
+#include <stdint.h>
 #include <skalibs/functypes.h>
 #include <skalibs/avlnode.h>
 #include "avlnode-internal.h"
 
-unsigned int avlnode_insertnode (avlnode *s, unsigned int max, unsigned int r, unsigned int i, dtokfunc_t_ref dtok, cmpfunc_t_ref f, void *p)
+uint32_t avlnode_insertnode (avlnode *s, uint32_t max, uint32_t r, uint32_t i, dtokfunc_t_ref dtok, cmpfunc_t_ref f, void *p)
 {
-  unsigned int stack[AVLNODE_MAXDEPTH] ;
+  uint32_t stack[AVLNODE_MAXDEPTH] ;
   int spin[AVLNODE_MAXDEPTH] ;
   unsigned int sp = 0 ;
   
   {
-    register void const *k = (*dtok)(s[i].data, p) ;
+    void const *k = (*dtok)(s[i].data, p) ;
     for (; r < max ; sp++)
     {
       spin[sp] = avlnode_ufroms((*f)(k, (*dtok)(s[r].data, p), p)) ;

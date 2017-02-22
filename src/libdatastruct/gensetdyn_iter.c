@@ -1,19 +1,22 @@
 /* ISC license. */
 
+#include <sys/types.h>
+#include <stdint.h>
 #include <skalibs/bitarray.h>
 #include <skalibs/functypes.h>
 #include <skalibs/gensetdyn.h>
 
-unsigned int gensetdyn_iter_nocancel (gensetdyn *g, unsigned int n, iterfunc_t_ref f, void *stuff)
+uint32_t gensetdyn_iter_nocancel (gensetdyn *g, uint32_t n, iterfunc_t_ref f, void *stuff)
 {
  /*
     XXX: we may be called by a freeing function, so we cannot alloc -
     XXX: so pray that the bitarray fits in the stack.
  */
-  unsigned char bits[bitarray_div8(g->storage.len)] ;
-  unsigned int i = 0, j = 0 ;
-  register unsigned int *fl = genalloc_s(unsigned int, &g->freelist) ;
-  register unsigned int sp = genalloc_len(unsigned int, &g->freelist) ;
+  unsigned char bits[bitarray_div8(g->storage.len) ? bitarray_div8(g->storage.len) : 1] ;
+  size_t i = 0 ;
+  uint32_t j = 0 ;
+  uint32_t *fl = genalloc_s(uint32_t, &g->freelist) ;
+  size_t sp = genalloc_len(uint32_t, &g->freelist) ;
   bitarray_setn(bits, 0, g->storage.len) ;
   
   for (; i < sp ; i++) if (fl[i] < g->storage.len) bitarray_clear(bits, fl[i]) ;

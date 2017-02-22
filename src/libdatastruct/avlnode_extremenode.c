@@ -1,10 +1,11 @@
 /* ISC license. */
 
+#include <stdint.h>
 #include <skalibs/avlnode.h>
 
-unsigned int avlnode_extremenode (avlnode const *s, unsigned int max, unsigned int r, int h)
+uint32_t avlnode_extremenode (avlnode const *s, uint32_t max, uint32_t r, int h)
 {
-  register unsigned int oldr = r ;
+  uint32_t oldr = r ;
   for (; r < max ; oldr = r, r = s[r].child[h]) ;
   return oldr ;
 }

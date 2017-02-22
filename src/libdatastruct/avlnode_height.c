@@ -1,8 +1,9 @@
 /* ISC license. */
 
+#include <stdint.h>
 #include <skalibs/avlnode.h>
 
-unsigned int avlnode_height (avlnode const *s, unsigned int max, unsigned int r)
+unsigned int avlnode_height (avlnode const *s, uint32_t max, uint32_t r)
 {
   if (r >= max) return 0 ;
   else if (s[r].balance) return 1 + avlnode_height(s, max, s[r].child[s[r].balance > 0]) ;

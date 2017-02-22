@@ -3,6 +3,7 @@
 #ifndef AVLTREEN_H
 #define AVLTREEN_H
 
+#include <stdint.h>
 #include <skalibs/functypes.h>
 #include <skalibs/genset.h>
 #include <skalibs/avlnode.h>
@@ -14,20 +15,20 @@ typedef struct avltreen_s avltreen, *avltreen_ref ;
 struct avltreen_s
 {
   genset x ;
-  unsigned int root ;
+  uint32_t root ;
   dtokfunc_t_ref dtok ;
   cmpfunc_t_ref kcmp ;
   void *external ;
 } ;
 
-#define AVLTREEN_ZERO { .x = GENSET_ZERO, .root = (unsigned int)-1, .dtok = 0, .kcmp = 0, .external = 0 }
+#define AVLTREEN_ZERO { .x = GENSET_ZERO, .root = UINT32_MAX, .dtok = 0, .kcmp = 0, .external = 0 }
 #define avltreen_totalsize(t) ((t)->x.max)
 #define avltreen_len(t) genset_n(&(t)->x)
 #define avltreen_nodes(t) ((avlnode *)(t)->x.storage)
 #define avltreen_data(t, i) (avltreen_nodes(t)[i].data)
 #define avltreen_root(t) ((t)->root)
 #define avltreen_setroot(t, r) ((t)->root = (r))
-extern void avltreen_init (avltreen *, avlnode *, unsigned int *, unsigned int, dtokfunc_t_ref, cmpfunc_t_ref, void *) ;
+extern void avltreen_init (avltreen *, avlnode *, uint32_t *, uint32_t, dtokfunc_t_ref, cmpfunc_t_ref, void *) ;
 
 #define avltreen_searchnode(t, k) avlnode_searchnode(avltreen_nodes(t), avltreen_totalsize(t), avltreen_root(t), (k), (t)->dtok, (t)->kcmp, (t)->external)
 #define avltreen_search(t, k, data) avlnode_search(avltreen_nodes(t), avltreen_totalsize(t), avltreen_root(t), k, (data), (t)->dtok, (t)->kcmp, (t)->external)
@@ -42,9 +43,9 @@ extern void avltreen_init (avltreen *, avlnode *, unsigned int *, unsigned int, 
 #define avltreen_min(t, data) avltreen_extreme((t), 0, data)
 #define avltreen_max(t, data) avltreen_extreme((t), 1, data)
 
-extern unsigned int avltreen_newnode (avltreen *, unsigned int) ;
+extern uint32_t avltreen_newnode (avltreen *, uint32_t) ;
 #define avltreen_insertnode(t, i) avltreen_setroot(t, avlnode_insertnode(avltreen_nodes(t), avltreen_totalsize(t), avltreen_root(t), i, (t)->dtok, (t)->kcmp, (t)->external))
-extern int avltreen_insert (avltreen *, unsigned int) ;
+extern int avltreen_insert (avltreen *, uint32_t) ;
 
 #define avltreen_deletenode(t, i) avltreen_delete(t, avltreen_data(t, i))
 extern int avltreen_delete (avltreen *, void const *) ;
@@ -56,7 +57,7 @@ extern int avltreen_delete (avltreen *, void const *) ;
 
  /* avltreeb: everything in one place. Stack or BSS, or heap if you insist */
 
-#define AVLTREEB_TYPE(size) struct { avlnode storage[size] ; unsigned int freelist[size] ; avltreen info ; }
+#define AVLTREEB_TYPE(size) struct { avlnode storage[size] ; uint32_t freelist[size] ; avltreen info ; }
 #define avltreeb_init(t, size, dtk, f, p) avltreen_init(&(t)->info, (t)->storage, (t)->freelist, size, dtk, f, p)
 #define avltreeb_totalsize(t) avltreen_totalsize(&(t)->info)
 #define avltreeb_len(t) avltreen_len(&(t)->info)

@@ -12,7 +12,7 @@ int buffer_getvall (buffer *b, struct iovec const *v, unsigned int n, size_t *wr
   struct iovec vv[n ? n : 1] ;
   if (*written > len) return (errno = EINVAL, -1) ;
   {
-    register unsigned int i = n ;
+    unsigned int i = n ;
     while (i--) vv[i] = v[i] ;
   }
   siovec_seek(vv, n, *written) ;

@@ -16,7 +16,7 @@
 
 aligned_char *alloc (size_t n)
 {
-  register aligned_char *p = n ? (aligned_char *)malloc(n) : (aligned_char *)alloc_0 ;
+  aligned_char *p = n ? (aligned_char *)malloc(n) : (aligned_char *)alloc_0 ;
 #ifdef DEBUG_ALLOC
   static unsigned int counter = 0 ;
   PLM("alloc(%u): %p. Allocated: %u", n, p, ++counter) ;
@@ -26,7 +26,7 @@ aligned_char *alloc (size_t n)
 
 void alloc_free (void *p)
 {
-  register int e = errno ;
+  int e = errno ;
 #ifdef DEBUG_ALLOC
   static unsigned int counter = 0 ;
   PLM("alloc_free(%p). Freed: %u", p, ++counter) ;

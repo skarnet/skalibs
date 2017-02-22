@@ -1,10 +1,11 @@
 /* ISC license. */
 
+#include <stdint.h>
 #include <skalibs/avltree.h>
 
-int avltree_insert (avltree_ref t, unsigned int d)
+int avltree_insert (avltree *t, uint32_t d)
 {
-  unsigned int i ;
+  uint32_t i ;
   if (!avltree_newnode(t, d, &i)) return 0 ;
   avltree_insertnode(t, i) ;
   return 1 ;

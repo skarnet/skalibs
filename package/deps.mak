@@ -98,7 +98,7 @@ src/libdatastruct/avlnode_insertnode.o src/libdatastruct/avlnode_insertnode.lo: 
 src/libdatastruct/avlnode_iter.o src/libdatastruct/avlnode_iter.lo: src/libdatastruct/avlnode_iter.c src/include/skalibs/avlnode.h
 src/libdatastruct/avlnode_iter_withcancel.o src/libdatastruct/avlnode_iter_withcancel.lo: src/libdatastruct/avlnode_iter_withcancel.c src/include/skalibs/avlnode.h
 src/libdatastruct/avlnode_rotate.o src/libdatastruct/avlnode_rotate.lo: src/libdatastruct/avlnode_rotate.c src/libdatastruct/avlnode-internal.h src/include/skalibs/avlnode.h
-src/libdatastruct/avlnode_search.o src/libdatastruct/avlnode_search.lo: src/libdatastruct/avlnode_search.c src/include/skalibs/avlnode.h
+src/libdatastruct/avlnode_search.o src/libdatastruct/avlnode_search.lo: src/libdatastruct/avlnode_search.c src/include/skalibs/avlnode.h src/include/skalibs/functypes.h
 src/libdatastruct/avlnode_searchnode.o src/libdatastruct/avlnode_searchnode.lo: src/libdatastruct/avlnode_searchnode.c src/libdatastruct/avlnode-internal.h src/include/skalibs/avlnode.h src/include/skalibs/functypes.h
 src/libdatastruct/avlnode_zero.o src/libdatastruct/avlnode_zero.lo: src/libdatastruct/avlnode_zero.c src/include/skalibs/avlnode.h
 src/libdatastruct/avltree_delete.o src/libdatastruct/avltree_delete.lo: src/libdatastruct/avltree_delete.c src/include/skalibs/avlnode.h src/include/skalibs/avltree.h src/include/skalibs/gensetdyn.h

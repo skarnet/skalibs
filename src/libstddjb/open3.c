@@ -7,7 +7,7 @@
 
 int open3 (char const *s, unsigned int flags, unsigned int mode)
 {
-  register int r ;
+  int r ;
   do r = open(s, flags, mode) ;
   while ((r == -1) && (errno == EINTR)) ;
   return r ;

@@ -1,25 +1,26 @@
 /* ISC license. */
 
+#include <stdint.h>
 #include <errno.h>
 #include <skalibs/genset.h>
 
-void genset_init (genset *x, void *storage, unsigned int *freelist, unsigned int esize, unsigned int max)
+void genset_init (genset *x, void *storage, uint32_t *freelist, uint32_t esize, uint32_t max)
 {
-  register unsigned int i = 0 ;
+  uint32_t i = max ;
   x->storage = (char *)storage ;
   x->freelist = freelist ;
   x->esize = esize ;
   x->max = max ;
   x->sp = max ;
-  for (; i < max ; i++) freelist[i] = max - 1 - i ;
+  while (i--) freelist[i] = max - 1 - i ;
 }
 
-unsigned int genset_new (genset *x)
+uint32_t genset_new (genset *x)
 {
   return x->sp ? x->freelist[--x->sp] : (errno = ENOSPC, x->max) ;
 }
 
-int genset_delete (genset *x, unsigned int i)
+int genset_delete (genset *x, uint32_t i)
 {
   if ((i >= x->max) || (x->sp >= x->max)) return (errno = EINVAL, 0) ;
   x->freelist[x->sp++] = i ;

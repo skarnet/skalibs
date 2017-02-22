@@ -3,7 +3,7 @@
 #include <string.h>
 #include <skalibs/bufalloc.h>
 
-void bufalloc_clean (register bufalloc *ba)
+void bufalloc_clean (bufalloc *ba)
 {
   if (ba->p)
   {

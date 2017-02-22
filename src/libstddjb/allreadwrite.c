@@ -10,7 +10,7 @@ size_t allreadwrite (iofunc_t_ref op, int fd, char *buf, size_t len)
   size_t written = 0 ;
   while (len)
   {
-    register ssize_t w = (*op)(fd, buf, len) ;
+    ssize_t w = (*op)(fd, buf, len) ;
     if (w <= 0)
     {
       if (!w) errno = 0 ;

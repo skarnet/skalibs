@@ -14,7 +14,7 @@ uint64_t bitarray_countones (unsigned char const *c, size_t n)
   static unsigned char const table[256] = { B3(0) } ;
   size_t len = bitarray_div8(n) ;
   uint64_t total = 0 ;
-  register size_t i = 0 ;
+  size_t i = 0 ;
   if (n & 7) len-- ;
   for (; i < len ; i++) total += table[c[i]] ;
   if (n & 7) total += table[c[i] & ((1 << (n & 7)) - 1)] ;

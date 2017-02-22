@@ -1,11 +1,12 @@
 /* ISC license. */
 
+#include <stdint.h>
 #include <errno.h>
 #include <skalibs/avlnode.h>
 
-int avlnode_iter_withcancel (avlnode *tree, unsigned int max, unsigned int root, avliterfunc_t_ref f, avliterfunc_t_ref cancelf, void *stuff)
+int avlnode_iter_withcancel (avlnode *tree, uint32_t max, uint32_t root, avliterfunc_t_ref f, avliterfunc_t_ref cancelf, void *stuff)
 {
-  unsigned int cut = avlnode_iter_nocancel(tree, max, max, root, f, stuff) ;
+  uint32_t cut = avlnode_iter_nocancel(tree, max, max, root, f, stuff) ;
   if (cut != max)
   {
     int e = errno ;

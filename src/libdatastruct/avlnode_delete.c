@@ -1,20 +1,21 @@
 /* ISC license. */
 
+#include <stdint.h>
 #include <skalibs/functypes.h>
 #include <skalibs/avlnode.h>
 #include "avlnode-internal.h"
 
-unsigned int avlnode_delete (avlnode *s, unsigned int max, unsigned int *root, void const *k, dtokfunc_t_ref dtok, cmpfunc_t_ref f, void *p)
+uint32_t avlnode_delete (avlnode *s, uint32_t max, uint32_t *root, void const *k, dtokfunc_t_ref dtok, cmpfunc_t_ref f, void *p)
 {
-  unsigned int stack[AVLNODE_MAXDEPTH] ;
+  uint32_t stack[AVLNODE_MAXDEPTH] ;
   int spin[AVLNODE_MAXDEPTH] ;
   unsigned int sp = 0 ;
-  unsigned int r = *root ;
-  unsigned int itodel ;
+  uint32_t r = *root ;
+  uint32_t itodel ;
 
   for (; r < max ; sp++)
   {
-    register int c = (*f)(k, (*dtok)(s[r].data, p), p) ;
+    int c = (*f)(k, (*dtok)(s[r].data, p), p) ;
     if (!c) break ;
     spin[sp] = avlnode_ufroms(c) ;
     stack[sp] = r ;

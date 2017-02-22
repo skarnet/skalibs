@@ -1,12 +1,13 @@
 /* ISC license. */
 
+#include <stdint.h>
 #include <skalibs/avlnode.h>
 #include "avlnode-internal.h"
 
-unsigned int avlnode_doublerotate (avlnode_ref s, unsigned int max, unsigned int i, int h)
+uint32_t avlnode_doublerotate (avlnode_ref s, uint32_t max, uint32_t i, int h)
 {
-  register unsigned int j = s[i].child[!h] ;
-  register unsigned int k = s[j].child[h] ;
+  uint32_t j = s[i].child[!h] ;
+  uint32_t k = s[j].child[h] ;
   s[i].child[!h] = s[k].child[h] ;
   s[j].child[h] = s[k].child[!h] ;
   s[k].child[!h] = j ;

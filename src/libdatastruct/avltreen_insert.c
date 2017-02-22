@@ -1,10 +1,11 @@
 /* ISC license. */
 
+#include <stdint.h>
 #include <skalibs/avltreen.h>
 
-int avltreen_insert (avltreen *t, unsigned int d)
+int avltreen_insert (avltreen *t, uint32_t d)
 {
-  unsigned int i = avltreen_newnode(t, d) ;
+  uint32_t i = avltreen_newnode(t, d) ;
   if (i >= avltreen_totalsize(t)) return 0 ;
   avltreen_insertnode(t, i) ;
   return 1 ;

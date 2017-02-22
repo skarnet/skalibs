@@ -3,16 +3,19 @@
 #ifndef FUNCTYPES_H
 #define FUNCTYPES_H
 
-#include <sys/types.h>
+#include <stdint.h>
 #include <sys/uio.h>
 
 typedef int uintcmpfunc_t (unsigned int, unsigned int, void *) ;
 typedef uintcmpfunc_t *uintcmpfunc_t_ref ;
 
+typedef int uint32cmpfunc_t (uint32_t, uint32_t, void *) ;
+typedef uint32cmpfunc_t *uint32cmpfunc_t_ref ;
+
 typedef int cmpfunc_t (void const *, void const *, void *) ;
 typedef cmpfunc_t *cmpfunc_t_ref ;
 
-typedef void *dtokfunc_t (unsigned int, void *) ;
+typedef void *dtokfunc_t (uint32_t, void *) ;
 typedef dtokfunc_t *dtokfunc_t_ref ;
 
 typedef int iterfunc_t (char *, void *) ;

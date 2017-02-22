@@ -10,7 +10,7 @@
 
 size_t case_str (char const *haystack, char const *needle)
 {
-  register char *p = strcasestr(haystack, needle) ;
+  char *p = strcasestr(haystack, needle) ;
   return p ? p - haystack : strlen(haystack) ;
 }
 
