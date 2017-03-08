@@ -39,7 +39,7 @@ other time formats and user-friendly representations.
 <ul>
  <li> TAI time with 1-second precision is represented as a <a href="tai.html">tai_t</a>. </li>
  <li> TAI time with more precision is represented as a <a href="tai.html">tain_t</a>. </li>
- <li> UTC time is represented as an <a href="headers.html#uint64">unsigned 64-bit integer</a>
+ <li> UTC time is represented as an unsigned 64-bit integer
 equal to 2^62 added to the number of seconds since the Epoch. It's a trivial extension of
 the standard 32-bit Unix time that will expire in 2038. </li>
  <li> Broken-down GMT or local time with more than a 1-second precision is stored in a
@@ -52,7 +52,7 @@ field and an unsigned long <em>nano</em> field. </li>
 <h3> UTC </h3>
 
 <p>
-<code> int utc_from_tai (uint64 *u, tai_t const *t) </code> <br />
+<code> int utc_from_tai (uint64_t *u, tai_t const *t) </code> <br />
 Converts the absolute TAI64 time in *<em>t</em> to an UTC time, stored in
 *<em>u</em> as an unsigned 64-bit integer. *<em>u</em> is actually 2^62
 plus the number of seconds since the Epoch.
@@ -61,7 +61,7 @@ error occurs.
 </p>
 
 <p>
-<code> int tai_from_utc (tai_t *t, uint64 u) </code> <br />
+<code> int tai_from_utc (tai_t *t, uint64_t u) </code> <br />
 Converts the UTC time in <em>u</em>, stored
 as an unsigned 64-bit integer (2^62 plus the number of seconds since
 the Epoch), to a TAI64 time in *<em>t</em>.
@@ -72,7 +72,7 @@ error occurs.
 <h3> NTP </h3>
 
 <p>
-<code> int ntp_from_tain (uint64 *ntp, tain_t const *a) </code> <br />
+<code> int ntp_from_tain (uint64_t *ntp, tain_t const *a) </code> <br />
 Converts the absolute TAI64N time in *<em>a</em> to a 64-bit NTP timestamp,
 stored in *<em>ntp</em>. The higher 32 bits of *<em>ntp</em> represent a number
 of seconds ; the lower 32 bits are the fractional part of the timestamp.
@@ -82,7 +82,7 @@ error occurs (for instance:
 </p>
 
 <p>
-<code> int tain_from_ntp (tain_t *a, uint64 ntp) </code> <br />
+<code> int tain_from_ntp (tain_t *a, uint64_t ntp) </code> <br />
 Converts the NTP timestamp in <em>ntp</em> to a TAI64N time in
 *<em>a</em>.
 The function returns 1 if it succeeds, or 0 (and sets errno) if an
@@ -110,7 +110,7 @@ in a struct tm).
 </p>
 
 <p>
-<code> int localtm_from_utc (struct tm *tm, uint64 u, int lo) </code> <br />
+<code> int localtm_from_utc (struct tm *tm, uint64_t u, int lo) </code> <br />
 Converts the UTC time in <em>u</em> to broken-down GMT (if
 <em>lo</em> is zero) or local (if <em>lo</em> is nonzero) time in
 *<em>tm</em>.
@@ -120,7 +120,7 @@ in a struct tm).
 </p>
 
 <p>
-<code> int localtm_from_sysclock (struct tm *tm, uint64 u, int lo) </code> <br />
+<code> int localtm_from_sysclock (struct tm *tm, uint64_t u, int lo) </code> <br />
 Converts the time in <em>u</em> to broken-down GMT (if
 <em>lo</em> is zero) or local (if <em>lo</em> is nonzero) time in
 *<em>tm</em>. <em>u</em> will be interpreted as a TAI-10 value (with
@@ -131,7 +131,7 @@ in a struct tm).
 </p>
 
 <p>
-<code> int utc_from_localtm (uint64 *u, struct tm const *tm) </code> <br />
+<code> int utc_from_localtm (uint64_t *u, struct tm const *tm) </code> <br />
 Converts the broken-down local time in *<em>tm</em> to an UTC value
 in *<em>u</em>.
 The function returns 1 if it succeeds, or 0 (and sets errno) if an
@@ -147,7 +147,7 @@ error occurs.
 </p>
 
 <p>
-<code> int sysclock_from_localtm (uint64 *u, struct tm const *tm) </code> <br />
+<code> int sysclock_from_localtm (uint64_t *u, struct tm const *tm) </code> <br />
 Converts the broken-down local time in *<em>tm</em> to a value
 in *<em>u</em> - either TAI-10 or UTC depending on your system clock.
 The function returns 1 if it succeeds, or 0 (and sets errno) if an
@@ -163,7 +163,7 @@ a broken-down time and a nanosecond count:
 struct localtmn_s
 {
   struct tm tm ;
-  uint32 nano ;
+  uint32_t nano ;
 } ;
 </pre>
 

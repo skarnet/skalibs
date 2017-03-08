@@ -29,12 +29,12 @@ and implemented in the <tt>libskarnet.a</tt> or <tt>libskarnet.so</tt> library.
 
 <p>
  <tt>iopause</tt> is the skalibs API for event loop selection. It's a
-wrapper around the system's
+wrapper around the system's <tt>ppoll()</tt> or
 <a href="http://www.opengroup.org/onlinepubs/9699919799/functions/poll.html">poll()</a>
 (if available) or
 <a href="http://www.opengroup.org/onlinepubs/9699919799/functions/select.html">select()</a>
-(if <tt>poll()</tt> is unavailable) function. It
-works around some system-dependent quirks; also it works with
+(if neither <tt>ppoll()</tt> n or <tt>poll()</tt> is available) function.
+ It works around some system-dependent quirks; also it works with
 <em>absolute dates</em> instead of timeouts. This is a good thing:
 see below.
 </p>
@@ -175,22 +175,23 @@ it is recommended to use this function instead of the lower-level
 <h3> Underlying implementations </h3>
 
 <p>
- <tt>iopause</tt> is an alias to either <tt>iopause_poll</tt> or
-or <tt>iopause_select</tt>. By default, it is aliased to <tt>iopause_poll</tt>; to
-alias it to <tt>iopause_select</tt> instead, configure skalibs with the
-<tt>--enable-iopause-select</tt> option.
+ <tt>iopause</tt> is an alias to one of <tt>iopause_ppoll</tt>, <tt>iopause_poll</tt> or
+<tt>iopause_select</tt>. It is always aliased to <tt>iopause_ppoll</tt> if
+the <tt>ppoll()</tt> function is available on the system; else, it's aliased to
+<tt>iopause_poll</tt> by default, and users can alias it to <tt>iopause_select</tt>
+instead if they configure skalibs with the <tt>--enable-iopause-select</tt> option.
 </p>
 
 <p>
-Both <tt>iopause_poll</tt> and <tt>iopause_select</tt> are implemented on top of the
-<a href="http://man7.org/linux/man-pages/man2/ppoll.2.html">ppoll()</a> system call
-if it is available; but if it is not, then <tt>iopause_poll</tt> defaults to
-<a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/poll.html">poll()</a>,
-which has a more comfortable API than
+<a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/poll.html">poll()</a>
+has a more comfortable API than
 <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/select.html">select()</a>,
-but a maximum precision of 1 millisecond which might not be enough for some applications; whereas
-<tt>iopause_select</tt> defaults to select(), which incurs some CPU overhead for the
-API conversion, but has a 1 microsecond precision.
+but its maximum precision is 1 millisecond, which might not be enough for some applications;
+using <tt>select()</tt> instead incurs some CPU overhead for the API conversion, but has a
+1 microsecond precision.
+<a href="http://man7.org/linux/man-pages/man2/poll.2.html">ppoll()</a> gets the best of
+both worlds with the same interface model as <tt>poll()</tt> and a 1 nanosecond precision,
+which is why skalibs always uses it when available.
 </p>
 
 </body>

@@ -46,7 +46,7 @@ Definitions </h3>
 
 <ul>
  <li> A <em>biguint</em> <tt>x</tt> is a pointer to an array <tt>u</tt>
-of uint32, together with an unsigned integer <tt>n</tt> called its <em>length</em>.
+of uint32_t, together with an unsigned integer <tt>n</tt> called its <em>length</em>.
 <br><tt>x = (2^32)^0 * u[0] + (2^32)^1 * u[1] + ... + (2^32)^(n-1) * u[n-1]</tt>. </li>
  <li> Every <tt>u[i]</tt> is called a <em>limb</em>. </li>
  <li> The greatest integer <tt>i</tt> lesser than <tt>n</tt> for which
@@ -60,10 +60,10 @@ Basic operations </h3>
 <h4> Creating a biguint </h4>
 
 <p>
- Just declare <tt>uint32 x[n] ;</tt> - <em>n</em> being the length of the
+ Just declare <tt>uint32_t x[n] ;</tt> - <em>n</em> being the length of the
 biguint. You could also allocate <em>x</em> in the heap, possibly using a
-uint32 <a href="../libstddjb/genalloc.html">genalloc</a>. In the following,
-a biguint is always referred to as a <tt>uint32 *</tt> with its
+uint32_t <a href="../libstddjb/genalloc.html">genalloc</a>. In the following,
+a biguint is always referred to as a <tt>uint32_t *</tt> with its
 <tt>unsigned int</tt> length ; it must always be pre-allocated.
 </p>
 
@@ -77,7 +77,7 @@ EOVERFLOW.
 <h4> Setting it to zero </h4>
 
 <pre>
-uint32 *x ;
+uint32_t *x ;
 unsigned int n ;
 
  bu_zero(x, n) ;
@@ -90,9 +90,9 @@ unsigned int n ;
 <h4> Copying a biguint </h4>
 
 <pre>
-uint32 const *x ;
+uint32_t const *x ;
 unsigned int xn ;
-uint32 *y ;
+uint32_t *y ;
 unsigned int yn ;
 
   bu_copy(y, yn, x, xn) ;
@@ -107,7 +107,7 @@ the function returns 0 EOVERFLOW.
 <h4> Calculating the order </h4>
 
 <pre>
-uint32 const *x ;
+uint32_t const *x ;
 unsigned int n ;
 unsigned int r ;
 
@@ -122,9 +122,9 @@ unsigned int r ;
 <h4> Comparing two biguints </h4>
 
 <pre>
-uint32 const *a ;
+uint32_t const *a ;
 unsigned int an ;
-uint32 const *b ;
+uint32_t const *b ;
 unsigned int bn ;
 int r ;
 
@@ -143,7 +143,7 @@ I/O operations </h3>
 
 <pre>
 char *s ;
-uint32 const *x ;
+uint32_t const *x ;
 unsigned int n ;
 
   bu_pack(s, x, n) ;
@@ -160,7 +160,7 @@ are a little-endian representation of <tt>x</tt>.<br />
 
 <pre>
 char const *s ;
-uint32 *x ;
+uint32_t *x ;
 unsigned int n ;
 
   bu_unpack(s, x, n) ;
@@ -178,7 +178,7 @@ big-endian.
 
 <pre>
 char *s ;
-uint32 const *x ;
+uint32_t const *x ;
 unsigned int n ;
 
   bu_fmt(s, x, n) ;
@@ -195,7 +195,7 @@ starts with zeros. <tt>bu_fmt</tt> returns the number of bytes written.
 
 <pre>
 char const *s ;
-uint32 *x ;
+uint32_t *x ;
 unsigned int xn ;
 unsigned int z ;
 unsigned int len ;
@@ -231,11 +231,11 @@ Arithmetic operations </h3>
 <h4> Addition </h4>
 
 <pre>
-uint32 const *a ;
+uint32_t const *a ;
 unsigned int an ;
-uint32 const *b ;
+uint32_t const *b ;
 unsigned int bn ;
-uint32 *c ;
+uint32_t *c ;
 unsigned int cn ;
 unsigned char carrybefore ;
 unsigned char carryafter ;
@@ -258,11 +258,11 @@ written as <tt>(2^32)^cn - c</tt> and the function returns 0 EOVERFLOW.
 <h4> Multiplication </h4>
 
 <pre>
-uint32 const *a ;
+uint32_t const *a ;
 unsigned int an ;
-uint32 const *b ;
+uint32_t const *b ;
 unsigned int bn ;
-uint32 *c ;
+uint32_t *c ;
 unsigned int cn ;
 
  bu_mul(c, cn, a, an, b, bn) ;
@@ -278,13 +278,13 @@ If it is not the case, the result will be truncated and bu_mul will return
 <h4> Division </h4>
 
 <pre>
-uint32 const *a ;
+uint32_t const *a ;
 unsigned int an ;
-uint32 const *b ;
+uint32_t const *b ;
 unsigned int bn ;
-uint32 *q ;
+uint32_t *q ;
 unsigned int qn ;
-uint32 *r ;
+uint32_t *r ;
 unsigned int rn ;
 
  bu_div(a, an, b, bn, q, qn, r, rn) ;
@@ -302,11 +302,11 @@ quotient or the remainder, it returns 0 EOVERFLOW.
 <h4> GCD </h4>
 
 <pre>
-uint32 *r ;
+uint32_t *r ;
 unsigned int rn ;
-uint32 const *a ;
+uint32_t const *a ;
 unsigned int an ;
-uint32 const *b ;
+uint32_t const *b ;
 unsigned int bn ;
 
  bu_gcd(r, rn, a, an, b, bn) ;
@@ -327,7 +327,7 @@ negligible amount of CPU time.
 <h4> Left-shifts and right-shifts </h4>
 
 <pre>
-uint32 *x ;
+uint32_t *x ;
 unsigned int xn ;
 unsigned char carryafter ;
 unsigned char carrybefore ;
@@ -352,13 +352,13 @@ respectively <tt>bu_slbc(x, n, 0)</tt> and <tt>bu_srbc(x, n, 0)</tt>.
 <h4> Modular operations </h4>
 
 <pre>
-uint32 const *a ;
+uint32_t const *a ;
 unsigned int an ;
-uint32 const *b ;
+uint32_t const *b ;
 unsigned int bn ;
-uint32 *c ;
+uint32_t *c ;
 unsigned int cn ;
-uint32 const *m ;
+uint32_t const *m ;
 unsigned int mn ;
 
  bu_addmod(c, cn, a, an, b, bn, m, mn) ;

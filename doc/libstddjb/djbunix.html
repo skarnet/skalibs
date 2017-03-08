@@ -140,7 +140,7 @@ Safe wrapper around
 </p>
 
 <p>
-<code> int fd_chown (int fd, unsigned int uid, unsigned int gid) </code> <br />
+<code> int fd_chown (int fd, uid_t uid, gid_t gid) </code> <br />
 Safe wrapper around
 <a href="http://www.opengroup.org/onlinepubs/9699919799/functions/fchown.html">fchown()</a>.
 This function requires root privileges.
@@ -177,7 +177,7 @@ in Linux 2.6.17 and later </li>
 </ul>
 
 <p>
-<code> unsigned int fd_catn (int from, int to, unsigned int n) </code> <br />
+<code> size_t fd_catn (int from, int to, size_t n) </code> <br />
 Synchronously copies at most <em>n</em> bytes from fd <em>from</em> to fd <em>to</em>.
 Returns the total number of transmitted bytes; sets errno if this number
 is lesser than <em>n</em>. EOF is reported as EPIPE. See above for zero-copy
@@ -319,16 +319,6 @@ group database. This is a privileged operation.
 Returns -1 and sets errno if it fails; returns 0 if it succeeds.
 </p>
 
-<p>
-<code> int prot_gid (int gid) </code> <br />
-Alias to <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/setgid.html">setgid</a>.
-</p>
-
-<p>
-<code> int prot_uid (int uid) </code> <br />
-Alias to <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/setuid.html">setuid</a>.
-</p>
-
 <h3> Executable search and execution, and environment </h3>
 
 <p>
@@ -382,7 +372,7 @@ simply exiting 0.
 </p>
 
 <p>
-<code> void pathexec_r_name (char const *file, char const *const *argv, char const *const *envp, unsigned int envlen, char const *modifs, unsigned int modiflen) </code> <br />
+<code> void pathexec_r_name (char const *file, char const *const *argv, char const *const *envp, size_t envlen, char const *modifs, size_t modiflen) </code> <br />
 Alters <em>envp</em> (which does not have to be NULL-terminated, but the
 number <em>envlen</em> of elements must be provided) with the modifier
 string <em>modifs</em> of length <em>modiflen</em>, then performs
@@ -390,7 +380,7 @@ string <em>modifs</em> of length <em>modiflen</em>, then performs
 </p>
 
 <p>
-<code> void pathexec_r (char const *const *argv, char const *const *envp, unsigned int envlen, char const *modifs, unsigned int modiflen) </code> <br />
+<code> void pathexec_r (char const *const *argv, char const *const *envp, size_t envlen, char const *modifs, size_t modiflen) </code> <br />
 Same as <tt>pathexec_r_name</tt>, except that the <em>file</em> argument is read from <em>argv</em>[0].
 </p>
 
@@ -404,7 +394,7 @@ Returns 1 if it succeeds and 0 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> void pathexec_fromenv (char const *const *argv, char const *const *envp, unsigned int envlen) </code> <br />
+<code> void pathexec_fromenv (char const *const *argv, char const *const *envp, size_t envlen) </code> <br />
 Performs <tt>pathexec_r()</tt> with the given arguments and the hidden modifier
 string.
 </p>
@@ -430,7 +420,7 @@ to manipulate modifier strings and environments.
 <h3> Forking children </h3>
 
 <p>
-<code> int doublefork () </code> <br />
+<code> pid_t doublefork () </code> <br />
 Performs a double fork. Returns -1 if it fails (and
 sets errno, EINTR meaning that the intermediate process
 was killed by a signal), 0 if the current process is the grandchild,
@@ -512,7 +502,7 @@ be unchanged.
 </p>
 
 <p>
-<code> int wait_nohang (int *wstat) </code> <br />
+<code> pid_t wait_nohang (int *wstat) </code> <br />
 Instantly reaps one zombie, and stores the status information into
 *<em>wstat</em>.
 Returns the PID of the reaped zombie if it succeeds, 0 if there was
@@ -522,13 +512,13 @@ or -1 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> int waitpid_nointr (pid_t pid, int *wstat, int flags) </code> <br />
+<code> pid_t waitpid_nointr (pid_t pid, int *wstat, int flags) </code> <br />
 Safe wrapper around
 <a href="http://www.opengroup.org/onlinepubs/9699919799/functions/waitpid.html">waitpid()</a>.
 </p>
 
 <p>
-<code> int wait_pid_nohang (pid_t pid, int *wstat) </code> <br />
+<code> pid_t wait_pid_nohang (pid_t pid, int *wstat) </code> <br />
 Instantly reaps an undetermined number of zombies until it finds <em>pid</em>.
 Stores the status information for dead <em>pid</em> into *<em>wstat</em>.
 Returns <em>pid</em> if it succeeds, 0 if there was
@@ -587,33 +577,27 @@ Returns 1 if it succeeds, and 0 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> int openreadclose (char const *file, stralloc *sa, unsigned int dummy) </code> <br />
-Legacy interface for <code>openslurpclose(sa, file)</code>. The <em>dummy</em>
-argument is unused. Returns 0 if it succeeds, and -1 (and sets errno) if it fails.
-</p>
-
-<p>
-<code> int openreadnclose (char const *file, char *s, unsigned int n) </code> <br />
+<code> ssize_t openreadnclose (char const *file, char *s, size_t n) </code> <br />
 Reads at most <em>n</em> bytes from file <em>file</em> into preallocated
 buffer <em>s</em>. Returns -1 (and sets errno) if it fails; else returns the
 number of read bytes. If that number is not <em>n</em>, errno is set to EPIPE.
 </p>
 
 <p>
-<code> int openreadnclose_nb (char const *file, char *s, unsigned int n) </code> <br />
+<code> ssize_t openreadnclose_nb (char const *file, char *s, size_t n) </code> <br />
 Like <tt>openreadnclose</tt>, but can fail with EAGAIN if the file cannot be
 immediately read (for instance if it's a named pipe or other special file).
 </p>
 
 <p>
-<code> int openreadfileclose (char const *file, stralloc *sa, unsigned int n) </code> <br />
+<code> int openreadfileclose (char const *file, stralloc *sa, size_t n) </code> <br />
 Reads at most <em>n</em> bytes from file <em>file</em> into the *<em>sa</em>
 stralloc, which is grown (if needed) to <em>just</em> accommodate the file
 size. Returns 1 if it succeeds and 0 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> int openwritenclose_unsafe_internal (char const *file, char const *s, unsigned int len, uint64 *dev, uint64 *ino, unsigned char dosync) </code> <br />
+<code> int openwritenclose_unsafe_internal (char const *file, char const *s, size_t len, dev_t *dev, ino_t *ino, int dosync) </code> <br />
 Writes the <em>n</em> bytes stored at <em>s</em> into file <em>file</em>.
 The previous contents of <em>file</em> are destroyed even if the function
 fails. If <em>dosync</em> is nonzero, the new contents of <em>file</em>
@@ -623,16 +607,16 @@ The function returns 1 if it succeeds, or 0 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> int openwritenclose_unsafe (char const *file, char const *s, unsigned int len) <br />
-int openwritenclose_unsafe_sync (char const *file, char const *s, unsigned int len) <br />
-int openwritenclose_unsafe_devino (char const *file, char const *s, unsigned int len, uint64 *dev, uint64 *ino) <br />
-int openwritenclose_unsafe_devino_sync (char const *file, char const *s, unsigned int len, uint64 *dev, uint64 *ino) </code> <br />
+<code> int openwritenclose_unsafe (char const *file, char const *s, size_t len) <br />
+int openwritenclose_unsafe_sync (char const *file, char const *s, size_t len) <br />
+int openwritenclose_unsafe_devino (char const *file, char const *s, size_t len, dev_t *dev, ino_t *ino) <br />
+int openwritenclose_unsafe_devino_sync (char const *file, char const *s, size_t len, dev_t *dev, ino_t *ino) </code> <br />
 Trivial shortcuts around <tt>openwritenclose_unsafe_internal()</tt>. The
 reader can easily figure out what they do.
 </p>
 
 <p>
-<code> int openwritenclose_suffix_internal (char const *file, char const *s, unsigned int len, uint64 *dev, uint64 *ino, unsigned char dosync, char const *suffix) </code> <br />
+<code> int openwritenclose_suffix_internal (char const *file, char const *s, size_t len, dev_t *dev, ino_t *ino, int dosync, char const *suffix) </code> <br />
 Writes the <em>n</em> bytes stored at <em>s</em> into file <em>file</em>,
 by first writing into <em>filesuffix</em> and atomically renaming
 <em>filesuffix</em> to <em>file</em>. IOW, the old contents of <em>file</em>
@@ -645,43 +629,43 @@ The function returns 1 if it succeeds, or 0 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> int openwritenclose_suffix (char const *file, char const *s, unsigned int len, char const *suffix) <br />
-int openwritenclose_suffix_sync (char const *file, char const *s, unsigned int len, char const *suffix) <br />
-int openwritenclose_suffix_devino (char const *file, char const *s, unsigned int len, uint64 *dev, uint64 *ino, char const *suffix) <br />
-int openwritenclose_suffix_devino_sync (char const *file, char const *s, unsigned int len, uint64 *dev, uint64 *ino, char const *suffix) </code> <br />
+<code> int openwritenclose_suffix (char const *file, char const *s, size_t len, char const *suffix) <br />
+int openwritenclose_suffix_sync (char const *file, char const *s, size_t len, char const *suffix) <br />
+int openwritenclose_suffix_devino (char const *file, char const *s, size_t len, dev_t *dev, ino_t *ino, char const *suffix) <br />
+int openwritenclose_suffix_devino_sync (char const *file, char const *s, size_t len, dev_t *dev, ino_t *ino, char const *suffix) </code> <br />
 Trivial shortcuts around <tt>openwritenclose_suffix_internal()</tt>. The
 reader can easily figure out what they do.
 </p>
 
 <p>
-<code> int openwritevnclose_unsafe_internal (char const *file, siovec_t const *v, unsigned int vlen, uint64 *dev, uint64 *ino, unsigned char dosync) </code> <br />
+<code> int openwritevnclose_unsafe_internal (char const *file, struct iovec const *v, unsigned int vlen, dev_t *dev, ino_t *ino, int dosync) </code> <br />
 Like <tt>openwritenclose_unsafe_internal</tt>, but the content to
 write is taken from a
-<a href="siovec.html">siovec_t</a> scatter/gather array of <em>vlen</em>
+<a href="siovec.html">scatter/gather array</a> of <em>vlen</em>
 elements instead of a single string.
 </p>
 
 <p>
-<code> int openwritevnclose_unsafe (char const *file, siovec_t const *v, unsigned int vlen) <br />
-int openwritevnclose_unsafe_sync (char const *file, siovec_t const *v, unsigned int vlen) <br />
-int openwritevnclose_unsafe_devino (char const *file, siovec_t const *v, unsigned int vlen, uint64 *dev, uint64 *ino) <br />
-int openwritevnclose_unsafe_devino_sync (char const *file, siovec_t const *v, unsigned int vlen, uint64 *dev, uint64 *ino) </code> <br />
+<code> int openwritevnclose_unsafe (char const *file, struct iovec const *v, unsigned int vlen) <br />
+int openwritevnclose_unsafe_sync (char const *file, struct iovec const *v, unsigned int vlen) <br />
+int openwritevnclose_unsafe_devino (char const *file, struct iovec const *v, unsigned int vlen, dev_t *dev, ino_t *ino) <br />
+int openwritevnclose_unsafe_devino_sync (char const *file, struct iovec const *v, unsigned int vlen, dev_t *dev, ino_t *ino) </code> <br />
 Trivial wrappers around <tt>openwritevnclose_unsafe_internal()</tt>.
 </p>
 
 <p>
-<code> int openwritevnclose_suffix_internal (char const *file, siovec_t const *v, unsigned int vlen, uint64 *dev, uint64 *ino, unsigned char dosync, char const *suffix) </code> <br />
+<code> int openwritevnclose_suffix_internal (char const *file, struct iovec const *v, unsigned int vlen, dev_t *dev, ino_t *ino, int dosync, char const *suffix) </code> <br />
 Like <tt>openwritenclose_suffix_internal</tt>, but the content to
 write is taken from a
-<a href="siovec.html">siovec_t</a> scatter/gather array of <em>vlen</em>
+<a href="siovec.html">scatter/gather array</a> of <em>vlen</em>
 elements instead of a single string.
 </p>
 
 <p>
-<code> int openwritenclose_suffix (char const *file, char const *s, unsigned int len, char const *suffix) <br />
-int openwritenclose_suffix_sync (char const *file, char const *s, unsigned int len, char const *suffix) <br />
-int openwritenclose_suffix_devino (char const *file, char const *s, unsigned int len, uint64 *dev, uint64 *ino, char const *suffix) <br />
-int openwritenclose_suffix_devino_sync (char const *file, char const *s, unsigned int len, uint64 *dev, uint64 *ino, char const *suffix) </code> <br />
+<code> int openwritenclose_suffix (char const *file, char const *s, size_t len, char const *suffix) <br />
+int openwritenclose_suffix_sync (char const *file, char const *s, size_t len, char const *suffix) <br />
+int openwritenclose_suffix_devino (char const *file, char const *s, size_t len, dev_t *dev, ino_t *ino, char const *suffix) <br />
+int openwritenclose_suffix_devino_sync (char const *file, char const *s, size_t len, dev_t *dev, ino_t *ino, char const *suffix) </code> <br />
 Trivial wrappers around <tt>openwritevnclose_suffix_internal()</tt>.
 </p>
 
@@ -706,7 +690,7 @@ Returns 0 if it succeeds or -1 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> int rm_rf_in_tmp (stralloc *tmp, unsigned int n) </code> <br />
+<code> int rm_rf_in_tmp (stralloc *tmp, size_t n) </code> <br />
 Deletes a filesystem subtree, using *<em>tmp</em>
 as heap-allocated temporary space.
 Returns 0 if it succeeds or -1 (and sets errno) if it fails.
@@ -763,14 +747,14 @@ Returns 0 if it succeeds and -1 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> int sabasename (stralloc *sa, char const *s, unsigned int len) </code> <br />
+<code> int sabasename (stralloc *sa, char const *s, size_t len) </code> <br />
 Appends the basename of filename <em>s</em> (of length <em>len</em>)
 to *<em>sa</em>.
 Returns 1 if it succeeds and 0 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> int sadirname (stralloc *sa, char const *s, unsigned int len) </code> <br />
+<code> int sadirname (stralloc *sa, char const *s, size_t len) </code> <br />
 Appends the dirname of filename <em>s</em> (of length <em>len</em>)
 to *<em>sa</em>.
 Returns 1 if it succeeds and 0 (and sets errno) if it fails.

@@ -37,7 +37,6 @@ Optional features:
   --enable-slashpackage[=ROOT]  assume /package installation at ROOT [disabled]
 
 $package options:
-  --enable-libc-replacements    use independent low-level primitives [disabled]
   --disable-ipv6                do not build IPv6 support [enabled]
   --enable-iopause-select       prefer select() over poll() for iopause implementation [disabled]
   --enable-tai-clock            assume the system clock is TAI-10 instead of UTC [disabled]
@@ -226,7 +225,6 @@ sysdeps=
 shared=true
 static=true
 slashpackage=false
-replacements=false
 ipv6=true
 select=false
 taiclock=false
@@ -266,8 +264,6 @@ for arg ; do
     --enable-slashpackage=*) sproot=${arg#*=} ; slashpackage=true ; ;;
     --enable-slashpackage) sproot= ; slashpackage=true ;;
     --disable-slashpackage) sproot= ; slashpackage=false ;;
-    --enable-libc-replacements|--enable-libc-replacements=yes) replacements=true ;;
-    --disable-libc-replacements|--enable-libc-replacements=no) replacements=false ;;
     --enable-ipv6|--enable-ipv6=yes) ipv6=true ;;
     --disable-ipv6|--enable-ipv6=no) ipv6=false ;;
     --enable-iopause-select|--enable-iopause-select=yes) select=true ;;
@@ -598,11 +594,6 @@ cat <<EOF
 #define ${package_macro_name}_SPROOT "$sproot"
 #define ${package_macro_name}_HOME "$home"
 EOF
-if $replacements ; then
-  echo "#define ${package_macro_name}_FLAG_REPLACE_LIBC"
-else
-  echo "#undef ${package_macro_name}_FLAG_REPLACE_LIBC"
-fi
 if $taiclock ; then
   echo "#define ${package_macro_name}_FLAG_CLOCKISTAI"
 else

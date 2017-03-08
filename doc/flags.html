@@ -58,27 +58,6 @@ to the installed skalibs shared libraries. </li>
  If this option is not given, no slashpackage support will be provided.
 </p>
 
-<a name="replace-libc"><h3> --enable-libc-replacements </h3></a>
-
-<p>
- If this option is given, then the low-level components
-of <a href="libstddjb/">libstddjb</a>, such as <tt>byte_copy()</tt>,
-will be built using independent, failsafe implementations; skalibs will
-avoid relying on the libc when possible.
-</p>
-
-<p>
- If this option is not given, then native libc primitives such as
-<a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/memmove.html">memmove()</a>
-will be used for the low-levels components of libstddjb. This is the default.
-</p>
-
-<p>
- This flag should be set if your libc has known bugs or you are uncertain
-of it for some reason. Standard libcs on modern systems have been thoroughly
-tested, so it's usually safe, and faster, to stick to the default.
-</p>
-
 <a name="clockistai"><h3> --enable-tai-clock </h3></a>
 
 <p>

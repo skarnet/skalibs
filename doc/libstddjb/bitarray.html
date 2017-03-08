@@ -47,69 +47,69 @@ can grow in size should be stored in a
 <h2> Functions </h2>
 
 <p>
-<code> unsigned int bitarray_div8 (unsigned int n) </code> <br />
+<code> size_t bitarray_div8 (size_t n) </code> <br />
 Returns the minimum number of bytes needed to store a field of <em>n</em> bits.
 
 </p>
 
 <p>
-<code> void bitarray_clearsetn (unsigned char *s, unsigned int start, unsigned int len, int h) </code> <br />
+<code> void bitarray_clearsetn (unsigned char *s, size_t start, size_t len, int h) </code> <br />
 Sets (if <em>h</em> is nonzero) or clears (if <em>h</em> is zero)
 <em>len</em> bits in field <em>s</em>, starting at bit <em>start</em>.
 </p>
 
 <p>
-<code> void bitarray_clearn (unsigned char *s, unsigned int start, unsigned int len) </code> <br />
+<code> void bitarray_clearn (unsigned char *s, size_t start, size_t len) </code> <br />
 Clears <em>len</em> bits in field <em>s</em>, starting at bit <em>start</em>.
 </p>
 
 <p>
-<code> void bitarray_setn (unsigned char *s, unsigned int start, unsigned int len) </code> <br />
+<code> void bitarray_setn (unsigned char *s, size_t start, size_t len) </code> <br />
 Sets <em>len</em> bits in field <em>s</em>, starting at bit <em>start</em>.
 </p>
 
 <p>
-<code> int bitarray_peek (unsigned char const *s, unsigned int n) </code> <br />
+<code> int bitarray_peek (unsigned char const *s, size_t n) </code> <br />
 Returns the value of the <em>n</em>th bit in field <em>s</em>.
 </p>
 
 <p>
-<code> void bitarray_poke (unsigned char *s, unsigned int n, int h) </code> <br />
+<code> void bitarray_poke (unsigned char *s, size_t n, int h) </code> <br />
 Sets (if <em>h</em> is nonzero) or clears (if <em>h</em> is zero)
 the <em>n</em>th bit in field <em>s</em>.
 </p>
 
 <p>
-<code> void bitarray_clear (unsigned char *s, unsigned int n) </code> <br />
+<code> void bitarray_clear (unsigned char *s, size_t n) </code> <br />
 Clears the <em>n</em>th bit in field <em>s</em>.
 </p>
 
 <p>
-<code> void bitarray_set (unsigned char *s, unsigned int n) </code> <br />
+<code> void bitarray_set (unsigned char *s, size_t n) </code> <br />
 Sets the <em>n</em>th bit in field <em>s</em>.
 </p>
 
 <p>
-<code> int bitarray_testandpoke (unsigned char *s, unsigned int n, int h) </code> <br />
+<code> int bitarray_testandpoke (unsigned char *s, size_t n, int h) </code> <br />
 Sets (if <em>h</em> is nonzero) or clears (if <em>h</em> is zero)
 the <em>n</em>th bit in field <em>s</em>,
 and returns the previous value of that bit.
 </p>
 
 <p>
-<code> int bitarray_testandclear (unsigned char *s, unsigned int n) </code> <br />
+<code> int bitarray_testandclear (unsigned char *s, size_t n) </code> <br />
 Clear the <em>n</em>th bit in field <em>s</em>,
 and returns the previous value of that bit.
 </p>
 
 <p>
-<code> int bitarray_testandset (unsigned char *s, unsigned int n) </code> <br />
+<code> int bitarray_testandset (unsigned char *s, size_t n) </code> <br />
 Sets the <em>n</em>th bit in field <em>s</em>,
 and returns the previous value of that bit.
 </p>
 
 <p>
-<code> unsigned int bitarray_first (unsigned char const *s, unsigned int len, int h) </code> <br />
+<code> size_t bitarray_first (unsigned char const *s, size_t len, int h) </code> <br />
 Returns the number of the first set (if <em>h</em> is nonzero) or clear
 (if <em>h</em> is zero) bit in <em>s</em>, <em>len</em> being
 the total number of bits. If all bits in <em>s</em> are the negation of
@@ -117,26 +117,26 @@ the total number of bits. If all bits in <em>s</em> are the negation of
 </p>
 
 <p>
-<code> unsigned int bitarray_firstclear (unsigned char const *s, unsigned int len) </code> <br />
+<code> size_t bitarray_firstclear (unsigned char const *s, size_t len) </code> <br />
 Returns the number of the first clear bit in <em>s</em>, <em>len</em> being
 the total number of bits. If all bits in <em>s</em> are set, <em>len</em> is returned.
 </p>
 
 <p>
-<code> unsigned int bitarray_firstclear_skip (unsigned char const *s, unsigned int len, unsigned int skip) </code> <br />
+<code> size_t bitarray_firstclear_skip (unsigned char const *s, size_t len, size_t skip) </code> <br />
 Like <tt>bitarray_firstclear</tt>, but the first <em>skip</em> bits are
 ignored: the function cannot return less than <em>skip</em>. It is a
 programming error if <em>skip</em> &gt; <em>len</em>.
 </p>
 
 <p>
-<code> unsigned int bitarray_firstset (unsigned char const *s, unsigned int len) </code> <br />
+<code> size_t bitarray_firstset (unsigned char const *s, size_t len) </code> <br />
 Returns the number of the first set bit in <em>s</em>, <em>len</em> being
 the total number of bits. If all bits in <em>s</em> are clear, <em>len</em> is returned.
 </p>
 
 <p>
-<code> unsigned int bitarray_firstset_skip (unsigned char const *s, unsigned int len, unsigned int skip) </code> <br />
+<code> size_t bitarray_firstset_skip (unsigned char const *s, size_t len, size_t skip) </code> <br />
 Like <tt>bitarray_firstset</tt>, but the first <em>skip</em> bits are
 ignored: the function cannot return less than <em>skip</em>. It is a
 programming error if <em>skip</em> &gt; <em>len</em>.

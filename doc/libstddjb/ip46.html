@@ -74,21 +74,21 @@ except if IPv6 is unavailable, in which case it returns 0 ENOSYS.
 </p>
 
 <p>
-<code> unsigned int ip46_fmt (char *s, ip46_t const *a) </code> <br />
+<code> size_t ip46_fmt (char *s, ip46_t const *a) </code> <br />
 Formats the address in *<em>a</em> into the string <em>s</em>, which
 must be preallocated. Returns the number of bytes written. The address
 will be accordingly formatted as IPv4 or IPv6.
 </p>
 
 <p>
-<code> unsigned int ip46_scan (char const *s, ip46_t *a) </code> <br />
+<code> size_t ip46_scan (char const *s, ip46_t *a) </code> <br />
 Scans the string <em>s</em> for an IPv4 or IPv6 address. If it finds
 one, writes it into *<em>a</em> and returns the number of bytes read.
 If it cannot, returns 0.
 </p>
 
 <p>
-<code> unsigned int ip46_scanlist (ip46_t *list, unsigned int max, char const *s, unsigned int *n) </code> <br />
+<code> size_t ip46_scanlist (ip46_t *list, size_t max, char const *s, size_t *n) </code> <br />
 Scans the string <em>s</em> for a list of comma-, semicolon-, space-, tab- or
 newline-separated IPv4 or IPv6 addresses, up to a maximum of <em>max</em>. It
 stores them into the (preallocated) ip46_t array pointed to by <em>list</em>.
@@ -97,24 +97,24 @@ IP list at all), and stores the number of found and scanned addresses into *<em>
 </p>
 
 <p>
-<code> int socket_connect46 (int fd, ip46_t *a, uint16 port) </code> <br />
+<code> int socket_connect46 (int fd, ip46_t *a, uint16_t port) </code> <br />
 Connects the socket <em>fd</em> to address *<em>a</em> and port <em>port</em>.
 Returns 0 in case of success, and -1 (and sets errno) in case of failure.
 </p>
 
 <p>
-<code> int socket_bind46 (int fd, ip46_t *a, uint16 port) </code> <br />
+<code> int socket_bind46 (int fd, ip46_t *a, uint16_t port) </code> <br />
 Binds the socket <em>fd</em> to address *<em>a</em> and port <em>port</em>.
 Returns 0 in case of success, and -1 (and sets errno) in case of failure.
 </p>
 
 <p>
-<code> int socket_bind46_reuse (int fd, ip46_t *a, uint16 port) </code> <br />
+<code> int socket_bind46_reuse (int fd, ip46_t *a, uint16_t port) </code> <br />
 Same as the previous function, with the SO_REUSEADDR option.
 </p>
 
 <p>
-<code> int socket_deadlineconnstamp46 (int fd, ip46_t const *a, uint16 port, tain_t const *deadline, tain_t *stamp) </code> <br />
+<code> int socket_deadlineconnstamp46 (int fd, ip46_t const *a, uint16_t port, tain_t const *deadline, tain_t *stamp) </code> <br />
 Attempts to synchronously connect the socket <em>fd</em> to address a<em>a</em>
 and port <em>port</em>. Returns 1 if it succeeds and 0 (and sets errno)
 if it fails. <em>stamp</em> must contain an accurate enough
@@ -124,35 +124,35 @@ returns 0 ETIMEDOUT.
 </p>
 
 <p>
-<code> int socket_recv46 (int fd, char *s, unsigned int len, ip46_t *a, uint16 *port) </code> <br />
+<code> ssize_t socket_recv46 (int fd, char *s, size_t len, ip46_t *a, uint16_t *port) </code> <br />
 Reads a datagram from socket <em>fd</em>. The message is stored into buffer <em>s</em>
 of max length <em>len</em>, and stores the sender information into address *<em>a</em>
 and port *<em>port</em>. Returns the length of the read datagram, or -1 if it fails.
 </p>
 
 <p>
-<code> int socket_send46 (int fd, char const *s, unsigned int len, ip46_t const *a, uint16 port) </code> <br />
+<code> ssize_t socket_send46 (int fd, char const *s, size_t len, ip46_t const *a, uint16_t port) </code> <br />
 Writes a datagram to socket <em>fd</em>. The message is read from buffer <em>s</em>
 of length <em>len</em>, and the recipient information is address *<em>a</em>
 and port <em>port</em>. Returns the number of written bytes, or -1 if it fails.
 </p>
 
 <p>
-<code> int socket_local46 (int fd, ip46_t *a, uint16 *port) </code> <br />
+<code> int socket_local46 (int fd, ip46_t *a, uint16_t *port) </code> <br />
 Gets the local information about bound socket <em>fd</em>: the local IP
 address is stored into *<em>a</em> and the local port into *<em>port</em>.
 Returns 0 in case of success, and -1 (and sets errno) in case of failure.
 </p>
 
 <p>
-<code> int socket_remote46 (int fd, ip46_t *a, uint16 *port) </code> <br />
+<code> int socket_remote46 (int fd, ip46_t *a, uint16_t *port) </code> <br />
 Gets the peer information about connected socket <em>fd</em>: the remote IP
 address is stored into *<em>a</em> and the remote port into *<em>port</em>.
 Returns 0 in case of success, and -1 (and sets errno) in case of failure.
 </p>
 
 <p>
-<code> int socket_recvnb46 (int fd, char *s, unsigned int len, ip46_t *a, uint16 *port,
+<code> ssize_t socket_recvnb46 (int fd, char *s, size_t len, ip46_t *a, uint16_t *port,
 tain_t const *deadline, tain_t *stamp) </code> <br />
 Like <tt>socket_recv46</tt>, except that the function blocks until a datagram
 is received. *<em>stamp</em> must be an accurate enough approximation of the
@@ -161,7 +161,7 @@ arrived by absolute date *<em>deadline</em>, the function returns -1 ETIMEOUT.
 </p>
 
 <p>
-<code> int socket_sendnb46 (int fd, char const *s, unsigned int len, ip46_t const *a, uint16 port,
+<code> ssize_t socket_sendnb46 (int fd, char const *s, size_t len, ip46_t const *a, uint16_t port,
 tain_t const *deadline, tain_t *stamp) </code> <br />
 Like <tt>socket_send46</tt>, except that the function blocks until a datagram
 has been effectively sent. *<em>stamp</em> must be an accurate enough approximation of the

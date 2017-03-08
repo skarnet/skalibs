@@ -65,7 +65,7 @@ should favor them over basic interfaces like <tt>malloc()</tt>.
 <h2> Functions </h2>
 
 <p>
-<code> char *alloc (unsigned int len) </code> <br />
+<code> char *alloc (size_t len) </code> <br />
 Allocates a block of <em>len</em> bytes in the heap and returns a pointer
 to the start of the block (or NULL if it failed). Though the pointer type
 is <tt>char *</tt>, the block of memory is correctly aligned for any type
@@ -80,7 +80,7 @@ Frees the block of heap memory pointed to by <em>p</em>.
 </p>
 
 <p>
-<code> int alloc_realloc (char **p, unsigned int newlen) </code> <br />
+<code> int alloc_realloc (char **p, size_t newlen) </code> <br />
 Redimension the block of heap memory pointed to by *<em>p</em> to
 <em>newlen</em> bytes. The block may have to be moved, in which case
 *<em>p</em> will be modified. Normally returns 1; if an error occurred,
@@ -89,7 +89,7 @@ modified.
 </p>
 
 <p>
-<code> int alloc_re (char **p, unsigned int oldlen, unsigned int newlen) </code> <br />
+<code> int alloc_re (char **p, size_t oldlen, size_t newlen) </code> <br />
 Legacy interface for reallocation. It works like <tt>alloc_realloc</tt>,
 except that the original block length must be provided as the <em>oldlen</em>
 argument.

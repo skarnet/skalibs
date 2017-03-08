@@ -93,7 +93,7 @@ A stralloc should be initialized to STRALLOC_ZERO before its first use.
 <h2> Functions </h2>
 
 <p>
-<code> int stralloc_catb (stralloc *sa, char const *s, unsigned int len) </code> <br />
+<code> int stralloc_catb (stralloc *sa, char const *s, size_t len) </code> <br />
 Appends the <em>len</em> bytes pointed to by <em>s</em> to the end of the
 memory zone handled by *<em>sa</em>, automatically allocating more memory
 if needed. Returns 1 if it succeeds, and 0 if it fails.

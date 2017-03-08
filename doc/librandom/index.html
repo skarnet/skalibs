@@ -46,7 +46,7 @@ function prototypes.
   unsigned char c ;
   uint32_t max ;
   uint32_t n ;
-  unsigned int b ;
+  size_t b ;
   char data[at least b] ;
   int r ;
 
@@ -88,7 +88,7 @@ Bytes are not permuted inside chunks.
 </p>
 
 <p>
-<code> void random_name (char *s, unsigned int n) </code> <br />
+<code> void random_name (char *s, size_t n) </code> <br />
 Writes <em>n</em> random readable ASCII characters into <em>s</em>:
 letters, numbers, hyphens or underscores. Does not terminate with a
 null character.

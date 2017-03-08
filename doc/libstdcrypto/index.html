@@ -33,6 +33,11 @@ operations are provided:
   <li> sha512 </li>
 </ul>
 
+<p>
+ Please bear in mind that rc4 and md5 are broken, and that sha1 is about to be.
+Do not use them in security-critical applications.
+</p>
+
 <h2> Compiling </h2>
 
 <ul>
@@ -52,10 +57,10 @@ RC4 </h3>
 <pre>
   RC4Schedule ctx ;
   unsigned char const *key ;
-  unsigned int keylen ;
+  size_t keylen ;
   unsigned char const *in ;
   unsigned char *out ;
-  unsigned int len ;
+  size_t len ;
 
   rc4_init(&amp;ctx, key, keylen) ;
   rc4(&amp;ctx, in, out, len) ;
@@ -75,7 +80,7 @@ MD5 </h3>
 <pre>
   MD5Schedule ctx ;
   char const *message ;
-  unsigned int messagelen ;
+  size_t messagelen ;
   char digest[16] ;
 
   md5_init(&amp;ctx) ;
@@ -95,7 +100,7 @@ SHA1 </h3>
 <pre>
   SHA1Schedule ctx ;
   char const *message ;
-  unsigned int messagelen ;
+  size_t messagelen ;
   unsigned char digest[20] ;
 
   sha1_init(&amp;ctx) ;
@@ -115,7 +120,7 @@ SHA256 </h3>
 <pre>
   SHA256Schedule ctx ;
   char const *message ;
-  unsigned int messagelen ;
+  size_t messagelen ;
   char digest[32] ;
 
   sha256_init(&amp;ctx) ;
@@ -135,7 +140,7 @@ SHA512 </h3>
 <pre>
   SHA512Schedule ctx ;
   char const *message ;
-  unsigned int messagelen ;
+  size_t messagelen ;
   char digest[64] ;
 
   sha512_init(&amp;ctx) ;

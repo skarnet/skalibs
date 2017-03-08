@@ -78,6 +78,9 @@ functions writing into <a href="buffer.html">buffers</a> or <a href="bufalloc.ht
 how to safely handle signals in event loops) </li>
  <li> <a href="sgetopt.html">skalibs/sgetopt.h</a>: <tt>getopt()</tt>-style command-line options management </li>
  <li> <a href="sig.html">skalibs/sig.h</a>: safe signal management </li>
+ <li> <a href="siovec.html">skalibs/siovec.h</a>: scatter/gather IO primitives working with an
+<a href="http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/sys_uio.h.html">iovec</a>
+structure </li>
  <li> <a href="skamisc.html">skalibs/skamisc.h</a>: general string quoting and parsing; miscellaneous, unclassifiable functions </li>
  <li> <a href="socket.html">skalibs/socket.h</a>: INET domain sockets </li>
  <li> <a href="stralloc.html">skalibs/stralloc.h</a>: advanced management of dynamically allocated strings </li>
@@ -97,11 +100,9 @@ includes them.
  <li> skalibs/uint16.h: operations with 16-bit unsigned integers </li>
  <li> skalibs/uint32.h: operations with 32-bit unsigned integers </li>
  <li> skalibs/uint64.h: operations with 64-bit unsigned integers </li>
- <li> skalibs/ushort.h: portable helpers for the "unsigned short" basic type </li>
- <li> skalibs/uint.h: portable helpers for the "unsigned int" basic type </li>
- <li> skalibs/ulong.h: portable helpers for the "unsigned long" basic type </li>
+ <li> skalibs/types.h: portable helpers for common Unix types: size_t,
+uid_t, gid_t, pid_t, time_t, dev_t and ino_t. </li>
  <li> skalibs/error.h: portable macros for errno management </li>
- <li> skalibs/gidstuff.h: helpers for the "gid_t" type </li>
  <li> skalibs/setgroups.h: stub for the setgroups() function, for systems that do not define it</li>
  <li> <a href="ip46.html">skalibs/ip46.h</a>: IPv4/IPv6 abstraction layer </li>
 </ul>
@@ -115,12 +116,10 @@ are not associated with any code and are mostly self-explanatory:
  <li> <a href="gccattributes.html">skalibs/gccattributes.h</a>: wrappers around a few GCC-specific optimizations </li>
  <li> skalibs/diuint.h: for associative arrays of unsigned integers </li>
  <li> skalibs/diuint32.h: for associative arrays of 32-bit unsigned integers </li>
+ <li> skalibs/disize.h: for associative arrays of size_t </li>
  <li> skalibs/environ.h: declaration of the <em>environ</em> variable </li>
  <li> skalibs/nsig.h: the number of system signals, for systems that do not define it </li>
  <li> skalibs/nonposix.h: feature test macros for non-POSIX-compliant systems </li>
- <li> skalibs/siovec.h:
-<a href="http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/sys_uio.h.html">iovec</a>-like
-structure for scatter/gather IO operations </li>
 </ul>
 
 </body>
