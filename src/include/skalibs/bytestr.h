@@ -10,10 +10,8 @@
 #define T8(x)   ((x) & 0xffU)
 
 #include <skalibs/sysdeps.h>
-#include <sys/types.h>
 #include <string.h>
 #include <strings.h>
-#include <skalibs/uint64.h>
 
 #define byte_copy(to, n, from) memmove(to, (from), n)
 #define byte_copyr(to, n, from) memmove(to, (from), n)
@@ -36,14 +34,14 @@
 extern size_t byte_chr (char const *, size_t, int) gccattr_pure ;
 extern size_t byte_rchr (char const *, size_t, int) gccattr_pure ;
 extern size_t byte_in (char const *, size_t, char const *, size_t) gccattr_pure ;
-#define byte_equal(s, n, t) (!byte_diff((s), (n), (t)))
+#define byte_equal(s, n, t) (!memcmp(s, (t), n))
 extern size_t byte_count (char const *, size_t, char) gccattr_pure ;
 
-#define str_diffb(a, n, b) str_diffn(a, (b), n)
+#define str_diffb(a, n, b) strncmp(a, (b), n)
 extern size_t str_chr (char const *, int) gccattr_pure ;
 extern size_t str_rchr (char const *, int) gccattr_pure ;
 extern int str_start (char const *, char const *) gccattr_pure ;
-#define str_equal(s, t) (!str_diff(s, t))
+#define str_equal(s, t) (!strcmp(s, t))
 extern size_t str_strn (char const *, size_t, char const *, size_t) gccattr_pure ;
 
 extern void case_lowers (char *) ;
@@ -51,8 +49,8 @@ extern void case_lowerb (char *, size_t) ;
 extern void case_uppers (char *) ;
 extern void case_upperb (char *, size_t) ;
 #define case_diffb(a, n, b) case_diffn(a, (b), n)
-#define case_equals(a, b) (!case_diffs(a, b))
-#define case_equalb(a, n, b) (!case_diffb(a, n, b))
+#define case_equals(a, b) (!strcasecmp(a, b))
+#define case_equalb(a, n, b) (!strcasecmp(a, (b), n))
 #define case_starts(s, t) case_startb(s, strlen(s), t)
 extern int case_startb (char const *, size_t, char const *) gccattr_pure ;
 extern size_t case_str (char const *, char const *) gccattr_pure ;

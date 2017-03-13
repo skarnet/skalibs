@@ -3,7 +3,6 @@
 #ifndef SIOVEC_H
 #define SIOVEC_H
 
-#include <sys/types.h>
 #include <sys/uio.h>
 #include <skalibs/gccattributes.h>
 

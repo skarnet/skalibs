@@ -3,7 +3,6 @@
 #ifndef GENALLOC_H
 #define GENALLOC_H
 
-#include <sys/types.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/functypes.h>
 

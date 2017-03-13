@@ -3,7 +3,6 @@
 #ifndef IOPAUSE_H
 #define IOPAUSE_H
 
-#include <sys/types.h>
 #include <poll.h>
 #include <skalibs/tai.h>
 

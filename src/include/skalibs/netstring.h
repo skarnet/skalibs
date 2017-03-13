@@ -3,7 +3,6 @@
 #ifndef NETSTRING_H
 #define NETSTRING_H
 
-#include <sys/types.h>
 #include <sys/uio.h>
 #include <string.h>
 #include <skalibs/buffer.h>

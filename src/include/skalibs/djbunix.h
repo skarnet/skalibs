@@ -6,8 +6,6 @@
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <sys/wait.h>
-#include <sys/stat.h>
-#include <unistd.h>
 #include <skalibs/gccattributes.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/envalloc.h>

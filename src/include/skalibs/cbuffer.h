@@ -3,7 +3,6 @@
 #ifndef CBUFFER_H
 #define CBUFFER_H
 
-#include <sys/types.h>
 #include <sys/uio.h>
 #include <string.h>
 #include <skalibs/gccattributes.h>

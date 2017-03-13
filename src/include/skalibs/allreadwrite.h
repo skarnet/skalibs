@@ -3,10 +3,8 @@
 #ifndef ALLREADWRITE_H
 #define ALLREADWRITE_H
 
-#include <sys/types.h>
 #include <sys/uio.h>
 #include <skalibs/functypes.h>
-#include <skalibs/siovec.h>
 
 extern ssize_t sanitize_read (ssize_t) ;
 extern ssize_t unsanitize_read (ssize_t) ;

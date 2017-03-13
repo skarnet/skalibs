@@ -1,7 +1,5 @@
 /* ISC license. */
 
-/* MT-unsafe */
-
 #ifndef SELFPIPE_H
 #define SELFPIPE_H
 

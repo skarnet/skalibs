@@ -4,15 +4,15 @@
 
 src/include/skalibs/alarm.h: src/include/skalibs/tai.h
 src/include/skalibs/alloc.h: src/include/skalibs/gccattributes.h
-src/include/skalibs/allreadwrite.h: src/include/skalibs/functypes.h src/include/skalibs/siovec.h
+src/include/skalibs/allreadwrite.h: src/include/skalibs/functypes.h
 src/include/skalibs/avlnode.h: src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h
 src/include/skalibs/avltree.h: src/include/skalibs/avlnode.h src/include/skalibs/functypes.h src/include/skalibs/gensetdyn.h
 src/include/skalibs/avltreen.h: src/include/skalibs/avlnode.h src/include/skalibs/functypes.h src/include/skalibs/genset.h
 src/include/skalibs/biguint.h: src/include/skalibs/gccattributes.h
-src/include/skalibs/bitarray.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint64.h
+src/include/skalibs/bitarray.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/bufalloc.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/buffer.h: src/include/skalibs/allreadwrite.h src/include/skalibs/cbuffer.h src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h
-src/include/skalibs/bytestr.h: src/include/skalibs/config.h src/include/skalibs/gccattributes.h src/include/skalibs/sysdeps.h src/include/skalibs/uint64.h
+src/include/skalibs/bytestr.h: src/include/skalibs/config.h src/include/skalibs/gccattributes.h src/include/skalibs/sysdeps.h
 src/include/skalibs/cbuffer.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/cdb.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/cdb_make.h: src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h
@@ -170,7 +170,7 @@ src/libstddjb/allwritev.o src/libstddjb/allwritev.lo: src/libstddjb/allwritev.c 
 src/libstddjb/baprintf.o src/libstddjb/baprintf.lo: src/libstddjb/baprintf.c src/include/skalibs/bufalloc.h src/include/skalibs/lolstdio.h
 src/libstddjb/bitarray_and.o src/libstddjb/bitarray_and.lo: src/libstddjb/bitarray_and.c src/include/skalibs/bitarray.h
 src/libstddjb/bitarray_clearsetn.o src/libstddjb/bitarray_clearsetn.lo: src/libstddjb/bitarray_clearsetn.c src/include/skalibs/bitarray.h
-src/libstddjb/bitarray_count.o src/libstddjb/bitarray_count.lo: src/libstddjb/bitarray_count.c src/include/skalibs/bitarray.h src/include/skalibs/uint64.h
+src/libstddjb/bitarray_count.o src/libstddjb/bitarray_count.lo: src/libstddjb/bitarray_count.c src/include/skalibs/bitarray.h
 src/libstddjb/bitarray_firstclear.o src/libstddjb/bitarray_firstclear.lo: src/libstddjb/bitarray_firstclear.c src/include/skalibs/bitarray.h
 src/libstddjb/bitarray_firstclear_skip.o src/libstddjb/bitarray_firstclear_skip.lo: src/libstddjb/bitarray_firstclear_skip.c src/include/skalibs/bitarray.h
 src/libstddjb/bitarray_firstset.o src/libstddjb/bitarray_firstset.lo: src/libstddjb/bitarray_firstset.c src/include/skalibs/bitarray.h

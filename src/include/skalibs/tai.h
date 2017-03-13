@@ -3,7 +3,6 @@
 #ifndef TAI_H
 #define TAI_H
 
-#include <sys/types.h>
 #include <stdint.h>
 #include <time.h>
 #include <sys/time.h>

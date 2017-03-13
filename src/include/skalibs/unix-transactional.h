@@ -4,8 +4,8 @@
 #define UNIX_TRANSACTIONAL_H
 
 #include <sys/types.h>
-#include <sys/uio.h>
 #include <sys/stat.h>
+#include <sys/uio.h>
 #include <skalibs/uint64.h>
 #include <skalibs/stralloc.h>
 
@@ -59,7 +59,7 @@ extern int dd_open_write (dirdescriptor_t *, char const *, unsigned int) ;
 extern int dd_close (dirdescriptor_t *) ;  /* after dd_open_read */
 extern void dd_cancel (dirdescriptor_t *) ; /* after dd_open_write */
 extern int dd_commit (dirdescriptor_t *) ; /* after dd_open_write */
-extern int dd_commit_devino (dirdescriptor_t *, uint64 *, uint64 *) ; /* after dd_open_write */
+extern int dd_commit_devino (dirdescriptor_t *, dev_t *, ino_t *) ; /* after dd_open_write */
 
 #define dd_openreadnclose(blah, file, s, len) openreadnclose_at((blah)->fd, file, s, len)
 #define dd_openslurpclose(blah, file, sa) openslurpclose_at((blah)->fd, file, sa)

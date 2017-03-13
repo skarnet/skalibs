@@ -3,9 +3,8 @@
 #ifndef BITARRAY_H
 #define BITARRAY_H
 
-#include <sys/types.h>
+#include <string.h>
 #include <skalibs/gccattributes.h>
-#include <skalibs/uint64.h>
 
 #define bitarray_div8(n) ((n) ? 1U + (((n) - 1) >> 3) : 0U)
 
@@ -31,7 +30,7 @@ extern size_t bitarray_firstclear_skip (unsigned char const *, size_t, size_t) g
 extern size_t bitarray_firstset_skip (unsigned char const *, size_t, size_t) gccattr_pure ;
 #define bitarray_first_skip(s, n, k, h) ((h) ? bitarray_firstset_skip(s, n, k) : bitarray_firstclear_skip(s, n, k))
 
-extern uint64_t bitarray_countones (unsigned char const *, size_t) gccattr_pure ;
+extern size_t bitarray_countones (unsigned char const *, size_t) gccattr_pure ;
 
 extern void bitarray_not (unsigned char *, size_t, size_t) ;
 extern void bitarray_and (unsigned char *, unsigned char const *, unsigned char const *, size_t) ;

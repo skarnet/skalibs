@@ -3,9 +3,7 @@
 #ifndef BUFFER_H
 #define BUFFER_H
 
-#include <sys/types.h>
 #include <sys/uio.h>
-#include <string.h>
 #include <skalibs/gccattributes.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/cbuffer.h>

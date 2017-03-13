@@ -51,7 +51,7 @@
 
 
  /* old versions of BSD: system headers are not self-contained,
-      starting with sys/types.h is the usual workaround */
+      starting with sys/types.h normally always works. */
 
 #include <sys/types.h>
 

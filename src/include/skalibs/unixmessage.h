@@ -3,7 +3,6 @@
 #ifndef UNIXMESSAGE_H
 #define UNIXMESSAGE_H
 
-#include <sys/types.h>
 #include <sys/uio.h>
 #include <stdint.h>
 #include <skalibs/gccattributes.h>
