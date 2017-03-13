@@ -1,7 +1,6 @@
 /* ISC license. */
 
 #include <skalibs/nonposix.h>
-#include <stdint.h>
 #include <string.h>
 #include <errno.h>
 #include <sys/socket.h>

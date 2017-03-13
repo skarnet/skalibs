@@ -1,8 +1,6 @@
 /* ISC license. */
 
-#include <stdint.h>
 #include <errno.h>
-#include <skalibs/functypes.h>
 #include <skalibs/avlnode.h>
 
 int avlnode_search (avlnode const *s, uint32_t max, uint32_t r, void const *k, uint32_t *data, dtokfunc_t_ref dtok, cmpfunc_t_ref f, void *p)

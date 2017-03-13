@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <string.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/skamisc.h>
 

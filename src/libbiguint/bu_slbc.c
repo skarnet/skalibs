@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <stdint.h>
 #include <skalibs/biguint.h>
 
 int bu_slbc (uint32_t *a, unsigned int n, int carry)

@@ -1,9 +1,7 @@
 /* ISC license. */
 
 #include <errno.h>
-#include <stdint.h>
 #include <skalibs/error.h>
-#include <skalibs/tai.h>
 #include <skalibs/socket.h>
 
 int socket_deadlineconnstamp6 (int s, char const *ip, uint16_t port, tain_t const *deadline, tain_t *stamp)

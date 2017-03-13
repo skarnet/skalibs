@@ -2,7 +2,6 @@
 
 #include <skalibs/nonposix.h>
 #include <sys/socket.h>
-#include <stdint.h>
 #include <skalibs/socket.h>
 
 int socket_bind4_reuse (int s, char const *ip, uint16_t port)

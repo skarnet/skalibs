@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <stdint.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/genalloc.h>
 #include <skalibs/gensetdyn.h>

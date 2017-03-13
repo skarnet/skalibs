@@ -1,11 +1,8 @@
 /* ISC license. */
 
-#include <sys/types.h>
-#include <stdint.h>
 #include <errno.h>
 #include <skalibs/kolbak.h>
 #include <skalibs/skaclient.h>
-#include <skalibs/tai.h>
 #include "skaclient-internal.h"
 
 int skaclient_startf (

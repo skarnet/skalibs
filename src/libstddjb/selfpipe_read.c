@@ -3,7 +3,6 @@
 /* MT-unsafe */
 
 #include <skalibs/sysdeps.h>
-#include <sys/types.h>
 #include <skalibs/allreadwrite.h>
 #include "selfpipe-internal.h"
 #include <skalibs/selfpipe.h>

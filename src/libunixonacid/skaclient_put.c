@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/skaclient.h>
 #include <skalibs/unixmessage.h>
 

@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <fcntl.h>
 #include <skalibs/unix-transactional.h>
 

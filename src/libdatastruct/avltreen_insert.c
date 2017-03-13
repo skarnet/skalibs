@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <stdint.h>
 #include <skalibs/avltreen.h>
 
 int avltreen_insert (avltreen *t, uint32_t d)

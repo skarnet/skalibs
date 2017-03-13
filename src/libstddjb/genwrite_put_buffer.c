@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/buffer.h>
 #include <skalibs/genwrite.h>
 

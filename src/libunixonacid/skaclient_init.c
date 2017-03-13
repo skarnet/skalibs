@@ -1,9 +1,7 @@
 /* ISC license. */
 
-#include <sys/types.h>
-#include <skalibs/kolbak.h>
-#include <skalibs/skaclient.h>
 #include <skalibs/unixmessage.h>
+#include <skalibs/skaclient.h>
 #include "skaclient-internal.h"
 
 int skaclient_init (

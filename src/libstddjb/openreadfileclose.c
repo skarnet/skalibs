@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <sys/stat.h>
 #include <errno.h>
 #include <skalibs/allreadwrite.h>

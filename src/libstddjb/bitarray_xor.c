@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/bitarray.h>
 
 void bitarray_xor (unsigned char *c, unsigned char const *a, unsigned char const *b, size_t n)

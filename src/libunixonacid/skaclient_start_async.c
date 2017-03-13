@@ -1,8 +1,6 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <errno.h>
-#include <stdint.h>
 #include <skalibs/error.h>
 #include <skalibs/kolbak.h>
 #include <skalibs/skaclient.h>

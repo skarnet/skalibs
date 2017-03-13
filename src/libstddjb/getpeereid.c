@@ -11,7 +11,6 @@
 /* implementation with SO_PEERCRED */
 
 #include <skalibs/nonposix.h>
-#include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <skalibs/getpeereid.h>
@@ -34,8 +33,8 @@ int getpeereid (int s, uid_t *u, gid_t *g)
 /* implementation with getpeerucred() */
 
 #include <skalibs/nonposix.h>
-#include <sys/types.h>
 #include <ucred.h>
+#include <skalibs/getpeereid.h>
 
 int getpeereid (int s, uid_t *u, gid_t *g)
 {
@@ -51,7 +50,6 @@ int getpeereid (int s, uid_t *u, gid_t *g)
 
 /* can't find a real implementation, make a stub */
 
-#include <sys/types.h>
 #include <errno.h>
 #include <skalibs/getpeereid.h>
 

@@ -5,7 +5,6 @@
 #include <skalibs/buffer.h>
 #include <skalibs/functypes.h>
 #include <skalibs/skamisc.h>
-#include <skalibs/tai.h>
 #include <skalibs/unix-timed.h>
 
 struct blah_s

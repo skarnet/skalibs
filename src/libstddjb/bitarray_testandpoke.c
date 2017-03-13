@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/bitarray.h>
 
 int bitarray_testandpoke (unsigned char *s, size_t n, int h)

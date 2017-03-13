@@ -3,7 +3,6 @@
 #ifndef FMTSCAN_INTERNAL_H
 #define FMTSCAN_INTERNAL_H
 
-#include <sys/types.h>
 #include <stdint.h>
 #include <string.h>
 #include <errno.h>

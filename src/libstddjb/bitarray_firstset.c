@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/bitarray.h>
 
 size_t bitarray_firstset (unsigned char const *s, size_t max)

@@ -5,7 +5,6 @@
 #define _BSD_SOURCE
 #endif
 
-#include <sys/types.h>
 #include <string.h>  /* Solaris... */
 #include <errno.h>
 #include <sys/select.h>

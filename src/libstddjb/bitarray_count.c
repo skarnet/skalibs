@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/bitarray.h>
 
 #define B0(n) n, n+1, n+1, n+2

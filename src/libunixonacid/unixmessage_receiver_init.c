@@ -1,7 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
-#include <errno.h>
 #include <skalibs/cbuffer.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/unixmessage.h>

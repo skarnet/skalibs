@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <stdint.h>
 #include <skalibs/avlnode.h>
 
 uint32_t avlnode_extremenode (avlnode const *s, uint32_t max, uint32_t r, int h)

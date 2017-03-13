@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/djbunix.h>
 

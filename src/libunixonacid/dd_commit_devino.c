@@ -1,8 +1,6 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <sys/stat.h>
-#include <skalibs/types.h>
 #include <skalibs/unix-transactional.h>
 
 int dd_commit_devino (dirdescriptor_t *dd, dev_t *dev, ino_t *ino)

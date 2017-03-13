@@ -1,9 +1,5 @@
 /* ISC license. */
 
-/* MT-unsafe */
-
-#include <sys/types.h>
-#include <skalibs/types.h>
 #include <skalibs/skamisc.h>
 #include <skalibs/unix-transactional.h>
 

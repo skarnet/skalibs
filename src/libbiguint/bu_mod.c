@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <stdint.h>
 #include <skalibs/biguint.h>
 
 int bu_mod (uint32_t *a, unsigned int an, uint32_t const *b, unsigned int bn)

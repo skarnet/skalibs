@@ -19,7 +19,6 @@ int open2_at (int dirfd, char const *file, int flags)
 
 #else
 
-#include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <errno.h>

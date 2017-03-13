@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <stdint.h>
 #include <skalibs/cdb.h>
 
 uint32_t cdb_hashadd (uint32_t h, unsigned char c)

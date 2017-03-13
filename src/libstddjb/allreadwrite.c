@@ -1,8 +1,6 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <errno.h>
-#include <skalibs/functypes.h>
 #include <skalibs/allreadwrite.h>
 
 size_t allreadwrite (iofunc_t_ref op, int fd, char *buf, size_t len)

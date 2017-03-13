@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/buffer.h>
 
 ssize_t buffer_putflush (buffer *b, char const *s, size_t len)

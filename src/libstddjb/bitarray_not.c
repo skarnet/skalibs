@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/bitarray.h>
 
 void bitarray_not (unsigned char *s, size_t a, size_t b)

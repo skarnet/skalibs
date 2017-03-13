@@ -19,7 +19,6 @@ int open3_at (int dirfd, char const *file, int flags, unsigned int mode)
 
 #else
 
-#include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <errno.h>

@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/sha1.h>
 #include "sha1-internal.h"
 

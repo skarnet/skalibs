@@ -16,7 +16,6 @@ uint32_t random_uint32 (uint32_t n)
 
 #else
 
-#include <stdint.h>
 #include <skalibs/uint32.h>
 #include <skalibs/random.h>
 

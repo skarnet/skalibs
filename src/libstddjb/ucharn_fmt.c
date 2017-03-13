@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/fmtscan.h>
 
 size_t ucharn_fmt (char *s, char const *key, size_t n)

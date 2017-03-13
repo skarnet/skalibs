@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/uint32.h>
 #include <skalibs/djbtime.h>
 

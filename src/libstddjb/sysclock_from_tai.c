@@ -2,7 +2,6 @@
 
 #include <errno.h>
 #include <skalibs/config.h>
-#include <skalibs/uint64.h>
 #include <skalibs/tai.h>
 
 #ifdef SKALIBS_FLAG_CLOCKISTAI

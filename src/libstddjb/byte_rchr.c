@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/bytestr.h>
 
 size_t byte_rchr (char const *s, size_t n, int c)

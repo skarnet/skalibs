@@ -1,7 +1,6 @@
 /* ISC license. */
 
 #include <time.h>
-#include <skalibs/tai.h>
 #include <skalibs/djbtime.h>
 
 int localtmn_from_tain (localtmn_t *l, tain_t const *a, int tz)

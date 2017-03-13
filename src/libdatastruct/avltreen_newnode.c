@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <stdint.h>
 #include <skalibs/genset.h>
 #include <skalibs/avlnode.h>
 #include <skalibs/avltreen.h>

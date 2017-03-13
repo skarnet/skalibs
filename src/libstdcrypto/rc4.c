@@ -1,7 +1,6 @@
 /* ISC license. */
 /* Thanks to Thomas Pornin <pornin@bolet.org> */
 
-#include <sys/types.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/rc4.h>
 

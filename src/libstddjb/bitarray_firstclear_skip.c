@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/bitarray.h>
 
 size_t bitarray_firstclear_skip (unsigned char const *s, size_t max, size_t skip)

@@ -1,7 +1,6 @@
 /* ISC license. */
 
 #include <skalibs/functypes.h>
-#include <skalibs/tai.h>
 #include <skalibs/unix-timed.h>
 #include <skalibs/unixmessage.h>
 

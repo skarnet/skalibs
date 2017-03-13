@@ -1,7 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
-#include <stdint.h>
 #include <errno.h>
 #include <skalibs/uint16.h>
 #include <skalibs/fmtscan.h>

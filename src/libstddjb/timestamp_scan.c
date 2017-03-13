@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/tai.h>
 
 size_t timestamp_scan (char const *s, tain_t *a)

@@ -1,7 +1,5 @@
 /* ISC license. */
 
-#include <stdint.h>
-#include <skalibs/functypes.h>
 #include <skalibs/avlnode.h>
 #include "avlnode-internal.h"
 

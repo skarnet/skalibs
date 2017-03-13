@@ -2,7 +2,6 @@
 
 #include <errno.h>
 #include <skalibs/error.h>
-#include <skalibs/tai.h>
 #include <skalibs/iopause.h>
 #include <skalibs/webipc.h>
 

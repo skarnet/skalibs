@@ -1,7 +1,6 @@
 /* ISC license. */
 
 #include <errno.h>
-#include <skalibs/tai.h>
 #include <skalibs/skaclient.h>
 
 int skaclient_syncify (skaclient_t *a, tain_t const *deadline, tain_t *stamp)

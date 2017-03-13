@@ -27,8 +27,6 @@ int lstat_at (int dirfd, char const *file, struct stat *st)
 
  /* OpenBSD plz. lstat() is POSIX. */
 #include <skalibs/nonposix.h>
-
-#include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <errno.h>

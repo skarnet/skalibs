@@ -1,6 +1,5 @@
  /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/genalloc.h>
 #include <skalibs/disize.h>
 #include <skalibs/djbunix.h>

@@ -1,10 +1,7 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <errno.h>
 #include <skalibs/allreadwrite.h>
-#include <skalibs/functypes.h>
-#include <skalibs/tai.h>
 #include <skalibs/iopause.h>
 #include <skalibs/unix-timed.h>
 

@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <stdint.h>
 #include <skalibs/tai.h>
 #include <skalibs/socket.h>
 

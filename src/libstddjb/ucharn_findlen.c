@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/fmtscan.h>
 
 size_t ucharn_findlen (char const *s)

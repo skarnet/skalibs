@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/bytestr.h>
 
 size_t byte_count (char const *s, size_t len, char b)

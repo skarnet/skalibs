@@ -1,11 +1,8 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <errno.h>
 #include <skalibs/buffer.h>
-#include <skalibs/stralloc.h>
 #include <skalibs/netstring.h>
-#include <skalibs/tai.h>
 #include <skalibs/iopause.h>
 #include <skalibs/unix-timed.h>
 

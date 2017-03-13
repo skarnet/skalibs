@@ -3,7 +3,6 @@
 #ifndef ERROR_H
 #define ERROR_H
 
-#include <errno.h>
 #include <skalibs/gccattributes.h>
 
 extern int error_temp (int) gccattr_const ;

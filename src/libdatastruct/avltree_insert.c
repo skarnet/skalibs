@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <stdint.h>
 #include <skalibs/avltree.h>
 
 int avltree_insert (avltree *t, uint32_t d)

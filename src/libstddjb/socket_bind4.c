@@ -2,7 +2,6 @@
 
 #include <skalibs/nonposix.h>
 #include <sys/socket.h>
-#include <stdint.h>
 #include <string.h>
 #include <netinet/in.h>
 #include <skalibs/uint16.h>

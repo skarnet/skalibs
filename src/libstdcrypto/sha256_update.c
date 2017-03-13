@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/sha256.h>
 #include "sha256-internal.h"
 

@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <skalibs/uint64.h>
 #include <skalibs/tai.h>
 #include <skalibs/djbtime.h>
 #include "djbtime-internal.h"

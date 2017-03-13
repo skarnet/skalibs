@@ -2,7 +2,6 @@
 
 /* MT-unsafe */
 
-#include <sys/types.h>
 #include <grp.h>
 #include <errno.h>
 #include <string.h>

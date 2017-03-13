@@ -1,7 +1,6 @@
 /* ISC license. */
 
 #include <sys/types.h>
-#include <stdint.h>
 #include <skalibs/genalloc.h>
 #include <skalibs/gensetdyn.h>
 

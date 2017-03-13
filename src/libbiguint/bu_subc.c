@@ -6,7 +6,6 @@
 #endif
 
 #include <errno.h>
-#include <stdint.h>
 #include <skalibs/biguint.h>
 
 int bu_subc (uint32_t *c, unsigned int cn, uint32_t const *a, unsigned int an, uint32_t const *b, unsigned int bn, int carry)

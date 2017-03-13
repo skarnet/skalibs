@@ -1,9 +1,8 @@
 /* ISC license. */
 
-#include <sys/types.h>
+#include <skalibs/sysdeps.h>
 #include <errno.h>
 #include <stdlib.h>
-#include <skalibs/sysdeps.h>
 #include <skalibs/alloc.h>
 #include "alloc-internal.h"
 

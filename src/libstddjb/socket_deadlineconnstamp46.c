@@ -1,9 +1,7 @@
 /* ISC license. */
 
 #include <errno.h>
-#include <stdint.h>
 #include <skalibs/error.h>
-#include <skalibs/tai.h>
 #include <skalibs/socket.h>
 #include <skalibs/ip46.h>
 

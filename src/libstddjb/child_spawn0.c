@@ -1,7 +1,6 @@
 /* ISC license. */
 
 #include <skalibs/sysdeps.h>
-#include <sys/types.h>
 #include <errno.h>
 
 #ifdef SKALIBS_HASPOSIXSPAWN

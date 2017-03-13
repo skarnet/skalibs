@@ -4,7 +4,6 @@
 #include <skalibs/nonposix.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <stdint.h>
 #include <string.h>
 #include <errno.h>
 #include <skalibs/uint16.h>

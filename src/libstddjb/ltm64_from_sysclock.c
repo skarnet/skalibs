@@ -1,7 +1,6 @@
 /* ISC license. */
 
 #include <skalibs/config.h>
-#include <skalibs/uint64.h>
 #include <skalibs/djbtime.h>
 
 #ifdef SKALIBS_FLAG_CLOCKISTAI

@@ -2,7 +2,6 @@
 
 #include <skalibs/bufalloc.h>
 #include <skalibs/functypes.h>
-#include <skalibs/tai.h>
 #include <skalibs/unix-timed.h>
 
 static int bufalloc_isnonempty (bufalloc *ba)

@@ -1,9 +1,7 @@
 /* ISC license. */
 
 #include <sys/types.h>
-#include <stdint.h>
 #include <skalibs/bitarray.h>
-#include <skalibs/functypes.h>
 #include <skalibs/gensetdyn.h>
 
 uint32_t gensetdyn_iter_nocancel (gensetdyn *g, uint32_t n, iterfunc_t_ref f, void *stuff)

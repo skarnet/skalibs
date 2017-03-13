@@ -1,7 +1,6 @@
 /* ISC license. */
 
 #include <stdint.h>
-#include <skalibs/uint32.h>
 #include <skalibs/cdb.h>
 
 int cdb_successor (struct cdb *c, char const *key, unsigned int klen)

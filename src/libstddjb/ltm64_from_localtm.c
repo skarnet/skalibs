@@ -2,7 +2,6 @@
 
 #include <errno.h>
 #include <time.h>
-#include <skalibs/uint64.h>
 #include <skalibs/tai.h>
 #include <skalibs/djbtime.h>
 

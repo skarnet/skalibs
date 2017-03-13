@@ -2,7 +2,6 @@
 
 #include <time.h>
 #include <skalibs/uint64.h>
-#include <skalibs/tai.h>
 #include <skalibs/djbtime.h>
 
 int tai_from_localtm (tai_t *t, struct tm const *l)

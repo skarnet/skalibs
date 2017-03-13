@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/uint16.h>
 
 void uint16_reverse (char *s, size_t n)

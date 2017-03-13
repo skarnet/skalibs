@@ -1,8 +1,7 @@
 /* ISC license. */
 
-#include <stdint.h>
+#include <string.h>
 #include <skalibs/uint32.h>
-#include <skalibs/bytestr.h>
 #include <skalibs/md5.h>
 #include "md5-internal.h"
 
@@ -14,18 +13,18 @@ void md5_final (MD5Schedule *ctx, char *digest /* 16 chars */)
   count = 63 - count ;
   if (count < 8)
   {
-    byte_zero(p, count) ;
+    memset(p, 0, count) ;
     uint32_little_endian((char *)ctx->in, 16) ;
     md5_transform(ctx->buf, (uint32_t *)ctx->in) ;
-    byte_zero(ctx->in, 56) ;
+    memset(ctx->in, 0, 56) ;
   }
-  else byte_zero(p, count - 8) ;
+  else memset(p, 0, count - 8) ;
   uint32_little_endian((char *)ctx->in, 14) ;
 
-  byte_copy((char *)ctx->in + 56, 4, (char *)&ctx->bits[0]) ;
-  byte_copy((char *)ctx->in + 60, 4, (char *)&ctx->bits[1]) ;
+  memcpy(ctx->in + 56, &ctx->bits[0], 4) ;
+  memcpy(ctx->in + 60, &ctx->bits[1], 4) ;
 
   md5_transform(ctx->buf, (uint32_t *)ctx->in) ;
   uint32_little_endian((char *)ctx->buf, 4) ;
-  byte_copy(digest, 16, (char *)ctx->buf) ;
+  memcpy(digest, ctx->buf, 16) ;
 }

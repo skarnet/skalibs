@@ -1,9 +1,8 @@
 /* ISC license. */
 
 #include <sys/uio.h>
-#include <skalibs/functypes.h>
-#include <skalibs/allreadwrite.h>
 #include <skalibs/siovec.h>
+#include <skalibs/allreadwrite.h>
 
 size_t allreadwritev (iovfunc_t_ref op, int fd, struct iovec const *v, unsigned int vlen)
 {

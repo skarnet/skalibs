@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <stdint.h>
 #include <skalibs/biguint.h>
 
 /* x^-1 mod m. */

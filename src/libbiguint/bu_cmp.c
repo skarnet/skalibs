@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <stdint.h>
 #include <skalibs/biguint.h>
 
 int bu_cmp (uint32_t const *a, unsigned int an, uint32_t const *b, unsigned int bn)

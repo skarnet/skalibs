@@ -4,12 +4,12 @@
 #include <skalibs/nonposix.h>
 #include <sys/socket.h>
 #include <sys/uio.h>
+#include <string.h>
 #include <stdint.h>
 #include <unistd.h>
 #include <errno.h>
 #include <skalibs/uint16.h>
 #include <skalibs/uint32.h>
-#include <skalibs/bytestr.h>
 #include <skalibs/disize.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/genalloc.h>
@@ -84,7 +84,7 @@ int unixmessage_sender_flush (unixmessage_sender_t *b)
     {
       struct cmsghdr *cp = CMSG_FIRSTHDR(&hdr) ;
       size_t i = 0 ;
-      byte_zero(ancilbuf, sizeof(ancilbuf)) ;
+      memset(ancilbuf, 0, sizeof(ancilbuf)) ;
       cp->cmsg_level = SOL_SOCKET ;
       cp->cmsg_type = SCM_RIGHTS ;
       cp->cmsg_len = CMSG_LEN(nfds * sizeof(int)) ;

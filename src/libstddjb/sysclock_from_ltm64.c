@@ -6,8 +6,6 @@
 
 #ifdef SKALIBS_FLAG_CLOCKISTAI
 
-#include <skalibs/tai.h>
-
 int sysclock_from_ltm64 (uint64_t *u)
 {
   tai_t t ;

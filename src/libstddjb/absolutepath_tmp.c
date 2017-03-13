@@ -2,10 +2,8 @@
 
 /* MT-unsafe (because of chdir) */
 
-#include <sys/types.h>
 #include <unistd.h>
 #include <errno.h>
-#include <skalibs/bytestr.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/djbunix.h>
 

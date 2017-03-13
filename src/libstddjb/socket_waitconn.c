@@ -2,7 +2,6 @@
 
 #include <errno.h>
 #include <skalibs/allreadwrite.h>
-#include <skalibs/tai.h>
 #include <skalibs/iopause.h>
 #include <skalibs/socket.h>
 

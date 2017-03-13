@@ -159,7 +159,7 @@ src/include/$(package)/error.h: src/include/$(package)/gccattributes.h $(sysdeps
 	  exec cat src/headers/error-footer ; \
 	} > $@
 
-src/include/$(package)/ip46.h: src/include/$(package)/uint16.h src/include/$(package)/bytestr.h src/include/$(package)/fmtscan.h src/include/$(package)/tai.h src/include/$(package)/socket.h $(sysdeps)/sysdeps src/headers/ip46-header src/headers/ip46-footer src/headers/ip46-with src/headers/ip46-without
+src/include/$(package)/ip46.h: src/include/$(package)/fmtscan.h src/include/$(package)/socket.h $(sysdeps)/sysdeps src/headers/ip46-header src/headers/ip46-footer src/headers/ip46-with src/headers/ip46-without
 	@{ \
 	  cat src/headers/ip46-header ; \
 	  if $(ipv6) && grep -qF 'ipv6: yes' $(sysdeps)/sysdeps ; then cat src/headers/ip46-with ; \

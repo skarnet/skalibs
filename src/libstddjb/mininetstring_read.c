@@ -1,7 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
-#include <stdint.h>
 #include <errno.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/stralloc.h>

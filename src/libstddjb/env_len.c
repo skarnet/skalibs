@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/env.h>
 
 size_t env_len (char const *const *e)

@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <stdint.h>
 #include <skalibs/uint32.h>
 #include <skalibs/socket.h>
 

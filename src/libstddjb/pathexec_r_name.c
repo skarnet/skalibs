@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/env.h>
 #include <skalibs/djbunix.h>

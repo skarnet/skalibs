@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <stdint.h>
 #include <skalibs/avlnode.h>
 
 unsigned int avlnode_height (avlnode const *s, uint32_t max, uint32_t r)

@@ -2,10 +2,7 @@
 
 #include <errno.h>
 #include <skalibs/error.h>
-#include <skalibs/bufalloc.h>
-#include <skalibs/functypes.h>
 #include <skalibs/iopause.h>
-#include <skalibs/tai.h>
 #include <skalibs/unix-timed.h>
 
 int timed_flush (void *b, initfunc_t_ref getfd, initfunc_t_ref isnonempty, initfunc_t_ref flush, tain_t const *deadline, tain_t *stamp)

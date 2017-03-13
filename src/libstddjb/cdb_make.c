@@ -5,9 +5,7 @@
 #include <errno.h>
 #include <skalibs/uint32.h>
 #include <skalibs/diuint32.h>
-#include <skalibs/allreadwrite.h>
 #include <skalibs/buffer.h>
-#include <skalibs/djbunix.h>
 #include <skalibs/genalloc.h>
 #include <skalibs/cdb.h>
 #include <skalibs/cdb_make.h>
@@ -16,7 +14,7 @@ int cdb_make_start (struct cdb_make *c, int fd)
 {
   c->hplist = genalloc_zero ;
   c->pos = 2048 ;
-  buffer_init(&c->b, &fd_writev, fd, c->buf, BUFFER_OUTSIZE) ;
+  buffer_init(&c->b, &buffer_write, fd, c->buf, BUFFER_OUTSIZE) ;
   if (lseek(fd, c->pos, SEEK_SET) < 0) return -1 ;
   return 0 ;
 }

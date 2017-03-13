@@ -3,12 +3,10 @@
 #ifndef IP46_H
 #define IP46_H
 
-#include <sys/types.h>
+#include <string.h>
 #include <stdint.h>
 #include <errno.h>
-#include <skalibs/bytestr.h>
 #include <skalibs/fmtscan.h>
-#include <skalibs/tai.h>
 #include <skalibs/socket.h>
 
 #define IP46_FMT IP6_FMT
@@ -30,6 +28,6 @@ struct ip46full_s
 #define ip46full_fmt(s, i) ((i)->is6 ? ip6_fmt(s, (i)->ip) : ip4_fmt(s, (i)->ip))
 extern size_t ip46full_scan (char const *, ip46full_t *) ;
 extern size_t ip46full_scanlist (ip46full_t *, size_t, char const *, size_t *) ;
-#define ip46full_from_ip4(i, ip4) (byte_copy((i)->ip, 4, ip4), byte_zero((i)->ip + 4, 12), (i)->is6 = 0)
-#define ip46full_from_ip6(i, ip6) (byte_copy((i)->ip, 16, ip6), (i)->is6 = 1)
+#define ip46full_from_ip4(i, ip4) (memcpy((i)->ip, ip4, 4), memset((i)->ip + 4, 0, 12), (i)->is6 = 0)
+#define ip46full_from_ip6(i, ip6) (memcpy((i)->ip, ip6, 16), (i)->is6 = 1)
 

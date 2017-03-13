@@ -2,7 +2,6 @@
 
 #include <skalibs/buffer.h>
 #include <skalibs/functypes.h>
-#include <skalibs/tai.h>
 #include <skalibs/unix-timed.h>
 
 static int buffer_isnonempty (buffer *b)

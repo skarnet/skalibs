@@ -1,7 +1,6 @@
 /* ISC license. */
 
 #include <errno.h>
-#include <skalibs/stralloc.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/unix-transactional.h>
 

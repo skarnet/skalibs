@@ -1,10 +1,8 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/buffer.h>
 #include <skalibs/functypes.h>
-#include <skalibs/tai.h>
 #include <skalibs/unix-timed.h>
 
 static ssize_t get (buffer *b)

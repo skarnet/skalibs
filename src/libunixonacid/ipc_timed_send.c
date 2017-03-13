@@ -1,10 +1,8 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <sys/socket.h>
 #include <errno.h>
 #include <skalibs/error.h>
-#include <skalibs/tai.h>
 #include <skalibs/iopause.h>
 #include <skalibs/unix-timed.h>
 

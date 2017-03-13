@@ -1,7 +1,7 @@
 /* ISC license. */
 
-#include <stdint.h>
 #include <string.h>
+#include <stdint.h>
 #include <skalibs/uint32.h>
 #include <skalibs/surf.h>
 

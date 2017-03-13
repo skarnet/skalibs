@@ -20,7 +20,7 @@ int netstring_appendv (stralloc *sa, struct iovec const *v, unsigned int n)
   sa->len += pos+1 ;
   for (i = 0 ; i < n ; i++)
   {
-    memmove(sa->s + sa->len, v[i].iov_base, v[i].iov_len) ;
+    memcpy(sa->s + sa->len, v[i].iov_base, v[i].iov_len) ;
     sa->len += v[i].iov_len ;
   }
   sa->s[sa->len++] = ',' ;

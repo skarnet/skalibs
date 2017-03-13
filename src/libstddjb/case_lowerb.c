@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <skalibs/bytestr.h>
 
 void case_lowerb (char *s, size_t len)

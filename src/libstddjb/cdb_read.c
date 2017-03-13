@@ -1,12 +1,10 @@
 /* ISC license. */
 
 #include <unistd.h>
-#include <stdint.h>
 #include <string.h>
 #include <errno.h>
 #include <skalibs/error.h>
 #include <skalibs/allreadwrite.h>
-#include <skalibs/uint32.h>
 #include <skalibs/cdb.h>
 
 int cdb_read (struct cdb *c, char *buf, unsigned int len, uint32_t pos)
