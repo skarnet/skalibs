@@ -4,7 +4,7 @@ sysdeps="$1"
 shift
 
 getbits() {
-  expr 8 '*' `grep -F sizeof$2: < "$1" | cut -f2 -d' ')`
+  expr 8 '*' `grep -F sizeof$2: < "$1" | cut -f2 -d' '`
 }
 
 cat < src/headers/types-header

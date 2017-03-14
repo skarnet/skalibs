@@ -1,7 +1,11 @@
 #!/usr/xpg4/bin/sh
 
 patchit () {
-  echo '#!/usr/xpg4/bin/sh' > $1.tmp
+  if head -n 1 $1 | grep -qF -- -e ; then
+    echo '#!/usr/xpg4/bin/sh -e' > $1.tmp
+  else
+    echo '#!/usr/xpg4/bin/sh' > $1.tmp
+  fi
   tail -n +2 $1 >> $1.tmp
   mv -f $1.tmp $1
   chmod 0755 $1
@@ -14,6 +18,10 @@ mv -f configure.tmp configure
 patchit ./configure
 patchit ./tools/install.sh
 patchit ./tools/gen-deps.sh
+patchit ./tools/gen-types.sh
+patchit ./tools/gen-types-internal.sh
+patchit ./tools/gen-bits.sh
+patchit ./tools/gen-bits-internal.sh
 
 echo 'SHELL := /usr/xpg4/bin/sh' > Makefile.tmp
 echo >> Makefile.tmp
