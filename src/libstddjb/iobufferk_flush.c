@@ -53,7 +53,7 @@ iobufferk_output_func_t_ref const iobufferk_flush_f[4] =
 #include <errno.h>
 #include <skalibs/iobuffer.h>
 
-static int iobufferk_onosys (iobuffer_k *k)
+static int iobufferk_onosys (iobufferk *k)
 {
   (void)k ;
   return (errno = ENOSYS, -1) ;
