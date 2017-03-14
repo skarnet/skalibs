@@ -39,6 +39,7 @@ iobufferk_input_func_t_ref const iobufferk_fill_f[4] =
 
 #else
 
+#include <errno.h>
 #include <skalibs/iobuffer.h>
 
 static ssize_t iobufferk_inosys (iobufferk *k)
