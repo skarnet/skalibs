@@ -4,14 +4,7 @@
 
 #ifdef SKALIBS_HASPIPE2
 
-#ifndef _NETBSD_SOURCE
-#define _NETBSD_SOURCE
-#endif
-
-#ifndef _GNU_SOURCE
-#define _GNU_SOURCE
-#endif
-
+#include <skalibs/nonposix.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <skalibs/djbunix.h>
