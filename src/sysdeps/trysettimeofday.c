@@ -15,7 +15,6 @@
 #define __EXTENSIONS__
 #endif
 
-#include <sys/types.h>
 #include <sys/time.h>
 
 int main (void)

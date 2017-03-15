@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <sys/types.h>
 #include <signal.h>
 #include <sys/signalfd.h>
 

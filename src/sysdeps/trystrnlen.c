@@ -1,4 +1,8 @@
 /* ISC license. */
 
 #include <string.h>
-int main () { return strnlen("/", 1) ; }
+
+int main (void)
+{
+  return strnlen("/", 1) ;
+}

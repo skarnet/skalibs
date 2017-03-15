@@ -6,9 +6,7 @@
 #define __EXTENSIONS__
 #endif
 
-#include <sys/types.h>
 #include <sys/stat.h>
-#include <time.h>
 
 int main (void)
 {

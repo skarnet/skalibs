@@ -15,7 +15,6 @@
 # define _GNU_SOURCE
 #endif
 
-#include <sys/types.h>
 #include <sys/socket.h>
 
 int main (void)

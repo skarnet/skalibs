@@ -11,7 +11,6 @@
 #define _XPG4_2
 #endif
 
-#include <sys/types.h>
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>

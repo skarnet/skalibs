@@ -1,4 +1,8 @@
 /* ISC license */
 
 #include <stdlib.h>
-int main() { return !malloc(0) ; }
+
+int main (void)
+{
+  return !malloc(0) ;
+}

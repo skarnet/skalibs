@@ -11,7 +11,6 @@
 #define _BSD_SOURCE
 #endif
 
-#include <sys/types.h>
 #include <sys/socket.h>
 
 int value = MSG_DONTWAIT ;

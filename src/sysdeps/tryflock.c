@@ -3,7 +3,6 @@
 #undef _POSIX_C_SOURCE
 #undef _XOPEN_SOURCE
 
-#include <sys/types.h>
 #include <sys/file.h>
 #include <fcntl.h>
 

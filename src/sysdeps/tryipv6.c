@@ -6,7 +6,6 @@
 #define _XPG4_2
 #define _XPG6
 
-#include <sys/types.h>
 #include <errno.h>
 #include <string.h>
 #include <sys/socket.h>

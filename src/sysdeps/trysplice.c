@@ -1,7 +1,9 @@
 /* ISC license. */
 
+#ifndef _GNU_SOURCE
 #define _GNU_SOURCE
-#include <sys/types.h>
+#endif
+
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>

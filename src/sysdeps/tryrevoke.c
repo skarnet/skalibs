@@ -4,4 +4,8 @@
 #undef _XOPEN_SOURCE
 
 #include <unistd.h>
-int main () { return revoke("/") ; }
+
+int main (void)
+{
+  return revoke("/") ;
+}
