@@ -16,5 +16,5 @@ int main (void)
   fd = open("/dev/urandom", O_RDONLY) ;
   if ((fd == -1) || (read(fd, b, 64) < 64) ) return 111 ;
   close(fd) ;
-  return (!memcmp(a, 64, b)) ;  
+  return (!memcmp(a, b, 64)) ;  
 }
