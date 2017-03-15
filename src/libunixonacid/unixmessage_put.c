@@ -72,6 +72,6 @@ int unixmessage_putv_and_close (unixmessage_sender_t *b, unixmessage_v_t const *
 {
   size_t len = siovec_len(m->v, m->vlen) ;
   if (!reserve_and_copy(b, len, m->fds, m->nfds, bits)) return 0 ;
-  siovec_gather(m->v, m->vlen, b->data.s + b->data.len, len) ;
+  b->data.len += siovec_gather(m->v, m->vlen, b->data.s + b->data.len, len) ;
   return 1 ;
 }
