@@ -7,6 +7,7 @@
 
 int main (void)
 {
-  arc4random_addrandom("", 1) ;
+  unsigned char *blah = "" ;
+  arc4random_addrandom(blah, 1) ;
   return 0 ;
 }
