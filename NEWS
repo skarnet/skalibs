@@ -1,0 +1,22 @@
+Changelog for skalibs.
+
+In 2.5.0.0
+----------
+
+ - Added this NEWS file. :)
+ - Dropped support for old versions of OpenBSD (at least 4.9 isn't working
+anymore). Newer versions are still supported: 5.7 and up are working.
+ - --enable-replace-libc flag dropped. All supported systems now have a
+compliant-enough libc for skalibs' purposes.
+ - Major types overhaul to be more POSIXly correct. 64-bit operations are
+now supported on 64-bit archs where int is 32-bit. Use of POSIX types
+wherever important, e.g. where pointers are used: datastruct.h indices,
+for instance, are uint32_t. stralloc et al. lengths are size_t.
+ - Related API changes: skalibs/ushort.h, skalibs/uint.h and skalibs/ulong.h
+have disappeared - replaced with skalibs/types.h that also includes basic
+fmtscan support for common POSIX types. The uint16, uint32 and uint64
+integer types have disappeared - replaced with stdint.h types. uint64_t is
+defined by skalibs/uint64.h when stdint.h omits it.
+ - Lots of minor bugfixes and cleanups related to the types system.
+ - Better support for getrandom() and arc4random().
+
