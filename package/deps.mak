@@ -426,7 +426,7 @@ src/libstddjb/pathexec_fromenv.o src/libstddjb/pathexec_fromenv.lo: src/libstddj
 src/libstddjb/pathexec_r.o src/libstddjb/pathexec_r.lo: src/libstddjb/pathexec_r.c src/include/skalibs/djbunix.h
 src/libstddjb/pathexec_r_name.o src/libstddjb/pathexec_r_name.lo: src/libstddjb/pathexec_r_name.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/env.h
 src/libstddjb/pathexec_run.o src/libstddjb/pathexec_run.lo: src/libstddjb/pathexec_run.c src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/env.h
-src/libstddjb/pipe_internal.o src/libstddjb/pipe_internal.lo: src/libstddjb/pipe_internal.c src/include/skalibs/djbunix.h src/include/skalibs/sysdeps.h
+src/libstddjb/pipe_internal.o src/libstddjb/pipe_internal.lo: src/libstddjb/pipe_internal.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
 src/libstddjb/prog.o src/libstddjb/prog.lo: src/libstddjb/prog.c src/include/skalibs/strerr2.h
 src/libstddjb/prot.o src/libstddjb/prot.lo: src/libstddjb/prot.c src/include/skalibs/djbunix.h
 src/libstddjb/prot_grps.o src/libstddjb/prot_grps.lo: src/libstddjb/prot_grps.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/setgroups.h
