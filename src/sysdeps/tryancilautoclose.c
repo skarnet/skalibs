@@ -17,9 +17,15 @@
 #include <sys/socket.h>
 #include <sys/uio.h>
 
+union aligner_u
+{
+  struct cmsghdr cmsghdr ;
+  int i ;
+} ;
+
 static int ancil_send_fd (int sock, int fd)
 {
-  char ancilbuf[CMSG_SPACE(sizeof(int))] ;
+  union aligner_u ancilbuf[1 + CMSG_SPACE(sizeof(int)) / sizeof(union aligner_u)] ;
   char s[8] = "blahblah" ;
   struct iovec v = { .iov_base = s, .iov_len = 8 } ;
   struct msghdr msghdr =
@@ -30,7 +36,7 @@ static int ancil_send_fd (int sock, int fd)
     .msg_iovlen = 1,
     .msg_flags = 0,
     .msg_control = ancilbuf,
-    .msg_controllen = sizeof(ancilbuf)
+    .msg_controllen = CMSG_SPACE(sizeof(int))
   } ;
   struct cmsghdr *cmsg = CMSG_FIRSTHDR(&msghdr) ;
   cmsg->cmsg_len = CMSG_LEN(sizeof(int)) ;
@@ -43,7 +49,7 @@ static int ancil_send_fd (int sock, int fd)
 
 static int ancil_recv_fd (int sock)
 {
-  char ancilbuf[CMSG_SPACE(sizeof(int))] ;
+  union aligner_u ancilbuf[1 + CMSG_SPACE(sizeof(int)) / sizeof(union aligner_u)] ;
   char s[8] ;
   struct iovec v = { .iov_base = s, .iov_len = 8 } ;
   struct msghdr msghdr =
@@ -54,7 +60,7 @@ static int ancil_recv_fd (int sock)
     .msg_iovlen = 1,
     .msg_flags = 0,
     .msg_control = ancilbuf,
-    .msg_controllen = sizeof(ancilbuf)
+    .msg_controllen = CMSG_SPACE(sizeof(int))
   } ;
   struct cmsghdr *cmsg = CMSG_FIRSTHDR(&msghdr) ;
   cmsg->cmsg_len = msghdr.msg_controllen ;

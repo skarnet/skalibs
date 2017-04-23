@@ -21,6 +21,13 @@
 #define MSG_NOSIGNAL 0
 #endif
 
+union aligner_u
+{
+  struct cmsghdr cmsghdr ;
+  int i ;
+} ;
+
+
  /*
     XXX: sendmsg/recvmsg is badly, badly specified.
     XXX: We assume ancillary data is attached to the first byte.
@@ -68,7 +75,7 @@ int unixmessage_sender_flush (unixmessage_sender_t *b)
       { .iov_base = pack, .iov_len = 6 },
       { .iov_base = b->data.s + offsets[b->head].left, .iov_len = len }
     } ;
-    char ancilbuf[CMSG_SPACE(nfds * sizeof(int))] ;
+    union aligner_u ancilbuf[1 + CMSG_SPACE(nfds * sizeof(int)) / sizeof(union aligner_u)] ;
     struct msghdr hdr =
     {
       .msg_name = 0,
@@ -76,7 +83,7 @@ int unixmessage_sender_flush (unixmessage_sender_t *b)
       .msg_iov = v,
       .msg_iovlen = 2,
       .msg_control = nfds ? ancilbuf : 0,
-      .msg_controllen = nfds ? sizeof(ancilbuf) : 0
+      .msg_controllen = nfds ? CMSG_SPACE(nfds * sizeof(int)) : 0
     } ;
     uint32_pack_big(pack, (uint32_t)len) ;
     uint16_pack_big(pack + 4, (uint16_t)nfds) ;
@@ -84,7 +91,7 @@ int unixmessage_sender_flush (unixmessage_sender_t *b)
     {
       struct cmsghdr *cp = CMSG_FIRSTHDR(&hdr) ;
       size_t i = 0 ;
-      memset(ancilbuf, 0, sizeof(ancilbuf)) ;
+      memset(hdr.msg_control, 0, hdr.msg_controllen) ;
       cp->cmsg_level = SOL_SOCKET ;
       cp->cmsg_type = SCM_RIGHTS ;
       cp->cmsg_len = CMSG_LEN(nfds * sizeof(int)) ;

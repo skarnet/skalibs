@@ -14,6 +14,12 @@
 #include <skalibs/stralloc.h>
 #include <skalibs/unixmessage.h>
 
+union aligner_u
+{
+  struct cmsghdr cmsghdr ;
+  int i ;
+} ;
+
 static int const awesomeflags =
 #ifdef SKALIBS_HASMSGDONTWAIT
   MSG_DONTWAIT
@@ -36,7 +42,7 @@ static int const awesomeflags =
 
 static int unixmessage_receiver_fill (unixmessage_receiver_t *b)
 {
-  char ancilbuf[CMSG_SPACE(b->auxb.a - 1)] ;
+  union aligner_u ancilbuf[1 + CMSG_SPACE(b->auxb.a - 1) / sizeof(union aligner_u)] ;
   struct iovec iov[2] ;
   struct msghdr msghdr =
   {
@@ -46,7 +52,7 @@ static int unixmessage_receiver_fill (unixmessage_receiver_t *b)
     .msg_iovlen = 2,
     .msg_flags = 0,
     .msg_control = b->fds_ok & 1 ? ancilbuf : 0,
-    .msg_controllen = b->fds_ok & 1 ? sizeof(ancilbuf) : 0
+    .msg_controllen = b->fds_ok & 1 ? CMSG_SPACE(b->auxb.a - 1) : 0
   } ;
   ssize_t r = -1 ;
   if (cbuffer_isfull(&b->mainb) || ((b->fds_ok & 1) && cbuffer_isfull(&b->auxb)))

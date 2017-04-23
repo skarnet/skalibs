@@ -119,7 +119,7 @@ HOST-ar, etc.) are accessible via your PATH environment variable
  * give the correct --host option
  * for --prefix, --bindir and other paths, always use the run-time path
  * to install the cross-compiled package in a staging directory /your/stage,
-   perform "make install DESTDIR=/your/staging/directory"
+   perform "make install DESTDIR=/your/stage"
 
 
 * The slashpackage convention

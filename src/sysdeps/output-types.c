@@ -1,3 +1,5 @@
+/* ISC license. */
+
 #include <sys/types.h>
 #include <stdio.h>
 
