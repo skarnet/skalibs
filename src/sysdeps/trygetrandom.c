@@ -19,5 +19,6 @@ static int getrandom (void *buf, size_t buflen, unsigned int flags)
 int main (void)
 {
   char buf[4] ;
-  return getrandom(buf, 4, 0) ;
+  if (getrandom(buf, 4, 0) < 0) return 1 ;
+  return 0 ;
 }

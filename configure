@@ -511,7 +511,7 @@ EOF
   choose cl futimes FUTIMES 'futimes()'
   choose cl arc4random ARC4RANDOM 'arc4random()'
   choose cl arc4random_addrandom ARC4RANDOM_ADDRANDOM 'arc4random_addrandom()'
-  choose cl getrandom GETRANDOM 'getrandom()'
+  choose clr getrandom GETRANDOM 'getrandom()'
   choose cl itimer ITIMER 'setitimer()'
 
   echo '#endif' >> $sysdeps/sysdeps.h
