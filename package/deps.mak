@@ -31,7 +31,6 @@ src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr2.h
 src/include/skalibs/mininetstring.h: src/include/skalibs/stralloc.h
 src/include/skalibs/netstring.h: src/include/skalibs/buffer.h src/include/skalibs/stralloc.h
-src/include/skalibs/nsig.h: src/include/skalibs/nonposix.h
 src/include/skalibs/random.h: src/include/skalibs/stralloc.h
 src/include/skalibs/sha512.h: src/include/skalibs/uint64.h
 src/include/skalibs/sig.h: src/include/skalibs/gccattributes.h
@@ -444,12 +443,12 @@ src/libstddjb/sanitize_read.o src/libstddjb/sanitize_read.lo: src/libstddjb/sani
 src/libstddjb/sareadlink.o src/libstddjb/sareadlink.lo: src/libstddjb/sareadlink.c src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/satmp.o src/libstddjb/satmp.lo: src/libstddjb/satmp.c src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/sauniquename.o src/libstddjb/sauniquename.lo: src/libstddjb/sauniquename.c src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h src/include/skalibs/types.h
-src/libstddjb/selfpipe_finish.o src/libstddjb/selfpipe_finish.lo: src/libstddjb/selfpipe_finish.c src/include/skalibs/djbunix.h src/include/skalibs/nsig.h src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
+src/libstddjb/selfpipe_finish.o src/libstddjb/selfpipe_finish.lo: src/libstddjb/selfpipe_finish.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/nsig.h src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
 src/libstddjb/selfpipe_init.o src/libstddjb/selfpipe_init.lo: src/libstddjb/selfpipe_init.c src/include/skalibs/djbunix.h src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sysdeps.h
 src/libstddjb/selfpipe_internal.o src/libstddjb/selfpipe_internal.lo: src/libstddjb/selfpipe_internal.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/libstddjb/selfpipe-internal.h src/include/skalibs/sysdeps.h
 src/libstddjb/selfpipe_read.o src/libstddjb/selfpipe_read.lo: src/libstddjb/selfpipe_read.c src/include/skalibs/allreadwrite.h src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sysdeps.h
 src/libstddjb/selfpipe_trap.o src/libstddjb/selfpipe_trap.lo: src/libstddjb/selfpipe_trap.c src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
-src/libstddjb/selfpipe_trapset.o src/libstddjb/selfpipe_trapset.lo: src/libstddjb/selfpipe_trapset.c src/include/skalibs/nsig.h src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
+src/libstddjb/selfpipe_trapset.o src/libstddjb/selfpipe_trapset.lo: src/libstddjb/selfpipe_trapset.c src/include/skalibs/nonposix.h src/include/skalibs/nsig.h src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
 src/libstddjb/selfpipe_untrap.o src/libstddjb/selfpipe_untrap.lo: src/libstddjb/selfpipe_untrap.c src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
 src/libstddjb/sgetopt.o src/libstddjb/sgetopt.lo: src/libstddjb/sgetopt.c src/include/skalibs/buffer.h src/include/skalibs/sgetopt.h
 src/libstddjb/sig_block.o src/libstddjb/sig_block.lo: src/libstddjb/sig_block.c src/include/skalibs/sig.h
@@ -462,7 +461,7 @@ src/libstddjb/sig_pause.o src/libstddjb/sig_pause.lo: src/libstddjb/sig_pause.c 
 src/libstddjb/sig_push.o src/libstddjb/sig_push.lo: src/libstddjb/sig_push.c src/include/skalibs/sig.h
 src/libstddjb/sig_restoreto.o src/libstddjb/sig_restoreto.lo: src/libstddjb/sig_restoreto.c src/include/skalibs/sig.h
 src/libstddjb/sig_shield.o src/libstddjb/sig_shield.lo: src/libstddjb/sig_shield.c src/include/skalibs/sig.h
-src/libstddjb/sig_stack.o src/libstddjb/sig_stack.lo: src/libstddjb/sig_stack.c src/include/skalibs/nsig.h src/include/skalibs/sig.h
+src/libstddjb/sig_stack.o src/libstddjb/sig_stack.lo: src/libstddjb/sig_stack.c src/include/skalibs/nonposix.h src/include/skalibs/nsig.h src/include/skalibs/sig.h
 src/libstddjb/sig_table.o src/libstddjb/sig_table.lo: src/libstddjb/sig_table.c src/libstddjb/sig-internal.h
 src/libstddjb/sig_unblock.o src/libstddjb/sig_unblock.lo: src/libstddjb/sig_unblock.c src/include/skalibs/sig.h
 src/libstddjb/sig_unshield.o src/libstddjb/sig_unshield.lo: src/libstddjb/sig_unshield.c src/include/skalibs/sig.h

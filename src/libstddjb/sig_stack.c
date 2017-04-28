@@ -1,7 +1,6 @@
 /* ISC license. */
 
-/* MT-unsafe */
-
+#include <skalibs/nonposix.h>
 #include <errno.h>
 #include <signal.h>
 #include <skalibs/sig.h>

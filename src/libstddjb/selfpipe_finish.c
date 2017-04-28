@@ -3,12 +3,13 @@
 /* MT-unsafe */
 
 #include <skalibs/sysdeps.h>
+
+#ifdef SKALIBS_HASSIGNALFD
+
 #include <signal.h>
 #include <skalibs/djbunix.h>
 #include "selfpipe-internal.h"
 #include <skalibs/selfpipe.h>
-
-#ifdef SKALIBS_HASSIGNALFD
 
 void selfpipe_finish (void)
 {
@@ -20,8 +21,13 @@ void selfpipe_finish (void)
 
 #else
 
+#include <skalibs/nonposix.h>
+#include <signal.h>
 #include <skalibs/sig.h>
 #include <skalibs/nsig.h>
+#include <skalibs/djbunix.h>
+#include "selfpipe-internal.h"
+#include <skalibs/selfpipe.h>
 
 void selfpipe_finish (void)
 {

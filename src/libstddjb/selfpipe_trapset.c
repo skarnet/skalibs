@@ -1,16 +1,14 @@
 /* ISC license. */
 
-/* MT-unsafe */
-
-#include <errno.h>
-#include <signal.h>
 #include <skalibs/sysdeps.h>
-#include "selfpipe-internal.h"
-#include <skalibs/selfpipe.h>
 
 #ifdef SKALIBS_HASSIGNALFD
 
+#include <errno.h>
+#include <signal.h>
 #include <sys/signalfd.h>
+#include <skalibs/selfpipe.h>
+#include "selfpipe-internal.h"
 
 int selfpipe_trapset (sigset_t const *set)
 {
@@ -30,8 +28,13 @@ int selfpipe_trapset (sigset_t const *set)
 
 #else
 
+#include <skalibs/nonposix.h>
+#include <errno.h>
+#include <signal.h>
 #include <skalibs/sig.h>
 #include <skalibs/nsig.h>
+#include <skalibs/selfpipe.h>
+#include "selfpipe-internal.h"
 
 int selfpipe_trapset (sigset_t const *set)
 {
