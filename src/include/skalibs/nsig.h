@@ -9,10 +9,19 @@
 
 #include <signal.h>
 
-#define SKALIBS_NSIG 65
+#define SKALIBS_DEFAULT_NSIG 65
 
 #ifndef NSIG
-# define NSIG SKALIBS_NSIG
+# define NSIG SKALIBS_DEFAULT_NSIG
+#endif
+
+
+ /* OpenBSD is a fucking snowflake */
+
+#ifdef __OpenBSD__
+#define SKALIBS_NSIG (NSIG-1)
+#else
+#define SKALIBS_NSIG NSIG
 #endif
 
 #endif

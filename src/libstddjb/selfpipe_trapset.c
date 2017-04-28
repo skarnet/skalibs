@@ -40,7 +40,7 @@ int selfpipe_trapset (sigset_t const *set)
 {
   unsigned int i = 1 ;
   if (selfpipe_fd < 0) return (errno = EBADF, -1) ;
-  for (; i < NSIG ; i++)
+  for (; i < SKALIBS_NSIG ; i++)
   {
     int h = sigismember(set, i) ;
     if (h < 0) continue ;
@@ -53,7 +53,7 @@ int selfpipe_trapset (sigset_t const *set)
       if (sig_restore(i) < 0) break ;
     }
   }
-  if (i < NSIG)
+  if (i < SKALIBS_NSIG)
   {
     int e = errno ;
     sig_restoreto(set, i) ;

@@ -31,7 +31,7 @@ void selfpipe_finish (void)
 
 void selfpipe_finish (void)
 {
-  sig_restoreto(&selfpipe_caught, NSIG-1) ;
+  sig_restoreto(&selfpipe_caught, SKALIBS_NSIG-1) ;
   sigemptyset(&selfpipe_caught) ;
   fd_close(selfpipe[1]) ;
   fd_close(selfpipe[0]) ;
