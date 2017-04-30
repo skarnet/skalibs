@@ -38,6 +38,9 @@
 #ifndef _BSD_SOURCE
 #define _BSD_SOURCE
 #endif
+#ifndef _DEFAULT_SOURCE
+#define _DEFAULT_SOURCE
+#endif
 
 
  /* NetBSD: of course they had to have their own macros. */
