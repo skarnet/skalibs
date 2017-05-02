@@ -399,7 +399,7 @@ if test -n "$sysdeps" ; then
     exit 1
   fi
   if [ "x$target" != "x$(cat $sysdeps/target)" ] ; then
-    echo "$0: error: target $target does not match the contents of $sysdepdir/target"
+    echo "$0: error: target $target does not match the contents of $sysdeps/target"
     exit 1
   fi
   echo "Using pre-computed sysdeps in $sysdeps."
