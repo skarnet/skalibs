@@ -11,7 +11,7 @@ struct ip46_s
 #define ip46_fmt(s, i) ip4_fmt(s, (i)->ip)
 #define ip46_scan(s, i) ip4_scan(s, (i)->ip)
 #define ip46_scanlist(out, max, s, num) ip4_scanlist((out)->ip, max, s, num)
-#define ip46_from_ip4(i, ip4) (byte_copy((i)->ip, 4, ip4), 1)
+#define ip46_from_ip4(i, ip4) (memmove((i)->ip, (ip4), 4), 1)
 #define ip46_from_ip6(i, ip6) (errno = ENOSYS, 0)
 
 #define socket_connect46(s, i, port) socket_connect4(s, (i)->ip, port)
