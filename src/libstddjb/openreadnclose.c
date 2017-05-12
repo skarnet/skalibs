@@ -7,11 +7,16 @@
 
 static ssize_t readnclose (int fd, char *s, size_t n)
 {
-  ssize_t r = allread(fd, s, n) ;
-  int e = errno ;
+  size_t r = allread(fd, s, n) ;
+  if (errno)
+  {
+    int e = errno ;
+    fd_close(fd) ;
+    errno = e ;
+    return -1 ;
+  }
   fd_close(fd) ;
-  if ((r > 0) && (r < (ssize_t)n)) e = EPIPE ;
-  errno = e ;
+  if (r < n) errno = EPIPE ;
   return r ;
 }
 
