@@ -442,7 +442,7 @@ EOF
   if $hasclock ; then
     echo 'clockrt: yes' >> $sysdeps/sysdeps
     echo "#define ${package_macro_name}_HASCLOCKRT" >> $sysdeps/sysdeps.h
-    choose cl clockmon CLOCKMON CLOCK_MONOTONIC $clock_lib
+    choose cl clockmon CLOCKMON CLOCK_MONOTONIC $sysclock_lib
   else
     echo 'clockrt: no' >> $sysdeps/sysdeps
     echo "#undef ${package_macro_name}_HASCLOCKRT" >> $sysdeps/sysdeps.h
