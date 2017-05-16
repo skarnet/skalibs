@@ -3,6 +3,7 @@
 #undef _POSIX_C_SOURCE
 #undef _XOPEN_SOURCE
 
+#include <sys/types.h>
 #include <unistd.h>
 
 int main (void)

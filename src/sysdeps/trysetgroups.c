@@ -23,6 +23,7 @@
 #define __EXTENSIONS__
 #endif
 
+#include <sys/types.h>
 #include <unistd.h>
 #include <grp.h>
 

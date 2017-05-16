@@ -53,7 +53,8 @@
 #endif
 
 
- /* old versions of BSD: system headers are not self-contained,
+ /* old versions of BSD and some broken GNU toolchains:
+      system headers are not self-contained,
       starting with sys/types.h normally always works. */
 
 #include <sys/types.h>
