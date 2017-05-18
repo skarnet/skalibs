@@ -669,6 +669,14 @@ src/libstddjb/wait_reap.o src/libstddjb/wait_reap.lo: src/libstddjb/wait_reap.c 
 src/libstddjb/waitn.o src/libstddjb/waitn.lo: src/libstddjb/waitn.c src/include/skalibs/djbunix.h
 src/libstddjb/waitn_reap.o src/libstddjb/waitn_reap.lo: src/libstddjb/waitn_reap.c src/include/skalibs/djbunix.h
 src/libstddjb/waitpid_nointr.o src/libstddjb/waitpid_nointr.lo: src/libstddjb/waitpid_nointr.c src/include/skalibs/djbunix.h
+src/libstddjb/xexecvep.o src/libstddjb/xexecvep.lo: src/libstddjb/xexecvep.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
+src/libstddjb/xpathexec.o src/libstddjb/xpathexec.lo: src/libstddjb/xpathexec.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
+src/libstddjb/xpathexec0.o src/libstddjb/xpathexec0.lo: src/libstddjb/xpathexec0.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
+src/libstddjb/xpathexec0_run.o src/libstddjb/xpathexec0_run.lo: src/libstddjb/xpathexec0_run.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
+src/libstddjb/xpathexec_fromenv.o src/libstddjb/xpathexec_fromenv.lo: src/libstddjb/xpathexec_fromenv.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
+src/libstddjb/xpathexec_r.o src/libstddjb/xpathexec_r.lo: src/libstddjb/xpathexec_r.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
+src/libstddjb/xpathexec_r_name.o src/libstddjb/xpathexec_r_name.lo: src/libstddjb/xpathexec_r_name.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
+src/libstddjb/xpathexec_run.o src/libstddjb/xpathexec_run.lo: src/libstddjb/xpathexec_run.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
 src/libunixonacid/atomic_rm_rf.o src/libunixonacid/atomic_rm_rf.lo: src/libunixonacid/atomic_rm_rf.c src/include/skalibs/skamisc.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/atomic_rm_rf_tmp.o src/libunixonacid/atomic_rm_rf_tmp.lo: src/libunixonacid/atomic_rm_rf_tmp.c src/include/skalibs/djbunix.h src/include/skalibs/random.h src/include/skalibs/stralloc.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/bufalloc_timed_flush.o src/libunixonacid/bufalloc_timed_flush.lo: src/libunixonacid/bufalloc_timed_flush.c src/include/skalibs/bufalloc.h src/include/skalibs/functypes.h src/include/skalibs/unix-timed.h

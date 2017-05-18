@@ -61,6 +61,15 @@ extern void pathexec0_run (char const *const *, char const *const *) ;
 extern void pathexec (char const *const *) ;
 extern void pathexec0 (char const *const *) ;
 
+extern void xpathexec_r (char const *const *, char const *const *, size_t, char const *, size_t) gccattr_noreturn ;
+extern void xpathexec_r_name (char const *, char const *const *, char const *const *, size_t, char const *, size_t) gccattr_noreturn ;
+extern void xpathexec_fromenv (char const *const *, char const *const *, size_t) gccattr_noreturn ;
+extern void xexecvep (char const *, char const *const *, char const *const *, char const *) gccattr_noreturn ;
+extern void xpathexec_run (char const *, char const *const *, char const *const *) gccattr_noreturn ;
+extern void xpathexec0_run (char const *const *, char const *const *) gccattr_noreturn ;
+extern void xpathexec (char const *const *) gccattr_noreturn ;
+extern void xpathexec0 (char const *const *) gccattr_noreturn ;
+
 #define prot_gid(gid) setgid(gid)
 #define prot_uid(uid) setuid(uid)
 extern int prot_readgroups (char const *, gid_t *, unsigned int) ;
@@ -152,11 +161,11 @@ extern pid_t child_spawn2 (char const *, char const *const *, char const *const 
 
 
  /*
-    Unified function to fork a child with communication canals.
+    Unified function to fork a child with communication channels (pipes).
     * uses posix_spawn() if available, else uses fork+exec
     * requests n (the last arg) communication fds between parent and child
     * if n=1, equivalent to child_spawn1_pipe; child writes, parent reads.
-    * if n>=2, the fds are pipes, parent reads on even and writes on odd.
+    * if n>=2, parent reads on even and writes on odd.
  */
 
 extern pid_t child_spawn (char const *, char const *const *, char const *const *, int *, unsigned int) ;

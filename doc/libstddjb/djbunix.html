@@ -412,6 +412,23 @@ modified by the hidden modifier string. If this command line is empty,
 exit 0 instead.
 </p>
 
+<p> <code>
+void xexecvep (char const *, char const *const *, char const *const *, char const *) <br />
+void xpathexec_r (char const *const *, char const *const *, size_t, char const *, size_t) <br />
+void xpathexec_r_name (char const *, char const *const *, char const *const *, size_t, char const *, size_t) <br />
+void xpathexec_fromenv (char const *const *, char const *const *, size_t) <br />
+void xpathexec_run (char const *, char const *const *, char const *const *) <br />
+void xpathexec0_run (char const *const *, char const *const *) <br />
+void xpathexec (char const *const *) <br />
+void xpathexec0 (char const *const *)
+</code> </p>
+
+<p>
+ Those functions provide the same functionality as the non-x-prefixed versions,
+but if the execution fails (i.e. the process cannot exec into a new program), then
+the process dies with a 111 exit code and an error message on stderr.
+</p>
+
 <p>
  The <a href="env.html">env</a> library interface provides additional functions
 to manipulate modifier strings and environments.
