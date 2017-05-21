@@ -4,6 +4,7 @@ In 2.5.1.0
 ----------
 
  - Bugfixes.
+ - More workarounds for OpenBSD (who else).
  - More workarounds for sysdeps detection by broken toolchains.
  - Added the xpathexec_* family of functions (in djbunix.h).
 
@@ -27,4 +28,3 @@ integer types have disappeared - replaced with stdint.h types. uint64_t is
 defined by skalibs/uint64.h when stdint.h omits it.
  - Lots of minor bugfixes and cleanups related to the types system.
  - Better support for getrandom() and arc4random().
-
