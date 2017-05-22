@@ -7,7 +7,9 @@
 
 static ssize_t readnclose (int fd, char *s, size_t n)
 {
-  size_t r = allread(fd, s, n) ;
+  size_t r ;
+  errno = 0 ;
+  r = allread(fd, s, n) ;
   if (errno)
   {
     int e = errno ;
