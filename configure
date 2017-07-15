@@ -501,6 +501,7 @@ EOF
   choose cl revoke REVOKE 'revoke()'
   choose cl sendfile SENDFILE 'sendfile()'
   choose cl setgroups SETGROUPS 'setgroups()'
+  choose clr egidingroups EGIDINGROUPS 'the effective gid in the supplementary group list'
   choose cl settimeofday SETTIMEOFDAY 'settimeofday()'
   choose clr signalfd SIGNALFD 'signalfd()'
   choose clr splice SPLICE 'splice()'
