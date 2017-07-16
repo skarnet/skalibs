@@ -7,6 +7,7 @@
 #include <skalibs/nonposix.h>
 #include <string.h>
 #include <unistd.h>
+#include <grp.h>
 #include <skalibs/setgroups.h>
 
 int setgroups_with_egid (size_t n, gid_t const *tab)
