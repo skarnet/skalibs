@@ -44,8 +44,7 @@ src/include/$(package)/uint32.h \
 src/include/$(package)/uint64.h \
 src/include/$(package)/types.h \
 src/include/$(package)/error.h \
-src/include/$(package)/ip46.h \
-src/include/$(package)/setgroups.h
+src/include/$(package)/ip46.h
 ALL_INCLUDES := $(sort $(BUILT_INCLUDES) $(wildcard src/include/$(package)/*.h))
 ALL_SYSDEPS := $(wildcard $(sysdeps)/*)
 ALL_DATA := $(wildcard src/etc/*)
@@ -166,13 +165,4 @@ src/include/$(package)/ip46.h: src/include/$(package)/fmtscan.h src/include/$(pa
 	  else cat src/headers/ip46-without ; \
 	  fi ; \
 	  exec cat src/headers/ip46-footer ; \
-	} > $@
-
-src/include/$(package)/setgroups.h: $(sysdeps)/sysdeps src/headers/setgroups-header src/headers/setgroups-footer src/headers/setgroups-stub
-	@{ \
-	  cat src/headers/setgroups-header ; \
-	  if grep -qF 'setgroups: yes' $(sysdeps)/sysdeps ; then : ; \
-	  else cat src/headers/setgroups-stub ; \
-	  fi ; \
-	  exec cat src/headers/setgroups-footer ; \
 	} > $@

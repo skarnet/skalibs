@@ -1,2 +1,0 @@
-#include <errno.h>
-#define setgroups(n, s) (errno = ENOSYS, -1)

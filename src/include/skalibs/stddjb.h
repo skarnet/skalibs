@@ -10,7 +10,6 @@
 #include <skalibs/types.h>
 #include <skalibs/error.h>
 #include <skalibs/ip46.h>
-#include <skalibs/setgroups.h>
 
 #include <skalibs/alarm.h>
 #include <skalibs/alloc.h>
@@ -45,6 +44,7 @@
 #include <skalibs/nsig.h>
 #include <skalibs/segfault.h>
 #include <skalibs/selfpipe.h>
+#include <skalibs/setgroups.h>
 #include <skalibs/sgetopt.h>
 #include <skalibs/sig.h>
 #include <skalibs/siovec.h>

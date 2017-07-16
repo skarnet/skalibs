@@ -32,6 +32,7 @@ src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skali
 src/include/skalibs/mininetstring.h: src/include/skalibs/stralloc.h
 src/include/skalibs/netstring.h: src/include/skalibs/buffer.h src/include/skalibs/stralloc.h
 src/include/skalibs/random.h: src/include/skalibs/stralloc.h
+src/include/skalibs/setgroups.h: src/include/skalibs/sysdeps.h
 src/include/skalibs/sha512.h: src/include/skalibs/uint64.h
 src/include/skalibs/sig.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/siovec.h: src/include/skalibs/gccattributes.h
@@ -450,6 +451,7 @@ src/libstddjb/selfpipe_read.o src/libstddjb/selfpipe_read.lo: src/libstddjb/self
 src/libstddjb/selfpipe_trap.o src/libstddjb/selfpipe_trap.lo: src/libstddjb/selfpipe_trap.c src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
 src/libstddjb/selfpipe_trapset.o src/libstddjb/selfpipe_trapset.lo: src/libstddjb/selfpipe_trapset.c src/include/skalibs/nonposix.h src/include/skalibs/nsig.h src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
 src/libstddjb/selfpipe_untrap.o src/libstddjb/selfpipe_untrap.lo: src/libstddjb/selfpipe_untrap.c src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
+src/libstddjb/setgroups.o src/libstddjb/setgroups.lo: src/libstddjb/setgroups.c src/include/skalibs/nonposix.h src/include/skalibs/setgroups.h src/include/skalibs/sysdeps.h
 src/libstddjb/sgetopt.o src/libstddjb/sgetopt.lo: src/libstddjb/sgetopt.c src/include/skalibs/buffer.h src/include/skalibs/sgetopt.h
 src/libstddjb/sig_block.o src/libstddjb/sig_block.lo: src/libstddjb/sig_block.c src/include/skalibs/sig.h
 src/libstddjb/sig_blocknone.o src/libstddjb/sig_blocknone.lo: src/libstddjb/sig_blocknone.c src/include/skalibs/sig.h

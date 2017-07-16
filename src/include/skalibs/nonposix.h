@@ -53,6 +53,15 @@
 #endif
 
 
+ /* Unfortunately we can't fully avoid #ifdef forests,
+    because the BSDs are bloody snowflakes. See: setgroups(). */
+
+#undef SKALIBS_BSD_SUCKS
+#if defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__) || defined(__bsdi__)
+# define SKALIBS_BSD_SUCKS
+#endif
+
+
  /* old versions of BSD and some broken GNU toolchains:
       system headers are not self-contained,
       starting with sys/types.h normally always works. */
