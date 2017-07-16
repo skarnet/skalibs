@@ -40,9 +40,7 @@ static int fstat_at (int dirfd, char const *file, struct stat *st, int (*dostat)
   if (fdhere < 0) return -1 ;
   if (fd_chdir(dirfd) < 0)
   {
-    int e = errno ;
     fd_close(fdhere) ;
-    errno = e ;
     return -1 ;
   }
   r = (*dostat)(file, st) ;
@@ -56,11 +54,10 @@ static int fstat_at (int dirfd, char const *file, struct stat *st, int (*dostat)
   }
   if (fd_chdir(fdhere) < 0)
   {
-    int e = errno ;
     fd_close(fdhere) ;
-    errno = e ;
     return -1 ;
   }
+  fd_close(fdhere) ;
   return r ;
 }
 

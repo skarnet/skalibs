@@ -15,9 +15,7 @@ int fd_ensure_open (int fd, int w)
     if (newfd < 0) return 0 ;
     if (fd_move(fd, newfd) < 0)
     {
-      int e = errno ;
       fd_close(newfd) ;
-      errno = e ;
       return 0 ;
     }
   }

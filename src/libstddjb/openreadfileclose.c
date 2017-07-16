@@ -1,7 +1,6 @@
 /* ISC license. */
 
 #include <sys/stat.h>
-#include <errno.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/djbunix.h>
@@ -27,10 +26,6 @@ int openreadfileclose (char const *file, stralloc *sa, size_t limit)
   return 1 ;
 
 err:
-  {
-    int e = errno ;
-    fd_close(fd) ;
-    errno = e ;
-  }
+  fd_close(fd) ;
   return 0 ;
 }

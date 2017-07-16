@@ -18,9 +18,7 @@ int fd_move2 (int to1, int from1, int to2, int from2)
   }
   if (fd_copy(to1, from1) == -1)
   {
-    int e = errno ;
     if (from2 != tmp) fd_close(tmp) ;
-    errno = e ;
     return -1 ;
   }
   if (fd_copy(to2, tmp) == -1)

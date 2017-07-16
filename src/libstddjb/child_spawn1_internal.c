@@ -77,21 +77,17 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
   pid_t pid ;
   if (coe(p[0]) < 0 || pipecoe(syncp) < 0)
   {
-    e = errno ;
     fd_close(p[1]) ;
     fd_close(p[0]) ;
-    errno = e ;
     return 0 ;
   }
   pid = fork() ;
   if (pid < 0)
   {
-    e = errno ;
     fd_close(syncp[1]) ;
     fd_close(syncp[0]) ;
     fd_close(p[1]) ;
     fd_close(p[0]) ;
-    errno = e ;
     return 0 ;
   }
   if (!pid)
@@ -117,10 +113,8 @@ err:
   syncp[1] = fd_read(syncp[0], (char *)&e, sizeof(e)) ;
   if (syncp[1] < 0)
   {
-    e = errno ;
     fd_close(syncp[0]) ;
     fd_close(p[!(to & 1)]) ;
-    errno = e ;
     return 0 ;
   }
   fd_close(syncp[0]) ;

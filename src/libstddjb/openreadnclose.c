@@ -12,9 +12,7 @@ static ssize_t readnclose (int fd, char *s, size_t n)
   r = allread(fd, s, n) ;
   if (errno)
   {
-    int e = errno ;
     fd_close(fd) ;
-    errno = e ;
     return -1 ;
   }
   fd_close(fd) ;

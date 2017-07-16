@@ -18,10 +18,8 @@ pid_t doublefork ()
   {
     case -1:
     {
-      int e = errno ;
       fd_close(fd[1]) ;
       fd_close(fd[0]) ;
-      errno = e ;
       return -1 ;
     }
     case 0:

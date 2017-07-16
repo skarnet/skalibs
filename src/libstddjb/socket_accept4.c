@@ -27,9 +27,7 @@ int socket_accept4_internal (int s, char *ip, uint16_t *port, unsigned int optio
   if ((((options & DJBUNIX_FLAG_NB) ? ndelay_on(fd) : ndelay_off(fd)) < 0)
    || (((options & DJBUNIX_FLAG_COE) ? coe(fd) : uncoe(fd)) < 0))
   {
-    int e = errno ;
     fd_close(fd) ;
-    errno = e ;
     return -1 ;
   }
 #endif

@@ -34,14 +34,14 @@ int skaclient_startf_async (
   if (!pid) return 0 ;
   if (ndelay_on(fd) < 0 || !skaclient_init(a, fd, bufss, bufsn, auxbufss, auxbufsn, bufas, bufan, auxbufas, auxbufan, q, qlen, before, beforelen))
   {
-    int e = errno ;
     fd_close(fd) ;
     if (options & SKACLIENT_OPTION_WAITPID)
     {
+      int e = errno ;
       int wstat ;
       waitpid_nointr(a->pid, &wstat, 0) ;
+      errno = e ;
     }
-    errno = e ;
     return 0 ;
   }
   a->pid = pid ;

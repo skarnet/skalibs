@@ -11,11 +11,12 @@
 
 int touch (char const *file)
 {
+  int r ;
   int fd = open_create(file) ;
   if (fd < 0) return 0 ;
-  if (futimens(fd, 0) < 0) return 0 ;
+  r = futimens(fd, 0) >= 0 ;
   fd_close(fd) ;
-  return 1 ;
+  return r ;
 }
 
 #else
@@ -27,9 +28,10 @@ int touch (char const *file)
 
 int touch (char const *file)
 {
+  int r ;
   int fd = open_create(file) ;
   if (fd < 0) return 0 ;
-  if (futimes(fd, 0) < 0) return 0 ;
+  r = futimes(fd, 0) >= 0 ;
   fd_close(fd) ;
   return 1 ;
 }
@@ -44,8 +46,7 @@ int touch (char const *file)
   int fd = open_create(file) ;
   if (fd < 0) return 0 ;
   fd_close(fd) ;
-  if (utimes(file, 0) < 0) return 0 ;
-  return 1 ;
+  return utimes(file, 0) >= 0 ;
 }
 
 #endif

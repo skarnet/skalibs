@@ -1,9 +1,9 @@
 /* ISC license. */
 
 #include <skalibs/nonposix.h>
-#include <errno.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <errno.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/ip46.h>
 #include <skalibs/socket.h>
@@ -18,9 +18,7 @@ int socket_udp6_internal (unsigned int flags)
     int option = 1 ;
     if (setsockopt(fd, IPPROTO_IPV6, IPV6_V6ONLY, &option, sizeof(option)) < 0)
     {
-      int e = errno ;
       fd_close(fd) ;
-      errno = e ;
       return -1 ;
     }
   }

@@ -33,9 +33,7 @@ int skaclient_start_async (
   if ((!ipc_connect(fd, path) && !error_isalready(errno))
    || !skaclient_init(a, fd, bufss, bufsn, auxbufss, auxbufsn, bufas, bufan, auxbufas, auxbufan, q, qlen, before, beforelen))
   {
-    int e = errno ;
     fd_close(fd) ;
-    errno = e ;
     return 0 ;
   }
   a->pid = 0 ;

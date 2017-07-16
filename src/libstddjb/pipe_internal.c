@@ -17,7 +17,6 @@ int pipe_internal (int *p, unsigned int flags)
 #else
 
 #include <unistd.h>
-#include <errno.h>
 #include <skalibs/djbunix.h>
 
 int pipe_internal (int *p, unsigned int flags)
@@ -32,10 +31,8 @@ int pipe_internal (int *p, unsigned int flags)
   return 0 ;
  err:
   {
-    int e = errno ;
     fd_close(pi[1]) ;
     fd_close(pi[0]) ;
-    errno = e ;
   }
   return -1 ;
 }

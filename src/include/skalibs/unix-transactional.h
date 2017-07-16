@@ -56,7 +56,7 @@ struct dirdescriptor_s
 
 extern int dd_open_read (dirdescriptor_t *, char const *) ;
 extern int dd_open_write (dirdescriptor_t *, char const *, unsigned int) ;
-extern int dd_close (dirdescriptor_t *) ;  /* after dd_open_read */
+extern void dd_close (dirdescriptor_t *) ;  /* after dd_open_read */
 extern void dd_cancel (dirdescriptor_t *) ; /* after dd_open_write */
 extern int dd_commit (dirdescriptor_t *) ; /* after dd_open_write */
 extern int dd_commit_devino (dirdescriptor_t *, dev_t *, ino_t *) ; /* after dd_open_write */

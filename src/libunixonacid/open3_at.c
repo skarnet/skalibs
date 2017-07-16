@@ -30,30 +30,26 @@ int open3_at (int dirfd, char const *file, int flags, unsigned int mode)
   int fd ;
   int fdhere = open_read(".") ;
   if (fdhere < 0) return -1 ;
-  if (fd_chdir(dirfd) < 0)
-  {
-    int e = errno ;
-    fd_close(fdhere) ;
-    errno = e ;
-    return -1 ;
-  }
+  if (fd_chdir(dirfd) < 0) goto errclose ;
   fd = open3(file, flags, mode) ;
   if (fd < 0)
   {
     int e = errno ;
     fd_chdir(fdhere) ;
-    fd_close(fdhere) ;
     errno = e ;
-    return -1 ;
+    goto errclose ;
   }
   if (fd_chdir(fdhere) < 0)
   {
-    int e = errno ;
-    fd_close(fdhere) ;
-    errno = e ;
-    return -1 ;
+    fd_close(fd) ;
+    goto errclose ;
   }
+  fd_close(fdhere) ;
   return fd ;
+
+ errclose:
+  fd_close(fdhere) ;
+  return -1 ;
 }
 
 #endif

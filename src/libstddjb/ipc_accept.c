@@ -2,10 +2,10 @@
 
 #include <skalibs/sysdeps.h>
 #include <skalibs/nonposix.h>
-#include <errno.h>
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <string.h>
+#include <errno.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/webipc.h>
@@ -28,9 +28,7 @@ int ipc_accept_internal (int s, char *p, size_t l, int *trunc, unsigned int opti
   if ((((options & DJBUNIX_FLAG_NB) ? ndelay_on(fd) : ndelay_off(fd)) < 0)
    || (((options & DJBUNIX_FLAG_COE) ? coe(fd) : uncoe(fd)) < 0))
   {
-    int e = errno ;
     fd_close(fd) ;
-    errno = e ;
     return -1 ;
   }
 #endif

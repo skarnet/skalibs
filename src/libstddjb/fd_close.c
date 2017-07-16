@@ -4,12 +4,9 @@
 #include <errno.h>
 #include <skalibs/djbunix.h>
 
-int fd_close (int fd)
+void fd_close (int fd)
 {
-  for (;;)
-  {
-    if (!close(fd) || errno == EINPROGRESS) break ;
-    if (errno != EINTR) return -1 ;
-  }
-  return 0 ;
+  int e = errno ;
+  while (close(fd) < 0 && errno == EINTR) ;
+  errno = e ;
 }

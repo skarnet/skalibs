@@ -59,10 +59,8 @@ pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const
   pid = fork() ;
   if (pid < 0)
   {
-    e = errno ;
     fd_close(p[1]) ;
     fd_close(p[0]) ;
-    errno = e ;
     return 0 ;
   }
   if (!pid)
@@ -83,9 +81,7 @@ pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const
   p[1] = fd_read(p[0], (char *)&e, sizeof(e)) ;
   if (p[1] < 0)
   {
-    e = errno ;
     fd_close(p[0]) ;
-    errno = e ;
     return 0 ;
   }
   fd_close(p[0]) ;

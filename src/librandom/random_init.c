@@ -62,9 +62,7 @@ int random_init ()
     if (fd < 0) return 0 ;
     if (coe(fd) < 0)
     {
-      int e = errno ;
       fd_close(fd) ;
-      errno = e ;
       return 0 ;
     }
     random_fd = fd ;

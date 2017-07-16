@@ -11,5 +11,7 @@ int fd_move (int to, int from)
   do
     r = dup2(from, to) ;
   while ((r == -1) && (errno == EINTR)) ;
-  return (r == -1) ? -1 : fd_close(from) ;
+  if (r < 0) return r ;
+  fd_close(from) ;
+  return 0 ;
 }

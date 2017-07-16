@@ -20,10 +20,8 @@ int skaclient_server_ack (unixmessage_t const *clientmsg, unixmessage_sender_t *
   unixmessage_sender_init(asyncout, fd[1]) ;
   if (!unixmessage_put_and_close(out, &m, &bits))
   {
-    int e = errno ;
     fd_close(fd[1]) ;
     fd_close(fd[0]) ;
-    errno = e ;
     return 0 ;
   }
   return 1 ;

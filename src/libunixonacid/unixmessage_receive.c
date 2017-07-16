@@ -84,10 +84,8 @@ static int unixmessage_receiver_fill (unixmessage_receiver_t *b)
         for (; i < auxlen / sizeof(int) ; i++)
           if (coe(((int *)CMSG_DATA(c))[i]) < 0)
           {
-            int e = errno ;
             i++ ;
             while (i--) fd_close(((int *)CMSG_DATA(c))[i]) ;
-            errno = e ;
             return -1 ;
           }
       }

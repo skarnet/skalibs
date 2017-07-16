@@ -26,7 +26,7 @@ extern int fd_copy (int, int) ;
 extern int fd_copy2 (int, int, int, int) ;
 extern int fd_move (int, int) ;
 extern int fd_move2 (int, int, int, int) ;
-extern int fd_close (int) ;
+extern void fd_close (int) ;
 extern int fd_chmod (int, unsigned int) ;
 extern int fd_chown (int, uid_t, gid_t) ;
 extern int fd_sync (int) ;
