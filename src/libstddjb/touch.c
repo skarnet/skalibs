@@ -33,7 +33,7 @@ int touch (char const *file)
   if (fd < 0) return 0 ;
   r = futimes(fd, 0) >= 0 ;
   fd_close(fd) ;
-  return 1 ;
+  return r ;
 }
 
 #else
