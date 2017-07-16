@@ -9,6 +9,7 @@
 
 #include <unistd.h>
 
+extern int setgroups_and_gid (gid_t, size_t, gid_t const *) ;
 extern int setgroups_with_egid (size_t, gid_t const *) ;
 extern int skalibs_setgroups (size_t, gid_t const *) ;
 
