@@ -43,7 +43,7 @@ extern unixmessage_v_t const unixmessage_v_zero ;
 #define UNIXMESSAGE_MAXFDS 255
 #define UNIXMESSAGE_BUFSIZE 2048
 #define UNIXMESSAGE_AUXBUFSIZE (sizeof(int) * UNIXMESSAGE_MAXFDS + 1)
-#define UNIXMESSAGE_MAXREADS 4096
+#define UNIXMESSAGE_MAXREADS 128
 
 
  /* Sender */
@@ -124,6 +124,8 @@ extern void unixmessage_receiver_free (unixmessage_receiver_t *) ;
 #define unixmessage_receiver_fd(b) ((b)->fd)
 #define unixmessage_receiver_isempty(b) (cbuffer_isempty(&(b)->mainb) && cbuffer_isempty(&(b)->auxb))
 #define unixmessage_receiver_isfull(b) (cbuffer_isfull(&(b)->mainb) || cbuffer_isfull(&(b)->auxb))
+
+extern int unixmessage_receiver_hasmsginbuf (unixmessage_receiver_t const *) ;
 
 extern int unixmessage_receive (unixmessage_receiver_t *, unixmessage_t *) ;
 extern int unixmessage_timed_receive (unixmessage_receiver_t *, unixmessage_t *, tain_t const *, tain_t *) ;

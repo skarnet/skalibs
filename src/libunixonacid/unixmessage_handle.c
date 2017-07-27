@@ -4,9 +4,8 @@
 
 int unixmessage_handle (unixmessage_receiver_t *b, unixmessage_handler_func_t_ref f, void *p)
 {
-  unsigned int n = UNIXMESSAGE_MAXREADS ;
   unsigned int count = 0 ;
-  while (n--)
+  while (count < UNIXMESSAGE_MAXREADS || unixmessage_receiver_hasmsginbuf(b))
   {
     unixmessage_t m ;
     int r = unixmessage_receive(b, &m) ;
