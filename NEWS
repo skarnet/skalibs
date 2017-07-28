@@ -1,5 +1,15 @@
 Changelog for skalibs.
 
+In 2.6.0.0
+----------
+
+ - Bugfixes. New unixmessage_receiver_hasmsginbuf() function to address
+an issue in unixmessage_handle().
+ - fd_close() now returns void. This mandates a major version bump.
+ - new skalibs_setgroups(), setgroups_with_egid() and setgroups_and_gid()
+functions to work around supplementary group mismanagement in... can you
+guess what operating system? You get 3 tries.
+
 In 2.5.1.1
 ----------
 
