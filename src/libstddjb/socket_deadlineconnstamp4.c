@@ -6,7 +6,9 @@
 
 int socket_deadlineconnstamp (int s, char const *ip, uint16_t port, tain_t const *deadline, tain_t *stamp)
 {
+  int e = errno ;
   if (socket_connect4(s, ip, port) >= 0) return 1 ;
   if (!error_isagain(errno) && !error_isalready(errno)) return 0 ;
+  errno = e ;
   return socket_waitconn(s, deadline, stamp) ;
 }
