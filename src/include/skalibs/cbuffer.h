@@ -34,7 +34,7 @@ extern size_t cbuffer_putv (cbuffer_t *, struct iovec const *, unsigned int) ;
 
 #define cbuffer_UNPUT(b, w) ((b)->n = ((b)->a + (b)->n - w) % (b)->a, w) ;
 extern size_t cbuffer_unput (cbuffer_t *, size_t) ;
-extern void cbuffer_wpeek (cbuffer_t *, struct iovec *) ;
+extern void cbuffer_wpeek (cbuffer_t const *, struct iovec *) ;
 #define cbuffer_WSEEK(b, w) ((b)->n = ((b)->n + (w)) % (b)->a, w)
 extern size_t cbuffer_wseek (cbuffer_t *, size_t) ;
 
@@ -46,7 +46,7 @@ extern size_t cbuffer_getv (cbuffer_t *, struct iovec const *, unsigned int) ;
 
 #define cbuffer_UNGET(b, n) ((b)->p = ((b)->a + (b)->p - n) % (b)->a, n) ;
 extern size_t cbuffer_unget (cbuffer_t *, size_t) ;
-extern void cbuffer_rpeek (cbuffer_t *, struct iovec *) ;
+extern void cbuffer_rpeek (cbuffer_t const *, struct iovec *) ;
 #define cbuffer_RSEEK(b, n) ((b)->p = ((b)->p + (n)) % (b)->a, n)
 extern size_t cbuffer_rseek (cbuffer_t *, size_t) ;
 

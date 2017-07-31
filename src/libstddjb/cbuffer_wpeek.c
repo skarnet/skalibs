@@ -3,7 +3,7 @@
 #include <sys/uio.h>
 #include <skalibs/cbuffer.h>
 
-void cbuffer_wpeek (cbuffer_t *b, struct iovec *v)
+void cbuffer_wpeek (cbuffer_t const *b, struct iovec *v)
 {
   size_t last = (b->a - 1 + b->p) % b->a ;
   v[0].iov_base = b->x + b->n ;

@@ -117,7 +117,7 @@ src/libdatastruct/genset_iter_nocancel.o src/libdatastruct/genset_iter_nocancel.
 src/libdatastruct/genset_iter_withcancel.o src/libdatastruct/genset_iter_withcancel.lo: src/libdatastruct/genset_iter_withcancel.c src/include/skalibs/genset.h
 src/libdatastruct/gensetdyn_delete.o src/libdatastruct/gensetdyn_delete.lo: src/libdatastruct/gensetdyn_delete.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h
 src/libdatastruct/gensetdyn_free.o src/libdatastruct/gensetdyn_free.lo: src/libdatastruct/gensetdyn_free.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h src/include/skalibs/stralloc.h
-src/libdatastruct/gensetdyn_init.o src/libdatastruct/gensetdyn_init.lo: src/libdatastruct/gensetdyn_init.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h src/include/skalibs/stralloc.h
+src/libdatastruct/gensetdyn_init.o src/libdatastruct/gensetdyn_init.lo: src/libdatastruct/gensetdyn_init.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h
 src/libdatastruct/gensetdyn_iter.o src/libdatastruct/gensetdyn_iter.lo: src/libdatastruct/gensetdyn_iter.c src/include/skalibs/bitarray.h src/include/skalibs/gensetdyn.h
 src/libdatastruct/gensetdyn_iter_withcancel.o src/libdatastruct/gensetdyn_iter_withcancel.lo: src/libdatastruct/gensetdyn_iter_withcancel.c src/include/skalibs/gensetdyn.h
 src/libdatastruct/gensetdyn_new.o src/libdatastruct/gensetdyn_new.lo: src/libdatastruct/gensetdyn_new.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h
@@ -187,7 +187,7 @@ src/libstddjb/bufalloc_clean.o src/libstddjb/bufalloc_clean.lo: src/libstddjb/bu
 src/libstddjb/bufalloc_flush.o src/libstddjb/bufalloc_flush.lo: src/libstddjb/bufalloc_flush.c src/include/skalibs/allreadwrite.h src/include/skalibs/bufalloc.h src/include/skalibs/functypes.h
 src/libstddjb/bufalloc_getfd.o src/libstddjb/bufalloc_getfd.lo: src/libstddjb/bufalloc_getfd.c src/include/skalibs/bufalloc.h
 src/libstddjb/bufalloc_getlen.o src/libstddjb/bufalloc_getlen.lo: src/libstddjb/bufalloc_getlen.c src/include/skalibs/bufalloc.h
-src/libstddjb/bufalloc_init.o src/libstddjb/bufalloc_init.lo: src/libstddjb/bufalloc_init.c src/include/skalibs/bufalloc.h src/include/skalibs/stralloc.h
+src/libstddjb/bufalloc_init.o src/libstddjb/bufalloc_init.lo: src/libstddjb/bufalloc_init.c src/include/skalibs/bufalloc.h
 src/libstddjb/buffer_0.o src/libstddjb/buffer_0.lo: src/libstddjb/buffer_0.c src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h
 src/libstddjb/buffer_0f1.o src/libstddjb/buffer_0f1.lo: src/libstddjb/buffer_0f1.c src/include/skalibs/buffer.h
 src/libstddjb/buffer_0small.o src/libstddjb/buffer_0small.lo: src/libstddjb/buffer_0small.c src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h

@@ -3,7 +3,7 @@
 #include <sys/uio.h>
 #include <skalibs/cbuffer.h>
 
-void cbuffer_rpeek (cbuffer_t *b, struct iovec *v)
+void cbuffer_rpeek (cbuffer_t const *b, struct iovec *v)
 {
   v[0].iov_base = b->x + b->p ;
   if (b->n >= b->p)
