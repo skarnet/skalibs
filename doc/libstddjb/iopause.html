@@ -65,7 +65,7 @@ to select on. If <em>x</em> is an <tt>iopause_fd</tt>:
  <li> When the selection function returns, <em>x</em>.revents contains
 a disjunction of the following flags:
  <ul>
-  <li> IOPAUSE_READ if the fd is readable (this include reception of an EOF). </li>
+  <li> IOPAUSE_READ if the fd is readable (this includes reception of an EOF). </li>
   <li> IOPAUSE_WRITE if the fd is writable. </li>
   <li> IOPAUSE_EXCEPT if an exception (such as EOF or an error) occurred on the fd. </li>
  </ul> </li>
