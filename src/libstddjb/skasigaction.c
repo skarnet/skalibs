@@ -1,5 +1,6 @@
 /* ISC license. */
 
+#include <skalibs/config.h>
 #include <signal.h>
 #include <skalibs/sig.h>
 
@@ -9,6 +10,9 @@ int skasigaction (int sig, struct skasigaction const *new, struct skasigaction *
   if (((new->flags & SKASA_MASKALL) ? sigfillset(&sanew.sa_mask) : sigemptyset(&sanew.sa_mask)) == -1) return -1 ;
   sanew.sa_handler = new->handler ;
   sanew.sa_flags = (new->flags & SKASA_NOCLDSTOP) ? SA_NOCLDSTOP : 0 ;
+#ifndef SKALIBS_FLAG_PREFERSELECT
+  sanew.sa_flags |= SA_RESTART ;
+#endif
   if (sigaction(sig, &sanew, &saold) < 0) return -1 ;
   if (old)
   {
