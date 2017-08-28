@@ -514,6 +514,7 @@ EOF
   choose clr getrandom GETRANDOM 'getrandom()'
   choose cl itimer ITIMER 'setitimer()'
   choose cl namespaces NAMESPACES 'namespaces'
+  choose cl nsgetparent NSGETPARENT 'NS_GET_PARENT'
 
   echo '#endif' >> $sysdeps/sysdeps.h
 fi
