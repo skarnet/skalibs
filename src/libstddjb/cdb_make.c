@@ -19,7 +19,7 @@ int cdb_make_start (struct cdb_make *c, int fd)
   return 0 ;
 }
 
-static int posplus (struct cdb_make *c, uint32 len)
+static int posplus (struct cdb_make *c, uint32_t len)
 {
   uint32_t newpos = c->pos + len ;
   if (newpos < len) return (errno = ENOMEM, 0) ;

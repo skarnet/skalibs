@@ -9,8 +9,8 @@
 /*
    Writes 160 bytes of crap into s.
    Certainly not cryptographically secure or 100% unpredictable,
-   but we're only using this to speed up /dev/urandom
-   initialization or to init an internal SURF PRNG. 
+   but we're only using this to help shuffle the entropy of
+   /dev/urandom or to init an internal SURF PRNG. 
    iow: we are CS iff the system's RNG is CS.
 */
 
