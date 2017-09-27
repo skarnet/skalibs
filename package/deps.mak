@@ -21,12 +21,14 @@ src/include/skalibs/djbtime.h: src/include/skalibs/tai.h src/include/skalibs/uin
 src/include/skalibs/djbunix.h: src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/env.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/envalloc.h: src/include/skalibs/genalloc.h
+src/include/skalibs/error.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/fmtscan.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/genalloc.h: src/include/skalibs/functypes.h src/include/skalibs/stralloc.h
 src/include/skalibs/genset.h: src/include/skalibs/functypes.h
 src/include/skalibs/gensetdyn.h: src/include/skalibs/functypes.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
 src/include/skalibs/iobuffer.h: src/include/skalibs/buffer.h src/include/skalibs/djbunix.h
 src/include/skalibs/iopause.h: src/include/skalibs/tai.h
+src/include/skalibs/ip46.h: src/include/skalibs/fmtscan.h src/include/skalibs/socket.h
 src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr2.h
 src/include/skalibs/mininetstring.h: src/include/skalibs/stralloc.h
@@ -45,6 +47,7 @@ src/include/skalibs/stddjb.h: src/include/skalibs/alarm.h src/include/skalibs/al
 src/include/skalibs/strerr.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint64.h
+src/include/skalibs/types.h: src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
 src/include/skalibs/unix-timed.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
 src/include/skalibs/unix-transactional.h: src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
 src/include/skalibs/unixconnection.h: src/include/skalibs/unixmessage.h
@@ -416,10 +419,12 @@ src/libstddjb/open_write.o src/libstddjb/open_write.lo: src/libstddjb/open_write
 src/libstddjb/openreadfileclose.o src/libstddjb/openreadfileclose.lo: src/libstddjb/openreadfileclose.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/openreadnclose.o src/libstddjb/openreadnclose.lo: src/libstddjb/openreadnclose.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
 src/libstddjb/openslurpclose.o src/libstddjb/openslurpclose.lo: src/libstddjb/openslurpclose.c src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
+src/libstddjb/openwritenclose.o src/libstddjb/openwritenclose.lo: src/libstddjb/openwritenclose.c src/include/skalibs/djbunix.h
 src/libstddjb/openwritenclose_suffix.o src/libstddjb/openwritenclose_suffix.lo: src/libstddjb/openwritenclose_suffix.c src/include/skalibs/djbunix.h
-src/libstddjb/openwritenclose_unsafe.o src/libstddjb/openwritenclose_unsafe.lo: src/libstddjb/openwritenclose_unsafe.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
+src/libstddjb/openwritenclose_unsafe.o src/libstddjb/openwritenclose_unsafe.lo: src/libstddjb/openwritenclose_unsafe.c src/include/skalibs/djbunix.h
+src/libstddjb/openwritevnclose.o src/libstddjb/openwritevnclose.lo: src/libstddjb/openwritevnclose.c src/include/skalibs/djbunix.h
 src/libstddjb/openwritevnclose_suffix.o src/libstddjb/openwritevnclose_suffix.lo: src/libstddjb/openwritevnclose_suffix.c src/include/skalibs/djbunix.h
-src/libstddjb/openwritevnclose_unsafe.o src/libstddjb/openwritevnclose_unsafe.lo: src/libstddjb/openwritevnclose_unsafe.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/siovec.h
+src/libstddjb/openwritevnclose_unsafe.o src/libstddjb/openwritevnclose_unsafe.lo: src/libstddjb/openwritevnclose_unsafe.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
 src/libstddjb/pathexec.o src/libstddjb/pathexec.lo: src/libstddjb/pathexec.c src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/environ.h
 src/libstddjb/pathexec0.o src/libstddjb/pathexec0.lo: src/libstddjb/pathexec0.c src/include/skalibs/djbunix.h
 src/libstddjb/pathexec0_run.o src/libstddjb/pathexec0_run.lo: src/libstddjb/pathexec0_run.c src/include/skalibs/djbunix.h
@@ -671,6 +676,8 @@ src/libstddjb/wait_reap.o src/libstddjb/wait_reap.lo: src/libstddjb/wait_reap.c 
 src/libstddjb/waitn.o src/libstddjb/waitn.lo: src/libstddjb/waitn.c src/include/skalibs/djbunix.h
 src/libstddjb/waitn_reap.o src/libstddjb/waitn_reap.lo: src/libstddjb/waitn_reap.c src/include/skalibs/djbunix.h
 src/libstddjb/waitpid_nointr.o src/libstddjb/waitpid_nointr.lo: src/libstddjb/waitpid_nointr.c src/include/skalibs/djbunix.h
+src/libstddjb/writenclose_unsafe.o src/libstddjb/writenclose_unsafe.lo: src/libstddjb/writenclose_unsafe.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
+src/libstddjb/writevnclose_unsafe.o src/libstddjb/writevnclose_unsafe.lo: src/libstddjb/writevnclose_unsafe.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/siovec.h
 src/libstddjb/xexecvep.o src/libstddjb/xexecvep.lo: src/libstddjb/xexecvep.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
 src/libstddjb/xpathexec.o src/libstddjb/xpathexec.lo: src/libstddjb/xpathexec.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
 src/libstddjb/xpathexec0.o src/libstddjb/xpathexec0.lo: src/libstddjb/xpathexec0.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
@@ -713,11 +720,7 @@ src/libunixonacid/opengetlnclose.o src/libunixonacid/opengetlnclose.lo: src/libu
 src/libunixonacid/opengetlnclose_at.o src/libunixonacid/opengetlnclose_at.lo: src/libunixonacid/opengetlnclose_at.c src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/openreadnclose_at.o src/libunixonacid/openreadnclose_at.lo: src/libunixonacid/openreadnclose_at.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/openslurpclose_at.o src/libunixonacid/openslurpclose_at.lo: src/libunixonacid/openslurpclose_at.c src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
-src/libunixonacid/openwritenclose.o src/libunixonacid/openwritenclose.lo: src/libunixonacid/openwritenclose.c src/include/skalibs/skamisc.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/openwritenclose_at.o src/libunixonacid/openwritenclose_at.lo: src/libunixonacid/openwritenclose_at.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
-src/libunixonacid/openwritenclose_devino.o src/libunixonacid/openwritenclose_devino.lo: src/libunixonacid/openwritenclose_devino.c src/include/skalibs/skamisc.h src/include/skalibs/unix-transactional.h
-src/libunixonacid/openwritenclose_devino_tmp.o src/libunixonacid/openwritenclose_devino_tmp.lo: src/libunixonacid/openwritenclose_devino_tmp.c src/include/skalibs/djbunix.h src/include/skalibs/random.h src/include/skalibs/stralloc.h src/include/skalibs/types.h src/include/skalibs/unix-transactional.h
-src/libunixonacid/openwritenclose_tmp.o src/libunixonacid/openwritenclose_tmp.lo: src/libunixonacid/openwritenclose_tmp.c src/include/skalibs/unix-transactional.h
 src/libunixonacid/openwritevnclose_at.o src/libunixonacid/openwritevnclose_at.lo: src/libunixonacid/openwritevnclose_at.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/siovec.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/skaclient_default_cb.o src/libunixonacid/skaclient_default_cb.lo: src/libunixonacid/skaclient_default_cb.c src/include/skalibs/error.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
 src/libunixonacid/skaclient_end.o src/libunixonacid/skaclient_end.lo: src/libunixonacid/skaclient_end.c src/include/skalibs/djbunix.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h

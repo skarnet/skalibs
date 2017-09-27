@@ -107,6 +107,12 @@ extern ssize_t openreadnclose (char const *, char *, size_t) ;
 extern ssize_t openreadnclose_nb (char const *, char *, size_t) ;
 extern int openreadfileclose (char const *, stralloc *, size_t) ;
 
+#define writenclose_unsafe(fd, s, n) writenclose_unsafe_internal(fd, s, (n), 0, 0, 0)
+#define writenclose_unsafe_sync(fd, s, n) writenclose_unsafe_internal(fd, s, (n), 0, 0, 1)
+#define writenclose_unsafe_devino(fd, s, n, dev, ino) writenclose_unsafe_internal(fd, s, n, dev, (ino), 0)
+#define writenclose_unsafe_devino_sync(fd, s, n, dev, ino) writenclose_unsafe_internal(fd, s, n, dev, (ino), 1)
+extern int writenclose_unsafe_internal (int, char const *, size_t, dev_t *, ino_t *, int) ;
+
 #define openwritenclose_unsafe(f, s, n) openwritenclose_unsafe_internal(f, s, (n), 0, 0, 0)
 #define openwritenclose_unsafe_sync(f, s, n) openwritenclose_unsafe_internal(f, s, (n), 0, 0, 1)
 #define openwritenclose_unsafe_devino(f, s, n, dev, ino) openwritenclose_unsafe_internal(f, s, n, dev, (ino), 0)
@@ -119,6 +125,18 @@ extern int openwritenclose_unsafe_internal (char const *, char const *, size_t, 
 #define openwritenclose_suffix_devino_sync(f, s, n, t, dev, ino) openwritenclose_suffix_internal(f, s, n, dev, (ino), 1, t)
 extern int openwritenclose_suffix_internal (char const *, char const *, size_t, dev_t *, ino_t *, int, char const *) ;
 
+#define openwritenclose(f, s, n) openwritenclose_internal(f, s, (n), 0, 0, 0)
+#define openwritenclose_sync(f, s, n) openwritenclose_internal(f, s, (n), 0, 0, 1)
+#define openwritenclose_devino(f, s, n, dev, ino) openwritenclose_internal(f, s, n, dev, (ino), 0)
+#define openwritenclose_devino_sync(f, s, n, dev, ino) openwritenclose_internal(f, s, n, dev, (ino), 1)
+extern int openwritenclose_internal (char const *, char const *, size_t, dev_t *, ino_t *, int) ;
+
+#define writenvclose_unsafe(fd, v, n) writevnclose_unsafe_internal(fd, v, (n), 0, 0, 0)
+#define writevnclose_unsafe_sync(fd, v, n) writevnclose_unsafe_internal(fd, v, (n), 0, 0, 1)
+#define writevnclose_unsafe_devino(fd, v, n, dev, ino) writevnclose_unsafe_internal(fd, v, n, dev, (ino), 0)
+#define writevnclose_unsafe_devino_sync(fd, v, n, dev, ino) writevnclose_unsafe_internal(fd, v, n, dev, (ino), 1)
+extern int writevnclose_unsafe_internal (int, struct iovec const *, unsigned int, dev_t *, ino_t *, int) ;
+
 #define openwritevnclose_unsafe(f, v, n) openwritevnclose_unsafe_internal(f, v, (n), 0, 0, 0)
 #define openwritevnclose_unsafe_sync(f, v, n) openwritevnclose_unsafe_internal(f, v, (n), 0, 0, 1)
 #define openwritevnclose_unsafe_devino(f, v, n, dev, ino) openwritevnclose_unsafe_internal(f, v, n, dev, (ino), 0)
@@ -130,6 +148,12 @@ extern int openwritevnclose_unsafe_internal (char const *, struct iovec const *,
 #define openwritevnclose_suffix_devino(f, v, n, t, dev, ino) openwritevnclose_suffix_internal(f, v, n, dev, (ino), 0, t)
 #define openwritevnclose_suffix_devino_sync(f, v, n, t, dev, ino) openwritevnclose_suffix_internal(f, v, n, dev, (ino), 1, t)
 extern int openwritevnclose_suffix_internal (char const *, struct iovec const *, unsigned int, dev_t *, ino_t *, int, char const *) ;
+
+#define openwritevnclose(f, v, n) openwritevnclose_internal(f, v, (n), 0, 0, 0)
+#define openwritevnclose_sync(f, v, n) openwritevnclose_internal(f, v, (n), 0, 0, 1)
+#define openwritevnclose_devino(f, v, n, dev, ino) openwritevnclose_internal(f, v, n, dev, (ino), 0)
+#define openwritevnclose_devino_sync(f, v, n, dev, ino) openwritevnclose_internal(f, v, n, dev, (ino), 1)
+extern int openwritevnclose_internal (char const *, struct iovec const *, unsigned int, dev_t *, ino_t *, int) ;
 
 extern int rm_rf (char const *) ;
 extern int rm_rf_tmp (char const *, stralloc *) ;

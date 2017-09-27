@@ -32,10 +32,6 @@ extern size_t openreadnclose_at (int, char const *, char *, size_t) ;
 extern int openslurpclose_at (int, char const *, stralloc *) ;
 extern int opengetlnclose_at (int, char const *, stralloc *, int) ;
 
-extern int openwritenclose (char const *, char const *, size_t) ;
-extern int openwritenclose_devino (char const *, char const *, size_t, dev_t *, ino_t *) ;
-extern int openwritenclose_tmp (char const *, char const *, size_t, stralloc *) ;
-extern int openwritenclose_devino_tmp (char const *, char const *, size_t, dev_t *, ino_t *, stralloc *) ;
 extern size_t openwritenclose_at (int, char const *, char const *, size_t) ;
 extern size_t openwritevnclose_at (int, char const *, struct iovec const *, unsigned int) ;
 
