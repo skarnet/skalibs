@@ -21,14 +21,12 @@ src/include/skalibs/djbtime.h: src/include/skalibs/tai.h src/include/skalibs/uin
 src/include/skalibs/djbunix.h: src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/env.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/envalloc.h: src/include/skalibs/genalloc.h
-src/include/skalibs/error.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/fmtscan.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/genalloc.h: src/include/skalibs/functypes.h src/include/skalibs/stralloc.h
 src/include/skalibs/genset.h: src/include/skalibs/functypes.h
 src/include/skalibs/gensetdyn.h: src/include/skalibs/functypes.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
 src/include/skalibs/iobuffer.h: src/include/skalibs/buffer.h src/include/skalibs/djbunix.h
 src/include/skalibs/iopause.h: src/include/skalibs/tai.h
-src/include/skalibs/ip46.h: src/include/skalibs/fmtscan.h src/include/skalibs/socket.h
 src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr2.h
 src/include/skalibs/mininetstring.h: src/include/skalibs/stralloc.h
@@ -47,7 +45,6 @@ src/include/skalibs/stddjb.h: src/include/skalibs/alarm.h src/include/skalibs/al
 src/include/skalibs/strerr.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint64.h
-src/include/skalibs/types.h: src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
 src/include/skalibs/unix-timed.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
 src/include/skalibs/unix-transactional.h: src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
 src/include/skalibs/unixconnection.h: src/include/skalibs/unixmessage.h

@@ -51,9 +51,10 @@ nevertheless, a few standard environment variables are recognized.
 detection by configure. The --host=HOST option will still add a HOST-
 prefix to the value of CC.
 
- The values of CFLAGS, CPPFLAGS and LDFLAGS will be appended to flags
-auto-detected by configure. To entirely override the flags set by
-configure instead, use make variables.
+ The values of CFLAGS, CPPFLAGS and LDFLAGS will be appended to the
+default flags set by configure. To override those defaults instead
+of appending to them, use the CPPFLAGS, CFLAGS and LDFLAGS
+_make variables_ instead of environment variables.
 
 
 * Make variables

@@ -16,6 +16,17 @@
 <a href="//skarnet.org/">skarnet.org</a>
 </p>
 
+
+<h2> in 2.6.0.1 </h2>
+
+<ul>
+ <li> <tt>openwritenclose()</tt> and <tt>openwritevnclose()</tt> now use
+<a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/mkstemp.html">mkstemp()</a>
+instead of relying on an unpredictable name (which required a random
+generator to be fully initialized). </li>
+</ul>
+
+
 <h2> in 2.6.0.0 </h2>
 
 <ul>

@@ -125,11 +125,11 @@ choose () {
   libs="$*"
   r=true
   case "$what" in
-    *c*) $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO -o try$name.o -c src/sysdeps/try$name.c 2>/dev/null || r=false ;;
+    *c*) $CC_AUTO $CPPFLAGS_AUTO $CPPFLAGS $CPPFLAGS_POST $CFLAGS_AUTO $CFLAGS $CFLAGS_POST -o try$name.o -c src/sysdeps/try$name.c 2>/dev/null || r=false ;;
   esac
   if $r ; then
     case "$what" in
-      *l*) $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o try$name try$name.o $libs 2>/dev/null || r=false ;;
+      *l*) $CC_AUTO $CFLAGS_AUTO $CFLAGS $CFLAGS_POST $LDFLAGS_AUTO $LDFLAGS $LDFLAGS_POST -o try$name try$name.o $libs 2>/dev/null || r=false ;;
     esac
   fi
   if $r ; then
@@ -156,7 +156,7 @@ choose () {
 
 trytypes () {
   echo "Checking size and signedness of standard types..."
-  $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o output-types src/sysdeps/output-types.c
+  $CC_AUTO $CPPFLAGS_AUTO $CPPFLAGS $CPPFLAGS_POST $CFLAGS_AUTO $CFLAGS $CFLAGS_POST $LDFLAGS_AUTO $LDFLAGS $LDFLAGS_POST -o output-types src/sysdeps/output-types.c
   ./output-types >> $sysdeps/sysdeps
   ./output-types | grep -F sizeof | while read key value ; do
     caps=$(echo $key | sed s/:\$// | tr a-z A-Z)
@@ -181,8 +181,8 @@ trylibs () {
   name=$1
   echo "Checking whether system has $2..." >&3
   shift 2
-  if $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO -c -o try$name.o src/sysdeps/try$name.c 2>/dev/null ; then
-    until $CC_AUTO $CFLAGS_AUTO $LDFLAGS_AUTO -o /dev/null try$name.o $args 2>/dev/null ; do
+  if $CC_AUTO $CPPFLAGS_AUTO $CPPFLAGS $CPPFLAGS_POST $CFLAGS_AUTO $CFLAGS $CFLAGS_POST -c -o try$name.o src/sysdeps/try$name.c 2>/dev/null ; then
+    until $CC_AUTO $CFLAGS_AUTO $CFLAGS $CFLAGS_POST $LDFLAGS_AUTO $LDFLAGS $LDFLAGS_POST -o /dev/null try$name.o $args 2>/dev/null ; do
       if test -z "$*" ; then
         rm -f try$name.o
         echo
@@ -210,9 +210,15 @@ trylibs () {
 # Actual script
 
 CC_AUTO=
-CFLAGS_AUTO="$CFLAGS"
-CPPFLAGS_AUTO="-D_POSIX_C_SOURCE=200809L -D_XOPEN_SOURCE=700 -O2 $CPPFLAGS"
-LDFLAGS_AUTO="$LDFLAGS"
+CPPFLAGS_AUTO="-D_POSIX_C_SOURCE=200809L -D_XOPEN_SOURCE=700 -Isrc/include"
+CPPFLAGS_POST="$CPPFLAGS"
+CPPFLAGS=
+CFLAGS_AUTO="-pipe -Wall"
+CFLAGS_POST="$CFLAGS"
+CFLAGS="-O2"
+LDFLAGS_AUTO=
+LDFLAGS_POST="$LDFLAGS"
+LDFLAGS=
 LDFLAGS_NOSHARED=
 LDFLAGS_SHARED=-shared
 prefix=
@@ -353,7 +359,7 @@ test -n "$CC_AUTO" || { echo "$0: cannot find a C compiler" ; exit 1 ; }
 echo "  ... $CC_AUTO"
 echo "Checking whether C compiler works... "
 echo "typedef int x;" > "$tmpc"
-if $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO -c -o /dev/null "$tmpc" 2>"$tmpe" ; then
+if $CC_AUTO $CPPFLAGS_AUTO $CPPFLAGS $CPPFLAGS_POST $CFLAGS_AUTO $CFLAGS $CFLAGS_POST -c -o /dev/null "$tmpc" 2>"$tmpe" ; then
   echo "  ... yes"
 else
   echo "  ... no. Compiler output follows:"
@@ -371,13 +377,13 @@ if test -z "$target" ; then
 fi
 echo "  ... $target"
 
-tryflag CPPFLAGS_AUTO -std=c99
-tryflag CPPFLAGS_AUTO -fomit-frame-pointer
-tryflag CPPFLAGS_AUTO -fno-exceptions
-tryflag CPPFLAGS_AUTO -fno-unwind-tables
-tryflag CPPFLAGS_AUTO -fno-asynchronous-unwind-tables
-tryflag CPPFLAGS_AUTO -Wa,--noexecstack
-tryflag CPPFLAGS_AUTO -fno-stack-protector
+tryflag CFLAGS_AUTO -std=c99
+tryflag CFLAGS -fomit-frame-pointer
+tryflag CFLAGS_AUTO -fno-exceptions
+tryflag CFLAGS_AUTO -fno-unwind-tables
+tryflag CFLAGS_AUTO -fno-asynchronous-unwind-tables
+tryflag CFLAGS_AUTO -Wa,--noexecstack
+tryflag CFLAGS -fno-stack-protector
 tryflag CPPFLAGS_AUTO -Werror=implicit-function-declaration
 tryflag CPPFLAGS_AUTO -Werror=implicit-int
 tryflag CPPFLAGS_AUTO -Werror=pointer-sign
@@ -390,7 +396,7 @@ tryflag CFLAGS_AUTO -fdata-sections
 tryldflag LDFLAGS_AUTO -Wl,--sort-section=alignment
 tryldflag LDFLAGS_AUTO -Wl,--sort-common
 if $shared ; then
-  tryldflag LDFLAGS_AUTO -Wl,--hash-style=both
+  tryldflag LDFLAGS -Wl,--hash-style=both
 fi
 
 if test -n "$sysdeps" ; then
@@ -472,7 +478,7 @@ EOF
   exec 3>&-
 
   echo "Checking system endianness..."
-  $CC_AUTO $CPPFLAGS_AUTO $CFLAGS_AUTO -o tryendianness src/sysdeps/tryendianness.c
+  $CC_AUTO $CPPFLAGS_AUTO $CPPFLAGS $CPPFLAGS_POST $CFLAGS_AUTO $CFLAGS $CFLAGS_POST $LDFLAGS_AUTO $LDFLAGS $LDFLAGS_POST -o tryendianness src/sysdeps/tryendianness.c
   endianness=$(./tryendianness) || fail "$0: unable to determine endianness"
   echo "endianness: $endianness" >> $sysdeps/sysdeps
   echo "#define ${package_macro_name}_ENDIANNESS \"$endianness\"" >> $sysdeps/sysdeps.h
@@ -553,9 +559,12 @@ TAINNOW_LIB := ${tainnow_lib}
 TIMER_LIB := ${timer_lib}
 UTIL_LIB := ${util_lib}
 CC := ${CC_AUTO##${cross}}
-CFLAGS := $CFLAGS_AUTO
-CPPFLAGS := $CPPFLAGS_AUTO
-LDFLAGS := $LDFLAGS_AUTO
+CPPFLAGS_AUTO := $CPPFLAGS_AUTO
+CPPFLAGS := $CPPFLAGS $CPPFLAGS_POST
+CFLAGS_AUTO := $CFLAGS_AUTO
+CFLAGS := $CFLAGS $CFLAGS_POST
+LDFLAGS_AUTO := $LDFLAGS_AUTO
+LDFLAGS := $LDFLAGS $LDFLAGS_POST
 LDFLAGS_NOSHARED := $LDFLAGS_NOSHARED
 LDFLAGS_SHARED := $LDFLAGS_SHARED
 CROSS_COMPILE := ${cross}
