@@ -18,6 +18,5 @@ int openwritevnclose_unsafe_internal (char const *fn, struct iovec const *v, uns
     errno = e ;
     return 0 ;
   }
-  fd_close(fd) ;
   return 1 ;
 }

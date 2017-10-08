@@ -16,6 +16,5 @@ int openwritenclose_unsafe_internal (char const *fn, char const *s, size_t len, 
     errno = e ;
     return 0 ;
   }
-  fd_close(fd) ;
   return 1 ;
 }
