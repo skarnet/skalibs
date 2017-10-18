@@ -627,37 +627,40 @@ src/libstddjb/ucharn_scan_little.o src/libstddjb/ucharn_scan_little.lo: src/libs
 src/libstddjb/ucspi_get.o src/libstddjb/ucspi_get.lo: src/libstddjb/ucspi_get.c src/include/skalibs/env.h
 src/libstddjb/uint160_fmt.o src/libstddjb/uint160_fmt.lo: src/libstddjb/uint160_fmt.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint16.h
 src/libstddjb/uint160_scan.o src/libstddjb/uint160_scan.lo: src/libstddjb/uint160_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint16.h
+src/libstddjb/uint16_bswap.o src/libstddjb/uint16_bswap.lo: src/libstddjb/uint16_bswap.c src/include/skalibs/uint16.h
 src/libstddjb/uint16_fmt.o src/libstddjb/uint16_fmt.lo: src/libstddjb/uint16_fmt.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint16.h
 src/libstddjb/uint16_fmtlist.o src/libstddjb/uint16_fmtlist.lo: src/libstddjb/uint16_fmtlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint16.h
-src/libstddjb/uint16_pack.o src/libstddjb/uint16_pack.lo: src/libstddjb/uint16_pack.c src/include/skalibs/bytestr.h src/include/skalibs/uint16.h
-src/libstddjb/uint16_pack_big.o src/libstddjb/uint16_pack_big.lo: src/libstddjb/uint16_pack_big.c src/include/skalibs/bytestr.h src/include/skalibs/uint16.h
+src/libstddjb/uint16_pack.o src/libstddjb/uint16_pack.lo: src/libstddjb/uint16_pack.c src/include/skalibs/uint16.h
+src/libstddjb/uint16_pack_big.o src/libstddjb/uint16_pack_big.lo: src/libstddjb/uint16_pack_big.c src/include/skalibs/uint16.h
 src/libstddjb/uint16_reverse.o src/libstddjb/uint16_reverse.lo: src/libstddjb/uint16_reverse.c src/include/skalibs/uint16.h
 src/libstddjb/uint16_scan.o src/libstddjb/uint16_scan.lo: src/libstddjb/uint16_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint16.h
 src/libstddjb/uint16_scanlist.o src/libstddjb/uint16_scanlist.lo: src/libstddjb/uint16_scanlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint16.h
-src/libstddjb/uint16_unpack.o src/libstddjb/uint16_unpack.lo: src/libstddjb/uint16_unpack.c src/include/skalibs/bytestr.h src/include/skalibs/uint16.h
-src/libstddjb/uint16_unpack_big.o src/libstddjb/uint16_unpack_big.lo: src/libstddjb/uint16_unpack_big.c src/include/skalibs/bytestr.h src/include/skalibs/uint16.h
+src/libstddjb/uint16_unpack.o src/libstddjb/uint16_unpack.lo: src/libstddjb/uint16_unpack.c src/include/skalibs/uint16.h
+src/libstddjb/uint16_unpack_big.o src/libstddjb/uint16_unpack_big.lo: src/libstddjb/uint16_unpack_big.c src/include/skalibs/uint16.h
 src/libstddjb/uint320_fmt.o src/libstddjb/uint320_fmt.lo: src/libstddjb/uint320_fmt.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint32.h
 src/libstddjb/uint320_scan.o src/libstddjb/uint320_scan.lo: src/libstddjb/uint320_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint32.h
+src/libstddjb/uint32_bswap.o src/libstddjb/uint32_bswap.lo: src/libstddjb/uint32_bswap.c src/include/skalibs/uint32.h
 src/libstddjb/uint32_fmt.o src/libstddjb/uint32_fmt.lo: src/libstddjb/uint32_fmt.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint32.h
 src/libstddjb/uint32_fmtlist.o src/libstddjb/uint32_fmtlist.lo: src/libstddjb/uint32_fmtlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint32.h
-src/libstddjb/uint32_pack.o src/libstddjb/uint32_pack.lo: src/libstddjb/uint32_pack.c src/include/skalibs/bytestr.h src/include/skalibs/uint32.h
-src/libstddjb/uint32_pack_big.o src/libstddjb/uint32_pack_big.lo: src/libstddjb/uint32_pack_big.c src/include/skalibs/bytestr.h src/include/skalibs/uint32.h
+src/libstddjb/uint32_pack.o src/libstddjb/uint32_pack.lo: src/libstddjb/uint32_pack.c src/include/skalibs/uint32.h
+src/libstddjb/uint32_pack_big.o src/libstddjb/uint32_pack_big.lo: src/libstddjb/uint32_pack_big.c src/include/skalibs/uint32.h
 src/libstddjb/uint32_reverse.o src/libstddjb/uint32_reverse.lo: src/libstddjb/uint32_reverse.c src/include/skalibs/uint32.h
 src/libstddjb/uint32_scan.o src/libstddjb/uint32_scan.lo: src/libstddjb/uint32_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint32.h
 src/libstddjb/uint32_scanlist.o src/libstddjb/uint32_scanlist.lo: src/libstddjb/uint32_scanlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint32.h
-src/libstddjb/uint32_unpack.o src/libstddjb/uint32_unpack.lo: src/libstddjb/uint32_unpack.c src/include/skalibs/bytestr.h src/include/skalibs/uint32.h
-src/libstddjb/uint32_unpack_big.o src/libstddjb/uint32_unpack_big.lo: src/libstddjb/uint32_unpack_big.c src/include/skalibs/bytestr.h src/include/skalibs/uint32.h
+src/libstddjb/uint32_unpack.o src/libstddjb/uint32_unpack.lo: src/libstddjb/uint32_unpack.c src/include/skalibs/uint32.h
+src/libstddjb/uint32_unpack_big.o src/libstddjb/uint32_unpack_big.lo: src/libstddjb/uint32_unpack_big.c src/include/skalibs/uint32.h
 src/libstddjb/uint640_fmt.o src/libstddjb/uint640_fmt.lo: src/libstddjb/uint640_fmt.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint64.h
 src/libstddjb/uint640_scan.o src/libstddjb/uint640_scan.lo: src/libstddjb/uint640_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint64.h
+src/libstddjb/uint64_bswap.o src/libstddjb/uint64_bswap.lo: src/libstddjb/uint64_bswap.c src/include/skalibs/uint64.h
 src/libstddjb/uint64_fmt.o src/libstddjb/uint64_fmt.lo: src/libstddjb/uint64_fmt.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint64.h
 src/libstddjb/uint64_fmtlist.o src/libstddjb/uint64_fmtlist.lo: src/libstddjb/uint64_fmtlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint64.h
-src/libstddjb/uint64_pack.o src/libstddjb/uint64_pack.lo: src/libstddjb/uint64_pack.c src/include/skalibs/bytestr.h src/include/skalibs/uint64.h
-src/libstddjb/uint64_pack_big.o src/libstddjb/uint64_pack_big.lo: src/libstddjb/uint64_pack_big.c src/include/skalibs/bytestr.h src/include/skalibs/uint64.h
+src/libstddjb/uint64_pack.o src/libstddjb/uint64_pack.lo: src/libstddjb/uint64_pack.c src/include/skalibs/uint64.h
+src/libstddjb/uint64_pack_big.o src/libstddjb/uint64_pack_big.lo: src/libstddjb/uint64_pack_big.c src/include/skalibs/uint64.h
 src/libstddjb/uint64_reverse.o src/libstddjb/uint64_reverse.lo: src/libstddjb/uint64_reverse.c src/include/skalibs/uint64.h
 src/libstddjb/uint64_scan.o src/libstddjb/uint64_scan.lo: src/libstddjb/uint64_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint64.h
 src/libstddjb/uint64_scanlist.o src/libstddjb/uint64_scanlist.lo: src/libstddjb/uint64_scanlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint64.h
-src/libstddjb/uint64_unpack.o src/libstddjb/uint64_unpack.lo: src/libstddjb/uint64_unpack.c src/include/skalibs/bytestr.h src/include/skalibs/uint64.h
-src/libstddjb/uint64_unpack_big.o src/libstddjb/uint64_unpack_big.lo: src/libstddjb/uint64_unpack_big.c src/include/skalibs/bytestr.h src/include/skalibs/uint64.h
+src/libstddjb/uint64_unpack.o src/libstddjb/uint64_unpack.lo: src/libstddjb/uint64_unpack.c src/include/skalibs/uint64.h
+src/libstddjb/uint64_unpack_big.o src/libstddjb/uint64_unpack_big.lo: src/libstddjb/uint64_unpack_big.c src/include/skalibs/uint64.h
 src/libstddjb/uncoe.o src/libstddjb/uncoe.lo: src/libstddjb/uncoe.c src/include/skalibs/djbunix.h
 src/libstddjb/unsanitize_read.o src/libstddjb/unsanitize_read.lo: src/libstddjb/unsanitize_read.c src/include/skalibs/allreadwrite.h src/include/skalibs/error.h
 src/libstddjb/utc_from_localtm.o src/libstddjb/utc_from_localtm.lo: src/libstddjb/utc_from_localtm.c src/include/skalibs/djbtime.h src/include/skalibs/uint64.h

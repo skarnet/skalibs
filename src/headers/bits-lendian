@@ -1,3 +1,6 @@
 #define uint@BITS@_little_endian(s, n)
-#define uint@BITS@_big_endian(s, n) uint16_reverse((s), (n))
+#define uint@BITS@_big_endian(s, n) uint@BITS@_reverse((s), (n))
+
+#define uint@BITS@_little(u) (u)
+#define uint@BITS@_big(u) uint@BITS@_bswap(u)
 

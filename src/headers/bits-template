@@ -3,6 +3,7 @@ extern void uint@BITS@_pack_big (char *, uint@BITS@_t) ;
 extern void uint@BITS@_unpack (char const *, uint@BITS@_t *) ;
 extern void uint@BITS@_unpack_big (char const *, uint@BITS@_t *) ;
 extern void uint@BITS@_reverse (char *, size_t) ;
+extern uint@BITS@_t uint@BITS@_bswap (uint@BITS@_t) ;
 
 #define UINT@BITS@_FMT @DFMT@
 #define UINT@BITS@_OFMT @OFMT@

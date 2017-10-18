@@ -1,15 +1,16 @@
 /* ISC license. */
 
+#include <string.h>
 #include <skalibs/uint64.h>
 
 void uint64_reverse (char *s, size_t n)
 {
   while (n--)
   {
-    char c = s[0] ; s[0] = s[7] ; s[7] = c ;
-    c = s[1] ; s[1] = s[6] ; s[6] = c ;
-    c = s[2] ; s[2] = s[5] ; s[5] = c ;
-    c = s[3] ; s[3] = s[4] ; s[4] = c ;
-    s += 8 ;
+    uint64_t x ;
+    memcpy(&x, s, sizeof(uint64_t)) ;
+    x = uint64_bswap(x) ;
+    memcpy(s, &x, sizeof(uint64_t)) ;
+    s += sizeof(uint64_t) ;
   }
 }
