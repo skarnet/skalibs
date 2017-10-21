@@ -19,8 +19,8 @@ int getlnmax (buffer *b, char *d, size_t max, size_t *w, char sep)
     if (len > max - *w) len = max - *w ;
     pos = siovec_bytechr(v, 2, sep) ;
     if (pos > len) pos = len ;
-    r = pos < len ;
-    buffer_getnofill(b, d + *w, pos + r) ; *w += pos ;
+    r = pos < len ; pos += r ;
+    buffer_getnofill(b, d + *w, pos) ; *w += pos ;
     if (*w >= max) return (errno = ERANGE, -1) ;
     if (r) return 1 ;
     r = buffer_fill(b) ;
