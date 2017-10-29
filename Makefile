@@ -34,8 +34,12 @@ INSTALL := ./tools/install.sh
 TYPES := size uid gid pid time dev ino
 
 ALL_SRCS := $(wildcard src/lib*/*.c)
-ALL_SOBJS := $(ALL_SRCS:%.c=%.o)
 ALL_DOBJS := $(ALL_SRCS:%.c=%.lo)
+ifeq ($(strip $(DEFAULT_PIE)),)
+ALL_SOBJS := $(ALL_SRCS:%.c=%.o)
+else
+ALL_SOBJS := $(ALL_DOBJS)
+endif
 ALL_LIBS := $(SHARED_LIBS) $(STATIC_LIBS)
 BUILT_INCLUDES := \
 src/include/$(package)/sysdeps.h \
