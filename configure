@@ -379,7 +379,7 @@ echo "  ... $target"
 
 defaultpie=false
 echo "Checking whether we're building PIE..."
-if $CC_AUTO $CPPFLAGS_AUTO $CPPFLAGS $CPPFLAGS_POST $CFLAGS_AUTO $CFLAGS $CFLAGS_POST -dM -E - < /dev/null | grep -F __PIE__ ; then
+if $CC_AUTO $CPPFLAGS_AUTO $CPPFLAGS $CPPFLAGS_POST $CFLAGS_AUTO $CFLAGS $CFLAGS_POST -dM -E - < /dev/null | grep -qF __PIE__ ; then
   defaultpie=true
   echo "  ... yes"
 else
