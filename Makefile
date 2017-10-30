@@ -22,7 +22,6 @@ version_M := $(basename $(version_m))
 version_l := $(basename $(version_M))
 CPPFLAGS_ALL := $(CPPFLAGS_AUTO) $(CPPFLAGS)
 CFLAGS_ALL := $(CFLAGS_AUTO) $(CFLAGS)
-CFLAGS_SHARED := -fPIC
 LDFLAGS_ALL := $(LDFLAGS_AUTO) $(LDFLAGS)
 LDLIBS_ALL := $(LDLIBS_AUTO) $(LDLIBS)
 REALCC = $(CROSS_COMPILE)$(CC)
@@ -35,10 +34,12 @@ TYPES := size uid gid pid time dev ino
 
 ALL_SRCS := $(wildcard src/lib*/*.c)
 ALL_DOBJS := $(ALL_SRCS:%.c=%.lo)
-ifeq ($(strip $(DEFAULT_PIE)),)
+ifeq ($(strip $(STATIC_LIBS_ARE_PIC)),)
 ALL_SOBJS := $(ALL_SRCS:%.c=%.o)
+CFLAGS_SHARED := -fPIC
 else
 ALL_SOBJS := $(ALL_DOBJS)
+CFLAGS_SHARED :=
 endif
 ALL_LIBS := $(SHARED_LIBS) $(STATIC_LIBS)
 BUILT_INCLUDES := \

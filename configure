@@ -34,6 +34,7 @@ Dependencies:
 Optional features:
   --disable-shared              do not build shared libraries [enabled]
   --disable-static              do not build static libraries [enabled]
+  --enable-all-pic              build everything as PIC [enabled iff toolchain builds PIE]
   --enable-slashpackage[=ROOT]  assume /package installation at ROOT [disabled]
 
 $package options:
@@ -230,6 +231,7 @@ sysdepdir='$prefix/lib/$package/sysdeps'
 sysdeps=
 shared=true
 static=true
+allpic=detect
 slashpackage=false
 ipv6=true
 select=false
@@ -249,7 +251,6 @@ vpaths=''
 vpathd=''
 build=
 
-
 for arg ; do
   case "$arg" in
     --help) usage ;;
@@ -267,6 +268,8 @@ for arg ; do
     --disable-shared|--enable-shared=no) shared=false ;;
     --enable-static|--enable-static=yes) static=true ;;
     --disable-static|--enable-static=no) static=false ;;
+    --enable-all-pic|--enable-all-pic=yes) allpic=true ;;
+    --disable-all-pic|--enable-all-pic=no) allpic=false ;;
     --enable-slashpackage=*) sproot=${arg#*=} ; slashpackage=true ; ;;
     --enable-slashpackage) sproot= ; slashpackage=true ;;
     --disable-slashpackage) sproot= ; slashpackage=false ;;
@@ -377,13 +380,18 @@ if test -z "$target" ; then
 fi
 echo "  ... $target"
 
-defaultpie=false
-echo "Checking whether we're building PIE..."
-if $CC_AUTO $CPPFLAGS_AUTO $CPPFLAGS $CPPFLAGS_POST $CFLAGS_AUTO $CFLAGS $CFLAGS_POST -dM -E - < /dev/null | grep -qF __PIE__ ; then
-  defaultpie=true
-  echo "  ... yes"
-else
-  echo "  ... no"
+if test $allpic = detect ; then
+  echo "Checking whether we need to build everything as PIC..."
+  if $CC_AUTO $CPPFLAGS_AUTO $CPPFLAGS $CPPFLAGS_POST $CFLAGS_AUTO $CFLAGS $CFLAGS_POST -dM -E - < /dev/null | grep -qF __PIE__ ; then
+    allpic=true
+    echo "  ... yes"
+  else
+    allpic=false
+    echo "  ... no"
+  fi
+fi
+if $allpic ; then
+  tryflag CFLAGS_AUTO -fPIC
 fi
 
 tryflag CFLAGS_AUTO -std=c99
@@ -595,10 +603,10 @@ if $shared ; then
 else
   echo "SHARED_LIBS :="
 fi
-if $defaultpie ; then
-  echo "DEFAULT_PIE := true"
+if $allpic ; then
+  echo "STATIC_LIBS_ARE_PIC := 1"
 else
-  echo "DEFAULT_PIE :="
+  echo "STATIC_LIBS_ARE_PIC :="
 fi
 
 exec 1>&3 3>&-
