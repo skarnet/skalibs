@@ -235,6 +235,12 @@ Returns 0 if it succeeds, or -1 (and sets errno) if it fails.
 </p>
 
 <p>
+<code> void lock_unx (int fd) </code> <br />
+Like <tt>lock_un</tt>, but without a return code and without
+modifying errno.
+</p>
+
+<p>
 <code> int open2 (char const *file, unsigned int flags) </code> <br />
 Safe wrapper around
 <a href="http://www.opengroup.org/onlinepubs/9699919799/functions/open.html">open()</a>

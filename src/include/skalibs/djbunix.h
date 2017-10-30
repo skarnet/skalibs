@@ -39,6 +39,7 @@ extern int lock_exnb (int) ;
 extern int lock_sh (int) ;
 extern int lock_shnb (int) ;
 extern int lock_un (int) ;
+extern void lock_unx (int) ;
 extern int open2 (char const *, unsigned int) ;
 extern int open3 (char const *, unsigned int, unsigned int) ;
 extern int open_read (char const *) ;

@@ -388,6 +388,7 @@ src/libstddjb/lock_exnb.o src/libstddjb/lock_exnb.lo: src/libstddjb/lock_exnb.c 
 src/libstddjb/lock_sh.o src/libstddjb/lock_sh.lo: src/libstddjb/lock_sh.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
 src/libstddjb/lock_shnb.o src/libstddjb/lock_shnb.lo: src/libstddjb/lock_shnb.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
 src/libstddjb/lock_un.o src/libstddjb/lock_un.lo: src/libstddjb/lock_un.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
+src/libstddjb/lock_unx.o src/libstddjb/lock_unx.lo: src/libstddjb/lock_unx.c src/include/skalibs/djbunix.h
 src/libstddjb/lolprintf.o src/libstddjb/lolprintf.lo: src/libstddjb/lolprintf.c src/include/skalibs/buffer.h src/include/skalibs/lolstdio.h
 src/libstddjb/ltm64_from_localtm.o src/libstddjb/ltm64_from_localtm.lo: src/libstddjb/ltm64_from_localtm.c src/include/skalibs/djbtime.h src/include/skalibs/tai.h
 src/libstddjb/ltm64_from_sysclock.o src/libstddjb/ltm64_from_sysclock.lo: src/libstddjb/ltm64_from_sysclock.c src/include/skalibs/config.h src/include/skalibs/djbtime.h src/include/skalibs/tai.h
