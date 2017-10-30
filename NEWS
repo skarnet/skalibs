@@ -1,10 +1,16 @@
 Changelog for skalibs.
 
+In 2.6.1.0
+----------
+ - New function: lock_unx().
+
+
 In 2.6.0.2
 ----------
 
  - Bugfixes.
  - Optimized packing/unpacking routines.
+
 
 In 2.6.0.1
 ----------
