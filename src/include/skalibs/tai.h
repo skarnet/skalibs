@@ -15,12 +15,11 @@ struct tai_s
   uint64_t x ;
 } ;
 
-
-#define TAI_ZERO { .x = 0 }
+#define TAI_ZERO { 0 }
 #define TAI_MAGIC ((uint64_t)4611686018427387904ULL)
-#define TAI_EPOCH { .x = TAI_MAGIC + 10UL }
-#define TAI_INFINITE_RELATIVE { .x = (uint64_t)1 << 60 }
-#define TAI_INFINITE { .x = TAI_MAGIC + ((uint64_t)1 << 61) }
+#define TAI_EPOCH { TAI_MAGIC + 10UL }
+#define TAI_INFINITE_RELATIVE { (uint64_t)1 << 60 }
+#define TAI_INFINITE { TAI_MAGIC + ((uint64_t)1 << 61) }
 
 #define tai_sec(t) ((t)->x)
 extern int tai_u64 (tai_t *, uint64_t) ;
@@ -58,11 +57,11 @@ struct tain_s
   uint32_t nano ; /* 0..999999999U */
 } ;
 
-#define TAIN_ZERO { .sec = TAI_ZERO, .nano = 0 }
-#define TAIN_EPOCH { .sec = TAI_EPOCH, .nano = 0 }
-#define TAIN_INFINITE { .sec = TAI_INFINITE, .nano = 0 }
-#define TAIN_INFINITE_RELATIVE { .sec = TAI_INFINITE_RELATIVE, .nano = 0 }
-#define TAIN_NANO500 { .sec = TAI_ZERO, .nano = 500 }
+#define TAIN_ZERO { TAI_ZERO, 0 }
+#define TAIN_EPOCH { TAI_EPOCH, 0 }
+#define TAIN_INFINITE { TAI_INFINITE, 0 }
+#define TAIN_INFINITE_RELATIVE { TAI_INFINITE_RELATIVE, 0 }
+#define TAIN_NANO500 { TAI_ZERO, 500 }
 
 extern tain_t STAMP ; /* the global process wallclock */
 extern tain_t const tain_zero ;

@@ -14,7 +14,7 @@ struct stralloc_s
   size_t a ;
 } ;
 
-#define STRALLOC_ZERO { .s = 0, .len = 0, .a = 0 }
+#define STRALLOC_ZERO { 0, 0, 0 }
 extern stralloc const stralloc_zero ;
 
 extern int stralloc_ready_tuned (stralloc *, size_t, size_t, size_t, size_t) ;
