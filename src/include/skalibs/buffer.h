@@ -84,7 +84,7 @@ extern ssize_t buffer_get (buffer *, char *, size_t) ;
 extern ssize_t buffer_getv (buffer *, struct iovec const *, unsigned int) ;
 
 #define buffer_unget(b, n) cbuffer_unget(&(b)->c, n)
-#define buffer_rpeek(b, n) cbuffer_rpeek(&(b)->c, n)
+#define buffer_rpeek(b, v) cbuffer_rpeek(&(b)->c, v)
 #define buffer_rseek(b, n) cbuffer_rseek(&(b)->c, n)
 
 
