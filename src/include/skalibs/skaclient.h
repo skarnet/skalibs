@@ -139,5 +139,7 @@ extern unixmessage_handler_func_t skaclient_default_cb ;
 #define skaclient_aput(a, m) unixmessage_put(&(a)->asyncout, m)
 #define skaclient_aputv(a, m) unixmessage_putv(&(a)->asyncout, m)
 #define skaclient_aflush(a) unixmessage_sender_flush(&(a)->asyncout)
+#define skaclient_timed_aflush(a, deadline, stamp) unixmessage_sender_timed_flush(&(a)->asyncout, deadline, stamp)
+#define skaclient_timed_aflush_g(a, deadline) skaclient_timed_aflush(a, (deadline), &STAMP)
 
 #endif
