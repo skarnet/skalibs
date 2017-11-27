@@ -1,7 +1,7 @@
 *.o
-*.a.xyzzy
+/*.a.xyzzy
 *.lo
-*.so.xyzzy
+/*.so.xyzzy
 /config.mak
 /src/include/skalibs/config.h
 /src/include/skalibs/error.h
