@@ -2,7 +2,7 @@
 
 #include <skalibs/sysdeps.h>
 
-#ifdef SKALIBS_HASOPENAT
+#ifdef SKALIBS_HASLINKAT
 
 #ifndef _ATFILE_SOURCE
 #define _ATFILE_SOURCE
