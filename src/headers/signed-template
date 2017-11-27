@@ -1,5 +1,10 @@
-#define @TYPE@_FMT (1+UINT@BITS@_FMT)
+#define @TYPE@_PACK @BYTES@
+#define @type@_pack uint@BITS@_pack
+#define @type@_pack_big uint@BITS@_pack_big
+#define @type@_unpack uint@BITS@_unpack
+#define @type@_unpack_big uint@BITS@_unpack_big
 
+#define @TYPE@_FMT (1+UINT@BITS@_FMT)
 #define @type@_fmt int@BITS@_fmt
 #define @type@_fmtlist int@BITS@_fmtlist
 #define @type@_scan int@BITS@_scan
