@@ -3,7 +3,8 @@ Changelog for skalibs.
 In 2.6.2.0
 ----------
 
- - New function: skaclient_timed_aflush().
+ - New functions: access_at() (MacOS and Solaris don't support faccessat),
+skaclient_timed_aflush().
  - stralloc.h and tai.h are suitable for inclusion in C++ headers.
  - New sysdep: SKALIBS_HASODIRECTORY. (MacOS doesn't support O_DIRECTORY.)
 
