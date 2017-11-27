@@ -687,6 +687,7 @@ src/libstddjb/xpathexec_fromenv.o src/libstddjb/xpathexec_fromenv.lo: src/libstd
 src/libstddjb/xpathexec_r.o src/libstddjb/xpathexec_r.lo: src/libstddjb/xpathexec_r.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
 src/libstddjb/xpathexec_r_name.o src/libstddjb/xpathexec_r_name.lo: src/libstddjb/xpathexec_r_name.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
 src/libstddjb/xpathexec_run.o src/libstddjb/xpathexec_run.lo: src/libstddjb/xpathexec_run.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
+src/libunixonacid/access_at.o src/libunixonacid/access_at.lo: src/libunixonacid/access_at.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/atomic_rm_rf.o src/libunixonacid/atomic_rm_rf.lo: src/libunixonacid/atomic_rm_rf.c src/include/skalibs/skamisc.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/atomic_rm_rf_tmp.o src/libunixonacid/atomic_rm_rf_tmp.lo: src/libunixonacid/atomic_rm_rf_tmp.c src/include/skalibs/djbunix.h src/include/skalibs/random.h src/include/skalibs/stralloc.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/bufalloc_timed_flush.o src/libunixonacid/bufalloc_timed_flush.lo: src/libunixonacid/bufalloc_timed_flush.c src/include/skalibs/bufalloc.h src/include/skalibs/functypes.h src/include/skalibs/unix-timed.h

@@ -13,6 +13,7 @@
 
 extern int open2_at (int, char const *, int) ;
 extern int open3_at (int, char const *, int, unsigned int) ;
+extern int access_at (int, char const *, int, unsigned int) ;
 
 extern int opengetlnclose (char const *, stralloc *, int) ;
 
