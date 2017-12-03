@@ -39,6 +39,7 @@ extern size_t openwritevnclose_at (int, char const *, struct iovec const *, unsi
 extern int mkdir_unique (stralloc *, char const *, unsigned int) ;
 extern int atomic_rm_rf (char const *) ;
 extern int atomic_rm_rf_tmp (char const *, stralloc *) ;
+extern int atomic_symlink (char const *, char const *, char const *) ;
 
 
 typedef struct dirdescriptor_s dirdescriptor_t, *dirdescriptor_t_ref ;

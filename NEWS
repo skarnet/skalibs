@@ -1,5 +1,11 @@
 Changelog for skalibs.
 
+In 2.6.3.0
+----------
+
+ - New function: atomic_symlink().
+
+
 In 2.6.2.0
 ----------
 
