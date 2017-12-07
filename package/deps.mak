@@ -154,8 +154,6 @@ src/libstdcrypto/sha512_final.o src/libstdcrypto/sha512_final.lo: src/libstdcryp
 src/libstdcrypto/sha512_init.o src/libstdcrypto/sha512_init.lo: src/libstdcrypto/sha512_init.c src/include/skalibs/sha512.h
 src/libstdcrypto/sha512_transform.o src/libstdcrypto/sha512_transform.lo: src/libstdcrypto/sha512_transform.c src/libstdcrypto/sha512-internal.h src/include/skalibs/sha512.h src/include/skalibs/uint64.h
 src/libstdcrypto/sha512_update.o src/libstdcrypto/sha512_update.lo: src/libstdcrypto/sha512_update.c src/libstdcrypto/sha512-internal.h src/include/skalibs/sha512.h
-src/libstddjb/absolutepath.o src/libstddjb/absolutepath.lo: src/libstddjb/absolutepath.c src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
-src/libstddjb/absolutepath_tmp.o src/libstddjb/absolutepath_tmp.lo: src/libstddjb/absolutepath_tmp.c src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/alarm_deadline.o src/libstddjb/alarm_deadline.lo: src/libstddjb/alarm_deadline.c src/libstddjb/alarm-internal.h src/include/skalibs/alarm.h src/include/skalibs/sysdeps.h src/include/skalibs/tai.h
 src/libstddjb/alarm_disable.o src/libstddjb/alarm_disable.lo: src/libstddjb/alarm_disable.c src/libstddjb/alarm-internal.h src/include/skalibs/alarm.h src/include/skalibs/sysdeps.h
 src/libstddjb/alarm_milliseconds.o src/libstddjb/alarm_milliseconds.lo: src/libstddjb/alarm_milliseconds.c src/libstddjb/alarm-internal.h src/include/skalibs/alarm.h src/include/skalibs/sysdeps.h
@@ -445,6 +443,8 @@ src/libstddjb/sagetcwd.o src/libstddjb/sagetcwd.lo: src/libstddjb/sagetcwd.c src
 src/libstddjb/sagethostname.o src/libstddjb/sagethostname.lo: src/libstddjb/sagethostname.c src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/sanitize_read.o src/libstddjb/sanitize_read.lo: src/libstddjb/sanitize_read.c src/include/skalibs/allreadwrite.h src/include/skalibs/error.h
 src/libstddjb/sareadlink.o src/libstddjb/sareadlink.lo: src/libstddjb/sareadlink.c src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
+src/libstddjb/sarealpath.o src/libstddjb/sarealpath.lo: src/libstddjb/sarealpath.c src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
+src/libstddjb/sarealpath_tmp.o src/libstddjb/sarealpath_tmp.lo: src/libstddjb/sarealpath_tmp.c src/include/skalibs/djbunix.h
 src/libstddjb/satmp.o src/libstddjb/satmp.lo: src/libstddjb/satmp.c src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/sauniquename.o src/libstddjb/sauniquename.lo: src/libstddjb/sauniquename.c src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h src/include/skalibs/types.h
 src/libstddjb/selfpipe_finish.o src/libstddjb/selfpipe_finish.lo: src/libstddjb/selfpipe_finish.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/nsig.h src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
