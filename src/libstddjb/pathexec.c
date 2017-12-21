@@ -4,7 +4,7 @@
 
 #include <skalibs/env.h>
 #include <skalibs/djbunix.h>
-#include <skalibs/environ.h>
+#include <skalibs/posixplz.h>
 
 void pathexec (char const *const *argv)
 {

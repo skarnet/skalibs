@@ -29,17 +29,15 @@
 #include <skalibs/djbunix.h>
 #include <skalibs/envalloc.h>
 #include <skalibs/env.h>
-#include <skalibs/environ.h>
 #include <skalibs/fmtscan.h>
 #include <skalibs/functypes.h>
 #include <skalibs/gccattributes.h>
 #include <skalibs/genalloc.h>
 #include <skalibs/genwrite.h>
-#include <skalibs/getpeereid.h>
 #include <skalibs/iobuffer.h>
 #include <skalibs/iopause.h>
 #include <skalibs/lolstdio.h>
-#include <skalibs/mininetstring.h>
+#include <skalibs/mininetstring.h> /* will disappear */
 #include <skalibs/netstring.h>
 #include <skalibs/nsig.h>
 #include <skalibs/segfault.h>

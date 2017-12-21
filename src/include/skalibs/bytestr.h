@@ -3,27 +3,21 @@
 #ifndef BYTESTR_H
 #define BYTESTR_H
 
-#include <skalibs/config.h>
 #include <skalibs/gccattributes.h>
 
 /* for Alphas and other archs where char != 8bit */
 #define T8(x)   ((x) & 0xffU)
 
-#include <skalibs/sysdeps.h>
 #include <string.h>
 #include <strings.h>
+#include <skalibs/posixplz.h>
 
 #define byte_copy(to, n, from) memmove(to, (from), n)
 #define byte_copyr(to, n, from) memmove(to, (from), n)
 #define byte_diff(a, n, b) memcmp(a, (b), n)
 #define byte_zero(p, n) memset(p, 0, n)
 #define str_len strlen
-
-#ifdef SKALIBS_HASSTRNLEN
-# define str_nlen strnlen
-#else
-# define str_nlen(s, max) byte_chr(s, (max), 0)
-#endif
+#define str_nlen strnlen
 
 #define str_diff strcmp
 #define str_diffn strncmp
@@ -36,6 +30,7 @@ extern size_t byte_rchr (char const *, size_t, int) gccattr_pure ;
 extern size_t byte_in (char const *, size_t, char const *, size_t) gccattr_pure ;
 #define byte_equal(s, n, t) (!memcmp(s, (t), n))
 extern size_t byte_count (char const *, size_t, char) gccattr_pure ;
+extern size_t byte_search (char const *, size_t, char const *, size_t) ;
 
 #define str_diffb(a, n, b) strncmp(a, (b), n)
 extern size_t str_chr (char const *, int) gccattr_pure ;

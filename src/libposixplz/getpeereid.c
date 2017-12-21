@@ -13,7 +13,7 @@
 #include <skalibs/nonposix.h>
 #include <sys/socket.h>
 #include <sys/un.h>
-#include <skalibs/getpeereid.h>
+#include <skalibs/posixplz.h>
 
 int getpeereid (int s, uid_t *u, gid_t *g)
 {
@@ -34,7 +34,7 @@ int getpeereid (int s, uid_t *u, gid_t *g)
 
 #include <skalibs/nonposix.h>
 #include <ucred.h>
-#include <skalibs/getpeereid.h>
+#include <skalibs/posixplz.h>
 
 int getpeereid (int s, uid_t *u, gid_t *g)
 {
@@ -51,7 +51,7 @@ int getpeereid (int s, uid_t *u, gid_t *g)
 /* can't find a real implementation, make a stub */
 
 #include <errno.h>
-#include <skalibs/getpeereid.h>
+#include <skalibs/posixplz.h>
 
 int getpeereid (int s, uid_t *uid, gid_t *gid)
 {

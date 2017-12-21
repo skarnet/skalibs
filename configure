@@ -520,6 +520,7 @@ EOF
   choose c odirectory ODIRECTORY 'O_DIRECTORY'
   choose cl openat OPENAT 'openat()'
   choose cl linkat LINKAT 'linkat()'
+  choose cl memmem MEMMEM 'memmem()'
   choose clr pipe2 PIPE2 'pipe2()'
   choose clr ppoll PPOLL 'ppoll()'
   choose cl revoke REVOKE 'revoke()'

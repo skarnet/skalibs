@@ -13,7 +13,7 @@
 #define IPCPATH_MAX 107
 
 #include <sys/types.h>
-#include <skalibs/getpeereid.h>
+#include <skalibs/posixplz.h>
 #include <skalibs/tai.h>
 #include <skalibs/djbunix.h>
 

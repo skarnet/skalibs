@@ -19,9 +19,10 @@
 #define _INCOMPLETE_XOPEN_C063
 #endif
 
-#include <stdlib.h>
+#include <string.h>
 
 int main (void)
 {
-  return arc4random_uniform(1) ;
+  memmem("blah", 4, "la", 2) ;
+  return 0 ;
 }

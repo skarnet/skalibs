@@ -6,6 +6,7 @@
 #include <skalibs/uint64.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/djbunix.h>
+#include <skalibs/posixplz.h>
 
 pid_t doublefork ()
 {

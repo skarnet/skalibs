@@ -3,7 +3,13 @@ Changelog for skalibs.
 In 2.6.3.0
 ----------
 
- - New function: atomic_symlink().
+ - memmem implementation for platforms that don't provide it.
+ - memmem wrappers: byte_search, siovec_search.
+ - New functions: atomic_symlink, skagetlnmaxsep.
+ - New header: skalibs/posixplz.h, some header reorganization.
+ - New family of functions: skalibs/textmessage.h.
+ - skalibs/environ.h and skalibs/getpeereid.h are now obsolescent.
+ - mininetstring* functions are now obsolescent.
 
 
 In 2.6.2.0

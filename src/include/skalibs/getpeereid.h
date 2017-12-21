@@ -1,10 +1,5 @@
 /* ISC license. */
 
-#ifndef GETPEEREID_H
-#define GETPEEREID_H
+/* This header is being deprecated */
 
-#include <sys/types.h>
-
-extern int getpeereid (int, uid_t *, gid_t *) ;
-
-#endif
+#include <skalibs/posixplz.h>

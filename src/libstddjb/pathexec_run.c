@@ -2,6 +2,7 @@
 
 #include <skalibs/config.h>
 #include <skalibs/env.h>
+#include <skalibs/posixplz.h>
 #include <skalibs/djbunix.h>
 
 void pathexec_run (char const *file, char const *const *argv, char const *const *envp)

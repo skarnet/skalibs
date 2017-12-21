@@ -1,6 +1,7 @@
 /* ISC license. */
 
 #include <errno.h>
+#include <skalibs/posixplz.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/strerr2.h>
 

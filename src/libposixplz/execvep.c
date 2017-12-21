@@ -4,7 +4,7 @@
 #include <string.h>
 #include <errno.h>
 #include <skalibs/bytestr.h>
-#include <skalibs/djbunix.h>
+#include <skalibs/posixplz.h>
 
 void execvep (char const *file, char const *const *argv, char const *const *envp, char const *path)
 {

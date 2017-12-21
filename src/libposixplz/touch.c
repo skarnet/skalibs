@@ -8,6 +8,7 @@
 #include <time.h>
 #include <sys/stat.h>
 #include <skalibs/djbunix.h>
+#include <skalibs/posixplz.h>
 
 int touch (char const *file)
 {
@@ -25,6 +26,7 @@ int touch (char const *file)
 #include <skalibs/nonposix.h>
 #include <sys/time.h>
 #include <skalibs/djbunix.h>
+#include <skalibs/posixplz.h>
 
 int touch (char const *file)
 {
@@ -40,6 +42,7 @@ int touch (char const *file)
 
 #include <sys/time.h>
 #include <skalibs/djbunix.h>
+#include <skalibs/posixplz.h>
 
 int touch (char const *file)
 {

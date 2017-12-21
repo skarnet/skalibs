@@ -9,7 +9,8 @@
 #include <skalibs/gccattributes.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/envalloc.h>
-#include <skalibs/env.h>        /* compatibility */
+#include <skalibs/env.h>        /* will disappear */
+#include <skalibs/posixplz.h>
 
 #define DJBUNIX_FLAG_NB  0x01U
 #define DJBUNIX_FLAG_COE 0x02U
@@ -56,7 +57,6 @@ extern int pathexec_env (char const *, char const *) ;
 extern void pathexec_r (char const *const *, char const *const *, size_t, char const *, size_t) ;
 extern void pathexec_r_name (char const *, char const *const *, char const *const *, size_t, char const *, size_t) ;
 extern void pathexec_fromenv (char const *const *, char const *const *, size_t) ;
-extern void execvep (char const *, char const *const *, char const *const *, char const *) ;
 extern void pathexec_run (char const *, char const *const *, char const *const *) ;
 extern void pathexec0_run (char const *const *, char const *const *) ;
 extern void pathexec (char const *const *) ;
@@ -89,11 +89,9 @@ extern unsigned int wait_reap (void) ;
 extern int waitn (pid_t *, unsigned int) ;
 extern int waitn_reap (pid_t *, unsigned int) ;
 
-extern pid_t doublefork (void) ;
-
 extern int fd_chdir (int) ;
 
-#define absolutepath(sa, s) sarealpath(sa, s)
+#define absolutepath(sa, s) sarealpath(sa, s) /* will disappear */
 extern int sarealpath (stralloc *, char const *) ;
 extern int sarealpath_tmp (stralloc *, char const *, stralloc *) ;
 extern int sabasename (stralloc *, char const *, size_t) ;
@@ -162,7 +160,6 @@ extern int rm_rf_in_tmp (stralloc *, size_t) ; /* caution ! */
 extern int rmstar (char const *) ;
 extern int rmstar_tmp (char const *, stralloc *) ;
 
-extern int touch (char const *) ;
 extern int filecopy_unsafe (char const *, char const *, unsigned int) ;
 extern int filecopy_suffix (char const *, char const *, unsigned int, char const *) ;
 extern int hiercopy (char const *, char const *) ;

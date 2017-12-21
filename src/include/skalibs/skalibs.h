@@ -4,11 +4,11 @@
 #define SKALIBS_H
 
 /*
-   This header includes everything in skalibs,
-   except skalibs/config.h and skalibs/sysdeps.h
+   This header includes everything in skalibs except skalibs/config.h
    It's heavy!
 */
 
+#include <skalibs/posixplz.h>
 #include <skalibs/stddjb.h>
 #include <skalibs/stdcrypto.h>
 #include <skalibs/random.h>

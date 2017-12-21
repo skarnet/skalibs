@@ -1,8 +1,5 @@
 /* ISC license. */
 
-#ifndef ENVIRON_H
-#define ENVIRON_H
+/* This header is being deprecated */
 
-extern char **environ ;
-
-#endif
+#include <skalibs/posixplz.h>
