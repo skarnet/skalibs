@@ -507,6 +507,7 @@ EOF
   choose clr ancilautoclose ANCILAUTOCLOSE 'auto-close after fd-passing'
   choose c cmsgcloexec CMSGCLOEXEC 'MSG_CMSG_CLOEXEC'
   choose clr devurandom DEVURANDOM '/dev/urandom'
+  choose cl dirfd DIRFD 'dirfd()'
   choose c eproto EPROTO EPROTO
   choose cl eventfd EVENTFD 'eventfd()'
   choose cl flock FLOCK 'flock()'
