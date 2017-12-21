@@ -9,7 +9,6 @@ In 2.6.3.0
  - New header: skalibs/posixplz.h, some header reorganization.
  - New family of functions: skalibs/textmessage.h.
  - skalibs/environ.h and skalibs/getpeereid.h are now obsolescent.
- - mininetstring* functions are now obsolescent.
 
 
 In 2.6.2.0
