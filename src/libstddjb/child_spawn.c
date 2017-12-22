@@ -10,10 +10,6 @@
 #include <unistd.h>
 #include <errno.h>
 #include <signal.h>
-#include <skalibs/types.h>
-#include <skalibs/allreadwrite.h>
-#include <skalibs/env.h>
-#include <skalibs/djbunix.h>
 
 #ifdef SKALIBS_HASPOSIXSPAWN
 
@@ -28,8 +24,10 @@
 
 #endif
 
-#define NOFDVAR "SKALIBS_CHILD_SPAWN_FDS"
-
+#include <skalibs/types.h>
+#include <skalibs/allreadwrite.h>
+#include <skalibs/env.h>
+#include <skalibs/djbunix.h>
 
  /*
     If n = 0 : child's stdin and stdout are the same as the parent's
@@ -48,10 +46,10 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
   int p[n ? n : 1][2] ;
   pid_t pid ;
   int e ;
-  size_t m = sizeof(NOFDVAR) ;
+  size_t m = sizeof(SKALIBS_CHILD_SPAWN_FDS_ENVVAR) ;
   unsigned int i = 0 ;
   char modifs[m + 1 + n * UINT_FMT] ;
-  memcpy(modifs, NOFDVAR "=", sizeof(NOFDVAR)) ;
+  memcpy(modifs, SKALIBS_CHILD_SPAWN_FDS_ENVVAR "=", sizeof(SKALIBS_CHILD_SPAWN_FDS_ENVVAR)) ;
   for (; i < n ; i++) if (pipe(p[i]) < 0) { e = errno ; goto errpi ; }
   for (i = 0 ; i < n ; i++)
     if ((ndelay_on(p[i][i & 1]) < 0) || (coe(p[i][i & 1]) < 0))
@@ -94,7 +92,7 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
     if (e) goto erractions ;
   }
   {
-    int haspath = !!env_get("PATH") ;
+    int haspath = !!getenv("PATH") ;
     size_t envlen = env_len(envp) ;
     char const *newenv[envlen + 2] ;
     if (!env_merge(newenv, envlen+2, envp, envlen, modifs, m)) goto errsp ;
@@ -137,8 +135,8 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
 
   syncdie:
     {
-      unsigned char c = errno ;
-      fd_write(syncpipe[1], (char const *)&c, 1) ;
+      char c = errno ;
+      fd_write(syncpipe[1], &c, 1) ;
     }
     _exit(127) ;
   }

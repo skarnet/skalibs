@@ -9,14 +9,12 @@
 #include <unistd.h>
 #include <errno.h>
 #include <signal.h>
-#include <skalibs/djbunix.h>
 
 #ifdef SKALIBS_HASPOSIXSPAWN
 
 #include <stdlib.h>
 #include <spawn.h>
 #include <skalibs/config.h>
-#include <skalibs/env.h>
 
 #else
 
@@ -26,6 +24,8 @@
 #include <skalibs/strerr2.h>
 
 #endif
+
+#include <skalibs/djbunix.h>
 
 pid_t child_spawn2 (char const *prog, char const *const *argv, char const *const *envp, int *fds)
 {
@@ -65,7 +65,7 @@ pid_t child_spawn2 (char const *prog, char const *const *argv, char const *const
   e = posix_spawn_file_actions_addclose(&actions, p[0][1]) ;
   if (e) goto erractions ;
   {
-    int haspath = !!env_get("PATH") ;
+    int haspath = !!getenv("PATH") ;
     if (!haspath && (setenv("PATH", SKALIBS_DEFAULTPATH, 0) < 0))
     {
       e = errno ; goto erractions ;
@@ -98,8 +98,8 @@ pid_t child_spawn2 (char const *prog, char const *const *argv, char const *const
 
   syncdie:
     {
-      unsigned char c = errno ;
-      fd_write(syncpipe[1], (char const *)&c, 1) ;
+      char c = errno ;
+      fd_write(syncpipe[1], &c, 1) ;
     }
     _exit(127) ;
   }

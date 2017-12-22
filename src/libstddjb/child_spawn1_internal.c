@@ -3,7 +3,6 @@
 #include <skalibs/sysdeps.h>
 #include <unistd.h>
 #include <errno.h>
-#include <skalibs/djbunix.h>
 
 #ifdef SKALIBS_HASPOSIXSPAWN
 
@@ -11,7 +10,7 @@
 #include <spawn.h>
 #include <stdlib.h>
 #include <skalibs/config.h>
-#include <skalibs/env.h>
+#include <skalibs/djbunix.h>
 
 pid_t child_spawn1_internal (char const *prog, char const *const *argv, char const *const *envp, int *p, int to)
 {
@@ -19,7 +18,7 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
   posix_spawnattr_t attr ;
   int e ;
   pid_t pid ;
-  int haspath = !!env_get("PATH") ;
+  int haspath = !!getenv("PATH") ;
   if (coe(p[!(to & 1)]) < 0) { e = errno ; goto err ; }
   e = posix_spawnattr_init(&attr) ;
   if (e) goto err ;
@@ -69,6 +68,7 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
 #include <skalibs/allreadwrite.h>
 #include <skalibs/strerr2.h>
 #include <skalibs/sig.h>
+#include <skalibs/djbunix.h>
 
 pid_t child_spawn1_internal (char const *prog, char const *const *argv, char const *const *envp, int *p, int to)
 {

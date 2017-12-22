@@ -1,14 +1,14 @@
 /* ISC license. */
 
-#ifndef ENV_H
-#define ENV_H
+#ifndef SKALIBS_ENV_H
+#define SKALIBS_ENV_H
 
 #include <sys/types.h>
 #include <skalibs/gccattributes.h>
 #include <skalibs/stralloc.h>
 
 extern size_t env_len (char const *const *) gccattr_pure ;
-extern char const *env_get (char const *) gccattr_pure ;
+extern char const *env_get (char const *) gccattr_deprecated ;
 extern char const *env_get2 (char const *const *, char const *) gccattr_pure ;
 extern char const *ucspi_get (char const *) gccattr_pure ;
 extern int env_addmodif (stralloc *, char const *, char const *) ;

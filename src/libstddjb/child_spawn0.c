@@ -9,14 +9,13 @@
 #include <spawn.h>
 #include <stdlib.h>
 #include <skalibs/config.h>
-#include <skalibs/env.h>
 
 pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const *envp)
 {
   posix_spawnattr_t attr ;
   int e ;
   pid_t pid ;
-  int haspath = !!env_get("PATH") ;
+  int haspath = !!getenv("PATH") ;
   e = posix_spawnattr_init(&attr) ;
   if (e) goto err ;
   {
