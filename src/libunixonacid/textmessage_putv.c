@@ -13,7 +13,7 @@ int textmessage_putv (textmessage_sender_t *ts, struct iovec const *v, unsigned 
   size_t len = siovec_len(v, n) ;
   char pack[4] ;
   struct iovec vv[n+1] ;
-  if (len > UINT32_MAX) return (errno = EINVAL, 0) ;
+  if (len > TEXTMESSAGE_MAXLEN) return (errno = EINVAL, 0) ;
   vv[0].iov_base = pack ;
   vv[0].iov_len = 4 ;
   for (unsigned int i = 0 ; i < n ; i++) vv[i+1] = v[i] ;

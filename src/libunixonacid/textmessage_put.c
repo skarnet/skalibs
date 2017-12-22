@@ -15,7 +15,7 @@ int textmessage_put (textmessage_sender_t *ts, char const *s, size_t len)
     { .iov_base = pack, .iov_len = 4 },
     { .iov_base = (char *)s, .iov_len = len }
   } ;
-  if (len > UINT32_MAX) return (errno = EINVAL, 0) ;
+  if (len > TEXTMESSAGE_MAXLEN) return (errno = EINVAL, 0) ;
   uint32_pack_big(pack, (uint32_t)len) ;
   return bufalloc_putv(&ts->out, v, 2) ;
 }

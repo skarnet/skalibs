@@ -13,6 +13,7 @@
 #include <skalibs/tai.h>
 
 #define TEXTMESSAGE_MAXREADS 128
+#define TEXTMESSAGE_MAXLEN 0x01000000U
 
 
  /* Sender */
@@ -36,13 +37,13 @@ extern int textmessage_put (textmessage_sender_t *, char const *, size_t) ;
 extern int textmessage_putv (textmessage_sender_t *, struct iovec const *, unsigned int) ;
 
 extern int textmessage_sender_flush (textmessage_sender_t *) ;
-extern int unixmessage_sender_timed_flush (textmessage_sender_t *, tain_t const *, tain_t *) ;
+extern int textmessage_sender_timed_flush (textmessage_sender_t *, tain_t const *, tain_t *) ;
 #define textmessage_sender_timed_flush_g(ts, deadline) textmessage_sender_timed_flush(ts, (deadline), &STAMP)
 
 #define textmessage_send(ts, s, len) (textmessage_put(ts, s, len) && textmessage_sender_flush(ts))
 #define textmessage_sendv(ts, v, n) (textmessage_putv(ts, v, n) && textmessage_sender_flush(ts))
-#define textmessage_timed_send(ts, s, len, deadline, stamp) (textmessage_put(ts, s, len) && texxtmessage_sender_timed_flush(ts, deadline, stamp))
-#define textmessage_timed_sendv(ts, v, n, deadline, stamp) (textmessage_putv(ts, v, n) && texxtmessage_sender_timed_flush(ts, deadline, stamp))
+#define textmessage_timed_send(ts, s, len, deadline, stamp) (textmessage_put(ts, s, len) && textmessage_sender_timed_flush(ts, deadline, stamp))
+#define textmessage_timed_sendv(ts, v, n, deadline, stamp) (textmessage_putv(ts, v, n) && textmessage_sender_timed_flush(ts, deadline, stamp))
 #define textmessage_timed_send_g(ts, s, len, deadline) textmessage_timed_send(ts, s, len, (deadline), &STAMP)
 #define textmessage_timed_sendv_g(ts, v, n, deadline) textmessage_timed_sendv(ts, v, n, (deadline), &STAMP)
 
@@ -71,14 +72,14 @@ extern int textmessage_receiver_hasmsginbuf (textmessage_receiver_t const *) gcc
 
 extern int textmessage_receive (textmessage_receiver_t *, struct iovec *) ;
 extern int textmessage_timed_receive (textmessage_receiver_t *, struct iovec *, tain_t const *, tain_t *) ;
-#define textmessage_timed_receive_g(tr, s, max, deadline) textmessage_timed_receive(tr, s, max, (deadline), &STAMP)
+#define textmessage_timed_receive_g(tr, v, deadline) textmessage_timed_receive(tr, v, (deadline), &STAMP)
 
 typedef int textmessage_handler_func_t (struct iovec const *, void *) ;
 typedef textmessage_handler_func_t *textmessage_handler_func_t_ref ;
 
 extern int textmessage_handle (textmessage_receiver_t *, textmessage_handler_func_t_ref, void *) ;
 extern int textmessage_timed_handle (textmessage_receiver_t *, textmessage_handler_func_t_ref, void *, tain_t const *, tain_t *) ;
-#define textmessage_timed_handle_g(tr, f, p, deadline) unixmessage_timed_handle(tr, f, p, (deadline), &STAMP)
+#define textmessage_timed_handle_g(tr, f, p, deadline) textmessage_timed_handle(tr, f, p, (deadline), &STAMP)
 
 
 
