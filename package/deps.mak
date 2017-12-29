@@ -16,7 +16,7 @@ src/include/skalibs/bytestr.h: src/include/skalibs/gccattributes.h src/include/s
 src/include/skalibs/cbuffer.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/cdb.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/cdb_make.h: src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h
-src/include/skalibs/datastruct.h: src/include/skalibs/avlnode.h src/include/skalibs/avltree.h src/include/skalibs/avltreen.h src/include/skalibs/genset.h src/include/skalibs/gensetdyn.h
+src/include/skalibs/datastruct.h: src/include/skalibs/avlnode.h src/include/skalibs/avltree.h src/include/skalibs/avltreen.h src/include/skalibs/genqdyn.h src/include/skalibs/genset.h src/include/skalibs/gensetdyn.h
 src/include/skalibs/djbtime.h: src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/include/skalibs/djbunix.h: src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/gccattributes.h src/include/skalibs/posixplz.h src/include/skalibs/stralloc.h
 src/include/skalibs/env.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
@@ -24,6 +24,7 @@ src/include/skalibs/envalloc.h: src/include/skalibs/genalloc.h
 src/include/skalibs/environ.h: src/include/skalibs/posixplz.h
 src/include/skalibs/fmtscan.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/genalloc.h: src/include/skalibs/functypes.h src/include/skalibs/stralloc.h
+src/include/skalibs/genqdyn.h: src/include/skalibs/stralloc.h
 src/include/skalibs/genset.h: src/include/skalibs/functypes.h
 src/include/skalibs/gensetdyn.h: src/include/skalibs/functypes.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
 src/include/skalibs/getpeereid.h: src/include/skalibs/posixplz.h
@@ -57,6 +58,7 @@ src/include/skalibs/unixmessage.h: src/include/skalibs/buffer.h src/include/skal
 src/include/skalibs/unixonacid.h: src/include/skalibs/kolbak.h src/include/skalibs/skaclient.h src/include/skalibs/textclient.h src/include/skalibs/textmessage.h src/include/skalibs/unix-timed.h src/include/skalibs/unix-transactional.h src/include/skalibs/unixconnection.h src/include/skalibs/unixmessage.h
 src/include/skalibs/webipc.h: src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h src/include/skalibs/tai.h
 src/libdatastruct/avlnode-internal.h: src/include/skalibs/avlnode.h
+src/libdatastruct/genqdyn-internal.h: src/include/skalibs/genqdyn.h
 src/librandom/random-internal.h: src/include/skalibs/surf.h
 src/libstdcrypto/md5-internal.h: src/include/skalibs/md5.h
 src/libstdcrypto/sha1-internal.h: src/include/skalibs/sha1.h
@@ -117,6 +119,12 @@ src/libdatastruct/avltreen_delete.o src/libdatastruct/avltreen_delete.lo: src/li
 src/libdatastruct/avltreen_init.o src/libdatastruct/avltreen_init.lo: src/libdatastruct/avltreen_init.c src/include/skalibs/avlnode.h src/include/skalibs/avltreen.h src/include/skalibs/genset.h
 src/libdatastruct/avltreen_insert.o src/libdatastruct/avltreen_insert.lo: src/libdatastruct/avltreen_insert.c src/include/skalibs/avltreen.h
 src/libdatastruct/avltreen_newnode.o src/libdatastruct/avltreen_newnode.lo: src/libdatastruct/avltreen_newnode.c src/include/skalibs/avlnode.h src/include/skalibs/avltreen.h src/include/skalibs/genset.h
+src/libdatastruct/genqdyn_clean.o src/libdatastruct/genqdyn_clean.lo: src/libdatastruct/genqdyn_clean.c src/libdatastruct/genqdyn-internal.h
+src/libdatastruct/genqdyn_free.o src/libdatastruct/genqdyn_free.lo: src/libdatastruct/genqdyn_free.c src/include/skalibs/genqdyn.h src/include/skalibs/stralloc.h
+src/libdatastruct/genqdyn_init.o src/libdatastruct/genqdyn_init.lo: src/libdatastruct/genqdyn_init.c src/include/skalibs/genqdyn.h src/include/skalibs/stralloc.h
+src/libdatastruct/genqdyn_pop.o src/libdatastruct/genqdyn_pop.lo: src/libdatastruct/genqdyn_pop.c src/libdatastruct/genqdyn-internal.h src/include/skalibs/genqdyn.h
+src/libdatastruct/genqdyn_push.o src/libdatastruct/genqdyn_push.lo: src/libdatastruct/genqdyn_push.c src/include/skalibs/genqdyn.h src/include/skalibs/stralloc.h
+src/libdatastruct/genqdyn_zero.o src/libdatastruct/genqdyn_zero.lo: src/libdatastruct/genqdyn_zero.c src/include/skalibs/genqdyn.h
 src/libdatastruct/genset.o src/libdatastruct/genset.lo: src/libdatastruct/genset.c src/include/skalibs/genset.h
 src/libdatastruct/genset_iter_nocancel.o src/libdatastruct/genset_iter_nocancel.lo: src/libdatastruct/genset_iter_nocancel.c src/include/skalibs/bitarray.h src/include/skalibs/genset.h
 src/libdatastruct/genset_iter_withcancel.o src/libdatastruct/genset_iter_withcancel.lo: src/libdatastruct/genset_iter_withcancel.c src/include/skalibs/genset.h
