@@ -276,6 +276,7 @@ src/libstddjb/child_spawn1_internal.o src/libstddjb/child_spawn1_internal.lo: sr
 src/libstddjb/child_spawn1_pipe.o src/libstddjb/child_spawn1_pipe.lo: src/libstddjb/child_spawn1_pipe.c src/libstddjb/djbunix-internal.h src/include/skalibs/djbunix.h
 src/libstddjb/child_spawn1_socket.o src/libstddjb/child_spawn1_socket.lo: src/libstddjb/child_spawn1_socket.c src/libstddjb/djbunix-internal.h src/include/skalibs/djbunix.h src/include/skalibs/webipc.h
 src/libstddjb/child_spawn2.o src/libstddjb/child_spawn2.lo: src/libstddjb/child_spawn2.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h
+src/libstddjb/child_spawn3.o src/libstddjb/child_spawn3.lo: src/libstddjb/child_spawn3.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h src/include/skalibs/types.h
 src/libstddjb/coe.o src/libstddjb/coe.lo: src/libstddjb/coe.c src/include/skalibs/djbunix.h
 src/libstddjb/deepsleepuntil.o src/libstddjb/deepsleepuntil.lo: src/libstddjb/deepsleepuntil.c src/include/skalibs/iopause.h src/include/skalibs/tai.h
 src/libstddjb/dir_close.o src/libstddjb/dir_close.lo: src/libstddjb/dir_close.c src/include/skalibs/direntry.h

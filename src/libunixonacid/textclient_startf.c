@@ -12,8 +12,8 @@
 int textclient_startf (textclient_t *a, char const *const *argv, char const *const *envp, uint32_t options, char const *before, size_t beforelen, char const *after, size_t afterlen, tain_t const *deadline, tain_t *stamp)
 {
   struct iovec v ;
-  int fd[3] ;
-  pid_t pid = child_spawn(argv[0], argv, envp, fd, 3) ;
+  int fd[3] = { 0, 1 } ;
+  pid_t pid = child_spawn3(argv[0], argv, envp, fd) ;
   if (!pid) return 0 ;
   textmessage_receiver_init(&a->syncin, fd[0], a->syncbuf, TEXTCLIENT_BUFSIZE, TEXTMESSAGE_MAXLEN) ;
   textmessage_receiver_init(&a->asyncin, fd[2], a->asyncbuf, TEXTCLIENT_BUFSIZE, TEXTMESSAGE_MAXLEN) ;

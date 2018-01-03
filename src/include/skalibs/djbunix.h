@@ -183,14 +183,24 @@ extern pid_t child_spawn2 (char const *, char const *const *, char const *const 
 
 
  /*
-    Unified function to fork a child with communication channels (pipes).
+    Same, with an additional pipe from the child to the parent.
+    The int * points to 3 fds.
+    The additional fd# is available to the child in the defined env variable.
+ */
+
+#define SKALIBS_CHILD_SPAWN_FDS_ENVVAR "SKALIBS_CHILD_SPAWN_FDS"
+
+extern pid_t child_spawn3 (char const *, char const *const *, char const *const *, int *) ;
+
+
+ /*
+    Generalization of the previous functions.
     * uses posix_spawn() if available, else uses fork+exec
-    * requests n (the last arg) communication fds between parent and child
+    * requests n (the last arg) communication fds between parent and child. Uses pipes.
     * if n=1, equivalent to child_spawn1_pipe; child writes, parent reads.
     * if n>=2, parent reads on even and writes on odd.
  */
 
-#define SKALIBS_CHILD_SPAWN_FDS_ENVVAR "SKALIBS_CHILD_SPAWN_FDS"
 
 extern pid_t child_spawn (char const *, char const *const *, char const *const *, int *, unsigned int) ;
 
