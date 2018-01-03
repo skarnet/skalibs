@@ -6,10 +6,11 @@ In 2.6.3.0
  - New dir_fd function wrapping dirfd() (Solaris doesn't have dirfd())
  - memmem implementation for platforms that don't provide it.
  - memmem wrappers: byte_search, siovec_search.
- - New functions: atomic_symlink, skagetlnmaxsep.
+ - New functions: atomic_symlink, skagetlnmaxsep, child_spawn3
  - New header: skalibs/posixplz.h, some header reorganization.
  - New family of functions: skalibs/textmessage.h.
  - skalibs/environ.h and skalibs/getpeereid.h are now obsolescent.
+ - Bugfixes.
 
 
 In 2.6.2.0

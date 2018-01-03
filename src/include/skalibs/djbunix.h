@@ -201,7 +201,6 @@ extern pid_t child_spawn3 (char const *, char const *const *, char const *const 
     * if n>=2, parent reads on even and writes on odd.
  */
 
-
 extern pid_t child_spawn (char const *, char const *const *, char const *const *, int *, unsigned int) ;
 
 #endif
