@@ -8,7 +8,7 @@ In 2.6.3.0
  - memmem wrappers: byte_search, siovec_search.
  - New functions: atomic_symlink, skagetlnmaxsep, child_spawn3
  - New header: skalibs/posixplz.h, some header reorganization.
- - New family of functions: skalibs/textmessage.h.
+ - New family of functions: textmessage and textclient
  - skalibs/environ.h and skalibs/getpeereid.h are now obsolescent.
  - Bugfixes.
 
