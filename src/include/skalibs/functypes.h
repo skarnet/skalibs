@@ -21,9 +21,6 @@ typedef dtokfunc_t *dtokfunc_t_ref ;
 typedef int iterfunc_t (char *, void *) ;
 typedef iterfunc_t *iterfunc_t_ref ;
 
-typedef void viterfunc_t (char *, void *) ;
-typedef viterfunc_t *viterfunc_t_ref ;
-
 typedef void freefunc_t (void *) ;
 typedef freefunc_t *freefunc_t_ref ;
 
