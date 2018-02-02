@@ -166,11 +166,11 @@ trytypes () {
   ./output-types | grep -F signed | while read key value ; do
     caps=$(echo $key | sed s/:\$// | tr a-z A-Z)
     if test $value = yes ; then
-      echo "#define ${package_macro_name}_HASSIGNED${caps}"
-      echo "#undef ${package_macro_name}_HASUNSIGNED${caps}"
+      echo "#define ${package_macro_name}_HAS${caps}"
+      echo "#undef ${package_macro_name}_HASUN${caps}"
     else
-      echo "#undef ${package_macro_name}_HASSIGNED${caps}"
-      echo "#define ${package_macro_name}_HASUNSIGNED${caps}"
+      echo "#undef ${package_macro_name}_HAS${caps}"
+      echo "#define ${package_macro_name}_HASUN${caps}"
     fi >> $sysdeps/sysdeps.h
   done
   rm -f output-types

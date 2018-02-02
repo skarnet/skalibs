@@ -5,6 +5,7 @@
 #define _BSD_SOURCE
 #endif
 
+#include <skalibs/sysdeps.h>
 #include <errno.h>
 #include <time.h>
 #include <skalibs/uint64.h>
@@ -15,7 +16,9 @@ int localtm_from_ltm64 (struct tm *l, uint64_t uu, int tz)
 {
   if (uu < TAI_MAGIC) return (errno = EINVAL, 0) ;
   uu -= TAI_MAGIC ;
+#if SKALIBS_SIZEOFTIME != 8
   if (uu > 0xFFFFFFFFUL) return (errno = EOVERFLOW, 0) ;
+#endif
   {
     time_t u = (time_t)uu ;
     if (tz ? !localtime_r(&u, l) : !gmtime_r(&u, l)) return 0 ;

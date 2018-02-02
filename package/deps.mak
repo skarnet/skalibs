@@ -392,7 +392,7 @@ src/libstddjb/leapsecs_add.o src/libstddjb/leapsecs_add.lo: src/libstddjb/leapse
 src/libstddjb/leapsecs_sub.o src/libstddjb/leapsecs_sub.lo: src/libstddjb/leapsecs_sub.c src/libstddjb/djbtime-internal.h src/include/skalibs/uint64.h
 src/libstddjb/leapsecs_table.o src/libstddjb/leapsecs_table.lo: src/libstddjb/leapsecs_table.c src/libstddjb/djbtime-internal.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/localtm_fmt.o src/libstddjb/localtm_fmt.lo: src/libstddjb/localtm_fmt.c src/include/skalibs/djbtime.h src/include/skalibs/types.h
-src/libstddjb/localtm_from_ltm64.o src/libstddjb/localtm_from_ltm64.lo: src/libstddjb/localtm_from_ltm64.c src/include/skalibs/djbtime.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
+src/libstddjb/localtm_from_ltm64.o src/libstddjb/localtm_from_ltm64.lo: src/libstddjb/localtm_from_ltm64.c src/include/skalibs/djbtime.h src/include/skalibs/sysdeps.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/localtm_from_sysclock.o src/libstddjb/localtm_from_sysclock.lo: src/libstddjb/localtm_from_sysclock.c src/include/skalibs/djbtime.h src/include/skalibs/uint64.h
 src/libstddjb/localtm_from_tai.o src/libstddjb/localtm_from_tai.lo: src/libstddjb/localtm_from_tai.c src/include/skalibs/djbtime.h src/include/skalibs/uint64.h
 src/libstddjb/localtm_from_utc.o src/libstddjb/localtm_from_utc.lo: src/libstddjb/localtm_from_utc.c src/include/skalibs/djbtime.h src/include/skalibs/uint64.h
