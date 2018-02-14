@@ -16,8 +16,8 @@ struct bufalloc
   ssize_t (*op) (int, char const *, size_t) ;
 } ;
 
-#define BUFALLOC_ZERO { .x = STRALLOC_ZERO, .p = 0, .fd = -1, .op = 0 }
-#define BUFALLOC_INIT(f, d) { .x = STRALLOC_ZERO, .p = 0, .fd = (d), .op = (f) }
+#define BUFALLOC_ZERO { STRALLOC_ZERO, 0, -1, 0 }
+#define BUFALLOC_INIT(f, d) { STRALLOC_ZERO, 0, (d), (f) }
 extern void bufalloc_init (bufalloc *, ssize_t (*)(int, char const *, size_t), int) ;
 #define bufalloc_shrink(ba) stralloc_shrink(&(ba)->x)
 #define bufalloc_free(ba) stralloc_free(&(ba)->x)

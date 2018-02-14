@@ -16,7 +16,7 @@ struct buffer_s
   int fd ;
   cbuffer_t c ;
 } ;
-#define BUFFER_ZERO { .op = 0, .fd = -1, .c = CBUFFER_ZERO }
+#define BUFFER_ZERO { 0, -1, CBUFFER_ZERO }
 
 
  /*
@@ -30,7 +30,7 @@ struct buffer_s
 #define BUFFER_INSIZE_SMALL 512
 #define BUFFER_OUTSIZE_SMALL 512
 
-#define BUFFER_INIT(f, d, buf, len) { .op = (f), .fd = (d), .c = CBUFFER_INIT(buf, len) }
+#define BUFFER_INIT(f, d, buf, len) { (f), (d), CBUFFER_INIT(buf, len) }
 extern int buffer_init (buffer *, iovfunc_t_ref, int, char *, size_t) ;
 
 

@@ -23,9 +23,9 @@ struct textmessage_sender_s
 {
   bufalloc out ;
 } ;
-#define TEXTMESSAGE_SENDER_ZERO { .out = BUFALLOC_ZERO }
+#define TEXTMESSAGE_SENDER_ZERO { BUFALLOC_ZERO }
 extern textmessage_sender_t const textmessage_sender_zero ;
-#define TEXTMESSAGE_SENDER_INIT(fd) { .out = BUFALLOC_INIT(&fd_write, (fd)) }
+#define TEXTMESSAGE_SENDER_INIT(fd) { BUFALLOC_INIT(&fd_write, (fd)) }
 
 #define textmessage_sender_init(ts, fd) bufalloc_init(&(ts)->out, &fd_write, fd)
 #define textmessage_sender_free(ts) bufalloc_free(&(ts)->out)
@@ -58,9 +58,9 @@ struct textmessage_receiver_s
   uint32_t wanted ;
   uint32_t max ;
 } ;
-#define TEXTMESSAGE_RECEIVER_ZERO { .in = BUFFER_ZERO, .indata = STRALLOC_ZERO, .wanted = 0, .max = 0 }
+#define TEXTMESSAGE_RECEIVER_ZERO { BUFFER_ZERO, STRALLOC_ZERO, 0, 0 }
 extern textmessage_receiver_t const textmessage_receiver_zero ;
-#define TEXTMESSAGE_RECEIVER_INIT(fd, buf, len, n) { .in = BUFFER_INIT(&buffer_read, (fd), buf, len), .indata = STRALLOC_ZERO, .wanted = 0, .max = n }
+#define TEXTMESSAGE_RECEIVER_INIT(fd, buf, len, n) { BUFFER_INIT(&buffer_read, (fd), buf, len), STRALLOC_ZERO, 0, n }
 
 extern int textmessage_receiver_init (textmessage_receiver_t *, int, char *, size_t, uint32_t) ;
 extern void textmessage_receiver_free (textmessage_receiver_t *) ;

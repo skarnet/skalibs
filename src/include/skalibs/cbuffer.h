@@ -15,14 +15,14 @@ struct cbuffer_s
   size_t p ; /* head */
   size_t n ; /* tail */
 } ;
-#define CBUFFER_ZERO { .x = 0, .a = 0, .p = 0, .n = 0 }
+#define CBUFFER_ZERO { 0, 0, 0, 0 }
 
  /*
     Circular buffers need to be 1 char bigger than the storage space,
     so that the head == tail case is nonambiguous (empty).
  */
 
-#define CBUFFER_INIT(buf, len) { .x = (buf), .a = (len), .p = 0, .n = 0 }
+#define CBUFFER_INIT(buf, len) { (buf), (len), 0, 0 }
 extern int cbuffer_init (cbuffer_t *, char *, size_t) ;
 
 
