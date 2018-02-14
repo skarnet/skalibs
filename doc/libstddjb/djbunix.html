@@ -328,7 +328,7 @@ Returns -1 and sets errno if it fails; returns 0 if it succeeds.
 <h3> Executable search and execution, and environment </h3>
 
 <p>
-<code> void execvep (char const *file, char const *const *argv, char const *const *envp, char const *path) </code> <br />
+<code> void execvep_loose (char const *file, char const *const *argv, char const *const *envp, char const *path) </code> <br />
 Executes into the executable file at <em>file</em>, with the command line
 set to <em>argv</em> and the environment set to <em>envp</em>.
 If <em>file</em> is not an absolute path, it is searched in the
@@ -336,6 +336,12 @@ If <em>file</em> is not an absolute path, it is searched in the
 search directories such as the contents of the PATH environment variable.
 The function returns if it fails, and sets errno to the most relevant
 error that happened.
+</p>
+
+<p>
+<code> void execvep (char const *file, char const *const *argv, char const *const *envp, char const *path) </code> <br />
+Like <tt>execvep_loose()</tt>, but if <em>file</em> contains a slash,
+it is treated as an absolute path.
 </p>
 
 <p>

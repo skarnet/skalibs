@@ -1,9 +1,11 @@
 Changelog for skalibs.
 
-In 2.6.3.2
+In 2.6.4.0
 ----------
 
  - Bugfixes.
+ - New function: execvep_loose()
+
 
 In 2.6.3.1
 ----------

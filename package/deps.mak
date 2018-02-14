@@ -22,6 +22,7 @@ src/include/skalibs/djbunix.h: src/include/skalibs/env.h src/include/skalibs/env
 src/include/skalibs/env.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/envalloc.h: src/include/skalibs/genalloc.h
 src/include/skalibs/environ.h: src/include/skalibs/posixplz.h
+src/include/skalibs/error.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/fmtscan.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/genalloc.h: src/include/skalibs/functypes.h src/include/skalibs/stralloc.h
 src/include/skalibs/genqdyn.h: src/include/skalibs/stralloc.h
@@ -30,6 +31,7 @@ src/include/skalibs/gensetdyn.h: src/include/skalibs/functypes.h src/include/ska
 src/include/skalibs/getpeereid.h: src/include/skalibs/posixplz.h
 src/include/skalibs/iobuffer.h: src/include/skalibs/buffer.h src/include/skalibs/djbunix.h
 src/include/skalibs/iopause.h: src/include/skalibs/tai.h
+src/include/skalibs/ip46.h: src/include/skalibs/fmtscan.h src/include/skalibs/socket.h
 src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr2.h
 src/include/skalibs/mininetstring.h: src/include/skalibs/stralloc.h
@@ -51,6 +53,7 @@ src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint64.h
 src/include/skalibs/textclient.h: src/include/skalibs/allreadwrite.h src/include/skalibs/tai.h src/include/skalibs/textmessage.h
 src/include/skalibs/textmessage.h: src/include/skalibs/allreadwrite.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
+src/include/skalibs/types.h: src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
 src/include/skalibs/unix-timed.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
 src/include/skalibs/unix-transactional.h: src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
 src/include/skalibs/unixconnection.h: src/include/skalibs/unixmessage.h
@@ -137,7 +140,9 @@ src/libdatastruct/gensetdyn_new.o src/libdatastruct/gensetdyn_new.lo: src/libdat
 src/libdatastruct/gensetdyn_ready.o src/libdatastruct/gensetdyn_ready.lo: src/libdatastruct/gensetdyn_ready.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h src/include/skalibs/stralloc.h
 src/libdatastruct/gensetdyn_zero.o src/libdatastruct/gensetdyn_zero.lo: src/libdatastruct/gensetdyn_zero.c src/include/skalibs/gensetdyn.h
 src/libposixplz/doublefork.o src/libposixplz/doublefork.lo: src/libposixplz/doublefork.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h src/include/skalibs/uint64.h
-src/libposixplz/execvep.o src/libposixplz/execvep.lo: src/libposixplz/execvep.c src/include/skalibs/bytestr.h src/include/skalibs/posixplz.h
+src/libposixplz/execvep.o src/libposixplz/execvep.lo: src/libposixplz/execvep.c src/libposixplz/posixplz-internal.h src/include/skalibs/posixplz.h
+src/libposixplz/execvep_internal.o src/libposixplz/execvep_internal.lo: src/libposixplz/execvep_internal.c src/include/skalibs/bytestr.h src/include/skalibs/posixplz.h
+src/libposixplz/execvep_loose.o src/libposixplz/execvep_loose.lo: src/libposixplz/execvep_loose.c src/libposixplz/posixplz-internal.h src/include/skalibs/posixplz.h
 src/libposixplz/getpeereid.o src/libposixplz/getpeereid.lo: src/libposixplz/getpeereid.c src/include/skalibs/nonposix.h src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h
 src/libposixplz/memmem.o src/libposixplz/memmem.lo: src/libposixplz/memmem.c src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h
 src/libposixplz/setgroups.o src/libposixplz/setgroups.lo: src/libposixplz/setgroups.c src/include/skalibs/nonposix.h src/include/skalibs/setgroups.h src/include/skalibs/sysdeps.h
