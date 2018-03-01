@@ -541,6 +541,7 @@ EOF
   choose cl itimer ITIMER 'setitimer()'
   choose cl namespaces NAMESPACES 'namespaces'
   choose cl nsgetparent NSGETPARENT 'NS_GET_PARENT'
+  choose cl explicit_bzero EXPLICIT_BZERO 'explicit_bzero()'
 
   echo '#endif' >> $sysdeps/sysdeps.h
 fi

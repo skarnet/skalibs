@@ -31,6 +31,7 @@ extern size_t byte_in (char const *, size_t, char const *, size_t) gccattr_pure 
 #define byte_equal(s, n, t) (!memcmp(s, (t), n))
 extern size_t byte_count (char const *, size_t, char) gccattr_pure ;
 extern size_t byte_search (char const *, size_t, char const *, size_t) ;
+extern void byte_zzero (char *, size_t) ;
 
 #define str_diffb(a, n, b) strncmp(a, (b), n)
 extern size_t str_chr (char const *, int) gccattr_pure ;

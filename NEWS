@@ -4,7 +4,7 @@ In 2.6.4.0
 ----------
 
  - Bugfixes.
- - New function: execvep_loose()
+ - New functions: execvep_loose(), byte_zzero(), openb_read()
 
 
 In 2.6.3.1

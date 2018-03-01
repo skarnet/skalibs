@@ -44,6 +44,7 @@ extern void lock_unx (int) ;
 extern int open2 (char const *, unsigned int) ;
 extern int open3 (char const *, unsigned int, unsigned int) ;
 extern int open_read (char const *) ;
+extern int openb_read (char const *) ;
 extern int open_readb (char const *) ;
 extern int open_excl (char const *) ;
 extern int open_append (char const *) ;

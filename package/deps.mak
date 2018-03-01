@@ -22,7 +22,6 @@ src/include/skalibs/djbunix.h: src/include/skalibs/env.h src/include/skalibs/env
 src/include/skalibs/env.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/envalloc.h: src/include/skalibs/genalloc.h
 src/include/skalibs/environ.h: src/include/skalibs/posixplz.h
-src/include/skalibs/error.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/fmtscan.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/genalloc.h: src/include/skalibs/functypes.h src/include/skalibs/stralloc.h
 src/include/skalibs/genqdyn.h: src/include/skalibs/stralloc.h
@@ -31,7 +30,6 @@ src/include/skalibs/gensetdyn.h: src/include/skalibs/functypes.h src/include/ska
 src/include/skalibs/getpeereid.h: src/include/skalibs/posixplz.h
 src/include/skalibs/iobuffer.h: src/include/skalibs/buffer.h src/include/skalibs/djbunix.h
 src/include/skalibs/iopause.h: src/include/skalibs/tai.h
-src/include/skalibs/ip46.h: src/include/skalibs/fmtscan.h src/include/skalibs/socket.h
 src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr2.h
 src/include/skalibs/mininetstring.h: src/include/skalibs/stralloc.h
@@ -53,7 +51,6 @@ src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint64.h
 src/include/skalibs/textclient.h: src/include/skalibs/allreadwrite.h src/include/skalibs/tai.h src/include/skalibs/textmessage.h
 src/include/skalibs/textmessage.h: src/include/skalibs/allreadwrite.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
-src/include/skalibs/types.h: src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
 src/include/skalibs/unix-timed.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
 src/include/skalibs/unix-transactional.h: src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
 src/include/skalibs/unixconnection.h: src/include/skalibs/unixmessage.h
@@ -248,6 +245,7 @@ src/libstddjb/byte_count.o src/libstddjb/byte_count.lo: src/libstddjb/byte_count
 src/libstddjb/byte_in.o src/libstddjb/byte_in.lo: src/libstddjb/byte_in.c src/include/skalibs/bytestr.h
 src/libstddjb/byte_rchr.o src/libstddjb/byte_rchr.lo: src/libstddjb/byte_rchr.c src/include/skalibs/bytestr.h
 src/libstddjb/byte_search.o src/libstddjb/byte_search.lo: src/libstddjb/byte_search.c src/include/skalibs/bytestr.h src/include/skalibs/posixplz.h
+src/libstddjb/byte_zzero.o src/libstddjb/byte_zzero.lo: src/libstddjb/byte_zzero.c src/include/skalibs/bytestr.h src/include/skalibs/gccattributes.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
 src/libstddjb/case_lowerb.o src/libstddjb/case_lowerb.lo: src/libstddjb/case_lowerb.c src/include/skalibs/bytestr.h
 src/libstddjb/case_lowers.o src/libstddjb/case_lowers.lo: src/libstddjb/case_lowers.c src/include/skalibs/bytestr.h
 src/libstddjb/case_startb.o src/libstddjb/case_startb.lo: src/libstddjb/case_startb.c src/include/skalibs/bytestr.h
@@ -437,6 +435,7 @@ src/libstddjb/open_read.o src/libstddjb/open_read.lo: src/libstddjb/open_read.c 
 src/libstddjb/open_readb.o src/libstddjb/open_readb.lo: src/libstddjb/open_readb.c src/include/skalibs/djbunix.h
 src/libstddjb/open_trunc.o src/libstddjb/open_trunc.lo: src/libstddjb/open_trunc.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h
 src/libstddjb/open_write.o src/libstddjb/open_write.lo: src/libstddjb/open_write.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h
+src/libstddjb/openb_read.o src/libstddjb/openb_read.lo: src/libstddjb/openb_read.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h
 src/libstddjb/openreadfileclose.o src/libstddjb/openreadfileclose.lo: src/libstddjb/openreadfileclose.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/openreadnclose.o src/libstddjb/openreadnclose.lo: src/libstddjb/openreadnclose.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
 src/libstddjb/openslurpclose.o src/libstddjb/openslurpclose.lo: src/libstddjb/openslurpclose.c src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
