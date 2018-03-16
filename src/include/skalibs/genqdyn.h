@@ -26,6 +26,7 @@ extern void genqdyn_init (genqdyn *, size_t, unsigned int, unsigned int) ;
 
 extern void genqdyn_free (genqdyn *) ;
 extern int genqdyn_push (genqdyn *, void const *) ;
+extern int genqdyn_unpush (genqdyn *) ;
 #define GENQDYN_PEEK(type, g) ((type *)((g)->queue.s + (g)->esize * (g)->head))
 #define genqdyn_peek(g) GENQDYN_PEEK(void, (g))
 extern int genqdyn_pop(genqdyn *) ;

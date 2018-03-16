@@ -24,6 +24,7 @@ extern void bufalloc_init (bufalloc *, ssize_t (*)(int, char const *, size_t), i
 #define bufalloc_put(ba, s, n) stralloc_catb(&(ba)->x, s, n)
 #define bufalloc_puts(ba, s) stralloc_cats(&(ba)->x, s)
 #define bufalloc_putv(ba, v, n) stralloc_catv(&(ba)->x, v, n)
+#define bufalloc_unput(ba, n) ((ba)->x.len -= (n))
 #define bufalloc_fd(ba) ((ba)->fd)
 extern int bufalloc_getfd (bufalloc const *) gccattr_pure ;
 extern int bufalloc_flush (bufalloc *) ;
