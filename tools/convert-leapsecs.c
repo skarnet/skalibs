@@ -9,12 +9,12 @@
 #include <skalibs/genalloc.h>
 #include <skalibs/skamisc.h>
 
-static genalloc table = GENALLOC_ZERO ; /* uint64 */
+static genalloc table = GENALLOC_ZERO ; /* uint64_t */
 
 static void add_leapsecs (uint64_t *t)
 {
-  uint64_t *tab = genalloc_s(uint64, &table) ;
-  size_t n = genalloc_len(uint64, &table) ;
+  uint64_t *tab = genalloc_s(uint64_t, &table) ;
+  size_t n = genalloc_len(uint64_t, &table) ;
   size_t i = 0 ;
   for (; i < n ; i++) if (*t >= tab[i]) (*t)++ ;
 }
