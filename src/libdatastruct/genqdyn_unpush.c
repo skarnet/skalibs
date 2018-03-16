@@ -1,6 +1,6 @@
 /* ISC license. */
 
-#include <skalibs/errno.h>
+#include <errno.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/genqdyn.h>
 
