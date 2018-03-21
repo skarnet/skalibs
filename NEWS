@@ -4,7 +4,8 @@ In 2.6.4.0
 ----------
 
  - Bugfixes.
- - New functions: execvep_loose(), byte_zzero(), openb_read()
+ - New functions: execvep_loose(), byte_zzero(), openb_read(),
+sig_scan(), sig0_scan()
  - New function family: skalibs/genqdyn.h
 
 

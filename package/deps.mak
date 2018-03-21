@@ -124,6 +124,7 @@ src/libdatastruct/genqdyn_free.o src/libdatastruct/genqdyn_free.lo: src/libdatas
 src/libdatastruct/genqdyn_init.o src/libdatastruct/genqdyn_init.lo: src/libdatastruct/genqdyn_init.c src/include/skalibs/genqdyn.h src/include/skalibs/stralloc.h
 src/libdatastruct/genqdyn_pop.o src/libdatastruct/genqdyn_pop.lo: src/libdatastruct/genqdyn_pop.c src/libdatastruct/genqdyn-internal.h src/include/skalibs/genqdyn.h
 src/libdatastruct/genqdyn_push.o src/libdatastruct/genqdyn_push.lo: src/libdatastruct/genqdyn_push.c src/include/skalibs/genqdyn.h src/include/skalibs/stralloc.h
+src/libdatastruct/genqdyn_unpush.o src/libdatastruct/genqdyn_unpush.lo: src/libdatastruct/genqdyn_unpush.c src/include/skalibs/genqdyn.h src/include/skalibs/stralloc.h
 src/libdatastruct/genqdyn_zero.o src/libdatastruct/genqdyn_zero.lo: src/libdatastruct/genqdyn_zero.c src/include/skalibs/genqdyn.h
 src/libdatastruct/genset.o src/libdatastruct/genset.lo: src/libdatastruct/genset.c src/include/skalibs/genset.h
 src/libdatastruct/genset_iter_nocancel.o src/libdatastruct/genset_iter_nocancel.lo: src/libdatastruct/genset_iter_nocancel.c src/include/skalibs/bitarray.h src/include/skalibs/genset.h
@@ -479,6 +480,7 @@ src/libstddjb/selfpipe_trap.o src/libstddjb/selfpipe_trap.lo: src/libstddjb/self
 src/libstddjb/selfpipe_trapset.o src/libstddjb/selfpipe_trapset.lo: src/libstddjb/selfpipe_trapset.c src/include/skalibs/nonposix.h src/include/skalibs/nsig.h src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
 src/libstddjb/selfpipe_untrap.o src/libstddjb/selfpipe_untrap.lo: src/libstddjb/selfpipe_untrap.c src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
 src/libstddjb/sgetopt.o src/libstddjb/sgetopt.lo: src/libstddjb/sgetopt.c src/include/skalibs/buffer.h src/include/skalibs/sgetopt.h
+src/libstddjb/sig0_scan.o src/libstddjb/sig0_scan.lo: src/libstddjb/sig0_scan.c src/include/skalibs/sig.h
 src/libstddjb/sig_block.o src/libstddjb/sig_block.lo: src/libstddjb/sig_block.c src/include/skalibs/sig.h
 src/libstddjb/sig_blocknone.o src/libstddjb/sig_blocknone.lo: src/libstddjb/sig_blocknone.c src/include/skalibs/sig.h
 src/libstddjb/sig_blockset.o src/libstddjb/sig_blockset.lo: src/libstddjb/sig_blockset.c src/include/skalibs/sig.h
@@ -488,6 +490,7 @@ src/libstddjb/sig_number.o src/libstddjb/sig_number.lo: src/libstddjb/sig_number
 src/libstddjb/sig_pause.o src/libstddjb/sig_pause.lo: src/libstddjb/sig_pause.c src/include/skalibs/sig.h
 src/libstddjb/sig_push.o src/libstddjb/sig_push.lo: src/libstddjb/sig_push.c src/include/skalibs/sig.h
 src/libstddjb/sig_restoreto.o src/libstddjb/sig_restoreto.lo: src/libstddjb/sig_restoreto.c src/include/skalibs/sig.h
+src/libstddjb/sig_scan.o src/libstddjb/sig_scan.lo: src/libstddjb/sig_scan.c src/include/skalibs/sig.h src/include/skalibs/types.h
 src/libstddjb/sig_shield.o src/libstddjb/sig_shield.lo: src/libstddjb/sig_shield.c src/include/skalibs/sig.h
 src/libstddjb/sig_stack.o src/libstddjb/sig_stack.lo: src/libstddjb/sig_stack.c src/include/skalibs/nonposix.h src/include/skalibs/nsig.h src/include/skalibs/sig.h
 src/libstddjb/sig_table.o src/libstddjb/sig_table.lo: src/libstddjb/sig_table.c src/libstddjb/sig-internal.h
