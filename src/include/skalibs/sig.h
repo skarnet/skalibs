@@ -46,7 +46,6 @@ extern void sig_unshield (void) ;
 
 extern char const *sig_name (int) ;
 extern int sig_number (char const *) ;
-extern size_t sig_scan (char const *, int *) ;
 extern size_t sig0_scan (char const *, int *) ;
 
 #endif
