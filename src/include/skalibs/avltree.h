@@ -48,7 +48,7 @@ extern int avltree_newnode (avltree *, uint32_t, uint32_t *) ;
 #define avltree_insertnode(t, i) avltree_setroot(t, avlnode_insertnode(avltree_nodes(t), avltree_totalsize(t), avltree_root(t), i, (t)->dtok, (t)->kcmp, (t)->external))
 extern int avltree_insert (avltree *, uint32_t) ;
 
-#define avltree_deletenode(t, i) avltree_delete(t, (*(t)->dtok)(avltree_data(t, i)))
+#define avltree_deletenode(t, i) avltree_delete(t, (*(t)->dtok)(avltree_data(t, i),(t)->external))
 extern int avltree_delete (avltree *, void const *) ;
 
 #define avltree_iter(t, f, p) avlnode_iter(avltree_nodes(t), avltree_totalsize(t), avltree_root(t), f, p)
