@@ -29,6 +29,7 @@ extern void gensetdyn_init (gensetdyn *, uint32_t, uint32_t, uint32_t, uint32_t)
 extern int gensetdyn_ready (gensetdyn *, uint32_t) ;
 #define gensetdyn_readyplus(x, n) gensetdyn_ready(x, gensetdyn_n(x) + (n))
 extern void gensetdyn_free (gensetdyn *) ;
+extern void gensetdyn_deepfree (gensetdyn *, freefunc_t_ref) ;
 
 extern int gensetdyn_new (gensetdyn *, uint32_t *) ;
 extern int gensetdyn_delete (gensetdyn *, uint32_t) ;

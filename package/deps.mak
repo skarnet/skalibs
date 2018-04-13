@@ -127,8 +127,10 @@ src/libdatastruct/genqdyn_push.o src/libdatastruct/genqdyn_push.lo: src/libdatas
 src/libdatastruct/genqdyn_unpush.o src/libdatastruct/genqdyn_unpush.lo: src/libdatastruct/genqdyn_unpush.c src/include/skalibs/genqdyn.h src/include/skalibs/stralloc.h
 src/libdatastruct/genqdyn_zero.o src/libdatastruct/genqdyn_zero.lo: src/libdatastruct/genqdyn_zero.c src/include/skalibs/genqdyn.h
 src/libdatastruct/genset.o src/libdatastruct/genset.lo: src/libdatastruct/genset.c src/include/skalibs/genset.h
+src/libdatastruct/genset_deepfree.o src/libdatastruct/genset_deepfree.lo: src/libdatastruct/genset_deepfree.c src/include/skalibs/functypes.h src/include/skalibs/genset.h
 src/libdatastruct/genset_iter_nocancel.o src/libdatastruct/genset_iter_nocancel.lo: src/libdatastruct/genset_iter_nocancel.c src/include/skalibs/bitarray.h src/include/skalibs/genset.h
 src/libdatastruct/genset_iter_withcancel.o src/libdatastruct/genset_iter_withcancel.lo: src/libdatastruct/genset_iter_withcancel.c src/include/skalibs/genset.h
+src/libdatastruct/gensetdyn_deepfree.o src/libdatastruct/gensetdyn_deepfree.lo: src/libdatastruct/gensetdyn_deepfree.c src/include/skalibs/functypes.h src/include/skalibs/gensetdyn.h
 src/libdatastruct/gensetdyn_delete.o src/libdatastruct/gensetdyn_delete.lo: src/libdatastruct/gensetdyn_delete.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h
 src/libdatastruct/gensetdyn_free.o src/libdatastruct/gensetdyn_free.lo: src/libdatastruct/gensetdyn_free.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h src/include/skalibs/stralloc.h
 src/libdatastruct/gensetdyn_init.o src/libdatastruct/gensetdyn_init.lo: src/libdatastruct/gensetdyn_init.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h src/include/skalibs/stralloc.h
