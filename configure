@@ -503,6 +503,7 @@ EOF
   rm -f tryendianness
 
   trytypes
+  choose clr nullispointer NULLISPOINTER 'a pointer-typed NULL'
   choose clr accept4 ACCEPT4 'accept4()'
   choose clr ancilautoclose ANCILAUTOCLOSE 'auto-close after fd-passing'
   choose c cmsgcloexec CMSGCLOEXEC 'MSG_CMSG_CLOEXEC'
