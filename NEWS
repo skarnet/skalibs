@@ -1,5 +1,12 @@
 Changelog for skalibs.
 
+In 2.6.5.0
+----------
+
+ - Bugfixes.
+ - New function: ipc_timed_sendv()
+
+
 In 2.6.4.0
 ----------
 

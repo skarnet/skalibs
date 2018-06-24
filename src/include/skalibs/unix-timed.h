@@ -4,6 +4,7 @@
 #define UNIX_TIMED_H
 
 #include <sys/types.h>
+#include <sys/uio.h>
 #include <skalibs/bufalloc.h>
 #include <skalibs/buffer.h>
 #include <skalibs/functypes.h>
@@ -36,6 +37,8 @@ extern int netstring_timed_get (buffer *, stralloc *, tain_t const *, tain_t *) 
 
 extern int ipc_timed_send (int, char const *, size_t, tain_t const *, tain_t *) ;
 #define ipc_timed_send_g(fd, s, len, deadline) ipc_timed_send(fd, s, len, (deadline), &STAMP)
+extern int ipc_timed_sendv (int, struct iovec const *, unsigned int, tain_t const *, tain_t *) ;
+#define ipc_timed_sendv_g(fd, v, n, deadline) ipc_timed_sendv(fd, v, n, (deadline), &STAMP)
 extern ssize_t ipc_timed_recv (int, char *, size_t, char *, tain_t const *, tain_t *) ;
 #define ipc_timed_recv_g(fd, s, len, path, deadline) ipc_timed_recv(fd, s, len, path, (deadline), &STAMP)
 

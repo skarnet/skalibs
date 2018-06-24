@@ -509,9 +509,11 @@ src/libstddjb/siovec_search.o src/libstddjb/siovec_search.lo: src/libstddjb/siov
 src/libstddjb/siovec_seek.o src/libstddjb/siovec_seek.lo: src/libstddjb/siovec_seek.c src/include/skalibs/bytestr.h src/include/skalibs/siovec.h
 src/libstddjb/siovec_trunc.o src/libstddjb/siovec_trunc.lo: src/libstddjb/siovec_trunc.c src/include/skalibs/siovec.h
 src/libstddjb/skagetln.o src/libstddjb/skagetln.lo: src/libstddjb/skagetln.c src/include/skalibs/buffer.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
+src/libstddjb/skagetln_loose.o src/libstddjb/skagetln_loose.lo: src/libstddjb/skagetln_loose.c src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/skagetln_nofill.o src/libstddjb/skagetln_nofill.lo: src/libstddjb/skagetln_nofill.c src/include/skalibs/buffer.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/skagetlnmaxsep.o src/libstddjb/skagetlnmaxsep.lo: src/libstddjb/skagetlnmaxsep.c src/include/skalibs/buffer.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/skagetlnsep.o src/libstddjb/skagetlnsep.lo: src/libstddjb/skagetlnsep.c src/include/skalibs/buffer.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
+src/libstddjb/skagetlnsep_loose.o src/libstddjb/skagetlnsep_loose.lo: src/libstddjb/skagetlnsep_loose.c src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/skalibs_tzisright.o src/libstddjb/skalibs_tzisright.lo: src/libstddjb/skalibs_tzisright.c src/libstddjb/djbtime-internal.h
 src/libstddjb/skasig_dfl.o src/libstddjb/skasig_dfl.lo: src/libstddjb/skasig_dfl.c src/include/skalibs/sig.h
 src/libstddjb/skasigaction.o src/libstddjb/skasigaction.lo: src/libstddjb/skasigaction.c src/include/skalibs/config.h src/include/skalibs/sig.h
@@ -730,7 +732,8 @@ src/libunixonacid/dd_commit_devino.o src/libunixonacid/dd_commit_devino.lo: src/
 src/libunixonacid/dd_open_read.o src/libunixonacid/dd_open_read.lo: src/libunixonacid/dd_open_read.c src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/dd_open_write.o src/libunixonacid/dd_open_write.lo: src/libunixonacid/dd_open_write.c src/include/skalibs/djbunix.h src/include/skalibs/random.h src/include/skalibs/stralloc.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/ipc_timed_recv.o src/libunixonacid/ipc_timed_recv.lo: src/libunixonacid/ipc_timed_recv.c src/include/skalibs/allreadwrite.h src/include/skalibs/functypes.h src/include/skalibs/unix-timed.h src/include/skalibs/webipc.h
-src/libunixonacid/ipc_timed_send.o src/libunixonacid/ipc_timed_send.lo: src/libunixonacid/ipc_timed_send.c src/include/skalibs/error.h src/include/skalibs/iopause.h src/include/skalibs/unix-timed.h
+src/libunixonacid/ipc_timed_send.o src/libunixonacid/ipc_timed_send.lo: src/libunixonacid/ipc_timed_send.c src/include/skalibs/error.h src/include/skalibs/iopause.h src/include/skalibs/nonposix.h src/include/skalibs/unix-timed.h
+src/libunixonacid/ipc_timed_sendv.o src/libunixonacid/ipc_timed_sendv.lo: src/libunixonacid/ipc_timed_sendv.c src/include/skalibs/error.h src/include/skalibs/iopause.h src/include/skalibs/nonposix.h src/include/skalibs/siovec.h src/include/skalibs/unix-timed.h
 src/libunixonacid/kolbak_call.o src/libunixonacid/kolbak_call.lo: src/libunixonacid/kolbak_call.c src/include/skalibs/kolbak.h src/include/skalibs/unixmessage.h
 src/libunixonacid/kolbak_enqueue.o src/libunixonacid/kolbak_enqueue.lo: src/libunixonacid/kolbak_enqueue.c src/include/skalibs/kolbak.h src/include/skalibs/unixmessage.h
 src/libunixonacid/kolbak_queue_init.o src/libunixonacid/kolbak_queue_init.lo: src/libunixonacid/kolbak_queue_init.c src/include/skalibs/kolbak.h
