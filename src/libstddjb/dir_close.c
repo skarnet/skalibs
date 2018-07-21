@@ -3,12 +3,13 @@
 #include <errno.h>
 #include <skalibs/direntry.h>
 
-int dir_close (DIR *dir)
+void dir_close (DIR *dir)
 {
-  unsigned int done = 0 ;
-doit:
-  done++ ;
-  if (!closedir(dir)) return 0 ;
-  if (errno == EINTR) goto doit ;
-  return ((errno == EBADF) && (done > 1)) ? 0 : -1 ;
+  int e = errno ;
+  for (;;)
+  {
+    if (closedir(dir) == 0) break ;
+    if (errno != EINTR) break ;
+  }
+  errno = e ;
 }

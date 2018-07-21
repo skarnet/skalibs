@@ -40,6 +40,7 @@ extern int getpeereid (int, uid_t *, gid_t *) ;
 
 extern void execvep (char const *, char const *const *, char const *const *, char const *) ;
 extern void execvep_loose (char const *, char const *const *, char const *const *, char const *) ;
+extern void unlink_void (char const *) ;
 extern pid_t doublefork (void) ;
 extern int touch (char const *) ;
 

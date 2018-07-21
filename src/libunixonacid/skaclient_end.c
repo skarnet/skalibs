@@ -1,5 +1,6 @@
 /* ISC license. */
 
+#include <errno.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/skaclient.h>
 #include <skalibs/unixmessage.h>
@@ -14,8 +15,10 @@ void skaclient_end (skaclient_t *a)
   unixmessage_receiver_free(&a->asyncin) ;
   if (a->pid && a->options & SKACLIENT_OPTION_WAITPID)
   {
+    int e = errno ;
     int wstat ;
     waitpid_nointr(a->pid, &wstat, 0) ;
+    errno = e ;
   }
   *a = skaclient_zero ;
 }

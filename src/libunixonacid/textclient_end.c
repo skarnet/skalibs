@@ -1,5 +1,6 @@
 /* ISC license. */
 
+#include <errno.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/textmessage.h>
 #include <skalibs/textclient.h>
@@ -15,8 +16,10 @@ void textclient_end (textclient_t *a)
   textmessage_receiver_free(&a->asyncin) ;
   if (a->pid && a->options & TEXTCLIENT_OPTION_WAITPID)
   {
+    int e = errno ;
     int wstat ;
     waitpid_nointr(a->pid, &wstat, 0) ;
+    errno = e ;
   }
   *a = textclient_zero ;
 }

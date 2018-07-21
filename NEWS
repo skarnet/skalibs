@@ -1,10 +1,11 @@
 Changelog for skalibs.
 
-In 2.6.5.0
+In 2.7.0.0
 ----------
 
  - Bugfixes.
- - New function: ipc_timed_sendv()
+ - New functions: ipc_timed_sendv(), unlink_void()
+ - dir_close() now returns void and leaves errno unchanged
 
 
 In 2.6.4.0
