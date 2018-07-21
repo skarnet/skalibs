@@ -18,7 +18,7 @@ int sarealpath (stralloc *sa, char const *path)
   {
     char *p = realpath(path, 0) ;
     if (!p) return -1 ;
-    sa->s = p ;
+    sa->s = p ; /* XXX: incompatible with alloc() interposition */
     sa->len = strlen(p) ;
     sa->a = sa->len + 1 ;
   }

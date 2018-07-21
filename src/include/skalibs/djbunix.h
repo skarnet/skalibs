@@ -9,7 +9,6 @@
 #include <skalibs/gccattributes.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/envalloc.h>
-#include <skalibs/env.h>        /* will disappear */
 #include <skalibs/posixplz.h>
 
 #define DJBUNIX_FLAG_NB  0x01U
@@ -92,9 +91,7 @@ extern int waitn_reap (pid_t *, unsigned int) ;
 
 extern int fd_chdir (int) ;
 
-#define absolutepath(sa, s) sarealpath(sa, s) /* will disappear */
 extern int sarealpath (stralloc *, char const *) ;
-extern int sarealpath_tmp (stralloc *, char const *, stralloc *) ;
 extern int sabasename (stralloc *, char const *, size_t) ;
 extern int sadirname (stralloc *, char const *, size_t) ;
 extern int sagetcwd (stralloc *) ;

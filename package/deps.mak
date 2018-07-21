@@ -18,7 +18,7 @@ src/include/skalibs/cdb.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/cdb_make.h: src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h
 src/include/skalibs/datastruct.h: src/include/skalibs/avlnode.h src/include/skalibs/avltree.h src/include/skalibs/avltreen.h src/include/skalibs/genqdyn.h src/include/skalibs/genset.h src/include/skalibs/gensetdyn.h
 src/include/skalibs/djbtime.h: src/include/skalibs/tai.h src/include/skalibs/uint64.h
-src/include/skalibs/djbunix.h: src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/gccattributes.h src/include/skalibs/posixplz.h src/include/skalibs/stralloc.h
+src/include/skalibs/djbunix.h: src/include/skalibs/envalloc.h src/include/skalibs/gccattributes.h src/include/skalibs/posixplz.h src/include/skalibs/stralloc.h
 src/include/skalibs/env.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/envalloc.h: src/include/skalibs/genalloc.h
 src/include/skalibs/environ.h: src/include/skalibs/posixplz.h
@@ -32,7 +32,6 @@ src/include/skalibs/iobuffer.h: src/include/skalibs/buffer.h src/include/skalibs
 src/include/skalibs/iopause.h: src/include/skalibs/tai.h
 src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr2.h
-src/include/skalibs/mininetstring.h: src/include/skalibs/stralloc.h
 src/include/skalibs/netstring.h: src/include/skalibs/buffer.h src/include/skalibs/stralloc.h
 src/include/skalibs/posixplz.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/random.h: src/include/skalibs/stralloc.h
@@ -45,7 +44,7 @@ src/include/skalibs/skalibs.h: src/include/skalibs/biguint.h src/include/skalibs
 src/include/skalibs/skamisc.h: src/include/skalibs/buffer.h src/include/skalibs/stralloc.h
 src/include/skalibs/socket.h: src/include/skalibs/djbunix.h src/include/skalibs/gccattributes.h src/include/skalibs/tai.h src/include/skalibs/webipc.h
 src/include/skalibs/stdcrypto.h: src/include/skalibs/md5.h src/include/skalibs/rc4.h src/include/skalibs/sha1.h src/include/skalibs/sha256.h src/include/skalibs/sha512.h
-src/include/skalibs/stddjb.h: src/include/skalibs/alarm.h src/include/skalibs/alloc.h src/include/skalibs/allreadwrite.h src/include/skalibs/bitarray.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/bytestr.h src/include/skalibs/cbuffer.h src/include/skalibs/cdb.h src/include/skalibs/cdb_make.h src/include/skalibs/config.h src/include/skalibs/direntry.h src/include/skalibs/disize.h src/include/skalibs/diuint.h src/include/skalibs/diuint32.h src/include/skalibs/djbtime.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/error.h src/include/skalibs/fmtscan.h src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h src/include/skalibs/genalloc.h src/include/skalibs/genwrite.h src/include/skalibs/iobuffer.h src/include/skalibs/iopause.h src/include/skalibs/ip46.h src/include/skalibs/lolstdio.h src/include/skalibs/mininetstring.h src/include/skalibs/netstring.h src/include/skalibs/nsig.h src/include/skalibs/segfault.h src/include/skalibs/selfpipe.h src/include/skalibs/setgroups.h src/include/skalibs/sgetopt.h src/include/skalibs/sig.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/socket.h src/include/skalibs/stralloc.h src/include/skalibs/strerr.h src/include/skalibs/strerr2.h src/include/skalibs/tai.h src/include/skalibs/types.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h src/include/skalibs/webipc.h
+src/include/skalibs/stddjb.h: src/include/skalibs/alarm.h src/include/skalibs/alloc.h src/include/skalibs/allreadwrite.h src/include/skalibs/bitarray.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/bytestr.h src/include/skalibs/cbuffer.h src/include/skalibs/cdb.h src/include/skalibs/cdb_make.h src/include/skalibs/config.h src/include/skalibs/direntry.h src/include/skalibs/disize.h src/include/skalibs/diuint.h src/include/skalibs/diuint32.h src/include/skalibs/djbtime.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/error.h src/include/skalibs/fmtscan.h src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h src/include/skalibs/genalloc.h src/include/skalibs/genwrite.h src/include/skalibs/iobuffer.h src/include/skalibs/iopause.h src/include/skalibs/ip46.h src/include/skalibs/lolstdio.h src/include/skalibs/netstring.h src/include/skalibs/nsig.h src/include/skalibs/segfault.h src/include/skalibs/selfpipe.h src/include/skalibs/setgroups.h src/include/skalibs/sgetopt.h src/include/skalibs/sig.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/socket.h src/include/skalibs/stralloc.h src/include/skalibs/strerr.h src/include/skalibs/strerr2.h src/include/skalibs/tai.h src/include/skalibs/types.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h src/include/skalibs/webipc.h
 src/include/skalibs/strerr.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint64.h
@@ -419,8 +418,6 @@ src/libstddjb/ltm64_from_localtm.o src/libstddjb/ltm64_from_localtm.lo: src/libs
 src/libstddjb/ltm64_from_sysclock.o src/libstddjb/ltm64_from_sysclock.lo: src/libstddjb/ltm64_from_sysclock.c src/include/skalibs/config.h src/include/skalibs/djbtime.h src/include/skalibs/tai.h
 src/libstddjb/ltm64_from_tai.o src/libstddjb/ltm64_from_tai.lo: src/libstddjb/ltm64_from_tai.c src/libstddjb/djbtime-internal.h src/include/skalibs/djbtime.h
 src/libstddjb/ltm64_from_utc.o src/libstddjb/ltm64_from_utc.lo: src/libstddjb/ltm64_from_utc.c src/libstddjb/djbtime-internal.h src/include/skalibs/djbtime.h src/include/skalibs/uint64.h
-src/libstddjb/mininetstring_read.o src/libstddjb/mininetstring_read.lo: src/libstddjb/mininetstring_read.c src/include/skalibs/allreadwrite.h src/include/skalibs/mininetstring.h src/include/skalibs/stralloc.h
-src/libstddjb/mininetstring_write.o src/libstddjb/mininetstring_write.lo: src/libstddjb/mininetstring_write.c src/include/skalibs/allreadwrite.h src/include/skalibs/mininetstring.h src/include/skalibs/uint16.h
 src/libstddjb/ndelay_off.o src/libstddjb/ndelay_off.lo: src/libstddjb/ndelay_off.c src/include/skalibs/djbunix.h
 src/libstddjb/ndelay_on.o src/libstddjb/ndelay_on.lo: src/libstddjb/ndelay_on.c src/include/skalibs/djbunix.h
 src/libstddjb/netstring_append.o src/libstddjb/netstring_append.lo: src/libstddjb/netstring_append.c src/include/skalibs/netstring.h src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
@@ -472,7 +469,6 @@ src/libstddjb/sagethostname.o src/libstddjb/sagethostname.lo: src/libstddjb/sage
 src/libstddjb/sanitize_read.o src/libstddjb/sanitize_read.lo: src/libstddjb/sanitize_read.c src/include/skalibs/allreadwrite.h src/include/skalibs/error.h
 src/libstddjb/sareadlink.o src/libstddjb/sareadlink.lo: src/libstddjb/sareadlink.c src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/sarealpath.o src/libstddjb/sarealpath.lo: src/libstddjb/sarealpath.c src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
-src/libstddjb/sarealpath_tmp.o src/libstddjb/sarealpath_tmp.lo: src/libstddjb/sarealpath_tmp.c src/include/skalibs/djbunix.h
 src/libstddjb/satmp.o src/libstddjb/satmp.lo: src/libstddjb/satmp.c src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/sauniquename.o src/libstddjb/sauniquename.lo: src/libstddjb/sauniquename.c src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h src/include/skalibs/types.h
 src/libstddjb/selfpipe_finish.o src/libstddjb/selfpipe_finish.lo: src/libstddjb/selfpipe_finish.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/nsig.h src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h

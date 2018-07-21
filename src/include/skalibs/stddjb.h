@@ -37,7 +37,6 @@
 #include <skalibs/iobuffer.h>
 #include <skalibs/iopause.h>
 #include <skalibs/lolstdio.h>
-#include <skalibs/mininetstring.h> /* will disappear */
 #include <skalibs/netstring.h>
 #include <skalibs/nsig.h>
 #include <skalibs/segfault.h>
