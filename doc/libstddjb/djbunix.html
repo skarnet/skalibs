@@ -311,26 +311,6 @@ Opens <em>file</em> in write-only, non-blocking mode.
 Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
 </p>
 
-<h3> Privilege management </h3>
-
-<p>
-<code> int prot_readgroups (char const *name, gid_t *tab, unsigned int max) </code> <br />
-Reads the group database (normally <tt>/etc/group</tt>, but it can be
-altered via NSS) to get the list of supplementary groups for user <em>name</em>.
-Stores that list into the array pointed to by <em>tab</em>, which must be
-preallocated. Stores at most <em>max</em> elements into <em>tab</em>.
-Returns -1 and sets errno if it fails; else, returns the number of elements actually
-stored into <em>tab</em>.
-</p>
-
-<p>
-<code> int prot_grps (char const *name) </code> <br />
-Sets the kernel-maintained list of supplementary groups for the current process
-to the list of supplementary groups for user <em>name</em> according to the
-group database. This is a privileged operation.
-Returns -1 and sets errno if it fails; returns 0 if it succeeds.
-</p>
-
 <h3> Executable search and execution, and environment </h3>
 
 <p>

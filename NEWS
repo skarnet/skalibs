@@ -6,7 +6,7 @@ In 2.7.0.0
  - Bugfixes.
  - New functions: ipc_timed_sendv(), unlink_void()
  - dir_close() now returns void and leaves errno unchanged
- - absolutepath(), sarealpath_tmp(), mininetstring functions removed
+ - absolutepath(), sarealpath_tmp(), mininetstring, prot functions removed
  - djbunix.h doesn't include env.h anymore
 
 

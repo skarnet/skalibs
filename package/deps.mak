@@ -455,9 +455,6 @@ src/libstddjb/pathexec_r_name.o src/libstddjb/pathexec_r_name.lo: src/libstddjb/
 src/libstddjb/pathexec_run.o src/libstddjb/pathexec_run.lo: src/libstddjb/pathexec_run.c src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
 src/libstddjb/pipe_internal.o src/libstddjb/pipe_internal.lo: src/libstddjb/pipe_internal.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
 src/libstddjb/prog.o src/libstddjb/prog.lo: src/libstddjb/prog.c src/include/skalibs/strerr2.h
-src/libstddjb/prot.o src/libstddjb/prot.lo: src/libstddjb/prot.c src/include/skalibs/djbunix.h
-src/libstddjb/prot_grps.o src/libstddjb/prot_grps.lo: src/libstddjb/prot_grps.c src/include/skalibs/djbunix.h src/include/skalibs/setgroups.h
-src/libstddjb/prot_readgroups.o src/libstddjb/prot_readgroups.lo: src/libstddjb/prot_readgroups.c src/include/skalibs/djbunix.h
 src/libstddjb/rm_rf.o src/libstddjb/rm_rf.lo: src/libstddjb/rm_rf.c src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h
 src/libstddjb/rm_rf_in_tmp.o src/libstddjb/rm_rf_in_tmp.lo: src/libstddjb/rm_rf_in_tmp.c src/include/skalibs/direntry.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/rm_rf_tmp.o src/libstddjb/rm_rf_tmp.lo: src/libstddjb/rm_rf_tmp.c src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h

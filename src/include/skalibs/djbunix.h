@@ -71,12 +71,6 @@ extern void xpathexec0_run (char const *const *, char const *const *) gccattr_no
 extern void xpathexec (char const *const *) gccattr_noreturn ;
 extern void xpathexec0 (char const *const *) gccattr_noreturn ;
 
-#define prot_gid(gid) setgid(gid)
-#define prot_uid(uid) setuid(uid)
-extern int prot_readgroups (char const *, gid_t *, unsigned int) ;
-extern int prot_grps (char const *) ;
-extern int prot_setuidgid (char const *) ;
-
 extern pid_t wait_nointr (int *) ;
 extern pid_t waitpid_nointr (pid_t, int *, int) ;
 #define wait_pid(pid, wstat) waitpid_nointr(pid, (wstat), 0)
