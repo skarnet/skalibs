@@ -19,11 +19,14 @@
 <h2> in 2.7.0.0 </h2>
 
 <ul>
- <li> New functions: <tt>ipc_timed_sendv()</tt>, <tt>unlink_void()</tt> </li>
+ <li> New functions: <tt>ipc_timed_sendv()</tt>, <tt>unlink_void()</tt>,
+<tt>skagetln_loose()</tt>, <tt>skagetlnsep_loose()</tt>,
+<tt>genset_deepfree()</tt>, <tt>gensetdyn_deepfree()</tt> </li>
  <li> The <a href="libstddjb/djbunix.html">dir_close()</a> function now returns void
 and leaves errno unchanged. </li>
  <li> The <tt>absolutepath()</tt> and <tt>sarealpath_tmp()</tt> functions, as well
-as the <tt>skalibs/mininetstring.h</tt> and <em>prot</em> family of functions, have been removed. </li>
+as the <tt>avl*_deletenode()</tt>, <tt>skalibs/mininetstring.h</tt> and <em>prot</em>
+families of functions, have been removed. </li>
  <li> <a href="libstddjb/djbunix.html">skalibs/djbunix.h</a> does not include
 <tt>skalibs/env.h</tt> anymore. </li>
 </ul>

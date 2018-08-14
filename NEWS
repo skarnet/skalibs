@@ -4,9 +4,9 @@ In 2.7.0.0
 ----------
 
  - Bugfixes.
- - New functions: ipc_timed_sendv(), unlink_void()
+ - New functions: ipc_timed_sendv(), unlink_void(), genset_deepfree(), gensetdyn_deepfree(), skagetln_loose(), skagetlnsep_loose()
  - dir_close() now returns void and leaves errno unchanged
- - absolutepath(), sarealpath_tmp(), mininetstring, prot functions removed
+ - absolutepath(), sarealpath_tmp(), avl*_deletnode(), mininetstring, prot functions removed
  - djbunix.h doesn't include env.h anymore
 
 

@@ -38,7 +38,6 @@ extern int avlnode_extreme (avlnode const *, uint32_t, uint32_t, int, uint32_t *
 
 extern uint32_t avlnode_insertnode (avlnode *, uint32_t, uint32_t, uint32_t, dtokfunc_t_ref, cmpfunc_t_ref, void *) ;
 extern uint32_t avlnode_delete (avlnode *, uint32_t, uint32_t *, void const *, dtokfunc_t_ref, cmpfunc_t_ref, void *) ;
-#define avlnode_deletenode(s, max, r, i, dtok, f, p) avlnode_delete(s, max, r, (*(dtok))((s)[i].data), dtok, f, p)
 
 extern uint32_t avlnode_iter_nocancel (avlnode *, uint32_t, uint32_t, uint32_t, avliterfunc_t_ref, void *) ;
 #define avlnode_iter(tree, max, root, f, stuff) (avlnode_iter_nocancel(tree, max, max, root, f, stuff) == (max))

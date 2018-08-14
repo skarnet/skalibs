@@ -47,7 +47,6 @@ extern uint32_t avltreen_newnode (avltreen *, uint32_t) ;
 #define avltreen_insertnode(t, i) avltreen_setroot(t, avlnode_insertnode(avltreen_nodes(t), avltreen_totalsize(t), avltreen_root(t), i, (t)->dtok, (t)->kcmp, (t)->external))
 extern int avltreen_insert (avltreen *, uint32_t) ;
 
-#define avltreen_deletenode(t, i) avltreen_delete(t, avltreen_data(t, i))
 extern int avltreen_delete (avltreen *, void const *) ;
 
 #define avltreen_iter(t, f, p) avlnode_iter(avltreen_nodes(t), avltreen_totalsize(t), avltreen_root(t), f, p)
@@ -82,7 +81,6 @@ extern int avltreen_delete (avltreen *, void const *) ;
 #define avltreeb_insertnode(t, i) avltreeb_setroot(t, avlnode_insertnode(avltreeb_nodes(t), avltreeb_totalsize(t), avltreeb_root(t), (i), (t)->info.dtok, (t)->info.kcmp, (t)->info.external))
 #define avltreeb_insert(t, d) avltreen_insert(&(t)->info, d)
 
-#define avltreeb_deletenode(t, i) avltreeb_delete(t, avltreeb_data(t, i))
 #define avltreeb_delete(t, k) avltreen_delete(&(t)->info, k)
 
 #define avltreeb_iter(t, f, p) avlnode_iter(avltreeb_nodes(t), avltreeb_totalsize(t), avltreeb_root(t), f, p)
