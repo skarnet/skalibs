@@ -103,7 +103,7 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
     if ((to & 2) && (fd_copy(!(to & 1), to & 1) < 0)) goto err ;
     sig_blocknone() ;
     pathexec_run(prog, argv, envp) ;
-err:
+   err:
     e = errno ;
     fd_write(syncp[1], (char *)&e, sizeof(e)) ;
     _exit(127) ;

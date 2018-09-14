@@ -40,7 +40,7 @@ pid_t child_spawn2 (char const *prog, char const *const *argv, char const *const
   int e ;
   if (pipe(p[0]) < 0) return 0 ;
   if (ndelay_on(p[0][0]) < 0 || coe(p[0][0]) < 0 || pipe(p[1]) < 0) { e = errno ; goto errp ; }
-  if (ndelay_on(p[1][1]) < 0 || coe(p[1][1]) < 0) { e = errno ; goto errsp ; }
+  if (ndelay_on(p[1][1]) < 0 || coe(p[1][1]) < 0) { e = errno ; goto errp1 ; }
 
 #ifdef SKALIBS_HASPOSIXSPAWN
 
