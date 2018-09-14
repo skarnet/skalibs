@@ -138,8 +138,8 @@ pid_t child_spawn2 (char const *prog, char const *const *argv, char const *const
   fd_close(syncpipe[1]) ;
  errsp0:
   fd_close(syncpipe[0]) ;
- errp1:
 #endif
+ errp1:
   fd_close(p[1][1]) ;
   fd_close(p[1][0]) ;
  errp:
