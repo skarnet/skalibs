@@ -38,7 +38,7 @@ int getpeereid (int s, uid_t *u, gid_t *g)
 
 int getpeereid (int s, uid_t *u, gid_t *g)
 {
-  ucred_t *cred ;
+  ucred_t *cred = 0 ;
   if (getpeerucred(s, &cred) == -1) return -1 ;
   *u = ucred_geteuid(cred) ;
   *g = ucred_getegid(cred) ;
