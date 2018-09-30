@@ -1,5 +1,14 @@
 Changelog for skalibs.
 
+In 2.8.0.0
+----------
+
+ - Bugfixes.
+ - avltreeb removed. (It used VLAs inside of structures, which is
+GNU C, not C99.) The AVLTREEN_DECLARE_AND_INIT() macro should be
+used instead.
+
+
 In 2.7.0.0
 ----------
 

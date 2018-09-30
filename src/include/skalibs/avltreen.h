@@ -8,8 +8,13 @@
 #include <skalibs/genset.h>
 #include <skalibs/avlnode.h>
 
-
- /* avltreen: just the structure. Storage and freelist are outside. */
+ /*
+    avltreen is the structure managing the AVL tree.
+    It needs pre-declared arrays: "storage", an array of avlnode,
+    and "freelist", an array of uint32_t, given as arguments to
+    avltreen_init(). Pointers to those arrays are then stored in
+    the genset.
+ */
 
 typedef struct avltreen_s avltreen, *avltreen_ref ;
 struct avltreen_s
@@ -30,9 +35,14 @@ struct avltreen_s
 #define avltreen_setroot(t, r) ((t)->root = (r))
 extern void avltreen_init (avltreen *, avlnode *, uint32_t *, uint32_t, dtokfunc_t_ref, cmpfunc_t_ref, void *) ;
 
+#define AVLTREEN_DECLARE_AND_INIT(name, size, dtk, cmp, p) \
+avlnode name##_storage[size] ; \
+uint32_t name##_freelist[size] ; \
+avltreen name ; \
+avltreen_init(&name, name##_storage, name##_freelist, size, dtk, cmp, p)
+
 #define avltreen_searchnode(t, k) avlnode_searchnode(avltreen_nodes(t), avltreen_totalsize(t), avltreen_root(t), (k), (t)->dtok, (t)->kcmp, (t)->external)
 #define avltreen_search(t, k, data) avlnode_search(avltreen_nodes(t), avltreen_totalsize(t), avltreen_root(t), k, (data), (t)->dtok, (t)->kcmp, (t)->external)
-
 #define avltreen_height(t) avlnode_height(avltreen_nodes(t), avltreen_totalsize(t), avltreen_root(t))
 
 #define avltreen_extremenode(t, h) avlnode_extremenode(avltreen_nodes(t), avltreen_totalsize(t), avltreen_root(t), h)
@@ -52,39 +62,5 @@ extern int avltreen_delete (avltreen *, void const *) ;
 #define avltreen_iter(t, f, p) avlnode_iter(avltreen_nodes(t), avltreen_totalsize(t), avltreen_root(t), f, p)
 #define avltreen_iter_nocancel(t, cut, f, p) avlnode_iter_nocancel(avltreen_nodes(t), avltreen_totalsize(t), cut, avltreen_root(t), f, p)
 #define avltreen_iter_withcancel(t, f, cancelf, p) avlnode_iter_withcancel(avltreen_nodes(t), avltreen_totalsize(t), avltreen_root(t), f, cancelf, p)
-
-
- /* avltreeb: everything in one place. Stack or BSS, or heap if you insist */
-
-#define AVLTREEB_TYPE(size) struct { avlnode storage[size] ; uint32_t freelist[size] ; avltreen info ; }
-#define avltreeb_init(t, size, dtk, f, p) avltreen_init(&(t)->info, (t)->storage, (t)->freelist, size, dtk, f, p)
-#define avltreeb_totalsize(t) avltreen_totalsize(&(t)->info)
-#define avltreeb_len(t) avltreen_len(&(t)->info)
-#define avltreeb_nodes(t) ((avlnode *)(t)->storage)
-#define avltreeb_data(t, i) (avltreeb_nodes(t)[i].data)
-#define avltreeb_root(t) ((t)->info.root)
-#define avltreeb_setroot(t, r) ((t)->info.root = (r))
-
-#define avltreeb_searchnode(t, k) avlnode_searchnode(avltreeb_nodes(t), avltreeb_totalsize(t), avltreeb_root(t), (k), (t)->info.dtok, (t)->info.kcmp, (t)->info.external)
-#define avltreeb_search(t, k, data) avlnode_search(avltreeb_nodes(t), avltreeb_totalsize(t), avltreeb_root(t), k, (data), (t)->info.dtok, (t)->info.kcmp, (t)->info.external)
-#define avltreeb_height(t) avlnode_height(avltreeb_nodes(t), avltreeb_totalsize(t), avltreeb_root(t))
-
-#define avltreeb_extremenode(t, h) avlnode_extremenode(avltreeb_nodes(t), avltreeb_totalsize(t), avltreeb_root(t), h)
-#define avltreeb_minnode(t) avltreeb_extremenode((t), 0)
-#define avltreeb_maxnode(t) avltreeb_extremenode((t), 1)
-
-#define avltreeb_extreme(t, h, data) avlnode_extreme(avltreeb_nodes(t), avltreeb_totalsize(t), avltreeb_root(t), h, data)
-#define avltreeb_min(t, data) avltreeb_extreme((t), 0, data)
-#define avltreeb_max(t, data) avltreeb_extreme((t), 1, data)
-
-#define avltreeb_newnode(t, d) avltreen_newnode(&(t)->info, d)
-#define avltreeb_insertnode(t, i) avltreeb_setroot(t, avlnode_insertnode(avltreeb_nodes(t), avltreeb_totalsize(t), avltreeb_root(t), (i), (t)->info.dtok, (t)->info.kcmp, (t)->info.external))
-#define avltreeb_insert(t, d) avltreen_insert(&(t)->info, d)
-
-#define avltreeb_delete(t, k) avltreen_delete(&(t)->info, k)
-
-#define avltreeb_iter(t, f, p) avlnode_iter(avltreeb_nodes(t), avltreeb_totalsize(t), avltreeb_root(t), f, p)
-#define avltreeb_iter_nocancel(t, cut, f, p) avlnode_iter_nocancel(avltreeb_nodes(t), avltreeb_totalsize(t), cut, avltreeb_root(t), f, p)
-#define avltreeb_iter_withcancel(t, f, cancelf, p) avlnode_iter_withcancel(avltreeb_nodes(t), avltreeb_totalsize(t), avltreeb_root(t), f, cancelf, p)
 
 #endif
