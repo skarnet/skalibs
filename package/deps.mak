@@ -288,6 +288,7 @@ src/libstddjb/deepsleepuntil.o src/libstddjb/deepsleepuntil.lo: src/libstddjb/de
 src/libstddjb/dir_close.o src/libstddjb/dir_close.lo: src/libstddjb/dir_close.c src/include/skalibs/direntry.h
 src/libstddjb/dir_fd.o src/libstddjb/dir_fd.lo: src/libstddjb/dir_fd.c src/include/skalibs/direntry.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
 src/libstddjb/env_addmodif.o src/libstddjb/env_addmodif.lo: src/libstddjb/env_addmodif.c src/include/skalibs/env.h src/include/skalibs/stralloc.h
+src/libstddjb/env_dump.o src/libstddjb/env_dump.lo: src/libstddjb/env_dump.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/unix-transactional.h
 src/libstddjb/env_get.o src/libstddjb/env_get.lo: src/libstddjb/env_get.c src/include/skalibs/posixplz.h
 src/libstddjb/env_get2.o src/libstddjb/env_get2.lo: src/libstddjb/env_get2.c src/include/skalibs/bytestr.h src/include/skalibs/env.h
 src/libstddjb/env_len.o src/libstddjb/env_len.lo: src/libstddjb/env_len.c src/include/skalibs/env.h

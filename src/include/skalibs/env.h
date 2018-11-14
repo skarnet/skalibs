@@ -23,5 +23,6 @@ extern int envdir_internal (char const *, stralloc *, unsigned int, char) ;
 #define envdir_chomp(path, sa) envdir_internal(path, (sa), SKALIBS_ENVDIR_NOCHOMP, '\n')
 #define envdir_verbatim_chomp(path, sa) envdir_internal(path, (sa), SKALIBS_ENVDIR_VERBATIM, '\n')
 #define envdir_verbatim(path, sa) envdir_internal(path, (sa), SKALIBS_ENVDIR_VERBATIM|SKALIBS_ENVDIR_NOCHOMP, '\n')
+extern int env_dump (char const *, mode_t, char const *const *) ;
 
 #endif
