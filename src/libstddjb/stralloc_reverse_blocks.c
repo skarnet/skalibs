@@ -10,8 +10,9 @@ void stralloc_reverse_blocks (stralloc *sa, size_t size)
   char tmp[size] ;
   for (; i < n ; i++)
   {
+    size_t k = sa->len - (i + 1) * size ;
     memcpy(tmp, sa->s + i * size, size) ;
-    memcpy(sa->s + i * size, sa->s + (2*n - 1 - i) * size, size) ;
-    memcpy(sa->s + (2*n - 1 - i) * size, tmp, size) ;
+    memcpy(sa->s + i * size, sa->s + k, size) ;
+    memcpy(sa->s + k, tmp, size) ;
   }
 }
