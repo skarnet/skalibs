@@ -4,6 +4,7 @@
 #define FUNCTYPES_H
 
 #include <stdint.h>
+#include <sys/stat.h>
 #include <sys/uio.h>
 
 typedef int uintcmpfunc_t (unsigned int, unsigned int, void *) ;
@@ -44,5 +45,8 @@ typedef alliofunc_t *alliofunc_t_ref ;
 
 typedef size_t alliovfunc_t (int, struct iovec const *, unsigned int) ;
 typedef alliovfunc_t *alliovfunc_t_ref ;
+
+typedef int createfunc_t (char const *, mode_t, void *) ;
+typedef createfunc_t *createfunc_t_ref ;
 
 #endif

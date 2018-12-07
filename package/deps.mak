@@ -33,7 +33,7 @@ src/include/skalibs/iopause.h: src/include/skalibs/tai.h
 src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr2.h
 src/include/skalibs/netstring.h: src/include/skalibs/buffer.h src/include/skalibs/stralloc.h
-src/include/skalibs/posixplz.h: src/include/skalibs/gccattributes.h
+src/include/skalibs/posixplz.h: src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h
 src/include/skalibs/random.h: src/include/skalibs/stralloc.h
 src/include/skalibs/setgroups.h: src/include/skalibs/sysdeps.h
 src/include/skalibs/sha512.h: src/include/skalibs/uint64.h
@@ -144,15 +144,24 @@ src/libposixplz/execvep_internal.o src/libposixplz/execvep_internal.lo: src/libp
 src/libposixplz/execvep_loose.o src/libposixplz/execvep_loose.lo: src/libposixplz/execvep_loose.c src/libposixplz/posixplz-internal.h src/include/skalibs/posixplz.h
 src/libposixplz/getpeereid.o src/libposixplz/getpeereid.lo: src/libposixplz/getpeereid.c src/include/skalibs/nonposix.h src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h
 src/libposixplz/memmem.o src/libposixplz/memmem.lo: src/libposixplz/memmem.c src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h
+src/libposixplz/mkLtemp.o src/libposixplz/mkLtemp.lo: src/libposixplz/mkLtemp.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
+src/libposixplz/mkbtemp.o src/libposixplz/mkbtemp.lo: src/libposixplz/mkbtemp.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
+src/libposixplz/mkctemp.o src/libposixplz/mkctemp.lo: src/libposixplz/mkctemp.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
+src/libposixplz/mkfiletemp.o src/libposixplz/mkfiletemp.lo: src/libposixplz/mkfiletemp.c src/include/skalibs/posixplz.h src/include/skalibs/surf.h
+src/libposixplz/mkltemp.o src/libposixplz/mkltemp.lo: src/libposixplz/mkltemp.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
+src/libposixplz/mkptemp.o src/libposixplz/mkptemp.lo: src/libposixplz/mkptemp.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
 src/libposixplz/setgroups.o src/libposixplz/setgroups.lo: src/libposixplz/setgroups.c src/include/skalibs/nonposix.h src/include/skalibs/setgroups.h src/include/skalibs/sysdeps.h
 src/libposixplz/strnlen.o src/libposixplz/strnlen.lo: src/libposixplz/strnlen.c src/include/skalibs/bytestr.h src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h
 src/libposixplz/touch.o src/libposixplz/touch.lo: src/libposixplz/touch.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h
 src/libposixplz/unlink_void.o src/libposixplz/unlink_void.lo: src/libposixplz/unlink_void.c src/include/skalibs/posixplz.h
+src/librandom/autosurf.o src/librandom/autosurf.lo: src/librandom/autosurf.c src/include/skalibs/random.h src/include/skalibs/surf.h
+src/librandom/autosurf_name.o src/librandom/autosurf_name.lo: src/librandom/autosurf_name.c src/librandom/random-internal.h src/include/skalibs/surf.h
 src/librandom/random_char.o src/librandom/random_char.lo: src/librandom/random_char.c src/include/skalibs/random.h
 src/librandom/random_finish.o src/librandom/random_finish.lo: src/librandom/random_finish.c src/include/skalibs/djbunix.h src/librandom/random-internal.h src/include/skalibs/random.h src/include/skalibs/sysdeps.h
 src/librandom/random_init.o src/librandom/random_init.lo: src/librandom/random_init.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/librandom/random-internal.h src/include/skalibs/random.h src/include/skalibs/surf.h src/include/skalibs/sysdeps.h
 src/librandom/random_makeseed.o src/librandom/random_makeseed.lo: src/librandom/random_makeseed.c src/include/skalibs/sha1.h src/include/skalibs/tai.h src/include/skalibs/uint32.h
-src/librandom/random_name.o src/librandom/random_name.lo: src/librandom/random_name.c src/include/skalibs/random.h
+src/librandom/random_name.o src/librandom/random_name.lo: src/librandom/random_name.c src/librandom/random-internal.h src/include/skalibs/random.h
+src/librandom/random_oklist.o src/librandom/random_oklist.lo: src/librandom/random_oklist.c src/librandom/random-internal.h
 src/librandom/random_sauniquename.o src/librandom/random_sauniquename.lo: src/librandom/random_sauniquename.c src/include/skalibs/random.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/librandom/random_string.o src/librandom/random_string.lo: src/librandom/random_string.c src/include/skalibs/allreadwrite.h src/include/skalibs/nonposix.h src/librandom/random-internal.h src/include/skalibs/random.h src/include/skalibs/sysdeps.h
 src/librandom/random_uint32.o src/librandom/random_uint32.lo: src/librandom/random_uint32.c src/include/skalibs/nonposix.h src/include/skalibs/random.h src/include/skalibs/sysdeps.h src/include/skalibs/uint32.h

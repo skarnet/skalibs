@@ -4,7 +4,10 @@
 #define SKALIBS_POSIXPLZ_H
 
 #include <sys/types.h>
+#include <sys/stat.h>
+
 #include <skalibs/gccattributes.h>
+#include <skalibs/functypes.h>
 
 
  /*
@@ -43,5 +46,12 @@ extern void execvep_loose (char const *, char const *const *, char const *const 
 extern void unlink_void (char const *) ;
 extern pid_t doublefork (void) ;
 extern int touch (char const *) ;
+
+extern int mkfiletemp (char *, createfunc_t_ref, mode_t, void *) ;
+extern int mkptemp (char *) ;
+extern int mkltemp (char const *, char *) ;
+extern int mkLtemp (char const *, char *) ;
+extern int mkctemp (char *, mode_t, dev_t) ;
+extern int mkbtemp (char *, mode_t, dev_t) ;
 
 #endif

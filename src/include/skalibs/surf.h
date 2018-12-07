@@ -19,5 +19,7 @@ struct SURFSchedule
 
 extern void surf_init (SURFSchedule *, char const *) ; /* 160 chars */
 extern void surf (SURFSchedule *, char *, size_t) ;
+extern void autosurf (char *, size_t) ;
+extern void autosurf_name (char *, size_t) ;
 
 #endif
