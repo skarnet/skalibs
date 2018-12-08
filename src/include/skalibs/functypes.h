@@ -49,4 +49,7 @@ typedef alliovfunc_t *alliovfunc_t_ref ;
 typedef int createfunc_t (char const *, mode_t, void *) ;
 typedef createfunc_t *createfunc_t_ref ;
 
+typedef int linkfunc_t (char const *, char const *) ;
+typedef linkfunc_t *linkfunc_t_ref ;
+
 #endif

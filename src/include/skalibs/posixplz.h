@@ -48,6 +48,7 @@ extern pid_t doublefork (void) ;
 extern int touch (char const *) ;
 
 extern int mkfiletemp (char *, createfunc_t_ref, mode_t, void *) ;
+extern int mklinktemp (char const *, char *, linkfunc_t_ref) ;
 extern int mkptemp (char *) ;
 extern int mkltemp (char const *, char *) ;
 extern int mkLtemp (char const *, char *) ;
