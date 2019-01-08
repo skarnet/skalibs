@@ -725,7 +725,7 @@ src/libstddjb/xpathexec_run.o src/libstddjb/xpathexec_run.lo: src/libstddjb/xpat
 src/libunixonacid/access_at.o src/libunixonacid/access_at.lo: src/libunixonacid/access_at.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/atomic_rm_rf.o src/libunixonacid/atomic_rm_rf.lo: src/libunixonacid/atomic_rm_rf.c src/include/skalibs/skamisc.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/atomic_rm_rf_tmp.o src/libunixonacid/atomic_rm_rf_tmp.lo: src/libunixonacid/atomic_rm_rf_tmp.c src/include/skalibs/djbunix.h src/include/skalibs/random.h src/include/skalibs/stralloc.h src/include/skalibs/unix-transactional.h
-src/libunixonacid/atomic_symlink.o src/libunixonacid/atomic_symlink.lo: src/libunixonacid/atomic_symlink.c src/include/skalibs/random.h src/include/skalibs/unix-transactional.h
+src/libunixonacid/atomic_symlink.o src/libunixonacid/atomic_symlink.lo: src/libunixonacid/atomic_symlink.c src/include/skalibs/posixplz.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/bufalloc_timed_flush.o src/libunixonacid/bufalloc_timed_flush.lo: src/libunixonacid/bufalloc_timed_flush.c src/include/skalibs/bufalloc.h src/include/skalibs/functypes.h src/include/skalibs/unix-timed.h
 src/libunixonacid/buffer_timed_fill.o src/libunixonacid/buffer_timed_fill.lo: src/libunixonacid/buffer_timed_fill.c src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/unix-timed.h
 src/libunixonacid/buffer_timed_flush.o src/libunixonacid/buffer_timed_flush.lo: src/libunixonacid/buffer_timed_flush.c src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/unix-timed.h
@@ -743,7 +743,6 @@ src/libunixonacid/kolbak_call.o src/libunixonacid/kolbak_call.lo: src/libunixona
 src/libunixonacid/kolbak_enqueue.o src/libunixonacid/kolbak_enqueue.lo: src/libunixonacid/kolbak_enqueue.c src/include/skalibs/kolbak.h src/include/skalibs/unixmessage.h
 src/libunixonacid/kolbak_queue_init.o src/libunixonacid/kolbak_queue_init.lo: src/libunixonacid/kolbak_queue_init.c src/include/skalibs/kolbak.h
 src/libunixonacid/kolbak_unenqueue.o src/libunixonacid/kolbak_unenqueue.lo: src/libunixonacid/kolbak_unenqueue.c src/include/skalibs/kolbak.h
-src/libunixonacid/mkdir_unique.o src/libunixonacid/mkdir_unique.lo: src/libunixonacid/mkdir_unique.c src/include/skalibs/random.h src/include/skalibs/stralloc.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/netstring_timed_get.o src/libunixonacid/netstring_timed_get.lo: src/libunixonacid/netstring_timed_get.c src/include/skalibs/buffer.h src/include/skalibs/iopause.h src/include/skalibs/netstring.h src/include/skalibs/unix-timed.h
 src/libunixonacid/open2_at.o src/libunixonacid/open2_at.lo: src/libunixonacid/open2_at.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/open3_at.o src/libunixonacid/open3_at.lo: src/libunixonacid/open3_at.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h

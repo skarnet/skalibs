@@ -36,7 +36,6 @@ extern int opengetlnclose_at (int, char const *, stralloc *, int) ;
 extern size_t openwritenclose_at (int, char const *, char const *, size_t) ;
 extern size_t openwritevnclose_at (int, char const *, struct iovec const *, unsigned int) ;
 
-extern int mkdir_unique (stralloc *, char const *, unsigned int) ;
 extern int atomic_rm_rf (char const *) ;
 extern int atomic_rm_rf_tmp (char const *, stralloc *) ;
 extern int atomic_symlink (char const *, char const *, char const *) ;

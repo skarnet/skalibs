@@ -4,8 +4,8 @@
 #include <unistd.h>
 #include <errno.h>
 #include <stdio.h>
-#include <unistd.h>
-#include <skalibs/random.h>
+
+#include <skalibs/posixplz.h>
 #include <skalibs/unix-transactional.h>
 
 int atomic_symlink (char const *target, char const *name, char const *suffix)
@@ -18,29 +18,20 @@ int atomic_symlink (char const *target, char const *name, char const *suffix)
   }
   {
     size_t namelen = strlen(name) ;
-    size_t suffixlen = suffix ? strlen(suffix) : 25 ;
-    char tmp[namelen + suffixlen + 2] ;
+    size_t suffixlen = suffix ? strlen(suffix) + 1 : 0 ;
+    char tmp[namelen + suffixlen + 8] ;
     memcpy(tmp, name, namelen) ;
-    tmp[namelen] = ':' ;
     if (suffix)
-      memcpy(tmp + namelen + 1, suffix, suffixlen + 1) ;
-    else
     {
-      memcpy(tmp + namelen + 1, "atomic_symlink:", 15) ;
-      random_name(tmp + namelen + 16, 8) ;
-      tmp[namelen + 24] = 0 ;
+      tmp[namelen] = ':' ;
+      memcpy(tmp + namelen + 1, suffix, suffixlen - 1) ;
     }
-    {
-      int e = errno ;
-      if (unlink(tmp) < 0 && errno != ENOENT) return 0 ;
-      errno = e ;
-    }
-    if (symlink(target, tmp) < 0) return 0 ;
+    memcpy(tmp + namelen + suffixlen, ":XXXXXX", 7) ;
+    tmp[namelen + suffixlen + 7] = 0 ;
+    if (mkltemp(target, tmp) == -1) return 0 ;
     if (rename(tmp, name) < 0)
     {
-      int e = errno ;
-      unlink(tmp) ;
-      errno = e ;
+      unlink_void(tmp) ;
       return 0 ;
     }
   }

@@ -8,6 +8,7 @@ In 2.8.0.0
 GNU C, not C99.) The AVLTREEN_DECLARE_AND_INIT() macro should be
 used instead.
  - New functions: env_dump(), mk?temp(), autosurf(), autosurf_name()
+ - mkdir_unique() removed. (Duplicate functionality with mkdtemp.)
 
 
 In 2.7.0.0
