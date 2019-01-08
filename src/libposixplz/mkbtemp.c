@@ -8,7 +8,9 @@
 static int f (char const *fn, mode_t mode, void *data)
 {
   dev_t *devp = data ;
+  mode_t m = umask(0) ;
   int r = mknod(fn, (mode & 00777) | S_IFBLK, *devp) ;
+  umask(m) ;
   if (r == -1) return -1 ;
   r = open_readb(fn) ;
   if (r == -1) unlink_void(fn) ;
