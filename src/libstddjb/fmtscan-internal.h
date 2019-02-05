@@ -119,7 +119,7 @@ size_t uint##bits##_fmtlist (char *s, uint##bits##_t const *tab, size_t n) \
     size_t w = uint##bits##_fmt(s, tab[i]) ; \
     len += w ; \
     if (s) s += w ; \
-    if (i < n-1) { len++ ; if (s)  *s++ = ',' ; } \
+    if (i < n-1) { len++ ; if (s) *s++ = ',' ; } \
   } \
   return len ; \
 } \
