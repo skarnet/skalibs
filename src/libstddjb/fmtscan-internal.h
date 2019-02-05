@@ -118,11 +118,8 @@ size_t uint##bits##_fmtlist (char *s, uint##bits##_t const *tab, size_t n) \
   { \
     size_t w = uint##bits##_fmt(s, tab[i]) ; \
     len += w ; \
-    if (s) \
-    { \
-      s += w ; \
-      if (i < n-1) { *s++ = ',' ; len++ ; } \
-    } \
+    if (s) s += w ; \
+    if (i < n-1) { len++ ; if (s)  *s++ = ',' ; } \
   } \
   return len ; \
 } \
@@ -146,9 +143,14 @@ size_t uint##bits##_fmt_base (char *s, uint##bits##_t x, unsigned int base) \
 #define FMTB0(bits) \
 size_t uint##bits##0_fmt_base (char *s, uint##bits##_t x, size_t n, unsigned int base) \
 { \
+  size_t r = n ; \
   size_t len = uint##bits##_fmt_base(0, x, base) ; \
-  while (n-- > len) *s++ = '0' ; \
-  return uint##bits##_fmt_base(s, x, base) ; \
+  if (s) \
+  { \
+    while (n-- > len) *s++ = '0' ; \
+    len = uint##bits##_fmt_base(s, x, base) ; \
+  } \
+  return len > r ? len : r ; \
 } \
 
 #define FMTS(bits) \
@@ -167,11 +169,8 @@ size_t int##bits##_fmtlist (char *s, int##bits##_t const *tab, size_t n) \
   { \
     size_t w = int##bits##_fmt(s, tab[i]) ; \
     len += w ; \
-    if (s) \
-    { \
-      s += w ; \
-      if (i < n-1) { *s++ = ',' ; len++ ; } \
-    } \
+    if (s) s += w ; \
+    if (i < n-1) { len++ ; if (s) *s++ = ',' ; } \
   } \
   return len ; \
 } \
