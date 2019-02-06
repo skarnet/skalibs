@@ -51,7 +51,7 @@ extern int mkfiletemp (char *, createfunc_t_ref, mode_t, void *) ;
 extern int mklinktemp (char const *, char *, linkfunc_t_ref) ;
 extern int mkptemp (char *) ;
 extern int mkltemp (char const *, char *) ;
-extern int mkLtemp (char const *, char *) ;
+extern int mkhtemp (char const *, char *) ;
 extern int mkctemp (char *, mode_t, dev_t) ;
 extern int mkbtemp (char *, mode_t, dev_t) ;
 

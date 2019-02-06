@@ -53,6 +53,13 @@
 #endif
 
 
+ /* MacOS: needs this for full SUSv3 conformance. Don't ask. */
+
+#ifndef _DARWIN_C_SOURCE
+#define _DARWIN_C_SOURCE
+#endif
+
+
  /* Unfortunately we can't fully avoid #ifdef forests,
     because the BSDs are bloody snowflakes. See: setgroups(). */
 

@@ -144,10 +144,10 @@ src/libposixplz/execvep_internal.o src/libposixplz/execvep_internal.lo: src/libp
 src/libposixplz/execvep_loose.o src/libposixplz/execvep_loose.lo: src/libposixplz/execvep_loose.c src/libposixplz/posixplz-internal.h src/include/skalibs/posixplz.h
 src/libposixplz/getpeereid.o src/libposixplz/getpeereid.lo: src/libposixplz/getpeereid.c src/include/skalibs/nonposix.h src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h
 src/libposixplz/memmem.o src/libposixplz/memmem.lo: src/libposixplz/memmem.c src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h
-src/libposixplz/mkLtemp.o src/libposixplz/mkLtemp.lo: src/libposixplz/mkLtemp.c src/include/skalibs/posixplz.h
 src/libposixplz/mkbtemp.o src/libposixplz/mkbtemp.lo: src/libposixplz/mkbtemp.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
 src/libposixplz/mkctemp.o src/libposixplz/mkctemp.lo: src/libposixplz/mkctemp.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
 src/libposixplz/mkfiletemp.o src/libposixplz/mkfiletemp.lo: src/libposixplz/mkfiletemp.c src/include/skalibs/posixplz.h src/include/skalibs/surf.h
+src/libposixplz/mkhtemp.o src/libposixplz/mkhtemp.lo: src/libposixplz/mkhtemp.c src/include/skalibs/posixplz.h
 src/libposixplz/mklinktemp.o src/libposixplz/mklinktemp.lo: src/libposixplz/mklinktemp.c src/include/skalibs/djbunix.h src/libposixplz/posixplz-internal.h src/include/skalibs/posixplz.h
 src/libposixplz/mkltemp.o src/libposixplz/mkltemp.lo: src/libposixplz/mkltemp.c src/include/skalibs/posixplz.h
 src/libposixplz/mkptemp.o src/libposixplz/mkptemp.lo: src/libposixplz/mkptemp.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
@@ -298,7 +298,7 @@ src/libstddjb/deepsleepuntil.o src/libstddjb/deepsleepuntil.lo: src/libstddjb/de
 src/libstddjb/dir_close.o src/libstddjb/dir_close.lo: src/libstddjb/dir_close.c src/include/skalibs/direntry.h
 src/libstddjb/dir_fd.o src/libstddjb/dir_fd.lo: src/libstddjb/dir_fd.c src/include/skalibs/direntry.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
 src/libstddjb/env_addmodif.o src/libstddjb/env_addmodif.lo: src/libstddjb/env_addmodif.c src/include/skalibs/env.h src/include/skalibs/stralloc.h
-src/libstddjb/env_dump.o src/libstddjb/env_dump.lo: src/libstddjb/env_dump.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/unix-transactional.h
+src/libstddjb/env_dump.o src/libstddjb/env_dump.lo: src/libstddjb/env_dump.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/nonposix.h src/include/skalibs/unix-transactional.h
 src/libstddjb/env_get.o src/libstddjb/env_get.lo: src/libstddjb/env_get.c src/include/skalibs/posixplz.h
 src/libstddjb/env_get2.o src/libstddjb/env_get2.lo: src/libstddjb/env_get2.c src/include/skalibs/bytestr.h src/include/skalibs/env.h
 src/libstddjb/env_len.o src/libstddjb/env_len.lo: src/libstddjb/env_len.c src/include/skalibs/env.h
