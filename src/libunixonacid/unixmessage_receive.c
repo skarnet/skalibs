@@ -27,12 +27,6 @@ static int const awesomeflags =
   0
 #endif
   |
-#ifdef SKALIBS_HASNBWAITALL
-  MSG_WAITALL
-#else
-  0
-#endif
-  |
 #ifdef SKALIBS_HASCMSGCLOEXEC
   MSG_CMSG_CLOEXEC
 #else

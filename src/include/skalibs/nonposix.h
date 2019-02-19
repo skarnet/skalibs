@@ -61,7 +61,7 @@
     because the BSDs are bloody snowflakes. See: setgroups(). */
 
 #undef SKALIBS_BSD_SUCKS
-#if defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__) || defined(__bsdi__)
+#if defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__) || defined(__bsdi__) || defined(__DragonFly__)
 # define SKALIBS_BSD_SUCKS
 #endif
 

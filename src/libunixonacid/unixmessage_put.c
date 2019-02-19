@@ -1,9 +1,5 @@
 /* ISC license. */
 
-#include <skalibs/sysdeps.h>
-#ifdef SKALIBS_HASANCILAUTOCLOSE
-#include <unistd.h>
-#endif
 #include <string.h>
 #include <errno.h>
 #include <skalibs/bitarray.h>
@@ -22,24 +18,6 @@ static inline int copyfds (char *s, int const *fds, unsigned int n, unsigned cha
     int fd = fds[i] ;
     if (fd < 0) return (errno = EINVAL, -1) ;
     if (bitarray_peek(bits, i)) fd = - fd - 1 ;
-#ifdef SKALIBS_HASANCILAUTOCLOSE
-    else
-    {
-      fd = dup(fd) ;
-      if (fd < 0)
-      {
-        int e = errno ;
-        while (i--)
-        {
-          s -= sizeof(int) ;
-          memcpy((char *)fd, s, sizeof(int)) ;
-          if (fd >= 0) (*closecb)(fd, closecbdata) ;
-        }
-        errno = e ;
-        return 0 ;
-      }
-    }
-#endif
     memcpy(s, (char const *)&fd, sizeof(int)) ;
     s += sizeof(int) ;
   }

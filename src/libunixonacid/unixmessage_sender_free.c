@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <skalibs/sysdeps.h>
 #include <sys/types.h>
 #include <skalibs/disize.h>
 #include <skalibs/stralloc.h>
@@ -18,9 +17,6 @@ void unixmessage_sender_free (unixmessage_sender_t *b)
     {
       int fd = genalloc_s(int, &b->fds)[i] ;
       if (fd < 0) (*b->closecb)(-(fd+1), b->closecbdata) ;
-#ifdef SKALIBS_HASANCILAUTOCLOSE
-      else (*b->closecb)(fd, b->closecbdata) ;
-#endif
     }
   }
   genalloc_free(disize, &b->offsets) ;

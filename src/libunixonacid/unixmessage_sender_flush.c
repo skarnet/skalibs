@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <skalibs/sysdeps.h>
 #include <skalibs/nonposix.h>
 #include <sys/socket.h>
 #include <sys/uio.h>
@@ -104,7 +103,6 @@ int unixmessage_sender_flush (unixmessage_sender_t *b)
     do r = sendmsg(b->fd, &hdr, MSG_NOSIGNAL) ;
     while (r < 0 && errno == EINTR) ;
     if (r <= 0) return 0 ;
-#ifndef SKALIBS_HASANCILAUTOCLOSE
     if (nfds)
     {
       size_t i = 0 ;
@@ -114,7 +112,6 @@ int unixmessage_sender_flush (unixmessage_sender_t *b)
         if (fd < 0) (*b->closecb)(-(fd+1), b->closecbdata) ;
       }
     }
-#endif
     if ((size_t)r < 6 + len)
     {
       b->shorty = 6 + len - r ;

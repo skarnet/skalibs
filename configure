@@ -505,7 +505,6 @@ EOF
   trytypes
   choose clr nullispointer NULLISPOINTER 'a pointer-typed NULL'
   choose clr accept4 ACCEPT4 'accept4()'
-  choose clr ancilautoclose ANCILAUTOCLOSE 'auto-close after fd-passing'
   choose c cmsgcloexec CMSGCLOEXEC 'MSG_CMSG_CLOEXEC'
   choose clr devurandom DEVURANDOM '/dev/urandom'
   choose cl dirfd DIRFD 'dirfd()'
@@ -518,7 +517,6 @@ EOF
   choose cl ipv6 IPV6 'IPv6 support' $socket_lib
   choose clr malloc0 MALLOC0 'non-NULL malloc(0)'
   choose c msgdontwait MSGDONTWAIT 'MSG_DONTWAIT'
-  choose clr nbwaitall NBWAITALL 'non-blocking MSG_WAITALL'
   choose c odirectory ODIRECTORY 'O_DIRECTORY'
   choose cl openat OPENAT 'openat()'
   choose cl linkat LINKAT 'linkat()'

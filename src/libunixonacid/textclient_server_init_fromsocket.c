@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <skalibs/sysdeps.h>
 #include <skalibs/nonposix.h>
 #include <sys/uio.h>
 #include <errno.h>
@@ -60,9 +59,7 @@ static int sendit (void *p)
   do r = sendmsg(fd[0], &hdr, MSG_NOSIGNAL) ;
   while (r < 0 && errno == EINTR) ;
   if (r <= 0) return 0 ;
-#ifndef SKALIBS_HASANCILAUTOCLOSE
   fd_close(fd[1]) ;
-#endif
   return 1 ;
 }
 
