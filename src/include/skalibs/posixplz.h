@@ -18,17 +18,6 @@ extern char **environ ;
 
 
  /*
-    Stuff that _is_ POSIX, but some OSes still don't have it.
-    openat() et al. should be here, but they're impossible to
-    emulate correctly, and I don't want an app using openat()
-    to think it has safe POSIX semantics when it doesn't :/
-    EPROTO et al. should be here, but ugh ifdef forests.
- */
-
-extern size_t strnlen (char const *, size_t) gccattr_pure ;
-
-
- /*
     Non-POSIX functions that some OSes provide and others don't.
     setgroups() isn't included because it's its own kind of broken.
  */

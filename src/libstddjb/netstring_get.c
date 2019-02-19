@@ -1,11 +1,12 @@
 /* ISC license. */
 
 #include <errno.h>
+
+#include <skalibs/posixishard.h>
 #include <skalibs/types.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/buffer.h>
-#include <skalibs/error.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/netstring.h>
 

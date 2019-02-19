@@ -1,21 +1,19 @@
 /* ISC license. */
 
 #include <skalibs/nonposix.h>
+
 #include <sys/uio.h>
 #include <errno.h>
 #include <string.h>
 #include <sys/socket.h>
+
+#include <skalibs/posixishard.h>
 #include <skalibs/types.h>
-#include <skalibs/error.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/unix-timed.h>
 #include <skalibs/textmessage.h>
 #include <skalibs/textclient.h>
-
-#ifndef MSG_NOSIGNAL
-#define MSG_NOSIGNAL 0
-#endif
 
 union aligner_u
 {

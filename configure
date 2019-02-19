@@ -144,15 +144,16 @@ choose () {
     esac
   fi
   rm -f try$name.o try$name
+  echo "#undef ${package_macro_name}_HAS$macro" >> $sysdeps/sysdeps.h
   if $r ; then
     echo "$name: yes" >> $sysdeps/sysdeps
     echo "#define ${package_macro_name}_HAS$macro" >> $sysdeps/sysdeps.h
     echo "  ... yes"
   else
     echo "$name: no" >> $sysdeps/sysdeps
-    echo "#undef ${package_macro_name}_HAS$macro" >> $sysdeps/sysdeps.h
     echo "  ... no"
   fi
+  echo >> $sysdeps/sysdeps.h
 }
 
 trytypes () {
@@ -161,18 +162,21 @@ trytypes () {
   ./output-types >> $sysdeps/sysdeps
   ./output-types | grep -F sizeof | while read key value ; do
     caps=$(echo $key | sed s/:\$// | tr a-z A-Z)
-    echo "#define ${package_macro_name}_${caps} $value" >> $sysdeps/sysdeps.h
-  done
+    echo "#undef ${package_macro_name}_${caps}"
+    echo "#define ${package_macro_name}_${caps} $value"
+    echo
+  done >> $sysdeps/sysdeps.h
   ./output-types | grep -F signed | while read key value ; do
     caps=$(echo $key | sed s/:\$// | tr a-z A-Z)
+    echo "#undef ${package_macro_name}_HASUN${caps}"
+    echo "#undef ${package_macro_name}_HAS${caps}"
     if test $value = yes ; then
       echo "#define ${package_macro_name}_HAS${caps}"
-      echo "#undef ${package_macro_name}_HASUN${caps}"
     else
-      echo "#undef ${package_macro_name}_HAS${caps}"
       echo "#define ${package_macro_name}_HASUN${caps}"
-    fi >> $sysdeps/sysdeps.h
-  done
+    fi
+    echo
+  done >> $sysdeps/sysdeps.h
   rm -f output-types
   echo "  ... done"
 }
@@ -443,7 +447,14 @@ else
 #ifndef SYSDEPS_H
 #define SYSDEPS_H
 
+#undef SKALIBS_TARGET
 #define SKALIBS_TARGET "$target"
+
+#undef SKALIBS_BSD_SUCKS
+#if defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__) || defined(__bsdi__) || defined(__DragonFly__)
+# define SKALIBS_BSD_SUCKS
+#endif
+
 EOF
 
   exec 3>&1
@@ -462,43 +473,51 @@ EOF
   fi
   echo "$sysclock_lib" > $sysdeps/sysclock.lib
   echo "$tainnow_lib" > $sysdeps/tainnow.lib
+  echo "#undef ${package_macro_name}_HASCLOCKRT" >> $sysdeps/sysdeps.h
   if $hasclock ; then
     echo 'clockrt: yes' >> $sysdeps/sysdeps
     echo "#define ${package_macro_name}_HASCLOCKRT" >> $sysdeps/sysdeps.h
+    echo >> $sysdeps/sysdeps.h
     choose cl clockmon CLOCKMON CLOCK_MONOTONIC $sysclock_lib
   else
     echo 'clockrt: no' >> $sysdeps/sysdeps
-    echo "#undef ${package_macro_name}_HASCLOCKRT" >> $sysdeps/sysdeps.h
+    echo >> $sysdeps/sysdeps.h
   fi
 
   hasspawn=true
   spawn_lib=`trylibs posixspawn 'posix_spawn()' -lrt` || hasspawn=false
   echo "$spawn_lib" > $sysdeps/spawn.lib
+  echo "#undef ${package_macro_name}_HASPOSIXSPAWN" >> $sysdeps/sysdeps.h
   if $hasspawn ; then
     echo 'posixspawn: yes' >> $sysdeps/sysdeps
     echo "#define ${package_macro_name}_HASPOSIXSPAWN" >> $sysdeps/sysdeps.h
   else
     echo 'posixspawn: no' >> $sysdeps/sysdeps
-    echo "#undef ${package_macro_name}_HASPOSIXSPAWN" >> $sysdeps/sysdeps.h
   fi
+  echo >> $sysdeps/sysdeps.h
 
   hastimer=true
   timer_lib=`trylibs timer 'timer_create()' -lrt` || hastimer=false
   echo "$timer_lib" > $sysdeps/timer.lib
+  echo "#undef ${package_macro_name}_HASTIMER" >> $sysdeps/sysdeps.h
   if $hastimer ; then
     echo 'timer: yes' >> $sysdeps/sysdeps
     echo "#define ${package_macro_name}_HASTIMER" >> $sysdeps/sysdeps.h
   else
     echo 'timer: no' >> $sysdeps/sysdeps
-    echo "#undef ${package_macro_name}_HASTIMER" >> $sysdeps/sysdeps.h
   fi
+  echo >> $sysdeps/sysdeps.h
   exec 3>&-
 
   echo "Checking system endianness..."
   $CC_AUTO $CPPFLAGS_AUTO $CPPFLAGS $CPPFLAGS_POST $CFLAGS_AUTO $CFLAGS $CFLAGS_POST $LDFLAGS_AUTO $LDFLAGS $LDFLAGS_POST -o tryendianness src/sysdeps/tryendianness.c
   endianness=$(./tryendianness) || fail "$0: unable to determine endianness"
   echo "endianness: $endianness" >> $sysdeps/sysdeps
-  echo "#define ${package_macro_name}_ENDIANNESS \"$endianness\"" >> $sysdeps/sysdeps.h
+  {
+    echo "#undef ${package_macro_name}_ENDIANNESS"
+    echo "#define ${package_macro_name}_ENDIANNESS \"$endianness\""
+    echo
+  } >> $sysdeps/sysdeps.h
   echo "  ... $endianness"
   rm -f tryendianness
 
@@ -508,7 +527,6 @@ EOF
   choose c cmsgcloexec CMSGCLOEXEC 'MSG_CMSG_CLOEXEC'
   choose clr devurandom DEVURANDOM '/dev/urandom'
   choose cl dirfd DIRFD 'dirfd()'
-  choose c eproto EPROTO EPROTO
   choose cl eventfd EVENTFD 'eventfd()'
   choose cl flock FLOCK 'flock()'
   choose cl getpeereid GETPEEREID 'getpeereid()'

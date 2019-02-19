@@ -1,12 +1,15 @@
 /* ISC license. */
 
 #include <skalibs/nonposix.h>
+
 #include <sys/socket.h>
 #include <sys/uio.h>
 #include <string.h>
 #include <stdint.h>
 #include <unistd.h>
 #include <errno.h>
+
+#include <skalibs/posixishard.h>
 #include <skalibs/uint16.h>
 #include <skalibs/uint32.h>
 #include <skalibs/disize.h>
@@ -14,11 +17,6 @@
 #include <skalibs/genalloc.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/unixmessage.h>
-
- /* MacOS X tries hard to be POSIX-compliant... and fails. */
-#ifndef MSG_NOSIGNAL
-#define MSG_NOSIGNAL 0
-#endif
 
 union aligner_u
 {

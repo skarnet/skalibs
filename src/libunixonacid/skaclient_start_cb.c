@@ -2,7 +2,8 @@
 
 #include <errno.h>
 #include <string.h>
-#include <skalibs/error.h>
+
+#include <skalibs/posixishard.h>
 #include <skalibs/unixmessage.h>
 #include <skalibs/skaclient.h>
 #include "skaclient-internal.h"

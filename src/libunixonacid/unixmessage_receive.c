@@ -2,14 +2,16 @@
 
 #include <skalibs/sysdeps.h>
 #include <skalibs/nonposix.h>
+
 #include <errno.h>
 #include <sys/socket.h>
 #include <sys/uio.h>
+
+#include <skalibs/posixishard.h>
 #include <skalibs/uint16.h>
 #include <skalibs/uint32.h>
 #include <skalibs/cbuffer.h>
 #include <skalibs/djbunix.h>
-#include <skalibs/error.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/unixmessage.h>

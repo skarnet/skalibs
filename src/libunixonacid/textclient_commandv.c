@@ -2,7 +2,8 @@
 
 #include <sys/uio.h>
 #include <errno.h>
-#include <skalibs/error.h>
+
+#include <skalibs/posixishard.h>
 #include <skalibs/textclient.h>
 
 int textclient_commandv (textclient_t *a, struct iovec const *v, unsigned int n, tain_t const *deadline, tain_t *stamp)

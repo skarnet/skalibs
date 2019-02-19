@@ -12,7 +12,7 @@ src/include/skalibs/biguint.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/bitarray.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/bufalloc.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/buffer.h: src/include/skalibs/allreadwrite.h src/include/skalibs/cbuffer.h src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h
-src/include/skalibs/bytestr.h: src/include/skalibs/gccattributes.h src/include/skalibs/posixplz.h
+src/include/skalibs/bytestr.h: src/include/skalibs/gccattributes.h src/include/skalibs/posixishard.h
 src/include/skalibs/cbuffer.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/cdb.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/cdb_make.h: src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h
@@ -22,6 +22,7 @@ src/include/skalibs/djbunix.h: src/include/skalibs/envalloc.h src/include/skalib
 src/include/skalibs/env.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/envalloc.h: src/include/skalibs/genalloc.h
 src/include/skalibs/environ.h: src/include/skalibs/posixplz.h
+src/include/skalibs/error.h: src/include/skalibs/gccattributes.h src/include/skalibs/sysdeps.h
 src/include/skalibs/fmtscan.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/genalloc.h: src/include/skalibs/functypes.h src/include/skalibs/stralloc.h
 src/include/skalibs/genqdyn.h: src/include/skalibs/stralloc.h
@@ -33,6 +34,7 @@ src/include/skalibs/iopause.h: src/include/skalibs/tai.h
 src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr2.h
 src/include/skalibs/netstring.h: src/include/skalibs/buffer.h src/include/skalibs/stralloc.h
+src/include/skalibs/posixishard.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/posixplz.h: src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h
 src/include/skalibs/random.h: src/include/skalibs/stralloc.h
 src/include/skalibs/setgroups.h: src/include/skalibs/sysdeps.h
@@ -44,7 +46,7 @@ src/include/skalibs/skalibs.h: src/include/skalibs/biguint.h src/include/skalibs
 src/include/skalibs/skamisc.h: src/include/skalibs/buffer.h src/include/skalibs/stralloc.h
 src/include/skalibs/socket.h: src/include/skalibs/djbunix.h src/include/skalibs/gccattributes.h src/include/skalibs/tai.h src/include/skalibs/webipc.h
 src/include/skalibs/stdcrypto.h: src/include/skalibs/md5.h src/include/skalibs/rc4.h src/include/skalibs/sha1.h src/include/skalibs/sha256.h src/include/skalibs/sha512.h
-src/include/skalibs/stddjb.h: src/include/skalibs/alarm.h src/include/skalibs/alloc.h src/include/skalibs/allreadwrite.h src/include/skalibs/bitarray.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/bytestr.h src/include/skalibs/cbuffer.h src/include/skalibs/cdb.h src/include/skalibs/cdb_make.h src/include/skalibs/config.h src/include/skalibs/direntry.h src/include/skalibs/disize.h src/include/skalibs/diuint.h src/include/skalibs/diuint32.h src/include/skalibs/djbtime.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/error.h src/include/skalibs/fmtscan.h src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h src/include/skalibs/genalloc.h src/include/skalibs/genwrite.h src/include/skalibs/iobuffer.h src/include/skalibs/iopause.h src/include/skalibs/ip46.h src/include/skalibs/lolstdio.h src/include/skalibs/netstring.h src/include/skalibs/nsig.h src/include/skalibs/segfault.h src/include/skalibs/selfpipe.h src/include/skalibs/setgroups.h src/include/skalibs/sgetopt.h src/include/skalibs/sig.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/socket.h src/include/skalibs/stralloc.h src/include/skalibs/strerr.h src/include/skalibs/strerr2.h src/include/skalibs/tai.h src/include/skalibs/types.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h src/include/skalibs/webipc.h
+src/include/skalibs/stddjb.h: src/include/skalibs/alarm.h src/include/skalibs/alloc.h src/include/skalibs/allreadwrite.h src/include/skalibs/bitarray.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/bytestr.h src/include/skalibs/cbuffer.h src/include/skalibs/cdb.h src/include/skalibs/cdb_make.h src/include/skalibs/direntry.h src/include/skalibs/disize.h src/include/skalibs/diuint.h src/include/skalibs/diuint32.h src/include/skalibs/djbtime.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/error.h src/include/skalibs/fmtscan.h src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h src/include/skalibs/genalloc.h src/include/skalibs/genwrite.h src/include/skalibs/iobuffer.h src/include/skalibs/iopause.h src/include/skalibs/ip46.h src/include/skalibs/lolstdio.h src/include/skalibs/netstring.h src/include/skalibs/nsig.h src/include/skalibs/segfault.h src/include/skalibs/selfpipe.h src/include/skalibs/setgroups.h src/include/skalibs/sgetopt.h src/include/skalibs/sig.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/socket.h src/include/skalibs/stralloc.h src/include/skalibs/strerr.h src/include/skalibs/strerr2.h src/include/skalibs/tai.h src/include/skalibs/types.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h src/include/skalibs/webipc.h
 src/include/skalibs/strerr.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint64.h
@@ -152,7 +154,7 @@ src/libposixplz/mklinktemp.o src/libposixplz/mklinktemp.lo: src/libposixplz/mkli
 src/libposixplz/mkltemp.o src/libposixplz/mkltemp.lo: src/libposixplz/mkltemp.c src/include/skalibs/posixplz.h
 src/libposixplz/mkptemp.o src/libposixplz/mkptemp.lo: src/libposixplz/mkptemp.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
 src/libposixplz/setgroups.o src/libposixplz/setgroups.lo: src/libposixplz/setgroups.c src/include/skalibs/nonposix.h src/include/skalibs/setgroups.h src/include/skalibs/sysdeps.h
-src/libposixplz/strnlen.o src/libposixplz/strnlen.lo: src/libposixplz/strnlen.c src/include/skalibs/bytestr.h src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h
+src/libposixplz/strnlen.o src/libposixplz/strnlen.lo: src/libposixplz/strnlen.c src/include/skalibs/bytestr.h src/include/skalibs/posixishard.h src/include/skalibs/sysdeps.h
 src/libposixplz/touch.o src/libposixplz/touch.lo: src/libposixplz/touch.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h
 src/libposixplz/unlink_void.o src/libposixplz/unlink_void.lo: src/libposixplz/unlink_void.c src/include/skalibs/posixplz.h
 src/librandom/autosurf.o src/librandom/autosurf.lo: src/librandom/autosurf.c src/include/skalibs/random.h src/include/skalibs/surf.h
@@ -283,7 +285,7 @@ src/libstddjb/cdb_init_map.o src/libstddjb/cdb_init_map.lo: src/libstddjb/cdb_in
 src/libstddjb/cdb_make.o src/libstddjb/cdb_make.lo: src/libstddjb/cdb_make.c src/include/skalibs/buffer.h src/include/skalibs/cdb.h src/include/skalibs/cdb_make.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h src/include/skalibs/uint32.h
 src/libstddjb/cdb_mapfile.o src/libstddjb/cdb_mapfile.lo: src/libstddjb/cdb_mapfile.c src/include/skalibs/cdb.h src/include/skalibs/djbunix.h
 src/libstddjb/cdb_nextkey.o src/libstddjb/cdb_nextkey.lo: src/libstddjb/cdb_nextkey.c src/include/skalibs/cdb.h src/include/skalibs/uint32.h
-src/libstddjb/cdb_read.o src/libstddjb/cdb_read.lo: src/libstddjb/cdb_read.c src/include/skalibs/allreadwrite.h src/include/skalibs/cdb.h src/include/skalibs/error.h
+src/libstddjb/cdb_read.o src/libstddjb/cdb_read.lo: src/libstddjb/cdb_read.c src/include/skalibs/allreadwrite.h src/include/skalibs/cdb.h src/include/skalibs/posixishard.h
 src/libstddjb/cdb_successor.o src/libstddjb/cdb_successor.lo: src/libstddjb/cdb_successor.c src/include/skalibs/cdb.h
 src/libstddjb/cdb_zero.o src/libstddjb/cdb_zero.lo: src/libstddjb/cdb_zero.c src/include/skalibs/cdb.h
 src/libstddjb/child_spawn.o src/libstddjb/child_spawn.lo: src/libstddjb/child_spawn.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h src/include/skalibs/types.h
@@ -393,16 +395,16 @@ src/libstddjb/ip6_fmt.o src/libstddjb/ip6_fmt.lo: src/libstddjb/ip6_fmt.c src/in
 src/libstddjb/ip6_scan.o src/libstddjb/ip6_scan.lo: src/libstddjb/ip6_scan.c src/include/skalibs/fmtscan.h src/include/skalibs/uint16.h
 src/libstddjb/ip6_scanlist.o src/libstddjb/ip6_scanlist.lo: src/libstddjb/ip6_scanlist.c src/include/skalibs/fmtscan.h
 src/libstddjb/ipc_accept.o src/libstddjb/ipc_accept.lo: src/libstddjb/ipc_accept.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/webipc.h
-src/libstddjb/ipc_bind.o src/libstddjb/ipc_bind.lo: src/libstddjb/ipc_bind.c src/include/skalibs/error.h src/include/skalibs/nonposix.h src/include/skalibs/webipc.h
+src/libstddjb/ipc_bind.o src/libstddjb/ipc_bind.lo: src/libstddjb/ipc_bind.c src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/webipc.h
 src/libstddjb/ipc_bind_reuse.o src/libstddjb/ipc_bind_reuse.lo: src/libstddjb/ipc_bind_reuse.c src/include/skalibs/nonposix.h src/include/skalibs/webipc.h
-src/libstddjb/ipc_connect.o src/libstddjb/ipc_connect.lo: src/libstddjb/ipc_connect.c src/include/skalibs/error.h src/include/skalibs/nonposix.h src/include/skalibs/webipc.h
+src/libstddjb/ipc_connect.o src/libstddjb/ipc_connect.lo: src/libstddjb/ipc_connect.c src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/webipc.h
 src/libstddjb/ipc_connected.o src/libstddjb/ipc_connected.lo: src/libstddjb/ipc_connected.c src/include/skalibs/allreadwrite.h src/include/skalibs/nonposix.h src/include/skalibs/webipc.h
 src/libstddjb/ipc_dgram.o src/libstddjb/ipc_dgram.lo: src/libstddjb/ipc_dgram.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/webipc.h
 src/libstddjb/ipc_listen.o src/libstddjb/ipc_listen.lo: src/libstddjb/ipc_listen.c src/include/skalibs/nonposix.h src/include/skalibs/webipc.h
 src/libstddjb/ipc_local.o src/libstddjb/ipc_local.lo: src/libstddjb/ipc_local.c src/include/skalibs/bytestr.h src/include/skalibs/nonposix.h src/include/skalibs/webipc.h
 src/libstddjb/ipc_pair.o src/libstddjb/ipc_pair.lo: src/libstddjb/ipc_pair.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/webipc.h
-src/libstddjb/ipc_recv.o src/libstddjb/ipc_recv.lo: src/libstddjb/ipc_recv.c src/include/skalibs/error.h src/include/skalibs/nonposix.h src/include/skalibs/webipc.h
-src/libstddjb/ipc_send.o src/libstddjb/ipc_send.lo: src/libstddjb/ipc_send.c src/include/skalibs/error.h src/include/skalibs/nonposix.h src/include/skalibs/webipc.h
+src/libstddjb/ipc_recv.o src/libstddjb/ipc_recv.lo: src/libstddjb/ipc_recv.c src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/webipc.h
+src/libstddjb/ipc_send.o src/libstddjb/ipc_send.lo: src/libstddjb/ipc_send.c src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/webipc.h
 src/libstddjb/ipc_stream.o src/libstddjb/ipc_stream.lo: src/libstddjb/ipc_stream.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/webipc.h
 src/libstddjb/ipc_timed_connect.o src/libstddjb/ipc_timed_connect.lo: src/libstddjb/ipc_timed_connect.c src/include/skalibs/error.h src/include/skalibs/iopause.h src/include/skalibs/webipc.h
 src/libstddjb/leapsecs_add.o src/libstddjb/leapsecs_add.lo: src/libstddjb/leapsecs_add.c src/libstddjb/djbtime-internal.h src/include/skalibs/uint64.h
@@ -435,7 +437,7 @@ src/libstddjb/netstring_append.o src/libstddjb/netstring_append.lo: src/libstddj
 src/libstddjb/netstring_appendv.o src/libstddjb/netstring_appendv.lo: src/libstddjb/netstring_appendv.c src/include/skalibs/bytestr.h src/include/skalibs/netstring.h src/include/skalibs/siovec.h src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
 src/libstddjb/netstring_decode.o src/libstddjb/netstring_decode.lo: src/libstddjb/netstring_decode.c src/include/skalibs/netstring.h src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
 src/libstddjb/netstring_encode.o src/libstddjb/netstring_encode.lo: src/libstddjb/netstring_encode.c src/include/skalibs/netstring.h src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
-src/libstddjb/netstring_get.o src/libstddjb/netstring_get.lo: src/libstddjb/netstring_get.c src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/bytestr.h src/include/skalibs/error.h src/include/skalibs/netstring.h src/include/skalibs/stralloc.h src/include/skalibs/types.h
+src/libstddjb/netstring_get.o src/libstddjb/netstring_get.lo: src/libstddjb/netstring_get.c src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/bytestr.h src/include/skalibs/netstring.h src/include/skalibs/posixishard.h src/include/skalibs/stralloc.h src/include/skalibs/types.h
 src/libstddjb/netstring_put.o src/libstddjb/netstring_put.lo: src/libstddjb/netstring_put.c src/include/skalibs/buffer.h src/include/skalibs/netstring.h src/include/skalibs/uint64.h
 src/libstddjb/ntp_from_tain.o src/libstddjb/ntp_from_tain.lo: src/libstddjb/ntp_from_tain.c src/include/skalibs/djbtime.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/open2.o src/libstddjb/open2.lo: src/libstddjb/open2.c src/include/skalibs/nonposix.h
@@ -586,7 +588,7 @@ src/libstddjb/string_quote_nodelim.o src/libstddjb/string_quote_nodelim.lo: src/
 src/libstddjb/string_quote_nodelim_mustquote.o src/libstddjb/string_quote_nodelim_mustquote.lo: src/libstddjb/string_quote_nodelim_mustquote.c src/include/skalibs/fmtscan.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/string_unquote.o src/libstddjb/string_unquote.lo: src/libstddjb/string_unquote.c src/include/skalibs/skamisc.h
 src/libstddjb/string_unquote_nodelim.o src/libstddjb/string_unquote_nodelim.lo: src/libstddjb/string_unquote_nodelim.c src/include/skalibs/skamisc.h
-src/libstddjb/string_unquote_withdelim.o src/libstddjb/string_unquote_withdelim.lo: src/libstddjb/string_unquote_withdelim.c src/include/skalibs/bytestr.h src/include/skalibs/error.h src/include/skalibs/fmtscan.h src/include/skalibs/skamisc.h
+src/libstddjb/string_unquote_withdelim.o src/libstddjb/string_unquote_withdelim.lo: src/libstddjb/string_unquote_withdelim.c src/include/skalibs/bytestr.h src/include/skalibs/fmtscan.h src/include/skalibs/posixishard.h src/include/skalibs/skamisc.h
 src/libstddjb/strn_fmt.o src/libstddjb/strn_fmt.lo: src/libstddjb/strn_fmt.c src/include/skalibs/fmtscan.h src/include/skalibs/types.h
 src/libstddjb/subgetopt.o src/libstddjb/subgetopt.lo: src/libstddjb/subgetopt.c src/include/skalibs/sgetopt.h
 src/libstddjb/subgetopt_here.o src/libstddjb/subgetopt_here.lo: src/libstddjb/subgetopt_here.c src/include/skalibs/sgetopt.h
@@ -737,8 +739,8 @@ src/libunixonacid/dd_commit_devino.o src/libunixonacid/dd_commit_devino.lo: src/
 src/libunixonacid/dd_open_read.o src/libunixonacid/dd_open_read.lo: src/libunixonacid/dd_open_read.c src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/dd_open_write.o src/libunixonacid/dd_open_write.lo: src/libunixonacid/dd_open_write.c src/include/skalibs/djbunix.h src/include/skalibs/random.h src/include/skalibs/stralloc.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/ipc_timed_recv.o src/libunixonacid/ipc_timed_recv.lo: src/libunixonacid/ipc_timed_recv.c src/include/skalibs/allreadwrite.h src/include/skalibs/functypes.h src/include/skalibs/unix-timed.h src/include/skalibs/webipc.h
-src/libunixonacid/ipc_timed_send.o src/libunixonacid/ipc_timed_send.lo: src/libunixonacid/ipc_timed_send.c src/include/skalibs/error.h src/include/skalibs/iopause.h src/include/skalibs/nonposix.h src/include/skalibs/unix-timed.h
-src/libunixonacid/ipc_timed_sendv.o src/libunixonacid/ipc_timed_sendv.lo: src/libunixonacid/ipc_timed_sendv.c src/include/skalibs/error.h src/include/skalibs/iopause.h src/include/skalibs/nonposix.h src/include/skalibs/siovec.h src/include/skalibs/unix-timed.h
+src/libunixonacid/ipc_timed_send.o src/libunixonacid/ipc_timed_send.lo: src/libunixonacid/ipc_timed_send.c src/include/skalibs/error.h src/include/skalibs/iopause.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/unix-timed.h
+src/libunixonacid/ipc_timed_sendv.o src/libunixonacid/ipc_timed_sendv.lo: src/libunixonacid/ipc_timed_sendv.c src/include/skalibs/error.h src/include/skalibs/iopause.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/siovec.h src/include/skalibs/unix-timed.h
 src/libunixonacid/kolbak_call.o src/libunixonacid/kolbak_call.lo: src/libunixonacid/kolbak_call.c src/include/skalibs/kolbak.h src/include/skalibs/unixmessage.h
 src/libunixonacid/kolbak_enqueue.o src/libunixonacid/kolbak_enqueue.lo: src/libunixonacid/kolbak_enqueue.c src/include/skalibs/kolbak.h src/include/skalibs/unixmessage.h
 src/libunixonacid/kolbak_queue_init.o src/libunixonacid/kolbak_queue_init.lo: src/libunixonacid/kolbak_queue_init.c src/include/skalibs/kolbak.h
@@ -760,7 +762,7 @@ src/libunixonacid/openreadnclose_at.o src/libunixonacid/openreadnclose_at.lo: sr
 src/libunixonacid/openslurpclose_at.o src/libunixonacid/openslurpclose_at.lo: src/libunixonacid/openslurpclose_at.c src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/openwritenclose_at.o src/libunixonacid/openwritenclose_at.lo: src/libunixonacid/openwritenclose_at.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/openwritevnclose_at.o src/libunixonacid/openwritevnclose_at.lo: src/libunixonacid/openwritevnclose_at.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/siovec.h src/include/skalibs/unix-transactional.h
-src/libunixonacid/skaclient_default_cb.o src/libunixonacid/skaclient_default_cb.lo: src/libunixonacid/skaclient_default_cb.c src/include/skalibs/error.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
+src/libunixonacid/skaclient_default_cb.o src/libunixonacid/skaclient_default_cb.lo: src/libunixonacid/skaclient_default_cb.c src/include/skalibs/posixishard.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
 src/libunixonacid/skaclient_end.o src/libunixonacid/skaclient_end.lo: src/libunixonacid/skaclient_end.c src/include/skalibs/djbunix.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
 src/libunixonacid/skaclient_init.o src/libunixonacid/skaclient_init.lo: src/libunixonacid/skaclient_init.c src/libunixonacid/skaclient-internal.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
 src/libunixonacid/skaclient_put.o src/libunixonacid/skaclient_put.lo: src/libunixonacid/skaclient_put.c src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
@@ -771,25 +773,25 @@ src/libunixonacid/skaclient_send.o src/libunixonacid/skaclient_send.lo: src/libu
 src/libunixonacid/skaclient_sendmsg.o src/libunixonacid/skaclient_sendmsg.lo: src/libunixonacid/skaclient_sendmsg.c src/include/skalibs/skaclient.h
 src/libunixonacid/skaclient_sendmsgv.o src/libunixonacid/skaclient_sendmsgv.lo: src/libunixonacid/skaclient_sendmsgv.c src/include/skalibs/skaclient.h
 src/libunixonacid/skaclient_sendv.o src/libunixonacid/skaclient_sendv.lo: src/libunixonacid/skaclient_sendv.c src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
-src/libunixonacid/skaclient_server_ack.o src/libunixonacid/skaclient_server_ack.lo: src/libunixonacid/skaclient_server_ack.c src/include/skalibs/djbunix.h src/include/skalibs/error.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h src/include/skalibs/webipc.h
+src/libunixonacid/skaclient_server_ack.o src/libunixonacid/skaclient_server_ack.lo: src/libunixonacid/skaclient_server_ack.c src/include/skalibs/djbunix.h src/include/skalibs/posixishard.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h src/include/skalibs/webipc.h
 src/libunixonacid/skaclient_server_bidi_ack.o src/libunixonacid/skaclient_server_bidi_ack.lo: src/libunixonacid/skaclient_server_bidi_ack.c src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
 src/libunixonacid/skaclient_server_init.o src/libunixonacid/skaclient_server_init.lo: src/libunixonacid/skaclient_server_init.c src/include/skalibs/allreadwrite.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
 src/libunixonacid/skaclient_start.o src/libunixonacid/skaclient_start.lo: src/libunixonacid/skaclient_start.c src/include/skalibs/kolbak.h src/libunixonacid/skaclient-internal.h src/include/skalibs/skaclient.h
 src/libunixonacid/skaclient_start_async.o src/libunixonacid/skaclient_start_async.lo: src/libunixonacid/skaclient_start_async.c src/include/skalibs/error.h src/include/skalibs/kolbak.h src/libunixonacid/skaclient-internal.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h src/include/skalibs/webipc.h
-src/libunixonacid/skaclient_start_cb.o src/libunixonacid/skaclient_start_cb.lo: src/libunixonacid/skaclient_start_cb.c src/include/skalibs/error.h src/libunixonacid/skaclient-internal.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
+src/libunixonacid/skaclient_start_cb.o src/libunixonacid/skaclient_start_cb.lo: src/libunixonacid/skaclient_start_cb.c src/include/skalibs/posixishard.h src/libunixonacid/skaclient-internal.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
 src/libunixonacid/skaclient_startf.o src/libunixonacid/skaclient_startf.lo: src/libunixonacid/skaclient_startf.c src/include/skalibs/kolbak.h src/libunixonacid/skaclient-internal.h src/include/skalibs/skaclient.h
 src/libunixonacid/skaclient_startf_async.o src/libunixonacid/skaclient_startf_async.lo: src/libunixonacid/skaclient_startf_async.c src/include/skalibs/djbunix.h src/include/skalibs/kolbak.h src/libunixonacid/skaclient-internal.h src/include/skalibs/skaclient.h
 src/libunixonacid/skaclient_syncify.o src/libunixonacid/skaclient_syncify.lo: src/libunixonacid/skaclient_syncify.c src/include/skalibs/skaclient.h
 src/libunixonacid/skaclient_zero.o src/libunixonacid/skaclient_zero.lo: src/libunixonacid/skaclient_zero.c src/include/skalibs/skaclient.h
 src/libunixonacid/stat_at.o src/libunixonacid/stat_at.lo: src/libunixonacid/stat_at.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
-src/libunixonacid/textclient_command.o src/libunixonacid/textclient_command.lo: src/libunixonacid/textclient_command.c src/include/skalibs/error.h src/include/skalibs/textclient.h
-src/libunixonacid/textclient_commandv.o src/libunixonacid/textclient_commandv.lo: src/libunixonacid/textclient_commandv.c src/include/skalibs/error.h src/include/skalibs/textclient.h
+src/libunixonacid/textclient_command.o src/libunixonacid/textclient_command.lo: src/libunixonacid/textclient_command.c src/include/skalibs/posixishard.h src/include/skalibs/textclient.h
+src/libunixonacid/textclient_commandv.o src/libunixonacid/textclient_commandv.lo: src/libunixonacid/textclient_commandv.c src/include/skalibs/posixishard.h src/include/skalibs/textclient.h
 src/libunixonacid/textclient_end.o src/libunixonacid/textclient_end.lo: src/libunixonacid/textclient_end.c src/include/skalibs/djbunix.h src/include/skalibs/textclient.h src/include/skalibs/textmessage.h
 src/libunixonacid/textclient_server_init.o src/libunixonacid/textclient_server_init.lo: src/libunixonacid/textclient_server_init.c src/include/skalibs/djbunix.h src/include/skalibs/textclient.h
-src/libunixonacid/textclient_server_init_frompipe.o src/libunixonacid/textclient_server_init_frompipe.lo: src/libunixonacid/textclient_server_init_frompipe.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/error.h src/include/skalibs/textclient.h src/include/skalibs/textmessage.h src/include/skalibs/types.h
-src/libunixonacid/textclient_server_init_fromsocket.o src/libunixonacid/textclient_server_init_fromsocket.lo: src/libunixonacid/textclient_server_init_fromsocket.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/error.h src/include/skalibs/nonposix.h src/include/skalibs/textclient.h src/include/skalibs/textmessage.h src/include/skalibs/types.h src/include/skalibs/unix-timed.h
-src/libunixonacid/textclient_start.o src/libunixonacid/textclient_start.lo: src/libunixonacid/textclient_start.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/error.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/textclient.h src/include/skalibs/textmessage.h src/include/skalibs/unix-timed.h src/include/skalibs/webipc.h
-src/libunixonacid/textclient_startf.o src/libunixonacid/textclient_startf.lo: src/libunixonacid/textclient_startf.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/error.h src/include/skalibs/textclient.h src/include/skalibs/textmessage.h
+src/libunixonacid/textclient_server_init_frompipe.o src/libunixonacid/textclient_server_init_frompipe.lo: src/libunixonacid/textclient_server_init_frompipe.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/posixishard.h src/include/skalibs/textclient.h src/include/skalibs/textmessage.h src/include/skalibs/types.h
+src/libunixonacid/textclient_server_init_fromsocket.o src/libunixonacid/textclient_server_init_fromsocket.lo: src/libunixonacid/textclient_server_init_fromsocket.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/textclient.h src/include/skalibs/textmessage.h src/include/skalibs/types.h src/include/skalibs/unix-timed.h
+src/libunixonacid/textclient_start.o src/libunixonacid/textclient_start.lo: src/libunixonacid/textclient_start.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/sysdeps.h src/include/skalibs/textclient.h src/include/skalibs/textmessage.h src/include/skalibs/unix-timed.h src/include/skalibs/webipc.h
+src/libunixonacid/textclient_startf.o src/libunixonacid/textclient_startf.lo: src/libunixonacid/textclient_startf.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/posixishard.h src/include/skalibs/textclient.h src/include/skalibs/textmessage.h
 src/libunixonacid/textclient_zero.o src/libunixonacid/textclient_zero.lo: src/libunixonacid/textclient_zero.c src/include/skalibs/textclient.h
 src/libunixonacid/textmessage_handle.o src/libunixonacid/textmessage_handle.lo: src/libunixonacid/textmessage_handle.c src/include/skalibs/textmessage.h
 src/libunixonacid/textmessage_put.o src/libunixonacid/textmessage_put.lo: src/libunixonacid/textmessage_put.c src/include/skalibs/bufalloc.h src/include/skalibs/textmessage.h src/include/skalibs/uint32.h
@@ -820,15 +822,15 @@ src/libunixonacid/unixmessage_bits_closeall.o src/libunixonacid/unixmessage_bits
 src/libunixonacid/unixmessage_bits_closenone.o src/libunixonacid/unixmessage_bits_closenone.lo: src/libunixonacid/unixmessage_bits_closenone.c src/include/skalibs/bitarray.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_drop.o src/libunixonacid/unixmessage_drop.lo: src/libunixonacid/unixmessage_drop.c src/include/skalibs/djbunix.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_handle.o src/libunixonacid/unixmessage_handle.lo: src/libunixonacid/unixmessage_handle.c src/include/skalibs/unixmessage.h
-src/libunixonacid/unixmessage_put.o src/libunixonacid/unixmessage_put.lo: src/libunixonacid/unixmessage_put.c src/include/skalibs/bitarray.h src/include/skalibs/disize.h src/include/skalibs/error.h src/include/skalibs/genalloc.h src/include/skalibs/siovec.h src/include/skalibs/stralloc.h src/include/skalibs/unixmessage.h
-src/libunixonacid/unixmessage_receive.o src/libunixonacid/unixmessage_receive.lo: src/libunixonacid/unixmessage_receive.c src/include/skalibs/allreadwrite.h src/include/skalibs/cbuffer.h src/include/skalibs/djbunix.h src/include/skalibs/error.h src/include/skalibs/nonposix.h src/include/skalibs/stralloc.h src/include/skalibs/sysdeps.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/unixmessage.h
+src/libunixonacid/unixmessage_put.o src/libunixonacid/unixmessage_put.lo: src/libunixonacid/unixmessage_put.c src/include/skalibs/bitarray.h src/include/skalibs/disize.h src/include/skalibs/genalloc.h src/include/skalibs/posixishard.h src/include/skalibs/siovec.h src/include/skalibs/stralloc.h src/include/skalibs/unixmessage.h
+src/libunixonacid/unixmessage_receive.o src/libunixonacid/unixmessage_receive.lo: src/libunixonacid/unixmessage_receive.c src/include/skalibs/allreadwrite.h src/include/skalibs/cbuffer.h src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/stralloc.h src/include/skalibs/sysdeps.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_receiver_0.o src/libunixonacid/unixmessage_receiver_0.lo: src/libunixonacid/unixmessage_receiver_0.c src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_receiver_free.o src/libunixonacid/unixmessage_receiver_free.lo: src/libunixonacid/unixmessage_receiver_free.c src/include/skalibs/cbuffer.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_receiver_hasmsginbuf.o src/libunixonacid/unixmessage_receiver_hasmsginbuf.lo: src/libunixonacid/unixmessage_receiver_hasmsginbuf.c src/include/skalibs/cbuffer.h src/include/skalibs/siovec.h src/include/skalibs/uint32.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_receiver_init.o src/libunixonacid/unixmessage_receiver_init.lo: src/libunixonacid/unixmessage_receiver_init.c src/include/skalibs/cbuffer.h src/include/skalibs/stralloc.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_sender_1.o src/libunixonacid/unixmessage_sender_1.lo: src/libunixonacid/unixmessage_sender_1.c src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_sender_closecb.o src/libunixonacid/unixmessage_sender_closecb.lo: src/libunixonacid/unixmessage_sender_closecb.c src/include/skalibs/djbunix.h src/include/skalibs/unixmessage.h
-src/libunixonacid/unixmessage_sender_flush.o src/libunixonacid/unixmessage_sender_flush.lo: src/libunixonacid/unixmessage_sender_flush.c src/include/skalibs/allreadwrite.h src/include/skalibs/disize.h src/include/skalibs/djbunix.h src/include/skalibs/genalloc.h src/include/skalibs/nonposix.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/unixmessage.h
+src/libunixonacid/unixmessage_sender_flush.o src/libunixonacid/unixmessage_sender_flush.lo: src/libunixonacid/unixmessage_sender_flush.c src/include/skalibs/allreadwrite.h src/include/skalibs/disize.h src/include/skalibs/djbunix.h src/include/skalibs/genalloc.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_sender_free.o src/libunixonacid/unixmessage_sender_free.lo: src/libunixonacid/unixmessage_sender_free.c src/include/skalibs/disize.h src/include/skalibs/djbunix.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_sender_getfd.o src/libunixonacid/unixmessage_sender_getfd.lo: src/libunixonacid/unixmessage_sender_getfd.c src/include/skalibs/unixmessage.h
 src/libunixonacid/unixmessage_sender_init.o src/libunixonacid/unixmessage_sender_init.lo: src/libunixonacid/unixmessage_sender_init.c src/include/skalibs/unixmessage.h

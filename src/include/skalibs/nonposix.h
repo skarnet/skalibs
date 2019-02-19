@@ -35,12 +35,25 @@
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
 #endif
+
+
+ /* BSD and Linux libcs that are not glibc: _BSD_SOURCE opens up a
+    lot of extensions. Of course, glibc insisted on changing to a
+    different macro, because coordination and consistency would make
+    developers' life too easy. */
+
+#ifdef __GLIBC__
 #ifndef _DEFAULT_SOURCE
 #define _DEFAULT_SOURCE
 #endif
+#else
+#ifndef _BSD_SOURCE
+#define _BSD_SOURCE
+#endif
+#endif
 
 
- /* NetBSD: of course they had to have their own macros. */
+ /* NetBSD: of course they had to have their own macro too. */
 
 #ifndef _NETBSD_SOURCE
 #define _NETBSD_SOURCE
@@ -50,19 +63,10 @@
 #endif
 
 
- /* MacOS: needs this for full SUSv3 conformance. Don't ask. */
+ /* MacOS: needs this for full SUSv3 conformance. Standards are hard. */
 
 #ifndef _DARWIN_C_SOURCE
 #define _DARWIN_C_SOURCE
-#endif
-
-
- /* Unfortunately we can't fully avoid #ifdef forests,
-    because the BSDs are bloody snowflakes. See: setgroups(). */
-
-#undef SKALIBS_BSD_SUCKS
-#if defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__) || defined(__bsdi__) || defined(__DragonFly__)
-# define SKALIBS_BSD_SUCKS
 #endif
 
 

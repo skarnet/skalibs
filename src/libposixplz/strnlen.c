@@ -6,7 +6,7 @@
 
 #include <string.h>
 #include <skalibs/bytestr.h>
-#include <skalibs/posixplz.h>
+#include <skalibs/posixishard.h>
 
 size_t strnlen (char const *s, size_t max)
 {

@@ -1,3 +1,0 @@
-
-/* BSD sucks */
-#define error_isalready(e) (((e) == EALREADY) || ((e) == EINPROGRESS) || ((e) == EADDRINUSE))

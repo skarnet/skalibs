@@ -3,7 +3,8 @@
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
-#include <skalibs/error.h>
+
+#include <skalibs/posixishard.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/cdb.h>
 

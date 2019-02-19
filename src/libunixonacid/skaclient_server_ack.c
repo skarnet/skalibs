@@ -2,8 +2,9 @@
 
 #include <errno.h>
 #include <string.h>
+
+#include <skalibs/posixishard.h>
 #include <skalibs/djbunix.h>
-#include <skalibs/error.h>
 #include <skalibs/skaclient.h>
 #include <skalibs/unixmessage.h>
 #include <skalibs/webipc.h>

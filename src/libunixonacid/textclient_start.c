@@ -2,11 +2,13 @@
 
 #include <skalibs/sysdeps.h>
 #include <skalibs/nonposix.h>
+
 #include <sys/uio.h>
 #include <string.h>
 #include <errno.h>
 #include <sys/socket.h>
-#include <skalibs/error.h>
+
+#include <skalibs/posixishard.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/webipc.h>
 #include <skalibs/djbunix.h>

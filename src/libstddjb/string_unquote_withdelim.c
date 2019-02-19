@@ -1,7 +1,8 @@
 /* ISC license. */
 
 #include <errno.h>
-#include <skalibs/error.h>
+
+#include <skalibs/posixishard.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/fmtscan.h>
 #include <skalibs/skamisc.h>

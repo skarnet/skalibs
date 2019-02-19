@@ -3,7 +3,6 @@
 #ifndef STDDJB_H
 #define STDDJB_H
 
-#include <skalibs/config.h>
 #include <skalibs/uint16.h>
 #include <skalibs/uint32.h>
 #include <skalibs/uint64.h>

@@ -1,7 +1,8 @@
 /* ISC license. */
 
 #include <errno.h>
-#include <skalibs/error.h>
+
+#include <skalibs/posixishard.h>
 #include <skalibs/skaclient.h>
 #include <skalibs/unixmessage.h>
 

@@ -48,7 +48,6 @@ src/include/$(package)/uint16.h \
 src/include/$(package)/uint32.h \
 src/include/$(package)/uint64.h \
 src/include/$(package)/types.h \
-src/include/$(package)/error.h \
 src/include/$(package)/ip46.h
 ALL_INCLUDES := $(sort $(BUILT_INCLUDES) $(wildcard src/include/$(package)/*.h))
 ALL_SYSDEPS := $(wildcard $(sysdeps)/*)
@@ -150,18 +149,6 @@ src/include/$(package)/uint64.h: $(sysdeps)/sysdeps src/headers/bits-header src/
 
 src/include/$(package)/types.h: src/include/$(package)/uint16.h src/include/$(package)/uint32.h src/include/$(package)/uint64.h $(sysdeps)/sysdeps src/headers/types-header src/headers/types-footer src/headers/unsigned-template src/headers/signed-template
 	exec tools/gen-types.sh $(sysdeps)/sysdeps $(TYPES) > $@
-
-src/include/$(package)/error.h: src/include/$(package)/gccattributes.h $(sysdeps)/sysdeps src/headers/error-addrinuse src/headers/error-already src/headers/error-proto src/headers/error-header src/headers/error-footer
-	@{ \
-	  cat src/headers/error-header ; \
-	  if grep -F target: $(sysdeps)/sysdeps | grep -qiF bsd ; then cat src/headers/error-addrinuse ; \
-	  else cat src/headers/error-already ; \
-	  fi ; \
-	  if grep -qF 'eproto: yes' $(sysdeps)/sysdeps ; then : ; \
-	  else cat src/headers/error-proto ; \
-	  fi ; \
-	  exec cat src/headers/error-footer ; \
-	} > $@
 
 src/include/$(package)/ip46.h: src/include/$(package)/fmtscan.h src/include/$(package)/socket.h $(sysdeps)/sysdeps src/headers/ip46-header src/headers/ip46-footer src/headers/ip46-with src/headers/ip46-without
 	@{ \

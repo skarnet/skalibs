@@ -4,8 +4,9 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <errno.h>
+
+#include <skalibs/posixishard.h>
 #include <skalibs/types.h>
-#include <skalibs/error.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/textmessage.h>

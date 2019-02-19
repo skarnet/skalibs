@@ -2,9 +2,10 @@
 
 #include <string.h>
 #include <errno.h>
+
+#include <skalibs/posixishard.h>
 #include <skalibs/bitarray.h>
 #include <skalibs/disize.h>
-#include <skalibs/error.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/genalloc.h>
 #include <skalibs/siovec.h>

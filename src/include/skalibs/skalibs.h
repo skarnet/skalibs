@@ -4,8 +4,11 @@
 #define SKALIBS_H
 
 /*
-   This header includes everything in skalibs except skalibs/config.h
-   It's heavy!
+   This header is heavy! It includes everything in skalibs except:
+   - skalibs/config.h: package configuration
+   - skalibs/sysdeps.h: system-dependent feature test macros
+   - skalibs/nonposix.h: pre-system headers definitions for POSIX extensions
+   - skalibs/posixishard.h: workarounds for failures to respect POSIX
 */
 
 #include <skalibs/posixplz.h>

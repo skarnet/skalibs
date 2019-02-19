@@ -1,3 +1,0 @@
-
-/* Did I ever mention that BSD sucks ? */
-#define EPROTO EPROTOTYPE
