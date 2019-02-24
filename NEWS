@@ -9,6 +9,9 @@ GNU C, not C99.) The AVLTREEN_DECLARE_AND_INIT() macro should be
 used instead.
  - New functions: env_dump(), mk?temp(), autosurf(), autosurf_name()
  - mkdir_unique() removed. (Duplicate functionality with mkdtemp.)
+ - ancilautoclose and nbwaitall sysdeps removed.
+ - New header: skalibs/posixishard.h
+ - Static libraries are now PIC by default.
 
 
 In 2.7.0.0

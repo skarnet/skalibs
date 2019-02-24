@@ -34,7 +34,7 @@ Dependencies:
 Optional features:
   --disable-shared              do not build shared libraries [enabled]
   --disable-static              do not build static libraries [enabled]
-  --enable-all-pic              build everything as PIC [enabled iff toolchain builds PIE]
+  --disable-all-pic             do not build static libraries as PIC [enabled]
   --enable-slashpackage[=ROOT]  assume /package installation at ROOT [disabled]
 
 $package options:
@@ -235,7 +235,7 @@ sysdepdir='$prefix/lib/$package/sysdeps'
 sysdeps=
 shared=true
 static=true
-allpic=detect
+allpic=true
 slashpackage=false
 ipv6=true
 select=false
@@ -384,20 +384,9 @@ if test -z "$target" ; then
 fi
 echo "  ... $target"
 
-if test $allpic = detect ; then
-  echo "Checking whether we need to build everything as PIC..."
-  if $CC_AUTO $CPPFLAGS_AUTO $CPPFLAGS $CPPFLAGS_POST $CFLAGS_AUTO $CFLAGS $CFLAGS_POST -dM -E - < /dev/null | grep -qF __PIE__ ; then
-    allpic=true
-    echo "  ... yes"
-  else
-    allpic=false
-    echo "  ... no"
-  fi
-fi
 if $allpic ; then
   tryflag CFLAGS_AUTO -fPIC
 fi
-
 tryflag CFLAGS_AUTO -std=c99
 tryflag CFLAGS -fomit-frame-pointer
 tryflag CFLAGS_AUTO -fno-exceptions
