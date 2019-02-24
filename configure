@@ -385,7 +385,7 @@ fi
 echo "  ... $target"
 
 if $allpic ; then
-  tryflag CFLAGS_AUTO -fPIC
+  tryflag CPPFLAGS_AUTO -fPIC
 fi
 tryflag CFLAGS_AUTO -std=c99
 tryflag CFLAGS -fomit-frame-pointer
