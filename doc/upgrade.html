@@ -16,6 +16,15 @@
 <a href="//skarnet.org/">skarnet.org</a>
 </p>
 
+<h2> in 2.8.0.1 </h2>
+
+<ul>
+ <li> Changes to <a href="djbtime.html">skalibs/djbtime.h</a> functions
+that produce UTC time: when a leap second is hit, <tt>utc_from_tai()</tt>
+now returns 2, and functions writing a <tt>struct tm</tt> put 60 into
+the struct's <tt>tm_sec</tt> field.</li>
+</ul>
+
 <h2> in 2.8.0.0 </h2>
 
 <ul>

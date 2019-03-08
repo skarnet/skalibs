@@ -1,5 +1,12 @@
 Changelog for skalibs.
 
+In 2.8.0.1
+----------
+
+ - Bugfixes.
+ - Better reporting in utc_from_tai() and localtm_from_*()
+
+
 In 2.8.0.0
 ----------
 
