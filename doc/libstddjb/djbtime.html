@@ -57,7 +57,8 @@ Converts the absolute TAI64 time in *<em>t</em> to an UTC time, stored in
 *<em>u</em> as an unsigned 64-bit integer. *<em>u</em> is actually 2^62
 plus the number of seconds since the Epoch.
 The function returns 1 if it succeeds, or 0 (and sets errno) if an
-error occurs.
+error occurs. If *<em>t</em> happens to hit a leap second, the function
+returns 2 instead of 1.
 </p>
 
 <p>
@@ -106,7 +107,8 @@ Converts the TAI time in *<em>t</em> to broken-down GMT (if
 *<em>tm</em>.
 The function returns 1 if it succeeds, or 0 (and sets errno) if an
 error occurs (for instance: *<em>t</em> cannot be validly represented
-in a struct tm).
+in a struct tm). If *<em>t</em> happens to hit a leap second, the
+value of <em>tm&rarr;tm_sec</em> is 60.
 </p>
 
 <p>

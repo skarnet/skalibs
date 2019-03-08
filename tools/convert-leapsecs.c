@@ -41,7 +41,7 @@ int main (int argc, char const *const *argv)
     tm.tm_hour = 23 ;
     t = mktime(&tm) ;
     if (t < 0) strerr_diefu1sys(111, "mktime") ;
-    tt = t + 10 ;
+    tt = t + 1 ;
     add_leapsecs(&tt) ;
     if (!genalloc_append(uint64_t, &table, &tt))
       strerr_diefu1sys(111, "genalloc_append") ;

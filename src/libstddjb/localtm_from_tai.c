@@ -7,6 +7,6 @@
 int localtm_from_tai (struct tm *l, tai_t const *t, int tz)
 {
   uint64_t u ;
-  if (!ltm64_from_tai(&u, t)) return 0 ;
-  return localtm_from_ltm64(l, u, tz) ;
+  int h = ltm64_from_tai(&u, t) ;
+  return h ? localtm_from_ltm64(l, u, !!tz | (h & 2)) : 0 ;
 }

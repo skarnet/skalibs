@@ -7,5 +7,5 @@
 int localtm_from_utc (struct tm *l, uint64_t u, int tz)
 {
   if (!ltm64_from_utc(&u)) return 0 ;
-  return localtm_from_ltm64(l, u, tz) ;
+  return localtm_from_ltm64(l, u, !!tz) ;
 }
