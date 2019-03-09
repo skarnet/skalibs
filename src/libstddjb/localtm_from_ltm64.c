@@ -14,15 +14,14 @@
 
 int localtm_from_ltm64 (struct tm *l, uint64_t uu, int tzh)
 {
+  time_t u ;
   if (uu < TAI_MAGIC) return (errno = EINVAL, 0) ;
   uu -= TAI_MAGIC ;
 #if SKALIBS_SIZEOFTIME != 8
   if (uu > 0xFFFFFFFFUL) return (errno = EOVERFLOW, 0) ;
 #endif
-  {
-    time_t u = (time_t)uu ;
-    if (tzh & 1 ? !localtime_r(&u, l) : !gmtime_r(&u, l)) return 0 ;
-  }
+  u = (time_t)uu - !!(tzh & 2) ;
+  if (tzh & 1 ? !localtime_r(&u, l) : !gmtime_r(&u, l)) return 0 ;
   if (tzh & 2) l->tm_sec++ ;
   return 1 ;
 }

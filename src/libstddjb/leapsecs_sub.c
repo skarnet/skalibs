@@ -12,8 +12,8 @@ int leapsecs_sub (uint64_t *t)
   for (; i < leapsecs_table_len ; i++)
   {
     if (u < leapsecs_table[i]) break ;
-    ++d ;
     if (u == leapsecs_table[i]) hit = 1 ;
+    else d++ ;
   }
   *t = u - d ;
   return hit ;

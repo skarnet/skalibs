@@ -5,7 +5,7 @@
 
 void leapsecs_add (uint64_t *t, int hit)
 {
-  uint64_t u = *t ;
+  uint64_t u = *t - !!hit ;
   unsigned int i = 0 ;
   for (; i < leapsecs_table_len ; i++)
   {
