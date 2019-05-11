@@ -548,6 +548,7 @@ EOF
   choose cl namespaces NAMESPACES 'namespaces'
   choose cl nsgetparent NSGETPARENT 'NS_GET_PARENT'
   choose cl explicit_bzero EXPLICIT_BZERO 'explicit_bzero()'
+  choose clr emptyregex EMPTYREGEX 'regcomp() accept empty regexes'
 
   echo '#endif' >> $sysdeps/sysdeps.h
 fi

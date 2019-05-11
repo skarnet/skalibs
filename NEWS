@@ -1,5 +1,11 @@
 Changelog for skalibs.
 
+In 2.8.1.0
+----------
+
+ - Added skalibs_regcomp(), accepting empty regexes on BSDs.
+
+
 In 2.8.0.1
 ----------
 

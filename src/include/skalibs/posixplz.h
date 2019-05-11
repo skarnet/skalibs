@@ -5,6 +5,7 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <regex.h>
 
 #include <skalibs/gccattributes.h>
 #include <skalibs/functypes.h>
@@ -43,5 +44,12 @@ extern int mkltemp (char const *, char *) ;
 extern int mkhtemp (char const *, char *) ;
 extern int mkctemp (char *, mode_t, dev_t) ;
 extern int mkbtemp (char *, mode_t, dev_t) ;
+
+
+ /*
+    Wrappers around functions that should be specified better.
+ */
+
+#define skalibs_regcomp(re, s, flags) regcomp(re, (s)[0] ? (s) : ".*", flags)
 
 #endif
