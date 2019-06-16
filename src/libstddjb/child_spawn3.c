@@ -62,14 +62,20 @@ pid_t child_spawn3 (char const *prog, char const *const *argv, char const *const
   }
   e = posix_spawn_file_actions_init(&actions) ;
   if (e) goto errattr ;
-  e = posix_spawn_file_actions_adddup2(&actions, p[1][0], fds[0]) ;
-  if (e) goto erractions ;
-  e = posix_spawn_file_actions_addclose(&actions, p[1][0]) ;
-  if (e) goto erractions ;
-  e = posix_spawn_file_actions_adddup2(&actions, p[0][1], fds[1]) ;
-  if (e) goto erractions ;
-  e = posix_spawn_file_actions_addclose(&actions, p[0][1]) ;
-  if (e) goto erractions ;
+  if (p[1][0] != fds[0])
+  {
+    e = posix_spawn_file_actions_adddup2(&actions, p[1][0], fds[0]) ;
+    if (e) goto erractions ;
+    e = posix_spawn_file_actions_addclose(&actions, p[1][0]) ;
+    if (e) goto erractions ;
+  }
+  if (p[0][1] != fds[1])
+  {
+    e = posix_spawn_file_actions_adddup2(&actions, p[0][1], fds[1]) ;
+    if (e) goto erractions ;
+    e = posix_spawn_file_actions_addclose(&actions, p[0][1]) ;
+    if (e) goto erractions ;
+  }
   {
     int haspath = !!getenv("PATH") ;
     size_t envlen = env_len(envp) ;

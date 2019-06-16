@@ -32,10 +32,13 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
   }
   e = posix_spawn_file_actions_init(&actions) ;
   if (e) goto errattr ;
-  e = posix_spawn_file_actions_adddup2(&actions, p[to & 1], to & 1) ;
-  if (e) goto erractions ;
-  e = posix_spawn_file_actions_addclose(&actions, p[to & 1]) ;
-  if (e) goto erractions ;
+  if (p[to & 1] != to & 1)
+  {
+    e = posix_spawn_file_actions_adddup2(&actions, p[to & 1], to & 1) ;
+    if (e) goto erractions ;
+    e = posix_spawn_file_actions_addclose(&actions, p[to & 1]) ;
+    if (e) goto erractions ;
+  }
   if (to & 2)
   {
     e = posix_spawn_file_actions_adddup2(&actions, to & 1, !(to & 1)) ;

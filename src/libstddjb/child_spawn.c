@@ -77,14 +77,14 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
   }
   e = posix_spawn_file_actions_init(&actions) ;
   if (e) goto errattr ;
-  if (n >= 2)
+  if (n >= 2 && p[1][0])
   {
     e = posix_spawn_file_actions_adddup2(&actions, p[1][0], 0) ;
     if (e) goto erractions ;
     e = posix_spawn_file_actions_addclose(&actions, p[1][0]) ;
     if (e) goto erractions ;
   }
-  if (n)
+  if (n && p[0][1] != 1)
   {
     e = posix_spawn_file_actions_adddup2(&actions, p[0][1], 1) ;
     if (e) goto erractions ;
