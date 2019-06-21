@@ -120,17 +120,10 @@ Returns 0 if it succeeds, or -1 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> int fd_close (int fd) </code> <br />
+<code> void fd_close (int fd) </code> <br />
 Closes <em>fd</em>.
-Returns 0 if it succeeds, or -1 (and sets errno) if it fails.
 This is a <a href="safewrappers.html">safe wrapper</a> around
-<a href="http://www.opengroup.org/onlinepubs/9699919799/functions/close.html">close()</a>,
-or rather as safe a wrapper as is possible to write: the <tt>close()</tt>
-specification does not allow a 100% safe behaviour. So, in rare cases
-it is possible for <tt>fd_close()</tt> to return 0 (instead of -1 EBADF)
-when it is provided an argument that is not an open fd. This should not
-be a problem, because giving wrong arguments to <tt>fd_close()</tt> is
-always a static programming error.
+<a href="http://www.opengroup.org/onlinepubs/9699919799/functions/close.html">close()</a>.
 </p>
 
 <p>
