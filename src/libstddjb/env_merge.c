@@ -16,8 +16,7 @@ size_t env_merge (char const **v, size_t vmax, char const *const *envp, size_t e
   {
     size_t split = str_chr(modifs + i, '=') ;
     size_t j = 0 ;
-    for (; j < vlen ; j++)
-      if (!memcmp(modifs + i, v[j], split) && (v[j][split] == '=')) break ;
+    for (; j < vlen ; j++) if (!strncmp(modifs + i, v[j], split+1)) break ;
     if (j < vlen) v[j] = v[--vlen] ;
     if (modifs[i + split]) v[vlen++] = modifs + i ;
   }
