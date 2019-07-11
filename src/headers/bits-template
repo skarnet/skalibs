@@ -10,9 +10,8 @@ extern uint@BITS@_t uint@BITS@_bswap (uint@BITS@_t) ;
 #define UINT@BITS@_XFMT @XFMT@
 #define UINT@BITS@_BFMT @BFMT@
 
-extern size_t uint@BITS@_fmt_base (char *, uint@BITS@_t, unsigned int) ;
-extern size_t uint@BITS@0_fmt_base (char *, uint@BITS@_t, size_t, unsigned int) ;
-
+#define uint@BITS@_fmt_base(s, u, base) uint64_fmt_generic(s, u, base)
+#define uint@BITS@0_fmt_base(s, u, n, base) uint640_fmt_generic(s, u, n, base)
 #define uint@BITS@_fmt(s, u) uint@BITS@_fmt_base(s, (u), 10)
 #define uint@BITS@0_fmt(s, u, n) uint@BITS@0_fmt_base(s, u, (n), 10)
 #define uint@BITS@_ofmt(s, o) uint@BITS@_fmt_base(s, (o), 8)
@@ -24,8 +23,8 @@ extern size_t uint@BITS@0_fmt_base (char *, uint@BITS@_t, size_t, unsigned int) 
 
 extern size_t uint@BITS@_fmtlist (char *, uint@BITS@_t const *, size_t) ;
 
-extern size_t uint@BITS@_scan_base (char const *, uint@BITS@_t *, unsigned int) ;
-extern size_t uint@BITS@0_scan_base (char const *, uint@BITS@_t *, unsigned int) ;
+extern size_t uint@BITS@_scan_base (char const *, uint@BITS@_t *, uint8_t) ;
+extern size_t uint@BITS@0_scan_base (char const *, uint@BITS@_t *, uint8_t) ;
 
 #define uint@BITS@_scan(s, u) uint@BITS@_scan_base(s, (u), 10)
 #define uint@BITS@0_scan(s, u) uint@BITS@0_scan_base(s, (u), 10)
@@ -38,8 +37,24 @@ extern size_t uint@BITS@0_scan_base (char const *, uint@BITS@_t *, unsigned int)
 
 extern size_t uint@BITS@_scanlist (uint@BITS@_t *, size_t, char const *, size_t *) ;
 
-extern size_t int@BITS@_fmt (char *, int@BITS@_t) ;
+#define int@BITS@_fmt_base(s, u, base) int64_fmt_generic(s, u, base)
+#define int@BITS@_fmt(s, u) int@BITS@_fmt_base(s, (u), 10)
+#define int@BITS@_ofmt(s, o) int@BITS@_fmt_base(s, (o), 8)
+#define int@BITS@_xfmt(s, x) int@BITS@_fmt_base(s, (x), 16)
+#define int@BITS@_bfmt(s, b) int@BITS@0_fmt_base(s, (b), 2)
+
 extern size_t int@BITS@_fmtlist (char *, int@BITS@_t const *, size_t) ;
-extern size_t int@BITS@_scan (char const *, int@BITS@_t *) ;
-extern size_t int@BITS@0_scan (char const *, int@BITS@_t *) ;
+
+extern size_t int@BITS@_scan_base (char const *, int@BITS@_t *, uint8_t) ;
+extern size_t int@BITS@0_scan_base (char const *, int@BITS@_t *, uint8_t) ;
+
+#define int@BITS@_scan(s, u) int@BITS@_scan_base(s, (u), 10)
+#define int@BITS@0_scan(s, u) int@BITS@0_scan_base(s, (u), 10)
+#define int@BITS@_oscan(s, u) int@BITS@_scan_base(s, (u), 8)
+#define int@BITS@0_oscan(s, u) int@BITS@0_scan_base(s, (u), 8)
+#define int@BITS@_xscan(s, u) int@BITS@_scan_base(s, (u), 16)
+#define int@BITS@0_xscan(s, u) int@BITS@0_scan_base(s, (u), 16)
+#define int@BITS@_bscan(s, u) int@BITS@_scan_base(s, (u), 2)
+#define int@BITS@0_bscan(s, u) int@BITS@0_scan_base(s, (u), 2)
+
 extern size_t int@BITS@_scanlist (int@BITS@_t *, size_t, char const *, size_t *) ;

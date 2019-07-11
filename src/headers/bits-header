@@ -3,4 +3,5 @@
 #ifndef UINT@BITS@_H
 #define UINT@BITS@_H
 
-#include <sys/types.h>
+#include <stddef.h>
+#include <stdint.h>

@@ -7,76 +7,30 @@
 #include <string.h>
 #include <errno.h>
 #include <limits.h>
+
+#include <skalibs/uint64.h>
 #include <skalibs/fmtscan.h>
 
-#define SCANB(bits) \
-size_t uint##bits##_scan_base (char const *s, uint##bits##_t *u, unsigned int base) \
-{ \
-  static uint##bits##_t const max = UINT##bits##_MAX ; \
-  uint##bits##_t result = 0 ; \
-  size_t pos = 0 ; \
-  for (;; pos++) \
-  { \
-    unsigned char c = fmtscan_num(s[pos], base) ; \
-    if ((c >= base) || (result > ((max - c) / base))) break ; \
-    result = result * base + c ; \
-  } \
-  if (pos) *u = result ; \
-  return pos ; \
-} \
+extern size_t uint64_scan_base_max (char const *, uint64_t *, uint8_t, uint64_t) ;
+extern size_t int64_scan_base_max (char const *, int64_t *, uint8_t, uint64_t) ;
 
 #define SCANB0(bits) \
-size_t uint##bits##0_scan_base (char const *s, uint##bits##_t *u, unsigned int base) \
+size_t uint##bits##0_scan_base (char const *s, uint##bits##_t *u, uint8_t base) \
 { \
   size_t pos = uint##bits##_scan_base(s, u, base) ; \
   if (!pos) return (errno = EINVAL, 0) ; \
   if (!s[pos]) return pos ; \
-  errno = (fmtscan_num(s[pos], base) < base) ? EDOM : EINVAL ; \
+  errno = fmtscan_num(s[pos], base) < base ? ERANGE : EINVAL ; \
   return 0 ; \
 } \
 
-#define SCANS(bits) \
-size_t int##bits##_scan (char const *s, int##bits##_t *n) \
-{ \
-  uint##bits##_t tmp ; \
-  size_t r = 0 ; \
-  unsigned int sign = 0 ; \
-  if (*s == '-') \
-  { \
-    r = 1 + uint##bits##_scan(s+1, &tmp) ; \
-    if (r == 1) return 0 ; \
-    if (tmp == 0) *n = 0 ; \
-    else \
-    { \
-      if (tmp-1 > -(INT##bits##_MIN+1)) \
-      { \
-        tmp /= 10 ; \
-        r-- ; \
-      } \
-      *n = INT##bits##_MIN + (-(INT##bits##_MIN+1) - (tmp-1)) ; \
-    } \
-    return r ; \
-  } \
-  if (*s == '+') (s++, sign++) ; \
-  r = uint##bits##_scan(s, &tmp) ; \
-  if (!r) return 0 ; \
-  r += sign ; \
-  if (tmp > INT##bits##_MAX) \
-  { \
-    tmp /= 10 ; \
-    r-- ; \
-  } \
-  *n = tmp ; \
-  return r ; \
-} \
-
 #define SCANS0(bits) \
-size_t int##bits##0_scan (char const *s, int##bits##_t *u) \
+size_t int##bits##0_scan_base (char const *s, int##bits##_t *d, uint8_t base) \
 { \
-  size_t pos = int##bits##_scan(s, u) ; \
+  size_t pos = int##bits##_scan(s, d) ; \
   if (!pos) return (errno = EINVAL, 0) ; \
   if (!s[pos]) return pos ; \
-  errno = (fmtscan_num(s[pos], 10) < 10) ? EDOM : EINVAL ; \
+  errno = (fmtscan_num(s[pos], base) < base) ? ERANGE : EINVAL ; \
   return 0 ; \
 } \
 
@@ -122,43 +76,6 @@ size_t uint##bits##_fmtlist (char *s, uint##bits##_t const *tab, size_t n) \
     if (i < n-1) { len++ ; if (s) *s++ = ',' ; } \
   } \
   return len ; \
-} \
-
-#define FMTB(bits) \
-size_t uint##bits##_fmt_base (char *s, uint##bits##_t x, unsigned int base) \
-{ \
-  size_t len = 1 ; \
-  { \
-    uint##bits##_t q = x ; \
-    while (q >= base) { len++ ; q /= base ; } \
-  } \
-  if (s) \
-  { \
-    s += len ; \
-    do { *--s = fmtscan_asc(x % base) ; x /= base ; } while (x) ; \
-  } \
-  return len ; \
-} \
-
-#define FMTB0(bits) \
-size_t uint##bits##0_fmt_base (char *s, uint##bits##_t x, size_t n, unsigned int base) \
-{ \
-  size_t r = n ; \
-  size_t len = uint##bits##_fmt_base(0, x, base) ; \
-  if (s) \
-  { \
-    while (n-- > len) *s++ = '0' ; \
-    len = uint##bits##_fmt_base(s, x, base) ; \
-  } \
-  return len > r ? len : r ; \
-} \
-
-#define FMTS(bits) \
-size_t int##bits##_fmt (char *fmt, int##bits##_t n) \
-{ \
-  if (n >= 0) return uint##bits##_fmt(fmt, n) ; \
-  if (fmt) *fmt++ = '-' ; \
-  return 1 + uint##bits##_fmt(fmt, -n) ; \
 } \
 
 #define FMTSL(bits) \
