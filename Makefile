@@ -24,7 +24,6 @@ CPPFLAGS_ALL := $(CPPFLAGS_AUTO) $(CPPFLAGS)
 CFLAGS_ALL := $(CFLAGS_AUTO) $(CFLAGS)
 LDFLAGS_ALL := $(LDFLAGS_AUTO) $(LDFLAGS)
 LDLIBS_ALL := $(LDLIBS_AUTO) $(LDLIBS)
-REALCC = $(CROSS_COMPILE)$(CC)
 AR := $(CROSS_COMPILE)ar
 RANLIB := $(CROSS_COMPILE)ranlib
 STRIP := $(CROSS_COMPILE)strip
@@ -119,17 +118,17 @@ $(DESTDIR)$(includedir)/$(package)/%.h: src/include/$(package)/%.h
 	exec $(INSTALL) -D -m 644 $< $@
 
 %.o: %.c
-	exec $(REALCC) $(CPPFLAGS_ALL) $(CFLAGS_ALL) -c -o $@ $<
+	exec $(CC) $(CPPFLAGS_ALL) $(CFLAGS_ALL) -c -o $@ $<
 
 %.lo: %.c
-	exec $(REALCC) $(CPPFLAGS_ALL) $(CFLAGS_ALL) $(CFLAGS_SHARED) -c -o $@ $<
+	exec $(CC) $(CPPFLAGS_ALL) $(CFLAGS_ALL) $(CFLAGS_SHARED) -c -o $@ $<
 
 libskarnet.a.xyzzy: $(ALL_SOBJS)
 	exec $(AR) rc $@ $^
 	exec $(RANLIB) $@
 
 libskarnet.so.xyzzy: $(ALL_DOBJS)
-	exec $(REALCC) -o $@ $(CFLAGS_ALL) $(CFLAGS_SHARED) $(LDFLAGS_ALL) $(LDFLAGS_SHARED) -Wl,-soname,libskarnet.so.$(version_M) $^ $(SOCKET_LIB) $(SPAWN_LIB) $(SYSCLOCK_LIB) $(TAINNOW_LIB) $(TIMER_LIB) $(UTIL_LIB)
+	exec $(CC) -o $@ $(CFLAGS_ALL) $(CFLAGS_SHARED) $(LDFLAGS_ALL) $(LDFLAGS_SHARED) -Wl,-soname,libskarnet.so.$(version_M) $^ $(SOCKET_LIB) $(SPAWN_LIB) $(SYSCLOCK_LIB) $(TAINNOW_LIB) $(TIMER_LIB) $(UTIL_LIB)
 
 .PHONY: it all clean distclean tgz strip install install-data install-sysdeps install-dynlib install-lib install-include
 

@@ -363,10 +363,9 @@ trycc ${CC}
 if test -n "$cross" && test -n "$CC_AUTO" ; then
   b=`basename "$CC"`
   if test "${b}" = "${b##$cross}" ; then
-    echo "Warning: compiler $CC is declared as a cross-compiler for target $target but does not start with prefix $cross" 1>&2
+    echo "$0: warning: compiler $CC is declared as a cross-compiler for target $target but does not start with prefix $cross" 1>&2
   fi
 fi
-trycc ${cross}${CC}
 trycc ${cross}gcc
 trycc ${cross}clang
 trycc ${cross}cc
@@ -434,6 +433,9 @@ if test -n "$sysdeps" ; then
   timer_lib=$(cat $sysdeps/timer.lib)
   util_lib=$(cat $sysdeps/util.lib)
 else
+  if test -n "$cross" ; then
+    echo "$0: warning: possible cross-build attempt with a native compiler" 1>&2
+  fi
   sysdeps=sysdeps.cfg
   mkdir -p $sysdeps
   echo "$target" > $sysdeps/target
@@ -594,7 +596,7 @@ SYSCLOCK_LIB := ${sysclock_lib}
 TAINNOW_LIB := ${tainnow_lib}
 TIMER_LIB := ${timer_lib}
 UTIL_LIB := ${util_lib}
-CC := ${CC_AUTO##${cross}}
+CC := ${CC_AUTO}
 CPPFLAGS_AUTO := $CPPFLAGS_AUTO
 CPPFLAGS := $CPPFLAGS $CPPFLAGS_POST
 CFLAGS_AUTO := $CFLAGS_AUTO
