@@ -358,6 +358,13 @@ else
   cross=
 fi
 echo "Checking for C compiler..."
+trycc ${CC}
+if test -n "$cross" && test -n "$CC_AUTO" ; then
+  b=`basename "$CC"`
+  if test "${b}" = "${b##$cross}" ; then
+    echo "Warning: compiler $CC is declared as a cross-compiler for target $target but does not start with prefix $cross" 1>&2
+  fi
+fi
 trycc ${cross}${CC}
 trycc ${cross}gcc
 trycc ${cross}clang
