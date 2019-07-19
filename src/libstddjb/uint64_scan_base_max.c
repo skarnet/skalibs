@@ -1,8 +1,5 @@
 /* ISC license. */
 
-#include <stddef.h>
-#include <stdint.h>
-
 #include <skalibs/uint64.h>
 #include <skalibs/fmtscan.h>
 
