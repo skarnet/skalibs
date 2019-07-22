@@ -1,7 +1,7 @@
 /* ISC license. */
 
-#ifndef NONPOSIX_H
-#define NONPOSIX_H
+#ifndef SKALIBS_NONPOSIX_H
+#define SKALIBS_NONPOSIX_H
 
 
  /* Drop all pretense of standardness: some libc headers are *more*
@@ -11,6 +11,8 @@
 #undef _POSIX_C_SOURCE
 #undef _XOPEN_SOURCE
 
+
+#if defined(sun) || defined(__sun)
 
  /* Solaris: the socket API is not POSIX unless you enable this */
 
@@ -29,31 +31,34 @@
 #define __EXTENSIONS__
 #endif
 
+#endif /* sun || __sun */
 
- /* GNU: most extensions are unavailable unless you enable this */
+
+#if defined(__linux__) || defined(__GLIBC__)
+
+ /* GNU: most extensions are unavailable unless you enable _GNU_SOURCE.
+    Some Linux interfaces are also unavailable without it. */
 
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
 #endif
 
+#else /* __linux__ || __GLIBC__. */
 
- /* BSD and Linux libcs that are not glibc: _BSD_SOURCE opens up a
-    lot of extensions. Of course, glibc insisted on changing to a
-    different macro, because coordination and consistency would make
-    developers' life too easy. */
+ /* Various BSDs and others: _BSD_SOURCE opens up a lot of extensions.
+    We guard this under not-glibc because recent glibcs scream their
+    heads off if you define _BSD_SOURCE. Stay classy, GNU. */
 
-#ifdef __GLIBC__
-#ifndef _DEFAULT_SOURCE
-#define _DEFAULT_SOURCE
-#endif
-#else
 #ifndef _BSD_SOURCE
 #define _BSD_SOURCE
 #endif
-#endif
+
+#endif /* __linux__ || __GLIBC__ */
 
 
- /* NetBSD: of course they had to have their own macro too. */
+#ifdef __NetBSD__
+
+ /* NetBSD: of course they had to have their own macros too. */
 
 #ifndef _NETBSD_SOURCE
 #define _NETBSD_SOURCE
@@ -62,12 +67,7 @@
 #define _INCOMPLETE_XOPEN_C063
 #endif
 
-
- /* MacOS: needs this for full SUSv3 conformance. Standards are hard. */
-
-#ifndef _DARWIN_C_SOURCE
-#define _DARWIN_C_SOURCE
-#endif
+#endif /* __NetBSD__ */
 
 
  /* old versions of BSD and some broken GNU toolchains:
@@ -76,4 +76,4 @@
 
 #include <sys/types.h>
 
-#endif
+#endif /* SKALIBS_NONPOSIX_H */
