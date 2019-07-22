@@ -1,11 +1,7 @@
 /* ISC license. */
 
-/* OpenBSD needs that for EOVERFLOW. wtfbsdseriously */
-#ifndef _BSD_SOURCE
-#define _BSD_SOURCE
-#endif
-
 #include <skalibs/sysdeps.h>
+#include <skalibs/bsdsnowflake.h>
 #include <time.h>
 #include <errno.h>
 #include <skalibs/uint64.h>

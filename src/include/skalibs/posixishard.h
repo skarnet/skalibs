@@ -27,14 +27,4 @@ extern size_t strnlen (char const *, size_t) gccattr_pure ;
 #define MSG_NOSIGNAL 0
 #endif
 
-#if defined(__APPLE__) && defined(__MACH__)
-
- /* MacOS: needs this for full SUSv3 conformance. */
-
-#ifndef _DARWIN_C_SOURCE
-#define _DARWIN_C_SOURCE
-#endif
-
-#endif /* __APPLE__ && __MACH__ */
-
 #endif

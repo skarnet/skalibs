@@ -1,9 +1,6 @@
 /* ISC license. */
 
-#ifndef _BSD_SOURCE
-#define _BSD_SOURCE
-#endif
-
+#include <skalibs/bsdsnowflake.h>
 #include <sys/stat.h>
 #include <sys/mman.h>
 #include <stdint.h>

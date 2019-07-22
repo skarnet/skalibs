@@ -5,6 +5,7 @@
 #ifdef SKALIBS_HASSETGROUPS
 
 #include <skalibs/nonposix.h>
+#include <skalibs/posixishard.h>
 #include <string.h>
 #include <unistd.h>
 #include <grp.h>

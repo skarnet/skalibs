@@ -4,16 +4,7 @@
 
 #ifdef SKALIBS_HASPPOLL
 
-/* Just in case OpenBSD implements ppoll before fixing EOVERFLOW.
-   Stranger things have happened in the wonderful world of OpenBSD. */
-#ifndef _BSD_SOURCE
-#define _BSD_SOURCE
-#endif
-
-#ifndef _GNU_SOURCE
-#define _GNU_SOURCE
-#endif
-
+#include <skalibs/nonposix.h>
 #include <errno.h>
 #include <time.h>
 #include <poll.h>

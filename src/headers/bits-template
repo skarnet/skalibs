@@ -10,8 +10,8 @@ extern uint@BITS@_t uint@BITS@_bswap (uint@BITS@_t) ;
 #define UINT@BITS@_XFMT @XFMT@
 #define UINT@BITS@_BFMT @BFMT@
 
-#define uint@BITS@_fmt_base(s, u, base) uint64_fmt_generic(s, u, base)
-#define uint@BITS@0_fmt_base(s, u, n, base) uint640_fmt_generic(s, u, n, base)
+#define uint@BITS@_fmt_base uint64_fmt_generic
+#define uint@BITS@0_fmt_base uint640_fmt_generic
 #define uint@BITS@_fmt(s, u) uint@BITS@_fmt_base(s, (u), 10)
 #define uint@BITS@0_fmt(s, u, n) uint@BITS@0_fmt_base(s, u, (n), 10)
 #define uint@BITS@_ofmt(s, o) uint@BITS@_fmt_base(s, (o), 8)
@@ -37,7 +37,7 @@ extern size_t uint@BITS@0_scan_base (char const *, uint@BITS@_t *, uint8_t) ;
 
 extern size_t uint@BITS@_scanlist (uint@BITS@_t *, size_t, char const *, size_t *) ;
 
-#define int@BITS@_fmt_base(s, u, base) int64_fmt_generic(s, u, base)
+#define int@BITS@_fmt_base int64_fmt_generic
 #define int@BITS@_fmt(s, u) int@BITS@_fmt_base(s, (u), 10)
 #define int@BITS@_ofmt(s, o) int@BITS@_fmt_base(s, (o), 8)
 #define int@BITS@_xfmt(s, x) int@BITS@_fmt_base(s, (x), 16)
