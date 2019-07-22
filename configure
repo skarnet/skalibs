@@ -360,10 +360,19 @@ else
 fi
 echo "Checking for C compiler..."
 trycc ${CC}
-if test -n "$cross" && test -n "$CC_AUTO" ; then
+if test -n "$CC_AUTO" ; then
   b=`basename "$CC"`
-  if test "${b}" = "${b##$cross}" ; then
-    echo "$0: warning: compiler $CC is declared as a cross-compiler for target $target but does not start with prefix $cross" 1>&2
+  adjust_cross=false
+  if test "$b" != "$CC" ; then
+    adjust_cross=true
+    echo "$0: warning: compiler $CC is declared with its own path. If it's not accessible via PATH, you will need to pass AR, RANLIB and STRIP make variables to the make invocation." 1>&2
+  fi
+  if test -n "$cross" ; then
+    if test "$b" = "${b##$cross}" ; then
+      echo "$0: warning: compiler $CC is declared as a cross-compiler for target $target but does not start with prefix ${cross}" 1>&2
+    elif $adjust_cross ; then
+      cross=`dirname "$CC"`/"$cross"
+    fi
   fi
 fi
 trycc ${cross}gcc
