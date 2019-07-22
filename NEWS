@@ -3,7 +3,11 @@ Changelog for skalibs.
 In 2.9.0.0
 ----------
 
- - Refactoring of scanning and formatting functions.
+ - Bugfixes.
+ - Better support of out-of-path toolchains (among other things,
+that means better autotools emulation).
+ - Build more friendly to recent glibc.
+ - Refactoring and optimization of scanning and formatting functions.
 
 
 In 2.8.1.0
