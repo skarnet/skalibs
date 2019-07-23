@@ -137,10 +137,10 @@ libskarnet.so.xyzzy: $(ALL_DOBJS)
 src/include/$(package)/sysdeps.h: $(sysdeps)/sysdeps.h
 	exec cat < $< > $@
 
-src/include/$(package)/uint16.h: $(sysdeps)/sysdeps src/headers/bits-header src/headers/bits-footer src/headers/bits-lendian src/headers/bits-bendian src/headers/bits-template src/headers/uint64-include
+src/include/$(package)/uint16.h: $(sysdeps)/sysdeps src/headers/bits-header src/headers/bits-footer src/headers/bits-lendian src/headers/bits-bendian src/headers/bits-template src/headers/uint64-include src/include/$(package)/uint64.h
 	exec tools/gen-bits.sh $(sysdeps)/sysdeps 16 6 7 5 17 > $@
 
-src/include/$(package)/uint32.h: $(sysdeps)/sysdeps src/headers/bits-header src/headers/bits-footer src/headers/bits-lendian src/headers/bits-bendian src/headers/bits-template src/headers/uint64-include
+src/include/$(package)/uint32.h: $(sysdeps)/sysdeps src/headers/bits-header src/headers/bits-footer src/headers/bits-lendian src/headers/bits-bendian src/headers/bits-template src/headers/uint64-include src/include/$(package)/uint64.h
 	exec tools/gen-bits.sh $(sysdeps)/sysdeps 32 11 13 9 33 > $@
 
 src/include/$(package)/uint64.h: $(sysdeps)/sysdeps src/headers/bits-header src/headers/bits-footer src/headers/bits-lendian src/headers/bits-bendian src/headers/bits-template src/headers/uint64-ulong64 src/headers/uint64-noulong64 src/headers/uint64-defs src/headers/uint64-macros
