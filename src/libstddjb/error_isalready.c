@@ -8,7 +8,7 @@ int error_isalready (int e)
 {
   return e == EALREADY || e == EINPROGRESS
 #ifdef SKALIBS_BSD_SUCKS
-   || e == ADDRINUSE
+   || e == EADDRINUSE
 #endif
   ;
 }
