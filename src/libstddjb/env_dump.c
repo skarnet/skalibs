@@ -32,7 +32,8 @@ int env_dump (char const *dir, mode_t mode, char const *const *envp)
     size_t len = str_chr(*envp, '=') ;
     size_t vallen = strlen(*envp + len + 1) ;
     char fn[len + 1] ;
-    memcpy(fn, *envp, len + 1) ;
+    memcpy(fn, *envp, len) ;
+    fn[len] = 0 ;
     len = openwritenclose_at(fd, fn, *envp + len + 1, vallen) ;
     if (len < vallen) goto cerr ;
   }
