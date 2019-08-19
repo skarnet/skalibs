@@ -31,7 +31,7 @@ INSTALL := ./tools/install.sh
 
 TYPES := size uid gid pid time dev ino
 
-ALL_SRCS := $(wildcard src/lib*/*.c)
+ALL_SRCS := $(sort $(wildcard src/lib*/*.c))
 ALL_DOBJS := $(ALL_SRCS:%.c=%.lo)
 ifeq ($(strip $(STATIC_LIBS_ARE_PIC)),)
 ALL_SOBJS := $(ALL_SRCS:%.c=%.o)
