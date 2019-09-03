@@ -8,6 +8,11 @@ In 2.9.0.0
 that means better autotools emulation).
  - Build more friendly to recent glibc.
  - Refactoring and optimization of scanning and formatting functions.
+ - Refactoring of stopwatch/wallclock functions. The --enable-clock
+and --enable-monotonic configure switches have been removed.
+tain_now() can now be set at run time to use a wall clock (default,
+or via tain_now_set_wallclock()) or a stopwatch (via
+tain_now_set_stopwatch()), instead of it being fixed at build time.
 
 
 In 2.8.1.0

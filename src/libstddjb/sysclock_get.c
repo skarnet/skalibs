@@ -1,17 +1,9 @@
 /* ISC license. */
 
-#include <skalibs/config.h>
 #include <skalibs/sysdeps.h>
 #include <skalibs/tai.h>
 
-#ifdef SKALIBS_FLAG_USERT
-# ifndef SKALIBS_HASCLOCKRT
-#  undef SKALIBS_FLAG_USERT
-#  warning "SKALIBS_FLAG_USERT set but SKALIBS_HASCLOCKRT not found. Clearing SKALIBS_FLAG_USERT."
-# endif
-#endif
-
-#ifdef SKALIBS_FLAG_USERT
+#ifdef SKALIBS_HASCLOCKRT
 
 #include <time.h>
 

@@ -2,24 +2,16 @@
 
 /* MT-unsafe */
 
-#include <skalibs/config.h>
 #include <skalibs/sysdeps.h>
 
-#ifdef SKALIBS_FLAG_USERT
-# ifndef SKALIBS_HASCLOCKRT
-#  undef SKALIBS_FLAG_USERT
-#  warning "SKALIBS_FLAG_USERT set but SKALIBS_HASCLOCKRT not found. Clearing SKALIBS_FLAG_USERT."
-# endif
-#endif
-
-#ifndef SKALIBS_FLAG_USERT
+#ifndef SKALIBS_HASCLOCKRT
 # ifndef SKALIBS_HASSETTIMEOFDAY
-#  error "SKALIBS_FLAG_USERT clear but SKALIBS_HASSETTIMEOFDAY not found. How do your set your system clock?"
+#  error "neither clockrt nor settimeofday sysdeps are present. How do your set your system clock?"
 # endif
 #endif
 
 
-#ifdef SKALIBS_FLAG_USERT
+#ifdef SKALIBS_HASCLOCKRT
 
 #include <time.h>
 #include <skalibs/tai.h>

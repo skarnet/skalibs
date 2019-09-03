@@ -130,12 +130,9 @@ it fails.
 
 <p>
 <code> int sysclock_get (tain_t *a) </code> <br />
-Reads the current value of the system clock into *<em>a</em>, with
-a 1-nanosecond (resp. 1-microsecond ) precision if skalibs has been
-configured with (resp. without) the
-<a href="../flags.html#usert">--enable-clock</a> option.
-Returns 1 if it succeeds or 0 (and sets errno) if it
-fails. Note that despite being a <tt>tain_t</tt>, *<em>a</em>
+Reads the current value of the system clock (as in CLOCK_REALTIME) into *<em>a</em>.
+Returns 1 if it succeeds or 0 (and sets errno) if it fails.
+Note that despite being a <tt>tain_t</tt>, *<em>a</em>
 <strong>does not contain a TAI value</strong> - it only contains
 an internal, Y2038-safe representation of the value of the system
 clock, which should be either TAI-10 or UTC. You should not use
@@ -150,103 +147,106 @@ function directly unless you know exactly what you are doing.
 </p>
 
 <p>
-<code> int tain_sysclock (tain_t *a) </code> <br />
-Reads the current time into *<em>a</em>, as a TAI64N value,
-with a 1-nanosecond (resp. 1-microsecond) precision if skalibs
-has been configured with (resp. without) the
-<a href="../flags.html#usert">--enable-clock</a>
-option. Returns 1 if it succeeds or 0 (and sets errno) if it
-fails.
- Here <em>a</em> contains a valid TAI64N stamp, no matter what the
+<code> int tain_wallclock_read (tain_t *a) </code> <br />
+Reads the current time into *<em>a</em>, as a TAI64N value.
+Returns 1 if it succeeds or 0 (and sets errno) if it fails.
+Here <em>a</em> contains a valid TAI64N stamp, no matter what the
 system clock is set to: arithmetic operations can be performed
 on it.
 </p>
 
 <p>
 <code> int tain_setnow (tain_t const *a) </code> <br />
-Sets the current time to *<em>a</em>, with a 1-nanosecond
-(resp. 1-microsecond) precision if skalibs has been configured
-with (resp. without) the
-<a href="../flags.html#usert">--enable-clock</a>
-option. Returns 1 if it succeeds or 0 (and sets errno) if it
-fails. <em>a</em> must contain a valid TAI64N stamp; proper
+Sets the current time to *<em>a</em>.
+Returns 1 if it succeeds or 0 (and sets errno) if it fails.
+<em>a</em> must contain a valid TAI64N stamp; proper
 operations will be automatically run to convert that stamp into
 the right format for the system clock.
+</p>
+
+<p>
+<code> void tain_now_set_wallclock (void) </code> <br />
+Tells skalibs that future invocations of <tt>tain_now()</tt>
+(see below) should use a wall clock, i.e. the system time
+as returned by <tt>clock_gettime(CLOCK_REALTIME)</tt> or
+<tt>gettimeofday()</tt>. This is the default: it is not necessary
+to call this function before invoking <tt>tain_now()</tt> at the
+start of a program.
 </p>
 
 <h3> Stopwatch operations </h3>
 
 <p>
- The following 3 operations are only defined if your system
-provides the
+The following two operations can only succeed if your system provides the
 <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/clock_gettime.html">clock_gettime()</a>
-primitive with the CLOCK_MONOTONIC option.
+primitive with at least one of the CLOCK_MONOTONIC or CLOCK_BOOTTIME clocks.
+Otherwise, they will fail with errno set to ENOSYS.
 </p>
 
 <p>
-<code> int tain_clockmon_init (tain_t *offset) </code> <br />
-Initializes a stopwatch in *<em>offset</em>. The actual value of
+<code> int tain_stopwatch_init (clock_t cl, tain_t *offset) </code> <br />
+Initializes a stopwatch in *<em>offset</em>, using a clock named <em>cl</em>.
+Typically, <em>cl</em> is something like CLOCK_MONOTONIC, when it is defined
+by the system. The actual value of
 *<em>offset</em> is meaningless to the user; <em>offset</em>'s only
-use is to be given as a second parameter to <tt>tain_clockmon()</tt>.
+use is to be given as a second parameter to <tt>tain_stopwatch_read()</tt>.
 The function returns 1 if it succeeds or 0 (and sets errno) if it fails.
 </p>
 
 <p>
- What <tt>tain_clockmon_init()</tt> does is synchronize the "stopwatch
-clock" (CLOCK_MONOTONIC) to the system clock. Right after
-<tt>tain_clockmon_init()</tt> has been called, the absolute times given
-by <tt>tain_clockmon()</tt> and <tt>tain_sysclock()</tt> are similar. Then,
-depending on the accuracy of the system clock, a drift may appear; calling
-<tt>tain_clockmon_init()</tt> again resets that drift to zero.
+ What <tt>tain_stopwatch_init()</tt> does is synchronize the "stopwatch
+clock" to the system clock. Right after <tt>tain_stopwatch_init()</tt>
+has been called, the absolute times given
+by <tt>tain_stopwatch_read()</tt> and <tt>tain_wallclock_read()</tt> are
+the same. Then, depending on the accuracy of the system clock, a drift
+may appear; calling <tt>tain_stopwatch_init()</tt> again resets that drift
+to zero.
 </p>
 
 <p>
-<code> int tain_clockmon (tain_t *a, tain_t const *offset) </code> <br />
+<code> int tain_stopwatch_read (tain_t *a, clock_t cl, tain_t const *offset) </code> <br />
  Gives the absolute time, as a TAI64N value, in *<em>a</em>. This
 absolute time is computed as a linear increase (as measured with
-CLOCK_MONOTONIC) since the last time <tt>tain_clockmon_init()</tt>
-was called with parameter <em>offset</em>. <tt>tain_clockmon()</tt>
+the <em>cl</em> clock, which should be a monotonic clock such as
+CLOCK_MONOTONIC) since the last time <tt>tain_stopwatch_init()</tt>
+was called with parameter <em>offset</em>. <tt>tain_stopwatch_read()</tt>
 guarantees precise time interval measurements; however, the time it
-gives can slightly differ from the result of <tt>tain_sysclock()</tt>.
+gives can slightly differ from the result of <tt>tain_wallclock_read()</tt>.
 The function returns 1 if it succeeds or 0 (and sets errno) if it fails.
+</p>
+
+<p>
+<code> void tain_now_set_stopwatch (void) </code> <br />
+Tells skalibs that future invocations of <tt>tain_now()</tt>
+(see below) should use a stopwatch, i.e. the system time
+as returned by <tt>clock_gettime(CLOCK_MONOTONIC)</tt> or similar,
+if supported by the system. This is useful when it is more important
+for a program to compute unchanging time intervals no matter what the
+system clock does, than to display absolute time that is in sync with a
+human view of time (which is the cause and reason of most system clock
+jumps). <br />
+If no monotonic clock is supported by the system, this function does
+nothing (and <tt>tain_now()</tt> will keep using a wall clock).
 </p>
 
 <h3> All-purpose time reading </h3>
 
 <p>
-<code> int tain_init (void) </code> <br />
-If skalibs has been configured with the
-<a href="../flags.html#usemon">--enable-monotonic</a> option: this
-function initializes a process-global stopwatch, that future
-<tt>tain_now</tt> invocations will depend on.
-Without the <a href="../flags.html#usemon">--enable-monotonic</a> option: this
-function does nothing.
-The function returns 1 if it succeeds or 0 (and sets errno) if it fails.
-</p>
-
-<p>
 <code> int tain_now (tain_t *a) </code> <br />
 Writes the current time, as a TAI value, to *<em>a</em>. This is the
-function you should use to read time by default. It returns 1 if it succeeds or
+function you should use by default. It returns 1 if it succeeds or
 0 (and sets errno) if it fails.
 </p>
 
 <p>
- If skalibs has been configured with the
-<a href="../flags.html#usemon">--enable-monotonic</a> option:
-<tt>tain_now()</tt> is computed as a linear increase from the last time
-<tt>tain_init()</tt> was called. (If <tt>tain_init()</tt> has never
-been called before, the first invocation of <tt>tain_now()</tt>
-automatically calls <tt>tain_init()</tt>.)
- Without the <a href="../flags.html#usemon">--enable-monotonic</a> option:
-<tt>tain_now()</tt> is the same as <tt>tain_sysclock()</tt>.
-</p>
-
-<p>
- If the above is unclear to you: just use <tt>tain_now()</tt>
-everytime you need to read time, and you will always get a reasonable
-approximation of the current time, in a format suited for arithmetic
-computations.
+ <tt>tain_now()</tt> relies on the concept that there is One True Time Source
+for the process, and that is where it reads time from. By default, the
+One True Time Source is the system clock (a wall clock), and <tt>tain_now()</tt>
+is actually an alias to <tt>tain_wallclock_read()</tt>. At the start of a
+program, calling <tt>tain_now_set_stopwatch()</tt> will define a monotonic
+clock (if supported by the system) as the One True Time Source, which will
+make <tt>tain_now()</tt> resistant to system clock jumps, but will also
+make it unsuitable for timestamping.
 </p>
 
 <h3> Converting to/from libc representations </h3>

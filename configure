@@ -42,8 +42,6 @@ $package options:
   --disable-ipv6                do not build IPv6 support [enabled]
   --enable-iopause-select       prefer select() over poll() for iopause implementation [disabled]
   --enable-tai-clock            assume the system clock is TAI-10 instead of UTC [disabled]
-  --enable-clock                use clock_gettime() instead of gettimeofday() [disabled]
-  --enable-monotonic            count time with CLOCK_MONOTONIC instead of CLOCK_REALTIME
   --with-default-path=PATH      default executable search path [/usr/bin:/bin]
 
 EOF
@@ -241,8 +239,6 @@ slashpackage=false
 ipv6=true
 select=false
 taiclock=false
-clockrt=false
-clockmon=false
 ddefaultpath=/usr/bin:/bin
 defaultpath=$ddefaultpath
 dpathorig=true
@@ -284,10 +280,8 @@ for arg ; do
     --disable-iopause-select|--enable-iopause-select=no) select=false ;;
     --enable-tai-clock|--enable-tai-clock=yes) taiclock=true ;;
     --disable-tai-clock|--enable-tai-clock=no) taiclock=false ;;
-    --enable-clock|--enable-clock=yes) clockrt=true ;;
-    --disable-clock|--enable-clock=no) clockrt=false ;;
-    --enable-monotonic|--enable-monotonic=yes) clockmon=true ;;
-    --disable-monotonic|--enable-monotonic=no) clockmon=false ;;
+    --enable-monotonic|--enable-monotonic=yes) echo "$0: warning: --enable-monotonic is now obsolete" 1>&2 ;;
+    --disable-monotonic|--enable-monotonic=no) ;;
     --with-default-path=*) defaultpath=${arg#*=} ; dpathorig=false ;;
     --without-default-path) defaultpath=$ddefaultpath ; dpathorig=true ;;
     --enable-*|--disable-*|--with-*|--without-*|--*dir=*) ;;
@@ -458,11 +452,6 @@ else
 #undef SKALIBS_TARGET
 #define SKALIBS_TARGET "$target"
 
-#undef SKALIBS_BSD_SUCKS
-#if defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__) || defined(__bsdi__) || defined(__DragonFly__)
-# define SKALIBS_BSD_SUCKS
-#endif
-
 EOF
 
   exec 3>&1
@@ -474,23 +463,19 @@ EOF
 
   hasclock=true
   sysclock_lib=`trylibs clockrt 'clock_gettime()' -lrt` || hasclock=false
-  if $clockrt ; then
-    tainnow_lib=$sysclock_lib
-  else
-    tainnow_lib=
-  fi
+  tainnow_lib=$sysclock_lib
   echo "$sysclock_lib" > $sysdeps/sysclock.lib
   echo "$tainnow_lib" > $sysdeps/tainnow.lib
   echo "#undef ${package_macro_name}_HASCLOCKRT" >> $sysdeps/sysdeps.h
   if $hasclock ; then
     echo 'clockrt: yes' >> $sysdeps/sysdeps
     echo "#define ${package_macro_name}_HASCLOCKRT" >> $sysdeps/sysdeps.h
-    echo >> $sysdeps/sysdeps.h
-    choose cl clockmon CLOCKMON CLOCK_MONOTONIC $sysclock_lib
   else
     echo 'clockrt: no' >> $sysdeps/sysdeps
-    echo >> $sysdeps/sysdeps.h
   fi
+  echo >> $sysdeps/sysdeps.h
+  choose cl clockmon CLOCKMON CLOCK_MONOTONIC $sysclock_lib
+  choose cl clockboot CLOCKBOOT CLOCK_BOOTTIME $sysclock_lib
 
   hasspawn=true
   spawn_lib=`trylibs posixspawn 'posix_spawn()' -lrt` || hasspawn=false
@@ -663,16 +648,6 @@ if $taiclock ; then
   echo "#define ${package_macro_name}_FLAG_CLOCKISTAI"
 else
   echo "#undef ${package_macro_name}_FLAG_CLOCKISTAI"
-fi
-if $clockrt ; then
-  echo "#define ${package_macro_name}_FLAG_USERT"
-else
-  echo "#undef ${package_macro_name}_FLAG_USERT"
-fi
-if $clockmon ; then
-  echo "#define ${package_macro_name}_FLAG_USEMON"
-else
-  echo "#undef ${package_macro_name}_FLAG_USEMON"
 fi
 if $ipv6 ; then
   echo "#define ${package_macro_name}_FLAG_WANTIPV6"

@@ -23,6 +23,12 @@
  <li> The configure script now emulates autotools-created configure scripts
 more closely. In particular, it's now possible to declare an out-of-path
 compiler in <tt>CC</tt>. </li>
+ <li> <tt>tain_*</tt> functions dealing with wall clocks and stopwatches
+have been refactored. The <tt>--enable-clock</tt> and </tt>--enable-monotonic</tt>
+configure switches have been removed. <tt>tain_now()</tt> can now be told at run
+time to use a wall clock (default, or via <tt>tain_now_set_wallclock()</tt>) or a
+stopwatch (via <tt>tain_now_set_stopwatch()</tt>), instead of it being fixed at
+build time. </li>
 </ul>
 
 <h2> in 2.8.1.0 </h2>

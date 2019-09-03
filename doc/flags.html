@@ -175,36 +175,6 @@ and <tt>settimeofday()</tt> interfaces will be used. This is the default,
 and it's usually safe.
 </p>
 
-<a name="usemon"><h3> --enable-monotonic </h3></a>
-
-<p>
- Unless you have an accurate hardware system clock <em>and</em> you set it
-on a linear time scale such as TAI-10 instead of UTC (see above), it is
-generally a bad idea to trust the system clock for precise time interval
-measurements. Single Unix recommends the use of <tt>clock_gettime()</tt>
-with the CLOCK_MONOTONIC option to do such measurements: a stopwatch, not
-a wall clock. However:
-</p>
-
-<ul>
- <li> CLOCK_MONOTONIC is even less portable than CLOCK_REALTIME. </li>
- <li> It's a bit tricky to emulate absolute time calculations based on
-CLOCK_MONOTONIC. </li>
-</ul>
-
-<p>
- If <tt>--enable-monotonic</tt> is set, then the absolute time given by the
-<tt>tain_now()</tt> call will be computed with CLOCK_MONOTONIC. This
-will ensure precise time arithmetic but may drift away from the system
-clock.
-</p>
-
-<p>
- Otherwise, <tt>tain_now()</tt> will
-return a time based on the system clock, and not use CLOCK_MONOTONIC.
-This is the default.
-</p>
-
 <a name="noipv6"><h3> --disable-ipv6 </h3></a>
 
 <p>
