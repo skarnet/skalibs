@@ -630,7 +630,7 @@ src/libstddjb/tain_infinite_relative.o src/libstddjb/tain_infinite_relative.lo: 
 src/libstddjb/tain_less.o src/libstddjb/tain_less.lo: src/libstddjb/tain_less.c src/include/skalibs/tai.h
 src/libstddjb/tain_nano500.o src/libstddjb/tain_nano500.lo: src/libstddjb/tain_nano500.c src/include/skalibs/tai.h
 src/libstddjb/tain_now.o src/libstddjb/tain_now.lo: src/libstddjb/tain_now.c src/include/skalibs/tai.h
-src/libstddjb/tain_now_set_stopwatch.o src/libstddjb/tain_now_set_stopwatch.lo: src/libstddjb/tain_now_set_stopwatch.c src/include/skalibs/tai.h
+src/libstddjb/tain_now_set_stopwatch.o src/libstddjb/tain_now_set_stopwatch.lo: src/libstddjb/tain_now_set_stopwatch.c src/include/skalibs/sysdeps.h src/include/skalibs/tai.h
 src/libstddjb/tain_now_set_wallclock.o src/libstddjb/tain_now_set_wallclock.lo: src/libstddjb/tain_now_set_wallclock.c src/include/skalibs/tai.h
 src/libstddjb/tain_pack.o src/libstddjb/tain_pack.lo: src/libstddjb/tain_pack.c src/include/skalibs/tai.h src/include/skalibs/uint32.h
 src/libstddjb/tain_pack_little.o src/libstddjb/tain_pack_little.lo: src/libstddjb/tain_pack_little.c src/include/skalibs/tai.h src/include/skalibs/uint32.h

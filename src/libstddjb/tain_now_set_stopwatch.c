@@ -2,6 +2,7 @@
 
 /* MT-unsafe */
 
+#include <skalibs/sysdeps.h>
 #include <skalibs/tai.h>
 
 #if defined(SKALIBS_HASCLOCKRT) && (defined(SKALIBS_HASCLOCKMON) || defined(SKALIBS_HASCLOCKBOOT))
