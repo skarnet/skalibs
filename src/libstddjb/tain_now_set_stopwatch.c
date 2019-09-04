@@ -4,11 +4,11 @@
 
 #include <skalibs/tai.h>
 
-#if defined(SKALIBS_HAS_CLOCKRT) && (defined(SKALIBS_HAS_CLOCKMON) || defined(SKALIBS_HAS_CLOCKBOOT))
+#if defined(SKALIBS_HASCLOCKRT) && (defined(SKALIBS_HASCLOCKMON) || defined(SKALIBS_HASCLOCKBOOT))
 
 #include <time.h>
 
-#ifdef SKALIBS_HAS_CLOCKMON
+#ifdef SKALIBS_HASCLOCKMON
 # define SKALIBS_STOPWATCH CLOCK_MONOTONIC
 #else
 # define SKALIBS_STOPWATCH CLOCK_BOOTTIME
