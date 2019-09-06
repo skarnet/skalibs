@@ -17,21 +17,24 @@
 
 static tain_t offset ;
 
-static int tain_now_stopwatch (tain_t *a)
+static int tain_now_stopwatch (tain_t *now)
 {
-  return tain_stopwatch_read(a, SKALIBS_STOPWATCH, &offset) ;
+  return tain_stopwatch_read(now, SKALIBS_STOPWATCH, &offset) ;
 }
 
-void tain_now_set_stopwatch (void)
+int tain_now_set_stopwatch (tain_t *now)
 {
-  if (!tain_stopwatch_init(SKALIBS_STOPWATCH, &offset)) return ;
+  if (!tain_stopwatch_init(now, SKALIBS_STOPWATCH, &offset))
+    return tain_now_set_wallclock(now) ;
   tain_now = &tain_now_stopwatch ;
+  return 1 ;
 }
 
 #else
 
-void tain_now_set_stopwatch (void)
+int tain_now_set_stopwatch (tain_t *now)
 {
+  return tain_now_set_wallclock(now) ;
 }
 
 #endif

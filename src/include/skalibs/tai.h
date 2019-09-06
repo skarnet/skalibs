@@ -94,15 +94,17 @@ extern int sysclock_from_tain (tain_t *, tain_t const *) ;
 extern tain_clockread_func_t sysclock_get ;
 extern tain_clockread_func_t tain_wallclock_read ;
 #define tain_wallclock_read_g() tain_wallclock_read(&STAMP)
-extern int tain_stopwatch_init (clock_t, tain_t *) ;
+extern int tain_stopwatch_init (tain_t *, clock_t, tain_t *) ;
 extern int tain_stopwatch_read (tain_t *, clock_t, tain_t const *) ;
 #define tain_stopwatch_read_g(cl, offset) tain_stopwatch_read(&STAMP, (cl), offset)
 extern tain_clockread_func_t_ref tain_now ;
 #define tain_now_g() (*tain_now)(&STAMP)
 #define tain_copynow(t) (*(t) = STAMP)
 
-extern void tain_now_set_wallclock (void) ;
-extern void tain_now_set_stopwatch (void) ;
+extern tain_clockread_func_t tain_now_set_wallclock ;
+#define tain_now_set_wallclock_g() tain_now_set_wallclock(&STAMP)
+extern tain_clockread_func_t tain_now_set_stopwatch ;
+#define tain_now_set_stopwatch_g() tain_now_set_stopwatch(&STAMP)
 
 extern int sysclock_set (tain_t const *) ;
 extern int tain_setnow (tain_t const *) ;
