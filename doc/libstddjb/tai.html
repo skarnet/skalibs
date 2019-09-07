@@ -165,11 +165,13 @@ the right format for the system clock.
 </p>
 
 <p>
-<code> void tain_now_set_wallclock (void) </code> <br />
+<code> int tain_now_set_wallclock (tain_t *a) </code> <br />
 Tells skalibs that future invocations of <tt>tain_now()</tt>
 (see below) should use a wall clock, i.e. the system time
 as returned by <tt>clock_gettime(CLOCK_REALTIME)</tt> or
-<tt>gettimeofday()</tt>. This is the default: it is not necessary
+<tt>gettimeofday()</tt>. Also reads the current time into *<em>a</em>.
+Returns 1 if it succeeds or 0 (and sets errno) if it fails.
+A wall clock is the default: it is not necessary
 to call this function before invoking <tt>tain_now()</tt> at the
 start of a program.
 </p>
@@ -184,13 +186,15 @@ Otherwise, they will fail with errno set to ENOSYS.
 </p>
 
 <p>
-<code> int tain_stopwatch_init (clock_t cl, tain_t *offset) </code> <br />
+<code> int tain_stopwatch_init (tain_t *a, clock_t cl, tain_t *offset) </code> <br />
 Initializes a stopwatch in *<em>offset</em>, using a clock named <em>cl</em>.
 Typically, <em>cl</em> is something like CLOCK_MONOTONIC, when it is defined
 by the system. The actual value of
 *<em>offset</em> is meaningless to the user; <em>offset</em>'s only
 use is to be given as a second parameter to <tt>tain_stopwatch_read()</tt>.
 The function returns 1 if it succeeds or 0 (and sets errno) if it fails.
+On success, the current time, as given by the <em>system clock</em> (a
+wall clock), is returned in *<em>a</em>.
 </p>
 
 <p>
@@ -216,7 +220,7 @@ The function returns 1 if it succeeds or 0 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> void tain_now_set_stopwatch (void) </code> <br />
+<code> int tain_now_set_stopwatch (tain_t *a) </code> <br />
 Tells skalibs that future invocations of <tt>tain_now()</tt>
 (see below) should use a stopwatch, i.e. the system time
 as returned by <tt>clock_gettime(CLOCK_MONOTONIC)</tt> or similar,
@@ -226,7 +230,11 @@ system clock does, than to display absolute time that is in sync with a
 human view of time (which is the cause and reason of most system clock
 jumps). <br />
 If no monotonic clock is supported by the system, this function does
-nothing (and <tt>tain_now()</tt> will keep using a wall clock).
+not change what <tt>tain_now()</tt> refers to (i.e. it will keep
+referring to the system clock). <br />
+Returns 1 on success and 0 (and sets errno) on failure. On success,
+the current time, as given by the <em>system clock</em> (a wall clock),
+is returned in *<em>a</em>.
 </p>
 
 <h3> All-purpose time reading </h3>
@@ -248,6 +256,21 @@ clock (if supported by the system) as the One True Time Source, which will
 make <tt>tain_now()</tt> resistant to system clock jumps, but will also
 make it unsuitable for timestamping.
 </p>
+
+<p>
+ In other words: the <em>first</em> time you need to read the clock, or
+at the start of your program, you should use
+<tt>tain_now_set_wallclock()</tt> or <tt>tain_now_set_stopwatch()</tt>
+depending on whether you want the One True Time Source to be the system
+clock (CLOCK_REALTIME or <tt>gettimeofday()</tt>) or a stopwatch
+(CLOCK_MONOTONIC, if supported). Afterwards, every time you need to read
+from that time source, use <tt>tain_now()</tt>. skalibs functions that
+may block, such as <tt>iopause_g</tt>, internally call <tt>tain_now()</tt>
+to update the timestamp they're using, so they will use the time source
+you have defined. (Functions ending in <tt>_g</tt>
+use the STAMP global variable to store the current timestamp.)
+</p>
+
 
 <h3> Converting to/from libc representations </h3>
 
