@@ -57,56 +57,36 @@ options must be the valid paths for <strong>run-time</strong>. </li>
 DESTDIR=<em>stage</em></tt>. </li>
 </ul>
 
-<h2> Support for build-time options </h2>
+<h2> Support for build-time options and bypassing target execution tests </h2>
 
 <p>
- skalibs now uses a standard <tt>./configure &amp;&amp; make &amp;&amp; make install</tt>
+ skalibs uses a standard <tt>./configure &amp;&amp; make &amp;&amp; make install</tt>
 process, and cross-compiling build-time options can be given on the
 <tt>./configure</tt> command line.
 </p>
 
-<h2> Bypassing the build-time tests </h2>
-
 <p>
- This is the hardest part of cross-compilation, and very few build systems
-get it right. (GNU autotools does not, which is one of the reasons why
-skarnet.org packages do not use autotools.)
+ skalibs performs a certain number of build-time tests, to collect
+behaviour information on the target architecture. Most of these tests
+work when cross-compiling, because they only involve characteristics
+of the target that the cross-toolchain knows at build time; but some
+actually require code execution on the target, and so they cannot be
+performed when cross-compiling. For those, you have to manually
+give a special option to configure, to tell the build system what the
+behaviour of the target architecture is. The option is of the form
+<tt>--with-sysdep-<em>key</em>=<em>value</em></tt>, where <em>key</em>
+is the name of the sysdep (i.e. the element of target behaviour that
+is being tested), and <em>value</em> the associated value, most of
+the time <tt>yes</tt> or <tt>no</tt>.
 </p>
 
 <p>
- Native build procedures usually perform build-time tests: they compile
-executables and run them (on the build platform, which is the same as
-the target platform) to check for features and system quirks. skalibs
-does exactly that: the <tt>./configure</tt> step performs tests on the
-build platform and stores the system-dependent results in a directory
-that it calls the <em>sysdeps</em> for this platform.
-</p>
-
-<p>
-But in a
-cross-compilation environment, build-time tests are invalid, since the build
-platform and the target platform differ.
- There is only one way to cross-compile portable code without resorting
-to build-time autodetection:
-<strong>you must provide by hand the sysdeps for your target
-architecture</strong>, via the --with-sysdeps option to configure.
-</p>
-
-<p>
- The easiest way to get the correct sysdeps for a target achitecture is
-to natively run skalibs' <tt>./configure</tt> script on that target,
-and steal the produced sysdeps files, which are normally written to the
-<tt>./sysdeps.cfg</tt> directory.
-Doing this is easy with a virtual machine, qemu for instance.
-You could also (politely) ask for precompiled sysdeps on the
-skaware mailing-list, if you cannot find them anywhere on the Internet.
-</p>
-
-<h2> Credits </h2>
-
-<p>
-<a href="http://www.kegel.com/">Dan Kegel</a> brought up the need for a
-clean cross-compilation system.
+ At all times, <tt>./configure --help</tt> provides the list of sysdeps
+you need to provide a <tt>--with-sysdep-*</tt> option for. As of
+skalibs-2.9.0.0, there is only one such sysdep, named <tt>devurandom</tt>,
+and the value should be <tt>yes</tt> if the target has a valid
+pseudorandom generation device in <tt>/dev/urandom</tt>, and <tt>no</tt>
+otherwise.
 </p>
 
 </body>

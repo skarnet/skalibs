@@ -27,7 +27,6 @@ Fine tuning of the installation directories:
  includedir will be /usr/include and sysdepdir will be /usr/lib/$package/sysdeps.
 
 Dependencies:
-  --with-sysdeps=DIR            use provided sysdeps in DIR [autodetected]
   --with-include=DIR            add DIR to the list of searched directories for headers
   --with-lib=DIR                add DIR to the list of searched directories for static libraries
   --with-dynlib=DIR             add DIR to the list of searched directories for shared libraries
@@ -44,6 +43,10 @@ $package options:
   --enable-tai-clock            assume the system clock is TAI-10 instead of UTC [disabled]
   --with-default-path=PATH      default executable search path [/usr/bin:/bin]
 
+Sysdeps autodetection override:
+  --with-sysdep-X=yes|no|value  override sysdep X with the given value [autodetected]
+List of mandatory X for cross-compiling: devurandom
+ 
 EOF
   exit 0
 }
@@ -71,7 +74,7 @@ EOF
 }
 
 fail () {
-  echo "$*"
+  echo "$*" 1>&2
   exit 1
 }
 
@@ -126,8 +129,8 @@ tryldflag () {
 
 iscached ()
 {
-  if test -n "$sysdepspre" && grep -qF "${1}: " "$sysdepspre" ; then
-    v=`grep -F "${1}: " "$sysdepspre" | tail -n 1 | awk '{print $2;}'`
+  if test -r "$tmps" && grep -qF "${1}: " "$tmps" ; then
+    v=`grep -F "${1}: " "$tmps" | tail -n 1 | awk '{print $2;}'`
     echo "${1}: $v" >> "$sysdeps/sysdeps"
     echo "  ... user-provided: $v"
     return 0 ;
@@ -139,8 +142,8 @@ iscached ()
 choose () {
   what="$1"
   name="$2"
-  if iscached "$name" ; then return ; fi
   echo "Checking whether system has $3..."
+  if iscached "$name" ; then return ; fi
   shift 3
   libs="$*"
   r=true
@@ -154,9 +157,13 @@ choose () {
   fi
   if $r ; then
     case "$what" in
-     *r*) ./try$name >/dev/null 2>&1 ; r=$?
+     *r*) if test -n "$cross" ; then
+            rm -f try$name.o try$name
+            fail "$0: sysdep $name cannot be autodetected when cross-compiling. Please manually provide a value with the --with-sysdep-${name}=yes|no|... option."
+          fi
+          ./try$name >/dev/null 2>&1 ; r=$?
           case "$r" in
-           111) echo "  ... test crashed, aborting." ; exit 111 ;;
+           111) fail "$0: test crashed, aborting." ;;
            0) r=true ;;
            *) r=false ;;
           esac
@@ -242,13 +249,11 @@ EOF
         fi
       done
       rm -f "$tmpc"
-      echo "$0: error: unable to determine endianness according to $i" 1>&2
-      exit 1
+      fail "$0: error: unable to determine endianness according to $i"
     fi
   done
   rm -f "$tmpc"
-  echo "$0: error: unable to determine endianness: no endian.h found" 1>&2
-  exit 1
+  fail "$0: error: unable to determine endianness: no endian.h found"
 }
 
 trysigned () {
@@ -276,8 +281,7 @@ EOF
     fi
   done
   rm -f "$tmpc"
-  echo "$0: error: unable to determine the size of $t on the target" 1>&2
-  exit 1
+  fail "$0: error: unable to determine the size of $t on the target"
 }
 
 trystdtype () {
@@ -348,7 +352,7 @@ libdir='$prefix/lib/$package'
 includedir='$prefix/include'
 datadir='$prefix/etc'
 sysdepdir='$prefix/lib/$package/sysdeps'
-sysdepspre=
+sysdeplist=
 shared=true
 static=true
 allpic=true
@@ -378,7 +382,6 @@ for arg ; do
     --includedir=*) includedir=${arg#*=} ;;
     --datadir=*) datadir=${arg#*=} ;;
     --sysdepdir=*) sysdepdir=${arg#*=} ;;
-    --with-sysdeps=*) sysdepspre=${arg#*=} ;;
     --with-include=*) var=${arg#*=} ; stripdir var ; addincpath="$addincpath -I$var" ;;
     --with-lib=*) var=${arg#*=} ; stripdir var ; addlibspath="$addlibspath -L$var" ; vpaths="$vpaths $var" ;;
     --with-dynlib=*) var=${arg#*=} ; stripdir var ; addlibdpath="$addlibdpath -L$var" ; vpathd="$vpathd $var" ;;
@@ -401,6 +404,8 @@ for arg ; do
     --disable-monotonic|--enable-monotonic=no) ;;
     --with-default-path=*) defaultpath=${arg#*=} ; dpathorig=false ;;
     --without-default-path) defaultpath=$ddefaultpath ; dpathorig=true ;;
+    --with-sysdep-*=*) sysdeplist="$sysdeplist ${arg#--with-sysdep-}" ;;
+    --without-sysdep-*) sysdeplist="$sysdeplist ${arg#--with-sysdep-}=no" ;; 
     --enable-*|--disable-*|--with-*|--without-*|--*dir=*) ;;
     --host=*|--target=*) target=${arg#*=} ;;
     --build=*) build=${arg#*=} ;;
@@ -439,12 +444,13 @@ while : ; do
   i=$(($i+1))
   tmpc="./tmp-configure-$$-$PPID-$i.c"
   tmpe="./tmp-configure-$$-$PPID-$i.tmp"
+  tmps="./tmp-configure-$$-$PPID-$i.sysdeps"
   2>|/dev/null > "$tmpc" && break
   2>|/dev/null > "$tmpe" && break
   test "$i" -gt 50 && fail "$0: cannot create temporary files"
 done
 set +C
-trap 'rm -f "$tmpc" "$tmpe"' EXIT ABRT INT QUIT TERM HUP
+trap 'rm -f "$tmpc" "$tmpe" "$tmps"' EXIT ABRT INT QUIT TERM HUP
 
 # Set slashpackage values
 if $slashpackage ; then
@@ -489,7 +495,7 @@ fi
 trycc ${cross}gcc
 trycc ${cross}clang
 trycc ${cross}cc
-test -n "$CC_AUTO" || { echo "$0: cannot find a C compiler" ; exit 1 ; }
+test -n "$CC_AUTO" || fail "$0: cannot find a C compiler"
 echo "  ... $CC_AUTO"
 echo "Checking whether C compiler works... "
 echo "typedef int x;" > "$tmpc"
@@ -536,97 +542,97 @@ if $shared ; then
   tryldflag LDFLAGS -Wl,--hash-style=both
 fi
 
-if test -n "$sysdepspre" ; then
-  if test ! -d "$sysdepspre" || test ! -f $sysdepspre/target ; then
-    echo "$0: error: $sysdepspre is not a valid sysdeps directory"
-    exit 1
-  fi
-  if [ "x$target" != "x$(cat $sysdepspre/target)" ] ; then
-    echo "$0: error: target $target does not match the contents of $sysdepspre/target"
-    exit 1
-  fi
-  echo "Using pre-computed sysdeps in $sysdepspre."
-  spawn_lib=$(cat $sysdepspre/spawn.lib)
-  socket_lib=$(cat $sysdepspre/socket.lib)
-  sysclock_lib=$(cat $sysdepspre/sysclock.lib)
-  timer_lib=$(cat $sysdepspre/timer.lib)
-  util_lib=$(cat $sysdepspre/util.lib)
-else
-  if test -n "$cross" ; then
-    echo "$0: warning: possible cross-build attempt with a native compiler" 1>&2
-  fi
-  sysdeps=sysdeps.cfg
-  mkdir -p $sysdeps
-  echo "$target" > $sysdeps/target
-  :> "$sysdeps/sysdeps"
-
-  exec 3>&1
-  util_lib=
-  echo > $sysdeps/util.lib
-
-  socket_lib=`trylibs lsock 'accessible socket functions' -lsocket -lnsl` || fail "$0: unable to determine socket.lib sysdep"
-  echo "$socket_lib" > $sysdeps/socket.lib
-
-  hasclock=yes
-  sysclock_lib=`trylibs clockrt 'clock_gettime()' -lrt` || hasclock=no
-  echo "$sysclock_lib" > $sysdeps/sysclock.lib
-  echo "clockrt: $hasclock" >> $sysdeps/sysdeps
-
-  choose cl clockmon CLOCK_MONOTONIC $sysclock_lib
-  choose cl clockboot CLOCK_BOOTTIME $sysclock_lib
-
-  hasspawn=yes
-  spawn_lib=`trylibs posixspawn 'posix_spawn()' -lrt` || hasspawn=no
-  echo "$spawn_lib" > $sysdeps/spawn.lib
-  echo "posixspawn: $hasspawn" >> $sysdeps/sysdeps
-
-  hastimer=yes
-  timer_lib=`trylibs timer 'timer_create()' -lrt` || hastimer=no
-  echo "$timer_lib" > $sysdeps/timer.lib
-  echo "timer: $hastimer" >> $sysdeps/sysdeps
-  exec 3>&-
-
-  tryendianness
-  trytypes
-  choose cl accept4 'accept4()'
-  choose c cmsgcloexec 'MSG_CMSG_CLOEXEC'
-  choose cl dirfd 'dirfd()'
-  choose cl eventfd 'eventfd()'
-  choose cl flock 'flock()'
-  choose cl getrandom 'getrandom()'
-  choose cl getpeereid 'getpeereid()'
-  choose cl sopeercred 'SO_PEERCRED'
-  choose cl getpeerucred 'getpeerucred()'
-  choose cl ipv6 'IPv6 support' $socket_lib
-  choose c msgdontwait 'MSG_DONTWAIT'
-  choose c odirectory 'O_DIRECTORY'
-  choose cl openat 'openat()'
-  choose cl linkat 'linkat()'
-  choose cl memmem 'memmem()'
-  choose cl pipe2 'pipe2()'
-  choose cl ppoll 'ppoll()'
-  choose cl revoke 'revoke()'
-  choose cl sendfile 'sendfile()'
-  choose cl setgroups 'setgroups()'
-  choose cl settimeofday 'settimeofday()'
-  choose cl signalfd 'signalfd()'
-  choose cl splice 'splice()'
-  choose cl strcasestr 'strcasestr()'
-  choose c strnlen 'strnlen()'
-  choose c uint64t 'uint64_t'
-  choose cl futimens 'futimens()'
-  choose cl futimes 'futimes()'
-  choose cl arc4random 'arc4random()'
-  choose cl arc4random_addrandom 'arc4random_addrandom()'
-  choose cl itimer 'setitimer()'
-  choose cl namespaces 'namespaces'
-  choose cl nsgetparent 'NS_GET_PARENT'
-  choose cl explicit_bzero 'explicit_bzero()'
-
-  choose clr devurandom '/dev/urandom'
-
+rm -f "$tmps"
+if test -n "$sysdeplist" ; then
+  :> "$tmps"
+  for i in $sysdeplist ; do
+    k=${i%%=*}
+    v=${i#*=}
+    if test "$v" = "true" ; then v=yes
+    elif test "$v" = "false" ; then v=no
+    fi
+    if grep -qF -e "${k}: " "$tmps" ; then
+      grep -vF -e "${k}: " "$tmps" > "$tmpe"
+      mv -f "$tmpe" "$tmps"
+    fi
+    echo "${k}: $v" >> "$tmps"
+  done
 fi
 
+sysdeps=sysdeps.cfg
+mkdir -p $sysdeps
+echo "$target" > $sysdeps/target
+:> "$sysdeps/sysdeps"
+
+exec 3>&1
+util_lib=
+echo > $sysdeps/util.lib
+
+socket_lib=`trylibs lsock 'accessible socket functions' -lsocket -lnsl` || fail "$0: unable to determine socket.lib sysdep"
+echo "$socket_lib" > $sysdeps/socket.lib
+
+hasclock=yes
+sysclock_lib=`trylibs clockrt 'clock_gettime()' -lrt` || hasclock=no
+echo "$sysclock_lib" > $sysdeps/sysclock.lib
+echo "clockrt: $hasclock" >> $sysdeps/sysdeps
+
+choose cl clockmon CLOCK_MONOTONIC $sysclock_lib
+choose cl clockboot CLOCK_BOOTTIME $sysclock_lib
+
+hasspawn=yes
+spawn_lib=`trylibs posixspawn 'posix_spawn()' -lrt` || hasspawn=no
+echo "$spawn_lib" > $sysdeps/spawn.lib
+echo "posixspawn: $hasspawn" >> $sysdeps/sysdeps
+
+hastimer=yes
+timer_lib=`trylibs timer 'timer_create()' -lrt` || hastimer=no
+echo "$timer_lib" > $sysdeps/timer.lib
+echo "timer: $hastimer" >> $sysdeps/sysdeps
+exec 3>&-
+
+tryendianness
+trytypes
+choose cl accept4 'accept4()'
+choose c cmsgcloexec 'MSG_CMSG_CLOEXEC'
+choose cl dirfd 'dirfd()'
+choose cl eventfd 'eventfd()'
+choose cl flock 'flock()'
+choose cl getrandom 'getrandom()'
+choose cl getpeereid 'getpeereid()'
+choose cl sopeercred 'SO_PEERCRED'
+choose cl getpeerucred 'getpeerucred()'
+choose cl ipv6 'IPv6 support' $socket_lib
+choose c msgdontwait 'MSG_DONTWAIT'
+choose c odirectory 'O_DIRECTORY'
+choose cl openat 'openat()'
+choose cl linkat 'linkat()'
+choose cl memmem 'memmem()'
+choose cl pipe2 'pipe2()'
+choose cl ppoll 'ppoll()'
+choose cl revoke 'revoke()'
+choose cl sendfile 'sendfile()'
+choose cl setgroups 'setgroups()'
+choose cl settimeofday 'settimeofday()'
+choose cl signalfd 'signalfd()'
+choose cl splice 'splice()'
+choose cl strcasestr 'strcasestr()'
+choose c strnlen 'strnlen()'
+choose c uint64t 'uint64_t'
+choose cl futimens 'futimens()'
+choose cl futimes 'futimes()'
+choose cl arc4random 'arc4random()'
+choose cl arc4random_addrandom 'arc4random_addrandom()'
+choose cl itimer 'setitimer()'
+choose cl namespaces 'namespaces'
+choose cl nsgetparent 'NS_GET_PARENT'
+choose cl explicit_bzero 'explicit_bzero()'
+
+# And here are the evil irreducible sysdeps.
+
+choose clr devurandom '/dev/urandom'
+
+
+rm -f "$tmps"
 echo "Creating config.mak..."
 cmdline=$(quote "$0")
 for i ; do cmdline="$cmdline $(quote "$i")" ; done
