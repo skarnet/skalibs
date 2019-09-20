@@ -1,24 +1,10 @@
 /* ISC license. */
 
-#undef _POSIX_C_SOURCE
-#undef _XOPEN_SOURCE
-
-#ifndef _GNU_SOURCE
-#define _GNU_SOURCE
-#endif
-
-#include <sys/types.h>
-#include <unistd.h>
-#include <sys/syscall.h>
-
-static int getrandom (void *buf, size_t buflen, unsigned int flags)
-{
-  return syscall(SYS_getrandom, buf, buflen, flags) ;
-}
+#include <sys/random.h>
 
 int main (void)
 {
   char buf[4] ;
-  if (getrandom(buf, 4, 0) < 0) return 1 ;
+  if (getrandom(buf, 4, GRND_NONBLOCK) < 0) return 1 ;
   return 0 ;
 }

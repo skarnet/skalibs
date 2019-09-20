@@ -134,8 +134,8 @@ libskarnet.so.xyzzy: $(ALL_DOBJS)
 
 .DELETE_ON_ERROR:
 
-src/include/$(package)/sysdeps.h: $(sysdeps)/sysdeps.h
-	exec cat < $< > $@
+src/include/$(package)/sysdeps.h: $(sysdeps)/sysdeps $(sysdeps)/target
+	exec tools/gen-sysdepsh.sh `cat $(sysdeps)/target` < $(sysdeps)/sysdeps > $@
 
 src/include/$(package)/uint16.h: $(sysdeps)/sysdeps src/headers/bits-header src/headers/bits-footer src/headers/bits-lendian src/headers/bits-bendian src/headers/bits-template src/headers/uint64-include src/include/$(package)/uint64.h
 	exec tools/gen-bits.sh $(sysdeps)/sysdeps 16 6 7 5 17 > $@

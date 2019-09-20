@@ -16,21 +16,14 @@ void random_string (char *s, size_t n)
 #else
 #ifdef SKALIBS_HASGETRANDOM
 
-#include <skalibs/nonposix.h>
-#include <unistd.h>
-#include <sys/syscall.h>
+#include <sys/random.h>
 #include <skalibs/random.h>
-
-static int getrandom (void *buf, size_t buflen, unsigned int flags)
-{
-  return syscall(SYS_getrandom, buf, buflen, flags) ;
-}
 
 void random_string (char *s, size_t n)
 {
   while (n)
   {
-    int r = getrandom(s, n, 0) ;
+    ssize_t r = getrandom(s, n, 0) ;
     if (r >= 0)
     {
       s += r ;

@@ -11,6 +11,10 @@
 #define _GNU_SOURCE
 #endif
 
+#ifndef _DEFAULT_SOURCE
+#define _DEFAULT_SOURCE
+#endif
+
 #include <sys/socket.h>
 #include <sys/stat.h>
 #include <fcntl.h>
