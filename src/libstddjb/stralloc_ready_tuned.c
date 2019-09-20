@@ -19,7 +19,7 @@ int stralloc_ready_tuned (stralloc *sa, size_t n, size_t base, size_t a, size_t 
   }
   else if (n > sa->a)
   {
-    if (!alloc_re(&sa->s, sa->a, t)) return 0 ;
+    if (!alloc_re((void **)&sa->s, sa->a, t)) return 0 ;
     sa->a = t ;
   }
   return 1 ;

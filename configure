@@ -558,6 +558,7 @@ else
   sysdeps=sysdeps.cfg
   mkdir -p $sysdeps
   echo "$target" > $sysdeps/target
+  :> "$sysdeps/sysdeps"
 
   exec 3>&1
   util_lib=
@@ -622,10 +623,7 @@ else
   choose cl nsgetparent 'NS_GET_PARENT'
   choose cl explicit_bzero 'explicit_bzero()'
 
-  choose clr emptyregex 'regcomp() accept empty regexes'
-  choose clr nullispointer 'a pointer-typed NULL'
   choose clr devurandom '/dev/urandom'
-  choose clr malloc0 'non-NULL malloc(0)'
 
 fi
 

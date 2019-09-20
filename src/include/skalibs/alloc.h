@@ -3,15 +3,13 @@
 #ifndef ALLOC_H
 #define ALLOC_H
 
-#include <sys/types.h>
+#include <stdlib.h>
 #include <skalibs/gccattributes.h>
 
-typedef char aligned_char gccattr_aligned ;
-typedef aligned_char *aligned_char_ref, **aligned_char_ref_ref ;
+extern void *alloc (size_t) ;
+#define alloc_free(p) free(p)
 
-extern aligned_char *alloc (size_t) ;
-extern void alloc_free (void *) ;
 #define alloc_re(p, old, new) alloc_realloc(p, new)
-extern int alloc_realloc (aligned_char **, size_t) ;
+extern int alloc_realloc (void **, size_t) ;
 
 #endif

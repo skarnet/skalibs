@@ -65,7 +65,6 @@ src/libstdcrypto/md5-internal.h: src/include/skalibs/md5.h
 src/libstdcrypto/sha1-internal.h: src/include/skalibs/sha1.h
 src/libstdcrypto/sha256-internal.h: src/include/skalibs/sha256.h
 src/libstdcrypto/sha512-internal.h: src/include/skalibs/sha512.h
-src/libstddjb/alloc-internal.h: src/include/skalibs/alloc.h src/include/skalibs/sysdeps.h
 src/libstddjb/djbtime-internal.h: src/include/skalibs/uint64.h
 src/libstddjb/fmtscan-internal.h: src/include/skalibs/fmtscan.h src/include/skalibs/uint64.h
 src/libstddjb/selfpipe-internal.h: src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
@@ -195,8 +194,8 @@ src/libstddjb/alarm_deadline.o src/libstddjb/alarm_deadline.lo: src/libstddjb/al
 src/libstddjb/alarm_disable.o src/libstddjb/alarm_disable.lo: src/libstddjb/alarm_disable.c src/libstddjb/alarm-internal.h src/include/skalibs/alarm.h src/include/skalibs/sysdeps.h
 src/libstddjb/alarm_milliseconds.o src/libstddjb/alarm_milliseconds.lo: src/libstddjb/alarm_milliseconds.c src/libstddjb/alarm-internal.h src/include/skalibs/alarm.h src/include/skalibs/sysdeps.h
 src/libstddjb/alarm_timeout.o src/libstddjb/alarm_timeout.lo: src/libstddjb/alarm_timeout.c src/libstddjb/alarm-internal.h src/include/skalibs/alarm.h src/include/skalibs/sysdeps.h src/include/skalibs/tai.h
-src/libstddjb/alloc.o src/libstddjb/alloc.lo: src/libstddjb/alloc.c src/libstddjb/alloc-internal.h src/include/skalibs/alloc.h src/include/skalibs/sysdeps.h
-src/libstddjb/alloc_0.o src/libstddjb/alloc_0.lo: src/libstddjb/alloc_0.c src/libstddjb/alloc-internal.h src/include/skalibs/alloc.h src/include/skalibs/sysdeps.h
+src/libstddjb/alloc.o src/libstddjb/alloc.lo: src/libstddjb/alloc.c src/include/skalibs/alloc.h
+src/libstddjb/alloc_realloc.o src/libstddjb/alloc_realloc.lo: src/libstddjb/alloc_realloc.c src/include/skalibs/alloc.h
 src/libstddjb/allread.o src/libstddjb/allread.lo: src/libstddjb/allread.c src/include/skalibs/allreadwrite.h
 src/libstddjb/allreadv.o src/libstddjb/allreadv.lo: src/libstddjb/allreadv.c src/include/skalibs/allreadwrite.h
 src/libstddjb/allreadwrite.o src/libstddjb/allreadwrite.lo: src/libstddjb/allreadwrite.c src/include/skalibs/allreadwrite.h
