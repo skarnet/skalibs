@@ -102,31 +102,27 @@ the name of the sysdeps directory at build time, and can depend on
 its contents - that's how skarnet.org packages are easily made
 portable.
  However, when the host differs from the target - the cross-compilation
-case - those build-time tests are invalid. So you must provide
-configure with a precomputed sysdeps directory, containing valid
-sysdeps values for your target.
+case - some of those build-time tests, i.e. the ones that require
+code execution on the target, are invalid. So you must manually
+provide configure with appropriate values for the list of sysdeps that
+cannot be autodetected.
+ For a sysdep named K with a value V, the correct option to give to
+configure is: --with-sysdep-K=V
+ Most of the time, sysdeps have a boolean value, so the correct V is
+"yes" or "no".
+ For instance, to say that the target has a working pseudorandom
+number generator in /dev/urandom, you would give the following
+option to configure: --with-sysdep-devurandom=yes
 
- Use the --with-sysdeps=DIR option to specify DIR as a sysdeps
-directory for your target. Also use the --host=HOST option, HOST being
-the triplet for your target.
+ ./configure --help lists all the sysdeps you need to manually
+provide a value for when cross-compiling.
 
- If you know the peculiarities of your target system, you can build
-a sysdeps directory by hand. However, a much easier, and recommended,
-method of obtaining sysdeps, is to natively determine them (via
-./configure) in a virtual machine, for instance provided by qemu. If you
-are using Linux, simple root filesystems bootable with qemu for testing
-purposes are available at Aboriginal Linux: http://landley.net/aboriginal/
- Precomputed sysdeps for various targets may also be available on
-skarnet.org or on third-party sites.
-
- Once you have gathered your sysdeps, for any skarnet.org package:
- * make sure the binaries of your cross-toolchain (HOST-gcc, HOST-ld,
-HOST-ar, etc.) are accessible via your PATH environment variable
- * give the correct --with-sysdeps option to ./configure
- * give the correct --host option
- * for --prefix, --bindir and other paths, always use the run-time path
- * to install the cross-compiled package in a staging directory /your/stage,
-   perform "make install DESTDIR=/your/stage"
+ Note that you can provide manual sysdeps values at any time,
+for any existing sysdep, to bypass autodetection - and you can
+even do it when building natively. It's just not recommended
+(you should let skalibs autodetect everything it can), and
+and it's only mandatory for a small subset of sysdeps in the
+cross-compilation case.
 
 
 * The slashpackage convention

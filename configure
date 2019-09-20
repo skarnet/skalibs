@@ -44,8 +44,8 @@ $package options:
   --with-default-path=PATH      default executable search path [/usr/bin:/bin]
 
 Sysdeps autodetection override:
-  --with-sysdep-X=yes|no|value  override sysdep X with the given value [autodetected]
-List of mandatory X for cross-compiling: devurandom
+  --with-sysdep-K=V             assume sysdep K has the value V [autodetected]
+List of mandatory K for cross-compiling: devurandom (V=yes|no)
  
 EOF
   exit 0
