@@ -29,6 +29,12 @@ configure switches have been removed. <tt>tain_now()</tt> can now be told at run
 time to use a wall clock (default, or via <tt>tain_now_set_wallclock()</tt>) or a
 stopwatch (via <tt>tain_now_set_stopwatch()</tt>), instead of it being fixed at
 build time. </li>
+ <li> Cross-compilation has been made a lot easier, by removing the need to
+provide a whole sysdeps directory anymore. Only a few sysdeps - the ones that
+need code execution on the target to be autodetected - have to be provided manually,
+via a <tt>--with-sysdep-<em>K</em>=<em>V</em></tt> option to configure.
+Currently, that means one: <tt>--with-sysdep-devurandom=yes</tt> or
+<tt>--with-sysdep-devurandom=no</tt>. </li>
 </ul>
 
 <h2> in 2.8.1.0 </h2>

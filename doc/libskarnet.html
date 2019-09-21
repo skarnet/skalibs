@@ -63,7 +63,7 @@ it <tt>$sysdeps</tt>. </li>
  <li> Link with <tt>-lskarnet</tt>. If you are using socket functions, you
 will also need to link with <tt>`cat $sysdeps/socket.lib`</tt>. If you are using
 time functions such as <tt>tain_now()</tt>, you will also need to link with
-<tt>`cat $sysdeps/tainnow.lib`</tt>. Also
+<tt>`cat $sysdeps/sysclock.lib`</tt>. Also
 <tt>`cat $sysdeps/spawn.lib`</tt>` for <tt>posix_spawn()</tt> functions,
 <tt>timer.lib</tt> for <tt>timer_create</tt> functions, and so on. This
 is, unfortunately, the only way to work with all the idiosyncrasies and

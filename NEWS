@@ -13,6 +13,10 @@ and --enable-monotonic configure switches have been removed.
 tain_now() can now be set at run time to use a wall clock (default,
 or via tain_now_set_wallclock()) or a stopwatch (via
 tain_now_set_stopwatch()), instead of it being fixed at build time.
+ - Easy cross-compilation: no need to provide a whole sysdeps
+directory anymore. Only a few sysdeps have to be provided manually,
+via a --with-sysdep-K=V option to configure. Currently, that means
+one: --with-sysdep-devurandom=yes|no
 
 
 In 2.8.1.0
