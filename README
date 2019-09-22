@@ -7,7 +7,7 @@ programming than the libc, especially where network programming
 and IPCs are concerned.
 
  See the enclosed doc/ subdirectory for the documentation, or
- http://skarnet.org/software/skalibs/
+ https://skarnet.org/software/skalibs/
 
 
 * Installation
