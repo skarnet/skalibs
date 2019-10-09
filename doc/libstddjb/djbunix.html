@@ -808,5 +808,18 @@ Sleeps <em>n</em> milliseconds. Signals received during that time are handled,
 but <em>do not</em> interrupt the sleep.
 </p>
 
+<h3> Miscellaneous functions </h3>
+
+<p>
+<code> size_t path_canonicalize (char *out, char const *in, int check) </code> <br />
+Writes into <em>out</em> the canonical form of the Unix path given in
+<em>in</em>. The <em>out</em> array must be preallocated with at least
+<tt>strlen(in)+2</tt> bytes. Returns the length of the <em>out</em> path, without
+counting the terminating null byte. If <em>check</em> is nonzero, <em>in</em> is tested
+for every <tt>foobar/..</tt> element, and the function returns 0, and sets errno
+appropriately, if <tt>foobar</tt> is not a valid directory; in that case, <em>out</em>
+contains the problematic path.
+</p>
+
 </body>
 </html>

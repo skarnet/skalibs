@@ -1,5 +1,11 @@
 Changelog for skalibs.
 
+In 2.9.1.0
+----------
+
+ - Added path_canonicalize()
+
+
 In 2.9.0.0
 ----------
 

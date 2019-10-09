@@ -53,6 +53,8 @@ extern int open_write (char const *) ;
 extern int socket_internal (int, int, int, unsigned int) ;
 extern int socketpair_internal (int, int, int, unsigned int, int *) ;
 
+extern size_t path_canonicalize (char *, char const *, int) ;
+
 extern int pathexec_env (char const *, char const *) ;
 extern void pathexec_r (char const *const *, char const *const *, size_t, char const *, size_t) ;
 extern void pathexec_r_name (char const *, char const *const *, char const *const *, size_t, char const *, size_t) ;

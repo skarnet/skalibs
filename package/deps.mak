@@ -458,6 +458,7 @@ src/libstddjb/openwritenclose_unsafe.o src/libstddjb/openwritenclose_unsafe.lo: 
 src/libstddjb/openwritevnclose.o src/libstddjb/openwritevnclose.lo: src/libstddjb/openwritevnclose.c src/include/skalibs/djbunix.h
 src/libstddjb/openwritevnclose_suffix.o src/libstddjb/openwritevnclose_suffix.lo: src/libstddjb/openwritevnclose_suffix.c src/include/skalibs/djbunix.h
 src/libstddjb/openwritevnclose_unsafe.o src/libstddjb/openwritevnclose_unsafe.lo: src/libstddjb/openwritevnclose_unsafe.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
+src/libstddjb/path_canonicalize.o src/libstddjb/path_canonicalize.lo: src/libstddjb/path_canonicalize.c src/include/skalibs/djbunix.h
 src/libstddjb/pathexec.o src/libstddjb/pathexec.lo: src/libstddjb/pathexec.c src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/posixplz.h
 src/libstddjb/pathexec0.o src/libstddjb/pathexec0.lo: src/libstddjb/pathexec0.c src/include/skalibs/djbunix.h
 src/libstddjb/pathexec0_run.o src/libstddjb/pathexec0_run.lo: src/libstddjb/pathexec0_run.c src/include/skalibs/djbunix.h
