@@ -65,5 +65,5 @@ size_t path_canonicalize (char *out, char const *in, int check)
   if (j && out[j-1] == '/') j-- ;
   if (!j && !isabsolute) out[j++] = '.' ;
   out[j] = 0 ;
-  return j ;
+  return j + isabsolute ;
 }
