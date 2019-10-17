@@ -34,7 +34,7 @@
 #endif /* sun || __sun */
 
 
-#if defined(__linux__) || defined(__GLIBC__)
+#if defined(__linux__) || defined(__gnu_hurd__)
 
  /* GNU: most extensions are unavailable unless you enable _GNU_SOURCE.
     Some Linux interfaces are also unavailable without it. */
@@ -43,7 +43,7 @@
 #define _GNU_SOURCE
 #endif
 
-#else /* __linux__ || __GLIBC__. */
+#else /* __linux__ || __gnu_hurd__. */
 
  /* Various BSDs and others: _BSD_SOURCE opens up a lot of extensions.
     We guard this under not-glibc because recent glibcs scream their
@@ -53,7 +53,7 @@
 #define _BSD_SOURCE
 #endif
 
-#endif /* __linux__ || __GLIBC__ */
+#endif /* __linux__ || __gnu_hurd__ */
 
 
 #ifdef __NetBSD__
