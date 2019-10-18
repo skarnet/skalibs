@@ -34,26 +34,27 @@
 #endif /* sun || __sun */
 
 
-#if defined(__linux__) || defined(__gnu_hurd__)
+#if defined(__linux__) || defined(__GNU__)
 
- /* GNU: most extensions are unavailable unless you enable _GNU_SOURCE.
-    Some Linux interfaces are also unavailable without it. */
+ /* GNU (Linux or Hurd): most extensions are unavailable unless
+    you enable _GNU_SOURCE. Some Linux interfaces are also
+    unavailable without it. */
 
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
 #endif
 
-#else /* __linux__ || __gnu_hurd__. */
+#else /* __linux__ || __GNU__ */
 
  /* Various BSDs and others: _BSD_SOURCE opens up a lot of extensions.
-    We guard this under not-glibc because recent glibcs scream their
+    We guard this under not-GNU because recent glibcs scream their
     heads off if you define _BSD_SOURCE. Stay classy, GNU. */
 
 #ifndef _BSD_SOURCE
 #define _BSD_SOURCE
 #endif
 
-#endif /* __linux__ || __gnu_hurd__ */
+#endif /* __linux__ || __GNU__ */
 
 
 #ifdef __NetBSD__
