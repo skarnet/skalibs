@@ -148,33 +148,6 @@ POSIX freak, or your Unix distribution is running ntpd for you, or
 other software is assuming you're on UTC. This is the default.
 </p>
 
-<a name="usert"><h3> --enable-clock </h3></a>
-
-<p>
- The Open Group Base Specifications, issue 7, describes <tt>gettimeofday()</tt>
-as obsolescent, and recommends the use of
-<a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/clock_gettime.html">clock_gettime()</a>
-with the CLOCK_REALTIME option instead. However:
-</p>
-
-<ul>
- <li> <tt>clock_gettime()</tt> is not as portable; for instance, Darwin does not have it. </li>
- <li> On most systems, using the <tt>clock_</tt> functions requires linking with <tt>librt</tt>,
-which is slightly inconvenient - and silly if all you want is timestamping.
-</ul>
-
-<p>
- If <tt>--enable-clock</tt> is set, the <a href="libstddjb/tai.html">tain_now()
-and tain_setnow()</a> functions for getting and setting time will be based on
-the <tt>clock_gettime()</tt> and <tt>clock_settime()</tt> functions.
-</p>
-
-<p>
- Otherwise, the old-school <tt>gettimeofday()</tt>
-and <tt>settimeofday()</tt> interfaces will be used. This is the default,
-and it's usually safe.
-</p>
-
 <a name="noipv6"><h3> --disable-ipv6 </h3></a>
 
 <p>
