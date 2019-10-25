@@ -9,5 +9,6 @@
 #include <skalibs/avlnode.h>
 #include <skalibs/avltree.h>
 #include <skalibs/avltreen.h>
+#include <skalibs/bigkv.h>
 
 #endif

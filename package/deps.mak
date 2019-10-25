@@ -8,6 +8,7 @@ src/include/skalibs/allreadwrite.h: src/include/skalibs/functypes.h
 src/include/skalibs/avlnode.h: src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h
 src/include/skalibs/avltree.h: src/include/skalibs/avlnode.h src/include/skalibs/functypes.h src/include/skalibs/gensetdyn.h
 src/include/skalibs/avltreen.h: src/include/skalibs/avlnode.h src/include/skalibs/functypes.h src/include/skalibs/genset.h
+src/include/skalibs/bigkv.h: src/include/skalibs/avltree.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
 src/include/skalibs/biguint.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/bitarray.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/bufalloc.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
@@ -16,7 +17,7 @@ src/include/skalibs/bytestr.h: src/include/skalibs/gccattributes.h src/include/s
 src/include/skalibs/cbuffer.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/cdb.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/cdb_make.h: src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h
-src/include/skalibs/datastruct.h: src/include/skalibs/avlnode.h src/include/skalibs/avltree.h src/include/skalibs/avltreen.h src/include/skalibs/genqdyn.h src/include/skalibs/genset.h src/include/skalibs/gensetdyn.h
+src/include/skalibs/datastruct.h: src/include/skalibs/avlnode.h src/include/skalibs/avltree.h src/include/skalibs/avltreen.h src/include/skalibs/bigkv.h src/include/skalibs/genqdyn.h src/include/skalibs/genset.h src/include/skalibs/gensetdyn.h
 src/include/skalibs/djbtime.h: src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/include/skalibs/djbunix.h: src/include/skalibs/envalloc.h src/include/skalibs/gccattributes.h src/include/skalibs/posixplz.h src/include/skalibs/stralloc.h
 src/include/skalibs/env.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
@@ -119,6 +120,10 @@ src/libdatastruct/avltreen_delete.o src/libdatastruct/avltreen_delete.lo: src/li
 src/libdatastruct/avltreen_init.o src/libdatastruct/avltreen_init.lo: src/libdatastruct/avltreen_init.c src/include/skalibs/avlnode.h src/include/skalibs/avltreen.h src/include/skalibs/genset.h
 src/libdatastruct/avltreen_insert.o src/libdatastruct/avltreen_insert.lo: src/libdatastruct/avltreen_insert.c src/include/skalibs/avltreen.h
 src/libdatastruct/avltreen_newnode.o src/libdatastruct/avltreen_newnode.lo: src/libdatastruct/avltreen_newnode.c src/include/skalibs/avlnode.h src/include/skalibs/avltreen.h src/include/skalibs/genset.h
+src/libdatastruct/bigkv_free.o src/libdatastruct/bigkv_free.lo: src/libdatastruct/bigkv_free.c src/include/skalibs/avltree.h src/include/skalibs/bigkv.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
+src/libdatastruct/bigkv_init.o src/libdatastruct/bigkv_init.lo: src/libdatastruct/bigkv_init.c src/include/skalibs/avltree.h src/include/skalibs/bigkv.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
+src/libdatastruct/bigkv_search.o src/libdatastruct/bigkv_search.lo: src/libdatastruct/bigkv_search.c src/include/skalibs/avltree.h src/include/skalibs/bigkv.h src/include/skalibs/genalloc.h
+src/libdatastruct/bigkv_zero.o src/libdatastruct/bigkv_zero.lo: src/libdatastruct/bigkv_zero.c src/include/skalibs/bigkv.h
 src/libdatastruct/genqdyn_clean.o src/libdatastruct/genqdyn_clean.lo: src/libdatastruct/genqdyn_clean.c src/libdatastruct/genqdyn-internal.h
 src/libdatastruct/genqdyn_free.o src/libdatastruct/genqdyn_free.lo: src/libdatastruct/genqdyn_free.c src/include/skalibs/genqdyn.h src/include/skalibs/stralloc.h
 src/libdatastruct/genqdyn_init.o src/libdatastruct/genqdyn_init.lo: src/libdatastruct/genqdyn_init.c src/include/skalibs/genqdyn.h src/include/skalibs/stralloc.h
