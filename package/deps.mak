@@ -120,8 +120,8 @@ src/libdatastruct/avltreen_delete.o src/libdatastruct/avltreen_delete.lo: src/li
 src/libdatastruct/avltreen_init.o src/libdatastruct/avltreen_init.lo: src/libdatastruct/avltreen_init.c src/include/skalibs/avlnode.h src/include/skalibs/avltreen.h src/include/skalibs/genset.h
 src/libdatastruct/avltreen_insert.o src/libdatastruct/avltreen_insert.lo: src/libdatastruct/avltreen_insert.c src/include/skalibs/avltreen.h
 src/libdatastruct/avltreen_newnode.o src/libdatastruct/avltreen_newnode.lo: src/libdatastruct/avltreen_newnode.c src/include/skalibs/avlnode.h src/include/skalibs/avltreen.h src/include/skalibs/genset.h
+src/libdatastruct/bigkv_fill.o src/libdatastruct/bigkv_fill.lo: src/libdatastruct/bigkv_fill.c src/include/skalibs/avltree.h src/include/skalibs/bigkv.h src/include/skalibs/bytestr.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
 src/libdatastruct/bigkv_free.o src/libdatastruct/bigkv_free.lo: src/libdatastruct/bigkv_free.c src/include/skalibs/avltree.h src/include/skalibs/bigkv.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
-src/libdatastruct/bigkv_init.o src/libdatastruct/bigkv_init.lo: src/libdatastruct/bigkv_init.c src/include/skalibs/avltree.h src/include/skalibs/bigkv.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
 src/libdatastruct/bigkv_search.o src/libdatastruct/bigkv_search.lo: src/libdatastruct/bigkv_search.c src/include/skalibs/avltree.h src/include/skalibs/bigkv.h src/include/skalibs/genalloc.h
 src/libdatastruct/bigkv_zero.o src/libdatastruct/bigkv_zero.lo: src/libdatastruct/bigkv_zero.c src/include/skalibs/bigkv.h
 src/libdatastruct/genqdyn_clean.o src/libdatastruct/genqdyn_clean.lo: src/libdatastruct/genqdyn_clean.c src/libdatastruct/genqdyn-internal.h

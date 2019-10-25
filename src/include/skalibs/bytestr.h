@@ -46,7 +46,7 @@ extern void case_uppers (char *) ;
 extern void case_upperb (char *, size_t) ;
 #define case_diffb(a, n, b) case_diffn(a, (b), n)
 #define case_equals(a, b) (!strcasecmp(a, b))
-#define case_equalb(a, n, b) (!strcasecmp(a, (b), n))
+#define case_equalb(a, n, b) (!strncasecmp(a, (b), n))
 #define case_starts(s, t) case_startb(s, strlen(s), t)
 extern int case_startb (char const *, size_t, char const *) gccattr_pure ;
 extern size_t case_str (char const *, char const *) gccattr_pure ;

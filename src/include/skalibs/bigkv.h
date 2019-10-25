@@ -32,9 +32,10 @@ extern bigkv_t const bigkv_zero ;
 
 #define bigkv_len(b) avltree_len(&(b)->map)
 
-extern int bigkv_init (bigkv_t *, char const *const *, char, char const *, char const *, uint32_t) ;
-#define bigkv_init_argv(b, argv) bigkv_init(b, (argv), '=', "--", "--", 0)
-#define bigkv_init_envp(b, envp) bigkv_init(b, (envp), '=', 0, 0, 0)
+#define bigkv_init(b) (*(b) = bigkv_zero)
+extern int bigkv_fill (bigkv_t *, char const *const *, char, char const *, char const *, uint32_t) ;
+#define bigkv_fill_argv(b, argv) bigkv_fill(b, (argv), '=', "--", "--", 0)
+#define bigkv_fill_envp(b, envp) bigkv_fill(b, (envp), '=', 0, 0, 0)
 extern char const *bigkv_search (bigkv_t const *, char const *) ;
 extern void bigkv_free (bigkv_t *) ;
 
