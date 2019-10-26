@@ -203,30 +203,14 @@ tryendianness () {
 #define _DEFAULT_SOURCE
 #endif
 #include <$i>
-int a = 1 ;
-EOF
-    if trybasic "$tmpc" ; then
-      cat > "$tmpc" <<EOF
-#undef _POSIX_C_SOURCE
-#undef _XOPEN_SOURCE
-#ifndef _BSD_SOURCE
-#define _BSD_SOURCE
-#endif
-#ifndef _GNU_SOURCE
-#define _GNU_SOURCE
-#endif
-#ifndef _DEFAULT_SOURCE
-#define _DEFAULT_SOURCE
-#endif
-#include <$i>
 int a = LITTLE_ENDIAN ;
 int b = BIG_ENDIAN ;
 int c = BYTE_ORDER ;
 EOF
-      trybasic "$tmpc" || continue
-      for j in little big pdp ; do
-        k=`echo $j | tr a-z A-Z`
-        cat > "$tmpc" <<EOF
+    trybasic "$tmpc" || continue
+    for j in little big pdp ; do
+      k=`echo $j | tr a-z A-Z`
+      cat > "$tmpc" <<EOF
 #undef _POSIX_C_SOURCE
 #undef _XOPEN_SOURCE
 #ifndef _BSD_SOURCE
@@ -241,19 +225,18 @@ EOF
 #include <$i>
 int a[BYTE_ORDER == ${k}_ENDIAN ? 1 : -1] ;
 EOF
-        if trybasic "$tmpc" ; then
-          echo "endianness: $j" >> "$sysdeps/sysdeps"
-          echo "  ... $j"
-          rm -f "$tmpc"
-          return
-        fi
-      done
-      rm -f "$tmpc"
-      fail "$0: error: unable to determine endianness according to $i"
-    fi
+      if trybasic "$tmpc" ; then
+        echo "endianness: $j" >> "$sysdeps/sysdeps"
+        echo "  ... $j"
+        rm -f "$tmpc"
+        return
+      fi
+    done
+    rm -f "$tmpc"
+    fail "$0: error: unable to determine endianness according to $i"
   done
   rm -f "$tmpc"
-  fail "$0: error: unable to determine endianness: no endian.h found"
+  fail "$0: error: unable to determine endianness: no suitable endian.h found"
 }
 
 trysigned () {
