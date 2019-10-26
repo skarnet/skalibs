@@ -1,5 +1,11 @@
 /* ISC license. */
 
+#include <features.h>
+
+#ifdef __stub_getrandom
+#error getrandom() appears to be a stub function, we won't use it.
+#endif
+
 #include <sys/random.h>
 
 int main (void)

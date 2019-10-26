@@ -45,7 +45,7 @@ $package options:
 
 Sysdeps autodetection override:
   --with-sysdep-K=V             assume sysdep K has the value V [autodetected]
-List of mandatory K for cross-compiling: devurandom (V=yes|no), getrandom (V=yes|no)
+List of mandatory K for cross-compiling: devurandom (V=yes|no)
  
 EOF
   exit 0
@@ -625,11 +625,11 @@ choose cl itimer 'setitimer()'
 choose cl namespaces 'namespaces'
 choose cl nsgetparent 'NS_GET_PARENT'
 choose cl explicit_bzero 'explicit_bzero()'
+choose cl getrandom 'getrandom()'
 
 # And here are the evil irreducible sysdeps.
 
 choose clr devurandom '/dev/urandom'
-choose clr getrandom 'getrandom()'
 
 rm -f "$tmps"
 echo "Creating config.mak..."
