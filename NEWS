@@ -1,5 +1,12 @@
 Changelog for skalibs.
 
+In 2.9.2.0
+----------
+
+ - Bugfixes.
+ - New bigkv_* set of functions in libdatastruct.
+
+
 In 2.9.1.0
 ----------
 
