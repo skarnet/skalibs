@@ -27,7 +27,7 @@ void execvep_internal (char const *file, char const *const *argv, char const *co
         if (errno != ENOENT)
         {
           savederrno = errno ;
-          if ((errno != EACCES) && (errno != EPERM) && (errno != EISDIR)) break ;
+          if ((errno != EACCES) && (errno != EPERM) && (errno != EISDIR) && (errno != ENOTDIR)) break ;
         }
       }
       path += split+1 ; pathlen -= split+1 ;
