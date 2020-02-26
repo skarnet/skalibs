@@ -14,7 +14,7 @@ int selfpipe_trapset (sigset_t const *set)
 {
   sigset_t old ;
   if (selfpipe_fd < 0) return (errno = EBADF, -1) ;
-  if (sigprocmask(SIG_SETMASK, set, &old) < 0) return -1 ;
+  if (sigprocmask(SIG_BLOCK, set, &old) < 0) return -1 ;
   if (signalfd(selfpipe_fd, set, SFD_NONBLOCK | SFD_CLOEXEC) < 0)
   {
     int e = errno ;
@@ -53,7 +53,7 @@ int selfpipe_trapset (sigset_t const *set)
       if (sig_restore(i) < 0) break ;
     }
   }
-  if (i < SKALIBS_NSIG)
+  if (i < SKALIBS_NSIG || sigprocmask(SIG_UNBLOCK, set, 0) < 0)
   {
     int e = errno ;
     sig_restoreto(set, i) ;
