@@ -10,7 +10,6 @@
 
 #include <string.h>
 #include <strings.h>
-#include <skalibs/posixishard.h>
 
 #define byte_copy(to, n, from) memmove(to, (from), n)
 #define byte_copyr(to, n, from) memmove(to, (from), n)

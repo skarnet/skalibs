@@ -13,7 +13,7 @@ src/include/skalibs/biguint.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/bitarray.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/bufalloc.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/buffer.h: src/include/skalibs/allreadwrite.h src/include/skalibs/cbuffer.h src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h
-src/include/skalibs/bytestr.h: src/include/skalibs/gccattributes.h src/include/skalibs/posixishard.h
+src/include/skalibs/bytestr.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/cbuffer.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/cdb.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/cdb_make.h: src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h
