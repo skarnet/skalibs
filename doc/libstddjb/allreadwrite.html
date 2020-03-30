@@ -124,7 +124,7 @@ function.
 
 <p>
 <code> size_t allread (int fd, char *s, size_t len) </code> <br />
-Equivalent to <code> allreadwrite(&fd_read, fd, s, len) </code>: attempts
+Equivalent to <code> allreadwrite(&amp;fd_read, fd, s, len) </code>: attempts
 to read <em>len</em> bytes from <em>fd</em> into <em>s</em>, looping around
 <tt>fd_read()</tt> if necessary, until either <em>len</em> bytes are read or
 an error occurs. EOF is reported as EPIPE.
@@ -132,7 +132,7 @@ an error occurs. EOF is reported as EPIPE.
 
 <p>
 <code> size_t allwrite (int fd, char const *s, size_t len) </code> <br />
-Equivalent to <code> allreadwrite((iofunc_t *)&fd_write, fd, s, len) </code>:
+Equivalent to <code> allreadwrite((iofunc_t *)&amp;fd_write, fd, s, len) </code>:
 attempts to write <em>len</em> bytes from <em>s</em> to <em>fd</em>, looping
 around <tt>fd_write()</tt> if necessary, until either <em>len</em> bytes are
 written or an error occurs.

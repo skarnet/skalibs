@@ -160,10 +160,10 @@ and -1 if it failed.
 <pre>
 int r ;
 sigset_t set ;
-sigemptyset(&set) ;
-sigaddset(&set, SIGTERM) ;
-sigaddset(&set, SIGHUP) ;
-r = selfpipe_trapset(&set) ;
+sigemptyset(&amp;set) ;
+sigaddset(&amp;set, SIGTERM) ;
+sigaddset(&amp;set, SIGHUP) ;
+r = selfpipe_trapset(&amp;set) ;
 </pre>
 
 <p>
