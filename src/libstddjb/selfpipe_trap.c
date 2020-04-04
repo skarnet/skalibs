@@ -38,7 +38,7 @@ int selfpipe_trap (int sig)
 {
   if (selfpipe_fd < 0) return (errno = EBADF, -1) ;
   if (sig_catcha(sig, &selfpipe_ssa) < 0) return -1 ;
-  if (sigprocmask(SIG_UNBLOCK, sig, 0) < 0 || sigaddset(&selfpipe_caught, sig) < 0)
+  if (sigaddset(&selfpipe_caught, sig) < 0 || sigprocmask(SIG_UNBLOCK, &selfpipe_caught, 0) < 0)
   {
     int e = errno ;
     sig_restore(sig) ;
