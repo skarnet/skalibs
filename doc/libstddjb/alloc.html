@@ -65,11 +65,10 @@ should favor them over basic interfaces like <tt>malloc()</tt>.
 <h2> Functions </h2>
 
 <p>
-<code> char *alloc (size_t len) </code> <br />
+<code> void *alloc (size_t len) </code> <br />
 Allocates a block of <em>len</em> bytes in the heap and returns a pointer
-to the start of the block (or NULL if it failed). Though the pointer type
-is <tt>char *</tt>, the block of memory is correctly aligned for any type
-of object. If <em>len</em> is 0, the function returns a pointer that
+to the start of the block (or NULL if it failed).
+If <em>len</em> is 0, the function returns a unique pointer that
 cannot be written to, but that is <em>not null</em>. Note that this is
 different from the required C99 behaviour for <tt>malloc()</tt>.
 </p>
@@ -85,7 +84,9 @@ Redimension the block of heap memory pointed to by *<em>p</em> to
 <em>newlen</em> bytes. The block may have to be moved, in which case
 *<em>p</em> will be modified. Normally returns 1; if an error occurred,
 returns 0 and sets errno, and neither *<em>p</em> nor its contents are
-modified.
+modified. Note that <em>p</em> must be a pointer to a <tt>char *</tt>,
+because polymorphism isn't possible here (for reasons that have to do
+with pointer representation in C).
 </p>
 
 <p>
