@@ -10,6 +10,6 @@ extern void *alloc (size_t) ;
 #define alloc_free(p) free(p)
 
 #define alloc_re(p, old, new) alloc_realloc(p, new)
-extern int alloc_realloc (void **, size_t) ;
+extern int alloc_realloc (char **, size_t) ;
 
 #endif
