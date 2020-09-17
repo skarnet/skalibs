@@ -581,6 +581,7 @@ src/libstddjb/stralloc_copyb.o src/libstddjb/stralloc_copyb.lo: src/libstddjb/st
 src/libstddjb/stralloc_free.o src/libstddjb/stralloc_free.lo: src/libstddjb/stralloc_free.c src/include/skalibs/alloc.h src/include/skalibs/stralloc.h
 src/libstddjb/stralloc_insertb.o src/libstddjb/stralloc_insertb.lo: src/libstddjb/stralloc_insertb.c src/include/skalibs/stralloc.h
 src/libstddjb/stralloc_ready_tuned.o src/libstddjb/stralloc_ready_tuned.lo: src/libstddjb/stralloc_ready_tuned.c src/include/skalibs/alloc.h src/include/skalibs/stralloc.h
+src/libstddjb/stralloc_readyplus_tuned.o src/libstddjb/stralloc_readyplus_tuned.lo: src/libstddjb/stralloc_readyplus_tuned.c src/include/skalibs/stralloc.h
 src/libstddjb/stralloc_reverse.o src/libstddjb/stralloc_reverse.lo: src/libstddjb/stralloc_reverse.c src/include/skalibs/stralloc.h
 src/libstddjb/stralloc_reverse_blocks.o src/libstddjb/stralloc_reverse_blocks.lo: src/libstddjb/stralloc_reverse_blocks.c src/include/skalibs/stralloc.h
 src/libstddjb/stralloc_shrink.o src/libstddjb/stralloc_shrink.lo: src/libstddjb/stralloc_shrink.c src/include/skalibs/alloc.h src/include/skalibs/stralloc.h

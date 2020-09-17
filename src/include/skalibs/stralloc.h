@@ -18,8 +18,9 @@ struct stralloc_s
 extern stralloc const stralloc_zero ;
 
 extern int stralloc_ready_tuned (stralloc *, size_t, size_t, size_t, size_t) ;
+extern int stralloc_readyplus_tuned (stralloc *, size_t, size_t, size_t, size_t) ;
 #define stralloc_ready(sa, n) stralloc_ready_tuned(sa, (n), 8, 1, 8)
-#define stralloc_readyplus(sa, n) stralloc_ready(sa, (sa)->len + (n))
+#define stralloc_readyplus(sa, n) stralloc_readyplus_tuned(sa, (n), 8, 1, 8)
 extern void stralloc_free (stralloc *) ;
 extern int stralloc_shrink (stralloc *) ;
 extern int stralloc_copyb (stralloc *, char const *, size_t) ;
