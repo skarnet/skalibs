@@ -1,5 +1,12 @@
 Changelog for skalibs.
 
+In 2.9.3.0
+----------
+
+ - New stralloc_readyplus_tuned() function.
+ - Bugfixes.
+
+
 In 2.9.2.1
 ----------
 

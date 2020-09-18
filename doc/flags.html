@@ -174,5 +174,30 @@ often anyway).
  The default is <tt>/usr/bin:/bin</tt>, which is usually safe.
 </p>
 
+<a name="sysdep"><h3> --enable-sysdep-devurandom=yes </h3></a>
+
+<p>
+ When compiling natively, skalibs probes the build system for <em>sysdeps</em>,
+i.e. system-specific behaviours that influence the way skalibs must
+implement certain interfaces. This autodetection can be overriden on the
+configure command line: for a sysdep named <em>K</em>, if you want to
+enforce the value <em>V</em>, you can use <tt>--enable-sysdep-<em>K</em>=<em>V</em></tt>
+as a configure option.
+</p>
+
+<p>
+(This is similar to the <tt>ac_cv_foobar_<em>K</em>=<em>V</em></tt> environment
+variable mechanism in autotools.)
+</p>
+
+<p>
+ When <a href="crosscompile.html">cross-compiling</a>, there are a few sysdeps
+that <em>cannot</em> be autodetected and have to be provided manually on the
+command line. The <tt>devurandom</tt> sysdep, which encodes the existence of
+a functional <tt>/dev/urandom</tt> device on the target, is one of those.
+<tt>--enable-sysdep-devurandom=yes</tt> tells skalibs to assume that there is
+such a device it can rely on for random number generation.
+</p>
+
 </body>
 </html>
