@@ -71,21 +71,21 @@ Returns 0 if it succeeds, or -1 (and sets errno) if it fails.
 <p>
 <code> int pipenb (int *p) </code> <br />
 Like
-<a href="http://www.opengroup.org/onlinepubs/9699919799/functions/pipe.html">pipe()</a>,
+<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/pipe.html">pipe()</a>,
 but both ends of the created pipe are in non-blocking mode.
 </p>
 
 <p>
 <code> int pipecoe (int *p) </code> <br />
 Like
-<a href="http://www.opengroup.org/onlinepubs/9699919799/functions/pipe.html">pipe()</a>,
+<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/pipe.html">pipe()</a>,
 but both ends of the created pipe are close-on-exec.
 </p>
 
 <p>
 <code> int pipenbcoe (int *p) </code> <br />
 Like
-<a href="http://www.opengroup.org/onlinepubs/9699919799/functions/pipe.html">pipe()</a>,
+<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/pipe.html">pipe()</a>,
 but both ends of the created pipe are in non-blocking mode <em>and</em> close-on-exec.
 </p>
 
@@ -123,32 +123,32 @@ Returns 0 if it succeeds, or -1 (and sets errno) if it fails.
 <code> void fd_close (int fd) </code> <br />
 Closes <em>fd</em>.
 This is a <a href="safewrappers.html">safe wrapper</a> around
-<a href="http://www.opengroup.org/onlinepubs/9699919799/functions/close.html">close()</a>.
+<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/close.html">close()</a>.
 </p>
 
 <p>
 <code> int fd_chmod (int fd, unsigned int mode) </code> <br />
 Safe wrapper around
-<a href="http://www.opengroup.org/onlinepubs/9699919799/functions/fchmod.html">fchmod()</a>.
+<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/fchmod.html">fchmod()</a>.
 </p>
 
 <p>
 <code> int fd_chown (int fd, uid_t uid, gid_t gid) </code> <br />
 Safe wrapper around
-<a href="http://www.opengroup.org/onlinepubs/9699919799/functions/fchown.html">fchown()</a>.
+<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/fchown.html">fchown()</a>.
 This function requires root privileges.
 </p>
 
 <p>
 <code> int fd_sync (int fd) </code> <br />
 Safe wrapper around
-<a href="http://www.opengroup.org/onlinepubs/9699919799/functions/fsync.html">fsync()</a>.
+<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/fsync.html">fsync()</a>.
 </p>
 
 <p>
 <code> int fd_chdir (int fd) </code> <br />
 Safe wrapper around
-<a href="http://www.opengroup.org/onlinepubs/9699919799/functions/fchdir.html">fchdir()</a>.
+<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/fchdir.html">fchdir()</a>.
 </p>
 
 <p>
@@ -165,7 +165,7 @@ supported:
 </p>
 
 <ul>
- <li> <a href="http://www.kernel.org/doc/man-pages/online/pages/man2/splice.2.html">splice()</a>,
+ <li> <a href="https://man7.org/linux/man-pages/man2/splice.2.html">splice()</a>,
 in Linux 2.6.17 and later </li>
 </ul>
 
@@ -236,14 +236,14 @@ modifying errno.
 <p>
 <code> int open2 (char const *file, unsigned int flags) </code> <br />
 Safe wrapper around
-<a href="http://www.opengroup.org/onlinepubs/9699919799/functions/open.html">open()</a>
+<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/open.html">open()</a>
 when it takes 2 arguments.
 </p>
 
 <p>
 <code> int open3 (char const *file, unsigned int flags) </code> <br />
 Safe wrapper around
-<a href="http://www.opengroup.org/onlinepubs/9699919799/functions/open.html">open()</a>
+<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/open.html">open()</a>
 when it takes 3 arguments.
 </p>
 
@@ -264,7 +264,7 @@ Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
 Opens <em>file</em> in read-only, blocking mode.
 Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
 <em>This call does not block.</em> The
-<a href="http://www.opengroup.org/onlinepubs/9699919799/functions/open.html">open()</a>
+<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/open.html">open()</a>
 system call is actually performed with the O_NONBLOCK option, and blocking mode
 is set afterwards; this behaviour allows for more transparent interactions
 with FIFOs.
@@ -336,8 +336,8 @@ The function returns if it fails, and sets errno appropriately.
  <tt>pathexec_run()</tt> is the standard skalibs API to perform an
 <tt>exec</tt> call with a path search. It is recommended that you use
 it instead of the Single Unix
-<a href="http://www.opengroup.org/onlinepubs/9699919799/functions/execvp.html">execvp()</a> or
-<a href="http://www.opengroup.org/onlinepubs/9699919799/functions/execlp.html">execlp()</a>
+<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/execvp.html">execvp()</a> or
+<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/execlp.html">execlp()</a>
 functions, because <tt>execvp</tt> and <tt>execlp</tt> default to execution of
 the <tt>/bin/sh</tt> interpreter with <em>file</em> as an argument if they
 cannot find a suitable executable <em>file</em>, and this is:
@@ -439,7 +439,7 @@ and the grandchild's PID if the current process is the parent.
 <code> pid_t child_spawn0 (char const *file, char const *const *argv, char const *const *envp) </code> <br />
 Forks and executes a child as with <tt>pathexec_run(file, argv, envp)</tt>.
 Returns 0 if it fails, and the pid of the child if it succeeds.
-Implemented via <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/posix_spawn.html">posix_spawn()</a>
+Implemented via <a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/posix_spawn.html">posix_spawn()</a>
 on systems that support it.
 </p>
 
@@ -522,7 +522,7 @@ or -1 (and sets errno) if it fails.
 <p>
 <code> pid_t waitpid_nointr (pid_t pid, int *wstat, int flags) </code> <br />
 Safe wrapper around
-<a href="http://www.opengroup.org/onlinepubs/9699919799/functions/waitpid.html">waitpid()</a>.
+<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/waitpid.html">waitpid()</a>.
 </p>
 
 <p>

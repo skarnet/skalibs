@@ -29,7 +29,7 @@ and implemented in the <tt>libskarnet.a</tt> or <tt>libskarnet.so</tt> library.
 
 <p>
  <tt>lolstdio</tt> is a set of convenience functions providing
-<a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/printf.html">printf</a>-style
+<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/printf.html">printf</a>-style
 formatting but interacting with <a href="buffer.html">buffers</a> or
 <a href="bufalloc.html">bufallocs</a> instead of stdio FILEs.
 </p>
@@ -52,7 +52,7 @@ writing than fixed-size buffers or FILEs are.
 
 <p>
  The current lolstdio implementation relies on the libc's
-<a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/vsnprintf.html">vsnprintf</a>
+<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/vsnprintf.html">vsnprintf</a>
 function.
 </p>
 
@@ -60,31 +60,31 @@ function.
 
 <p>
 <code> int vbprintf (buffer *b, char const *format, va_list args) </code> <br />
-Like <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/vfprintf.html">vfprintf</a>
+Like <a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/vfprintf.html">vfprintf</a>
 except that the result is written to the buffer <em>b</em>.
 </p>
 
 <p>
 <code> int bprintf (buffer *b, char const *format, ...) </code> <br />
-Like <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/fprintf.html">fprintf</a>
+Like <a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/fprintf.html">fprintf</a>
 except that the result is written to the buffer <em>b</em>.
 </p>
 
 <p>
 <code> int lolprintf (char const *format, ...) </code> <br />
-Like <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/printf.html">printf</a>
+Like <a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/printf.html">printf</a>
 except that the result is written to the buffer <tt>buffer_1</tt>.
 </p>
 
 <p>
 <code> int vbaprintf (bufalloc *ba, char const *format, va_list args) </code> <br />
-Like <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/vfprintf.html">vfprintf</a>
+Like <a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/vfprintf.html">vfprintf</a>
 except that the result is written to the bufalloc <em>ba</em>.
 </p>
 
 <p>
 <code> int baprintf (bufalloc *ba, char const *format, ...) </code> <br />
-Like <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/fprintf.html">fprintf</a>
+Like <a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/fprintf.html">fprintf</a>
 except that the result is written to the bufalloc <em>ba</em>.
 </p>
 

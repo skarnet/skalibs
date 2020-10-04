@@ -33,7 +33,7 @@ function.
 
 <p>
  Quite a lot of system calls are defined by
-<a href="http://www.opengroup.org/onlinepubs/9699919799/nfindex.html">The
+<a href="https://www.opengroup.org/onlinepubs/9699919799/nfindex.html">The
 Open Group Base Specifications</a> as interruptible: when the process is in
 the middle of such a system call and receives a signal that it does not
 ignore, the system call immediately returns -1 EINTR (after the signal
@@ -47,7 +47,7 @@ simply restarted, not interrupted. EINTR can only happen when a signal
 handler has been installed, and a signal is actually caught by the
 signal handler during an interruptible system call. And to avoid EINTR,
 users can use the SA_RESTART flag when installing the signal handler with
-<a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/sigaction.html">sigaction()</a>.
+<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/sigaction.html">sigaction()</a>.
 </p>
 
 <p>
@@ -57,8 +57,8 @@ when writing an asynchronous event loop.
 
 <p>
  An asynchronous event loop is organized around a
-<a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/select.html">select()</a> or
-<a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/poll.html">poll()</a>
+<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/select.html">select()</a> or
+<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/poll.html">poll()</a>
 system call that is the only blocking operation in the whole loop. That call takes a
 timeout as an argument. If a signal handler is installed with SA_RESTART and a
 signal arrives in the middle of the select/poll call - which happens often

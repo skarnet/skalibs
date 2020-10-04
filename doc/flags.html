@@ -27,7 +27,7 @@ uncommon options; this page explains what they are for.
 
 <p>
  This flag tells configure that you want to install skalibs according to
-the <a href="http://cr.yp.to/slashpackage.html">slashpackage convention</a>.
+the <a href="https://cr.yp.to/slashpackage.html">slashpackage convention</a>.
 If you enable it, and $v is the version of skalibs you're compiling,
 <tt>make install</tt> will install the skalibs header files in
 <tt>/package/prog/skalibs-$v/include</tt>, the static libraries in
@@ -63,11 +63,11 @@ to the installed skalibs shared libraries. </li>
 <p>
  To understand what this flag is about - and the next two flags too - you
 should start by reading
-<a href="http://www.madore.org/~david/computers/unix-leap-seconds.html">this
+<a href="https://www.madore.org/~david/computers/unix-leap-seconds.html">this
 page about Unix time</a>,
-which <a href="http://www.madore.org/~david/">David Madore</a> wrote after
+which <a href="https://www.madore.org/~david/">David Madore</a> wrote after
 a long and fairly complete discussion we had on the subject. You can also
-read <a href="http://cr.yp.to/proto/utctai.html">what DJB says about Unix time</a>.
+read <a href="https://cr.yp.to/proto/utctai.html">what DJB says about Unix time</a>.
 Unfortunately, when he says "the POSIX rules are so outrageously dumb (...)
 that no self-respecting engineer would obey them", DJB is wrong: a lot of
 people follow the POSIX rules. Or maybe he's right... and there are very,
@@ -85,7 +85,7 @@ uncommon, thing to do:
   <ul>
    <li> &uarr; The main advantage of this setup is that it makes your system clock
 <em>linear</em>. In other words,
-<a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/gettimeofday.html">gettimeofday()</a>
+<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/gettimeofday.html">gettimeofday()</a>
 becomes suitable for both timestamping (which needs absolute time) and timeout
 computations (which need reliable interval measurements); if your clock is
 accurate enough, it can function as both a wall clock and a stopwatch.
@@ -105,7 +105,7 @@ or so. </li>
    <li> &darr; This setup is arguably not SUSv4 conformant (a strict
 interpretation of Single Unix requires the system clock to be set to UTC). </li>
    <li> &darr; This setup is <em>not</em> compatible with
-<a href="http://en.wikipedia.org/wiki/Ntpd">ntpd</a>. <tt>ntpd</tt>'s design
+<a href="https://en.wikipedia.org/wiki/Ntpd">ntpd</a>. <tt>ntpd</tt>'s design
 is flawed: it makes the mistake of setting the system clock itself - instead
 of simply making the computed time available to other programs, one of which
 could set the system clock - and it always sets it to UTC. (The
