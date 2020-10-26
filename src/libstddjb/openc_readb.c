@@ -2,9 +2,9 @@
 
 #include <skalibs/djbunix.h>
 
-int open_readbcoe (char const *fn)
+int openc_readb (char const *fn)
 {
-  int fd = open_readbcoe(fn) ;
+  int fd = openc_read(fn) ;
   if (fd < 0) return -1 ;
   if (ndelay_off(fd) < 0)
   {

@@ -4,7 +4,7 @@
 #include <fcntl.h>
 #include <skalibs/djbunix.h>
 
-int openb_readcoe (char const *fn)
+int openbc_read (char const *fn)
 {
   return open2(fn, O_RDONLY | O_CLOEXEC) ;
 }

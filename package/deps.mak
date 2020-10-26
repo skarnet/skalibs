@@ -454,6 +454,14 @@ src/libstddjb/open_readb.o src/libstddjb/open_readb.lo: src/libstddjb/open_readb
 src/libstddjb/open_trunc.o src/libstddjb/open_trunc.lo: src/libstddjb/open_trunc.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h
 src/libstddjb/open_write.o src/libstddjb/open_write.lo: src/libstddjb/open_write.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h
 src/libstddjb/openb_read.o src/libstddjb/openb_read.lo: src/libstddjb/openb_read.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h
+src/libstddjb/openbc_read.o src/libstddjb/openbc_read.lo: src/libstddjb/openbc_read.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h
+src/libstddjb/openc_append.o src/libstddjb/openc_append.lo: src/libstddjb/openc_append.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h
+src/libstddjb/openc_create.o src/libstddjb/openc_create.lo: src/libstddjb/openc_create.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h
+src/libstddjb/openc_excl.o src/libstddjb/openc_excl.lo: src/libstddjb/openc_excl.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h
+src/libstddjb/openc_read.o src/libstddjb/openc_read.lo: src/libstddjb/openc_read.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h
+src/libstddjb/openc_readb.o src/libstddjb/openc_readb.lo: src/libstddjb/openc_readb.c src/include/skalibs/djbunix.h
+src/libstddjb/openc_trunc.o src/libstddjb/openc_trunc.lo: src/libstddjb/openc_trunc.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h
+src/libstddjb/openc_write.o src/libstddjb/openc_write.lo: src/libstddjb/openc_write.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h
 src/libstddjb/openreadfileclose.o src/libstddjb/openreadfileclose.lo: src/libstddjb/openreadfileclose.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/openreadnclose.o src/libstddjb/openreadnclose.lo: src/libstddjb/openreadnclose.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
 src/libstddjb/openslurpclose.o src/libstddjb/openslurpclose.lo: src/libstddjb/openslurpclose.c src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h

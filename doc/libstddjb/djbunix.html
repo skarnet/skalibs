@@ -254,7 +254,7 @@ Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> int open_readcoe (char const *file) </code> <br />
+<code> int openc_read (char const *file) </code> <br />
 Opens <em>file</em> in read-only, non-blocking mode, close-on-exec.
 Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
 </p>
@@ -266,7 +266,7 @@ Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> int openb_readcoe (char const *file) </code> <br />
+<code> int openbc_read (char const *file) </code> <br />
 Opens <em>file</em> in read-only, blocking mode, close-on-exec.
 Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
 </p>
@@ -283,7 +283,7 @@ with FIFOs.
 </p>
 
 <p>
-<code> int open_readbcoe (char const *file) </code> <br />
+<code> int openc_readb (char const *file) </code> <br />
 Same as above, but the file is opened close-on-exec.
 </p>
 
@@ -295,7 +295,7 @@ Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> int open_exclcoe (char const *file) </code> <br />
+<code> int openc_excl (char const *file) </code> <br />
 Opens <em>file</em> in write-only, non-blocking mode, close-on-exec, with the
 additional O_EXCL and O_CREAT flags.
 Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
@@ -309,7 +309,7 @@ Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> int open_appendcoe (char const *file) </code> <br />
+<code> int openc_append (char const *file) </code> <br />
 Opens <em>file</em> in write-only, non-blocking mode, close-on-exec, with the
 additional O_APPEND and O_CREAT flags.
 Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
@@ -323,7 +323,7 @@ Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> int open_trunccoe (char const *file) </code> <br />
+<code> int openc_trunc (char const *file) </code> <br />
 Opens <em>file</em> in write-only, non-blocking mode, close-on-exec, with the
 additional O_TRUNC and O_CREAT flags.
 Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
@@ -337,7 +337,7 @@ Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> int open_createcoe (char const *file) </code> <br />
+<code> int openc_create (char const *file) </code> <br />
 Opens <em>file</em> in write-only, non-blocking mode, close-on-exec, with the
 additional O_CREAT flag.
 Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
@@ -350,7 +350,7 @@ Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> int open_writecoe (char const *file) </code> <br />
+<code> int openc_write (char const *file) </code> <br />
 Opens <em>file</em> in write-only, non-blocking mode, close-on-exec.
 Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
 </p>
