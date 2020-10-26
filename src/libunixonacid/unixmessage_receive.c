@@ -7,7 +7,6 @@
 #include <sys/socket.h>
 #include <sys/uio.h>
 
-#include <skalibs/posixishard.h>
 #include <skalibs/uint16.h>
 #include <skalibs/uint32.h>
 #include <skalibs/cbuffer.h>
@@ -15,6 +14,7 @@
 #include <skalibs/allreadwrite.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/unixmessage.h>
+#include <skalibs/posixishard.h>
 
 union aligner_u
 {

@@ -9,7 +9,6 @@
 #include <unistd.h>
 #include <errno.h>
 
-#include <skalibs/posixishard.h>
 #include <skalibs/uint16.h>
 #include <skalibs/uint32.h>
 #include <skalibs/disize.h>
@@ -17,6 +16,7 @@
 #include <skalibs/genalloc.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/unixmessage.h>
+#include <skalibs/posixishard.h>
 
 union aligner_u
 {

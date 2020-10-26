@@ -7,8 +7,8 @@
 #include <sys/un.h>
 #include <string.h>
 
-#include <skalibs/posixishard.h>
 #include <skalibs/webipc.h>
+#include <skalibs/posixishard.h>
 
 ssize_t ipc_recv (int fd, char *s, size_t len, char *path)
 {

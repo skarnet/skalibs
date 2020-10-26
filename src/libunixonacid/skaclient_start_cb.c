@@ -3,9 +3,9 @@
 #include <errno.h>
 #include <string.h>
 
-#include <skalibs/posixishard.h>
 #include <skalibs/unixmessage.h>
 #include <skalibs/skaclient.h>
+#include <skalibs/posixishard.h>
 #include "skaclient-internal.h"
 
 int skaclient_start_cb (unixmessage_t const *m, skaclient_cbdata_t *blah)

@@ -3,8 +3,8 @@
 #include <sys/uio.h>
 #include <errno.h>
 
-#include <skalibs/posixishard.h>
 #include <skalibs/textclient.h>
+#include <skalibs/posixishard.h>
 
 int textclient_command (textclient_t *a, char const *s, size_t len, tain_t const *deadline, tain_t *stamp)
 {

@@ -1,25 +1,15 @@
 /* ISC license. */
 
-#include <skalibs/nonposix.h>
-
-#include <sys/uio.h>
 #include <errno.h>
 #include <string.h>
-#include <sys/socket.h>
+#include <sys/uio.h>
 
-#include <skalibs/posixishard.h>
-#include <skalibs/types.h>
-#include <skalibs/allreadwrite.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/unix-timed.h>
+#include <skalibs/ancil.h>
 #include <skalibs/textmessage.h>
 #include <skalibs/textclient.h>
-
-union aligner_u
-{
-  struct cmsghdr cmsghdr ;
-  int i ;
-} ;
+#include <skalibs/posixishard.h>
 
 static int getfd (void *p)
 {
@@ -35,30 +25,7 @@ static int one (void *p)
 static int sendit (void *p)
 {
   int *fd = p ;
-  union aligner_u ancilbuf[1 + (CMSG_SPACE(sizeof(int)) - 1) / sizeof(union aligner_u)] ;
-  ssize_t r ;
-  char ch = '|' ;
-  struct iovec v = { .iov_base = &ch, .iov_len = 1 } ;
-  struct msghdr hdr =
-  {
-    .msg_name = 0,
-    .msg_namelen = 0,
-    .msg_iov = &v,
-    .msg_iovlen = 1,
-    .msg_control = ancilbuf,
-    .msg_controllen = CMSG_SPACE(sizeof(int))
-  } ;
-  struct cmsghdr *c = CMSG_FIRSTHDR(&hdr) ;
-  memset(hdr.msg_control, 0, hdr.msg_controllen) ;
-  c->cmsg_level = SOL_SOCKET ;
-  c->cmsg_type = SCM_RIGHTS ;
-  c->cmsg_len = CMSG_LEN(sizeof(int)) ;
-  *(int *)CMSG_DATA(c) = fd[1] ;
-  do r = sendmsg(fd[0], &hdr, MSG_NOSIGNAL) ;
-  while (r < 0 && errno == EINTR) ;
-  if (r <= 0) return 0 ;
-  fd_close(fd[1]) ;
-  return 1 ;
+  return ancil_send_fd(fd[0], fd[1], '|') ;
 }
 
 int textclient_server_init_fromsocket (textmessage_receiver_t *in, textmessage_sender_t *syncout, textmessage_sender_t *asyncout, char const *before, size_t beforelen, char const *after, size_t afterlen, tain_t const *deadline, tain_t *stamp)

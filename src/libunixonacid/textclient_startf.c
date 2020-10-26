@@ -4,11 +4,11 @@
 #include <string.h>
 #include <errno.h>
 
-#include <skalibs/posixishard.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/textmessage.h>
 #include <skalibs/textclient.h>
+#include <skalibs/posixishard.h>
 
 int textclient_startf (textclient_t *a, char const *const *argv, char const *const *envp, uint32_t options, char const *before, size_t beforelen, char const *after, size_t afterlen, tain_t const *deadline, tain_t *stamp)
 {

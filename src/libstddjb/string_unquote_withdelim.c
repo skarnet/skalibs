@@ -2,10 +2,10 @@
 
 #include <errno.h>
 
-#include <skalibs/posixishard.h>
 #include <skalibs/bytestr.h>
 #include <skalibs/fmtscan.h>
 #include <skalibs/skamisc.h>
+#include <skalibs/posixishard.h>
 
 #define PUSH0 0x40
 #define PUSH  0x20

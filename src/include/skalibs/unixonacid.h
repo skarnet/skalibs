@@ -5,6 +5,7 @@
 
 #include <skalibs/unix-transactional.h>
 #include <skalibs/unix-timed.h>
+#include <skalibs/ancil.h>
 #include <skalibs/textmessage.h>
 #include <skalibs/textclient.h>
 #include <skalibs/unixmessage.h>

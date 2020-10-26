@@ -7,8 +7,8 @@
 #include <string.h>
 #include <errno.h>
 
-#include <skalibs/posixishard.h>
 #include <skalibs/webipc.h>
+#include <skalibs/posixishard.h>
 
 int ipc_bind (int s, char const *p)
 {

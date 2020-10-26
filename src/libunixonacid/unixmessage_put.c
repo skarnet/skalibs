@@ -3,13 +3,13 @@
 #include <string.h>
 #include <errno.h>
 
-#include <skalibs/posixishard.h>
 #include <skalibs/bitarray.h>
 #include <skalibs/disize.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/genalloc.h>
 #include <skalibs/siovec.h>
 #include <skalibs/unixmessage.h>
+#include <skalibs/posixishard.h>
 
 static inline int copyfds (char *s, int const *fds, unsigned int n, unsigned char const *bits, unixmessage_sender_closecb_func_t_ref closecb, void *closecbdata)
 {

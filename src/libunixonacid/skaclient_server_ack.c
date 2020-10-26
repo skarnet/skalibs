@@ -3,11 +3,11 @@
 #include <errno.h>
 #include <string.h>
 
-#include <skalibs/posixishard.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/skaclient.h>
 #include <skalibs/unixmessage.h>
 #include <skalibs/webipc.h>
+#include <skalibs/posixishard.h>
 
 int skaclient_server_ack (unixmessage_t const *clientmsg, unixmessage_sender_t *out, unixmessage_sender_t *asyncout, char const *before, size_t beforelen, char const *after, size_t afterlen)
 {

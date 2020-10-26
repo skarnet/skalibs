@@ -1,26 +1,18 @@
 /* ISC license. */
 
-#include <skalibs/sysdeps.h>
-#include <skalibs/nonposix.h>
-
 #include <sys/uio.h>
 #include <string.h>
 #include <errno.h>
-#include <sys/socket.h>
 
-#include <skalibs/posixishard.h>
 #include <skalibs/allreadwrite.h>
+#include <skalibs/error.h>
 #include <skalibs/webipc.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/unix-timed.h>
+#include <skalibs/ancil.h>
 #include <skalibs/textmessage.h>
 #include <skalibs/textclient.h>
-
-union aligner_u
-{
-  struct cmsghdr cmsghdr ;
-  int i ;
-} ;
+#include <skalibs/posixishard.h>
 
 static int getfd (void *p)
 {
@@ -29,56 +21,13 @@ static int getfd (void *p)
 
 static ssize_t get (void *p)
 {
-  static int const awesomeflags =
-#ifdef SKALIBS_HASMSGDONTWAIT
-    MSG_DONTWAIT
-#else
-    0
-#endif
-    |
-#ifdef SKALIBS_HASCMSGCLOEXEC
-    MSG_CMSG_CLOEXEC
-#else
-    0
-#endif
-    ;
-  struct cmsghdr *c ;
   int *fd = p ;
-  ssize_t r ;
-  union aligner_u ancilbuf[1 + (CMSG_SPACE(sizeof(int)) - 1) / sizeof(union aligner_u)] ;
-  char ch ;
-  struct iovec v = { .iov_base = &ch, .iov_len = 1 } ;
-  struct msghdr msghdr =
-  {
-    .msg_name = 0,
-    .msg_namelen = 0,
-    .msg_iov = &v,
-    .msg_iovlen = 1,
-    .msg_flags = 0,
-    .msg_control = ancilbuf,
-    .msg_controllen = CMSG_SPACE(sizeof(int))
-  } ;
-  do r = recvmsg(fd[0], &msghdr, awesomeflags) ;
-  while (r < 0 && errno == EINTR) ;
-  if (r <= 0) return sanitize_read(r) ;
-  c = CMSG_FIRSTHDR(&msghdr) ;
-  if (ch != '|'
-   || !c
-   || c->cmsg_level != SOL_SOCKET
-   || c->cmsg_type != SCM_RIGHTS
-   || (size_t)(c->cmsg_len - (CMSG_DATA(c) - (unsigned char *)c)) != sizeof(int)) return (errno = EPROTO, -1) ;
-#ifndef SKALIBS_HASCMSGCLOEXEC
-  if (coe(*(int *)CMSG_DATA(c)) < 0)
-  {
-    fd_close(*(int *)CMSG_DATA(c)) ;
-    return -1 ;
-  }
-#endif
-  fd[1] = *(int *)CMSG_DATA(c) ;
+  int r = ancil_recv_fd(fd[0], '|') ;
+  if (r < 0) return error_isagain(errno) ? (errno = 0, 0) : r ;
+  fd[1] = r ;
   return 1 ;
 }
-
-
+  
 int textclient_start (textclient_t *a, char const *path, uint32_t options, char const *before, size_t beforelen, char const *after, size_t afterlen, tain_t const *deadline, tain_t *stamp)
 {
   struct iovec v ;

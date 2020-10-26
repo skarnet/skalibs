@@ -4,9 +4,9 @@
 #include <string.h>
 #include <errno.h>
 
-#include <skalibs/posixishard.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/cdb.h>
+#include <skalibs/posixishard.h>
 
 int cdb_read (struct cdb *c, char *buf, unsigned int len, uint32_t pos)
 {

@@ -2,9 +2,9 @@
 
 #include <errno.h>
 
-#include <skalibs/posixishard.h>
 #include <skalibs/skaclient.h>
 #include <skalibs/unixmessage.h>
+#include <skalibs/posixishard.h>
 
 int skaclient_default_cb (unixmessage_t const *m, void *p)
 {

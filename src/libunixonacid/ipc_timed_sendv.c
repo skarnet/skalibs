@@ -5,11 +5,11 @@
 #include <sys/socket.h>
 #include <errno.h>
 
-#include <skalibs/posixishard.h>
 #include <skalibs/error.h>
 #include <skalibs/iopause.h>
 #include <skalibs/siovec.h>
 #include <skalibs/unix-timed.h>
+#include <skalibs/posixishard.h>
 
 int ipc_timed_sendv (int fd, struct iovec const *v, unsigned int n, tain_t const *deadline, tain_t *stamp)
 {

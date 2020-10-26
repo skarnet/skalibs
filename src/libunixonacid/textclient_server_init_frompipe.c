@@ -5,12 +5,12 @@
 #include <fcntl.h>
 #include <errno.h>
 
-#include <skalibs/posixishard.h>
 #include <skalibs/types.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/textmessage.h>
 #include <skalibs/textclient.h>
+#include <skalibs/posixishard.h>
 
 int textclient_server_init_frompipe (textmessage_receiver_t *in, textmessage_sender_t *syncout, textmessage_sender_t *asyncout, char const *before, size_t beforelen, char const *after, size_t afterlen, tain_t const *deadline, tain_t *stamp)
 {
