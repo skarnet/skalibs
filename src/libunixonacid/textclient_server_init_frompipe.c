@@ -24,8 +24,8 @@ int textclient_server_init_frompipe (textmessage_receiver_t *in, textmessage_sen
   if (sanitize_read(textmessage_timed_receive(in, &v, deadline, stamp)) <= 0) return 0 ;
   if (v.iov_len != beforelen || memcmp(v.iov_base, before, beforelen)) return (errno = EPROTO, 0) ;
   if (fcntl(asyncfd, F_GETFD) < 0) return 0 ;
-  if (!textmessage_timed_send(syncout, after, afterlen, deadline, stamp)) return 0 ;
   textmessage_sender_init(asyncout, asyncfd) ;
   if (!textmessage_timed_send(asyncout, after, afterlen, deadline, stamp)) return 0 ;
+  if (!textmessage_timed_send(syncout, after, afterlen, deadline, stamp)) return 0 ;
   return 1 ;
 }

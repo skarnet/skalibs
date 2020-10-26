@@ -82,6 +82,11 @@ extern int textmessage_timed_handle (textmessage_receiver_t *, textmessage_handl
 #define textmessage_timed_handle_g(tr, f, p, deadline) textmessage_timed_handle(tr, f, p, (deadline), &STAMP)
 
 
+ /* Creating new textmessage channels via fd-passing over a socket */
+
+extern int textmessage_create_send_channel (int, textmessage_sender_t *, char const *, size_t, tain_t const *, tain_t *) ;
+extern int textmessage_recv_channel (int, textmessage_receiver_t *, char *, size_t, char const *, size_t, tain_t const *, tain_t *) ;
+
 
  /* Globals */
 

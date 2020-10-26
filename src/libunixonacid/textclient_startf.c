@@ -21,9 +21,10 @@ int textclient_startf (textclient_t *a, char const *const *argv, char const *con
   textmessage_sender_init(&a->syncout, fd[1]) ;
   a->pid = pid ;
   a->options = options ;
-  if (!textclient_exchange(a, before, beforelen, &v, deadline, stamp)) goto err ;
-  if (v.iov_len != afterlen || memcmp(v.iov_base, after, afterlen)) goto errproto ;
+  if (!textclient_timed_send(a, before, beforelen, deadline, stamp)) goto err ;
   if (sanitize_read(textmessage_timed_receive(&a->asyncin, &v, deadline, stamp)) <= 0) goto err ;
+  if (v.iov_len != afterlen || memcmp(v.iov_base, after, afterlen)) goto errproto ;
+  if (!textclient_timed_get(a, &v, deadline, stamp)) goto err ;
   if (v.iov_len != afterlen || memcmp(v.iov_base, after, afterlen)) goto errproto ;
   return 1 ;
 

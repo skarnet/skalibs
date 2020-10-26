@@ -7,7 +7,6 @@
 #include <sys/uio.h>
 #include <sys/socket.h>
 
-#include <skalibs/djbunix.h>
 #include <skalibs/ancil.h>
 #include <skalibs/posixishard.h>
 
@@ -40,6 +39,5 @@ int ancil_send_fd (int sock, int fd, char ch)
   do r = sendmsg(sock, &hdr, MSG_NOSIGNAL) ;
   while (r < 0 && errno == EINTR) ;
   if (r <= 0) return 0 ;
-  fd_close(fd) ;
   return 1 ;
 }
