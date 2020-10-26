@@ -6,7 +6,7 @@
 int openslurpclose (stralloc *sa, char const *fn)
 {
   int r ;
-  int fd = open_readb(fn) ;
+  int fd = openb_readcoe(fn) ;
   if (fd == -1) return 0 ;
   r = slurp(sa, fd) ;
   fd_close(fd) ;

@@ -8,7 +8,7 @@
 int openreadfileclose (char const *file, stralloc *sa, size_t limit)
 {
   size_t n ;
-  int fd = open_readb(file) ;
+  int fd = openb_readcoe(file) ;
   if (fd < 0) return 0 ;
   {
     struct stat st ;

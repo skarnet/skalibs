@@ -8,7 +8,7 @@
 
 int openwritevnclose_unsafe_internal (char const *fn, struct iovec const *v, unsigned int vlen, dev_t *dev, ino_t *ino, int dosync)
 {
-  int fd = open_trunc(fn) ;
+  int fd = open_trunccoe(fn) ;
   if (fd < 0) return 0 ;
   if (!writevnclose_unsafe_internal(fd, v, vlen, dev, ino, dosync))
   {
