@@ -40,6 +40,7 @@ extern int ipc_pair_internal (int *, unsigned int) ;
 
 extern int ipc_bind (int, char const *) ;
 extern int ipc_bind_reuse (int, char const *) ;
+extern int ipc_bind_reuse_lock (int, char const *, int *) ;
 extern int ipc_listen (int, int) ;
 
 #define ipc_accept(s, path, len, trunc) ipc_accept_internal(s, path, len, (trunc), 0)
