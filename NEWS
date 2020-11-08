@@ -4,6 +4,10 @@ In 2.9.4.0
 ----------
 
  - New openc_* functions.
+ - New function: ipc_bind_reuse_lock(), taking a lock before
+unconditionally deleting the socket.
+ - ipc_bind_reuse() rewritten to use ipc_bind_reuse_lock(),
+so it does the right thing instead of clobbering sockets.
 
 
 In 2.9.3.0

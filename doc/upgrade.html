@@ -21,6 +21,9 @@
 <ul>
  <li> New <tt>openc_*</tt> functions, which are O_CLOEXEC versions of the
 <a href="libstddjb/djbunix.html">djbunix.h</a> <tt>open_*</tt> functions. </li>
+ <li> New <tt>ipc_bind_reuse_lock()</tt> function, which takes a lock before
+deleting a Unix domain socket. The <tt>ipc_bind_reuse()</tt> function now
+uses it, so it won't unconditionally clobber sockets in the filesystem anymore. </li>
 </ul>
 
 <h2> in 2.9.3.0 </h2>
