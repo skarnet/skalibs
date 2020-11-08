@@ -5,7 +5,7 @@
 /*
    u = u/a mod m. a and m must be relatively prime - otherwise, infinite loop.
    a is not immutable.
-   Original idea: see http://research.sun.com/techrep/2001/abstract-95.html
+   Original idea by Sheueling Chang Shantz of Sun Research.
 */
 
 void bu_divmod_internal (uint32_t *u, uint32_t *a, uint32_t const *m, unsigned int n)

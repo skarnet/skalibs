@@ -1,6 +1,5 @@
 /* ISC license. */
 
-#include <errno.h>
 #include <skalibs/biguint.h>
 
 /*
