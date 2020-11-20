@@ -192,6 +192,16 @@ Returns 1 if it succeeds and 0 if it fails.
 </p>
 
 <p>
+<code> void fd_shutdown (int fd, int w) </code> <br />
+Shuts down socket <em>fd</em>, for reading if <em>w</em> is zero,
+and for writing otherwise. Does not return an error code; does
+not modify errno. This is just a call to
+<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/shutdown.html">shutdown()</a>
+with errno saved, used essentially to isolate application code from
+<tt>sys/socket.h</tt> which is a portability nightmare.
+</p>
+
+<p>
 <code> int lock_ex (int fd) </code> <br />
 Gets an exclusive advisory lock on <em>fd</em>. <em>fd</em> must point to
 a regular file, open for writing. Blocks until the lock can be obtained.

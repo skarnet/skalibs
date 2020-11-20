@@ -333,6 +333,7 @@ src/libstddjb/fd_read.o src/libstddjb/fd_read.lo: src/libstddjb/fd_read.c src/in
 src/libstddjb/fd_readv.o src/libstddjb/fd_readv.lo: src/libstddjb/fd_readv.c src/include/skalibs/allreadwrite.h
 src/libstddjb/fd_recv.o src/libstddjb/fd_recv.lo: src/libstddjb/fd_recv.c src/include/skalibs/allreadwrite.h
 src/libstddjb/fd_send.o src/libstddjb/fd_send.lo: src/libstddjb/fd_send.c src/include/skalibs/allreadwrite.h
+src/libstddjb/fd_shutdown.o src/libstddjb/fd_shutdown.lo: src/libstddjb/fd_shutdown.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h
 src/libstddjb/fd_sync.o src/libstddjb/fd_sync.lo: src/libstddjb/fd_sync.c src/include/skalibs/djbunix.h
 src/libstddjb/fd_write.o src/libstddjb/fd_write.lo: src/libstddjb/fd_write.c src/include/skalibs/allreadwrite.h
 src/libstddjb/fd_writev.o src/libstddjb/fd_writev.lo: src/libstddjb/fd_writev.c src/include/skalibs/allreadwrite.h
@@ -401,7 +402,7 @@ src/libstddjb/ip6_scanlist.o src/libstddjb/ip6_scanlist.lo: src/libstddjb/ip6_sc
 src/libstddjb/ipc_accept.o src/libstddjb/ipc_accept.lo: src/libstddjb/ipc_accept.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/webipc.h
 src/libstddjb/ipc_bind.o src/libstddjb/ipc_bind.lo: src/libstddjb/ipc_bind.c src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/webipc.h
 src/libstddjb/ipc_bind_reuse.o src/libstddjb/ipc_bind_reuse.lo: src/libstddjb/ipc_bind_reuse.c src/include/skalibs/webipc.h
-src/libstddjb/ipc_bind_reuse_lock.o src/libstddjb/ipc_bind_reuse_lock.lo: src/libstddjb/ipc_bind_reuse_lock.c src/include/skalibs/nonposix.h src/include/skalibs/webipc.h
+src/libstddjb/ipc_bind_reuse_lock.o src/libstddjb/ipc_bind_reuse_lock.lo: src/libstddjb/ipc_bind_reuse_lock.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/webipc.h
 src/libstddjb/ipc_connect.o src/libstddjb/ipc_connect.lo: src/libstddjb/ipc_connect.c src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/webipc.h
 src/libstddjb/ipc_connected.o src/libstddjb/ipc_connected.lo: src/libstddjb/ipc_connected.c src/include/skalibs/allreadwrite.h src/include/skalibs/nonposix.h src/include/skalibs/webipc.h
 src/libstddjb/ipc_dgram.o src/libstddjb/ipc_dgram.lo: src/libstddjb/ipc_dgram.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/webipc.h
