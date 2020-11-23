@@ -6,6 +6,5 @@
 int uncoe (int fd)
 {
   int flags = fcntl(fd, F_GETFD, 0) ;
-  if (flags < 0) return -1 ;
-  return fcntl(fd, F_SETFD, flags & ~FD_CLOEXEC) ;
+  return flags < 0 ? flags : flags & FD_CLOEXEC ? fcntl(fd, F_SETFD, flags & ~FD_CLOEXEC) : 0 ;
 }
