@@ -8,6 +8,7 @@ In 2.9.4.0
 unconditionally deleting the socket.
  - ipc_bind_reuse() rewritten to use ipc_bind_reuse_lock(),
 so it does the right thing instead of clobbering sockets.
+ - Complete revamping of the pathexec functions, see exec.h
 
 
 In 2.9.3.0

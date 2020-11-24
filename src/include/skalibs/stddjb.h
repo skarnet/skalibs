@@ -28,6 +28,7 @@
 #include <skalibs/djbunix.h>
 #include <skalibs/envalloc.h>
 #include <skalibs/env.h>
+#include <skalibs/exec.h>
 #include <skalibs/fmtscan.h>
 #include <skalibs/functypes.h>
 #include <skalibs/gccattributes.h>

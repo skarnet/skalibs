@@ -24,6 +24,7 @@
  <li> New <tt>ipc_bind_reuse_lock()</tt> function, which takes a lock before
 deleting a Unix domain socket. The <tt>ipc_bind_reuse()</tt> function now
 uses it, so it won't unconditionally clobber sockets in the filesystem anymore. </li>
+ <li> Complete revamping of the pathexec functions, see <tt>exec.h</tt>. </li>
 </ul>
 
 <h2> in 2.9.3.0 </h2>

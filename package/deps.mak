@@ -19,11 +19,12 @@ src/include/skalibs/cdb.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/cdb_make.h: src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h
 src/include/skalibs/datastruct.h: src/include/skalibs/avlnode.h src/include/skalibs/avltree.h src/include/skalibs/avltreen.h src/include/skalibs/bigkv.h src/include/skalibs/genqdyn.h src/include/skalibs/genset.h src/include/skalibs/gensetdyn.h
 src/include/skalibs/djbtime.h: src/include/skalibs/tai.h src/include/skalibs/uint64.h
-src/include/skalibs/djbunix.h: src/include/skalibs/envalloc.h src/include/skalibs/gccattributes.h src/include/skalibs/posixplz.h src/include/skalibs/stralloc.h
+src/include/skalibs/djbunix.h: src/include/skalibs/exec.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/env.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/envalloc.h: src/include/skalibs/genalloc.h
 src/include/skalibs/environ.h: src/include/skalibs/posixplz.h
 src/include/skalibs/error.h: src/include/skalibs/gccattributes.h
+src/include/skalibs/exec.h: src/include/skalibs/env.h src/include/skalibs/environ.h src/include/skalibs/gccattributes.h
 src/include/skalibs/fmtscan.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/genalloc.h: src/include/skalibs/functypes.h src/include/skalibs/stralloc.h
 src/include/skalibs/genqdyn.h: src/include/skalibs/stralloc.h
@@ -32,6 +33,7 @@ src/include/skalibs/gensetdyn.h: src/include/skalibs/functypes.h src/include/ska
 src/include/skalibs/getpeereid.h: src/include/skalibs/posixplz.h
 src/include/skalibs/iobuffer.h: src/include/skalibs/buffer.h src/include/skalibs/djbunix.h
 src/include/skalibs/iopause.h: src/include/skalibs/tai.h
+src/include/skalibs/ip46.h: src/include/skalibs/fmtscan.h src/include/skalibs/socket.h
 src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr2.h
 src/include/skalibs/netstring.h: src/include/skalibs/buffer.h src/include/skalibs/stralloc.h
@@ -47,12 +49,15 @@ src/include/skalibs/skalibs.h: src/include/skalibs/biguint.h src/include/skalibs
 src/include/skalibs/skamisc.h: src/include/skalibs/buffer.h src/include/skalibs/stralloc.h
 src/include/skalibs/socket.h: src/include/skalibs/djbunix.h src/include/skalibs/gccattributes.h src/include/skalibs/tai.h src/include/skalibs/webipc.h
 src/include/skalibs/stdcrypto.h: src/include/skalibs/md5.h src/include/skalibs/rc4.h src/include/skalibs/sha1.h src/include/skalibs/sha256.h src/include/skalibs/sha512.h
-src/include/skalibs/stddjb.h: src/include/skalibs/alarm.h src/include/skalibs/alloc.h src/include/skalibs/allreadwrite.h src/include/skalibs/bitarray.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/bytestr.h src/include/skalibs/cbuffer.h src/include/skalibs/cdb.h src/include/skalibs/cdb_make.h src/include/skalibs/direntry.h src/include/skalibs/disize.h src/include/skalibs/diuint.h src/include/skalibs/diuint32.h src/include/skalibs/djbtime.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/error.h src/include/skalibs/fmtscan.h src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h src/include/skalibs/genalloc.h src/include/skalibs/genwrite.h src/include/skalibs/iobuffer.h src/include/skalibs/iopause.h src/include/skalibs/ip46.h src/include/skalibs/lolstdio.h src/include/skalibs/netstring.h src/include/skalibs/nsig.h src/include/skalibs/segfault.h src/include/skalibs/selfpipe.h src/include/skalibs/setgroups.h src/include/skalibs/sgetopt.h src/include/skalibs/sig.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/socket.h src/include/skalibs/stralloc.h src/include/skalibs/strerr.h src/include/skalibs/strerr2.h src/include/skalibs/tai.h src/include/skalibs/types.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h src/include/skalibs/webipc.h
+src/include/skalibs/stddjb.h: src/include/skalibs/alarm.h src/include/skalibs/alloc.h src/include/skalibs/allreadwrite.h src/include/skalibs/bitarray.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/bytestr.h src/include/skalibs/cbuffer.h src/include/skalibs/cdb.h src/include/skalibs/cdb_make.h src/include/skalibs/direntry.h src/include/skalibs/disize.h src/include/skalibs/diuint.h src/include/skalibs/diuint32.h src/include/skalibs/djbtime.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/error.h src/include/skalibs/exec.h src/include/skalibs/fmtscan.h src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h src/include/skalibs/genalloc.h src/include/skalibs/genwrite.h src/include/skalibs/iobuffer.h src/include/skalibs/iopause.h src/include/skalibs/ip46.h src/include/skalibs/lolstdio.h src/include/skalibs/netstring.h src/include/skalibs/nsig.h src/include/skalibs/segfault.h src/include/skalibs/selfpipe.h src/include/skalibs/setgroups.h src/include/skalibs/sgetopt.h src/include/skalibs/sig.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/socket.h src/include/skalibs/stralloc.h src/include/skalibs/strerr.h src/include/skalibs/strerr2.h src/include/skalibs/tai.h src/include/skalibs/types.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h src/include/skalibs/webipc.h
 src/include/skalibs/strerr.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint64.h
 src/include/skalibs/textclient.h: src/include/skalibs/allreadwrite.h src/include/skalibs/tai.h src/include/skalibs/textmessage.h
 src/include/skalibs/textmessage.h: src/include/skalibs/allreadwrite.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
+src/include/skalibs/types.h: src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
+src/include/skalibs/uint16.h: src/include/skalibs/uint64.h
+src/include/skalibs/uint32.h: src/include/skalibs/uint64.h
 src/include/skalibs/unix-timed.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
 src/include/skalibs/unix-transactional.h: src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
 src/include/skalibs/unixconnection.h: src/include/skalibs/unixmessage.h
@@ -144,6 +149,40 @@ src/libdatastruct/gensetdyn_iter_withcancel.o src/libdatastruct/gensetdyn_iter_w
 src/libdatastruct/gensetdyn_new.o src/libdatastruct/gensetdyn_new.lo: src/libdatastruct/gensetdyn_new.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h
 src/libdatastruct/gensetdyn_ready.o src/libdatastruct/gensetdyn_ready.lo: src/libdatastruct/gensetdyn_ready.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h src/include/skalibs/stralloc.h
 src/libdatastruct/gensetdyn_zero.o src/libdatastruct/gensetdyn_zero.lo: src/libdatastruct/gensetdyn_zero.c src/include/skalibs/gensetdyn.h
+src/libenvexec/env_addmodif.o src/libenvexec/env_addmodif.lo: src/libenvexec/env_addmodif.c src/include/skalibs/env.h src/include/skalibs/stralloc.h
+src/libenvexec/env_dump.o src/libenvexec/env_dump.lo: src/libenvexec/env_dump.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/nonposix.h src/include/skalibs/unix-transactional.h
+src/libenvexec/env_get.o src/libenvexec/env_get.lo: src/libenvexec/env_get.c src/include/skalibs/posixplz.h
+src/libenvexec/env_get2.o src/libenvexec/env_get2.lo: src/libenvexec/env_get2.c src/include/skalibs/bytestr.h src/include/skalibs/env.h
+src/libenvexec/env_len.o src/libenvexec/env_len.lo: src/libenvexec/env_len.c src/include/skalibs/env.h
+src/libenvexec/env_make.o src/libenvexec/env_make.lo: src/libenvexec/env_make.c src/include/skalibs/env.h
+src/libenvexec/env_merg.o src/libenvexec/env_merg.lo: src/libenvexec/env_merg.c src/include/skalibs/env.h
+src/libenvexec/env_merge.o src/libenvexec/env_merge.lo: src/libenvexec/env_merge.c src/include/skalibs/bytestr.h src/include/skalibs/env.h
+src/libenvexec/env_mergen.o src/libenvexec/env_mergen.lo: src/libenvexec/env_mergen.c src/include/skalibs/bytestr.h src/include/skalibs/env.h
+src/libenvexec/env_mergn.o src/libenvexec/env_mergn.lo: src/libenvexec/env_mergn.c src/include/skalibs/env.h
+src/libenvexec/env_string.o src/libenvexec/env_string.lo: src/libenvexec/env_string.c src/include/skalibs/env.h src/include/skalibs/stralloc.h
+src/libenvexec/envalloc_0.o src/libenvexec/envalloc_0.lo: src/libenvexec/envalloc_0.c src/include/skalibs/envalloc.h src/include/skalibs/genalloc.h
+src/libenvexec/envalloc_make.o src/libenvexec/envalloc_make.lo: src/libenvexec/envalloc_make.c src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/genalloc.h
+src/libenvexec/envalloc_merge.o src/libenvexec/envalloc_merge.lo: src/libenvexec/envalloc_merge.c src/include/skalibs/bytestr.h src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/genalloc.h
+src/libenvexec/envalloc_uniq.o src/libenvexec/envalloc_uniq.lo: src/libenvexec/envalloc_uniq.c src/include/skalibs/bytestr.h src/include/skalibs/envalloc.h src/include/skalibs/genalloc.h
+src/libenvexec/envdir.o src/libenvexec/envdir.lo: src/libenvexec/envdir.c src/include/skalibs/bytestr.h src/include/skalibs/direntry.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/stralloc.h
+src/libenvexec/exec0_ae.o src/libenvexec/exec0_ae.lo: src/libenvexec/exec0_ae.c src/include/skalibs/exec.h
+src/libenvexec/exec_ae.o src/libenvexec/exec_ae.lo: src/libenvexec/exec_ae.c src/include/skalibs/config.h src/include/skalibs/exec.h src/include/skalibs/posixplz.h
+src/libenvexec/mexec0_af.o src/libenvexec/mexec0_af.lo: src/libenvexec/mexec0_af.c src/include/skalibs/exec.h
+src/libenvexec/mexec0_afm.o src/libenvexec/mexec0_afm.lo: src/libenvexec/mexec0_afm.c src/include/skalibs/exec.h
+src/libenvexec/mexec0_afn.o src/libenvexec/mexec0_afn.lo: src/libenvexec/mexec0_afn.c src/include/skalibs/exec.h
+src/libenvexec/mexec_af.o src/libenvexec/mexec_af.lo: src/libenvexec/mexec_af.c src/include/skalibs/env.h src/include/skalibs/exec.h src/include/skalibs/stralloc.h
+src/libenvexec/mexec_afm.o src/libenvexec/mexec_afm.lo: src/libenvexec/mexec_afm.c src/include/skalibs/bytestr.h src/include/skalibs/exec.h
+src/libenvexec/mexec_afn.o src/libenvexec/mexec_afn.lo: src/libenvexec/mexec_afn.c src/include/skalibs/env.h src/include/skalibs/exec.h
+src/libenvexec/xexec0_ae.o src/libenvexec/xexec0_ae.lo: src/libenvexec/xexec0_ae.c src/include/skalibs/exec.h
+src/libenvexec/xexec_ae.o src/libenvexec/xexec_ae.lo: src/libenvexec/xexec_ae.c src/include/skalibs/exec.h src/include/skalibs/strerr2.h
+src/libenvexec/xexecvep.o src/libenvexec/xexecvep.lo: src/libenvexec/xexecvep.c src/include/skalibs/exec.h src/include/skalibs/posixplz.h src/include/skalibs/strerr2.h
+src/libenvexec/xexecvep_loose.o src/libenvexec/xexecvep_loose.lo: src/libenvexec/xexecvep_loose.c src/include/skalibs/exec.h src/include/skalibs/posixplz.h src/include/skalibs/strerr2.h
+src/libenvexec/xmexec0_af.o src/libenvexec/xmexec0_af.lo: src/libenvexec/xmexec0_af.c src/include/skalibs/exec.h src/include/skalibs/strerr2.h
+src/libenvexec/xmexec0_afm.o src/libenvexec/xmexec0_afm.lo: src/libenvexec/xmexec0_afm.c src/include/skalibs/exec.h src/include/skalibs/strerr2.h
+src/libenvexec/xmexec0_afn.o src/libenvexec/xmexec0_afn.lo: src/libenvexec/xmexec0_afn.c src/include/skalibs/exec.h src/include/skalibs/strerr2.h
+src/libenvexec/xmexec_af.o src/libenvexec/xmexec_af.lo: src/libenvexec/xmexec_af.c src/include/skalibs/exec.h src/include/skalibs/strerr2.h
+src/libenvexec/xmexec_afm.o src/libenvexec/xmexec_afm.lo: src/libenvexec/xmexec_afm.c src/include/skalibs/exec.h src/include/skalibs/strerr2.h
+src/libenvexec/xmexec_afn.o src/libenvexec/xmexec_afn.lo: src/libenvexec/xmexec_afn.c src/include/skalibs/exec.h src/include/skalibs/strerr2.h
 src/libposixplz/doublefork.o src/libposixplz/doublefork.lo: src/libposixplz/doublefork.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h src/include/skalibs/uint64.h
 src/libposixplz/execvep.o src/libposixplz/execvep.lo: src/libposixplz/execvep.c src/libposixplz/posixplz-internal.h src/include/skalibs/posixplz.h
 src/libposixplz/execvep_internal.o src/libposixplz/execvep_internal.lo: src/libposixplz/execvep_internal.c src/include/skalibs/bytestr.h src/include/skalibs/posixplz.h
@@ -303,19 +342,6 @@ src/libstddjb/coe.o src/libstddjb/coe.lo: src/libstddjb/coe.c src/include/skalib
 src/libstddjb/deepsleepuntil.o src/libstddjb/deepsleepuntil.lo: src/libstddjb/deepsleepuntil.c src/include/skalibs/iopause.h src/include/skalibs/tai.h
 src/libstddjb/dir_close.o src/libstddjb/dir_close.lo: src/libstddjb/dir_close.c src/include/skalibs/direntry.h
 src/libstddjb/dir_fd.o src/libstddjb/dir_fd.lo: src/libstddjb/dir_fd.c src/include/skalibs/direntry.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
-src/libstddjb/env_addmodif.o src/libstddjb/env_addmodif.lo: src/libstddjb/env_addmodif.c src/include/skalibs/env.h src/include/skalibs/stralloc.h
-src/libstddjb/env_dump.o src/libstddjb/env_dump.lo: src/libstddjb/env_dump.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/nonposix.h src/include/skalibs/unix-transactional.h
-src/libstddjb/env_get.o src/libstddjb/env_get.lo: src/libstddjb/env_get.c src/include/skalibs/posixplz.h
-src/libstddjb/env_get2.o src/libstddjb/env_get2.lo: src/libstddjb/env_get2.c src/include/skalibs/bytestr.h src/include/skalibs/env.h
-src/libstddjb/env_len.o src/libstddjb/env_len.lo: src/libstddjb/env_len.c src/include/skalibs/env.h
-src/libstddjb/env_make.o src/libstddjb/env_make.lo: src/libstddjb/env_make.c src/include/skalibs/env.h
-src/libstddjb/env_merge.o src/libstddjb/env_merge.lo: src/libstddjb/env_merge.c src/include/skalibs/bytestr.h src/include/skalibs/env.h
-src/libstddjb/env_string.o src/libstddjb/env_string.lo: src/libstddjb/env_string.c src/include/skalibs/env.h src/include/skalibs/stralloc.h
-src/libstddjb/envalloc_0.o src/libstddjb/envalloc_0.lo: src/libstddjb/envalloc_0.c src/include/skalibs/envalloc.h src/include/skalibs/genalloc.h
-src/libstddjb/envalloc_make.o src/libstddjb/envalloc_make.lo: src/libstddjb/envalloc_make.c src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/genalloc.h
-src/libstddjb/envalloc_merge.o src/libstddjb/envalloc_merge.lo: src/libstddjb/envalloc_merge.c src/include/skalibs/bytestr.h src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/genalloc.h
-src/libstddjb/envalloc_uniq.o src/libstddjb/envalloc_uniq.lo: src/libstddjb/envalloc_uniq.c src/include/skalibs/bytestr.h src/include/skalibs/envalloc.h src/include/skalibs/genalloc.h
-src/libstddjb/envdir.o src/libstddjb/envdir.lo: src/libstddjb/envdir.c src/include/skalibs/bytestr.h src/include/skalibs/direntry.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/stralloc.h
 src/libstddjb/error_isalready.o src/libstddjb/error_isalready.lo: src/libstddjb/error_isalready.c src/include/skalibs/bsdsnowflake.h src/include/skalibs/error.h
 src/libstddjb/error_temp.o src/libstddjb/error_temp.lo: src/libstddjb/error_temp.c src/include/skalibs/error.h
 src/libstddjb/fd_cat.o src/libstddjb/fd_cat.lo: src/libstddjb/fd_cat.c src/include/skalibs/djbunix.h src/include/skalibs/iobuffer.h
@@ -474,13 +500,6 @@ src/libstddjb/openwritevnclose.o src/libstddjb/openwritevnclose.lo: src/libstddj
 src/libstddjb/openwritevnclose_suffix.o src/libstddjb/openwritevnclose_suffix.lo: src/libstddjb/openwritevnclose_suffix.c src/include/skalibs/djbunix.h
 src/libstddjb/openwritevnclose_unsafe.o src/libstddjb/openwritevnclose_unsafe.lo: src/libstddjb/openwritevnclose_unsafe.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
 src/libstddjb/path_canonicalize.o src/libstddjb/path_canonicalize.lo: src/libstddjb/path_canonicalize.c src/include/skalibs/djbunix.h
-src/libstddjb/pathexec.o src/libstddjb/pathexec.lo: src/libstddjb/pathexec.c src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/posixplz.h
-src/libstddjb/pathexec0.o src/libstddjb/pathexec0.lo: src/libstddjb/pathexec0.c src/include/skalibs/djbunix.h
-src/libstddjb/pathexec0_run.o src/libstddjb/pathexec0_run.lo: src/libstddjb/pathexec0_run.c src/include/skalibs/djbunix.h
-src/libstddjb/pathexec_fromenv.o src/libstddjb/pathexec_fromenv.lo: src/libstddjb/pathexec_fromenv.c src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/stralloc.h
-src/libstddjb/pathexec_r.o src/libstddjb/pathexec_r.lo: src/libstddjb/pathexec_r.c src/include/skalibs/djbunix.h
-src/libstddjb/pathexec_r_name.o src/libstddjb/pathexec_r_name.lo: src/libstddjb/pathexec_r_name.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/env.h
-src/libstddjb/pathexec_run.o src/libstddjb/pathexec_run.lo: src/libstddjb/pathexec_run.c src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
 src/libstddjb/pipe_internal.o src/libstddjb/pipe_internal.lo: src/libstddjb/pipe_internal.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
 src/libstddjb/prog.o src/libstddjb/prog.lo: src/libstddjb/prog.c src/include/skalibs/strerr2.h
 src/libstddjb/rm_rf.o src/libstddjb/rm_rf.lo: src/libstddjb/rm_rf.c src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h
@@ -734,12 +753,6 @@ src/libstddjb/waitpid_nointr.o src/libstddjb/waitpid_nointr.lo: src/libstddjb/wa
 src/libstddjb/writenclose_unsafe.o src/libstddjb/writenclose_unsafe.lo: src/libstddjb/writenclose_unsafe.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
 src/libstddjb/writevnclose_unsafe.o src/libstddjb/writevnclose_unsafe.lo: src/libstddjb/writevnclose_unsafe.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/siovec.h
 src/libstddjb/xexecvep.o src/libstddjb/xexecvep.lo: src/libstddjb/xexecvep.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h src/include/skalibs/strerr2.h
-src/libstddjb/xpathexec.o src/libstddjb/xpathexec.lo: src/libstddjb/xpathexec.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
-src/libstddjb/xpathexec0.o src/libstddjb/xpathexec0.lo: src/libstddjb/xpathexec0.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
-src/libstddjb/xpathexec0_run.o src/libstddjb/xpathexec0_run.lo: src/libstddjb/xpathexec0_run.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
-src/libstddjb/xpathexec_fromenv.o src/libstddjb/xpathexec_fromenv.lo: src/libstddjb/xpathexec_fromenv.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
-src/libstddjb/xpathexec_r.o src/libstddjb/xpathexec_r.lo: src/libstddjb/xpathexec_r.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
-src/libstddjb/xpathexec_r_name.o src/libstddjb/xpathexec_r_name.lo: src/libstddjb/xpathexec_r_name.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
 src/libstddjb/xpathexec_run.o src/libstddjb/xpathexec_run.lo: src/libstddjb/xpathexec_run.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
 src/libunixonacid/access_at.o src/libunixonacid/access_at.lo: src/libunixonacid/access_at.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/ancil_recv_fd.o src/libunixonacid/ancil_recv_fd.lo: src/libunixonacid/ancil_recv_fd.c src/include/skalibs/allreadwrite.h src/include/skalibs/ancil.h src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/sysdeps.h

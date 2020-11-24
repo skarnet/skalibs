@@ -4,6 +4,7 @@
 #define SKALIBS_ENV_H
 
 #include <sys/types.h>
+
 #include <skalibs/gccattributes.h>
 #include <skalibs/stralloc.h>
 
@@ -11,10 +12,15 @@ extern size_t env_len (char const *const *) gccattr_pure ;
 extern char const *env_get (char const *) gccattr_deprecated ;
 extern char const *env_get2 (char const *const *, char const *) gccattr_pure ;
 extern char const *ucspi_get (char const *) gccattr_pure ;
+
 extern int env_addmodif (stralloc *, char const *, char const *) ;
 extern int env_make (char const **, size_t, char const *, size_t) ;
-extern size_t env_merge (char const **, size_t, char const *const *, size_t, char const *, size_t) ;
 extern int env_string (stralloc *, char const *const *, size_t) ;
+
+extern size_t env_mergen (char const **, size_t, char const *const *, size_t, char const *, size_t, size_t) ;
+extern size_t env_merge (char const **, size_t, char const *const *, size_t, char const *, size_t) ;
+extern size_t env_mergn (char const **, size_t, char const *const *, char const *, size_t, size_t) ;
+extern size_t env_merg (char const **, size_t, char const *const *, char const *, size_t) ;
 
 #define SKALIBS_ENVDIR_VERBATIM 0x01
 #define SKALIBS_ENVDIR_NOCHOMP 0x02

@@ -1,9 +1,10 @@
 /* ISC license. */
 
 #include <errno.h>
+
 #include <skalibs/posixplz.h>
-#include <skalibs/djbunix.h>
 #include <skalibs/strerr2.h>
+#include <skalibs/exec.h>
 
 void xexecvep (char const *file, char const *const *argv, char const *const *envp, char const *path)
 {

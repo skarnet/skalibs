@@ -6,10 +6,10 @@
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <sys/wait.h>
+
 #include <skalibs/gccattributes.h>
 #include <skalibs/stralloc.h>
-#include <skalibs/envalloc.h>
-#include <skalibs/posixplz.h>
+#include <skalibs/exec.h>  /* compat */
 
 #define DJBUNIX_FLAG_NB  0x01U
 #define DJBUNIX_FLAG_COE 0x02U
@@ -63,24 +63,6 @@ extern int socket_internal (int, int, int, unsigned int) ;
 extern int socketpair_internal (int, int, int, unsigned int, int *) ;
 
 extern size_t path_canonicalize (char *, char const *, int) ;
-
-extern int pathexec_env (char const *, char const *) ;
-extern void pathexec_r (char const *const *, char const *const *, size_t, char const *, size_t) ;
-extern void pathexec_r_name (char const *, char const *const *, char const *const *, size_t, char const *, size_t) ;
-extern void pathexec_fromenv (char const *const *, char const *const *, size_t) ;
-extern void pathexec_run (char const *, char const *const *, char const *const *) ;
-extern void pathexec0_run (char const *const *, char const *const *) ;
-extern void pathexec (char const *const *) ;
-extern void pathexec0 (char const *const *) ;
-
-extern void xpathexec_r (char const *const *, char const *const *, size_t, char const *, size_t) gccattr_noreturn ;
-extern void xpathexec_r_name (char const *, char const *const *, char const *const *, size_t, char const *, size_t) gccattr_noreturn ;
-extern void xpathexec_fromenv (char const *const *, char const *const *, size_t) gccattr_noreturn ;
-extern void xexecvep (char const *, char const *const *, char const *const *, char const *) gccattr_noreturn ;
-extern void xpathexec_run (char const *, char const *const *, char const *const *) gccattr_noreturn ;
-extern void xpathexec0_run (char const *const *, char const *const *) gccattr_noreturn ;
-extern void xpathexec (char const *const *) gccattr_noreturn ;
-extern void xpathexec0 (char const *const *) gccattr_noreturn ;
 
 extern pid_t wait_nointr (int *) ;
 extern pid_t waitpid_nointr (pid_t, int *, int) ;

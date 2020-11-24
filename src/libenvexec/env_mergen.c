@@ -2,12 +2,12 @@
 
 #include <string.h>
 #include <errno.h>
+
 #include <skalibs/bytestr.h>
 #include <skalibs/env.h>
 
-size_t env_merge (char const **v, size_t vmax, char const *const *envp, size_t envlen, char const *modifs, size_t modiflen)
+size_t env_mergen (char const **v, size_t vmax, char const *const *envp, size_t envlen, char const *modifs, size_t modiflen, size_t n)
 {
-  size_t n = byte_count(modifs, modiflen, '\0') ;
   size_t vlen = envlen ;
   size_t i = 0 ;
   if (envlen + n + 1 > vmax) return (errno = ENAMETOOLONG, 0) ;
