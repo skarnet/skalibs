@@ -8,14 +8,15 @@
 #include <signal.h>
 #include <spawn.h>
 #include <stdlib.h>
+
 #include <skalibs/config.h>
 
 pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const *envp)
 {
+  pid_t pid ;
   posix_spawnattr_t attr ;
   int e ;
-  pid_t pid ;
-  int haspath = !!getenv("PATH") ;
+  int nopath = !getenv("PATH") ;
   e = posix_spawnattr_init(&attr) ;
   if (e) goto err ;
   {
@@ -26,9 +27,9 @@ pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const
     e = posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSIGMASK) ;
     if (e) goto errattr ;
   }
-  if (!haspath && (setenv("PATH", SKALIBS_DEFAULTPATH, 0) < 0)) { e = errno ; goto errattr ; }
+  if (nopath && (setenv("PATH", SKALIBS_DEFAULTPATH, 0) < 0)) { e = errno ; goto errattr ; }
   e = posix_spawnp(&pid, prog, 0, &attr, (char *const *)argv, (char *const *)envp) ;
-  if (!haspath) unsetenv("PATH") ;
+  if (nopath) unsetenv("PATH") ;
   posix_spawnattr_destroy(&attr) ;
   if (e) goto err ;
   return pid ;
@@ -44,16 +45,18 @@ pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const
 
 #include <unistd.h>
 #include <string.h>
+
 #include <skalibs/allreadwrite.h>
 #include <skalibs/strerr2.h>
 #include <skalibs/sig.h>
 #include <skalibs/djbunix.h>
+#include <skalibs/exec.h>
 
 pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const *envp)
 {
+  pid_t pid ;
   int e ;
   int p[2] ;
-  pid_t pid ;
   if (pipecoe(p) < 0) return 0 ;
   pid = fork() ;
   if (pid < 0)
@@ -71,7 +74,7 @@ pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const
     PROG = name ;
     fd_close(p[0]) ;
     sig_blocknone() ;
-    pathexec_run(prog, argv, envp) ;
+    exec_ae(prog, argv, envp) ;
     e = errno ;
     fd_write(p[1], (char *)&e, sizeof(e)) ;
     _exit(127) ;

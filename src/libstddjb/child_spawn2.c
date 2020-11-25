@@ -22,6 +22,7 @@
 #include <skalibs/allreadwrite.h>
 #include <skalibs/sig.h>
 #include <skalibs/strerr2.h>
+#include <skalibs/exec.h>
 
 #endif
 
@@ -29,23 +30,23 @@
 
 pid_t child_spawn2 (char const *prog, char const *const *argv, char const *const *envp, int *fds)
 {
+  pid_t pid ;
 #ifdef SKALIBS_HASPOSIXSPAWN
   posix_spawn_file_actions_t actions ;
   posix_spawnattr_t attr ;
+  int e ;
 #else
   int syncpipe[2] ;
 #endif
   int p[2][2] ;
-  pid_t pid ;
-  int e ;
   if (pipe(p[0]) < 0) return 0 ;
-  if (ndelay_on(p[0][0]) < 0 || coe(p[0][0]) < 0 || pipe(p[1]) < 0) { e = errno ; goto errp ; }
-  if (ndelay_on(p[1][1]) < 0 || coe(p[1][1]) < 0) { e = errno ; goto errp1 ; }
+  if (ndelay_on(p[0][0]) < 0 || coe(p[0][0]) < 0 || pipe(p[1]) < 0) goto errp ;
+  if (ndelay_on(p[1][1]) < 0 || coe(p[1][1]) < 0) goto errp1 ;
 
 #ifdef SKALIBS_HASPOSIXSPAWN
 
   e = posix_spawnattr_init(&attr) ;
-  if (e) goto errsp ;
+  if (e) goto erre ;
   {
     sigset_t set ;
     sigemptyset(&set) ;
@@ -71,13 +72,13 @@ pid_t child_spawn2 (char const *prog, char const *const *argv, char const *const
     if (e) goto erractions ;
   }
   {
-    int haspath = !!getenv("PATH") ;
-    if (!haspath && (setenv("PATH", SKALIBS_DEFAULTPATH, 0) < 0))
+    int nopath = !getenv("PATH") ;
+    if (nopath && (setenv("PATH", SKALIBS_DEFAULTPATH, 0) < 0))
     {
       e = errno ; goto erractions ;
     }
     e = posix_spawnp(&pid, prog, &actions, &attr, (char *const *)argv, (char *const *)envp) ;
-    if (!haspath) unsetenv("PATH") ;
+    if (nopath) unsetenv("PATH") ;
     if (e) goto erractions ;
   }
 
@@ -85,11 +86,10 @@ pid_t child_spawn2 (char const *prog, char const *const *argv, char const *const
   posix_spawnattr_destroy(&attr) ;
 
 #else
-  if (pipe(syncpipe) < 0) { e = errno ; goto errp1 ; }
-  if (coe(syncpipe[1]) < 0) { e = errno ; goto errsp ; }
+  if (pipecoe(syncpipe) < 0) goto errp1 ;
 
   pid = fork() ;
-  if (pid < 0) { e = errno ; goto errsp ; }
+  if (pid < 0) goto errsp ;
   else if (!pid)
   {
     size_t len = strlen(PROG) ;
@@ -97,10 +97,9 @@ pid_t child_spawn2 (char const *prog, char const *const *argv, char const *const
     memcpy(name, PROG, len) ;
     memcpy(name + len, " (child)", 9) ;
     PROG = name ;
-    fd_close(syncpipe[0]) ;
     if (fd_move2(fds[0], p[1][0], fds[1], p[0][1]) < 0) goto syncdie ;
     sig_blocknone() ;
-    pathexec_run(prog, argv, envp) ;
+    exec_ae(prog, argv, envp) ;
 
   syncdie:
     {
@@ -116,13 +115,10 @@ pid_t child_spawn2 (char const *prog, char const *const *argv, char const *const
     syncpipe[1] = fd_read(syncpipe[0], &c, 1) ;
     if (syncpipe[1])
     {
+      int e = c ;
       if (syncpipe[1] < 0) e = errno ;
-      else
-      {
-        kill(pid, SIGKILL) ;
-        e = c ;
-      }
-      wait_pid(pid, &syncpipe[1]) ;
+      if (wait_pid(pid, &syncpipe[1]) < 0) e = errno ;
+      errno = e ;
       goto errsp0 ;
     }
   }
@@ -138,9 +134,11 @@ pid_t child_spawn2 (char const *prog, char const *const *argv, char const *const
   posix_spawn_file_actions_destroy(&actions) ;
  errattr:
   posix_spawnattr_destroy(&attr) ;
+ erre:
+  errno = e ;
 #endif
- errsp:
 #ifndef SKALIBS_HASPOSIXSPAWN
+ errsp:
   fd_close(syncpipe[1]) ;
  errsp0:
   fd_close(syncpipe[0]) ;
@@ -151,6 +149,5 @@ pid_t child_spawn2 (char const *prog, char const *const *argv, char const *const
  errp:
   fd_close(p[0][1]) ;
   fd_close(p[0][0]) ;
-  errno = e ;
   return 0 ;
 }

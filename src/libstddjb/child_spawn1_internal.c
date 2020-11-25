@@ -9,19 +9,20 @@
 #include <signal.h>
 #include <spawn.h>
 #include <stdlib.h>
+
 #include <skalibs/config.h>
 #include <skalibs/djbunix.h>
 
 pid_t child_spawn1_internal (char const *prog, char const *const *argv, char const *const *envp, int *p, int to)
 {
+  pid_t pid ;
   posix_spawn_file_actions_t actions ;
   posix_spawnattr_t attr ;
   int e ;
-  pid_t pid ;
-  int haspath = !!getenv("PATH") ;
-  if (coe(p[!(to & 1)]) < 0) { e = errno ; goto err ; }
+  int nopath = !getenv("PATH") ;
+  if (coe(p[!(to & 1)]) < 0) goto err ;
   e = posix_spawnattr_init(&attr) ;
-  if (e) goto err ;
+  if (e) goto erre ;
   {
     sigset_t set ;
     sigemptyset(&set) ;
@@ -44,55 +45,45 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
     e = posix_spawn_file_actions_adddup2(&actions, to & 1, !(to & 1)) ;
     if (e) goto erractions ;
   }
-  if (!haspath && (setenv("PATH", SKALIBS_DEFAULTPATH, 0) < 0)) { e = errno ; goto erractions ; }
+  if (nopath && (setenv("PATH", SKALIBS_DEFAULTPATH, 0) < 0)) { e = errno ; goto erractions ; }
   e = posix_spawnp(&pid, prog, &actions, &attr, (char *const *)argv, (char *const *)envp) ;
-  if (!haspath) unsetenv("PATH") ;
+  if (nopath) unsetenv("PATH") ;
+  if (e) goto erractions ;
   posix_spawn_file_actions_destroy(&actions) ;
   posix_spawnattr_destroy(&attr) ;
   fd_close(p[to & 1]) ;
-  if (e) goto errp ;
   return pid ;
 
  erractions:
   posix_spawn_file_actions_destroy(&actions) ;
  errattr:
   posix_spawnattr_destroy(&attr) ;
- err:
-  fd_close(p[to & 1]) ;
- errp:
-  fd_close(p[!(to & 1)]) ;
+ erre:
   errno = e ;
+ err:
+  fd_close(p[1]) ;
+  fd_close(p[0]) ;
   return 0 ;
 }
 
 #else
 
 #include <string.h>
+
 #include <skalibs/allreadwrite.h>
 #include <skalibs/strerr2.h>
 #include <skalibs/sig.h>
 #include <skalibs/djbunix.h>
+#include <skalibs/exec.h>
 
 pid_t child_spawn1_internal (char const *prog, char const *const *argv, char const *const *envp, int *p, int to)
 {
-  int e ;
-  int syncp[2] ;
   pid_t pid ;
-  if (coe(p[0]) < 0 || pipecoe(syncp) < 0)
-  {
-    fd_close(p[1]) ;
-    fd_close(p[0]) ;
-    return 0 ;
-  }
+  int syncpipe[2] ;
+  if (coe(p[0]) < 0 || pipecoe(syncpipe) < 0) goto err ;
+
   pid = fork() ;
-  if (pid < 0)
-  {
-    fd_close(syncp[1]) ;
-    fd_close(syncp[0]) ;
-    fd_close(p[1]) ;
-    fd_close(p[0]) ;
-    return 0 ;
-  }
+  if (pid < 0) goto errsp ;
   if (!pid)
   {
     size_t len = strlen(PROG) ;
@@ -100,35 +91,47 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
     memcpy(name, PROG, len) ;
     memcpy(name + len, " (child)", 9) ;
     PROG = name ;
-    fd_close(syncp[0]) ;
     fd_close(p[!(to & 1)]) ;
-    if (fd_move(to & 1, p[to & 1]) < 0) goto err ;
-    if ((to & 2) && (fd_copy(!(to & 1), to & 1) < 0)) goto err ;
+    if (fd_move(to & 1, p[to & 1]) < 0) goto syncdie ;
+    if ((to & 2) && (fd_copy(!(to & 1), to & 1) < 0)) goto syncdie ;
     sig_blocknone() ;
-    pathexec_run(prog, argv, envp) ;
-   err:
-    e = errno ;
-    fd_write(syncp[1], (char *)&e, sizeof(e)) ;
+    exec_ae(prog, argv, envp) ;
+
+   syncdie:
+    {
+      char c = errno ;
+      fd_write(syncpipe[1], &c, 1) ;
+    }
     _exit(127) ;
   }
-  fd_close(syncp[1]) ;
+
+  fd_close(syncpipe[1]) ;
+
+  {
+    char c ;
+    syncpipe[1] = fd_read(syncpipe[0], &c, 1) ;
+    if (syncpipe[1])
+    {
+      int e = c ;
+      if (syncpipe[1] < 0) e = errno ;
+      if (wait_pid(pid, &syncpipe[1]) < 0) e = errno ;
+      errno = e ;
+      goto errsp0 ;
+    }
+  }
+  fd_close(syncpipe[0]) ;
+
   fd_close(p[to & 1]) ;
-  syncp[1] = fd_read(syncp[0], (char *)&e, sizeof(e)) ;
-  if (syncp[1] < 0)
-  {
-    fd_close(syncp[0]) ;
-    fd_close(p[!(to & 1)]) ;
-    return 0 ;
-  }
-  fd_close(syncp[0]) ;
-  if (syncp[1] == sizeof(e))
-  {
-    fd_close(p[!(to & 1)]) ;
-    wait_pid(pid, &syncp[1]) ;
-    errno = e ;
-    return 0 ;
-  }
   return pid ;
+
+ errsp:
+  fd_close(syncpipe[1]) ;
+ errsp0:
+  fd_close(syncpipe[0]) ;
+ err:
+  fd_close(p[1]) ;
+  fd_close(p[0]) ;
+  return 0 ;
 }
 
 #endif

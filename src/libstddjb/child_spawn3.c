@@ -21,6 +21,7 @@
 #include <string.h>
 #include <skalibs/sig.h>
 #include <skalibs/strerr2.h>
+#include <skalibs/exec.h>
 
 #endif
 
@@ -31,15 +32,15 @@
 
 pid_t child_spawn3 (char const *prog, char const *const *argv, char const *const *envp, int *fds)
 {
+  pid_t pid ;
 #ifdef SKALIBS_HASPOSIXSPAWN
   posix_spawn_file_actions_t actions ;
   posix_spawnattr_t attr ;
+  int e ;
 #else
   int syncpipe[2] ;
 #endif
   int p[3][2] ;
-  pid_t pid ;
-  int e ;
   size_t m = sizeof(SKALIBS_CHILD_SPAWN_FDS_ENVVAR) ;
   char modifs[sizeof(SKALIBS_CHILD_SPAWN_FDS_ENVVAR) + UINT_FMT] = SKALIBS_CHILD_SPAWN_FDS_ENVVAR "=" ;
   if (pipe(p[0]) < 0 || ndelay_on(p[0][0]) < 0 || coe(p[0][0]) < 0) return 0 ;
@@ -51,7 +52,7 @@ pid_t child_spawn3 (char const *prog, char const *const *argv, char const *const
 #ifdef SKALIBS_HASPOSIXSPAWN
 
   e = posix_spawnattr_init(&attr) ;
-  if (e) goto errp2 ;
+  if (e) goto erre ;
   {
     sigset_t set ;
     sigemptyset(&set) ;
@@ -77,16 +78,16 @@ pid_t child_spawn3 (char const *prog, char const *const *argv, char const *const
     if (e) goto erractions ;
   }
   {
-    int haspath = !!getenv("PATH") ;
+    int nopath = !getenv("PATH") ;
     size_t envlen = env_len(envp) ;
     char const *newenv[envlen + 2] ;
-    if (!env_merge(newenv, envlen+2, envp, envlen, modifs, m)) goto erractions ;
-    if (!haspath && (setenv("PATH", SKALIBS_DEFAULTPATH, 0) < 0))
+    if (!env_mergen(newenv, envlen+2, envp, envlen, modifs, m, 1)) goto erractions ;
+    if (nopath && (setenv("PATH", SKALIBS_DEFAULTPATH, 0) < 0))
     {
       e = errno ; goto erractions ;
     }
     e = posix_spawnp(&pid, prog, &actions, &attr, (char *const *)argv, (char *const *)newenv) ;
-    if (!haspath) unsetenv("PATH") ;
+    if (nopath) unsetenv("PATH") ;
     if (e) goto erractions ;
   }
 
@@ -94,11 +95,10 @@ pid_t child_spawn3 (char const *prog, char const *const *argv, char const *const
   posix_spawnattr_destroy(&attr) ;
 
 #else
-  if (pipe(syncpipe) < 0) { e = errno ; goto errp2 ; }
-  if (coe(syncpipe[1]) < 0) { e = errno ; goto errsp ; }
+  if (pipecoe(syncpipe) < 0) goto errp2 ;
 
   pid = fork() ;
-  if (pid < 0) { e = errno ; goto errsp ; }
+  if (pid < 0) goto errsp ;
   else if (!pid)
   {
     size_t len = strlen(PROG) ;
@@ -106,10 +106,9 @@ pid_t child_spawn3 (char const *prog, char const *const *argv, char const *const
     memcpy(name, PROG, len) ;
     memcpy(name + len, " (child)", 9) ;
     PROG = name ;
-    fd_close(syncpipe[0]) ;
     if (fd_move2(fds[0], p[1][0], fds[1], p[0][1]) < 0) goto syncdie ;
     sig_blocknone() ;
-    pathexec_r_name(prog, argv, envp, env_len(envp), modifs, m) ;
+    mexec_aen(prog, argv, envp, modifs, m, 1) ;
 
   syncdie:
     {
@@ -125,13 +124,10 @@ pid_t child_spawn3 (char const *prog, char const *const *argv, char const *const
     syncpipe[1] = fd_read(syncpipe[0], &c, 1) ;
     if (syncpipe[1])
     {
+      int e = c ;
       if (syncpipe[1] < 0) e = errno ;
-      else
-      {
-        kill(pid, SIGKILL) ;
-        e = c ;
-      }
-      wait_pid(pid, &syncpipe[1]) ;
+      if (wait_pid(pid, &syncpipe[1]) < 0) e = errno ;
+      errno = e ;
       goto errsp0 ;
     }
   }
@@ -151,14 +147,16 @@ pid_t child_spawn3 (char const *prog, char const *const *argv, char const *const
   posix_spawn_file_actions_destroy(&actions) ;
  errattr:
   posix_spawnattr_destroy(&attr) ;
+ erre:
+  errno = e ;
 #endif
 #ifndef SKALIBS_HASPOSIXSPAWN
  errsp:
   fd_close(syncpipe[1]) ;
  errsp0:
   fd_close(syncpipe[0]) ;
-#endif
  errp2:
+#endif
   fd_close(p[2][1]) ;
   fd_close(p[2][0]) ;
  errp1:

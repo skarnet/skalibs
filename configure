@@ -3,6 +3,8 @@
 cd `dirname "$0"`
 . package/info
 
+# Helper functions
+
 usage () {
   cat <<EOF
 Usage: $0 [OPTION]... [TARGET]
@@ -51,18 +53,16 @@ EOF
   exit 0
 }
 
-# Helper functions
-
 # If your system does not have printf, you can comment this, but it is
 # generally not a good idea to use echo.
 # See http://etalabs.net/sh_tricks.html
 echo () {
-  IFS=" "
+  IFS=' '
   printf %s\\n "$*"
 }
 
 echon () {
-  IFS=" "
+  IFS=' '
   printf %s "$*"
 }
 
@@ -124,16 +124,24 @@ tryldflag () {
   fi
 }
 
-
 # Sysdeps determination functions
 
 iscached ()
 {
-  if test -r "$tmps" && grep -qF "${1}: " "$tmps" ; then
-    v=`grep -F "${1}: " "$tmps" | tail -n 1 | awk '{print $2;}'`
-    echo "${1}: $v" >> "$sysdeps/sysdeps"
-    echo "  ... user-provided: $v"
-    return 0 ;
+  if test -r "$tmps" && grep -q "^${1}: " "$tmps" ; then
+    grep "^${1}: " "$tmps" | tail -n 1 |
+    {
+      IFS=' '
+      read -r k v ldlibs
+      if test -n "$ldlibs" ; then
+        echo "  ... user-provided: $v with linker args: $ldlibs"
+        echo "$ldlibs" >&3
+      else
+        echo "  ... user-provided: $v"
+      fi
+      echo "${1}: $v" >> "$sysdeps/sysdeps"
+      return 0 ;
+    }
   else
     return 1 ;
   fi
@@ -284,39 +292,50 @@ trytypes () {
   echo "  ... done"
 }
 
-trylibs () {
+detectlibs () {
   args=
   name=$1
-  echo "Checking whether system has $2..." >&3
-  shift 2
+  shift
   if $CC_AUTO $CPPFLAGS_AUTO $CPPFLAGS $CPPFLAGS_POST $CFLAGS_AUTO $CFLAGS $CFLAGS_POST -c -o try$name.o src/sysdeps/try$name.c 2>/dev/null ; then
     until $CC_AUTO $CFLAGS_AUTO $CFLAGS $CFLAGS_POST $LDFLAGS_AUTO $LDFLAGS $LDFLAGS_POST -o /dev/null try$name.o $args 2>/dev/null ; do
       if test -z "$*" ; then
         rm -f try$name.o
-        echo
-        echo "  ... no" >&3
         return 1
       fi
       args="$args $1"
       shift
     done
     echo ${args# }
-    if test -z "$args" ; then
-      echo "  ... yes" >&3
-    else
-      echo "  ... yes, with$args" >&3
-    fi
     rm -f try$name.o
     return 0
   else
-    echo
-    echo "  ... no" >&3
     return 1
   fi
 }
 
-# Actual script
+trylibs () {
+  name="$1"
+  libfile="$2"
+  echo "Checking whether system has $3..."
+  shift 3
+  if args=`iscached $name 3>&1 1>&4 4>&-` 4>&1 ; then :
+  elif args=`detectlibs "$name" "$@"` ; then
+    echo "${name}: yes" >> "${sysdeps}/sysdeps"
+    if test -z "$args" ; then
+      echo "  ... yes"
+    else
+      echo "  ... yes, with linker args: $args"
+    fi
+  else
+    echo "${name}: no" >> ${sysdeps}/sysdeps
+    echo "  ... no"
+  fi
+  echo "$args" > "${sysdeps}/$libfile"
+}
 
+# Actual script!
+
+# Initialize variables
 CC_AUTO=
 CPPFLAGS_AUTO="-D_POSIX_C_SOURCE=200809L -D_XOPEN_SOURCE=700 -Isrc/include"
 CPPFLAGS_POST="$CPPFLAGS"
@@ -356,6 +375,7 @@ vpaths=''
 vpathd=''
 build=
 
+# Parse command line
 for arg ; do
   case "$arg" in
     --help) usage ;;
@@ -388,7 +408,7 @@ for arg ; do
     --with-default-path=*) defaultpath=${arg#*=} ; dpathorig=false ;;
     --without-default-path) defaultpath=$ddefaultpath ; dpathorig=true ;;
     --with-sysdep-*=*) sysdeplist="$sysdeplist ${arg#--with-sysdep-}" ;;
-    --without-sysdep-*) sysdeplist="$sysdeplist ${arg#--with-sysdep-}=no" ;; 
+    --without-sysdep-*) sysdeplist="$sysdeplist ${arg#--without-sysdep-}=no" ;; 
     --enable-*|--disable-*|--with-*|--without-*|--*dir=*) ;;
     --host=*|--target=*) target=${arg#*=} ;;
     --build=*) build=${arg#*=} ;;
@@ -419,22 +439,6 @@ for i in exec_prefix dynlibdir libdir includedir datadir sysdepdir sysdepspre sp
   stripdir $i
 done
 
-
-# Get usable temp filenames
-i=0
-set -C
-while : ; do
-  i=$(($i+1))
-  tmpc="./tmp-configure-$$-$PPID-$i.c"
-  tmpe="./tmp-configure-$$-$PPID-$i.tmp"
-  tmps="./tmp-configure-$$-$PPID-$i.sysdeps"
-  2>|/dev/null > "$tmpc" && break
-  2>|/dev/null > "$tmpe" && break
-  test "$i" -gt 50 && fail "$0: cannot create temporary files"
-done
-set +C
-trap 'rm -f "$tmpc" "$tmpe" "$tmps"' EXIT ABRT INT QUIT TERM HUP
-
 # Set slashpackage values
 if $slashpackage ; then
   home=${sproot}/package/${category}/${package}-${version}
@@ -450,6 +454,50 @@ if $slashpackage ; then
       defaultpath="/command:$defaultpath"
     fi
   fi
+fi
+
+# Get usable temp filenames
+i=0
+set -C
+while test "$i" -lt 50 ; do
+  i=$(($i+1))
+  tmpc="./tmp-configure-$$-$PPID-$i.c"
+  tmpe="./tmp-configure-$$-$PPID-$i.tmp"
+  tmps="./tmp-configure-$$-$PPID-$i.sysdeps"
+  2>|/dev/null > "$tmpc" && break
+  2>|/dev/null > "$tmpe" && break
+  2>|/dev/null > "$tmps" && break
+done
+if test "$i" -gt 50 ; then
+  fail "$0: cannot create temporary files"
+fi
+set +C
+trap 'rm -f "$tmpc" "$tmpe" "$tmps"' EXIT ABRT INT QUIT TERM HUP
+
+# Preprocess user-provided sysdeps
+rm -f "$tmps"
+if test -n "$sysdeplist" ; then
+  :> "$tmps"
+  for i in $sysdeplist ; do
+    k=${i%%=*}
+    echo ${i#*=} | sed 's/,/ /g' |
+    {
+      read v extras
+      if test -z "$k" || test -z "$v" ; then fail "$0: invalid user-provided sysdep: $i" ; fi
+      if test "$v" = "true" ; then v=yes
+      elif test "$v" = "false" ; then v=no
+      fi
+      if grep -q -e "^${k}: " "$tmps" ; then
+        grep -v -e "^${k}: " "$tmps" > "$tmpe"
+        mv -f "$tmpe" "$tmps"
+      fi
+      if test -n "$extras" ; then
+        echo "${k}: $v $extras"
+      else
+        echo "${k}: $v"
+      fi >> "$tmps"
+    }
+  done
 fi
 
 # Find a C compiler to use
@@ -500,6 +548,7 @@ if test -z "$target" ; then
 fi
 echo "  ... $target"
 
+# Produce automatic compilation flags
 if $allpic ; then
   tryflag CPPFLAGS_AUTO -fPIC
 fi
@@ -518,60 +567,36 @@ tryflag CPPFLAGS_AUTO -Wno-unused-value
 tryflag CPPFLAGS_AUTO -Wno-parentheses
 tryflag CFLAGS_AUTO -ffunction-sections
 tryflag CFLAGS_AUTO -fdata-sections
-
 tryldflag LDFLAGS_AUTO -Wl,--sort-section=alignment
 tryldflag LDFLAGS_AUTO -Wl,--sort-common
 if $shared ; then
   tryldflag LDFLAGS -Wl,--hash-style=both
 fi
 
-rm -f "$tmps"
-if test -n "$sysdeplist" ; then
-  :> "$tmps"
-  for i in $sysdeplist ; do
-    k=${i%%=*}
-    v=${i#*=}
-    if test "$v" = "true" ; then v=yes
-    elif test "$v" = "false" ; then v=no
-    fi
-    if grep -qF -e "${k}: " "$tmps" ; then
-      grep -vF -e "${k}: " "$tmps" > "$tmpe"
-      mv -f "$tmpe" "$tmps"
-    fi
-    echo "${k}: $v" >> "$tmps"
-  done
-fi
+# And now, determine a big fat batch of sysdeps.
 
 sysdeps=sysdeps.cfg
 mkdir -p $sysdeps
 echo "$target" > $sysdeps/target
 :> "$sysdeps/sysdeps"
 
-exec 3>&1
 util_lib=
 echo > $sysdeps/util.lib
 
-socket_lib=`trylibs lsock 'accessible socket functions' -lsocket -lnsl` || fail "$0: unable to determine socket.lib sysdep"
+echo 'Checking required linker flags for socket functions...'
+socket_lib=`detectlibs lsock -lsocket -lnsl` || fail "$0: unable to determine required linker flags for socket functions"
+if test -n "$socket_lib" ; then
+  echo "  ... $socket_lib"
+else
+  echo "  ... none"
+fi
 echo "$socket_lib" > $sysdeps/socket.lib
 
-hasclock=yes
-sysclock_lib=`trylibs clockrt 'clock_gettime()' -lrt` || hasclock=no
-echo "$sysclock_lib" > $sysdeps/sysclock.lib
-echo "clockrt: $hasclock" >> $sysdeps/sysdeps
-
-choose cl clockmon CLOCK_MONOTONIC $sysclock_lib
-choose cl clockboot CLOCK_BOOTTIME $sysclock_lib
-
-hasspawn=yes
-spawn_lib=`trylibs posixspawn 'posix_spawn()' -lrt` || hasspawn=no
-echo "$spawn_lib" > $sysdeps/spawn.lib
-echo "posixspawn: $hasspawn" >> $sysdeps/sysdeps
-
-hastimer=yes
-timer_lib=`trylibs timer 'timer_create()' -lrt` || hastimer=no
-echo "$timer_lib" > $sysdeps/timer.lib
-echo "timer: $hastimer" >> $sysdeps/sysdeps
-exec 3>&-
+trylibs clockrt sysclock.lib 'clock_gettime()' -lrt
+choose cl clockmon CLOCK_MONOTONIC `cat "${sysdeps}/sysclock.lib"`
+choose cl clockboot CLOCK_BOOTTIME `cat "${sysdeps}/sysclock.lib"`
+trylibs posixspawn spawn.lib 'posix_spawn()' -lrt
+trylibs timer timer.lib 'timer_create()' -lrt
 
 tryendianness
 trytypes
@@ -610,9 +635,11 @@ choose cl nsgetparent 'NS_GET_PARENT'
 choose cl explicit_bzero 'explicit_bzero()'
 choose cl getrandom 'getrandom()'
 
-# And here are the evil irreducible sysdeps.
-
+# Here are the evil irreducible run-time sysdeps.
 choose clr devurandom '/dev/urandom'
+
+
+# Finally, produce config.mak and config.h
 
 rm -f "$tmps"
 echo "Creating config.mak..."

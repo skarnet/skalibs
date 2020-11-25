@@ -21,6 +21,7 @@
 
 #include <skalibs/sig.h>
 #include <skalibs/strerr2.h>
+#include <skalibs/exec.h>
 
 #endif
 
@@ -37,25 +38,27 @@
 
 pid_t child_spawn (char const *prog, char const *const *argv, char const *const *envp, int *fds, unsigned int n)
 {
+  pid_t pid ;
 #ifdef SKALIBS_HASPOSIXSPAWN
   posix_spawn_file_actions_t actions ;
   posix_spawnattr_t attr ;
+  int e ;
 #else
   int syncpipe[2] ;
 #endif
   int p[n ? n : 1][2] ;
-  pid_t pid ;
-  int e ;
   size_t m = sizeof(SKALIBS_CHILD_SPAWN_FDS_ENVVAR) ;
   unsigned int i = 0 ;
   char modifs[m + 1 + n * UINT_FMT] ;
   memcpy(modifs, SKALIBS_CHILD_SPAWN_FDS_ENVVAR "=", sizeof(SKALIBS_CHILD_SPAWN_FDS_ENVVAR)) ;
-  for (; i < n ; i++) if (pipe(p[i]) < 0) { e = errno ; goto errpi ; }
-  for (i = 0 ; i < n ; i++)
+  for (; i < n ; i++)
+  {
+    if (pipe(p[i]) < 0) goto errpi ;
     if ((ndelay_on(p[i][i & 1]) < 0) || (coe(p[i][i & 1]) < 0))
     {
-      e = errno ; goto errp ;
+      i++ ; goto errpi ;
     }
+  }
   for (i = 2 ; i < n ; i++)
   {
     m += uint_fmt(modifs + m, p[i][!(i & 1)]) ;
@@ -66,7 +69,7 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
 #ifdef SKALIBS_HASPOSIXSPAWN
 
   e = posix_spawnattr_init(&attr) ;
-  if (e) goto errsp ;
+  if (e) goto erre ;
   {
     sigset_t set ;
     sigemptyset(&set) ;
@@ -92,16 +95,16 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
     if (e) goto erractions ;
   }
   {
-    int haspath = !!getenv("PATH") ;
+    int nopath = !getenv("PATH") ;
     size_t envlen = env_len(envp) ;
     char const *newenv[envlen + 2] ;
-    if (!env_merge(newenv, envlen+2, envp, envlen, modifs, m)) goto erractions ;
-    if (!haspath && (setenv("PATH", SKALIBS_DEFAULTPATH, 0) < 0))
+    if (!env_mergen(newenv, envlen+2, envp, envlen, modifs, m, 1)) goto erractions ;
+    if (nopath && (setenv("PATH", SKALIBS_DEFAULTPATH, 0) < 0))
     {
       e = errno ; goto erractions ;
     }
     e = posix_spawnp(&pid, prog, &actions, &attr, (char *const *)argv, (char *const *)newenv) ;
-    if (!haspath) unsetenv("PATH") ;
+    if (nopath) unsetenv("PATH") ;
     if (e) goto erractions ;
   }
 
@@ -109,11 +112,10 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
   posix_spawnattr_destroy(&attr) ;
 
 #else
-  if (pipe(syncpipe) < 0) { e = errno ; goto errp ; }
-  if (coe(syncpipe[1]) < 0) { e = errno ; goto errsp ; }
+  if (pipecoe(syncpipe) < 0) goto errp ;
 
   pid = fork() ;
-  if (pid < 0) { e = errno ; goto errsp ; }
+  if (pid < 0) goto errsp ;
   else if (!pid)
   {
     size_t len = strlen(PROG) ;
@@ -121,7 +123,6 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
     memcpy(name, PROG, len) ;
     memcpy(name + len, " (child)", 9) ;
     PROG = name ;
-    fd_close(syncpipe[0]) ;
     if (n >= 2)
     {
       if (fd_move2(0, p[1][0], 1, p[0][1]) < 0) goto syncdie ;
@@ -131,7 +132,7 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
       if (fd_move(1, p[0][1]) < 0) goto syncdie ;
     }
     sig_blocknone() ;
-    pathexec_r_name(prog, argv, envp, env_len(envp), modifs, m) ;
+    mexec_aen(prog, argv, envp, modifs, m, 1) ;
 
   syncdie:
     {
@@ -147,13 +148,10 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
     syncpipe[1] = fd_read(syncpipe[0], &c, 1) ;
     if (syncpipe[1])
     {
+      int e = c ;
       if (syncpipe[1] < 0) e = errno ;
-      else
-      {
-        kill(pid, SIGKILL) ;
-        e = c ;
-      }
-      wait_pid(pid, &syncpipe[1]) ;
+      if (wait_pid(pid, &syncpipe[1]) < 0) e = errno ;
+      errno = e ;
       goto errsp0 ;
     }
   }
@@ -172,14 +170,16 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
   posix_spawn_file_actions_destroy(&actions) ;
  errattr:
   posix_spawnattr_destroy(&attr) ;
+ erre:
+  errno = e ;
 #endif
- errsp:
 #ifndef SKALIBS_HASPOSIXSPAWN
+ errsp:
   fd_close(syncpipe[1]) ;
  errsp0:
   fd_close(syncpipe[0]) ;
-#endif
  errp:
+#endif
   i = n ;
  errpi:
   while (i--)
@@ -187,6 +187,5 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
     fd_close(p[i][1]) ;
     fd_close(p[i][0]) ;
   }
-  errno = e ;
   return 0 ;
 }

@@ -33,7 +33,6 @@ src/include/skalibs/gensetdyn.h: src/include/skalibs/functypes.h src/include/ska
 src/include/skalibs/getpeereid.h: src/include/skalibs/posixplz.h
 src/include/skalibs/iobuffer.h: src/include/skalibs/buffer.h src/include/skalibs/djbunix.h
 src/include/skalibs/iopause.h: src/include/skalibs/tai.h
-src/include/skalibs/ip46.h: src/include/skalibs/fmtscan.h src/include/skalibs/socket.h
 src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr2.h
 src/include/skalibs/netstring.h: src/include/skalibs/buffer.h src/include/skalibs/stralloc.h
@@ -55,9 +54,6 @@ src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint64.h
 src/include/skalibs/textclient.h: src/include/skalibs/allreadwrite.h src/include/skalibs/tai.h src/include/skalibs/textmessage.h
 src/include/skalibs/textmessage.h: src/include/skalibs/allreadwrite.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
-src/include/skalibs/types.h: src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
-src/include/skalibs/uint16.h: src/include/skalibs/uint64.h
-src/include/skalibs/uint32.h: src/include/skalibs/uint64.h
 src/include/skalibs/unix-timed.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
 src/include/skalibs/unix-transactional.h: src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
 src/include/skalibs/unixconnection.h: src/include/skalibs/unixmessage.h
@@ -331,13 +327,13 @@ src/libstddjb/cdb_nextkey.o src/libstddjb/cdb_nextkey.lo: src/libstddjb/cdb_next
 src/libstddjb/cdb_read.o src/libstddjb/cdb_read.lo: src/libstddjb/cdb_read.c src/include/skalibs/allreadwrite.h src/include/skalibs/cdb.h src/include/skalibs/posixishard.h
 src/libstddjb/cdb_successor.o src/libstddjb/cdb_successor.lo: src/libstddjb/cdb_successor.c src/include/skalibs/cdb.h
 src/libstddjb/cdb_zero.o src/libstddjb/cdb_zero.lo: src/libstddjb/cdb_zero.c src/include/skalibs/cdb.h
-src/libstddjb/child_spawn.o src/libstddjb/child_spawn.lo: src/libstddjb/child_spawn.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h src/include/skalibs/types.h
-src/libstddjb/child_spawn0.o src/libstddjb/child_spawn0.lo: src/libstddjb/child_spawn0.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h
-src/libstddjb/child_spawn1_internal.o src/libstddjb/child_spawn1_internal.lo: src/libstddjb/child_spawn1_internal.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h
+src/libstddjb/child_spawn.o src/libstddjb/child_spawn.lo: src/libstddjb/child_spawn.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h src/include/skalibs/types.h
+src/libstddjb/child_spawn0.o src/libstddjb/child_spawn0.lo: src/libstddjb/child_spawn0.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h
+src/libstddjb/child_spawn1_internal.o src/libstddjb/child_spawn1_internal.lo: src/libstddjb/child_spawn1_internal.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h
 src/libstddjb/child_spawn1_pipe.o src/libstddjb/child_spawn1_pipe.lo: src/libstddjb/child_spawn1_pipe.c src/libstddjb/djbunix-internal.h src/include/skalibs/djbunix.h
 src/libstddjb/child_spawn1_socket.o src/libstddjb/child_spawn1_socket.lo: src/libstddjb/child_spawn1_socket.c src/libstddjb/djbunix-internal.h src/include/skalibs/djbunix.h src/include/skalibs/webipc.h
-src/libstddjb/child_spawn2.o src/libstddjb/child_spawn2.lo: src/libstddjb/child_spawn2.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h
-src/libstddjb/child_spawn3.o src/libstddjb/child_spawn3.lo: src/libstddjb/child_spawn3.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h src/include/skalibs/types.h
+src/libstddjb/child_spawn2.o src/libstddjb/child_spawn2.lo: src/libstddjb/child_spawn2.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h
+src/libstddjb/child_spawn3.o src/libstddjb/child_spawn3.lo: src/libstddjb/child_spawn3.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h src/include/skalibs/types.h
 src/libstddjb/coe.o src/libstddjb/coe.lo: src/libstddjb/coe.c src/include/skalibs/djbunix.h
 src/libstddjb/deepsleepuntil.o src/libstddjb/deepsleepuntil.lo: src/libstddjb/deepsleepuntil.c src/include/skalibs/iopause.h src/include/skalibs/tai.h
 src/libstddjb/dir_close.o src/libstddjb/dir_close.lo: src/libstddjb/dir_close.c src/include/skalibs/direntry.h
@@ -752,8 +748,6 @@ src/libstddjb/waitn_reap.o src/libstddjb/waitn_reap.lo: src/libstddjb/waitn_reap
 src/libstddjb/waitpid_nointr.o src/libstddjb/waitpid_nointr.lo: src/libstddjb/waitpid_nointr.c src/include/skalibs/djbunix.h
 src/libstddjb/writenclose_unsafe.o src/libstddjb/writenclose_unsafe.lo: src/libstddjb/writenclose_unsafe.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
 src/libstddjb/writevnclose_unsafe.o src/libstddjb/writevnclose_unsafe.lo: src/libstddjb/writevnclose_unsafe.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/siovec.h
-src/libstddjb/xexecvep.o src/libstddjb/xexecvep.lo: src/libstddjb/xexecvep.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h src/include/skalibs/strerr2.h
-src/libstddjb/xpathexec_run.o src/libstddjb/xpathexec_run.lo: src/libstddjb/xpathexec_run.c src/include/skalibs/djbunix.h src/include/skalibs/strerr2.h
 src/libunixonacid/access_at.o src/libunixonacid/access_at.lo: src/libunixonacid/access_at.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/ancil_recv_fd.o src/libunixonacid/ancil_recv_fd.lo: src/libunixonacid/ancil_recv_fd.c src/include/skalibs/allreadwrite.h src/include/skalibs/ancil.h src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/sysdeps.h
 src/libunixonacid/ancil_send_fd.o src/libunixonacid/ancil_send_fd.lo: src/libunixonacid/ancil_send_fd.c src/include/skalibs/ancil.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h
