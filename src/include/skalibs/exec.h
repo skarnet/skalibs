@@ -58,7 +58,7 @@ extern void mexec_af (char const *, char const *const *, char const *const *, si
 
 #define mexec_en(argv, envp, modif, modiflen, modifn) mexec_aen((argv)[0], (argv), envp, modif, modiflen, modifn)
 #define mexec_em(argv, envp, modif, modiflen) mexec_aem((argv)[0], (argv), envp, modif, modiflen)
-#define mexec_e(argv, envp) mexec_a((argv)[0], (argv), envp)
+#define mexec_e(argv, envp) mexec_ae((argv)[0], (argv), envp)
 
 #define mexec_n(argv, modif, modiflen, modifn) mexec_an((argv)[0], (argv), modif, modiflen, modifn)
 #define mexec_m(argv, modif, modiflen) mexec_am((argv)[0], (argv), modif, modiflen)
@@ -82,7 +82,7 @@ extern void mexec0_af (char const *, char const *const *, char const *const *, s
 
 #define mexec0_en(argv, envp, modif, modiflen, modifn) mexec0_aen((argv)[0], (argv), envp, modif, modiflen, modifn)
 #define mexec0_em(argv, envp, modif, modiflen) mexec0_aem((argv)[0], (argv), envp, modif, modiflen)
-#define mexec0_e(argv, envp) mexec0_a((argv)[0], (argv), envp)
+#define mexec0_e(argv, envp) mexec0_ae((argv)[0], (argv), envp)
 
 #define mexec0_n(argv, modif, modiflen, modifn) mexec0_an((argv)[0], (argv), modif, modiflen, modifn)
 #define mexec0_m(argv, modif, modiflen) mexec0_am((argv)[0], (argv), modif, modiflen)
@@ -106,15 +106,15 @@ extern void xmexec_af (char const *, char const *const *, char const *const *, s
 
 #define xmexec_en(argv, envp, modif, modiflen, modifn) xmexec_aen((argv)[0], (argv), envp, modif, modiflen, modifn)
 #define xmexec_em(argv, envp, modif, modiflen) xmexec_aem((argv)[0], (argv), envp, modif, modiflen)
-#define xmexec_e(argv, envp) xmexec_a((argv)[0], (argv), envp)
+#define xmexec_e(argv, envp) xmexec_ae((argv)[0], (argv), envp)
 
 #define xmexec_n(argv, modif, modiflen, modifn) xmexec_an((argv)[0], (argv), modif, modiflen, modifn)
 #define xmexec_m(argv, modif, modiflen) xmexec_am((argv)[0], (argv), modif, modiflen)
 #define xmexec(argv) xmexec_a((argv)[0], (argv))
 
-extern void xmexec0_afn (char const *, char const *const *, char const *const *, size_t, char const *, size_t, size_t) ;
-extern void xmexec0_afm (char const *, char const *const *, char const *const *, size_t, char const *, size_t) ;
-extern void xmexec0_af (char const *, char const *const *, char const *const *, size_t) ;
+extern void xmexec0_afn (char const *, char const *const *, char const *const *, size_t, char const *, size_t, size_t) gccattr_noreturn ;
+extern void xmexec0_afm (char const *, char const *const *, char const *const *, size_t, char const *, size_t) gccattr_noreturn ;
+extern void xmexec0_af (char const *, char const *const *, char const *const *, size_t) gccattr_noreturn ;
 
 #define xmexec0_aen(file, argv, envp, modif, modiflen, modifn) xmexec0_afn(file, argv, envp, env_len(envp), modif, modiflen, modifn)
 #define xmexec0_aem(file, argv, envp, modif, modiflen) xmexec0_afm(file, argv, envp, env_len(envp), modif, modiflen)
@@ -130,7 +130,7 @@ extern void xmexec0_af (char const *, char const *const *, char const *const *, 
 
 #define xmexec0_en(argv, envp, modif, modiflen, modifn) xmexec0_aen((argv)[0], (argv), envp, modif, modiflen, modifn)
 #define xmexec0_em(argv, envp, modif, modiflen) xmexec0_aem((argv)[0], (argv), envp, modif, modiflen)
-#define xmexec0_e(argv, envp) xmexec0_a((argv)[0], (argv), envp)
+#define xmexec0_e(argv, envp) xmexec0_ae((argv)[0], (argv), envp)
 
 #define xmexec0_n(argv, modif, modiflen, modifn) xmexec0_an((argv)[0], (argv), modif, modiflen, modifn)
 #define xmexec0_m(argv, modif, modiflen) xmexec0_am((argv)[0], (argv), modif, modiflen)
@@ -140,9 +140,9 @@ extern void xmexec0_af (char const *, char const *const *, char const *const *, 
  /* Compatibility */
 
 #define pathexec_run(file, argv, envp) exec_ae(file, argv, envp)
-#define pathexec0_run(file, argv, envp) exec0_ae(file, argv, envp)
+#define pathexec0_run(argv, envp) exec0_e(argv, envp)
 #define xpathexec_run(file, argv, envp) xexec_ae(file, argv, envp)
-#define xpathexec0_run(file, argv, envp) xexec0_ae(file, argv, envp)
+#define xpathexec0_run(argv, envp) xexec0_e(argv, envp)
 
 #define pathexec_env(key, value) env_mexec(key, value)
 #define pathexec_fromenv(argv, envp, envlen) mexec_f(argv, envp, envlen)
