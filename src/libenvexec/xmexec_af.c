@@ -7,6 +7,6 @@
 
 void xmexec_af (char const *file, char const *const *argv, char const *const *envp, size_t envlen)
 {
-  xmexec_af(file, argv, envp, envlen) ;
+  mexec_af(file, argv, envp, envlen) ;
   strerr_dieexec(errno == ENOENT ? 127 : 126, file) ;
 }
