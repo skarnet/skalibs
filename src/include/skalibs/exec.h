@@ -5,7 +5,7 @@
 
 #include <stddef.h>
 
-#include <skalibs/environ.h>
+#include <skalibs/posixplz.h>
 #include <skalibs/env.h>
 #include <skalibs/gccattributes.h>
 
@@ -46,11 +46,11 @@ extern void mexec_af (char const *, char const *const *, char const *const *, si
 
 #define mexec_aen(file, argv, envp, modif, modiflen, modifn) mexec_afn(file, argv, envp, env_len(envp), modif, modiflen, modifn)
 #define mexec_aem(file, argv, envp, modif, modiflen) mexec_afm(file, argv, envp, env_len(envp), modif, modiflen)
-#define mexec_ae(file, argv, envp) mexec_af(file, argv, envp, env_len(envp))
+#define mexec_ae(file, argv, envp) mexec_af(file, argv, (envp), env_len(envp))
 
 #define mexec_an(file, argv, modif, modiflen, modifn) mexec_aen(file, argv, (char const *const *)environ, modif, modiflen, modifn)
 #define mexec_am(file, argv, modif, modiflen) mexec_aem(file, argv, (char const *const *)environ, modif, modiflen)
-#define mexec_a(file, argv) mexec_ae(file, argv, (char const *const *)environ)
+#define mexec_a(file, argv) mexec_ae(file, (argv), (char const *const *)environ)
 
 #define mexec_fn(argv, envp, envlen, modif, modiflen, modifn) mexec_afn((argv)[0], (argv), envp, envlen, modif, modiflen, modifn)
 #define mexec_fm(argv, envp, envlen, modif, modiflen) mexec_afm((argv)[0], (argv), envp, envlen, modif, modiflen)
@@ -70,11 +70,11 @@ extern void mexec0_af (char const *, char const *const *, char const *const *, s
 
 #define mexec0_aen(file, argv, envp, modif, modiflen, modifn) mexec0_afn(file, argv, envp, env_len(envp), modif, modiflen, modifn)
 #define mexec0_aem(file, argv, envp, modif, modiflen) mexec0_afm(file, argv, envp, env_len(envp), modif, modiflen)
-#define mexec0_ae(file, argv, envp) mexec0_af(file, argv, envp, env_len(envp))
+#define mexec0_ae(file, argv, envp) mexec0_af(file, argv, (envp), env_len(envp))
 
 #define mexec0_an(file, argv, modif, modiflen, modifn) mexec0_aen(file, argv, (char const *const *)environ, modif, modiflen, modifn)
 #define mexec0_am(file, argv, modif, modiflen) mexec0_aem(file, argv, (char const *const *)environ, modif, modiflen)
-#define mexec0_a(file, argv) mexec0_ae(file, argv, (char const *const *)environ)
+#define mexec0_a(file, argv) mexec0_ae(file, (argv), (char const *const *)environ)
 
 #define mexec0_fn(argv, envp, envlen, modif, modiflen, modifn) mexec0_afn((argv)[0], (argv), envp, envlen, modif, modiflen, modifn)
 #define mexec0_fm(argv, envp, envlen, modif, modiflen) mexec0_afm((argv)[0], (argv), envp, envlen, modif, modiflen)
@@ -94,11 +94,11 @@ extern void xmexec_af (char const *, char const *const *, char const *const *, s
 
 #define xmexec_aen(file, argv, envp, modif, modiflen, modifn) xmexec_afn(file, argv, envp, env_len(envp), modif, modiflen, modifn)
 #define xmexec_aem(file, argv, envp, modif, modiflen) xmexec_afm(file, argv, envp, env_len(envp), modif, modiflen)
-#define xmexec_ae(file, argv, envp) xmexec_af(file, argv, envp, env_len(envp))
+#define xmexec_ae(file, argv, envp) xmexec_af(file, argv, (envp), env_len(envp))
 
 #define xmexec_an(file, argv, modif, modiflen, modifn) xmexec_aen(file, argv, (char const *const *)environ, modif, modiflen, modifn)
 #define xmexec_am(file, argv, modif, modiflen) xmexec_aem(file, argv, (char const *const *)environ, modif, modiflen)
-#define xmexec_a(file, argv) xmexec_ae(file, argv, (char const *const *)environ)
+#define xmexec_a(file, argv) xmexec_ae(file, (argv), (char const *const *)environ)
 
 #define xmexec_fn(argv, envp, envlen, modif, modiflen, modifn) xmexec_afn((argv)[0], (argv), envp, envlen, modif, modiflen, modifn)
 #define xmexec_fm(argv, envp, envlen, modif, modiflen) xmexec_afm((argv)[0], (argv), envp, envlen, modif, modiflen)
@@ -118,11 +118,11 @@ extern void xmexec0_af (char const *, char const *const *, char const *const *, 
 
 #define xmexec0_aen(file, argv, envp, modif, modiflen, modifn) xmexec0_afn(file, argv, envp, env_len(envp), modif, modiflen, modifn)
 #define xmexec0_aem(file, argv, envp, modif, modiflen) xmexec0_afm(file, argv, envp, env_len(envp), modif, modiflen)
-#define xmexec0_ae(file, argv, envp) xmexec0_af(file, argv, envp, env_len(envp))
+#define xmexec0_ae(file, argv, envp) xmexec0_af(file, argv, (envp), env_len(envp))
 
 #define xmexec0_an(file, argv, modif, modiflen, modifn) xmexec0_aen(file, argv, (char const *const *)environ, modif, modiflen, modifn)
 #define xmexec0_am(file, argv, modif, modiflen) xmexec0_aem(file, argv, (char const *const *)environ, modif, modiflen)
-#define xmexec0_a(file, argv) xmexec0_ae(file, argv, (char const *const *)environ)
+#define xmexec0_a(file, argv) xmexec0_ae(file, (argv), (char const *const *)environ)
 
 #define xmexec0_fn(argv, envp, envlen, modif, modiflen, modifn) xmexec0_afn((argv)[0], (argv), envp, envlen, modif, modiflen, modifn)
 #define xmexec0_fm(argv, envp, envlen, modif, modiflen) xmexec0_afm((argv)[0], (argv), envp, envlen, modif, modiflen)

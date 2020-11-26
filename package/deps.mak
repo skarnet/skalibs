@@ -24,7 +24,7 @@ src/include/skalibs/env.h: src/include/skalibs/gccattributes.h src/include/skali
 src/include/skalibs/envalloc.h: src/include/skalibs/genalloc.h
 src/include/skalibs/environ.h: src/include/skalibs/posixplz.h
 src/include/skalibs/error.h: src/include/skalibs/gccattributes.h
-src/include/skalibs/exec.h: src/include/skalibs/env.h src/include/skalibs/environ.h src/include/skalibs/gccattributes.h
+src/include/skalibs/exec.h: src/include/skalibs/env.h src/include/skalibs/gccattributes.h src/include/skalibs/posixplz.h
 src/include/skalibs/fmtscan.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/genalloc.h: src/include/skalibs/functypes.h src/include/skalibs/stralloc.h
 src/include/skalibs/genqdyn.h: src/include/skalibs/stralloc.h
