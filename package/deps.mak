@@ -19,7 +19,7 @@ src/include/skalibs/cdb.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/cdb_make.h: src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h
 src/include/skalibs/datastruct.h: src/include/skalibs/avlnode.h src/include/skalibs/avltree.h src/include/skalibs/avltreen.h src/include/skalibs/bigkv.h src/include/skalibs/genqdyn.h src/include/skalibs/genset.h src/include/skalibs/gensetdyn.h
 src/include/skalibs/djbtime.h: src/include/skalibs/tai.h src/include/skalibs/uint64.h
-src/include/skalibs/djbunix.h: src/include/skalibs/exec.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
+src/include/skalibs/djbunix.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/env.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/envalloc.h: src/include/skalibs/genalloc.h
 src/include/skalibs/environ.h: src/include/skalibs/posixplz.h
@@ -349,6 +349,8 @@ src/libstddjb/fd_close.o src/libstddjb/fd_close.lo: src/libstddjb/fd_close.c src
 src/libstddjb/fd_copy.o src/libstddjb/fd_copy.lo: src/libstddjb/fd_copy.c src/include/skalibs/djbunix.h
 src/libstddjb/fd_copy2.o src/libstddjb/fd_copy2.lo: src/libstddjb/fd_copy2.c src/include/skalibs/djbunix.h
 src/libstddjb/fd_ensure_open.o src/libstddjb/fd_ensure_open.lo: src/libstddjb/fd_ensure_open.c src/include/skalibs/djbunix.h
+src/libstddjb/fd_islocked.o src/libstddjb/fd_islocked.lo: src/libstddjb/fd_islocked.c src/include/skalibs/djbunix.h
+src/libstddjb/fd_lock.o src/libstddjb/fd_lock.lo: src/libstddjb/fd_lock.c src/include/skalibs/djbunix.h src/include/skalibs/error.h
 src/libstddjb/fd_move.o src/libstddjb/fd_move.lo: src/libstddjb/fd_move.c src/include/skalibs/djbunix.h
 src/libstddjb/fd_move2.o src/libstddjb/fd_move2.lo: src/libstddjb/fd_move2.c src/include/skalibs/djbunix.h
 src/libstddjb/fd_read.o src/libstddjb/fd_read.lo: src/libstddjb/fd_read.c src/include/skalibs/allreadwrite.h
@@ -357,6 +359,7 @@ src/libstddjb/fd_recv.o src/libstddjb/fd_recv.lo: src/libstddjb/fd_recv.c src/in
 src/libstddjb/fd_send.o src/libstddjb/fd_send.lo: src/libstddjb/fd_send.c src/include/skalibs/allreadwrite.h
 src/libstddjb/fd_shutdown.o src/libstddjb/fd_shutdown.lo: src/libstddjb/fd_shutdown.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h
 src/libstddjb/fd_sync.o src/libstddjb/fd_sync.lo: src/libstddjb/fd_sync.c src/include/skalibs/djbunix.h
+src/libstddjb/fd_unlock.o src/libstddjb/fd_unlock.lo: src/libstddjb/fd_unlock.c src/include/skalibs/djbunix.h
 src/libstddjb/fd_write.o src/libstddjb/fd_write.lo: src/libstddjb/fd_write.c src/include/skalibs/allreadwrite.h
 src/libstddjb/fd_writev.o src/libstddjb/fd_writev.lo: src/libstddjb/fd_writev.c src/include/skalibs/allreadwrite.h
 src/libstddjb/filecopy_suffix.o src/libstddjb/filecopy_suffix.lo: src/libstddjb/filecopy_suffix.c src/include/skalibs/djbunix.h
@@ -448,12 +451,6 @@ src/libstddjb/localtmn_fmt.o src/libstddjb/localtmn_fmt.lo: src/libstddjb/localt
 src/libstddjb/localtmn_from_sysclock.o src/libstddjb/localtmn_from_sysclock.lo: src/libstddjb/localtmn_from_sysclock.c src/include/skalibs/djbtime.h
 src/libstddjb/localtmn_from_tain.o src/libstddjb/localtmn_from_tain.lo: src/libstddjb/localtmn_from_tain.c src/include/skalibs/djbtime.h
 src/libstddjb/localtmn_scan.o src/libstddjb/localtmn_scan.lo: src/libstddjb/localtmn_scan.c src/include/skalibs/djbtime.h src/include/skalibs/uint32.h
-src/libstddjb/lock_ex.o src/libstddjb/lock_ex.lo: src/libstddjb/lock_ex.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
-src/libstddjb/lock_exnb.o src/libstddjb/lock_exnb.lo: src/libstddjb/lock_exnb.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
-src/libstddjb/lock_sh.o src/libstddjb/lock_sh.lo: src/libstddjb/lock_sh.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
-src/libstddjb/lock_shnb.o src/libstddjb/lock_shnb.lo: src/libstddjb/lock_shnb.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
-src/libstddjb/lock_un.o src/libstddjb/lock_un.lo: src/libstddjb/lock_un.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
-src/libstddjb/lock_unx.o src/libstddjb/lock_unx.lo: src/libstddjb/lock_unx.c src/include/skalibs/djbunix.h
 src/libstddjb/lolprintf.o src/libstddjb/lolprintf.lo: src/libstddjb/lolprintf.c src/include/skalibs/buffer.h src/include/skalibs/lolstdio.h
 src/libstddjb/ltm64_from_localtm.o src/libstddjb/ltm64_from_localtm.lo: src/libstddjb/ltm64_from_localtm.c src/include/skalibs/djbtime.h src/include/skalibs/tai.h
 src/libstddjb/ltm64_from_sysclock.o src/libstddjb/ltm64_from_sysclock.lo: src/libstddjb/ltm64_from_sysclock.c src/include/skalibs/config.h src/include/skalibs/djbtime.h src/include/skalibs/tai.h

@@ -202,45 +202,26 @@ with errno saved, used essentially to isolate application code from
 </p>
 
 <p>
-<code> int lock_ex (int fd) </code> <br />
-Gets an exclusive advisory lock on <em>fd</em>. <em>fd</em> must point to
-a regular file, open for writing. Blocks until the lock can be obtained.
-Returns 0 if it succeeds, or -1 (and sets errno) if it fails.
+<code> int fd_lock (int fd, int w, int nb) </code> <br />
+Gets an advisory lock on <em>fd</em>: shared if <em>w</em> is
+zero, exclusive otherwise. <em>fd</em> must point to
+a regular file, open for writing or reading depending on whether
+you want an exclusive lock or not. If <em>nb</em> is zero, the
+function blocks until the lock can be obtained; otherwise it
+returns 0 immediately. On success, the function returns 1 ; it
+returns 0 if it cannot take the lock, or -1 (and sets errno) if
+an error occurs.
 </p>
 
 <p>
-<code> int lock_exnb (int fd) </code> <br />
-Gets an exclusive advisory lock on <em>fd</em>. <em>fd</em> must point to
-a regular file, open for writing.
-Returns 0 if it succeeds, or -1 (and sets errno) if it fails. If the lock
-is held and the function would block, it immediately returns with -1 EWOULDBLOCK.
-</p>
-
-<p>
-<code> int lock_sh (int fd) </code> <br />
-Gets a shared advisory lock on <em>fd</em>. <em>fd</em> must point to
-a regular file, open for reading. Blocks until the lock can be obtained.
-Returns 0 if it succeeds, or -1 (and sets errno) if it fails.
-</p>
-
-<p>
-<code> int lock_shnb (int fd) </code> <br />
-Gets a shared advisory lock on <em>fd</em>. <em>fd</em> must point to
-a regular file, open for reading.
-Returns 0 if it succeeds, or -1 (and sets errno) if it fails. If the lock
-is held and the function would block, it immediately returns with -1 EWOULDBLOCK.
-</p>
-
-<p>
-<code> int lock_un (int fd) </code> <br />
+<code> void fd_unlock (int fd) </code> <br />
 Releases a previously held lock on <em>fd</em>.
-Returns 0 if it succeeds, or -1 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> void lock_unx (int fd) </code> <br />
-Like <tt>lock_un</tt>, but without a return code and without
-modifying errno.
+<code> int fd_islocked (int fd) </code> <br />
+Returns 1 if a lock is currently held on fd, 0 otherwise.
+Returns -1 (and sets errno) if an error occurs.
 </p>
 
 <p>

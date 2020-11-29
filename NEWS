@@ -1,14 +1,15 @@
 Changelog for skalibs.
 
-In 2.9.4.0
-----------
+In 2.10.0.0
+-----------
 
  - New openc_* functions.
  - New function: ipc_bind_reuse_lock(), taking a lock before
 unconditionally deleting the socket.
  - ipc_bind_reuse() rewritten to use ipc_bind_reuse_lock(),
 so it does the right thing instead of clobbering sockets.
- - Complete revamping of the pathexec functions, see exec.h
+ - Complete revamping of the pathexec functions, see exec.h.
+ - Revamping of the locking functions.
 
 
 In 2.9.3.0

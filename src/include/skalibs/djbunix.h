@@ -9,7 +9,6 @@
 
 #include <skalibs/gccattributes.h>
 #include <skalibs/stralloc.h>
-#include <skalibs/exec.h>  /* compat */
 
 #define DJBUNIX_FLAG_NB  0x01U
 #define DJBUNIX_FLAG_COE 0x02U
@@ -35,12 +34,11 @@ extern size_t fd_catn (int, int, size_t) ;
 extern int fd_ensure_open (int, int) ;
 #define fd_sanitize() (fd_ensure_open(0, 0) && fd_ensure_open(1, 1) && fd_ensure_open(2, 1))
 extern void fd_shutdown (int, int) ;
-extern int lock_ex (int) ;
-extern int lock_exnb (int) ;
-extern int lock_sh (int) ;
-extern int lock_shnb (int) ;
-extern int lock_un (int) ;
-extern void lock_unx (int) ;
+
+extern int fd_lock (int, int, int) ;
+extern void fd_unlock (int) ;
+extern int fd_islocked (int) ;
+
 extern int open2 (char const *, unsigned int) ;
 extern int open3 (char const *, unsigned int, unsigned int) ;
 extern int open_read (char const *) ;

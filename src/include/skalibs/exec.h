@@ -139,6 +139,7 @@ extern void xmexec0_af (char const *, char const *const *, char const *const *, 
 
  /* Compatibility */
 
+#if 0
 #define pathexec_run(file, argv, envp) exec_ae(file, argv, envp)
 #define pathexec0_run(argv, envp) exec0_e(argv, envp)
 #define xpathexec_run(file, argv, envp) xexec_ae(file, argv, envp)
@@ -156,5 +157,6 @@ extern void xmexec0_af (char const *, char const *const *, char const *const *, 
 #define pathexec_r(argv, envp, envlen, modif, modiflen) mexec_fm(argv, envp, envlen, modif, modiflen)
 #define xpathexec_r_name(file, argv, envp, envlen, modif, modiflen) xmexec_afm(file, argv, envp, envlen, modif, modiflen)
 #define xpathexec_r(argv, envp, envlen, modif, modiflen) xmexec_fm(argv, envp, envlen, modif, modiflen)
+#endif
 
 #endif
