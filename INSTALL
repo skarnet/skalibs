@@ -113,6 +113,9 @@ configure is: --with-sysdep-K=V
  For instance, to say that the target has a working pseudorandom
 number generator in /dev/urandom, you would give the following
 option to configure: --with-sysdep-devurandom=yes
+ If there are additional arguments to the sysdep, such as linker
+flags, give them separated by commas. Example:
+--with-sysdep-posixspawn=yes,-lrt
 
  ./configure --help lists all the sysdeps you need to manually
 provide a value for when cross-compiling.

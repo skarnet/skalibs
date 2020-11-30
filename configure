@@ -315,7 +315,8 @@ detectlibs () {
 
 trylibs () {
   name="$1"
-  libfile="$2"
+  libvar="$2"_lib
+  libfile="$2".lib
   echo "Checking whether system has $3..."
   shift 3
   if args=`iscached $name 3>&1 1>&4 4>&-` 4>&1 ; then :
@@ -330,6 +331,7 @@ trylibs () {
     echo "${name}: no" >> ${sysdeps}/sysdeps
     echo "  ... no"
   fi
+  eval "${libvar}=\"$args\""
   echo "$args" > "${sysdeps}/$libfile"
 }
 
@@ -592,11 +594,11 @@ else
 fi
 echo "$socket_lib" > $sysdeps/socket.lib
 
-trylibs clockrt sysclock.lib 'clock_gettime()' -lrt
+trylibs clockrt sysclock 'clock_gettime()' -lrt
 choose cl clockmon CLOCK_MONOTONIC `cat "${sysdeps}/sysclock.lib"`
 choose cl clockboot CLOCK_BOOTTIME `cat "${sysdeps}/sysclock.lib"`
-trylibs posixspawn spawn.lib 'posix_spawn()' -lrt
-trylibs timer timer.lib 'timer_create()' -lrt
+trylibs posixspawn spawn 'posix_spawn()' -lrt
+trylibs timer timer 'timer_create()' -lrt
 
 tryendianness
 trytypes
