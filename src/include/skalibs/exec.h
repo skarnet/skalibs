@@ -10,10 +10,18 @@
 #include <skalibs/gccattributes.h>
 
 
- /* Without environment modifications */
-
 extern void xexecvep (char const *, char const *const *, char const *const *, char const *) gccattr_noreturn ;
 extern void xexecvep_loose (char const *, char const *const *, char const *const *, char const *) gccattr_noreturn ;
+
+
+ /*
+    Direct execution with PATH (calls execvep).
+    (was called pathexec_run in earlier skalibs versions)
+    a for provided file name (default: argv[0])
+    e for provided envp (default: environ)
+    foo0 exits 0 if argv[0] is NULL
+    xfoo dies if the exec fails
+ */
 
 extern void exec_ae (char const *, char const *const *, char const *const *) ;
 #define exec_a(file, argv) exec_ae(file, (argv), (char const *const *)environ)
@@ -36,7 +44,15 @@ extern void xexec0_ae (char const *, char const *const *, char const *const *) g
 #define xexec0(argv) xexec0_a((argv)[0], (argv))
 
 
- /* With environment modifications : env_merge and exec */
+ /*
+    Execution with environment modifications : env_merge and exec.
+    (was called pathexec in earlier skalibs versions)
+    a for provided file name (default: argv[0])
+    e for provided envp (default: environ)
+    f for provided envp *and* length of the envp
+    m for provided modif string plus its length (the length is always needed because the modifs are null-terminated)
+    n for provided modif string, length *and* number of modifs
+ */
 
 extern int env_mexec (char const *, char const *) ;
 
@@ -135,28 +151,5 @@ extern void xmexec0_af (char const *, char const *const *, char const *const *, 
 #define xmexec0_n(argv, modif, modiflen, modifn) xmexec0_an((argv)[0], (argv), modif, modiflen, modifn)
 #define xmexec0_m(argv, modif, modiflen) xmexec0_am((argv)[0], (argv), modif, modiflen)
 #define xmexec0(argv) xmexec0_a((argv)[0], (argv))
-
-
- /* Compatibility */
-
-#if 0
-#define pathexec_run(file, argv, envp) exec_ae(file, argv, envp)
-#define pathexec0_run(argv, envp) exec0_e(argv, envp)
-#define xpathexec_run(file, argv, envp) xexec_ae(file, argv, envp)
-#define xpathexec0_run(argv, envp) xexec0_e(argv, envp)
-
-#define pathexec_env(key, value) env_mexec(key, value)
-#define pathexec_fromenv(argv, envp, envlen) mexec_f(argv, envp, envlen)
-#define pathexec(argv) mexec(argv)
-#define pathexec0(argv) mexec0(argv)
-#define xpathexec_fromenv(argv, envp, envlen) xmexec_f(argv, envp, envlen)
-#define xpathexec(argv) xmexec(argv)
-#define xpathexec0(argv) xmexec0(argv)
-
-#define pathexec_r_name(file, argv, envp, envlen, modif, modiflen) mexec_afm(file, argv, envp, envlen, modif, modiflen)
-#define pathexec_r(argv, envp, envlen, modif, modiflen) mexec_fm(argv, envp, envlen, modif, modiflen)
-#define xpathexec_r_name(file, argv, envp, envlen, modif, modiflen) xmexec_afm(file, argv, envp, envlen, modif, modiflen)
-#define xpathexec_r(argv, envp, envlen, modif, modiflen) xmexec_fm(argv, envp, envlen, modif, modiflen)
-#endif
 
 #endif
