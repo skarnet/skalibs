@@ -6,6 +6,7 @@
 
 #include <skalibs/nonposix.h>
 #include <stdlib.h>
+
 #include <skalibs/random.h>
 
 int random_init ()
@@ -45,29 +46,20 @@ SURFSchedule surf_here = SURFSCHEDULE_ZERO ;
 #ifdef SKALIBS_HASDEVURANDOM
 
 #include <errno.h>
+
 #include <skalibs/djbunix.h>
 
 int random_fd = -1 ;
 
 int random_init ()
 {
-  int fd ;
   char seed[160] ;
+  if (random_fd >= 0) return 1 ;
   random_makeseed(seed) ;
   surf_init(&surf_here, seed) ;
   openwritenclose_unsafe("/dev/urandom", seed, 160) ;
-  if (random_fd < 0)
-  {
-    fd = open_readb("/dev/urandom") ;
-    if (fd < 0) return 0 ;
-    if (coe(fd) < 0)
-    {
-      fd_close(fd) ;
-      return 0 ;
-    }
-    random_fd = fd ;
-  }
-  return 1 ;
+  random_fd = openc_readb("/dev/urandom") ;
+  return random_fd >= 0 ;
 }
 
 #else /* default */

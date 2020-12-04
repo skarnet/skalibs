@@ -6,18 +6,14 @@
 
 #include <sys/stat.h>
 #include <fcntl.h>
+
 #include <skalibs/djbunix.h>
 #include <skalibs/iobuffer.h>
 
 static int iobufferk_init_0 (iobufferk *k)
 {
-  int fd = open_write("/dev/null") ;
+  int fd = openc_write("/dev/null") ;
   if (fd < 0) return 0 ;
-  if (coe(fd) < 0)
-  {
-    fd_close(fd) ;
-    return 0 ;
-  }
   k->p[0] = -1 ;
   k->p[1] = fd ;
   return 1 ;
@@ -31,7 +27,7 @@ static int iobufferk_nofd (iobufferk *k)
 
 static int iobufferk_init_3 (iobufferk *k)
 {
-  return (pipenbcoe(k->p) >= 0) ;
+  return (pipecoe(k->p) >= 0) ;
 }
 
 static iobufferk_output_func_t_ref iobufferk_init_f[4] =
