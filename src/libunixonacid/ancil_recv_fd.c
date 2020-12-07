@@ -4,6 +4,7 @@
 #include <skalibs/nonposix.h>
 
 #include <errno.h>
+#include <string.h>
 #include <sys/uio.h>
 #include <sys/socket.h>
 
@@ -33,6 +34,7 @@ int ancil_recv_fd (int sock, char expected_ch)
     0
 #endif
     ;
+  int fd ;
   struct cmsghdr *c ;
   ssize_t r ;
   char ch ;
@@ -58,12 +60,13 @@ int ancil_recv_fd (int sock, char expected_ch)
    || c->cmsg_level != SOL_SOCKET
    || c->cmsg_type != SCM_RIGHTS
    || (size_t)(c->cmsg_len - (CMSG_DATA(c) - (unsigned char *)c)) != sizeof(int)) return (errno = EPROTO, -1) ;
+  memcpy(&fd, CMSG_DATA(c), sizeof(int)) ;
 #ifndef SKALIBS_HASCMSGCLOEXEC
-  if (coe(*(int *)CMSG_DATA(c)) < 0)
+  if (coe(fd) < 0)
   {
-    fd_close(*(int *)CMSG_DATA(c)) ;
+    fd_close(fd) ;
     return -1 ;
   }
 #endif
-  return *(int *)CMSG_DATA(c) ;
+  return fd ;
 }

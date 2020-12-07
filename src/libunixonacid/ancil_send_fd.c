@@ -35,7 +35,7 @@ int ancil_send_fd (int sock, int fd, char ch)
   c->cmsg_level = SOL_SOCKET ;
   c->cmsg_type = SCM_RIGHTS ;
   c->cmsg_len = CMSG_LEN(sizeof(int)) ;
-  *(int *)CMSG_DATA(c) = fd ;
+  memcpy(CMSG_DATA(c), &fd, sizeof(int)) ;
   do r = sendmsg(sock, &hdr, MSG_NOSIGNAL) ;
   while (r < 0 && errno == EINTR) ;
   if (r <= 0) return 0 ;

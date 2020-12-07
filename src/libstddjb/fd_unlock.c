@@ -1,6 +1,7 @@
 /* ISC license. */
 
 #include <fcntl.h>
+#include <unistd.h>
 #include <errno.h>
 
 #include <skalibs/djbunix.h>
