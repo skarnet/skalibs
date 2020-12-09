@@ -1,9 +1,10 @@
 /* ISC license. */
 
 #include <errno.h>
+
 #include <skalibs/error.h>
 #include <skalibs/iopause.h>
-#include <skalibs/webipc.h>
+#include <skalibs/socket.h>
 
 int ipc_timed_connect (int s, char const *path, tain_t const *deadline, tain_t *stamp)
 {

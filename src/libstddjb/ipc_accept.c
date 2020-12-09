@@ -6,9 +6,11 @@
 #include <sys/un.h>
 #include <string.h>
 #include <errno.h>
+#include <fcntl.h>
+
 #include <skalibs/bytestr.h>
 #include <skalibs/djbunix.h>
-#include <skalibs/webipc.h>
+#include <skalibs/socket.h>
 
 int ipc_accept_internal (int s, char *p, size_t l, int *trunc, unsigned int options)
 {
@@ -18,15 +20,15 @@ int ipc_accept_internal (int s, char *p, size_t l, int *trunc, unsigned int opti
   memset(&sa, 0, dummy) ;
   do
 #ifdef SKALIBS_HASACCEPT4
-    fd = accept4(s, (struct sockaddr *)&sa, &dummy, ((options & DJBUNIX_FLAG_NB) ? SOCK_NONBLOCK : 0) | ((options & DJBUNIX_FLAG_COE) ? SOCK_CLOEXEC : 0)) ;
+    fd = accept4(s, (struct sockaddr *)&sa, &dummy, ((options & O_NONBLOCK) ? SOCK_NONBLOCK : 0) | ((options & O_CLOEXEC) ? SOCK_CLOEXEC : 0)) ;
 #else
     fd = accept(s, (struct sockaddr *)&sa, &dummy) ;
 #endif
   while ((fd == -1) && (errno == EINTR)) ;
   if (fd == -1) return -1 ;
 #ifndef SKALIBS_HASACCEPT4
-  if ((((options & DJBUNIX_FLAG_NB) ? ndelay_on(fd) : ndelay_off(fd)) < 0)
-   || (((options & DJBUNIX_FLAG_COE) ? coe(fd) : uncoe(fd)) < 0))
+  if ((((options & O_NONBLOCK) ? ndelay_on(fd) : ndelay_off(fd)) < 0)
+   || (((options & O_CLOEXEC) ? coe(fd) : uncoe(fd)) < 0))
   {
     fd_close(fd) ;
     return -1 ;

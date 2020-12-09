@@ -4,13 +4,16 @@
 #include <skalibs/nonposix.h>
 #include <sys/socket.h>
 #include <errno.h>
+#include <fcntl.h>
+
 #include <skalibs/djbunix.h>
+#include <skalibs/socket.h>
 
 #ifdef SKALIBS_HASACCEPT4
 
 int socketpair_internal (int domain, int type, int protocol, unsigned int flags, int *sv)
 {
-  return socketpair(domain, type | ((flags & DJBUNIX_FLAG_NB) ? SOCK_NONBLOCK : 0) | ((flags & DJBUNIX_FLAG_COE) ? SOCK_CLOEXEC : 0), protocol, sv) ;
+  return socketpair(domain, type | ((flags & O_NONBLOCK) ? SOCK_NONBLOCK : 0) | ((flags & O_CLOEXEC) ? SOCK_CLOEXEC : 0), protocol, sv) ;
 }
 
 #else
@@ -19,7 +22,7 @@ int socketpair_internal (int domain, int type, int protocol, unsigned int flags,
 {
   int fd[2] ;
   if (socketpair(domain, type, protocol, fd) < 0) return -1 ;
-  if (flags & DJBUNIX_FLAG_NB)
+  if (flags & O_NONBLOCK)
   {
     if (ndelay_on(fd[0]) < 0) goto err ;
     if (ndelay_on(fd[1]) < 0) goto err ;
@@ -29,7 +32,7 @@ int socketpair_internal (int domain, int type, int protocol, unsigned int flags,
     if (ndelay_off(fd[0]) < 0) goto err ;
     if (ndelay_off(fd[1]) < 0) goto err ;
   }
-  if (flags & DJBUNIX_FLAG_COE)
+  if (flags & O_CLOEXEC)
   {
     if (coe(fd[0]) < 0) goto err ;
     if (coe(fd[1]) < 0) goto err ;

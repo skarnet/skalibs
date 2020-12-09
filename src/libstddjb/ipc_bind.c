@@ -1,13 +1,12 @@
 /* ISC license. */
 
 #include <skalibs/nonposix.h>
-
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <string.h>
 #include <errno.h>
 
-#include <skalibs/webipc.h>
+#include <skalibs/socket.h>
 #include <skalibs/posixishard.h>
 
 int ipc_bind (int s, char const *p)

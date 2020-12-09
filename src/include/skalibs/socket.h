@@ -3,18 +3,69 @@
 #ifndef SOCKET_H
 #define SOCKET_H
 
-#include <sys/types.h>
+#include <stddef.h>
 #include <stdint.h>
+#include <fcntl.h>
+
 #include <skalibs/gccattributes.h>
+#include <skalibs/posixplz.h>
 #include <skalibs/tai.h>
-#include <skalibs/djbunix.h>
-#include <skalibs/webipc.h>
 
 typedef ssize_t socket_io_func_t (int, char *, size_t, char *, uint16_t *) ;
 typedef socket_io_func_t *socket_io_func_t_ref ;
 
+extern int socket_internal (int, int, int, unsigned int) ;
+extern int socketpair_internal (int, int, int, unsigned int, int *) ;
 
- /* INET and INET6 domain socket operations */
+
+ /* UNIX domain sockets */
+
+#define IPCPATH_MAX 107
+
+#define ipc_stream() ipc_stream_nb()
+#define ipc_stream_b() ipc_stream_internal(0)
+#define ipc_stream_nb() ipc_stream_internal(O_NONBLOCK)
+#define ipc_stream_coe() ipc_stream_internal(O_CLOEXEC)
+#define ipc_stream_nbcoe() ipc_stream_internal(O_NONBLOCK|O_CLOEXEC)
+extern int ipc_stream_internal (unsigned int) ;
+
+#define ipc_datagram() ipc_datagram_nb()
+#define ipc_datagram_b() ipc_datagram_internal(0)
+#define ipc_datagram_nb() ipc_datagram_internal(O_NONBLOCK)
+#define ipc_datagram_coe() ipc_datagram_internal(O_CLOEXEC)
+#define ipc_datagram_nbcoe() ipc_datagram_internal(O_NONBLOCK|O_CLOEXEC)
+extern int ipc_datagram_internal (unsigned int) ;
+
+#define ipc_pair(sv) ipc_pair_nb(sv)
+#define ipc_pair_b(sv) ipc_pair_internal((sv), 0)
+#define ipc_pair_nb(sv) ipc_pair_internal((sv), O_NONBLOCK)
+#define ipc_pair_coe(sv) ipc_pair_internal((sv), O_CLOEXEC)
+#define ipc_pair_nbcoe(sv) ipc_pair_internal((sv), O_NONBLOCK|O_CLOEXEC)
+extern int ipc_pair_internal (int *, unsigned int) ;
+
+extern int ipc_bind (int, char const *) ;
+extern int ipc_bind_reuse (int, char const *) ;
+extern int ipc_bind_reuse_lock (int, char const *, int *) ;
+extern int ipc_listen (int, int) ;
+
+#define ipc_accept(s, path, len, trunc) ipc_accept_internal(s, path, len, (trunc), 0)
+#define ipc_accept_nb(s, path, len, trunc) ipc_accept_internal(s, path, len, (trunc), O_NONBLOCK)
+#define ipc_accept_coe(s, path, len, trunc) ipc_accept_internal(s, path, len, (trunc), O_CLOEXEC)
+#define ipc_accept_nbcoe(s, path, len, trunc) ipc_accept_internal(s, path, len, (trunc), O_NONBLOCK|O_CLOEXEC)
+extern int ipc_accept_internal (int, char *, size_t, int *, unsigned int) ;
+
+extern int ipc_local (int, char *, size_t, int *) ;
+
+extern int ipc_connect (int, char const *) ;
+extern int ipc_connected (int) ;
+extern int ipc_timed_connect (int, char const *, tain_t const *, tain_t *) ;
+#define ipc_timed_connect_g(fd, path, deadline) ipc_timed_connect(fd, path, (deadline), &STAMP)
+
+extern ssize_t ipc_send (int, char const *, size_t, char const *) ;
+extern ssize_t ipc_recv (int, char *, size_t, char *) ;
+
+
+ /* INET and INET6 domain sockets */
 
 #define socket_tcp() socket_tcp4()
 #define socket_tcp_b() socket_tcp4_b()
@@ -24,16 +75,16 @@ typedef socket_io_func_t *socket_io_func_t_ref ;
 
 #define socket_tcp4() socket_tcp4_nb()
 #define socket_tcp4_b() socket_tcp4_internal(0)
-#define socket_tcp4_nb() socket_tcp4_internal(DJBUNIX_FLAG_NB)
-#define socket_tcp4_coe() socket_tcp4_internal(DJBUNIX_FLAG_COE)
-#define socket_tcp4_nbcoe() socket_tcp4_internal(DJBUNIX_FLAG_NB|DJBUNIX_FLAG_COE)
+#define socket_tcp4_nb() socket_tcp4_internal(O_NONBLOCK)
+#define socket_tcp4_coe() socket_tcp4_internal(O_CLOEXEC)
+#define socket_tcp4_nbcoe() socket_tcp4_internal(O_NONBLOCK|O_CLOEXEC)
 extern int socket_tcp4_internal (unsigned int) ;
 
 #define socket_tcp6() socket_tcp6_nb()
 #define socket_tcp6_b() socket_tcp6_internal(0)
-#define socket_tcp6_nb() socket_tcp6_internal(DJBUNIX_FLAG_NB)
-#define socket_tcp6_coe() socket_tcp6_internal(DJBUNIX_FLAG_COE)
-#define socket_tcp6_nbcoe() socket_tcp6_internal(DJBUNIX_FLAG_NB|DJBUNIX_FLAG_COE)
+#define socket_tcp6_nb() socket_tcp6_internal(O_NONBLOCK)
+#define socket_tcp6_coe() socket_tcp6_internal(O_CLOEXEC)
+#define socket_tcp6_nbcoe() socket_tcp6_internal(O_NONBLOCK|O_CLOEXEC)
 extern int socket_tcp6_internal (unsigned int) ;
 
 #define socket_udp() socket_udp4()
@@ -44,16 +95,16 @@ extern int socket_tcp6_internal (unsigned int) ;
 
 #define socket_udp4() socket_udp4_nb()
 #define socket_udp4_b() socket_udp4_internal(0)
-#define socket_udp4_nb() socket_udp4_internal(DJBUNIX_FLAG_NB)
-#define socket_udp4_coe() socket_udp4_internal(DJBUNIX_FLAG_COE)
-#define socket_udp4_nbcoe() socket_udp4_internal(DJBUNIX_FLAG_NB|DJBUNIX_FLAG_COE)
+#define socket_udp4_nb() socket_udp4_internal(O_NONBLOCK)
+#define socket_udp4_coe() socket_udp4_internal(O_CLOEXEC)
+#define socket_udp4_nbcoe() socket_udp4_internal(O_NONBLOCK|O_CLOEXEC)
 extern int socket_udp4_internal (unsigned int) ;
 
 #define socket_udp6() socket_udp6_nb()
 #define socket_udp6_b() socket_udp6_internal(0)
-#define socket_udp6_nb() socket_udp6_internal(DJBUNIX_FLAG_NB)
-#define socket_udp6_coe() socket_udp6_internal(DJBUNIX_FLAG_COE)
-#define socket_udp6_nbcoe() socket_udp6_internal(DJBUNIX_FLAG_NB|DJBUNIX_FLAG_COE)
+#define socket_udp6_nb() socket_udp6_internal(O_NONBLOCK)
+#define socket_udp6_coe() socket_udp6_internal(O_CLOEXEC)
+#define socket_udp6_nbcoe() socket_udp6_internal(O_NONBLOCK|O_CLOEXEC)
 extern int socket_udp6_internal (unsigned int) ;
 
 extern int socket_waitconn (int, tain_t const *, tain_t *) ;
@@ -79,9 +130,9 @@ extern int socket_bind6 (int, char const *, uint16_t) ;
 extern int socket_bind6_reuse (int, char const *, uint16_t) ;
 
 #define socket_accept4(s, ip, port) socket_accept4_internal(s, ip, (port), 0)
-#define socket_accept4_nb(s, ip, port) socket_accept4_internal(s, ip, (port), DJBUNIX_FLAG_NB)
-#define socket_accept4_coe(s, ip, port) socket_accept4_internal(s, ip, (port), DJBUNIX_FLAG_COE)
-#define socket_accept4_nbcoe(s, ip, port) socket_accept4_internal(s, ip, (port), DJBUNIX_FLAG_NB|DJBUNIX_FLAG_COE)
+#define socket_accept4_nb(s, ip, port) socket_accept4_internal(s, ip, (port), O_NONBLOCK)
+#define socket_accept4_coe(s, ip, port) socket_accept4_internal(s, ip, (port), O_CLOEXEC)
+#define socket_accept4_nbcoe(s, ip, port) socket_accept4_internal(s, ip, (port), O_NONBLOCK|O_CLOEXEC)
 extern int socket_accept4_internal (int, char *, uint16_t *, unsigned int) ;
 extern socket_io_func_t socket_recv4 ;
 extern ssize_t socket_send4 (int, char const *, size_t, char const *, uint16_t) ;
@@ -90,9 +141,9 @@ extern int socket_local4 (int, char *, uint16_t *) ;
 extern int socket_remote4 (int, char *, uint16_t *) ;
 
 #define socket_accept6(s, ip6, port) socket_accept6_internal(s, ip6, (port), 0)
-#define socket_accept6_nb(s, ip6, port) socket_accept6_internal(s, ip6, (port), DJBUNIX_FLAG_NB)
-#define socket_accept6_coe(s, ip6, port) socket_accept6_internal(s, ip6, (port), DJBUNIX_FLAG_COE)
-#define socket_accept6_nbcoe(s, ip6, port) socket_accept6_internal(s, ip6, (port), DJBUNIX_FLAG_NB|DJBUNIX_FLAG_COE)
+#define socket_accept6_nb(s, ip6, port) socket_accept6_internal(s, ip6, (port), O_NONBLOCK)
+#define socket_accept6_coe(s, ip6, port) socket_accept6_internal(s, ip6, (port), O_CLOEXEC)
+#define socket_accept6_nbcoe(s, ip6, port) socket_accept6_internal(s, ip6, (port), O_NONBLOCK|O_CLOEXEC)
 extern int socket_accept6_internal (int, char *, uint16_t *, unsigned int) ;
 extern socket_io_func_t socket_recv6 ;
 extern ssize_t socket_send6 (int, char const *, size_t, char const *, uint16_t) ;

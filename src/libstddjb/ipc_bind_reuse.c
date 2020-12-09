@@ -1,6 +1,6 @@
 /* ISC license. */
 
-#include <skalibs/webipc.h>
+#include <skalibs/socket.h>
 
 int ipc_bind_reuse (int s, char const *p)
 {

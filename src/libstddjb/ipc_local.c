@@ -4,8 +4,9 @@
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <string.h>
+
 #include <skalibs/bytestr.h>
-#include <skalibs/webipc.h>
+#include <skalibs/socket.h>
 
 int ipc_local (int s, char *p, size_t l, int *trunc)
 {

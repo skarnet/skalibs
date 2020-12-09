@@ -2,7 +2,7 @@
 
 #include <skalibs/functypes.h>
 #include <skalibs/allreadwrite.h>
-#include <skalibs/webipc.h>
+#include <skalibs/socket.h>
 #include <skalibs/unix-timed.h>
 
 struct blah_s

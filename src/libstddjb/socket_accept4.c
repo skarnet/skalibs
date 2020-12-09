@@ -6,6 +6,8 @@
 #include <netinet/in.h>
 #include <string.h>
 #include <errno.h>
+#include <fcntl.h>
+
 #include <skalibs/uint16.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/socket.h>
@@ -17,15 +19,15 @@ int socket_accept4_internal (int s, char *ip, uint16_t *port, unsigned int optio
   int fd ;
   do
 #ifdef SKALIBS_HASACCEPT4
-    fd = accept4(s, (struct sockaddr *)&sa, &dummy, ((options & DJBUNIX_FLAG_NB) ? SOCK_NONBLOCK : 0) | ((options & DJBUNIX_FLAG_COE) ? SOCK_CLOEXEC : 0)) ;
+    fd = accept4(s, (struct sockaddr *)&sa, &dummy, ((options & O_NONBLOCK) ? SOCK_NONBLOCK : 0) | ((options & O_CLOEXEC) ? SOCK_CLOEXEC : 0)) ;
 #else
     fd = accept(s, (struct sockaddr *)&sa, &dummy) ;
 #endif
   while ((fd < 0) && (errno == EINTR)) ;
   if (fd < 0) return -1 ;
 #ifndef SKALIBS_HASACCEPT4
-  if ((((options & DJBUNIX_FLAG_NB) ? ndelay_on(fd) : ndelay_off(fd)) < 0)
-   || (((options & DJBUNIX_FLAG_COE) ? coe(fd) : uncoe(fd)) < 0))
+  if ((((options & O_NONBLOCK) ? ndelay_on(fd) : ndelay_off(fd)) < 0)
+   || (((options & O_CLOEXEC) ? coe(fd) : uncoe(fd)) < 0))
   {
     fd_close(fd) ;
     return -1 ;

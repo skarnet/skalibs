@@ -1,6 +1,6 @@
 /* ISC license. */
 
-#include <skalibs/webipc.h>
+#include <skalibs/socket.h>
 #include <skalibs/djbunix.h>
 #include "djbunix-internal.h"
 

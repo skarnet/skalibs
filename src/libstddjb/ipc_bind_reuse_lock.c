@@ -8,7 +8,7 @@
 #include <sys/socket.h>
 
 #include <skalibs/djbunix.h>
-#include <skalibs/webipc.h>
+#include <skalibs/socket.h>
 
 int ipc_bind_reuse_lock (int s, char const *p, int *fdlock)
 {
@@ -24,8 +24,10 @@ int ipc_bind_reuse_lock (int s, char const *p, int *fdlock)
   r = fd_lock(fd, 1, 1) ;
   if (r < 0) return -1 ;
   if (!r) return (errno = EBUSY, -1) ;
+  r = errno ;
   setsockopt(s, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof opt) ;
-  unlink(p) ;
+  errno = r ;
+  unlink_void(p) ;
   if (ipc_bind(s, p) < 0) return -1 ;
   *fdlock = fd ;
   return 0 ;

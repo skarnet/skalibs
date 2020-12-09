@@ -1,11 +1,13 @@
 /* ISC license. */
 
 #include <errno.h>
+
 #include <skalibs/error.h>
 #include <skalibs/kolbak.h>
 #include <skalibs/skaclient.h>
 #include <skalibs/unixmessage.h>
-#include <skalibs/webipc.h>
+#include <skalibs/djbunix.h>
+#include <skalibs/socket.h>
 #include "skaclient-internal.h"
 
 int skaclient_start_async (

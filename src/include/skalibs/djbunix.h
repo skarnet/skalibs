@@ -6,21 +6,19 @@
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <sys/wait.h>
+#include <fcntl.h>
 
 #include <skalibs/gccattributes.h>
 #include <skalibs/stralloc.h>
-
-#define DJBUNIX_FLAG_NB  0x01U
-#define DJBUNIX_FLAG_COE 0x02U
 
 extern int coe (int) ;
 extern int uncoe (int) ;
 extern int ndelay_on (int) ;
 extern int ndelay_off (int) ;
 extern int pipe_internal (int *, unsigned int) ;
-#define pipenb(p) pipe_internal(p, DJBUNIX_FLAG_NB)
-#define pipecoe(p) pipe_internal(p, DJBUNIX_FLAG_COE)
-#define pipenbcoe(p) pipe_internal(p, DJBUNIX_FLAG_NB|DJBUNIX_FLAG_COE)
+#define pipenb(p) pipe_internal(p, O_NONBLOCK)
+#define pipecoe(p) pipe_internal(p, O_CLOEXEC)
+#define pipenbcoe(p) pipe_internal(p, O_NONBLOCK|O_CLOEXEC)
 extern int fd_copy (int, int) ;
 extern int fd_copy2 (int, int, int, int) ;
 extern int fd_move (int, int) ;
@@ -57,8 +55,6 @@ extern int open_trunc (char const *) ;
 extern int openc_trunc (char const *) ;
 extern int open_write (char const *) ;
 extern int openc_write (char const *) ;
-extern int socket_internal (int, int, int, unsigned int) ;
-extern int socketpair_internal (int, int, int, unsigned int, int *) ;
 
 extern size_t path_canonicalize (char *, char const *, int) ;
 

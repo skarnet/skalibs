@@ -3,8 +3,9 @@
 #include <skalibs/nonposix.h>
 #include <sys/socket.h>
 #include <sys/un.h>
+
 #include <skalibs/allreadwrite.h>
-#include <skalibs/webipc.h>
+#include <skalibs/socket.h>
 
 int ipc_connected (int s)
 {

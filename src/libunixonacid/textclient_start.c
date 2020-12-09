@@ -4,7 +4,7 @@
 #include <string.h>
 #include <errno.h>
 
-#include <skalibs/webipc.h>
+#include <skalibs/socket.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/textmessage.h>
 #include <skalibs/textclient.h>
