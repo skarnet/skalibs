@@ -27,6 +27,12 @@ uses it, so it won't unconditionally clobber sockets in the filesystem anymore. 
  <li> Complete revamping of the pathexec functions, see <tt>exec.h</tt>. </li>
  <li> Revamping of the locking functions, see
 <a href="libstddjb/djbunix.html>djbunix.h</a>. </li>
+ <li> Use of standard O_NONBLOCK and O_CLOEXEC (defined in
+<a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/fcntl.h.html"></a>
+instead of adhoc <tt>DJBUNIX_FLAG_NB</tt> and <tt>DJBUNIX_FLAG_COE</tt>. </li>
+ <li>Better header separation; <tt>webipc.h</tt> removed (stuff moved to
+<tt>socket.h</tt>)
+
 </ul>
 
 <h2> in 2.9.3.0 </h2>

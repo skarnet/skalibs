@@ -62,6 +62,7 @@ wrappers</a> around I/O functions, extra I/O functions </li>
  <li> <a href="djbunix.html">skalibs/djbunix.h</a>: management of basic Unix concepts </li>
  <li> <a href="envalloc.html">skalibs/envalloc.h</a>: management of dynamically allocated <em>argv</em> and <em>envp</em> </li>
  <li> <a href="env.html">skalibs/env.h</a>: management of <em>argv</em> and <em>envp</em> </li>
+ <li> <a href="exec.html">skalibs/exec.h</a>: execution functions, with or without a newly built environment </li>
  <li> <a href="fmtscan.html">skalibs/fmtscan.h</a>: formatters (printers) and scanners (parsers) for basic C types </li>
  <li> <a href="genalloc.html">skalibs/genalloc.h</a>: generic advanced management of dynamically allocated structures </li>
  <li> <a href="genwrite.html">skalibs/genwrite.h</a>: interface to generic writes either to strallocs or to buffers </li>
@@ -82,12 +83,11 @@ how to safely handle signals in event loops) </li>
 <a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/sys_uio.h.html">iovec</a>
 structure </li>
  <li> <a href="skamisc.html">skalibs/skamisc.h</a>: general string quoting and parsing; miscellaneous, unclassifiable functions </li>
- <li> <a href="socket.html">skalibs/socket.h</a>: INET domain sockets </li>
+ <li> <a href="socket.html">skalibs/socket.h</a>: UNIX, INET and INET6 domain sockets </li>
  <li> <a href="stralloc.html">skalibs/stralloc.h</a>: advanced management of dynamically allocated strings </li>
  <li> <a href="strerr.html">skalibs/strerr.h</a>: basic error messages </li>
  <li> <a href="strerr2.html">skalibs/strerr2.h</a>: advanced error messages </li>
  <li> <a href="tai.html">skalibs/tai.h</a>: time, timers and system clock </li>
- <li> <a href="webipc.html">skalibs/webipc.h</a>: UNIX domain sockets </li>
 </ul>
 
 <p>
@@ -117,7 +117,6 @@ are not associated with any code and are mostly self-explanatory:
  <li> skalibs/diuint.h: for associative arrays of unsigned integers </li>
  <li> skalibs/diuint32.h: for associative arrays of 32-bit unsigned integers </li>
  <li> skalibs/disize.h: for associative arrays of size_t </li>
- <li> skalibs/environ.h: declaration of the <em>environ</em> variable </li>
  <li> skalibs/nsig.h: the number of system signals, for systems that do not define it </li>
  <li> skalibs/nonposix.h: feature test macros for non-POSIX-compliant systems </li>
 </ul>

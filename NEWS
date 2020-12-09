@@ -10,6 +10,10 @@ unconditionally deleting the socket.
 so it does the right thing instead of clobbering sockets.
  - Complete revamping of the pathexec functions, see exec.h.
  - Revamping of the locking functions.
+ - Use of standard O_NONBLOCK and O_CLOEXEC instead of adhoc
+DJBUNIX_FLAG_NB and DJBUNIX_FLAG_COE.
+ - Better header separation; webipc.h removed (stuff moved to
+socket.h)
 
 
 In 2.9.3.0
