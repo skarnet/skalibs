@@ -31,8 +31,11 @@ uses it, so it won't unconditionally clobber sockets in the filesystem anymore. 
 <a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/fcntl.h.html"></a>
 instead of adhoc <tt>DJBUNIX_FLAG_NB</tt> and <tt>DJBUNIX_FLAG_COE</tt>. </li>
  <li>Better header separation; <tt>webipc.h</tt> removed (stuff moved to
-<tt>socket.h</tt>)
-
+<tt>socket.h</tt>). </li>
+ <li> New <tt>mkptemp2()</tt> function, creating a fifo with a templated name
+and an option field for O_NONBLOCK and O_CLOEXEC. </li>
+ <li> New sysdep: <tt>chroot</tt>, testing whether the system has the
+<tt>chroot()</tt> function. </li>
 </ul>
 
 <h2> in 2.9.3.0 </h2>

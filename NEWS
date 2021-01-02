@@ -14,6 +14,9 @@ so it does the right thing instead of clobbering sockets.
 DJBUNIX_FLAG_NB and DJBUNIX_FLAG_COE.
  - Better header separation; webipc.h removed (stuff moved to
 socket.h)
+ - New function: mkptemp2(), creating a fifo with a templated
+name (like mkptemp) but with options for O_NONBLOCK and O_CLOEXEC.
+ - New sysdep to test for chroot().
 
 
 In 2.9.3.0
