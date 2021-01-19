@@ -54,6 +54,7 @@ src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint64.h
 src/include/skalibs/textclient.h: src/include/skalibs/allreadwrite.h src/include/skalibs/tai.h src/include/skalibs/textmessage.h
 src/include/skalibs/textmessage.h: src/include/skalibs/allreadwrite.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
+src/include/skalibs/uint32.h: src/include/skalibs/uint64.h
 src/include/skalibs/unix-timed.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
 src/include/skalibs/unix-transactional.h: src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
 src/include/skalibs/unixconnection.h: src/include/skalibs/unixmessage.h
