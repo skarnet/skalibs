@@ -18,7 +18,7 @@ struct tai_s
 #define TAI_ZERO { 0 }
 #define TAI_MAGIC ((uint64_t)4611686018427387904ULL)
 #define TAI_EPOCH { TAI_MAGIC + 10UL }
-#define TAI_INFINITE_RELATIVE { (uint64_t)1 << 60 }
+#define TAI_INFINITE_RELATIVE { (uint64_t)1 << 61 }
 #define TAI_INFINITE { TAI_MAGIC + ((uint64_t)1 << 61) }
 
 #define tai_sec(t) ((t)->x)
