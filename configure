@@ -319,7 +319,7 @@ trylibs () {
   libfile="$2".lib
   echo "Checking whether system has $3..."
   shift 3
-  if args=`iscached $name 3>&1 1>&4 4>&-` 4>&1 ; then :
+  if { args=`iscached $name 3>&1 1>&4 4>&-` ; } 4>&1 ; then :
   elif args=`detectlibs "$name" "$@"` ; then
     echo "${name}: yes" >> "${sysdeps}/sysdeps"
     if test -z "$args" ; then
