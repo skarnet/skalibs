@@ -2,6 +2,7 @@
 
 #include <skalibs/nonposix.h>
 
+#include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
@@ -19,7 +20,7 @@ int ipc_bind_reuse_lock (int s, char const *p, int *fdlock)
   char lockname[len + 6] ;
   memcpy(lockname, p, len) ;
   memcpy(lockname + len, ".lock", 6) ;
-  fd = openc_create(lockname) ;
+  fd = open3(lockname, O_WRONLY | O_NONBLOCK | O_CREAT | O_CLOEXEC, 0600) ;
   if (fd < 0) return -1 ;
   r = fd_lock(fd, 1, 1) ;
   if (r < 0) return -1 ;
