@@ -335,7 +335,8 @@ trylibs () {
   echo "$args" > "${sysdeps}/$libfile"
 }
 
-# Actual script!
+
+# The script starts HERE.
 
 # Initialize variables
 CC_AUTO=
