@@ -297,16 +297,16 @@ detectlibs () {
   name=$1
   shift
   if $CC_AUTO $CPPFLAGS_AUTO $CPPFLAGS $CPPFLAGS_POST $CFLAGS_AUTO $CFLAGS $CFLAGS_POST -c -o try$name.o src/sysdeps/try$name.c 2>/dev/null ; then
-    until $CC_AUTO $CFLAGS_AUTO $CFLAGS $CFLAGS_POST $LDFLAGS_AUTO $LDFLAGS $LDFLAGS_POST -o /dev/null try$name.o $args 2>/dev/null ; do
+    until $CC_AUTO $CFLAGS_AUTO $CFLAGS $CFLAGS_POST $LDFLAGS_AUTO $LDFLAGS $LDFLAGS_POST -o try$name try$name.o $args 2>/dev/null ; do
       if test -z "$*" ; then
-        rm -f try$name.o
+        rm -f try$name.o try$name
         return 1
       fi
       args="$args $1"
       shift
     done
     echo ${args# }
-    rm -f try$name.o
+    rm -f try$name.o try$name
     return 0
   else
     return 1
