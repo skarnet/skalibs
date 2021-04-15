@@ -6,9 +6,9 @@ Build Instructions
 
   - A POSIX-compliant C development environment
   - GNU make version 3.81 or later
-  - If cross-compiling: knowing the value for the irreducible
-sysdeps for your target architecture. See the "Cross-compilation"
-section below.
+  - If cross-compiling: you have to know the correct value for some
+non-autodetectable sysdeps for your target architecture. See the
+"Cross-compilation" section below.
 
  This software will install on any operating system that implements
 POSIX.1-2008, available at:
