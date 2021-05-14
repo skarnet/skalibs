@@ -14,5 +14,5 @@ int fd_islocked (int fd)
     .l_start = 0,
     .l_len = 0
   } ;
-  return fcntl(fd, F_GETLK, &fl) < 0 ? -1 : fl.l_type != F_UNLCK ;
+  return fcntl(fd, F_GETLK, &fl) == -1 ? -1 : fl.l_type != F_UNLCK ;
 }

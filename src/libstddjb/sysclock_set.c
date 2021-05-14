@@ -4,13 +4,6 @@
 
 #include <skalibs/sysdeps.h>
 
-#ifndef SKALIBS_HASCLOCKRT
-# ifndef SKALIBS_HASSETTIMEOFDAY
-#  error "neither clockrt nor settimeofday sysdeps are present. How do your set your system clock?"
-# endif
-#endif
-
-
 #ifdef SKALIBS_HASCLOCKRT
 
 #include <time.h>
@@ -27,6 +20,7 @@ int sysclock_set (tain_t const *a)
 }
 
 #else
+#ifdef SKALIBS_HASSETTIMEOFDAY
 
 #include <skalibs/nonposix.h>
 #include <sys/time.h>
@@ -42,4 +36,9 @@ int sysclock_set (tain_t const *a)
   return 1 ;
 }
 
+#else
+
+#error "neither clockrt nor settimeofday sysdeps are present. How do your set your system clock?"
+
+#endif
 #endif

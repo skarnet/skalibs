@@ -19,8 +19,8 @@ int fd_lock (int fd, int w, int nb)
   int e = errno ;
   int r ;
   do r = fcntl(fd, nb ? F_SETLK : F_SETLKW, &fl) ;
-  while (r < 0 && errno == EINTR) ;
-  return r >= 0 ? 1 :
+  while (r == -1 && errno == EINTR) ;
+  return r != -1 ? 1 :
     errno == EACCES || error_isagain(errno) ? (errno = e, 0) :
     -1 ;
 }
