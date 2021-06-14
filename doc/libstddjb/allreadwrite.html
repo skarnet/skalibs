@@ -52,6 +52,18 @@ and
 </p>
 
 <p>
+<code> typedef ssize_t iovfunc_t (int fd, struct iovec const *v, unsigned int vlen) </code> <br />
+This is the simplified type of IO functions such as
+<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/readv.html">readv()</a>
+and
+<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/writev.html">writev()</a>,
+where the content to perform IO on is specified as a
+<a href="siovec.html">scatter/gather array</a> of <em>vlen</em>
+elements instead of a single string.
+</p>
+
+
+<p>
 <code> typedef size_t alliofunc_t (int fd, char *buf, size_t len) </code> <br />
 This is the type of an IO operation that expects <em>all</em> of its
 <em>len</em> bytes to be sent or received, and that will loop around a
@@ -83,6 +95,11 @@ on reading.)
 </p>
 
 <p>
+<code> ssize_t unsanitize_read (ssize_t r) </code> <br />
+Returns the inverse of <code>sanitize_read</code>.
+</p>
+
+<p>
 <code> size_t allreadwrite (iofunc_t *f, int fd, char *s, size_t len) </code> <br />
 *<em>f</em> must be a basic reading or writing function such as
 <tt>fd_read</tt> or <tt>fd_write</tt>. <tt>allreadwrite()</tt> performs
@@ -92,6 +109,14 @@ total number of handled bytes, and sets errno if this number is not
 <em>len</em>. <tt>allreadwrite</tt> may block if <em>fd</em> is in
 blocking mode; if <em>fd</em> is in non-blocking mode, it might
 set errno to EWOULDBLOCK or EAGAIN.
+</p>
+
+<p>
+<code> size_t allreadwritev (iovfunc_t *f, int fd, struct iovec const *v, unsigned int vlen) </code> <br />
+Like <code> allreadwrite </code>
+but the content to perform IO on is specified as a
+<a href="siovec.html">scatter/gather array</a> of <em>vlen</em>
+elements instead of a single string.
 </p>
 
 <p>
@@ -105,6 +130,20 @@ function.
 <code> ssize_t fd_write (int fd, char const *s, size_t len) </code> <br />
 <a href="safewrappers.html">Safe wrapper</a> around the
 <a href="https://www.opengroup.org/onlinepubs/9699919799/functions/write.html">write()</a>
+function.
+</p>
+<p>
+
+<code> ssize_t fd_readv (int fd, struct iovec const *v, unsigned int vlen) </code> <br />
+<a href="safewrappers.html">Safe wrapper</a> around the
+<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/readv.html">readv()</a>
+function.
+</p>
+
+<p>
+<code> ssize_t fd_writev (int fd, struct iovec const *v, unsigned int vlen) </code> <br />
+<a href="safewrappers.html">Safe wrapper</a> around the
+<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/writev.html">writev()</a>
 function.
 </p>
 
@@ -136,6 +175,20 @@ Equivalent to <code> allreadwrite((iofunc_t *)&amp;fd_write, fd, s, len) </code>
 attempts to write <em>len</em> bytes from <em>s</em> to <em>fd</em>, looping
 around <tt>fd_write()</tt> if necessary, until either <em>len</em> bytes are
 written or an error occurs.
+</p>
+
+<p>
+<code> size_t allreadv (int fd, struct iovec *v, unsigned int vlen) </code> <br />
+Like <tt>allread</tt>, but the bytes from <em>fd</em> are read into a
+<a href="siovec.html">scatter/gather array</a> of <em>vlen</em>
+elements instead of a single string.
+</p>
+
+<p>
+<code> size_t allwritev (int fd, struct iovec const *v, unsigned int vlen) </code> <br />
+Like <tt>allwrite</tt>, but the content to write is taken from a
+<a href="siovec.html">scatter/gather array</a> of <em>vlen</em>
+elements instead of a single string.
 </p>
 
 </body>
