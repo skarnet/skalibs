@@ -560,8 +560,8 @@ The function returns 1 if it succeeds, or 0 (and sets errno) if it fails.
 <p>
 <code> int openwritenclose_suffix (char const *file, char const *s, size_t len, char const *suffix) <br />
 int openwritenclose_suffix_sync (char const *file, char const *s, size_t len, char const *suffix) <br />
-int openwritenclose_suffix_devino (char const *file, char const *s, size_t len, dev_t *dev, ino_t *ino, char const *suffix) <br />
-int openwritenclose_suffix_devino_sync (char const *file, char const *s, size_t len, dev_t *dev, ino_t *ino, char const *suffix) </code> <br />
+int openwritenclose_suffix_devino (char const *file, char const *s, size_t len, char const *suffix, dev_t *dev, ino_t *ino) <br />
+int openwritenclose_suffix_devino_sync (char const *file, char const *s, size_t len, char const *suffix, dev_t *dev, ino_t *ino) </code> <br />
 Trivial shortcuts around <tt>openwritenclose_suffix_internal()</tt>. The
 reader can easily figure out what they do.
 </p>
@@ -591,10 +591,10 @@ elements instead of a single string.
 </p>
 
 <p>
-<code> int openwritenclose_suffix (char const *file, char const *s, size_t len, char const *suffix) <br />
-int openwritenclose_suffix_sync (char const *file, char const *s, size_t len, char const *suffix) <br />
-int openwritenclose_suffix_devino (char const *file, char const *s, size_t len, dev_t *dev, ino_t *ino, char const *suffix) <br />
-int openwritenclose_suffix_devino_sync (char const *file, char const *s, size_t len, dev_t *dev, ino_t *ino, char const *suffix) </code> <br />
+<code> int openwritevnclose_suffix (char const *file, struct iovec const *v, unsigned int vlen, char const *suffix) <br />
+int openwritevnclose_suffix_sync (char const *file, struct iovec const *v, unsigned int vlen, char const *suffix) <br />
+int openwritevnclose_suffix_devino (char const *file, struct iovec const *v, unsigned int vlen, char const *suffix, dev_t *dev, ino_t *ino) <br />
+int openwritevnclose_suffix_devino_sync (char const *file, struct iovec const *v, unsigned int vlen, char const *suffix, dev_t *dev, ino_t *ino) </code> <br />
 Trivial wrappers around <tt>openwritevnclose_suffix_internal()</tt>.
 </p>
 
