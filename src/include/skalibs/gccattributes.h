@@ -6,6 +6,7 @@
 #ifdef __GNUC__
 
 #define gccattr_noreturn __attribute__((__noreturn__))
+#define gccattr_returns_twice __attribute__((__returns_twice__))
 #define gccattr_noinline __attribute__((__noinline__))
 #define gccattr_inline __attribute__((__always_inline__))
 #define gccattr_const __attribute__((__const__))
@@ -31,6 +32,7 @@
 #else
 
 #define gccattr_noreturn
+#define gccattr_returns_twice
 #define gccattr_noinline
 #define gccattr_inline
 #define gccattr_const
@@ -46,6 +48,7 @@
 
 #ifdef GCCATTR_COMPAT_0_22
 #define _a_noreturn gccattr_noreturn
+#define _a_returns_twice gccattr_returns_twice
 #define _a_noinline gccattr_noinline
 #define _a_inline gccattr_inline
 #define _a_const gccattr_const
