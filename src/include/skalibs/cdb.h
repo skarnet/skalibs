@@ -13,8 +13,7 @@ extern uint32_t cdb_hash (char const *, unsigned int) gccattr_pure ;
 typedef struct cdb cdb_t, *cdb_t_ref ;
 struct cdb
 {
-  char *map ; /* 0 if no map */
-  int fd ; /* -1 if uninitted, negative if mapped, nonnegative if nomapped */
+  char *map ;
   uint32_t size ; /* initialized if map is nonzero */
   uint32_t loop ; /* number of hash slots searched under this key */
   uint32_t khash ; /* initialized if loop is nonzero */
@@ -25,13 +24,13 @@ struct cdb
   uint32_t dlen ; /* initialized if cdb_findnext() returns 1 */
 } ;
 
-#define CDB_ZERO { .map = 0, .fd = -1, .size = 0, .loop = 0, .khash = 0, .kpos = 0, .hpos = 0, .hslots = 0, .dpos = 0, .dlen = 0 }
+#define CDB_ZERO { .map = 0, .size = 0, .loop = 0, .khash = 0, .kpos = 0, .hpos = 0, .hslots = 0, .dpos = 0, .dlen = 0 }
 extern struct cdb const cdb_zero ;
 
 extern void cdb_free (struct cdb *) ;
 
-#define cdb_init(c, fd) (cdb_init_map(c, (fd), 1) ? 0 : -1)
-extern int cdb_init_map (struct cdb *, int fd, int) ;
+#define cdb_init_map(c, fd, domap) (!cdb_init(c, fd))
+extern int cdb_init (struct cdb *, int fd) ;
 extern int cdb_mapfile (struct cdb *, char const *) ;
 extern int cdb_read (struct cdb *, char *, unsigned int, uint32_t) ;
 #define cdb_findstart(c) ((c)->loop = 0)
