@@ -1,5 +1,19 @@
 Changelog for skalibs.
 
+In 2.11.0.0
+-----------
+
+ - libbiguint removed.
+ - New posixplz function: munmap_void.
+ - cdb_make renamed to cdbmake; ui changed to 1=success/0=failure.
+ - cdb redesigned. cdb is now fixed, cdb_reader holds the state for cdb_find,
+    which puts data pointer and len directly into a cdb_data. A cdb
+    is always a map, pointers should always work.
+ - cdb_successor removed (unsafe to use); cdb_nextkey changed to
+    cdb_traverse_next, which puts key and data into two cdb_data's.
+ - cdb does not touch errno anymore.
+
+
 In 2.10.0.3
 -----------
 

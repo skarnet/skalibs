@@ -1,50 +1,48 @@
 /* ISC license. */
 
-#ifndef CDB_H
-#define CDB_H
+#ifndef SKALIBS_CDB_H
+#define SKALIBS_CDB_H
 
 #include <stdint.h>
+
 #include <skalibs/gccattributes.h>
 
-#define CDB_HASHSTART 5381
-extern uint32_t cdb_hashadd (uint32_t, unsigned char) gccattr_const ;
-extern uint32_t cdb_hash (char const *, unsigned int) gccattr_pure ;
-
-typedef struct cdb cdb_t, *cdb_t_ref ;
-struct cdb
+typedef struct cdb_s cdb, *cdb_ref ;
+struct cdb_s
 {
-  char *map ;
-  uint32_t size ; /* initialized if map is nonzero */
-  uint32_t loop ; /* number of hash slots searched under this key */
-  uint32_t khash ; /* initialized if loop is nonzero */
-  uint32_t kpos ; /* initialized if loop is nonzero */
-  uint32_t hpos ; /* initialized if loop is nonzero */
-  uint32_t hslots ; /* initialized if loop is nonzero */
-  uint32_t dpos ; /* initialized if cdb_findnext() returns 1 */
-  uint32_t dlen ; /* initialized if cdb_findnext() returns 1 */
+  char const *map ;
+  uint32_t size ;
+} ;
+#define CDB_ZERO { .map = 0, .size = 0 }
+extern cdb const cdb_zero ;
+
+typedef struct cdb_reader_s cdb_reader, *cdb_reader_ref ;
+struct cdb_reader_s
+{
+  uint32_t loop ;
+  uint32_t khash ;
+  uint32_t kpos ;
+  uint32_t hpos ;
+  uint32_t hslots ;
+} ;
+#define CDB_READER_ZERO { .loop = 0, .khash = 0, .kpos = 0, .hpos = 0, .hslots = 0 }
+extern cdb_reader const cdb_reader_zero ;
+
+typedef struct cdb_data_s cdb_data, *cdb_data_ref ;
+struct cdb_data_s
+{
+  char const *s ;
+  uint32_t len ;
 } ;
 
-#define CDB_ZERO { .map = 0, .size = 0, .loop = 0, .khash = 0, .kpos = 0, .hpos = 0, .hslots = 0, .dpos = 0, .dlen = 0 }
-extern struct cdb const cdb_zero ;
+extern void cdb_free (cdb *) ;
+extern int cdb_init (cdb *, char const *) ;
 
-extern void cdb_free (struct cdb *) ;
+#define cdb_findstart(d) ((d)->loop = 0)
+extern int cdb_find (cdb const *, cdb_reader *, cdb_data *, char const *, uint32_t) ;
 
-#define cdb_init_map(c, fd, domap) (!cdb_init(c, fd))
-extern int cdb_init (struct cdb *, int fd) ;
-extern int cdb_mapfile (struct cdb *, char const *) ;
-extern int cdb_read (struct cdb *, char *, unsigned int, uint32_t) ;
-#define cdb_findstart(c) ((c)->loop = 0)
-extern int cdb_findnext (struct cdb *, char const *, unsigned int) ;
-#define cdb_find(c, s, len) (cdb_findstart(c), cdb_findnext(c, s, len))
-
-#define cdb_datapos(c) ((c)->dpos)
-#define cdb_datalen(c) ((c)->dlen)
-#define cdb_keypos(c) ((c)->kpos)
-#define cdb_keylen(c) ((c)->dpos - (c)->kpos)
-
-#define cdb_traverse_init(c, kpos) (*(kpos) = 2048)
-#define cdb_firstkey(c, kpos) (cdb_traverse_init(c, kpos), cdb_nextkey(c, kpos))
-extern int cdb_nextkey (struct cdb *, uint32_t *) ;
-extern int cdb_successor (struct cdb *, char const *, unsigned int) ;
+#define CDB_TRAVERSE_INIT() 2048
+#define cdb_traverse_init(pos) (*pos = 2048)
+extern int cdb_traverse_next (cdb const *, cdb_data *, cdb_data *, uint32_t *) ;
 
 #endif

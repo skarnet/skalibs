@@ -1,17 +1,13 @@
 /* ISC license. */
 
-#include <sys/mman.h>
-#include <errno.h>
-
+#include <skalibs/posixplz.h>
 #include <skalibs/cdb.h>
 
-extern void cdb_free (struct cdb *c)
+extern void cdb_free (cdb *c)
 {
   if (c->map)
   {
-    int e = errno ;
-    munmap(c->map, c->size) ;
-    errno = e ;
+    munmap_void((void *)c->map, c->size) ;
+    c->map = 0 ;
   }
-  *c = cdb_zero ;
 }

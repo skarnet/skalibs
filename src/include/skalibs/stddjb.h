@@ -19,7 +19,7 @@
 #include <skalibs/bytestr.h>
 #include <skalibs/cbuffer.h>
 #include <skalibs/cdb.h>
-#include <skalibs/cdb_make.h>
+#include <skalibs/cdbmake.h>
 #include <skalibs/direntry.h>
 #include <skalibs/diuint32.h>
 #include <skalibs/diuint.h>

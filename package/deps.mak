@@ -16,7 +16,7 @@ src/include/skalibs/buffer.h: src/include/skalibs/allreadwrite.h src/include/ska
 src/include/skalibs/bytestr.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/cbuffer.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/cdb.h: src/include/skalibs/gccattributes.h
-src/include/skalibs/cdb_make.h: src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h
+src/include/skalibs/cdbmake.h: src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h
 src/include/skalibs/datastruct.h: src/include/skalibs/avlnode.h src/include/skalibs/avltree.h src/include/skalibs/avltreen.h src/include/skalibs/bigkv.h src/include/skalibs/genqdyn.h src/include/skalibs/genset.h src/include/skalibs/gensetdyn.h
 src/include/skalibs/djbtime.h: src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/include/skalibs/djbunix.h: src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
@@ -48,7 +48,7 @@ src/include/skalibs/skalibs.h: src/include/skalibs/biguint.h src/include/skalibs
 src/include/skalibs/skamisc.h: src/include/skalibs/buffer.h src/include/skalibs/stralloc.h
 src/include/skalibs/socket.h: src/include/skalibs/gccattributes.h src/include/skalibs/posixplz.h src/include/skalibs/tai.h
 src/include/skalibs/stdcrypto.h: src/include/skalibs/md5.h src/include/skalibs/rc4.h src/include/skalibs/sha1.h src/include/skalibs/sha256.h src/include/skalibs/sha512.h
-src/include/skalibs/stddjb.h: src/include/skalibs/alarm.h src/include/skalibs/alloc.h src/include/skalibs/allreadwrite.h src/include/skalibs/bitarray.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/bytestr.h src/include/skalibs/cbuffer.h src/include/skalibs/cdb.h src/include/skalibs/cdb_make.h src/include/skalibs/direntry.h src/include/skalibs/disize.h src/include/skalibs/diuint.h src/include/skalibs/diuint32.h src/include/skalibs/djbtime.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/error.h src/include/skalibs/exec.h src/include/skalibs/fmtscan.h src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h src/include/skalibs/genalloc.h src/include/skalibs/genwrite.h src/include/skalibs/iobuffer.h src/include/skalibs/iopause.h src/include/skalibs/ip46.h src/include/skalibs/lolstdio.h src/include/skalibs/netstring.h src/include/skalibs/nsig.h src/include/skalibs/segfault.h src/include/skalibs/selfpipe.h src/include/skalibs/setgroups.h src/include/skalibs/sgetopt.h src/include/skalibs/sig.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/socket.h src/include/skalibs/stralloc.h src/include/skalibs/strerr.h src/include/skalibs/strerr2.h src/include/skalibs/tai.h src/include/skalibs/types.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
+src/include/skalibs/stddjb.h: src/include/skalibs/alarm.h src/include/skalibs/alloc.h src/include/skalibs/allreadwrite.h src/include/skalibs/bitarray.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/bytestr.h src/include/skalibs/cbuffer.h src/include/skalibs/cdb.h src/include/skalibs/cdbmake.h src/include/skalibs/direntry.h src/include/skalibs/disize.h src/include/skalibs/diuint.h src/include/skalibs/diuint32.h src/include/skalibs/djbtime.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/error.h src/include/skalibs/exec.h src/include/skalibs/fmtscan.h src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h src/include/skalibs/genalloc.h src/include/skalibs/genwrite.h src/include/skalibs/iobuffer.h src/include/skalibs/iopause.h src/include/skalibs/ip46.h src/include/skalibs/lolstdio.h src/include/skalibs/netstring.h src/include/skalibs/nsig.h src/include/skalibs/segfault.h src/include/skalibs/selfpipe.h src/include/skalibs/setgroups.h src/include/skalibs/sgetopt.h src/include/skalibs/sig.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/socket.h src/include/skalibs/stralloc.h src/include/skalibs/strerr.h src/include/skalibs/strerr2.h src/include/skalibs/tai.h src/include/skalibs/types.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
 src/include/skalibs/strerr.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint64.h
@@ -66,38 +66,11 @@ src/libstdcrypto/md5-internal.h: src/include/skalibs/md5.h
 src/libstdcrypto/sha1-internal.h: src/include/skalibs/sha1.h
 src/libstdcrypto/sha256-internal.h: src/include/skalibs/sha256.h
 src/libstdcrypto/sha512-internal.h: src/include/skalibs/sha512.h
+src/libstddjb/cdb-internal.h: src/include/skalibs/cdb.h src/include/skalibs/gccattributes.h
 src/libstddjb/djbtime-internal.h: src/include/skalibs/uint64.h
 src/libstddjb/fmtscan-internal.h: src/include/skalibs/fmtscan.h src/include/skalibs/uint64.h
 src/libstddjb/selfpipe-internal.h: src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
 src/libunixonacid/skaclient-internal.h: src/include/skalibs/kolbak.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
-src/libbiguint/bu_addc.o src/libbiguint/bu_addc.lo: src/libbiguint/bu_addc.c src/include/skalibs/biguint.h src/include/skalibs/bsdsnowflake.h
-src/libbiguint/bu_addmod.o src/libbiguint/bu_addmod.lo: src/libbiguint/bu_addmod.c src/include/skalibs/biguint.h
-src/libbiguint/bu_cmp.o src/libbiguint/bu_cmp.lo: src/libbiguint/bu_cmp.c src/include/skalibs/biguint.h
-src/libbiguint/bu_copy.o src/libbiguint/bu_copy.lo: src/libbiguint/bu_copy.c src/include/skalibs/biguint.h src/include/skalibs/bsdsnowflake.h
-src/libbiguint/bu_copy_internal.o src/libbiguint/bu_copy_internal.lo: src/libbiguint/bu_copy_internal.c src/include/skalibs/biguint.h
-src/libbiguint/bu_div.o src/libbiguint/bu_div.lo: src/libbiguint/bu_div.c src/include/skalibs/biguint.h
-src/libbiguint/bu_div_internal.o src/libbiguint/bu_div_internal.lo: src/libbiguint/bu_div_internal.c src/include/skalibs/biguint.h
-src/libbiguint/bu_divmod.o src/libbiguint/bu_divmod.lo: src/libbiguint/bu_divmod.c src/include/skalibs/biguint.h
-src/libbiguint/bu_divmod_internal.o src/libbiguint/bu_divmod_internal.lo: src/libbiguint/bu_divmod_internal.c src/include/skalibs/biguint.h
-src/libbiguint/bu_fmt.o src/libbiguint/bu_fmt.lo: src/libbiguint/bu_fmt.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_gcd.o src/libbiguint/bu_gcd.lo: src/libbiguint/bu_gcd.c src/include/skalibs/biguint.h
-src/libbiguint/bu_invmod.o src/libbiguint/bu_invmod.lo: src/libbiguint/bu_invmod.c src/include/skalibs/biguint.h
-src/libbiguint/bu_len.o src/libbiguint/bu_len.lo: src/libbiguint/bu_len.c src/include/skalibs/biguint.h
-src/libbiguint/bu_mod.o src/libbiguint/bu_mod.lo: src/libbiguint/bu_mod.c src/include/skalibs/biguint.h
-src/libbiguint/bu_mul.o src/libbiguint/bu_mul.lo: src/libbiguint/bu_mul.c src/include/skalibs/biguint.h src/include/skalibs/uint64.h
-src/libbiguint/bu_mulmod.o src/libbiguint/bu_mulmod.lo: src/libbiguint/bu_mulmod.c src/include/skalibs/biguint.h
-src/libbiguint/bu_pack.o src/libbiguint/bu_pack.lo: src/libbiguint/bu_pack.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_pack_big.o src/libbiguint/bu_pack_big.lo: src/libbiguint/bu_pack_big.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_scan.o src/libbiguint/bu_scan.lo: src/libbiguint/bu_scan.c src/include/skalibs/biguint.h src/include/skalibs/bitarray.h src/include/skalibs/bsdsnowflake.h
-src/libbiguint/bu_scan_internal.o src/libbiguint/bu_scan_internal.lo: src/libbiguint/bu_scan_internal.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_scanlen.o src/libbiguint/bu_scanlen.lo: src/libbiguint/bu_scanlen.c src/include/skalibs/biguint.h src/include/skalibs/fmtscan.h
-src/libbiguint/bu_slbc.o src/libbiguint/bu_slbc.lo: src/libbiguint/bu_slbc.c src/include/skalibs/biguint.h
-src/libbiguint/bu_srbc.o src/libbiguint/bu_srbc.lo: src/libbiguint/bu_srbc.c src/include/skalibs/biguint.h
-src/libbiguint/bu_subc.o src/libbiguint/bu_subc.lo: src/libbiguint/bu_subc.c src/include/skalibs/biguint.h src/include/skalibs/bsdsnowflake.h
-src/libbiguint/bu_submod.o src/libbiguint/bu_submod.lo: src/libbiguint/bu_submod.c src/include/skalibs/biguint.h
-src/libbiguint/bu_unpack.o src/libbiguint/bu_unpack.lo: src/libbiguint/bu_unpack.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_unpack_big.o src/libbiguint/bu_unpack_big.lo: src/libbiguint/bu_unpack_big.c src/include/skalibs/biguint.h src/include/skalibs/uint32.h
-src/libbiguint/bu_zero.o src/libbiguint/bu_zero.lo: src/libbiguint/bu_zero.c src/include/skalibs/biguint.h
 src/libdatastruct/avlnode_delete.o src/libdatastruct/avlnode_delete.lo: src/libdatastruct/avlnode_delete.c src/libdatastruct/avlnode-internal.h src/include/skalibs/avlnode.h
 src/libdatastruct/avlnode_doublerotate.o src/libdatastruct/avlnode_doublerotate.lo: src/libdatastruct/avlnode_doublerotate.c src/libdatastruct/avlnode-internal.h src/include/skalibs/avlnode.h
 src/libdatastruct/avlnode_extreme.o src/libdatastruct/avlnode_extreme.lo: src/libdatastruct/avlnode_extreme.c src/include/skalibs/avlnode.h
@@ -192,6 +165,7 @@ src/libposixplz/mklinktemp.o src/libposixplz/mklinktemp.lo: src/libposixplz/mkli
 src/libposixplz/mkltemp.o src/libposixplz/mkltemp.lo: src/libposixplz/mkltemp.c src/include/skalibs/posixplz.h
 src/libposixplz/mkptemp.o src/libposixplz/mkptemp.lo: src/libposixplz/mkptemp.c src/include/skalibs/posixplz.h
 src/libposixplz/mkptemp2.o src/libposixplz/mkptemp2.lo: src/libposixplz/mkptemp2.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
+src/libposixplz/munmap_void.o src/libposixplz/munmap_void.lo: src/libposixplz/munmap_void.c src/include/skalibs/posixplz.h
 src/libposixplz/setgroups.o src/libposixplz/setgroups.lo: src/libposixplz/setgroups.c src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/setgroups.h src/include/skalibs/sysdeps.h
 src/libposixplz/strnlen.o src/libposixplz/strnlen.lo: src/libposixplz/strnlen.c src/include/skalibs/bytestr.h src/include/skalibs/posixishard.h src/include/skalibs/sysdeps.h
 src/libposixplz/touch.o src/libposixplz/touch.lo: src/libposixplz/touch.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h
@@ -317,16 +291,15 @@ src/libstddjb/cbuffer_unget.o src/libstddjb/cbuffer_unget.lo: src/libstddjb/cbuf
 src/libstddjb/cbuffer_unput.o src/libstddjb/cbuffer_unput.lo: src/libstddjb/cbuffer_unput.c src/include/skalibs/cbuffer.h
 src/libstddjb/cbuffer_wpeek.o src/libstddjb/cbuffer_wpeek.lo: src/libstddjb/cbuffer_wpeek.c src/include/skalibs/cbuffer.h
 src/libstddjb/cbuffer_wseek.o src/libstddjb/cbuffer_wseek.lo: src/libstddjb/cbuffer_wseek.c src/include/skalibs/cbuffer.h
-src/libstddjb/cdb_findnext.o src/libstddjb/cdb_findnext.lo: src/libstddjb/cdb_findnext.c src/include/skalibs/cdb.h src/include/skalibs/uint32.h
-src/libstddjb/cdb_free.o src/libstddjb/cdb_free.lo: src/libstddjb/cdb_free.c src/include/skalibs/cdb.h
-src/libstddjb/cdb_hash.o src/libstddjb/cdb_hash.lo: src/libstddjb/cdb_hash.c src/include/skalibs/cdb.h
-src/libstddjb/cdb_init.o src/libstddjb/cdb_init.lo: src/libstddjb/cdb_init.c src/include/skalibs/bsdsnowflake.h src/include/skalibs/cdb.h
-src/libstddjb/cdb_make.o src/libstddjb/cdb_make.lo: src/libstddjb/cdb_make.c src/include/skalibs/buffer.h src/include/skalibs/cdb.h src/include/skalibs/cdb_make.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h src/include/skalibs/uint32.h
-src/libstddjb/cdb_mapfile.o src/libstddjb/cdb_mapfile.lo: src/libstddjb/cdb_mapfile.c src/include/skalibs/cdb.h src/include/skalibs/djbunix.h
-src/libstddjb/cdb_nextkey.o src/libstddjb/cdb_nextkey.lo: src/libstddjb/cdb_nextkey.c src/include/skalibs/cdb.h src/include/skalibs/uint32.h
-src/libstddjb/cdb_read.o src/libstddjb/cdb_read.lo: src/libstddjb/cdb_read.c src/include/skalibs/cdb.h src/include/skalibs/posixishard.h
-src/libstddjb/cdb_successor.o src/libstddjb/cdb_successor.lo: src/libstddjb/cdb_successor.c src/include/skalibs/cdb.h
+src/libstddjb/cdb_find.o src/libstddjb/cdb_find.lo: src/libstddjb/cdb_find.c src/libstddjb/cdb-internal.h src/include/skalibs/cdb.h src/include/skalibs/uint32.h
+src/libstddjb/cdb_free.o src/libstddjb/cdb_free.lo: src/libstddjb/cdb_free.c src/include/skalibs/cdb.h src/include/skalibs/posixplz.h
+src/libstddjb/cdb_hash.o src/libstddjb/cdb_hash.lo: src/libstddjb/cdb_hash.c src/libstddjb/cdb-internal.h
+src/libstddjb/cdb_init.o src/libstddjb/cdb_init.lo: src/libstddjb/cdb_init.c src/include/skalibs/cdb.h src/include/skalibs/djbunix.h
+src/libstddjb/cdb_p.o src/libstddjb/cdb_p.lo: src/libstddjb/cdb_p.c src/libstddjb/cdb-internal.h src/include/skalibs/cdb.h
+src/libstddjb/cdb_reader_zero.o src/libstddjb/cdb_reader_zero.lo: src/libstddjb/cdb_reader_zero.c src/include/skalibs/cdb.h
+src/libstddjb/cdb_traverse_next.o src/libstddjb/cdb_traverse_next.lo: src/libstddjb/cdb_traverse_next.c src/libstddjb/cdb-internal.h src/include/skalibs/cdb.h src/include/skalibs/uint32.h
 src/libstddjb/cdb_zero.o src/libstddjb/cdb_zero.lo: src/libstddjb/cdb_zero.c src/include/skalibs/cdb.h
+src/libstddjb/cdbmake.o src/libstddjb/cdbmake.lo: src/libstddjb/cdbmake.c src/include/skalibs/buffer.h src/include/skalibs/cdbmake.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h src/include/skalibs/uint32.h
 src/libstddjb/child_spawn.o src/libstddjb/child_spawn.lo: src/libstddjb/child_spawn.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h src/include/skalibs/types.h
 src/libstddjb/child_spawn0.o src/libstddjb/child_spawn0.lo: src/libstddjb/child_spawn0.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h
 src/libstddjb/child_spawn1_internal.o src/libstddjb/child_spawn1_internal.lo: src/libstddjb/child_spawn1_internal.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h
