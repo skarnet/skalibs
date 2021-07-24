@@ -16,8 +16,8 @@ struct cdb_s
 #define CDB_ZERO { .map = 0, .size = 0 }
 extern cdb const cdb_zero ;
 
-typedef struct cdb_reader_s cdb_reader, *cdb_reader_ref ;
-struct cdb_reader_s
+typedef struct cdb_find_state_s cdb_find_state, *cdb_find_state_ref ;
+struct cdb_find_state_s
 {
   uint32_t loop ;
   uint32_t khash ;
@@ -25,8 +25,7 @@ struct cdb_reader_s
   uint32_t hpos ;
   uint32_t hslots ;
 } ;
-#define CDB_READER_ZERO { .loop = 0, .khash = 0, .kpos = 0, .hpos = 0, .hslots = 0 }
-extern cdb_reader const cdb_reader_zero ;
+#define CDB_FIND_STATE_ZERO { .loop = 0, .khash = 0, .kpos = 0, .hpos = 0, .hslots = 0 }
 
 typedef struct cdb_data_s cdb_data, *cdb_data_ref ;
 struct cdb_data_s
@@ -37,12 +36,14 @@ struct cdb_data_s
 
 extern void cdb_free (cdb *) ;
 extern int cdb_init (cdb *, char const *) ;
+extern int cdb_init_at (cdb *, int, char const *) ;
+extern int cdb_init_fromfd (cdb *, int) ;
 
 #define cdb_findstart(d) ((d)->loop = 0)
-extern int cdb_find (cdb const *, cdb_reader *, cdb_data *, char const *, uint32_t) ;
+extern int cdb_find (cdb const *, cdb_data *, char const *, uint32_t, cdb_find_state *) ;
 
 #define CDB_TRAVERSE_INIT() 2048
-#define cdb_traverse_init(pos) (*pos = 2048)
+#define cdb_traverse_init(pos) (*(pos) = 2048)
 extern int cdb_traverse_next (cdb const *, cdb_data *, cdb_data *, uint32_t *) ;
 
 #endif

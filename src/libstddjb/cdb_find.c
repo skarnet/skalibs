@@ -7,7 +7,7 @@
 #include <skalibs/cdb.h>
 #include "cdb-internal.h"
 
-int cdb_find (cdb const *c, cdb_reader *d, cdb_data *out, char const *key, uint32_t len)
+int cdb_find (cdb const *c, cdb_data *out, char const *key, uint32_t len, cdb_find_state *d)
 {
   if (!d->loop)
   {

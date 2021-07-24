@@ -2,10 +2,11 @@
 
 #include <skalibs/djbunix.h>
 #include <skalibs/cdb.h>
+#include <skalibs/unix-transactional.h>
 
-int cdb_init (cdb *c, char const *file)
+int cdb_init_at (cdb *c, int dirfd, char const *file)
 {
-  int fd = openc_read(file) ;
+  int fd = open_readat(dirfd, file) ;
   if (fd < 0) return 0 ;
   if (!cdb_init_fromfd(c, fd))
   {
