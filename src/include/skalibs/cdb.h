@@ -40,7 +40,8 @@ extern int cdb_init_at (cdb *, int, char const *) ;
 extern int cdb_init_fromfd (cdb *, int) ;
 
 #define cdb_findstart(d) ((d)->loop = 0)
-extern int cdb_find (cdb const *, cdb_data *, char const *, uint32_t, cdb_find_state *) ;
+extern int cdb_findnext (cdb const *, cdb_data *, char const *, uint32_t, cdb_find_state *) ;
+extern int cdb_find (cdb const *, cdb_data *, char const *, uint32_t) ;
 
 #define CDB_TRAVERSE_INIT() 2048
 #define cdb_traverse_init(pos) (*(pos) = 2048)

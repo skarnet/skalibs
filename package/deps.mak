@@ -291,7 +291,8 @@ src/libstddjb/cbuffer_unget.o src/libstddjb/cbuffer_unget.lo: src/libstddjb/cbuf
 src/libstddjb/cbuffer_unput.o src/libstddjb/cbuffer_unput.lo: src/libstddjb/cbuffer_unput.c src/include/skalibs/cbuffer.h
 src/libstddjb/cbuffer_wpeek.o src/libstddjb/cbuffer_wpeek.lo: src/libstddjb/cbuffer_wpeek.c src/include/skalibs/cbuffer.h
 src/libstddjb/cbuffer_wseek.o src/libstddjb/cbuffer_wseek.lo: src/libstddjb/cbuffer_wseek.c src/include/skalibs/cbuffer.h
-src/libstddjb/cdb_find.o src/libstddjb/cdb_find.lo: src/libstddjb/cdb_find.c src/libstddjb/cdb-internal.h src/include/skalibs/cdb.h src/include/skalibs/uint32.h
+src/libstddjb/cdb_find.o src/libstddjb/cdb_find.lo: src/libstddjb/cdb_find.c src/include/skalibs/cdb.h
+src/libstddjb/cdb_findnext.o src/libstddjb/cdb_findnext.lo: src/libstddjb/cdb_findnext.c src/libstddjb/cdb-internal.h src/include/skalibs/cdb.h src/include/skalibs/uint32.h
 src/libstddjb/cdb_free.o src/libstddjb/cdb_free.lo: src/libstddjb/cdb_free.c src/include/skalibs/cdb.h src/include/skalibs/posixplz.h
 src/libstddjb/cdb_hash.o src/libstddjb/cdb_hash.lo: src/libstddjb/cdb_hash.c src/libstddjb/cdb-internal.h
 src/libstddjb/cdb_init.o src/libstddjb/cdb_init.lo: src/libstddjb/cdb_init.c src/include/skalibs/cdb.h src/include/skalibs/djbunix.h
