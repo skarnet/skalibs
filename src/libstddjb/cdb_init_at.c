@@ -4,9 +4,9 @@
 #include <skalibs/cdb.h>
 #include <skalibs/unix-transactional.h>
 
-int cdb_init_at (cdb *c, int dirfd, char const *file)
+int cdb_init_at (cdb *c, int dfd, char const *file)
 {
-  int fd = open_readat(dirfd, file) ;
+  int fd = open_readat(dfd, file) ;
   if (fd < 0) return 0 ;
   if (!cdb_init_fromfd(c, fd))
   {
