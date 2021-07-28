@@ -1,24 +1,26 @@
 /* ISC license. */
 
-#ifndef BUFALLOC_H
-#define BUFALLOC_H
+#ifndef SKALIBS_BUFALLOC_H
+#define SKALIBS_BUFALLOC_H
 
 #include <sys/types.h>
+
 #include <skalibs/gccattributes.h>
+#include <skalibs/functypes.h>
 #include <skalibs/stralloc.h>
 
-typedef struct bufalloc bufalloc, *bufalloc_ref ;
-struct bufalloc
+typedef struct bufalloc_s bufalloc, *bufalloc_ref ;
+struct bufalloc_s
 {
   stralloc x ;
   size_t p ;
   int fd ;
-  ssize_t (*op) (int, char const *, size_t) ;
+  iow_func_ref op ;
 } ;
 
 #define BUFALLOC_ZERO { STRALLOC_ZERO, 0, -1, 0 }
 #define BUFALLOC_INIT(f, d) { STRALLOC_ZERO, 0, (d), (f) }
-extern void bufalloc_init (bufalloc *, ssize_t (*)(int, char const *, size_t), int) ;
+extern void bufalloc_init (bufalloc *, iow_func_ref, int) ;
 #define bufalloc_shrink(ba) stralloc_shrink(&(ba)->x)
 #define bufalloc_free(ba) stralloc_free(&(ba)->x)
 #define bufalloc_put(ba, s, n) stralloc_catb(&(ba)->x, s, n)

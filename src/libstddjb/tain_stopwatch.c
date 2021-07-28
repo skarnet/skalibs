@@ -7,9 +7,9 @@
 
 #include <time.h>
 
-int tain_stopwatch_init (tain_t *now, clock_t cl, tain_t *offset)
+int tain_stopwatch_init (tain *now, clock_t cl, tain *offset)
 {
-  tain_t a, b ;
+  tain a, b ;
   struct timespec ts ;
   if (clock_gettime(cl, &ts) < 0) return 0 ;
   if (!tain_from_timespec(&b, &ts)) return 0 ;
@@ -19,12 +19,12 @@ int tain_stopwatch_init (tain_t *now, clock_t cl, tain_t *offset)
   return 1 ;
 }
 
-int tain_stopwatch_read (tain_t *a, clock_t cl, tain_t const *offset)
+int tain_stopwatch_read (tain *now, clock_t cl, tain const *offset)
 {
   struct timespec ts ;
   if (clock_gettime(cl, &ts) < 0) return 0 ;
-  if (!tain_from_timespec(a, &ts)) return 0 ;
-  tain_add(a, a, offset) ;
+  if (!tain_from_timespec(now, &ts)) return 0 ;
+  tain_add(now, now, offset) ;
   return 1 ;
 }
 
@@ -32,7 +32,7 @@ int tain_stopwatch_read (tain_t *a, clock_t cl, tain_t const *offset)
 
 #include <errno.h>
 
-int tain_stopwatch_init (tain_t *now, clock_t cl, tain_t *offset)
+int tain_stopwatch_init (tain *now, clock_t cl, tain *offset)
 {
   (void)now ;
   (void)cl ;
@@ -40,7 +40,7 @@ int tain_stopwatch_init (tain_t *now, clock_t cl, tain_t *offset)
   return (errno = ENOSYS, 0) ;
 }
 
-int tain_stopwatch_read (tain_t *now, clock_t cl, tain_t const *offset)
+int tain_stopwatch_read (tain *now, clock_t cl, tain const *offset)
 {
   (void)now ;
   (void)cl ;

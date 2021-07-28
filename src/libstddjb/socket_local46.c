@@ -1,16 +1,18 @@
 /* ISC license. */
 
 #include <skalibs/nonposix.h>
+
 #include <errno.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <string.h>
+
 #include <skalibs/uint16.h>
 #include <skalibs/ip46.h>
 
 #ifdef SKALIBS_IPV6_ENABLED
 
-int socket_local46 (int s, ip46_t *ip, uint16_t *port)
+int socket_local46 (int s, ip46 *ip, uint16_t *port)
 {
   struct sockaddr_storage sa ;
   socklen_t dummy = sizeof sa ;

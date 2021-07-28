@@ -1,9 +1,10 @@
 /* ISC license. */
 
-#ifndef SIOVEC_H
-#define SIOVEC_H
+#ifndef SKALIBS_SIOVEC_H
+#define SKALIBS_SIOVEC_H
 
 #include <sys/uio.h>
+
 #include <skalibs/gccattributes.h>
 
 extern size_t siovec_len (struct iovec const *, unsigned int) gccattr_pure ;

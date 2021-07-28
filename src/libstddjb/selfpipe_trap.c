@@ -4,9 +4,10 @@
 
 #include <errno.h>
 #include <signal.h>
+
 #include <skalibs/sysdeps.h>
-#include "selfpipe-internal.h"
 #include <skalibs/selfpipe.h>
+#include "selfpipe-internal.h"
 
 #ifdef SKALIBS_HASSIGNALFD
 
@@ -16,18 +17,17 @@ int selfpipe_trap (int sig)
 {
   sigset_t ss = selfpipe_caught ;
   sigset_t old ;
-  if (selfpipe_fd < 0) return (errno = EBADF, -1) ;
-  if ((sigaddset(&ss, sig) < 0) || (sigprocmask(SIG_BLOCK, &ss, &old) < 0))
-    return -1 ;
+  if (selfpipe_fd < 0) return (errno = EBADF, 0) ;
+  if ((sigaddset(&ss, sig) < 0) || (sigprocmask(SIG_BLOCK, &ss, &old) < 0)) return 0 ;
   if (signalfd(selfpipe_fd, &ss, SFD_NONBLOCK | SFD_CLOEXEC) < 0)
   {
     int e = errno ;
     sigprocmask(SIG_SETMASK, &old, 0) ;
     errno = e ;
-    return -1 ;
+    return 0 ;
   }
   selfpipe_caught = ss ;
-  return 0 ;
+  return 1 ;
 }
 
 #else
@@ -36,16 +36,12 @@ int selfpipe_trap (int sig)
 
 int selfpipe_trap (int sig)
 {
-  if (selfpipe_fd < 0) return (errno = EBADF, -1) ;
-  if (sig_catcha(sig, &selfpipe_ssa) < 0) return -1 ;
-  if (sigaddset(&selfpipe_caught, sig) < 0 || sigprocmask(SIG_UNBLOCK, &selfpipe_caught, 0) < 0)
-  {
-    int e = errno ;
-    sig_restore(sig) ;
-    errno = e ;
-    return -1 ;
-  }
-  return 0 ;
+  sigset_t set ;
+  if (selfpipe_fd < 0) return (errno = EBADF, 0) ;
+  if (!sig_catch(sig, &selfpipe_tophalf)) return 0 ;
+  sigaddset(&selfpipe_caught, sig) ;
+  sig_unblock(sig) ;
+  return 1 ;
 }
 
 #endif

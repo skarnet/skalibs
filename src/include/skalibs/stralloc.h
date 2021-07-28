@@ -1,7 +1,7 @@
 /* ISC license. */
 
-#ifndef STRALLOC_H
-#define STRALLOC_H
+#ifndef SKALIBS_STRALLOC_H
+#define SKALIBS_STRALLOC_H
 
 #include <string.h>
 #include <sys/uio.h>

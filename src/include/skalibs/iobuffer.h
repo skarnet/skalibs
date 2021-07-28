@@ -1,13 +1,14 @@
 /* ISC license. */
 
-#ifndef IOBUFFER_H
-#define IOBUFFER_H
+#ifndef SKALIBS_IOBUFFER_H
+#define SKALIBS_IOBUFFER_H
 
 #define IOBUFFER_SIZE 65536U
 
  /* iobufferu */
 
 #include <sys/types.h>
+
 #include <skalibs/buffer.h>
 #include <skalibs/djbunix.h>
 
@@ -51,19 +52,19 @@ struct iobufferk_s
   unsigned int nb : 2 ;
 } ;
 
-typedef int iobufferk_output_func_t (iobufferk *) ;
-typedef iobufferk_output_func_t *iobufferk_output_func_t_ref ;
-typedef ssize_t iobufferk_input_func_t (iobufferk *) ;
-typedef iobufferk_input_func_t *iobufferk_input_func_t_ref ;
-typedef void iobufferk_finish_func_t (iobufferk *) ;
-typedef iobufferk_finish_func_t *iobufferk_finish_func_t_ref ;
+typedef int iobufferk_output_func (iobufferk *) ;
+typedef iobufferk_output_func *iobufferk_output_func_ref ;
+typedef ssize_t iobufferk_input_func (iobufferk *) ;
+typedef iobufferk_input_func *iobufferk_input_func_ref ;
+typedef void iobufferk_finish_func (iobufferk *) ;
+typedef iobufferk_finish_func *iobufferk_finish_func_ref ;
 
-extern iobufferk_output_func_t iobufferk_isworking ;
+extern iobufferk_output_func iobufferk_isworking ;
 
 extern int iobufferk_init (iobufferk *, int, int) ;
-extern iobufferk_input_func_t_ref const iobufferk_fill_f[4] ;
-extern iobufferk_output_func_t_ref const iobufferk_flush_f[4] ;
-extern iobufferk_finish_func_t_ref const iobufferk_finish_f[4] ;
+extern iobufferk_input_func_ref const iobufferk_fill_f[4] ;
+extern iobufferk_output_func_ref const iobufferk_flush_f[4] ;
+extern iobufferk_finish_func_ref const iobufferk_finish_f[4] ;
 
 #define iobufferk_fill(k) (*iobufferk_fill_f[(k)->type])(k)
 #define iobufferk_flush(k) (*iobufferk_flush_f[(k)->type])(k)

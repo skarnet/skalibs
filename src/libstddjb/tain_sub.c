@@ -2,9 +2,9 @@
 
 #include <skalibs/tai.h>
 
-int tain_sub (tain_t *t, tain_t const *u, tain_t const *v)
+int tain_sub (tain *t, tain const *u, tain const *v)
 {
-  tain_t tt ;
+  tain tt ;
   tt.sec.x = u->sec.x - v->sec.x ;
   tt.nano = u->nano - v->nano ;
   if (tt.nano > u->nano)

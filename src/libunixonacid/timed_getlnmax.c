@@ -26,10 +26,10 @@ static ssize_t get (struct blah_s *blah)
   return sanitize_read(getlnmax(blah->b, blah->d, blah->max, &blah->w, blah->sep)) ;
 }
 
-ssize_t timed_getlnmax (buffer *b, char *d, size_t max, size_t *w, char sep, tain_t const *deadline, tain_t *stamp)
+ssize_t timed_getlnmax (buffer *b, char *d, size_t max, size_t *w, char sep, tain const *deadline, tain *stamp)
 {
   struct blah_s blah = { .b = b, .d = d, .max = max, .w = *w, .sep = sep } ;
-  ssize_t r = timed_get(&blah, (initfunc_t_ref)&getfd, (getfunc_t_ref)&get, deadline, stamp) ;
+  ssize_t r = timed_get(&blah, (init_func_ref)&getfd, (get_func_ref)&get, deadline, stamp) ;
   *w = blah.w ;
   return r ;
 }

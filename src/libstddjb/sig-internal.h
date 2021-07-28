@@ -1,15 +1,15 @@
 /* ISC license. */
 
-#ifndef SIG_INTERNAL
-#define SIG_INTERNAL
+#ifndef SKALIBS_SIG_INTERNAL_H
+#define SKALIBS_SIG_INTERNAL_H
 
-typedef struct sigtable_s sigtable_t, *sigtable_t_ref ;
+typedef struct sigtable_s sigtable, *sigtable_ref ;
 struct sigtable_s
 {
   int number ;
   char const *name ;
 } ;
 
-extern sigtable_t const skalibs_sigtable[] ;
+extern sigtable const skalibs_sigtable[] ;
 
 #endif

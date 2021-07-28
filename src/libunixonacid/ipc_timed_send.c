@@ -10,7 +10,7 @@
 #include <skalibs/unix-timed.h>
 #include <skalibs/posixishard.h>
 
-int ipc_timed_send (int fd, char const *s, size_t len, tain_t const *deadline, tain_t *stamp)
+int ipc_timed_send (int fd, char const *s, size_t len, tain const *deadline, tain *stamp)
 {
   iopause_fd x = { .fd = fd, .events = IOPAUSE_WRITE, .revents = 0 } ;
   for (;;)

@@ -5,6 +5,6 @@
 
 #include <skalibs/sha512.h>
 
-extern void sha512_transform (SHA512Schedule *ctx, unsigned char const *block) ;
+extern void sha512_transform (SHA512Schedule *, unsigned char const *) ;
 
 #endif

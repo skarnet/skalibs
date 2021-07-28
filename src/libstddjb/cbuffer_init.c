@@ -3,7 +3,7 @@
 #include <errno.h>
 #include <skalibs/cbuffer.h>
 
-int cbuffer_init (cbuffer_t *b, char *s, size_t len)
+int cbuffer_init (cbuffer *b, char *s, size_t len)
 {
   if (len < 2) return (errno = EINVAL, 0) ;
   b->x = s ;

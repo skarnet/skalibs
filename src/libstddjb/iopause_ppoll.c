@@ -11,12 +11,12 @@
 #include <skalibs/tai.h>
 #include <skalibs/iopause.h>
 
-int iopause_ppoll (iopause_fd *x, unsigned int len, tain_t const *deadline, tain_t const *stamp)
+int iopause_ppoll (iopause_fd *x, unsigned int len, tain const *deadline, tain const *stamp)
 {
   struct timespec ts = { .tv_sec = 0, .tv_nsec = 0 } ;
   if (deadline && tain_less(stamp, deadline))
   {
-    tain_t delta ;
+    tain delta ;
     tain_sub(&delta, deadline, stamp) ;
     if (!timespec_from_tain_relative(&ts, &delta))
     {
@@ -32,7 +32,7 @@ int iopause_ppoll (iopause_fd *x, unsigned int len, tain_t const *deadline, tain
 #include <errno.h>
 #include <skalibs/iopause.h>
 
-int iopause_ppoll (iopause_fd *x, unsigned int len, tain_t const *deadline, tain_t const *stamp)
+int iopause_ppoll (iopause_fd *x, unsigned int len, tain const *deadline, tain const *stamp)
 {
   (void)x ;
   (void)len ;

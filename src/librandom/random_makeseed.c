@@ -18,7 +18,7 @@ void random_makeseed (char *s)
 {
   SHA1Schedule bak = SHA1_INIT() ;
   {
-    tain_t now ;
+    tain now ;
     char tmp[256] ;
     uint32_t x = getpid() ;
     uint32_pack(tmp, x) ;

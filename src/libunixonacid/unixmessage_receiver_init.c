@@ -4,7 +4,7 @@
 #include <skalibs/stralloc.h>
 #include <skalibs/unixmessage.h>
 
-int unixmessage_receiver_init (unixmessage_receiver_t *b, int fd, char *mainbuf, size_t mainlen, char *auxbuf, size_t auxlen)
+int unixmessage_receiver_init (unixmessage_receiver *b, int fd, char *mainbuf, size_t mainlen, char *auxbuf, size_t auxlen)
 {
   if (!cbuffer_init(&b->mainb, mainbuf, mainlen)
    || !cbuffer_init(&b->auxb, auxbuf, auxlen)) return 0 ;

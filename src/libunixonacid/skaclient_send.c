@@ -3,8 +3,8 @@
 #include <skalibs/unixmessage.h>
 #include <skalibs/skaclient.h>
 
-int skaclient_send (skaclient_t *a, char const *s, size_t len, unixmessage_handler_func_t *cb, void *result, tain_t const *deadline, tain_t *stamp)
+int skaclient_send (skaclient *a, char const *s, size_t len, unixmessage_handler_func *cb, void *result, tain const *deadline, tain *stamp)
 {
-  unixmessage_t m = { .s = (char *)s, .len = len, .fds = 0, .nfds = 0 } ;
+  unixmessage m = { .s = (char *)s, .len = len, .fds = 0, .nfds = 0 } ;
   return skaclient_sendmsg(a, &m, cb, result, deadline, stamp) ;
 }

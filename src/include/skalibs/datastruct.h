@@ -1,7 +1,7 @@
 /* ISC license. */
 
-#ifndef DATASTRUCT_H
-#define DATASTRUCT_H
+#ifndef SKALIBS_DATASTRUCT_H
+#define SKALIBS_DATASTRUCT_H
 
 #include <skalibs/genqdyn.h>
 #include <skalibs/genset.h>

@@ -1,7 +1,7 @@
 /* ISC license. */
 
-#ifndef DIUINT_H
-#define DIUINT_H
+#ifndef SKALIBS_DIUINT_H
+#define SKALIBS_DIUINT_H
 
 typedef struct diuint diuint, *diuint_ref ;
 struct diuint

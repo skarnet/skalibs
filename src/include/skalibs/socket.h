@@ -1,7 +1,7 @@
 /* ISC license. */
 
-#ifndef SOCKET_H
-#define SOCKET_H
+#ifndef SKALIBS_SOCKET_H
+#define SKALIBS_SOCKET_H
 
 #include <stddef.h>
 #include <stdint.h>
@@ -11,8 +11,11 @@
 #include <skalibs/posixplz.h>
 #include <skalibs/tai.h>
 
-typedef ssize_t socket_io_func_t (int, char *, size_t, char *, uint16_t *) ;
-typedef socket_io_func_t *socket_io_func_t_ref ;
+typedef ssize_t socket_io_func (int, char *, size_t, char *, uint16_t *) ;
+typedef socket_io_func *socket_io_func_ref ;
+
+typedef ssize_t socket_iow_func (int, char const *, size_t, char const *, uint16_t) ;
+typedef socket_iow_func *socket_iow_func_ref ;
 
 extern int socket_internal (int, int, int, unsigned int) ;
 extern int socketpair_internal (int, int, int, unsigned int, int *) ;
@@ -58,7 +61,7 @@ extern int ipc_local (int, char *, size_t, int *) ;
 
 extern int ipc_connect (int, char const *) ;
 extern int ipc_connected (int) ;
-extern int ipc_timed_connect (int, char const *, tain_t const *, tain_t *) ;
+extern int ipc_timed_connect (int, char const *, tain const *, tain *) ;
 #define ipc_timed_connect_g(fd, path, deadline) ipc_timed_connect(fd, path, (deadline), &STAMP)
 
 extern ssize_t ipc_send (int, char const *, size_t, char const *) ;
@@ -107,12 +110,12 @@ extern int socket_udp4_internal (unsigned int) ;
 #define socket_udp6_nbcoe() socket_udp6_internal(O_NONBLOCK|O_CLOEXEC)
 extern int socket_udp6_internal (unsigned int) ;
 
-extern int socket_waitconn (int, tain_t const *, tain_t *) ;
+extern int socket_waitconn (int, tain const *, tain *) ;
 #define socket_waitconn_g(fd, deadline) socket_waitconn(fd, (deadline), &STAMP)
-extern int socket_deadlineconnstamp4 (int, char const *, uint16_t, tain_t const *, tain_t *) ;
+extern int socket_deadlineconnstamp4 (int, char const *, uint16_t, tain const *, tain *) ;
 #define socket_deadlineconnstamp(s, ip, port, deadline, stamp) socket_deadlineconnstamp4(s, ip, port, deadline, stamp)
 #define socket_deadlineconnstamp4_g(fd, ip, port, deadline) socket_deadlineconnstamp4(fd, ip, port, (deadline), &STAMP)
-extern int socket_deadlineconnstamp4_u32 (int, uint32_t, uint16_t, tain_t const *, tain_t *) ;
+extern int socket_deadlineconnstamp4_u32 (int, uint32_t, uint16_t, tain const *, tain *) ;
 #define socket_deadlineconnstamp4_u32_g(fd, ip, port, deadline) socket_deadlineconnstamp4_u32(fd, ip, port, (deadline), &STAMP)
 
 extern int socket_timeoutconn (int, char const *, uint16_t, unsigned int) ;
@@ -124,7 +127,7 @@ extern int socket_bind4_reuse (int, char const *, uint16_t) ;
 #define socket_listen(fd, b) ipc_listen(fd, b)
 
 extern int socket_connect6 (int, char const *, uint16_t) ;
-extern int socket_deadlineconnstamp6 (int, char const *, uint16_t, tain_t const *, tain_t *) ;
+extern int socket_deadlineconnstamp6 (int, char const *, uint16_t, tain const *, tain *) ;
 #define socket_deadlineconnstamp6_g(fd, ip6, port, deadline) socket_deadlineconnstamp6(fd, ip6, port, (deadline), &STAMP)
 extern int socket_bind6 (int, char const *, uint16_t) ;
 extern int socket_bind6_reuse (int, char const *, uint16_t) ;
@@ -134,9 +137,8 @@ extern int socket_bind6_reuse (int, char const *, uint16_t) ;
 #define socket_accept4_coe(s, ip, port) socket_accept4_internal(s, ip, (port), O_CLOEXEC)
 #define socket_accept4_nbcoe(s, ip, port) socket_accept4_internal(s, ip, (port), O_NONBLOCK|O_CLOEXEC)
 extern int socket_accept4_internal (int, char *, uint16_t *, unsigned int) ;
-extern socket_io_func_t socket_recv4 ;
-extern ssize_t socket_send4 (int, char const *, size_t, char const *, uint16_t) ;
-extern socket_io_func_t socket_ioloop_send4 ;
+extern socket_io_func socket_recv4 ;
+extern socket_iow_func socket_send4 ;
 extern int socket_local4 (int, char *, uint16_t *) ;
 extern int socket_remote4 (int, char *, uint16_t *) ;
 
@@ -145,9 +147,8 @@ extern int socket_remote4 (int, char *, uint16_t *) ;
 #define socket_accept6_coe(s, ip6, port) socket_accept6_internal(s, ip6, (port), O_CLOEXEC)
 #define socket_accept6_nbcoe(s, ip6, port) socket_accept6_internal(s, ip6, (port), O_NONBLOCK|O_CLOEXEC)
 extern int socket_accept6_internal (int, char *, uint16_t *, unsigned int) ;
-extern socket_io_func_t socket_recv6 ;
-extern ssize_t socket_send6 (int, char const *, size_t, char const *, uint16_t) ;
-extern socket_io_func_t socket_ioloop_send6 ;
+extern socket_io_func socket_recv6 ;
+extern socket_iow_func socket_send6 ;
 extern int socket_local6 (int, char *, uint16_t *) ;
 extern int socket_remote6 (int, char *, uint16_t *) ;
 
@@ -158,7 +159,9 @@ extern void socket_tryreservein (int, unsigned int) ;
 
  /* Timed send and recv operations (for dgram sockets) */
 
-extern ssize_t socket_ioloop (int, char *, size_t, char *, uint16_t *, socket_io_func_t_ref, int, tain_t const *, tain_t *) ;
+extern ssize_t socket_ioloop (int, char *, size_t, char *, uint16_t *, socket_io_func_ref, int, tain const *, tain *) ;
+extern socket_io_func socket_ioloop_send4 ;
+extern socket_io_func socket_ioloop_send6 ;
 
 #define socket_sendnb4(fd, buf, len, ip4, port, deadline, stamp) socket_ioloop(fd, buf, len, (char *)ip4, &(port), &socket_ioloop_send4, 1, deadline, stamp)
 #define socket_sendnb4_g(fd, buf, len, ip4, port, deadline) socket_sendnb4(fd, buf, len, ip4, port, (deadline), &STAMP)

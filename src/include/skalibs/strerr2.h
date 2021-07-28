@@ -1,12 +1,11 @@
 /* ISC license. */
 
-#ifndef STRERR2_H
-#define STRERR2_H
+#ifndef SKALIBS_STRERR2_H
+#define SKALIBS_STRERR2_H
 
 #include <skalibs/strerr.h>
 
 extern char const *PROG ;
-
 
 #define strerr_warnw1x(x1) \
 strerr_warn3x(PROG, ": warning: ", (x1))

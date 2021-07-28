@@ -4,4 +4,4 @@
 
 #include <skalibs/unixmessage.h>
 
-unixmessage_sender_t unixmessage_sender_x_ = UNIXMESSAGE_SENDER_ZERO ;
+unixmessage_sender unixmessage_sender_x_ = UNIXMESSAGE_SENDER_ZERO ;

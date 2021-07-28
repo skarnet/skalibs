@@ -30,7 +30,7 @@ union aligner_u
     XXX: We assume ancillary data is attached to the first byte.
  */
 
-int unixmessage_sender_flush (unixmessage_sender_t *b)
+int unixmessage_sender_flush (unixmessage_sender *b)
 {
   disize last = { .left = b->data.len, .right = genalloc_len(int, &b->fds) } ;
   disize *offsets = genalloc_s(disize, &b->offsets) ;

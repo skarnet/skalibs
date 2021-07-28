@@ -2,12 +2,12 @@
 
 #include <skalibs/unixmessage.h>
 
-int unixmessage_handle (unixmessage_receiver_t *b, unixmessage_handler_func_t_ref f, void *p)
+int unixmessage_handle (unixmessage_receiver *b, unixmessage_handler_func_ref f, void *p)
 {
   unsigned int count = 0 ;
   while (count < UNIXMESSAGE_MAXREADS || unixmessage_receiver_hasmsginbuf(b))
   {
-    unixmessage_t m ;
+    unixmessage m ;
     int r = unixmessage_receive(b, &m) ;
     if (r < 0) return -1 ;
     if (!r) break ;

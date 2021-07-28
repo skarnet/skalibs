@@ -1,10 +1,11 @@
 /* ISC license. */
 
-#ifndef NETSTRING_H
-#define NETSTRING_H
+#ifndef SKALIBS_NETSTRING_H
+#define SKALIBS_NETSTRING_H
 
-#include <sys/uio.h>
 #include <string.h>
+#include <sys/uio.h>
+
 #include <skalibs/buffer.h>
 #include <skalibs/stralloc.h>
 

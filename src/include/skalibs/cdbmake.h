@@ -4,6 +4,7 @@
 #define SKALIBS_CDBMAKE_H
 
 #include <stdint.h>
+
 #include <skalibs/diuint32.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/genalloc.h>

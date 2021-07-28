@@ -11,7 +11,7 @@
 #include <skalibs/unix-timed.h>
 #include <skalibs/posixishard.h>
 
-int ipc_timed_sendv (int fd, struct iovec const *v, unsigned int n, tain_t const *deadline, tain_t *stamp)
+int ipc_timed_sendv (int fd, struct iovec const *v, unsigned int n, tain const *deadline, tain *stamp)
 {
   struct msghdr hdr =
   {

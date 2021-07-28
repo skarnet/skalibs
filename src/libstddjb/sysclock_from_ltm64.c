@@ -8,7 +8,7 @@
 
 int sysclock_from_ltm64 (uint64_t *u)
 {
-  tai_t t ;
+  tai t ;
   if (!tai_from_ltm64(&t, *u)) return 0 ;
   *u = t.x - 10U ;
   return 1 ;

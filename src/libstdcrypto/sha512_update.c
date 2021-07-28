@@ -1,6 +1,7 @@
 /* ISC license. */
 
 #include <string.h>
+
 #include <skalibs/sha512.h>
 #include "sha512-internal.h"
 

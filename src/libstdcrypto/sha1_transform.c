@@ -1,5 +1,7 @@
 /* ISC license. */
 
+#include <stdint.h>
+
 #include "sha1-internal.h"
 
 #define F1(x, y, z) ((x & y) | ((~x) & z))

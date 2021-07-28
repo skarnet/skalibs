@@ -7,7 +7,7 @@
 #include <skalibs/cbuffer.h>
 #include <skalibs/unixmessage.h>
 
-int unixmessage_receiver_hasmsginbuf (unixmessage_receiver_t const *b)
+int unixmessage_receiver_hasmsginbuf (unixmessage_receiver const *b)
 {
   size_t len = cbuffer_len(&b->mainb) ;
   uint32_t mainlen ;

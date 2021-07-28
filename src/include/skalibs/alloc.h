@@ -1,9 +1,10 @@
 /* ISC license. */
 
-#ifndef ALLOC_H
-#define ALLOC_H
+#ifndef SKALIBS_ALLOC_H
+#define SKALIBS_ALLOC_H
 
 #include <stdlib.h>
+
 #include <skalibs/gccattributes.h>
 
 extern void *alloc (size_t) ;

@@ -5,7 +5,7 @@
 #include <skalibs/tai.h>
 #include <skalibs/djbtime.h>
 
-int ntp_from_tain (uint64_t *u, tain_t const *a)
+int ntp_from_tain (uint64_t *u, tain const *a)
 {
   uint64_t secs, frac ;
   if (!utc_from_tai(&secs, tain_secp(a))) return 0 ;

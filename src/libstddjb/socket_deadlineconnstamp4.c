@@ -4,7 +4,7 @@
 #include <skalibs/error.h>
 #include <skalibs/socket.h>
 
-int socket_deadlineconnstamp (int s, char const *ip, uint16_t port, tain_t const *deadline, tain_t *stamp)
+int socket_deadlineconnstamp (int s, char const *ip, uint16_t port, tain const *deadline, tain *stamp)
 {
   int e = errno ;
   if (socket_connect4(s, ip, port) >= 0) return 1 ;

@@ -1,9 +1,10 @@
 /* ISC license. */
 
-#ifndef GENSET_H
-#define GENSET_H
+#ifndef SKALIBS_GENSET_H
+#define SKALIBS_GENSET_H
 
 #include <stdint.h>
+
 #include <skalibs/functypes.h>
 
 typedef struct genset_s genset, *genset_ref ;
@@ -24,10 +25,10 @@ extern void genset_init (genset *, void *, uint32_t *, uint32_t, uint32_t) ;
 extern uint32_t genset_new (genset *) ;
 extern int genset_delete (genset *, uint32_t) ;
 #define genset_n(g) ((g)->max - (g)->sp)
-extern uint32_t genset_iter_nocancel (genset *, uint32_t, iterfunc_t_ref, void *) ;
+extern uint32_t genset_iter_nocancel (genset *, uint32_t, iter_func_ref, void *) ;
 #define genset_iter(g, f, stuff) genset_iter_nocancel(g, (g)->max, f, stuff)
-extern int genset_iter_withcancel (genset *, iterfunc_t_ref, iterfunc_t_ref, void *) ;
-extern void genset_deepfree (genset *, freefunc_t_ref) ;
+extern int genset_iter_withcancel (genset *, iter_func_ref, iter_func_ref, void *) ;
+extern void genset_deepfree (genset *, free_func_ref) ;
 
 #define GENSETB_TYPE(type, size) struct { type storage[size] ; uint32_t freelist[size] ; genset info ; }
 #define GENSETB_init(type, g, size) GENSET_init(&(g)->info, type, (g)->storage, (g)->freelist, size)

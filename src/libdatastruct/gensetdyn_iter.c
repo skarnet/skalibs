@@ -4,7 +4,7 @@
 #include <skalibs/bitarray.h>
 #include <skalibs/gensetdyn.h>
 
-uint32_t gensetdyn_iter_nocancel (gensetdyn *g, uint32_t n, iterfunc_t_ref f, void *stuff)
+uint32_t gensetdyn_iter_nocancel (gensetdyn *g, uint32_t n, iter_func_ref f, void *stuff)
 {
  /*
     XXX: we may be called by a freeing function, so we cannot alloc -

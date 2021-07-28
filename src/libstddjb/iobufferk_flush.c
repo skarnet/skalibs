@@ -43,7 +43,7 @@ static int iobufferk_flush_3 (iobufferk *k)
   return 1 ;
 }
 
-iobufferk_output_func_t_ref const iobufferk_flush_f[4] =
+iobufferk_output_func_ref const iobufferk_flush_f[4] =
 {
   &iobufferk_flush_0, &fakeflush, &fakeflush, &iobufferk_flush_3
 } ;
@@ -59,7 +59,7 @@ static int iobufferk_onosys (iobufferk *k)
   return (errno = ENOSYS, -1) ;
 }
 
-iobufferk_output_func_t_ref const iobufferk_flush_f[4] =
+iobufferk_output_func_ref const iobufferk_flush_f[4] =
 {
   &iobufferk_onosys, &iobufferk_onosys, &iobufferk_onosys, &iobufferk_onosys
 } ;

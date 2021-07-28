@@ -9,13 +9,13 @@
 
 static int f (char const *dst, mode_t mode, void *data)
 {
-  linkarg_t *la = data ;
+  linkarg *la = data ;
   (void)mode ;
   return (*la->lf)(la->src, dst) ;
 }
 
-int mklinktemp (char const *src, char *dst, linkfunc_t_ref lf)
+int mklinktemp (char const *src, char *dst, link_func_ref lf)
 {
-  linkarg_t la = { .lf = lf, .src = src } ;
+  linkarg la = { .lf = lf, .src = src } ;
   return mkfiletemp(dst, &f, 0600, &la) ;
 }

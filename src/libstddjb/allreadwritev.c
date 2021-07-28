@@ -4,7 +4,7 @@
 #include <skalibs/siovec.h>
 #include <skalibs/allreadwrite.h>
 
-size_t allreadwritev (iovfunc_t_ref op, int fd, struct iovec const *v, unsigned int vlen)
+size_t allreadwritev (iov_func_ref op, int fd, struct iovec const *v, unsigned int vlen)
 {
   size_t written = 0 ;
   struct iovec vv[vlen ? vlen : 1] ;

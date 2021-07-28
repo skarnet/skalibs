@@ -1,9 +1,10 @@
  /* ISC license. */
 
 #include <signal.h>
+
 #include "sig-internal.h"
 
-sigtable_t const skalibs_sigtable[] =
+sigtable const skalibs_sigtable[] =
 {
   { SIGABRT, "ABRT" },
   { SIGALRM, "ALRM" },

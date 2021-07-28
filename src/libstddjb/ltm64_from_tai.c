@@ -3,7 +3,7 @@
 #include <skalibs/djbtime.h>
 #include "djbtime-internal.h"
 
-int ltm64_from_tai (uint64_t *u, tai_t const *t)
+int ltm64_from_tai (uint64_t *u, tai const *t)
 {
   switch (skalibs_tzisright())
   {

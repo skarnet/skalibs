@@ -1,13 +1,14 @@
 /* ISC license. */
 
-#ifndef CBUFFER_H
-#define CBUFFER_H
+#ifndef SKALIBS_CBUFFER_H
+#define SKALIBS_CBUFFER_H
 
 #include <sys/uio.h>
 #include <string.h>
+
 #include <skalibs/gccattributes.h>
 
-typedef struct cbuffer_s cbuffer_t, *cbuffer_t_ref ;
+typedef struct cbuffer_s cbuffer, *cbuffer_ref ;
 struct cbuffer_s
 {
   char *x ;
@@ -23,32 +24,32 @@ struct cbuffer_s
  */
 
 #define CBUFFER_INIT(buf, len) { (buf), (len), 0, 0 }
-extern int cbuffer_init (cbuffer_t *, char *, size_t) ;
+extern int cbuffer_init (cbuffer *, char *, size_t) ;
 
 
  /* Writing */
 
-extern size_t cbuffer_put (cbuffer_t *, char const *, size_t) ;
-extern size_t cbuffer_putv (cbuffer_t *, struct iovec const *, unsigned int) ;
+extern size_t cbuffer_put (cbuffer *, char const *, size_t) ;
+extern size_t cbuffer_putv (cbuffer *, struct iovec const *, unsigned int) ;
 #define cbuffer_puts(b, s) cbuffer_put(b, (s), strlen(s))
 
 #define cbuffer_UNPUT(b, w) ((b)->n = ((b)->a + (b)->n - w) % (b)->a, w) ;
-extern size_t cbuffer_unput (cbuffer_t *, size_t) ;
-extern void cbuffer_wpeek (cbuffer_t const *, struct iovec *) ;
+extern size_t cbuffer_unput (cbuffer *, size_t) ;
+extern void cbuffer_wpeek (cbuffer const *, struct iovec *) ;
 #define cbuffer_WSEEK(b, w) ((b)->n = ((b)->n + (w)) % (b)->a, w)
-extern size_t cbuffer_wseek (cbuffer_t *, size_t) ;
+extern size_t cbuffer_wseek (cbuffer *, size_t) ;
 
 
  /* Reading */
 
-extern size_t cbuffer_get (cbuffer_t *, char *, size_t) ;
-extern size_t cbuffer_getv (cbuffer_t *, struct iovec const *, unsigned int) ;
+extern size_t cbuffer_get (cbuffer *, char *, size_t) ;
+extern size_t cbuffer_getv (cbuffer *, struct iovec const *, unsigned int) ;
 
 #define cbuffer_UNGET(b, n) ((b)->p = ((b)->a + (b)->p - n) % (b)->a, n) ;
-extern size_t cbuffer_unget (cbuffer_t *, size_t) ;
-extern void cbuffer_rpeek (cbuffer_t const *, struct iovec *) ;
+extern size_t cbuffer_unget (cbuffer *, size_t) ;
+extern void cbuffer_rpeek (cbuffer const *, struct iovec *) ;
 #define cbuffer_RSEEK(b, n) ((b)->p = ((b)->p + (n)) % (b)->a, n)
-extern size_t cbuffer_rseek (cbuffer_t *, size_t) ;
+extern size_t cbuffer_rseek (cbuffer *, size_t) ;
 
 
  /* Utility */

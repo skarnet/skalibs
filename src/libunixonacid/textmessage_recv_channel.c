@@ -26,7 +26,7 @@ static ssize_t get (void *p)
   return 1 ;
 }
   
-int textmessage_recv_channel (int sock, textmessage_receiver_t *asyncin, char *asyncbuf, size_t asyncbufsize, char const *after, size_t afterlen, tain_t const *deadline, tain_t *stamp)
+int textmessage_recv_channel (int sock, textmessage_receiver *asyncin, char *asyncbuf, size_t asyncbufsize, char const *after, size_t afterlen, tain const *deadline, tain *stamp)
 {
   struct iovec v ;
   int fd[2] = { sock, -1 } ;

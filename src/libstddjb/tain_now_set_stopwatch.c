@@ -15,14 +15,14 @@
 # define SKALIBS_STOPWATCH CLOCK_BOOTTIME
 #endif
 
-static tain_t offset ;
+static tain offset ;
 
-static int tain_now_stopwatch (tain_t *now)
+static int tain_now_stopwatch (tain *now)
 {
   return tain_stopwatch_read(now, SKALIBS_STOPWATCH, &offset) ;
 }
 
-int tain_now_set_stopwatch (tain_t *now)
+int tain_now_set_stopwatch (tain *now)
 {
   if (!tain_stopwatch_init(now, SKALIBS_STOPWATCH, &offset))
     return tain_now_set_wallclock(now) ;
@@ -32,7 +32,7 @@ int tain_now_set_stopwatch (tain_t *now)
 
 #else
 
-int tain_now_set_stopwatch (tain_t *now)
+int tain_now_set_stopwatch (tain *now)
 {
   return tain_now_set_wallclock(now) ;
 }

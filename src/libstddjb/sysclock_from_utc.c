@@ -9,7 +9,7 @@
 
 int sysclock_from_utc (uint64_t *u)
 {
-  tai_t t ;
+  tai t ;
   if (!tai_from_utc(&t, *u)) return 0 ;
   if (t.x < 10) return (errno = EINVAL, 0) ;
   *u = t.x - 10 ;

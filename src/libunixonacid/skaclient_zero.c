@@ -2,4 +2,4 @@
 
 #include <skalibs/skaclient.h>
 
-skaclient_t const skaclient_zero = SKACLIENT_ZERO ;
+skaclient const skaclient_zero = SKACLIENT_ZERO ;

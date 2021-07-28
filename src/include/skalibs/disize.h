@@ -1,7 +1,7 @@
 /* ISC license. */
 
-#ifndef DISIZE_H
-#define DISIZE_H
+#ifndef SKALIBS_DISIZE_H
+#define SKALIBS_DISIZE_H
 
 #include <sys/types.h>
 

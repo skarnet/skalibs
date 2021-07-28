@@ -9,7 +9,7 @@
 #include <skalibs/stralloc.h>
 #include <skalibs/textmessage.h>
 
-int textmessage_receive (textmessage_receiver_t *tr, struct iovec *v)
+int textmessage_receive (textmessage_receiver *tr, struct iovec *v)
 {
   if (tr->indata.len == tr->wanted)
   {

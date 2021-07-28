@@ -2,26 +2,35 @@
 
 /* MT-unsafe */
 
-#include <errno.h>
 #include <signal.h>
+
 #include <skalibs/sysdeps.h>
-#include "selfpipe-internal.h"
+#include <skalibs/sig.h>
 #include <skalibs/selfpipe.h>
+#include "selfpipe-internal.h"
 
 #ifdef SKALIBS_HASSIGNALFD
+
 #include <sys/signalfd.h>
-#else
-#include <skalibs/djbunix.h>
-#endif
 
 int selfpipe_init (void)
 {
-  if (selfpipe_fd >= 0) return (errno = EBUSY, -1) ;
   sigemptyset(&selfpipe_caught) ;
-#ifdef SKALIBS_HASSIGNALFD
-  selfpipe_fd = signalfd(-1, &selfpipe_caught, SFD_NONBLOCK | SFD_CLOEXEC) ;
-#else
-  if (pipenbcoe(selfpipe) < 0) return -1 ;
-#endif
+  selfpipe_fd = signalfd(selfpipe_fd, &selfpipe_caught, SFD_NONBLOCK | SFD_CLOEXEC) ;
+  sig_blocknone() ;
   return selfpipe_fd ;
 }
+
+#else
+
+#include <skalibs/djbunix.h>
+
+int selfpipe_init (void)
+{
+  if (selfpipe_fd >= 0) selfpipe_finish() ;
+  sigemptyset(&selfpipe_caught) ;
+  sig_blocknone() ;
+  return pipenbcoe(selfpipe) < 0 ? -1 : selfpipe_fd ;
+}
+
+#endif

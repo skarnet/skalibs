@@ -4,7 +4,7 @@
 #include <skalibs/djbunix.h>
 #include <skalibs/textclient.h>
 
-int textclient_server_init (textmessage_receiver_t *in, textmessage_sender_t *syncout, textmessage_sender_t *asyncout, char const *before, size_t beforelen, char const *after, size_t afterlen, tain_t const *deadline, tain_t *stamp)
+int textclient_server_init (textmessage_receiver *in, textmessage_sender *syncout, textmessage_sender *asyncout, char const *before, size_t beforelen, char const *after, size_t afterlen, tain const *deadline, tain *stamp)
 {
   return getenv(SKALIBS_CHILD_SPAWN_FDS_ENVVAR) ?
     textclient_server_init_frompipe(in, syncout, asyncout, before, beforelen, after, afterlen, deadline, stamp) :

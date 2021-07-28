@@ -1,9 +1,10 @@
 /* ISC license. */
 
-#ifndef GENSETDYN_H
-#define GENSETDYN_H
+#ifndef SKALIBS_GENSETDYN_H
+#define SKALIBS_GENSETDYN_H
 
 #include <stdint.h>
+
 #include <skalibs/stralloc.h>
 #include <skalibs/genalloc.h>
 #include <skalibs/functypes.h>
@@ -29,7 +30,7 @@ extern void gensetdyn_init (gensetdyn *, uint32_t, uint32_t, uint32_t, uint32_t)
 extern int gensetdyn_ready (gensetdyn *, uint32_t) ;
 #define gensetdyn_readyplus(x, n) gensetdyn_ready(x, gensetdyn_n(x) + (n))
 extern void gensetdyn_free (gensetdyn *) ;
-extern void gensetdyn_deepfree (gensetdyn *, freefunc_t_ref) ;
+extern void gensetdyn_deepfree (gensetdyn *, free_func_ref) ;
 
 extern int gensetdyn_new (gensetdyn *, uint32_t *) ;
 extern int gensetdyn_delete (gensetdyn *, uint32_t) ;
@@ -37,8 +38,8 @@ extern int gensetdyn_delete (gensetdyn *, uint32_t) ;
 #define gensetdyn_p(g, i) ((g)->storage.s + (i) * (g)->esize)
 #define GENSETDYN_P(type, g, i) ((type *)gensetdyn_p(g, i))
 
-extern uint32_t gensetdyn_iter_nocancel (gensetdyn *, uint32_t, iterfunc_t_ref, void *) ;
+extern uint32_t gensetdyn_iter_nocancel (gensetdyn *, uint32_t, iter_func_ref, void *) ;
 #define gensetdyn_iter(g, f, stuff) gensetdyn_iter_nocancel(g, gensetdyn_n(g), f, stuff)
-extern int gensetdyn_iter_withcancel (gensetdyn *, iterfunc_t_ref, iterfunc_t_ref, void *) ;
+extern int gensetdyn_iter_withcancel (gensetdyn *, iter_func_ref, iter_func_ref, void *) ;
 
 #endif

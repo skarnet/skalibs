@@ -30,7 +30,7 @@ static int iobufferk_init_3 (iobufferk *k)
   return (pipecoe(k->p) >= 0) ;
 }
 
-static iobufferk_output_func_t_ref iobufferk_init_f[4] =
+static iobufferk_output_func_ref iobufferk_init_f[4] =
 {
   &iobufferk_init_0, &iobufferk_nofd, &iobufferk_nofd, &iobufferk_init_3
 } ;

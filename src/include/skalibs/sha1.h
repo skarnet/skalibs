@@ -1,7 +1,7 @@
 /* ISC license. */
 
-#ifndef SHA1_H
-#define SHA1_H
+#ifndef SKALIBS_SHA1_H
+#define SKALIBS_SHA1_H
 
 #include <sys/types.h>
 #include <stdint.h>

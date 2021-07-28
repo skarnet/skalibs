@@ -5,7 +5,7 @@
 #include <skalibs/iopause.h>
 #include <skalibs/unix-timed.h>
 
-ssize_t timed_get (void *b, initfunc_t_ref getfd, getfunc_t_ref get, tain_t const *deadline, tain_t *stamp)
+ssize_t timed_get (void *b, init_func_ref getfd, get_func_ref get, tain const *deadline, tain *stamp)
 {
   iopause_fd x = { .fd = (*getfd)(b), .events = IOPAUSE_READ, .revents = 0 } ;
   ssize_t r = (*get)(b) ;

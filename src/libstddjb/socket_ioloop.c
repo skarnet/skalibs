@@ -5,7 +5,7 @@
 #include <skalibs/iopause.h>
 #include <skalibs/socket.h>
 
-ssize_t socket_ioloop (int s, char *buf, size_t len, char *ip, uint16_t *port, socket_io_func_t_ref f, int w, tain_t const *deadline, tain_t *stamp)
+ssize_t socket_ioloop (int s, char *buf, size_t len, char *ip, uint16_t *port, socket_io_func_ref f, int w, tain const *deadline, tain *stamp)
 {
   iopause_fd x = { .fd = s, .events = w ? IOPAUSE_WRITE : IOPAUSE_READ, .revents = 0 } ;
   for (;;)

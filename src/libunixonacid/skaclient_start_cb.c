@@ -8,7 +8,7 @@
 #include <skalibs/posixishard.h>
 #include "skaclient-internal.h"
 
-int skaclient_start_cb (unixmessage_t const *m, skaclient_cbdata_t *blah)
+int skaclient_start_cb (unixmessage const *m, skaclient_cbdata *blah)
 {
   if (m->len != blah->afterlen
    || memcmp(m->s, blah->after, m->len)

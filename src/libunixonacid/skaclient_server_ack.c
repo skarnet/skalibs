@@ -9,10 +9,10 @@
 #include <skalibs/socket.h>
 #include <skalibs/posixishard.h>
 
-int skaclient_server_ack (unixmessage_t const *clientmsg, unixmessage_sender_t *out, unixmessage_sender_t *asyncout, char const *before, size_t beforelen, char const *after, size_t afterlen)
+int skaclient_server_ack (unixmessage const *clientmsg, unixmessage_sender *out, unixmessage_sender *asyncout, char const *before, size_t beforelen, char const *after, size_t afterlen)
 {
   int fd[2] ;
-  unixmessage_t m = { .s = (char *)after, .len = afterlen, .fds = fd, .nfds = 1 } ;
+  unixmessage m = { .s = (char *)after, .len = afterlen, .fds = fd, .nfds = 1 } ;
   static unsigned char const bits = 0xff ;
   if (clientmsg->nfds
    || clientmsg->len != beforelen

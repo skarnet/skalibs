@@ -2,13 +2,14 @@
 
 #include <errno.h>
 #include <signal.h>
+
 #include <skalibs/djbunix.h>
 #include <skalibs/kolbak.h>
 #include <skalibs/skaclient.h>
 #include "skaclient-internal.h"
 
 int skaclient_startf_async (
-  skaclient_t *a,
+  skaclient *a,
   char *bufss,
   size_t bufsn,
   char *auxbufss,
@@ -17,7 +18,7 @@ int skaclient_startf_async (
   size_t bufan,
   char *auxbufas,
   size_t auxbufan,
-  kolbak_closure_t *q,
+  kolbak_closure *q,
   size_t qlen,
   char const *prog,
   char const *const *argv,
@@ -27,7 +28,7 @@ int skaclient_startf_async (
   size_t beforelen,
   char const *after,
   size_t afterlen,
-  skaclient_cbdata_t *blah)
+  skaclient_cbdata *blah)
 {
   int fd ;
   pid_t pid = child_spawn1_socket(prog, argv, envp, &fd) ;
@@ -48,7 +49,7 @@ int skaclient_startf_async (
   }
   a->pid = pid ;
   a->options = options ;
-  if (!kolbak_enqueue(&a->kq, (unixmessage_handler_func_t_ref)&skaclient_start_cb, blah))
+  if (!kolbak_enqueue(&a->kq, (unixmessage_handler_func_ref)&skaclient_start_cb, blah))
   {
     skaclient_end(a) ;
     return 0 ;

@@ -4,9 +4,9 @@
 #include <skalibs/tai.h>
 #include <skalibs/djbtime.h>
 
-int tain_from_ntp (tain_t *a, uint64_t u)
+int tain_from_ntp (tain *a, uint64_t u)
 {
-  tai_t secs = { .x = u >> 32 } ;
+  tai secs = { .x = u >> 32 } ;
   if (secs.x <= 0x7FFFFFFFUL) secs.x |= ((uint64_t)1 << 32) ;
   secs.x += TAI_MAGIC ;
   secs.x -= NTP_OFFSET ;

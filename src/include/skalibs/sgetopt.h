@@ -1,12 +1,12 @@
 /* ISC license. */
 
-#ifndef SGETOPT_H
-#define SGETOPT_H
+#ifndef SKALIBS_SGETOPT_H
+#define SKALIBS_SGETOPT_H
 
 
  /* reentrant */
 
-typedef struct subgetopt_s subgetopt_t, *subgetopt_t_ref ;
+typedef struct subgetopt_s subgetopt, *subgetopt_ref ;
 struct subgetopt_s
 {
   int ind ;
@@ -19,16 +19,16 @@ struct subgetopt_s
 
 #define SUBGETOPT_ZERO { .ind = 1, .err = 1, .problem = 0, .arg = 0, .pos = 0, .prog = 0 }
 
-extern int subgetopt_r (int, char const *const *, char const *, subgetopt_t *) ;
+extern int subgetopt_r (int, char const *const *, char const *, subgetopt *) ;
 
 
  /* non-reentrant */
 
-extern int sgetopt_r (int, char const *const *, char const *, subgetopt_t *) ;
+extern int sgetopt_r (int, char const *const *, char const *, subgetopt *) ;
 
-extern subgetopt_t subgetopt_here ;
+extern subgetopt subgetopt_here ;
 
-#define subgetopt(argc, argv, opts) subgetopt_r((argc), (argv), (opts), &subgetopt_here)
+#define lgetopt(argc, argv, opts) subgetopt_r((argc), (argv), (opts), &subgetopt_here)
 #define sgetopt(argc, argv, opts) sgetopt_r((argc), (argv), (opts), &subgetopt_here)
 #define sgetopt_prog() (subgetopt_here.prog = PROG)
 

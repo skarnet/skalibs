@@ -38,8 +38,8 @@ extern void munmap_void (void *, size_t) ;
 extern pid_t doublefork (void) ;
 extern int touch (char const *) ;
 
-extern int mkfiletemp (char *, createfunc_t_ref, mode_t, void *) ;
-extern int mklinktemp (char const *, char *, linkfunc_t_ref) ;
+extern int mkfiletemp (char *, create_func_ref, mode_t, void *) ;
+extern int mklinktemp (char const *, char *, link_func_ref) ;
 extern int mkptemp (char *) ;
 extern int mkptemp2 (char *, unsigned int) ;
 extern int mkltemp (char const *, char *) ;

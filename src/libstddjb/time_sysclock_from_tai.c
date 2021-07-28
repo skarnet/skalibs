@@ -7,7 +7,7 @@
 #include <skalibs/uint64.h>
 #include <skalibs/tai.h>
 
-int time_sysclock_from_tai (time_t *u, tai_t const *t)
+int time_sysclock_from_tai (time_t *u, tai const *t)
 {
   uint64_t uu ;
   if (!sysclock_from_tai(&uu, t)) return 0 ;

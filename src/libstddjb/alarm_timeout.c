@@ -18,7 +18,7 @@
 # define MYCLOCK CLOCK_REALTIME
 #endif
 
-int alarm_timeout (tain_t const *tto)
+int alarm_timeout (tain const *tto)
 {
   struct itimerspec it = { .it_interval = { .tv_sec = 0, .tv_nsec = 0 } } ;
   struct sigevent se = { .sigev_notify = SIGEV_SIGNAL, .sigev_signo = SIGALRM, .sigev_value = { .sival_int = 0 }, .sigev_notify_function = 0, .sigev_notify_attributes = 0 } ;
@@ -39,7 +39,7 @@ int alarm_timeout (tain_t const *tto)
 
 #include <sys/time.h>
 
-int alarm_timeout (tain_t const *tto)
+int alarm_timeout (tain const *tto)
 {
   struct itimerval it = { .it_interval = { .tv_sec = 0, .tv_usec = 0 } } ;
   if (!timeval_from_tain_relative(&it.it_value, tto)) return 0 ;
@@ -52,7 +52,7 @@ int alarm_timeout (tain_t const *tto)
 #include <unistd.h>
 #include <limits.h>
 
-int alarm_timeout (tain_t const *tto)
+int alarm_timeout (tain const *tto)
 {
   int t = tain_to_millisecs(tto) ;
   if (t < 0 || t > INT_MAX - 999) return 0 ;

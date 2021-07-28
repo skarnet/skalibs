@@ -5,7 +5,7 @@
 #include <skalibs/iopause.h>
 #include <skalibs/unix-timed.h>
 
-int timed_flush (void *b, initfunc_t_ref getfd, initfunc_t_ref isnonempty, initfunc_t_ref flush, tain_t const *deadline, tain_t *stamp)
+int timed_flush (void *b, init_func_ref getfd, init_func_ref isnonempty, init_func_ref flush, tain const *deadline, tain *stamp)
 {
   iopause_fd x = { .fd = (*getfd)(b), .events = IOPAUSE_WRITE, .revents = 0 } ;
   while ((*isnonempty)(b))

@@ -7,7 +7,7 @@
 #include <skalibs/uint64.h>
 #include <skalibs/tai.h>
 
-int time_from_tai (time_t *u, tai_t const *t)
+int time_from_tai (time_t *u, tai const *t)
 {
   uint64_t uu = t->x - TAI_MAGIC ;
 #if SKALIBS_SIZEOFTIME < 8

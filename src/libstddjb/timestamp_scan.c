@@ -2,7 +2,7 @@
 
 #include <skalibs/tai.h>
 
-size_t timestamp_scan (char const *s, tain_t *a)
+size_t timestamp_scan (char const *s, tain *a)
 {
   size_t r ;
   if (*s != '@') return 0 ;

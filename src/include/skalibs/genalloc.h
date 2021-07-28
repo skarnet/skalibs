@@ -1,10 +1,10 @@
 /* ISC license. */
 
-#ifndef GENALLOC_H
-#define GENALLOC_H
+#ifndef SKALIBS_GENALLOC_H
+#define SKALIBS_GENALLOC_H
 
-#include <skalibs/stralloc.h>
 #include <skalibs/functypes.h>
+#include <skalibs/stralloc.h>
 
 typedef stralloc genalloc, *genalloc_ref ;
 
@@ -29,7 +29,7 @@ typedef stralloc genalloc, *genalloc_ref ;
 #define genalloc_insertb(type, g, offset, s, n) stralloc_insertb((g), (offset)*sizeof(type), (char const *)(s), (n)*sizeof(type))
 #define genalloc_insert(type, g1, offset, g2) stralloc_insert((g1), (offset)*sizeof(type), (g2))
 
-#define genalloc_deepfree(type, g, f) genalloc_deepfree_size(g, (freefunc_t_ref)(f), sizeof(type))
-extern void genalloc_deepfree_size (genalloc *, freefunc_t_ref, size_t) ;
+#define genalloc_deepfree(type, g, f) genalloc_deepfree_size(g, (free_func_ref)(f), sizeof(type))
+extern void genalloc_deepfree_size (genalloc *, free_func_ref, size_t) ;
 
 #endif

@@ -4,7 +4,7 @@
 #include <errno.h>
 #include <skalibs/genset.h>
 
-int genset_iter_withcancel (genset *g, iterfunc_t_ref f, iterfunc_t_ref cancelf, void *stuff)
+int genset_iter_withcancel (genset *g, iter_func_ref f, iter_func_ref cancelf, void *stuff)
 {
   uint32_t n = genset_iter(g, f, stuff) ;
   if (n < g->max)

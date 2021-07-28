@@ -4,7 +4,7 @@
 #include <skalibs/siovec.h>
 #include <skalibs/cbuffer.h>
 
-size_t cbuffer_put (cbuffer_t *b, char const *s, size_t len)
+size_t cbuffer_put (cbuffer *b, char const *s, size_t len)
 {
   struct iovec v[2] ;
   size_t w ;

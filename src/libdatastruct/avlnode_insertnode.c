@@ -3,7 +3,7 @@
 #include <skalibs/avlnode.h>
 #include "avlnode-internal.h"
 
-uint32_t avlnode_insertnode (avlnode *s, uint32_t max, uint32_t r, uint32_t i, dtokfunc_t_ref dtok, cmpfunc_t_ref f, void *p)
+uint32_t avlnode_insertnode (avlnode *s, uint32_t max, uint32_t r, uint32_t i, dtok_func_ref dtok, cmp_func_ref f, void *p)
 {
   uint32_t stack[AVLNODE_MAXDEPTH] ;
   int spin[AVLNODE_MAXDEPTH] ;

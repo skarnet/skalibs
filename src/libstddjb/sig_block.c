@@ -1,6 +1,7 @@
 /* ISC license. */
 
 #include <signal.h>
+
 #include <skalibs/sig.h>
 
 void sig_block (int sig)

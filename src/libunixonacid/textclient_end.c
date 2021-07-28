@@ -1,11 +1,12 @@
 /* ISC license. */
 
 #include <errno.h>
+
 #include <skalibs/djbunix.h>
 #include <skalibs/textmessage.h>
 #include <skalibs/textclient.h>
 
-void textclient_end (textclient_t *a)
+void textclient_end (textclient *a)
 {
   fd_close(textmessage_sender_fd(&a->syncout)) ;
   if (textmessage_receiver_fd(&a->syncin) != textmessage_sender_fd(&a->syncout))

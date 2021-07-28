@@ -5,6 +5,5 @@
 
 void sha256_update (SHA256Schedule *ctx, char const *buf, size_t len)
 {
-  size_t i = 0 ;
-  for (; i < len ; i++) sha256_feed(ctx, (unsigned char)buf[i]) ;
+  for (size_t i = 0 ; i < len ; i++) sha256_feed(ctx, (unsigned char)buf[i]) ;
 }

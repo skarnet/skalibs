@@ -4,7 +4,12 @@ In 2.11.0.0
 -----------
 
  - libbiguint removed.
- - New posixplz function: munmap_void.
+ - Obsolete skalibs/environ.h and skalibs/getpeereid.h removed.
+ - rc4 and md5 removed.
+ - All *_t types renamed to avoid treading on POSIX namespace.
+ - subgetopt() renamed to lgetopt().
+ - signal functions reworked; skasigaction removed; sig_stack removed
+ - Various functions removed: skaoffsetof(), selfpipe_untrap()
  - cdb_make renamed to cdbmake; ui changed to 1=success/0=failure.
  - cdb redesigned. cdb is now fixed, cdb_reader holds the state for cdb_find,
     which puts data pointer and len directly into a cdb_data. A cdb
@@ -12,6 +17,7 @@ In 2.11.0.0
  - cdb_successor removed (unsafe to use); cdb_nextkey changed to
     cdb_traverse_next, which puts key and data into two cdb_data's.
  - cdb does not touch errno anymore.
+ - New posixplz function: munmap_void.
 
 
 In 2.10.0.3

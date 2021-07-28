@@ -1,12 +1,12 @@
 /* ISC license. */
 
-#ifndef POSIXPLZ_INTERNAL_H
-#define POSIXPLZ_INTERNAL_H
+#ifndef SKALIBS_POSIXPLZ_INTERNAL_H
+#define SKALIBS_POSIXPLZ_INTERNAL_H
 
-typedef struct linkarg_s linkarg_t, *linkarg_t_ref ;
+typedef struct linkarg_s linkarg, *linkarg_ref ;
 struct linkarg_s
 {
-  linkfunc_t_ref lf ;
+  link_func_ref lf ;
   char const *src ;
 } ;
 

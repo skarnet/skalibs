@@ -8,7 +8,7 @@
 #include <skalibs/siovec.h>
 #include <skalibs/textmessage.h>
 
-int textmessage_putv (textmessage_sender_t *ts, struct iovec const *v, unsigned int n)
+int textmessage_putv (textmessage_sender *ts, struct iovec const *v, unsigned int n)
 {
   size_t len = siovec_len(v, n) ;
   char pack[4] ;

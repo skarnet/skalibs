@@ -1,9 +1,10 @@
 /* ISC license. */
 
-#ifndef SKAMISC_H
-#define SKAMISC_H
+#ifndef SKALIBS_SKAMISC_H
+#define SKALIBS_SKAMISC_H
 
 #include <sys/types.h>
+
 #include <skalibs/buffer.h>
 #include <skalibs/stralloc.h>
 
@@ -28,7 +29,5 @@ extern ssize_t string_unquote_nodelim (char *, char const *, size_t) ;
 extern int string_unquote_withdelim (char *, size_t *, char const *, size_t, size_t *, char const *, size_t) ;
 
 extern int string_format (stralloc *, char const *, char const *, char const *const *) ;
-
-#define skaoffsetof(n, s, field) do { s sofoftmp ; *(n) = (unsigned char *)&sofoftmp->field - (unsigned char *)&sofoftmp ; } while (0)
 
 #endif

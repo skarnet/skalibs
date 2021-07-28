@@ -4,6 +4,6 @@
 
 int timestamp (char *s)
 {
-  tain_t now ;
+  tain now ;
   return timestamp_r(s, &now) ;
 }

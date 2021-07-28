@@ -4,7 +4,7 @@
 #include <skalibs/genalloc.h>
 #include <skalibs/unixmessage.h>
 
-void unixmessage_sender_init_withclosecb (unixmessage_sender_t *b, int fd, unixmessage_sender_closecb_func_t_ref f, void *p)
+void unixmessage_sender_init_withclosecb (unixmessage_sender *b, int fd, unixmessage_sender_closecb_func_ref f, void *p)
 {
   b->fd = fd ;
   b->data = stralloc_zero ;

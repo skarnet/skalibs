@@ -6,7 +6,7 @@
 #include <skalibs/unixmessage.h>
 #include <skalibs/posixishard.h>
 
-int skaclient_default_cb (unixmessage_t const *m, void *p)
+int skaclient_default_cb (unixmessage const *m, void *p)
 {
   unsigned char *err = p ;
   if (m->len != 1 || m->nfds) return (errno = EPROTO, 0) ;

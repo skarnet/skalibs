@@ -32,7 +32,7 @@ static ssize_t iobufferk_fill_3 (iobufferk *k)
   return r ;
 }
 
-iobufferk_input_func_t_ref const iobufferk_fill_f[4] =
+iobufferk_input_func_ref const iobufferk_fill_f[4] =
 {
   &iobufferk_tee, &iobufferk_splice, &iobufferk_splice, &iobufferk_fill_3
 } ;
@@ -48,7 +48,7 @@ static ssize_t iobufferk_inosys (iobufferk *k)
   return (errno = ENOSYS, -1) ;
 }
 
-iobufferk_input_func_t_ref const iobufferk_fill_f[4] =
+iobufferk_input_func_ref const iobufferk_fill_f[4] =
 {
   &iobufferk_inosys, &iobufferk_inosys, &iobufferk_inosys, &iobufferk_inosys
 } ;

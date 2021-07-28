@@ -1,10 +1,11 @@
 /* ISC license. */
 
-#ifndef FMTSCAN_H
-#define FMTSCAN_H
+#ifndef SKALIBS_FMTSCAN_H
+#define SKALIBS_FMTSCAN_H
 
 #include <sys/types.h>
 #include <stdint.h>
+
 #include <skalibs/gccattributes.h>
 
 

@@ -9,7 +9,7 @@ static int buffer_isnonempty (buffer *b)
   return !buffer_isempty(b) ;
 }
 
-int buffer_timed_flush (buffer *b, tain_t const *deadline, tain_t *stamp)
+int buffer_timed_flush (buffer *b, tain const *deadline, tain *stamp)
 {
-  return timed_flush(b, (initfunc_t_ref)&buffer_getfd, (initfunc_t_ref)&buffer_isnonempty, (initfunc_t_ref)&buffer_flush, deadline, stamp) ;
+  return timed_flush(b, (init_func_ref)&buffer_getfd, (init_func_ref)&buffer_isnonempty, (init_func_ref)&buffer_flush, deadline, stamp) ;
 }

@@ -5,7 +5,7 @@
 #include <skalibs/djbunix.h>
 #include <skalibs/unixmessage.h>
 
-int unixmessage_unput_and_maybe_drop (unixmessage_sender_t *b, int drop)
+int unixmessage_unput_and_maybe_drop (unixmessage_sender *b, int drop)
 {
   disize *start ;
   size_t n = genalloc_len(disize, &b->offsets) ;

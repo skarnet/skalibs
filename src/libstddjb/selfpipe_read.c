@@ -4,8 +4,8 @@
 
 #include <skalibs/sysdeps.h>
 #include <skalibs/allreadwrite.h>
-#include "selfpipe-internal.h"
 #include <skalibs/selfpipe.h>
+#include "selfpipe-internal.h"
 
 #ifdef SKALIBS_HASSIGNALFD
 

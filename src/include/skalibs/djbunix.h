@@ -1,7 +1,7 @@
 /* ISC license. */
 
-#ifndef DJBUNIX_H
-#define DJBUNIX_H
+#ifndef SKALIBS_DJBUNIX_H
+#define SKALIBS_DJBUNIX_H
 
 #include <sys/types.h>
 #include <sys/uio.h>

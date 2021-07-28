@@ -1,9 +1,10 @@
 /* ISC license. */
 
-#ifndef BITARRAY_H
-#define BITARRAY_H
+#ifndef SKALIBS_BITARRAY_H
+#define SKALIBS_BITARRAY_H
 
 #include <string.h>
+
 #include <skalibs/gccattributes.h>
 
 #define bitarray_div8(n) ((n) ? 1U + (((n) - 1) >> 3) : 0U)

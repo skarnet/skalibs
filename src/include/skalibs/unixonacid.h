@@ -1,7 +1,7 @@
 /* ISC license. */
 
-#ifndef UNIXONACID_H
-#define UNIXONACID_H
+#ifndef SKALIBS_UNIXONACID_H
+#define SKALIBS_UNIXONACID_H
 
 #include <skalibs/unix-transactional.h>
 #include <skalibs/unix-timed.h>

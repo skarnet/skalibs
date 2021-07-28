@@ -1,27 +1,34 @@
 /* ISC license. */
 
 /*
-   This header MUST be paired with skalibs/nonposix.h
-   which must be included before system headers.
+   This header MUST be paired with skalibs/nonposix.h AND
+   skalibs/bsdsnowflake.h, both of which must be included
+   before system headers.
 */
 
-#ifndef NSIG_H
+#ifndef SKALIBS_NSIG_H
+#define SKALIBS_NSIG_H
 
 #include <signal.h>
 
-#define SKALIBS_DEFAULT_NSIG 65
-
 #ifndef NSIG
-# define NSIG SKALIBS_DEFAULT_NSIG
+# ifdef _NSIG
+#  define NSIG _NSIG
+# elif defined(SIGMAX)
+#  define NSIG (SIGMAX + 1)
+# elif defined(_SIGMAX)
+#  define NSIG(_SIGMAX + 1)
+# elif defined(SKALIBS_BSD_SUCKS)
+#  define NSIG 64
+# else
+#  define NSIG 65
+# endif
 #endif
 
-
- /* OpenBSD is a fucking snowflake */
-
-#ifdef __OpenBSD__
-#define SKALIBS_NSIG (NSIG-1)
+#ifdef SKALIBS_BSD_SUCKS
+# define SKALIBS_NSIG (NSIG+1)
 #else
-#define SKALIBS_NSIG NSIG
+# define SKALIBS_NSIG NSIG
 #endif
 
 #endif

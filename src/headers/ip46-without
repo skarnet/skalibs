@@ -1,4 +1,4 @@
-typedef struct ip46_s ip46_t, *ip46_t_ref ;
+typedef struct ip46_s ip46, *ip46_ref ;
 struct ip46_s
 {
   char ip[4] ;

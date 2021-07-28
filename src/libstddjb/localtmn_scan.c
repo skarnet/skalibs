@@ -3,9 +3,9 @@
 #include <skalibs/uint32.h>
 #include <skalibs/djbtime.h>
 
-size_t localtmn_scan (char const *s, localtmn_t *l)
+size_t localtmn_scan (char const *s, localtmn *l)
 {
-  localtmn_t m ;
+  localtmn m ;
   size_t n = localtm_scan(s, &m.tm) ;
   if (!n) return 0 ;
   s += n ;

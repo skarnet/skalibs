@@ -9,7 +9,7 @@
 #include <skalibs/textclient.h>
 #include <skalibs/posixishard.h>
 
-int textclient_server_init_fromsocket (textmessage_receiver_t *in, textmessage_sender_t *syncout, textmessage_sender_t *asyncout, char const *before, size_t beforelen, char const *after, size_t afterlen, tain_t const *deadline, tain_t *stamp)
+int textclient_server_init_fromsocket (textmessage_receiver *in, textmessage_sender *syncout, textmessage_sender *asyncout, char const *before, size_t beforelen, char const *after, size_t afterlen, tain const *deadline, tain *stamp)
 {
   struct iovec v ;
   if (sanitize_read(textmessage_timed_receive(in, &v, deadline, stamp)) <= 0) return 0 ;

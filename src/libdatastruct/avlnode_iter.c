@@ -8,7 +8,7 @@ struct avlnode_iter_s
   avlnode const *s ;
   uint32_t max ;
   uint32_t cut ;
-  avliterfunc_t_ref f ;
+  avliter_func_ref f ;
   void *p ;
 } ;
 
@@ -24,7 +24,7 @@ static uint32_t avlnode_iter_rec (struct avlnode_iter_s const *blah, uint32_t r,
   return avlnode_iter_rec(blah, blah->s[r].child[1], h+1) ;
 }
 
-uint32_t avlnode_iter_nocancel (avlnode *s, uint32_t max, uint32_t cut, uint32_t r, avliterfunc_t_ref f, void *p)
+uint32_t avlnode_iter_nocancel (avlnode *s, uint32_t max, uint32_t cut, uint32_t r, avliter_func_ref f, void *p)
 {
   struct avlnode_iter_s blah = { .s = s, .max = max, .cut = cut, .f = f, .p = p } ;
   return avlnode_iter_rec(&blah, r, 0) ;

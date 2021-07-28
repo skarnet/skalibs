@@ -7,7 +7,7 @@
 #include <skalibs/djbunix.h>
 #include <skalibs/unixmessage.h>
 
-void unixmessage_sender_free (unixmessage_sender_t *b)
+void unixmessage_sender_free (unixmessage_sender *b)
 {
   size_t n = genalloc_len(int, &b->fds) ;
   if (n)

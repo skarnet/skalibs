@@ -6,7 +6,7 @@
 #include <skalibs/djbunix.h>
 #include <skalibs/unixmessage.h>
 
-void unixmessage_receiver_free (unixmessage_receiver_t *b)
+void unixmessage_receiver_free (unixmessage_receiver *b)
 {
   size_t maindatalen = b->maindata.len ;
   int h ;

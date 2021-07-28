@@ -1,25 +1,25 @@
 /* ISC license. */
 
-#include <skalibs/bytestr.h>
+#include <string.h>
+
 #include <skalibs/uint64.h>
 #include <skalibs/sha512.h>
 #include "sha512-internal.h"
 
 void sha512_final (SHA512Schedule *ctx, char *digest)
 {
-  unsigned int i = 0 ;
-  unsigned int pad = ctx->len % 128;
+  unsigned int pad = ctx->len & 0x7fU ;
 
   ctx->buf[pad++] = 0x80 ;
   if (pad > 112)
   {
-    byte_zero(ctx->buf + pad, 128 - pad) ;
+    memset(ctx->buf + pad, 0, 128 - pad) ;
     sha512_transform(ctx, ctx->buf) ;
     pad = 0 ;
   }
-  byte_zero(ctx->buf + pad, 120 - pad) ;
+  memset(ctx->buf + pad, 0, 120 - pad) ;
   uint64_pack_big((char *)ctx->buf + 120, ctx->len << 3) ;
   sha512_transform(ctx, ctx->buf) ;
 
-  for (; i < 8 ; i++) uint64_pack_big(digest + (i << 3), ctx->h[i]) ;
+  for (unsigned int i = 0 ; i < 8 ; i++) uint64_pack_big(digest + (i << 3), ctx->h[i]) ;
 }

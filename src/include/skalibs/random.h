@@ -1,10 +1,11 @@
 /* ISC license. */
 
-#ifndef RANDOM_H
-#define RANDOM_H
+#ifndef SKALIBS_RANDOM_H
+#define SKALIBS_RANDOM_H
 
 #include <sys/types.h>
 #include <stdint.h>
+
 #include <skalibs/stralloc.h>
 
 extern void random_makeseed (char *) ; /* fills 160 bytes */

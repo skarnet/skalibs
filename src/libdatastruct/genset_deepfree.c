@@ -5,12 +5,12 @@
 
 static int freeiter (char *s, void *aux)
 {
-  freefunc_t_ref f = aux ;
+  free_func_ref f = aux ;
   (*f)((void *)s) ;
   return 1 ;
 }
 
-void genset_deepfree (genset *g, freefunc_t_ref f)
+void genset_deepfree (genset *g, free_func_ref f)
 {
   genset_iter(g, &freeiter, f) ;
 }

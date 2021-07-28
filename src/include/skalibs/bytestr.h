@@ -1,15 +1,16 @@
 /* ISC license. */
 
-#ifndef BYTESTR_H
-#define BYTESTR_H
+#ifndef SKALIBS_BYTESTR_H
+#define SKALIBS_BYTESTR_H
 
-#include <skalibs/gccattributes.h>
 
 /* for Alphas and other archs where char != 8bit */
 #define T8(x)   ((x) & 0xffU)
 
 #include <string.h>
 #include <strings.h>
+
+#include <skalibs/gccattributes.h>
 
 #define byte_copy(to, n, from) memmove(to, (from), n)
 #define byte_copyr(to, n, from) memmove(to, (from), n)

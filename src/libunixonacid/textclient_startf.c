@@ -10,7 +10,7 @@
 #include <skalibs/textclient.h>
 #include <skalibs/posixishard.h>
 
-int textclient_startf (textclient_t *a, char const *const *argv, char const *const *envp, uint32_t options, char const *before, size_t beforelen, char const *after, size_t afterlen, tain_t const *deadline, tain_t *stamp)
+int textclient_startf (textclient *a, char const *const *argv, char const *const *envp, uint32_t options, char const *before, size_t beforelen, char const *after, size_t afterlen, tain const *deadline, tain *stamp)
 {
   struct iovec v ;
   int fd[3] = { 0, 1 } ;

@@ -5,7 +5,7 @@
 #include <skalibs/iopause.h>
 #include <skalibs/socket.h>
 
-int socket_waitconn (int s, tain_t const *deadline, tain_t *stamp)
+int socket_waitconn (int s, tain const *deadline, tain *stamp)
 {
   iopause_fd x = { s, IOPAUSE_WRITE, 0 } ;
   for (;;)

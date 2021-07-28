@@ -3,7 +3,7 @@
 #include <sys/uio.h>
 #include <skalibs/textmessage.h>
 
-int textmessage_handle (textmessage_receiver_t *tr, textmessage_handler_func_t_ref f, void *p)
+int textmessage_handle (textmessage_receiver *tr, textmessage_handler_func_ref f, void *p)
 {
   unsigned int count = 0 ;
   while (count < TEXTMESSAGE_MAXREADS || textmessage_receiver_hasmsginbuf(tr))

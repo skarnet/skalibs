@@ -1,12 +1,13 @@
 /* ISC license. */
 
 #include <errno.h>
+
 #include <skalibs/kolbak.h>
 #include <skalibs/skaclient.h>
 #include "skaclient-internal.h"
 
 int skaclient_start (
-  skaclient_t *a,
+  skaclient *a,
   char *bufss,
   size_t bufsn,
   char *auxbufss,
@@ -15,7 +16,7 @@ int skaclient_start (
   size_t bufan,
   char *auxbufas,
   size_t auxbufan,
-  kolbak_closure_t *q,
+  kolbak_closure *q,
   size_t qlen,
   char const *path,
   uint32_t options,
@@ -23,11 +24,11 @@ int skaclient_start (
   size_t beforelen,
   char const *after,
   size_t afterlen,
-  tain_t const *deadline,
-  tain_t *stamp)
+  tain const *deadline,
+  tain *stamp)
 {
-  skaclient_cbdata_t blah ;
-  unixmessage_t m ;
+  skaclient_cbdata blah ;
+  unixmessage m ;
   int r ;
   if (!skaclient_start_async(a, bufss, bufsn, auxbufss, auxbufsn, bufas, bufan, auxbufas, auxbufan, q, qlen, path, options, before, beforelen, after, afterlen, &blah)) return 0 ;
   if (!skaclient_timed_flush(a, deadline, stamp))

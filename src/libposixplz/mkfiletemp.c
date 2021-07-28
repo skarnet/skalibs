@@ -6,7 +6,7 @@
 #include <skalibs/surf.h>
 #include <skalibs/posixplz.h>
 
-int mkfiletemp (char *s, createfunc_t_ref f, mode_t mode, void *data)
+int mkfiletemp (char *s, create_func_ref f, mode_t mode, void *data)
 {
   size_t len = strlen(s) ;
   size_t xlen = 0 ;

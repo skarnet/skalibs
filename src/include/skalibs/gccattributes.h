@@ -1,7 +1,7 @@
 /* ISC license. */
 
-#ifndef GCCATTRIBUTES_H
-#define GCCATTRIBUTES_H
+#ifndef SKALIBS_GCCATTRIBUTES_H
+#define SKALIBS_GCCATTRIBUTES_H
 
 #ifdef __GNUC__
 
@@ -44,21 +44,6 @@
 #define gccattr_pure
 #define gccattr_deprecated
 
-#endif
-
-#ifdef GCCATTR_COMPAT_0_22
-#define _a_noreturn gccattr_noreturn
-#define _a_returns_twice gccattr_returns_twice
-#define _a_noinline gccattr_noinline
-#define _a_inline gccattr_inline
-#define _a_const gccattr_const
-#define _a_unused gccattr_unused
-#define _a_used gccattr_used
-#define _a_weak gccattr_weak
-#define _a_aligned gccattr_aligned
-#define _a_malloc gccattr_malloc
-#define _a_pure gccattr_pure
-#define _a_deprecated gccattr_deprecated
 #endif
 
 #endif

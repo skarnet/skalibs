@@ -2,7 +2,7 @@
 
 #include <skalibs/tai.h>
 
-double tain_approx (tain_t const *t)
+double tain_approx (tain const *t)
 {
   return tai_approx(&t->sec) + tain_frac(t) ;
 }

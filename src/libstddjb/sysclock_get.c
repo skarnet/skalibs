@@ -7,9 +7,9 @@
 
 #include <time.h>
 
-int sysclock_get (tain_t *a)
+int sysclock_get (tain *a)
 {
-  tain_t aa ;
+  tain aa ;
   struct timespec now ;
   if (clock_gettime(CLOCK_REALTIME, &now) < 0) return 0 ;
   if (!tain_from_timespec(&aa, &now)) return 0 ;
@@ -21,9 +21,9 @@ int sysclock_get (tain_t *a)
 
 #include <sys/time.h>
 
-int sysclock_get (tain_t *a)
+int sysclock_get (tain *a)
 {
-  tain_t aa ;
+  tain aa ;
   struct timeval now ;
   if (gettimeofday(&now, 0) < 0) return 0 ;
   if (!tain_from_timeval(&aa, &now)) return 0 ;

@@ -1,9 +1,10 @@
 /* ISC license. */
 
-#ifndef SHA512_H
-#define SHA512_H
+#ifndef SKALIBS_SHA512_H
+#define SKALIBS_SHA512_H
 
 #include <sys/types.h>
+
 #include <skalibs/uint64.h>
 
 typedef struct SHA512Schedule_s SHA512Schedule, *SHA512Schedule_ref ;

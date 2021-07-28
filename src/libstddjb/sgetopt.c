@@ -7,7 +7,7 @@
 #include <skalibs/buffer.h>
 #include <skalibs/sgetopt.h>
 
-int sgetopt_r (int argc, char const *const *argv, char const *opts, subgetopt_t *o)
+int sgetopt_r (int argc, char const *const *argv, char const *opts, subgetopt *o)
 {
   int c = subgetopt_r(argc, argv, opts, o) ;
   if (o->err && ((c == '?') || (c == ':')))

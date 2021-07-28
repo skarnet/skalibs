@@ -1,7 +1,7 @@
 /* ISC license. */
 
-#ifndef STRERR_H
-#define STRERR_H
+#ifndef SKALIBS_STRERR_H
+#define SKALIBS_STRERR_H
 
 #include <skalibs/gccattributes.h>
 

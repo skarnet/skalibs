@@ -4,7 +4,7 @@
 #include <skalibs/tai.h>
 #include <skalibs/iopause.h>
 
-int iopause_stamp (iopause_fd *x, unsigned int n, tain_t const *deadline, tain_t *stamp)
+int iopause_stamp (iopause_fd *x, unsigned int n, tain const *deadline, tain *stamp)
 {
   int r ;
   do

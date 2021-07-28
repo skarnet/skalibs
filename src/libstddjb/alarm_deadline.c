@@ -18,7 +18,7 @@
 # define MYCLOCK CLOCK_REALTIME
 #endif
 
-int alarm_deadline (tain_t const *deadline)
+int alarm_deadline (tain const *deadline)
 {
   struct itimerspec it = { .it_interval = { .tv_sec = 0, .tv_nsec = 0 } } ;
   struct sigevent se = { .sigev_notify = SIGEV_SIGNAL, .sigev_signo = SIGALRM, .sigev_value = { .sival_int = 0 }, .sigev_notify_function = 0, .sigev_notify_attributes = 0 } ;
@@ -36,9 +36,9 @@ int alarm_deadline (tain_t const *deadline)
 
 #else
 
-int alarm_deadline (tain_t const *deadline)
+int alarm_deadline (tain const *deadline)
 {
-  tain_t tto ;
+  tain tto ;
   tain_now(&tto) ;
   tain_sub(&tto, deadline, &tto) ;
   return alarm_timeout(&tto) ;

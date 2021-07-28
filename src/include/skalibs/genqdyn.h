@@ -4,6 +4,7 @@
 #define SKALIBS_GENQDYN_H
 
 #include <sys/types.h>
+
 #include <skalibs/stralloc.h>
 
 typedef struct genqdyn_s genqdyn, *genqdyn_ref ;

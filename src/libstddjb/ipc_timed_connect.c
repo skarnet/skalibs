@@ -6,7 +6,7 @@
 #include <skalibs/iopause.h>
 #include <skalibs/socket.h>
 
-int ipc_timed_connect (int s, char const *path, tain_t const *deadline, tain_t *stamp)
+int ipc_timed_connect (int s, char const *path, tain const *deadline, tain *stamp)
 {
   if (!ipc_connect(s, path))
   {

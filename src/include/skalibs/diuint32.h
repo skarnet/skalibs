@@ -1,7 +1,7 @@
 /* ISC license. */
 
-#ifndef DIUINT32_H
-#define DIUINT32_H
+#ifndef SKALIBS_DIUINT32_H
+#define SKALIBS_DIUINT32_H
 
 #include <stdint.h>
 

@@ -2,9 +2,9 @@
 
 #include <skalibs/tai.h>
 
-int tain_wallclock_read (tain_t *a)
+int tain_wallclock_read (tain *a)
 {
-  tain_t aa ;
+  tain aa ;
   if (!sysclock_get(&aa)) return 0 ;
   return tain_from_sysclock(a, &aa) ;
 }

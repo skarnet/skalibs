@@ -5,7 +5,7 @@
 #include <skalibs/skaclient.h>
 #include <skalibs/unixmessage.h>
 
-void skaclient_end (skaclient_t *a)
+void skaclient_end (skaclient *a)
 {
   fd_close(a->syncout.fd) ;
   fd_close(a->asyncout.fd) ;

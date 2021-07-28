@@ -2,9 +2,9 @@
 
 #include <skalibs/djbtime.h>
 
-int tain_from_localtmn (tain_t *a, localtmn_t const *l)
+int tain_from_localtmn (tain *a, localtmn const *l)
 {
-  tai_t t ;
+  tai t ;
   if (!tai_from_localtm(&t, &l->tm)) return 0 ;
   a->sec = t ;
   a->nano = l->nano ;

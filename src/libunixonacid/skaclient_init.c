@@ -5,7 +5,7 @@
 #include "skaclient-internal.h"
 
 int skaclient_init (
-  skaclient_t *a,
+  skaclient *a,
   int fd,
   char *bufss,
   size_t bufsn,
@@ -15,12 +15,12 @@ int skaclient_init (
   size_t bufan,
   char *auxbufas,
   size_t auxbufan,
-  kolbak_closure_t *q,
+  kolbak_closure *q,
   size_t qlen,
   char const *before,
   size_t beforelen)
 {
-  unixmessage_t msg = { .s = (char *)before, .len = beforelen, .fds = 0, .nfds = 0 } ;
+  unixmessage msg = { .s = (char *)before, .len = beforelen, .fds = 0, .nfds = 0 } ;
   if (!unixmessage_receiver_init(&a->syncin, fd, bufss, bufsn, auxbufss, auxbufsn)
    || !unixmessage_receiver_init(&a->asyncin, -1, bufas, bufan, auxbufas, auxbufan)
    || !kolbak_queue_init(&a->kq, q, qlen)) return 0 ;

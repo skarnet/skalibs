@@ -21,7 +21,7 @@ extern int selfpipe_fd ;
 extern int selfpipe[2] ;
 #define selfpipe_fd selfpipe[0]
 
-extern struct skasigaction const selfpipe_ssa ;
+extern sig_func_ref selfpipe_tophalf ;
 
 #endif
 

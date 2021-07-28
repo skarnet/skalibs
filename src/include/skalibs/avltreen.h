@@ -1,9 +1,10 @@
 /* ISC license. */
 
-#ifndef AVLTREEN_H
-#define AVLTREEN_H
+#ifndef SKALIBS_AVLTREEN_H
+#define SKALIBS_AVLTREEN_H
 
 #include <stdint.h>
+
 #include <skalibs/functypes.h>
 #include <skalibs/genset.h>
 #include <skalibs/avlnode.h>
@@ -21,8 +22,8 @@ struct avltreen_s
 {
   genset x ;
   uint32_t root ;
-  dtokfunc_t_ref dtok ;
-  cmpfunc_t_ref kcmp ;
+  dtok_func_ref dtok ;
+  cmp_func_ref kcmp ;
   void *external ;
 } ;
 
@@ -33,7 +34,7 @@ struct avltreen_s
 #define avltreen_data(t, i) (avltreen_nodes(t)[i].data)
 #define avltreen_root(t) ((t)->root)
 #define avltreen_setroot(t, r) ((t)->root = (r))
-extern void avltreen_init (avltreen *, avlnode *, uint32_t *, uint32_t, dtokfunc_t_ref, cmpfunc_t_ref, void *) ;
+extern void avltreen_init (avltreen *, avlnode *, uint32_t *, uint32_t, dtok_func_ref, cmp_func_ref, void *) ;
 
 #define AVLTREEN_DECLARE_AND_INIT(name, size, dtk, cmp, p) \
 avlnode name##_storage[size] ; \

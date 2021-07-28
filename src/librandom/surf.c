@@ -2,6 +2,7 @@
 
 #include <string.h>
 #include <stdint.h>
+
 #include <skalibs/uint32.h>
 #include <skalibs/surf.h>
 
@@ -14,7 +15,7 @@ static void surfit (SURFSchedule *ctx)
   uint32_t z[8] ;
   uint32_t x ;
   uint32_t sum = 0 ;
-  unsigned int i = 0, loop = 0 ; ;
+  uint32_t i = 0, loop = 0 ; ;
 
   if (!++ctx->in[0] && !++ctx->in[1] && !++ctx->in[2]) ++ctx->in[3] ;
   for (; i < 12 ; i++) t[i] = ctx->in[i] ^ ctx->seed[12+i] ;

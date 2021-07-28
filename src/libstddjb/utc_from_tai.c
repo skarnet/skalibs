@@ -4,7 +4,7 @@
 #include <skalibs/djbtime.h>
 #include "djbtime-internal.h"
 
-int utc_from_tai (uint64_t *u, tai_t const *t)
+int utc_from_tai (uint64_t *u, tai const *t)
 {
   int r = 1 ;
   uint64_t tt = t->x - 10 ;

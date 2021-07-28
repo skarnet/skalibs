@@ -3,7 +3,7 @@
 #include <errno.h>
 #include <skalibs/avlnode.h>
 
-int avlnode_iter_withcancel (avlnode *tree, uint32_t max, uint32_t root, avliterfunc_t_ref f, avliterfunc_t_ref cancelf, void *stuff)
+int avlnode_iter_withcancel (avlnode *tree, uint32_t max, uint32_t root, avliter_func_ref f, avliter_func_ref cancelf, void *stuff)
 {
   uint32_t cut = avlnode_iter_nocancel(tree, max, max, root, f, stuff) ;
   if (cut != max)

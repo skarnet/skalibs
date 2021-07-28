@@ -20,12 +20,18 @@
 
 <ul>
  <li> <tt>libbiguint</tt> removed. </li>
- <li> New <tt>skalibs/posixplz.h</tt> function: munmap_void()</tt>. </li>
+ <li> Obsolete <tt>skalibs/environ.h</tt> and <tt>skalibs/getpeereid.h</tt> headers removed. </li>
+ <li> rc4 and md5 functions removed. </li>
+ <li> All <tt>*_t</tt> types renamed without the <tt>_t</tt> suffix,
+in order to preserve POSIX namespace. </li>
+ <li> <tt>subgetopt()</tt> renamed to <tt>lgetopt()</tt>. </li>
+ <li> All signal functions entirely reworked; cruft removed. </li>
  <li> <tt>skalibs/cdb_make.h</tt> renamed to <tt>skalibs/cdbmake.h</tt>;
  <tt>cdbmake</tt> functions now return 1 on success and 0 on failure. </li>
  <li> <tt>skalibs/cdb.h</tt> redesigned to remove reader state from the
- cdb structure itself. </li>
+cdb structure itself. </li>
  <li> The unsafe <tt>cdb_successor()</tt> API has been removed.
+ <li> New <tt>skalibs/posixplz.h</tt> function: munmap_void()</tt>. </li>
 </ul>
 
 <h2> in 2.10.0.3 </h2>

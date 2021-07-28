@@ -1,9 +1,10 @@
 /* ISC license. */
 
 #include <errno.h>
+
 #include <skalibs/skaclient.h>
 
-int skaclient_syncify (skaclient_t *a, tain_t const *deadline, tain_t *stamp)
+int skaclient_syncify (skaclient *a, tain const *deadline, tain *stamp)
 {
   int r ;
   if (!skaclient_timed_flush(a, deadline, stamp)) return 0 ;

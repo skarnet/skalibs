@@ -6,7 +6,7 @@
 #include <skalibs/iopause.h>
 #include <skalibs/unix-timed.h>
 
-int netstring_timed_get (buffer *b, stralloc *sa, tain_t const *deadline, tain_t *stamp)
+int netstring_timed_get (buffer *b, stralloc *sa, tain const *deadline, tain *stamp)
 {
   iopause_fd x = { .fd = buffer_fd(b), .events = IOPAUSE_READ } ;
   size_t w = 0 ;

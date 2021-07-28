@@ -10,7 +10,7 @@
 #include <skalibs/textclient.h>
 #include <skalibs/posixishard.h>
 
-int textclient_start (textclient_t *a, char const *path, uint32_t options, char const *before, size_t beforelen, char const *after, size_t afterlen, tain_t const *deadline, tain_t *stamp)
+int textclient_start (textclient *a, char const *path, uint32_t options, char const *before, size_t beforelen, char const *after, size_t afterlen, tain const *deadline, tain *stamp)
 {
   struct iovec v ;
   int fd = ipc_stream_nbcoe() ;

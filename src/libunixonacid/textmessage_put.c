@@ -7,7 +7,7 @@
 #include <skalibs/bufalloc.h>
 #include <skalibs/textmessage.h>
 
-int textmessage_put (textmessage_sender_t *ts, char const *s, size_t len)
+int textmessage_put (textmessage_sender *ts, char const *s, size_t len)
 {
   char pack[4] ;
   struct iovec v[2] =

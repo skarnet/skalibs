@@ -3,7 +3,7 @@
 #include <skalibs/avlnode.h>
 #include "avlnode-internal.h"
 
-uint32_t avlnode_searchnode (avlnode const *s, uint32_t max, uint32_t r, void const *k, dtokfunc_t_ref dtok, cmpfunc_t_ref f, void *p)
+uint32_t avlnode_searchnode (avlnode const *s, uint32_t max, uint32_t r, void const *k, dtok_func_ref dtok, cmp_func_ref f, void *p)
 {
   while (r < max)
   {

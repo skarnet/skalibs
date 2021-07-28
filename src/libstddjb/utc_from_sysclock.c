@@ -10,7 +10,7 @@
 
 int utc_from_sysclock (uint64_t *u)
 {
-  tai_t t = { .x = *u + 10U } ;
+  tai t = { .x = *u + 10U } ;
   return utc_from_tai(u, &t) ;
 }
 

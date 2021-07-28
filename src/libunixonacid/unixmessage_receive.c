@@ -36,7 +36,7 @@ static int const awesomeflags =
 #endif
   ;
 
-static int unixmessage_receiver_fill (unixmessage_receiver_t *b)
+static int unixmessage_receiver_fill (unixmessage_receiver *b)
 {
   union aligner_u ancilbuf[1 + CMSG_SPACE(b->auxb.a - 1) / sizeof(union aligner_u)] ;
   struct iovec iov[2] ;
@@ -98,7 +98,7 @@ static int unixmessage_receiver_fill (unixmessage_receiver_t *b)
   return 1 ;
 }
 
-int unixmessage_receive (unixmessage_receiver_t *b, unixmessage_t *m)
+int unixmessage_receive (unixmessage_receiver *b, unixmessage *m)
 {
   if (b->maindata.len == b->mainlen && b->auxdata.len == b->auxlen)
   {

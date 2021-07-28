@@ -1,9 +1,10 @@
 /* ISC license. */
 
-#ifndef AVLTREE_H
-#define AVLTREE_H
+#ifndef SKALIBS_AVLTREE_H
+#define SKALIBS_AVLTREE_H
 
 #include <stdint.h>
+
 #include <skalibs/functypes.h>
 #include <skalibs/gensetdyn.h>
 #include <skalibs/avlnode.h>
@@ -13,8 +14,8 @@ struct avltree_s
 {
   gensetdyn x ;
   uint32_t root ;
-  dtokfunc_t_ref dtok ;
-  cmpfunc_t_ref kcmp ;
+  dtok_func_ref dtok ;
+  cmp_func_ref kcmp ;
   void *external ;
 } ;
 
@@ -28,7 +29,7 @@ extern avltree const avltree_zero ;
 #define avltree_setroot(t, r) ((t)->root = (r))
 
 extern void avltree_free (avltree *) ;
-extern void avltree_init (avltree *, uint32_t, uint32_t, uint32_t, dtokfunc_t_ref, cmpfunc_t_ref, void *) ;
+extern void avltree_init (avltree *, uint32_t, uint32_t, uint32_t, dtok_func_ref, cmp_func_ref, void *) ;
 #define AVLTREE_INIT(b, num, den, dtk, f, p) { .x = GENSETDYN_INIT(avlnode, (b), num, den), .root = UINT32_MAX, .dtok = (dtk), .kcmp = (f), .external = (p) }
 
 #define avltree_searchnode(t, k) avlnode_searchnode(avltree_nodes(t), avltree_totalsize(t), avltree_root(t), k, (t)->dtok, (t)->kcmp, (t)->external)

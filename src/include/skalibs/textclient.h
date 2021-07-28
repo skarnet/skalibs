@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <stdint.h>
+
 #include <skalibs/allreadwrite.h>
 #include <skalibs/tai.h>
 #include <skalibs/textmessage.h>
@@ -25,9 +26,9 @@
 
  /* Server-side functions */
 
-extern int textclient_server_init (textmessage_receiver_t *, textmessage_sender_t *, textmessage_sender_t *, char const *, size_t, char const *, size_t, tain_t const *, tain_t *) ;
-extern int textclient_server_init_frompipe (textmessage_receiver_t *, textmessage_sender_t *, textmessage_sender_t *, char const *, size_t, char const *, size_t, tain_t const *, tain_t *) ;
-extern int textclient_server_init_fromsocket (textmessage_receiver_t *, textmessage_sender_t *, textmessage_sender_t *, char const *, size_t, char const *, size_t, tain_t const *, tain_t *) ;
+extern int textclient_server_init (textmessage_receiver *, textmessage_sender *, textmessage_sender *, char const *, size_t, char const *, size_t, tain const *, tain *) ;
+extern int textclient_server_init_frompipe (textmessage_receiver *, textmessage_sender *, textmessage_sender *, char const *, size_t, char const *, size_t, tain const *, tain *) ;
+extern int textclient_server_init_fromsocket (textmessage_receiver *, textmessage_sender *, textmessage_sender *, char const *, size_t, char const *, size_t, tain const *, tain *) ;
 #define textclient_server_init_g(in, syncout, asyncout, before, beforelen, after, afterlen, deadline) textclient_server_init(in, syncout, asyncout, before, beforelen, after, afterlen, (deadline), &STAMP)
 #define textclient_server_init_frompipe_g(in, syncout, asyncout, before, beforelen, after, afterlen, deadline) textclient_server_init_frompipe(in, syncout, asyncout, before, beforelen, after, afterlen, (deadline), &STAMP)
 #define textclient_server_init_fromsocket_g(in, syncout, asyncout, before, beforelen, after, afterlen, deadline) textclient_server_init_fromsocket(in, syncout, asyncout, before, beforelen, after, afterlen, (deadline), &STAMP)
@@ -41,27 +42,27 @@ extern int textclient_server_init_fromsocket (textmessage_receiver_t *, textmess
 
  /* User structure */
 
-typedef struct textclient_s textclient_t, *textclient_t_ref ;
+typedef struct textclient_s textclient, *textclient_ref ;
 struct textclient_s
 {
-  textmessage_sender_t syncout ;
-  textmessage_receiver_t syncin ;
-  textmessage_receiver_t asyncin ;
+  textmessage_sender syncout ;
+  textmessage_receiver syncin ;
+  textmessage_receiver asyncin ;
   pid_t pid ;
   uint32_t options ;
   char syncbuf[TEXTCLIENT_BUFSIZE] ;
   char asyncbuf[TEXTCLIENT_BUFSIZE] ;
 } ;
 #define TEXTCLIENT_ZERO { .syncout = TEXTMESSAGE_SENDER_ZERO, .syncin = TEXTMESSAGE_RECEIVER_ZERO, .asyncin = TEXTMESSAGE_RECEIVER_ZERO, .pid = 0, .options = 0 }
-extern textclient_t const textclient_zero ;
+extern textclient const textclient_zero ;
 
 
  /* Starting and ending */
 
-extern void textclient_end (textclient_t *) ;
+extern void textclient_end (textclient *) ;
 
-extern int textclient_start (textclient_t *, char const *, uint32_t, char const *, size_t, char const *, size_t, tain_t const *, tain_t *) ;
-extern int textclient_startf (textclient_t *, char const *const *, char const *const *, uint32_t, char const *, size_t, char const *, size_t, tain_t const *, tain_t *) ;
+extern int textclient_start (textclient *, char const *, uint32_t, char const *, size_t, char const *, size_t, tain const *, tain *) ;
+extern int textclient_startf (textclient *, char const *const *, char const *const *, uint32_t, char const *, size_t, char const *, size_t, tain const *, tain *) ;
 
 #define textclient_start_g(a, path, options, before, beforelen, after, afterlen, deadline) textclient_start(a, path, options, before, beforelen, after, afterlen, (deadline), &STAMP)
 #define textclient_startf_g(a, argv, envp, options, before, beforelen, after, afterlen, deadline) textclient_startf_b(a, argv, envp, options, before, beforelen, after, afterlen, (deadline), &STAMP)
@@ -96,8 +97,8 @@ extern int textclient_startf (textclient_t *, char const *const *, char const *c
 #define textclient_exchange_g(a, s, len, ans, deadline) textclient_exchange(a, s, len, ans, (deadline), &STAMP)
 #define textclient_exchangev_g(a, v, n, ans, deadline) textclient_exchangev(a, v, n, ans, (deadline), &STAMP)
 
-extern int textclient_command (textclient_t *, char const *, size_t, tain_t const *, tain_t *) ;
-extern int textclient_commandv (textclient_t *, struct iovec const *, unsigned int, tain_t const *, tain_t *) ;
+extern int textclient_command (textclient *, char const *, size_t, tain const *, tain *) ;
+extern int textclient_commandv (textclient *, struct iovec const *, unsigned int, tain const *, tain *) ;
 #define textclient_command_g(a, s, len, deadline) textclient_command(a, s, len, (deadline), &STAMP)
 #define textclient_commandv_g(a, v, n, deadline) textclient_commandv(a, v, n, (deadline), &STAMP)
 

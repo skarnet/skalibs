@@ -1,9 +1,10 @@
 /* ISC license. */
 
-#ifndef ENVALLOC_H
-#define ENVALLOC_H
+#ifndef SKALIBS_ENVALLOC_H
+#define SKALIBS_ENVALLOC_H
 
 #include <sys/types.h>
+
 #include <skalibs/genalloc.h>
 
 #define ENVALLOC_ZERO GENALLOC_ZERO

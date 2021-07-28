@@ -11,7 +11,7 @@
 #include <skalibs/unixmessage.h>
 #include <skalibs/posixishard.h>
 
-static inline int copyfds (char *s, int const *fds, unsigned int n, unsigned char const *bits, unixmessage_sender_closecb_func_t_ref closecb, void *closecbdata)
+static inline int copyfds (char *s, int const *fds, unsigned int n, unsigned char const *bits, unixmessage_sender_closecb_func_ref closecb, void *closecbdata)
 {
   unsigned int i = 0 ;
   for (; i < n ; i++)
@@ -25,7 +25,7 @@ static inline int copyfds (char *s, int const *fds, unsigned int n, unsigned cha
   return 1 ;
 }
 
-static int reserve_and_copy (unixmessage_sender_t *b, size_t len, int const *fds, unsigned int nfds, unsigned char const *bits)
+static int reserve_and_copy (unixmessage_sender *b, size_t len, int const *fds, unsigned int nfds, unsigned char const *bits)
 {
   disize cur = { .left = b->data.len, .right = genalloc_len(int, &b->fds) } ;
   if (len > UNIXMESSAGE_MAXSIZE || nfds > UNIXMESSAGE_MAXFDS)
@@ -39,7 +39,7 @@ static int reserve_and_copy (unixmessage_sender_t *b, size_t len, int const *fds
   return genalloc_append(disize, &b->offsets, &cur) ;
 }
 
-int unixmessage_put_and_close (unixmessage_sender_t *b, unixmessage_t const *m, unsigned char const *bits)
+int unixmessage_put_and_close (unixmessage_sender *b, unixmessage const *m, unsigned char const *bits)
 {
   if (!reserve_and_copy(b, m->len, m->fds, m->nfds, bits)) return 0 ;
   memmove(b->data.s + b->data.len, m->s, m->len) ;
@@ -47,7 +47,7 @@ int unixmessage_put_and_close (unixmessage_sender_t *b, unixmessage_t const *m, 
   return 1 ;
 }
 
-int unixmessage_putv_and_close (unixmessage_sender_t *b, unixmessage_v_t const *m, unsigned char const *bits)
+int unixmessage_putv_and_close (unixmessage_sender *b, unixmessagev const *m, unsigned char const *bits)
 {
   size_t len = siovec_len(m->v, m->vlen) ;
   if (!reserve_and_copy(b, len, m->fds, m->nfds, bits)) return 0 ;

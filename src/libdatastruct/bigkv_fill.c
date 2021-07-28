@@ -12,8 +12,8 @@
 
 static void *bigkv_dtok (uint32_t d, void *p)
 {
-  bigkv_t *b = p ;
-  return b->storage.s + genalloc_s(bigkv_node_t, &b->nodes)[d].k ;
+  bigkv *b = p ;
+  return b->storage.s + genalloc_s(bigkv_node, &b->nodes)[d].k ;
 }
 
 static int bigkv_cmp (void const *a, void const *b, void *p)
@@ -22,14 +22,14 @@ static int bigkv_cmp (void const *a, void const *b, void *p)
   return strcmp((char const *)a, (char const *)b) ;
 }
 
-int bigkv_fill (bigkv_t *b, char const *const *argv, char delim, char const *prefix, char const *stop, uint32_t options)
+int bigkv_fill (bigkv *b, char const *const *argv, char delim, char const *prefix, char const *stop, uint32_t options)
 {
   int i = 0 ;
   size_t prefixlen = prefix ? strlen(prefix) : 0 ;
   avltree_init(&b->map, 3, 3, 8, &bigkv_dtok, &bigkv_cmp, b) ;
   for (; argv[i] && !(stop && !strcmp(argv[i], stop)) ; i++)
   {
-    bigkv_node_t node = { .k = b->storage.len } ;
+    bigkv_node node = { .k = b->storage.len } ;
     char const *s = argv[i] ;
     size_t len = strlen(s) ;
     size_t pos ;
@@ -56,11 +56,11 @@ int bigkv_fill (bigkv_t *b, char const *const *argv, char delim, char const *pre
       if (!stralloc_catb(&b->storage, s + pos + 1, len - pos)) goto err ;
     }
     else node.v = b->storage.len - 1 ;
-    if (isdup) genalloc_s(bigkv_node_t, &b->nodes)[d].v = node.v ;
+    if (isdup) genalloc_s(bigkv_node, &b->nodes)[d].v = node.v ;
     else
     {
-      d = genalloc_len(bigkv_node_t, &b->nodes) ;
-      if (!genalloc_append(bigkv_node_t, &b->nodes, &node)) goto err ;
+      d = genalloc_len(bigkv_node, &b->nodes) ;
+      if (!genalloc_append(bigkv_node, &b->nodes, &node)) goto err ;
       if (!avltree_insert(&b->map, d)) goto err ;
     }
   }

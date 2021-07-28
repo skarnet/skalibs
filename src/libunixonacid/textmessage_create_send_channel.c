@@ -27,7 +27,7 @@ static int sendit (void *p)
   return ancil_send_fd(fd[0], fd[1], '|') ;
 }
 
-int textmessage_create_send_channel (int sock, textmessage_sender_t *asyncout, char const *after, size_t afterlen, tain_t const *deadline, tain_t *stamp)
+int textmessage_create_send_channel (int sock, textmessage_sender *asyncout, char const *after, size_t afterlen, tain const *deadline, tain *stamp)
 {
   int fd[3] = { sock } ;
   int r ;

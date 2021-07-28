@@ -1,20 +1,21 @@
 /* ISC license. */
 
-#ifndef BUFFER_H
-#define BUFFER_H
+#ifndef SKALIBS_BUFFER_H
+#define SKALIBS_BUFFER_H
 
 #include <sys/uio.h>
+
 #include <skalibs/gccattributes.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/cbuffer.h>
 #include <skalibs/functypes.h>
 
-typedef struct buffer_s buffer, buffer_t, *buffer_ref, *buffer_t_ref ;
+typedef struct buffer_s buffer, *buffer_ref ;
 struct buffer_s
 {
-  iovfunc_t_ref op ;
+  iov_func_ref op ;
   int fd ;
-  cbuffer_t c ;
+  cbuffer c ;
 } ;
 #define BUFFER_ZERO { 0, -1, CBUFFER_ZERO }
 
@@ -31,7 +32,7 @@ struct buffer_s
 #define BUFFER_OUTSIZE_SMALL 512
 
 #define BUFFER_INIT(f, d, buf, len) { (f), (d), CBUFFER_INIT(buf, len) }
-extern int buffer_init (buffer *, iovfunc_t_ref, int, char *, size_t) ;
+extern int buffer_init (buffer *, iov_func_ref, int, char *, size_t) ;
 
 
  /* Writing */
@@ -105,7 +106,7 @@ extern int buffer_getfd (buffer const *) gccattr_pure ;
 
 #define buffer_read fd_readv
 #define buffer_write fd_writev
-extern iovfunc_t buffer_flush1read ;
+extern iov_func buffer_flush1read ;
 
 extern buffer buffer_0_ ;
 #define buffer_0 (&buffer_0_)

@@ -23,7 +23,7 @@ static void iobufferk_finish_3 (iobufferk *k)
   fd_close(k->p[0]) ;
 }
 
-iobufferk_finish_func_t_ref const iobufferk_finish_f[4] =
+iobufferk_finish_func_ref const iobufferk_finish_f[4] =
 {
   &iobufferk_finish_0, &iobufferk_nop, &iobufferk_nop, &iobufferk_finish_3
 } ;
@@ -37,7 +37,7 @@ static void iobufferk_nop (iobufferk *k)
   (void)k ;
 }
 
-iobufferk_finish_func_t_ref const iobufferk_finish_f[4] =
+iobufferk_finish_func_ref const iobufferk_finish_f[4] =
 {
   &iobufferk_nop, &iobufferk_nop, &iobufferk_nop, &iobufferk_nop
 } ;

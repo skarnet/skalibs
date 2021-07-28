@@ -7,7 +7,7 @@
 #include <skalibs/buffer.h>
 #include <skalibs/textmessage.h>
 
-int textmessage_receiver_hasmsginbuf (textmessage_receiver_t const *tr)
+int textmessage_receiver_hasmsginbuf (textmessage_receiver const *tr)
 {
   size_t len = buffer_len(&tr->in) ;
   uint32_t n ;

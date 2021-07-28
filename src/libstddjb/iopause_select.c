@@ -7,7 +7,7 @@
 #include <skalibs/tai.h>
 #include <skalibs/iopause.h>
 
-int iopause_select (iopause_fd *x, unsigned int len, tain_t const *deadline, tain_t const *stamp)
+int iopause_select (iopause_fd *x, unsigned int len, tain const *deadline, tain const *stamp)
 {
   struct timeval tv = { .tv_sec = 0, .tv_usec = 0 } ;
   int nfds = 0 ;
@@ -19,7 +19,7 @@ int iopause_select (iopause_fd *x, unsigned int len, tain_t const *deadline, tai
   FD_ZERO(&xfds) ;
   if (deadline && tain_less(stamp, deadline))
   {
-    tain_t delta ;
+    tain delta ;
     tain_sub(&delta, deadline, stamp) ;
     if (!timeval_from_tain_relative(&tv, &delta))
     {

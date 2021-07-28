@@ -1,7 +1,7 @@
 /* ISC license. */
 
-#ifndef SEGFAULT_H
-#define SEGFAULT_H
+#ifndef SKALIBS_SEGFAULT_H
+#define SKALIBS_SEGFAULT_H
 
 extern int sigsegv (void) ;
 extern int sigfpe (void) ;

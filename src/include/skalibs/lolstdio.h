@@ -1,9 +1,10 @@
 /* ISC license. */
 
-#ifndef LOLSTDIO_H
-#define LOLSTDIO_H
+#ifndef SKALIBS_LOLSTDIO_H
+#define SKALIBS_LOLSTDIO_H
 
 #include <stdarg.h>
+
 #include <skalibs/buffer.h>
 #include <skalibs/bufalloc.h>
 #include <skalibs/strerr2.h>

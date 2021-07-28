@@ -4,9 +4,9 @@
 
 #include <skalibs/tai.h>
 
-int tain_setnow (tain_t const *a)
+int tain_setnow (tain const *a)
 {
-  tain_t aa ;
+  tain aa ;
   if (!sysclock_from_tai(&aa.sec.x, &a->sec)) return 0 ;
   aa.nano = a->nano ;
   return sysclock_set(&aa) ;

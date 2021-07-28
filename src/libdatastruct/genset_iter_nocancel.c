@@ -3,7 +3,7 @@
 #include <skalibs/bitarray.h>
 #include <skalibs/genset.h>
 
-uint32_t genset_iter_nocancel (genset *g, uint32_t n, iterfunc_t_ref f, void *stuff)
+uint32_t genset_iter_nocancel (genset *g, uint32_t n, iter_func_ref f, void *stuff)
 {
   unsigned char bits[bitarray_div8(n)] ;
   uint32_t i = 0, j = 0, m = genset_n(g) ;
