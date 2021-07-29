@@ -14,6 +14,7 @@ typedef sig_func *sig_func_ref ;
 extern int sig_catch (int, sig_func_ref) ;
 #define sig_restore(sig) sig_catch((sig), SIG_DFL)
 #define sig_ignore(sig) sig_catch((sig), SIG_IGN)
+extern int sig_altignore (int) ;
 
 extern void sig_restoreto (sigset_t const *, unsigned int) ;
 

@@ -481,6 +481,7 @@ src/libstddjb/selfpipe_trap.o src/libstddjb/selfpipe_trap.lo: src/libstddjb/self
 src/libstddjb/selfpipe_trapset.o src/libstddjb/selfpipe_trapset.lo: src/libstddjb/selfpipe_trapset.c src/include/skalibs/bsdsnowflake.h src/include/skalibs/nonposix.h src/include/skalibs/nsig.h src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
 src/libstddjb/sgetopt.o src/libstddjb/sgetopt.lo: src/libstddjb/sgetopt.c src/include/skalibs/buffer.h src/include/skalibs/sgetopt.h
 src/libstddjb/sig0_scan.o src/libstddjb/sig0_scan.lo: src/libstddjb/sig0_scan.c src/include/skalibs/sig.h src/include/skalibs/types.h
+src/libstddjb/sig_altignore.o src/libstddjb/sig_altignore.lo: src/libstddjb/sig_altignore.c src/include/skalibs/sig.h
 src/libstddjb/sig_block.o src/libstddjb/sig_block.lo: src/libstddjb/sig_block.c src/include/skalibs/sig.h
 src/libstddjb/sig_blocknone.o src/libstddjb/sig_blocknone.lo: src/libstddjb/sig_blocknone.c src/include/skalibs/sig.h
 src/libstddjb/sig_catch.o src/libstddjb/sig_catch.lo: src/libstddjb/sig_catch.c src/include/skalibs/functypes.h src/include/skalibs/sig.h
