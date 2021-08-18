@@ -611,6 +611,7 @@ src/libstddjb/tain_from_timespec_sysclock.o src/libstddjb/tain_from_timespec_sys
 src/libstddjb/tain_from_timeval.o src/libstddjb/tain_from_timeval.lo: src/libstddjb/tain_from_timeval.c src/include/skalibs/tai.h
 src/libstddjb/tain_from_timeval_sysclock.o src/libstddjb/tain_from_timeval_sysclock.lo: src/libstddjb/tain_from_timeval_sysclock.c src/include/skalibs/tai.h
 src/libstddjb/tain_half.o src/libstddjb/tain_half.lo: src/libstddjb/tain_half.c src/include/skalibs/tai.h
+src/libstddjb/tain_infinite.o src/libstddjb/tain_infinite.lo: src/libstddjb/tain_infinite.c src/include/skalibs/tai.h
 src/libstddjb/tain_infinite_relative.o src/libstddjb/tain_infinite_relative.lo: src/libstddjb/tain_infinite_relative.c src/include/skalibs/tai.h
 src/libstddjb/tain_less.o src/libstddjb/tain_less.lo: src/libstddjb/tain_less.c src/include/skalibs/tai.h
 src/libstddjb/tain_nano500.o src/libstddjb/tain_nano500.lo: src/libstddjb/tain_nano500.c src/include/skalibs/tai.h

@@ -67,6 +67,7 @@ struct tain_s
 extern tain STAMP ; /* the global process wallclock */
 extern tain const tain_zero ;
 extern tain const tain_infinite_relative ;
+extern tain const tain_infinite ;
 extern tain const tain_nano500 ;
 
 #define tain_sec(a) ((a)->sec)
