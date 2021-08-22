@@ -7,16 +7,18 @@
 #include <unistd.h>
 #include <errno.h>
 #include <sys/socket.h>
+#include <sys/stat.h>
 
 #include <skalibs/djbunix.h>
 #include <skalibs/socket.h>
 
-int ipc_bind_reuse_lock (int s, char const *p, int *fdlock)
+int ipc_bind_reuse_lock_perms (int s, char const *p, int *fdlock, unsigned int perms)
 {
   unsigned int opt = 1 ;
   size_t len = strlen(p) ;
   int fd ;
   int r ;
+  mode_t m ;
   char lockname[len + 6] ;
   memcpy(lockname, p, len) ;
   memcpy(lockname + len, ".lock", 6) ;
@@ -29,7 +31,13 @@ int ipc_bind_reuse_lock (int s, char const *p, int *fdlock)
   setsockopt(s, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof opt) ;
   errno = r ;
   unlink_void(p) ;
-  if (ipc_bind(s, p) < 0) return -1 ;
+  if (perms) m = umask(~perms & 0777) ;
+  if (ipc_bind(s, p) < 0)
+  {
+    if (perms) umask(m) ;
+    return -1 ;
+  }
+  if (perms) umask(m) ;
   *fdlock = fd ;
   return 0 ;
 }

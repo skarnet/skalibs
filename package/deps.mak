@@ -392,7 +392,8 @@ src/libstddjb/ip6_scanlist.o src/libstddjb/ip6_scanlist.lo: src/libstddjb/ip6_sc
 src/libstddjb/ipc_accept.o src/libstddjb/ipc_accept.lo: src/libstddjb/ipc_accept.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h src/include/skalibs/sysdeps.h
 src/libstddjb/ipc_bind.o src/libstddjb/ipc_bind.lo: src/libstddjb/ipc_bind.c src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/socket.h
 src/libstddjb/ipc_bind_reuse.o src/libstddjb/ipc_bind_reuse.lo: src/libstddjb/ipc_bind_reuse.c src/include/skalibs/socket.h
-src/libstddjb/ipc_bind_reuse_lock.o src/libstddjb/ipc_bind_reuse_lock.lo: src/libstddjb/ipc_bind_reuse_lock.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h
+src/libstddjb/ipc_bind_reuse_lock_perms.o src/libstddjb/ipc_bind_reuse_lock_perms.lo: src/libstddjb/ipc_bind_reuse_lock_perms.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h
+src/libstddjb/ipc_bind_reuse_perms.o src/libstddjb/ipc_bind_reuse_perms.lo: src/libstddjb/ipc_bind_reuse_perms.c src/include/skalibs/socket.h
 src/libstddjb/ipc_connect.o src/libstddjb/ipc_connect.lo: src/libstddjb/ipc_connect.c src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/socket.h
 src/libstddjb/ipc_connected.o src/libstddjb/ipc_connected.lo: src/libstddjb/ipc_connected.c src/include/skalibs/allreadwrite.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h
 src/libstddjb/ipc_dgram.o src/libstddjb/ipc_dgram.lo: src/libstddjb/ipc_dgram.c src/include/skalibs/nonposix.h src/include/skalibs/socket.h
