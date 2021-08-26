@@ -21,7 +21,7 @@ extern int selfpipe_fd ;
 extern int selfpipe[2] ;
 #define selfpipe_fd selfpipe[0]
 
-extern sig_func_ref selfpipe_tophalf ;
+extern sig_func selfpipe_tophalf ;
 
 #endif
 
