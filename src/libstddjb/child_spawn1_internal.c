@@ -99,8 +99,8 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
 
    syncdie:
     {
-      char c = errno ;
-      fd_write(syncpipe[1], &c, 1) ;
+      unsigned char c = errno ;
+      fd_write(syncpipe[1], (char *)&c, 1) ;
     }
     _exit(127) ;
   }
@@ -108,8 +108,8 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
   fd_close(syncpipe[1]) ;
 
   {
-    char c ;
-    syncpipe[1] = fd_read(syncpipe[0], &c, 1) ;
+    unsigned char c ;
+    syncpipe[1] = fd_read(syncpipe[0], (char *)&c, 1) ;
     if (syncpipe[1])
     {
       int e = c ;

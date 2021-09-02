@@ -112,16 +112,16 @@ pid_t child_spawn3 (char const *prog, char const *const *argv, char const *const
 
   syncdie:
     {
-      char c = errno ;
-      fd_write(syncpipe[1], &c, 1) ;
+      unsigned char c = errno ;
+      fd_write(syncpipe[1], (char *)&c, 1) ;
     }
     _exit(127) ;
   }
 
   fd_close(syncpipe[1]) ;
   {
-    char c ;
-    syncpipe[1] = fd_read(syncpipe[0], &c, 1) ;
+    unsigned char c ;
+    syncpipe[1] = fd_read(syncpipe[0], (char *)&c, 1) ;
     if (syncpipe[1])
     {
       int e = c ;

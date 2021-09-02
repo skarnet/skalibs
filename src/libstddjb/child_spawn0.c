@@ -55,8 +55,8 @@ pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const
 pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const *envp)
 {
   pid_t pid ;
-  int e ;
   int p[2] ;
+  unsigned char c ;
   if (pipecoe(p) < 0) return 0 ;
   pid = fork() ;
   if (pid < 0)
@@ -75,22 +75,22 @@ pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const
     fd_close(p[0]) ;
     sig_blocknone() ;
     exec_ae(prog, argv, envp) ;
-    e = errno ;
-    fd_write(p[1], (char *)&e, sizeof(e)) ;
+    c = errno ;
+    fd_write(p[1], (char *)&c, 1) ;
     _exit(127) ;
   }
   fd_close(p[1]) ;
-  p[1] = fd_read(p[0], (char *)&e, sizeof(e)) ;
+  p[1] = fd_read(p[0], (char *)&c, 1) ;
   if (p[1] < 0)
   {
     fd_close(p[0]) ;
     return 0 ;
   }
   fd_close(p[0]) ;
-  if (p[1] == sizeof(e))
+  if (p[1])
   {
     wait_pid(pid, &p[0]) ;
-    errno = e ;
+    errno = c ;
     return 0 ;
   }
   return pid ;
