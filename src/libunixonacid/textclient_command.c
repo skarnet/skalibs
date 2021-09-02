@@ -11,6 +11,6 @@ int textclient_command (textclient *a, char const *s, size_t len, tain const *de
   struct iovec ans ;
   if (!textclient_exchange(a, s, len, &ans, deadline, stamp)) return 0 ;
   if (ans.iov_len != 1) return (errno = EPROTO, 0) ;
-  if (*(char *)ans.iov_base) return (errno = *(char *)ans.iov_base, 0) ;
+  if (*(unsigned char *)ans.iov_base) return (errno = *(unsigned char *)ans.iov_base, 0) ;
   return 1 ;
 }
