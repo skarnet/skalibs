@@ -28,7 +28,6 @@ src/include/skalibs/genalloc.h: src/include/skalibs/functypes.h src/include/skal
 src/include/skalibs/genqdyn.h: src/include/skalibs/stralloc.h
 src/include/skalibs/genset.h: src/include/skalibs/functypes.h
 src/include/skalibs/gensetdyn.h: src/include/skalibs/functypes.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
-src/include/skalibs/iobuffer.h: src/include/skalibs/buffer.h src/include/skalibs/djbunix.h
 src/include/skalibs/iopause.h: src/include/skalibs/tai.h
 src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr2.h
@@ -45,7 +44,7 @@ src/include/skalibs/skalibs.h: src/include/skalibs/datastruct.h src/include/skal
 src/include/skalibs/skamisc.h: src/include/skalibs/buffer.h src/include/skalibs/stralloc.h
 src/include/skalibs/socket.h: src/include/skalibs/gccattributes.h src/include/skalibs/posixplz.h src/include/skalibs/tai.h
 src/include/skalibs/stdcrypto.h: src/include/skalibs/sha1.h src/include/skalibs/sha256.h src/include/skalibs/sha512.h
-src/include/skalibs/stddjb.h: src/include/skalibs/alarm.h src/include/skalibs/alloc.h src/include/skalibs/allreadwrite.h src/include/skalibs/bitarray.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/bytestr.h src/include/skalibs/cbuffer.h src/include/skalibs/cdb.h src/include/skalibs/cdbmake.h src/include/skalibs/direntry.h src/include/skalibs/disize.h src/include/skalibs/diuint.h src/include/skalibs/diuint32.h src/include/skalibs/djbtime.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/error.h src/include/skalibs/exec.h src/include/skalibs/fmtscan.h src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h src/include/skalibs/genalloc.h src/include/skalibs/genwrite.h src/include/skalibs/iobuffer.h src/include/skalibs/iopause.h src/include/skalibs/ip46.h src/include/skalibs/lolstdio.h src/include/skalibs/netstring.h src/include/skalibs/segfault.h src/include/skalibs/selfpipe.h src/include/skalibs/setgroups.h src/include/skalibs/sgetopt.h src/include/skalibs/sig.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/socket.h src/include/skalibs/stralloc.h src/include/skalibs/strerr.h src/include/skalibs/strerr2.h src/include/skalibs/tai.h src/include/skalibs/types.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
+src/include/skalibs/stddjb.h: src/include/skalibs/alarm.h src/include/skalibs/alloc.h src/include/skalibs/allreadwrite.h src/include/skalibs/bitarray.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/bytestr.h src/include/skalibs/cbuffer.h src/include/skalibs/cdb.h src/include/skalibs/cdbmake.h src/include/skalibs/direntry.h src/include/skalibs/disize.h src/include/skalibs/diuint.h src/include/skalibs/diuint32.h src/include/skalibs/djbtime.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/error.h src/include/skalibs/exec.h src/include/skalibs/fmtscan.h src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h src/include/skalibs/genalloc.h src/include/skalibs/genwrite.h src/include/skalibs/iopause.h src/include/skalibs/ip46.h src/include/skalibs/lolstdio.h src/include/skalibs/netstring.h src/include/skalibs/segfault.h src/include/skalibs/selfpipe.h src/include/skalibs/setgroups.h src/include/skalibs/sgetopt.h src/include/skalibs/sig.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/socket.h src/include/skalibs/stralloc.h src/include/skalibs/strerr.h src/include/skalibs/strerr2.h src/include/skalibs/tai.h src/include/skalibs/types.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
 src/include/skalibs/strerr.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint64.h
@@ -305,8 +304,8 @@ src/libstddjb/dir_close.o src/libstddjb/dir_close.lo: src/libstddjb/dir_close.c 
 src/libstddjb/dir_fd.o src/libstddjb/dir_fd.lo: src/libstddjb/dir_fd.c src/include/skalibs/direntry.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
 src/libstddjb/error_isalready.o src/libstddjb/error_isalready.lo: src/libstddjb/error_isalready.c src/include/skalibs/bsdsnowflake.h src/include/skalibs/error.h
 src/libstddjb/error_temp.o src/libstddjb/error_temp.lo: src/libstddjb/error_temp.c src/include/skalibs/error.h
-src/libstddjb/fd_cat.o src/libstddjb/fd_cat.lo: src/libstddjb/fd_cat.c src/include/skalibs/djbunix.h src/include/skalibs/iobuffer.h
-src/libstddjb/fd_catn.o src/libstddjb/fd_catn.lo: src/libstddjb/fd_catn.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/iobuffer.h
+src/libstddjb/fd_cat.o src/libstddjb/fd_cat.lo: src/libstddjb/fd_cat.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
+src/libstddjb/fd_catn.o src/libstddjb/fd_catn.lo: src/libstddjb/fd_catn.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
 src/libstddjb/fd_chdir.o src/libstddjb/fd_chdir.lo: src/libstddjb/fd_chdir.c src/include/skalibs/djbunix.h
 src/libstddjb/fd_chmod.o src/libstddjb/fd_chmod.lo: src/libstddjb/fd_chmod.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h
 src/libstddjb/fd_chown.o src/libstddjb/fd_chown.lo: src/libstddjb/fd_chown.c src/include/skalibs/djbunix.h
@@ -358,21 +357,6 @@ src/libstddjb/int64_fmtlist.o src/libstddjb/int64_fmtlist.lo: src/libstddjb/int6
 src/libstddjb/int64_scan.o src/libstddjb/int64_scan.lo: src/libstddjb/int64_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint64.h
 src/libstddjb/int64_scan_base_max.o src/libstddjb/int64_scan_base_max.lo: src/libstddjb/int64_scan_base_max.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint64.h
 src/libstddjb/int64_scanlist.o src/libstddjb/int64_scanlist.lo: src/libstddjb/int64_scanlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint64.h
-src/libstddjb/iobuffer_fill.o src/libstddjb/iobuffer_fill.lo: src/libstddjb/iobuffer_fill.c src/include/skalibs/iobuffer.h
-src/libstddjb/iobuffer_flush.o src/libstddjb/iobuffer_flush.lo: src/libstddjb/iobuffer_flush.c src/include/skalibs/iobuffer.h
-src/libstddjb/iobuffer_init.o src/libstddjb/iobuffer_init.lo: src/libstddjb/iobuffer_init.c src/include/skalibs/iobuffer.h
-src/libstddjb/iobuffer_kfromu.o src/libstddjb/iobuffer_kfromu.lo: src/libstddjb/iobuffer_kfromu.c src/include/skalibs/buffer.h src/include/skalibs/iobuffer.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
-src/libstddjb/iobuffer_salvage.o src/libstddjb/iobuffer_salvage.lo: src/libstddjb/iobuffer_salvage.c src/include/skalibs/iobuffer.h
-src/libstddjb/iobuffer_ufromk.o src/libstddjb/iobuffer_ufromk.lo: src/libstddjb/iobuffer_ufromk.c src/include/skalibs/iobuffer.h src/include/skalibs/sysdeps.h
-src/libstddjb/iobufferk_fill.o src/libstddjb/iobufferk_fill.lo: src/libstddjb/iobufferk_fill.c src/include/skalibs/iobuffer.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
-src/libstddjb/iobufferk_finish.o src/libstddjb/iobufferk_finish.lo: src/libstddjb/iobufferk_finish.c src/include/skalibs/djbunix.h src/include/skalibs/iobuffer.h src/include/skalibs/sysdeps.h
-src/libstddjb/iobufferk_flush.o src/libstddjb/iobufferk_flush.lo: src/libstddjb/iobufferk_flush.c src/include/skalibs/iobuffer.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
-src/libstddjb/iobufferk_init.o src/libstddjb/iobufferk_init.lo: src/libstddjb/iobufferk_init.c src/include/skalibs/djbunix.h src/include/skalibs/iobuffer.h src/include/skalibs/sysdeps.h
-src/libstddjb/iobufferk_isworking.o src/libstddjb/iobufferk_isworking.lo: src/libstddjb/iobufferk_isworking.c src/include/skalibs/iobuffer.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
-src/libstddjb/iobufferu_fill.o src/libstddjb/iobufferu_fill.lo: src/libstddjb/iobufferu_fill.c src/include/skalibs/buffer.h src/include/skalibs/iobuffer.h
-src/libstddjb/iobufferu_finish.o src/libstddjb/iobufferu_finish.lo: src/libstddjb/iobufferu_finish.c src/include/skalibs/alloc.h src/include/skalibs/iobuffer.h
-src/libstddjb/iobufferu_flush.o src/libstddjb/iobufferu_flush.lo: src/libstddjb/iobufferu_flush.c src/include/skalibs/buffer.h src/include/skalibs/iobuffer.h
-src/libstddjb/iobufferu_init.o src/libstddjb/iobufferu_init.lo: src/libstddjb/iobufferu_init.c src/include/skalibs/alloc.h src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/iobuffer.h
 src/libstddjb/iopause.o src/libstddjb/iopause.lo: src/libstddjb/iopause.c src/include/skalibs/config.h src/include/skalibs/iopause.h src/include/skalibs/sysdeps.h
 src/libstddjb/iopause_poll.o src/libstddjb/iopause_poll.lo: src/libstddjb/iopause_poll.c src/include/skalibs/iopause.h src/include/skalibs/tai.h
 src/libstddjb/iopause_ppoll.o src/libstddjb/iopause_ppoll.lo: src/libstddjb/iopause_ppoll.c src/include/skalibs/iopause.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/tai.h

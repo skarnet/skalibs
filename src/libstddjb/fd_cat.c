@@ -1,27 +1,23 @@
 /* ISC license. */
 
-#include <sys/types.h>
+#include <unistd.h>
 
-#include <skalibs/iobuffer.h>
+#include <skalibs/allreadwrite.h>
 #include <skalibs/djbunix.h>
 
-int fd_cat (int from, int to)
+#define BSIZE 65536
+
+off_t fd_cat (int from, int to)
 {
-  iobuffer b ;
-  size_t n = 0 ;
-  if (!iobuffer_init(&b, from, to)) return -1 ;
+  off_t n = 0 ;
+  char buf[BSIZE] ;
   for (;;)
   {
-    ssize_t r = iobuffer_fill(&b) ;
-    if (r < 0) goto err ;
-    else if (!r) break ;
-    if (!iobuffer_flush(&b)) goto err ;
+    ssize_t r = fd_read(from, buf, BSIZE) ;
+    if (r == -1) return -1 ;
+    if (!r) break ;
+    if (allwrite(to, buf, r) < r) return -1 ;
     n += r ;
   }
-  iobuffer_finish(&b) ;
   return n ;
-
- err:
-  iobuffer_finish(&b) ;
-  return -1 ;
 }

@@ -1,39 +1,28 @@
 /* ISC license. */
 
-#include <sys/types.h>
+#include <unistd.h>
 #include <errno.h>
+
 #include <skalibs/allreadwrite.h>
-#include <skalibs/iobuffer.h>
 #include <skalibs/djbunix.h>
 
-size_t fd_catn (int from, int to, size_t n)
+#define BSIZE 65536
+
+off_t fd_catn (int from, int to, off_t n)
 {
-  size_t w = 0 ;
-  if (n >= IOBUFFER_SIZE)
+  off_t w = 0 ;
+  char buf[BSIZE] ;
+  while (n >= BSIZE)
   {
-    iobuffer b ;
-    if (!iobuffer_init(&b, from, to)) return 0 ;
-    while (n >= IOBUFFER_SIZE)
-    {
-      ssize_t r = iobuffer_fill(&b) ;
-      if (r <= 0)
-      {
-        iobuffer_finish(&b) ;
-        if (!r) errno = EPIPE ;
-        return w ;
-      }
-      if (!iobuffer_flush(&b))
-      {
-        iobuffer_finish(&b) ;
-        return w ;
-      }
-      n -= r ; w += r ;
-    }
-    iobuffer_finish(&b) ;
+    ssize_t r = fd_read(from, buf, BSIZE) ;
+    if (r == -1) return w ;
+    if (!r) return (errno = EPIPE, w) ;
+    if (allwrite(to, buf, r) < r) return w ;
+    n -= r ; w += r ;
   }
 
+  if (n)
   {
-    char buf[n] ;
     size_t r = allread(from, buf, n) ;
     size_t v = 0 ;
     if (r) v = allwrite(to, buf, r) ;

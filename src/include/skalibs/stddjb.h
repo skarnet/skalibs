@@ -34,7 +34,6 @@
 #include <skalibs/gccattributes.h>
 #include <skalibs/genalloc.h>
 #include <skalibs/genwrite.h>
-#include <skalibs/iobuffer.h>
 #include <skalibs/iopause.h>
 #include <skalibs/lolstdio.h>
 #include <skalibs/netstring.h>

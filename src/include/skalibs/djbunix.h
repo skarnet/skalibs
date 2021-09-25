@@ -27,8 +27,8 @@ extern void fd_close (int) ;
 extern int fd_chmod (int, unsigned int) ;
 extern int fd_chown (int, uid_t, gid_t) ;
 extern int fd_sync (int) ;
-extern int fd_cat (int, int) ;
-extern size_t fd_catn (int, int, size_t) ;
+extern off_t fd_cat (int, int) ;
+extern off_t fd_catn (int, int, off_t) ;
 extern int fd_ensure_open (int, int) ;
 #define fd_sanitize() (fd_ensure_open(0, 0) && fd_ensure_open(1, 1) && fd_ensure_open(2, 1))
 extern void fd_shutdown (int, int) ;

@@ -6,6 +6,8 @@ In 2.11.0.0
  - libbiguint removed.
  - Obsolete skalibs/environ.h and skalibs/getpeereid.h removed.
  - rc4 and md5 removed.
+ - iobuffer removed.
+ - fd_cat and fd_catn changed signatures.
  - All *_t types renamed to avoid treading on POSIX namespace.
  - subgetopt() renamed to lgetopt().
  - signal functions reworked; skasigaction removed; sig_stack removed
