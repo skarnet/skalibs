@@ -152,7 +152,7 @@ Safe wrapper around
 </p>
 
 <p>
-<code> int fd_cat (int from, int to) </code> <br />
+<code> off_t fd_cat (int from, int to) </code> <br />
 Synchronously copies data from fd <em>from</em> to fd <em>to</em>,
 until it encounters EOF or an error. Returns -1 (and sets errno) if
 it fails; returns the number of transmitted bytes if it gets an EOF.
@@ -170,7 +170,7 @@ in Linux 2.6.17 and later </li>
 </ul>
 
 <p>
-<code> size_t fd_catn (int from, int to, size_t n) </code> <br />
+<code> off_t fd_catn (int from, int to, off_t n) </code> <br />
 Synchronously copies at most <em>n</em> bytes from fd <em>from</em> to fd <em>to</em>.
 Returns the total number of transmitted bytes; sets errno if this number
 is lesser than <em>n</em>. EOF is reported as EPIPE. See above for zero-copy
