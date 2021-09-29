@@ -132,7 +132,7 @@ non-blocking descriptor that can be used in your event loop. It will
 be selected for readability when you've caught a signal.
 </p>
 
-<h3> Trapping/untrapping signals </h3>
+<h3> Trapping signals </h3>
 
 <pre>
 int r = selfpipe_trap(SIGTERM) ;
@@ -140,21 +140,11 @@ int r = selfpipe_trap(SIGTERM) ;
 
 <p>
 <tt>selfpipe_trap()</tt> catches a signal and sends it to the selfpipe.
-Uncaught signals won't trigger the selfpipe. <tt>r</tt> is 0 if
-the operation succeeded, and -1 if it failed. If it succeeded, you
+Uncaught signals won't trigger the selfpipe. <tt>r</tt> is 1 if
+the operation succeeded, and 0 if it failed. If it succeeded, you
 can forget about the trapped signal entirely. <br />
-In our example, if <tt>r</tt> is 0, then a SIGTERM will instantly
+In our example, if <tt>r</tt> is 1, then a SIGTERM will instantly
 trigger readability on <tt>fd</tt>.
-</p>
-
-<pre>
-int r = selfpipe_untrap(SIGTERM) ;
-</pre>
-
-<p>
-Conversely, <tt>selfpipe_untrap()</tt> uncatches a signal; the selfpipe
-will not manage it anymore. <tt>r</tt> is 0 if the operation succeeded
-and -1 if it failed.
 </p>
 
 <pre>
@@ -167,12 +157,12 @@ r = selfpipe_trapset(&amp;set) ;
 </pre>
 
 <p>
-<tt>selfpipe_trap()</tt> and <tt>selfpipe_untrap()</tt> handle signals one
+<tt>selfpipe_trap()</tt> handles signals one
 by one. Alternatively (and often preferrably), you can use
 <tt>selfpipe_trapset()</tt> to directly handle signal sets. When you call
 <tt>selfpipe_trapset()</tt>, signals that are present in <tt>set</tt> will
 be caught by the selfpipe, and signals that are absent from <tt>set</tt>
-will be uncaught. <tt>r</tt> is 0 if the operation succeeded and -1 if it
+will be uncaught. <tt>r</tt> is 1 if the operation succeeded and 0 if it
 failed.
 </p>
 
@@ -200,7 +190,8 @@ selfpipe_finish() ;
 
 <p>
  Call <tt>selfpipe_finish()</tt> when you're done using the selfpipe.
-Signal handlers will be restored to their previous value.
+Signal handlers will be restored to SIG_DFL, i.e. signals will not
+be trapped anymore.
 </p>
 
 <h2> Any limitations&nbsp;? </h2>
@@ -211,11 +202,16 @@ Signal handlers will be restored to their previous value.
 
 <ul>
  <li> The selfpipe library uses a global pipe;
-so, it's not safe for multithreading. I'm not sure how multithreaded
-programs handle signals; I personally don't like multithreading and
-never use it, so I'm not knowledgeable about it. Anyway, if your
-program is multithreaded, chances are you don't have an asynchronous
-event loop, so the self-pipe trick has less benefits for you. </li>
+so, it's theoretically not safe for multithreading. However, as long as you dedicate
+one thread to signal handling and block signals in all the other threads
+(see <a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/pthread_sigmask.html">pthread_sigmask()</a>)
+then you should be able to use the selfpipe in the thread that handles
+signals without trouble. Since reading the selfpipe involves waiting for
+a file descriptor to become readable, it is recommended to do this in a
+thread that will already have a regular input/output loop (via
+<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/poll.html">poll()</a>
+or <a href="iopause.html">iopause()</a>) so you can just add the selfpipe
+to the list of fds you're reading on. </li>
  <li> In rare cases, the self-pipe can theoretically be filled, if some
 application sends more than PIPE_BUF signals before you have time to
 <tt>selfpipe_read()</tt>. On most Unix systems, PIPE_BUF is 4096,
