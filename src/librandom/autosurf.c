@@ -14,5 +14,5 @@ void autosurf (char *s, size_t n)
     surf_init(&ctx, tmp) ;
     need4seed = 0 ;
   }
-  return surf(&ctx, s, n) ;
+  surf(&ctx, s, n) ;
 }
