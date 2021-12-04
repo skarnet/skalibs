@@ -16,6 +16,21 @@
 <a href="//skarnet.org/">skarnet.org</a>
 </p>
 
+<h2> in 2.11.1.0 </h2>
+
+<ul>
+ <li> <tt>fd_close()</tt> now chooses to adapt to Linux's
+<a href="https://man7.org/linux/man-pages/man2/close.2.html">close()</a>
+behaviour (closing the fd on EINTR) over the HP-UX one (not closing it).
+Destructors like
+<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/close.html">close()</a>
+being allowed to fail has always been a mistake in the specification and a
+programming nightmare, making it impossible to behave correctly on all
+systems, but apparently standardization efforts are on the way and the Linux
+behaviour seems to be the chosen one. </li>
+ <li> New <tt>unix-transactional.h</tt> function: <tt>opendir_at</tt>. </li>
+</ul>
+
 <h2> in 2.11.0.0 </h2>
 
 <ul>

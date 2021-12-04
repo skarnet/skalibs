@@ -1,5 +1,13 @@
 Changelog for skalibs.
 
+In 2.11.1.0
+-----------
+
+ - fd_close() doesn't retry if close() fails. (i.e. adapts to Linux's
+behaviour over HP-UX's.)
+ - New function: opendir_at.
+
+
 In 2.11.0.0
 -----------
 

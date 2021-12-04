@@ -8,6 +8,7 @@
 #include <sys/uio.h>
 
 #include <skalibs/uint64.h>
+#include <skalibs/direntry.h>
 #include <skalibs/stralloc.h>
 
  /* Transactional/reliable filesystem operations */
@@ -26,6 +27,7 @@ extern int open_truncat (int, char const *) ;
 extern int open_truncatb (int, char const *) ;
 extern int open_appendat (int, char const *) ;
 extern int open_appendatb (int, char const *) ;
+extern DIR *opendir_at (int, char const *) ;
 
 extern int stat_at (int, char const *, struct stat *) ;
 extern int lstat_at (int, char const *, struct stat *) ;

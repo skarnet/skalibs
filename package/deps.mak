@@ -51,7 +51,7 @@ src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skali
 src/include/skalibs/textclient.h: src/include/skalibs/allreadwrite.h src/include/skalibs/tai.h src/include/skalibs/textmessage.h
 src/include/skalibs/textmessage.h: src/include/skalibs/allreadwrite.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
 src/include/skalibs/unix-timed.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
-src/include/skalibs/unix-transactional.h: src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
+src/include/skalibs/unix-transactional.h: src/include/skalibs/direntry.h src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
 src/include/skalibs/unixconnection.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/unixmessage.h: src/include/skalibs/buffer.h src/include/skalibs/cbuffer.h src/include/skalibs/gccattributes.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
 src/include/skalibs/unixonacid.h: src/include/skalibs/ancil.h src/include/skalibs/kolbak.h src/include/skalibs/skaclient.h src/include/skalibs/textclient.h src/include/skalibs/textmessage.h src/include/skalibs/unix-timed.h src/include/skalibs/unix-transactional.h src/include/skalibs/unixconnection.h src/include/skalibs/unixmessage.h
@@ -716,6 +716,7 @@ src/libunixonacid/open_truncat.o src/libunixonacid/open_truncat.lo: src/libunixo
 src/libunixonacid/open_truncatb.o src/libunixonacid/open_truncatb.lo: src/libunixonacid/open_truncatb.c src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/open_writeat.o src/libunixonacid/open_writeat.lo: src/libunixonacid/open_writeat.c src/include/skalibs/unix-transactional.h
 src/libunixonacid/open_writeatb.o src/libunixonacid/open_writeatb.lo: src/libunixonacid/open_writeatb.c src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
+src/libunixonacid/opendir_at.o src/libunixonacid/opendir_at.lo: src/libunixonacid/opendir_at.c src/include/skalibs/direntry.h src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/opengetlnclose.o src/libunixonacid/opengetlnclose.lo: src/libunixonacid/opengetlnclose.c src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/opengetlnclose_at.o src/libunixonacid/opengetlnclose_at.lo: src/libunixonacid/opengetlnclose_at.c src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/openreadnclose_at.o src/libunixonacid/openreadnclose_at.lo: src/libunixonacid/openreadnclose_at.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
