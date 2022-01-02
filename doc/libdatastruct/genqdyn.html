@@ -78,21 +78,13 @@ You can use the <tt>GENQDYN_PEEK(type, g)</tt> macro to get a
 <h2> Functions </h2>
 
 <p>
-<code> void genqdyn_init (genqdyn *g, size_t esize, unsigned int den, unsigned int den) </code> <br />
+<code> void genqdyn_init (genqdyn *g, size_t esize, unsigned int num, unsigned int den) </code> <br />
 Initializes the genqdyn <em>*g</em> to hold objects of size <em>esize</em>.
 <em>g</em> must be unused, or have been freed. The <em>num</em> and <em>den</em>
 arguments tune <em>g</em>'s behaviour as described above in the GENQDYN_INIT
 description. This function is similar to the GENQDYN_INIT macro, except that
 it can be used dynamically and works on a pre-declared genqdyn, whereas the
 macro can only be used as a static initializer.
-</p>
-
-<p>
-<code> void genqdyn_init (genqdyn *g, size_t esize, unsigned int den, unsigned int den) </code> <br />
-Initializes the genqdyn <em>*g</em> to hold objects of size <em>esize</em>.
-<em>g</em> must be unused, or have been freed. The <em>num</em> and <em>den</em>
-arguments tune <em>g</em>'s behaviour as described above in the GENQDYN_INIT
-description.
 </p>
 
 <p>
