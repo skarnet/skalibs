@@ -99,7 +99,7 @@ stripdir () {
 tryflag () {
   echo "Checking whether compiler accepts $2 ..."
   echo "typedef int x;" > "$tmpc"
-  if $CC_AUTO "$2" -c -o "$tmpo" "$tmpc" >/dev/null 2>&1 ; then
+  if $CC_AUTO $CPPFLAGS_POST $CFLAGS_POST "$2" -c -o "$tmpo" "$tmpc" >/dev/null 2>&1 ; then
     echo "  ... yes"
     eval "$1=\"\${$1} \$2\""
     eval "$1=\${$1# }"
@@ -113,7 +113,7 @@ tryflag () {
 tryldflag () {
   echo "Checking whether linker accepts $2 ..."
   echo "typedef int x;" > "$tmpc"
-  if $CC_AUTO -nostdlib "$2" -o "$tmpe" "$tmpc" >/dev/null 2>&1 ; then
+  if $CC_AUTO $CPPFLAGS_POST $CFLAGS_POST $LDFLAGS_POST -nostdlib "$2" -o "$tmpe" "$tmpc" >/dev/null 2>&1 ; then
     echo "  ... yes"
     eval "$1=\"\${$1} \$2\""
     eval "$1=\${$1# }"
