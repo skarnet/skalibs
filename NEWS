@@ -1,5 +1,15 @@
 Changelog for skalibs.
 
+In 2.11.2.0
+-----------
+
+ - Bugfixes.
+ - User-provided CPPFLAGS, CFLAGS and LDFLAGS are now honored in
+    sysdep autodetection.
+ - envdir_internal() now supports a SKALIBS_ENVDIR_NOCLAMP option, for
+    unlimited-size variable reading.
+
+
 In 2.11.1.0
 -----------
 
