@@ -1,6 +1,7 @@
 /* ISC license. */
 
 #include <sys/types.h>
+
 #include <skalibs/allreadwrite.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/djbunix.h>
@@ -9,7 +10,7 @@
 
 int slurp (stralloc *sa, int fd)
 {
-  size_t salen = sa->len ;
+  size_t sabase = sa->len ;
   int wasnull = !sa->s ;
   for (;;)
   {
@@ -18,20 +19,14 @@ int slurp (stralloc *sa, int fd)
     r = fd_read(fd, sa->s + sa->len, N) ;
     switch (r)
     {
-      case -1: goto err ;
-      case 0:
-        stralloc_shrink(sa) ;
-        return 1 ;
-      default:
-        sa->len += r ;
+      case -1 : goto err ;
+      case 0 : return 1 ;
+      default : sa->len += r ;
     }
   }
+
 err:
   if (wasnull) stralloc_free(sa) ;
-  else
-  {
-    sa->len = salen ;
-    stralloc_shrink(sa) ;
-  }
+  else sa->len = sabase ;
   return 0 ;
 }
