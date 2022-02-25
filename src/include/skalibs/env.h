@@ -24,6 +24,8 @@ extern size_t env_merg (char const **, size_t, char const *const *, char const *
 
 #define SKALIBS_ENVDIR_VERBATIM 0x01
 #define SKALIBS_ENVDIR_NOCHOMP 0x02
+#define SKALIBS_ENVDIR_NOCLAMP 0x04
+
 extern int envdir_internal (char const *, stralloc *, unsigned int, char) ;
 #define envdir(path, sa) envdir_internal(path, (sa), 0, '\n')
 #define envdir_chomp(path, sa) envdir_internal(path, (sa), SKALIBS_ENVDIR_NOCHOMP, '\n')

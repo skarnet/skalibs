@@ -57,6 +57,7 @@ src/include/skalibs/unixmessage.h: src/include/skalibs/buffer.h src/include/skal
 src/include/skalibs/unixonacid.h: src/include/skalibs/ancil.h src/include/skalibs/kolbak.h src/include/skalibs/skaclient.h src/include/skalibs/textclient.h src/include/skalibs/textmessage.h src/include/skalibs/unix-timed.h src/include/skalibs/unix-transactional.h src/include/skalibs/unixconnection.h src/include/skalibs/unixmessage.h
 src/libdatastruct/avlnode-internal.h: src/include/skalibs/avlnode.h
 src/libdatastruct/genqdyn-internal.h: src/include/skalibs/genqdyn.h
+src/libenvexec/envdir-internal.h: src/include/skalibs/stralloc.h
 src/librandom/random-internal.h: src/include/skalibs/surf.h
 src/libstdcrypto/sha1-internal.h: src/include/skalibs/sha1.h
 src/libstdcrypto/sha256-internal.h: src/include/skalibs/sha256.h
@@ -127,7 +128,9 @@ src/libenvexec/envalloc_0.o src/libenvexec/envalloc_0.lo: src/libenvexec/envallo
 src/libenvexec/envalloc_make.o src/libenvexec/envalloc_make.lo: src/libenvexec/envalloc_make.c src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/genalloc.h
 src/libenvexec/envalloc_merge.o src/libenvexec/envalloc_merge.lo: src/libenvexec/envalloc_merge.c src/include/skalibs/bytestr.h src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/genalloc.h
 src/libenvexec/envalloc_uniq.o src/libenvexec/envalloc_uniq.lo: src/libenvexec/envalloc_uniq.c src/include/skalibs/bytestr.h src/include/skalibs/envalloc.h src/include/skalibs/genalloc.h
-src/libenvexec/envdir.o src/libenvexec/envdir.lo: src/libenvexec/envdir.c src/include/skalibs/bytestr.h src/include/skalibs/direntry.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/stralloc.h
+src/libenvexec/envdir.o src/libenvexec/envdir.lo: src/libenvexec/envdir.c src/include/skalibs/env.h src/libenvexec/envdir-internal.h
+src/libenvexec/envdir_clamp.o src/libenvexec/envdir_clamp.lo: src/libenvexec/envdir_clamp.c src/include/skalibs/bytestr.h src/include/skalibs/direntry.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/libenvexec/envdir-internal.h src/include/skalibs/stralloc.h
+src/libenvexec/envdir_noclamp.o src/libenvexec/envdir_noclamp.lo: src/libenvexec/envdir_noclamp.c src/include/skalibs/buffer.h src/include/skalibs/bytestr.h src/include/skalibs/direntry.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/libenvexec/envdir-internal.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libenvexec/exec0_ae.o src/libenvexec/exec0_ae.lo: src/libenvexec/exec0_ae.c src/include/skalibs/exec.h
 src/libenvexec/exec_ae.o src/libenvexec/exec_ae.lo: src/libenvexec/exec_ae.c src/include/skalibs/config.h src/include/skalibs/exec.h src/include/skalibs/posixplz.h
 src/libenvexec/mexec0_af.o src/libenvexec/mexec0_af.lo: src/libenvexec/mexec0_af.c src/include/skalibs/exec.h
