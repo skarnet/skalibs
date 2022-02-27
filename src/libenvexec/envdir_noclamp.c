@@ -64,12 +64,12 @@ int envdir_internal_noclamp (char const *path, stralloc *modifs, unsigned int op
       {
         if (errno != EPIPE) goto errfd ;
         if (!(options & SKALIBS_ENVDIR_NOCHOMP)) modifs->len = pos ;
-        if (!stralloc_catb(modifs, "\n", 1)) goto errfd ;
+        modifs->len++ ;
       }
       if (!r) modifs->len = pos - 1 ;
       else
       {
-        size_t i = pos ;
+        modifs->len-- ;
         if (!(options & SKALIBS_ENVDIR_NOCHOMP))
         {
           while (modifs->len-- > pos)
@@ -78,11 +78,11 @@ int envdir_internal_noclamp (char const *path, stralloc *modifs, unsigned int op
             if ((c != ' ') && (c != '\t') && (c != '\r')) break ;
           }
           modifs->len++ ;
-          for (; i < modifs->len ; i++) if (!modifs->s[i]) modifs->s[i] = nullis ;
         }
       }
     }
     fd_close(fd) ;
+    for (; pos < modifs->len ; pos++) if (!modifs->s[pos]) modifs->s[pos] = nullis ;
     if (!stralloc_0(modifs)) goto err ;
     n++ ;
   }
