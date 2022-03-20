@@ -358,7 +358,7 @@ and the grandchild's PID if the current process is the parent.
 
 <p>
 <code> pid_t child_spawn0 (char const *file, char const *const *argv, char const *const *envp) </code> <br />
-Forks and executes a child as with <tt>pathexec_run(file, argv, envp)</tt>.
+Forks and executes a child as with <tt>exec_ae(file, argv, envp)</tt>.
 Returns 0 if it fails, and the pid of the child if it succeeds.
 Implemented via <a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/posix_spawn.html">posix_spawn()</a>
 on systems that support it.
