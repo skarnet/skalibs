@@ -636,6 +636,7 @@ choose cl namespaces 'namespaces'
 choose cl nsgetparent 'NS_GET_PARENT'
 choose cl explicit_bzero 'explicit_bzero()'
 choose cl getrandom 'getrandom()'
+choose cl grndinsecure 'GRND_INSECURE'
 choose cl chroot 'chroot()'
 
 # Here are the evil irreducible run-time sysdeps.
