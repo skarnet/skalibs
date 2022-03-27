@@ -9,9 +9,7 @@
 /*
    Writes 160 bytes of crap into s.
    Certainly not cryptographically secure or 100% unpredictable,
-   but we're only using this to help shuffle the entropy of
-   /dev/urandom or to init an internal SURF PRNG. 
-   iow: we are CS iff the system's RNG is CS.
+   but we're only using this to seed an internal PRNG.
 */
 
 void random_makeseed (char *s)

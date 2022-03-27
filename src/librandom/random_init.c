@@ -47,11 +47,7 @@ int random_fd = -1 ;
 
 int random_init ()
 {
-  char seed[160] ;
   if (random_fd >= 0) return 1 ;
-  random_makeseed(seed) ;
-  surf_init(&surf_here, seed) ;
-  openwritenclose_unsafe("/dev/urandom", seed, 160) ;
   random_fd = openc_readb("/dev/urandom") ;
   return random_fd >= 0 ;
 }
