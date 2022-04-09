@@ -1,5 +1,15 @@
 Changelog for skalibs.
 
+In 2.12.0.0
+-----------
+
+ - librandom revamped (again).
+   * random_init() and random_finish() removed.
+   * random_char() removed.
+   * random_string() renamed to random_buf().
+   * early versions added.
+
+
 In 2.11.2.0
 -----------
 

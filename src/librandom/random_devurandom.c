@@ -1,0 +1,22 @@
+/* ISC license. */
+
+#include <stddef.h>
+
+#include <skalibs/allreadwrite.h>
+#include <skalibs/strerr2.h>
+#include <skalibs/djbunix.h>
+#include <skalibs/random.h>
+
+void random_devurandom (char *s, size_t n)
+{
+  static int random_fd = -1 ;
+  size_t r ;
+  if (random_fd < 0)
+  {
+    random_fd = openbc_read("/dev/urandom") ;
+    if (random_fd < 0)
+      strerr_diefu2sys(111, "open ", "/dev/urandom") ;
+  }
+  r = allread(random_fd, s, n) ;
+  if (r < n) strerr_diefu2sys(111, "read from ", "/dev/urandom") ;
+}

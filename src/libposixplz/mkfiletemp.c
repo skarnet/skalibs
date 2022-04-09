@@ -3,7 +3,7 @@
 #include <string.h>
 #include <errno.h>
 
-#include <skalibs/surf.h>
+#include <skalibs/random.h>
 #include <skalibs/posixplz.h>
 
 int mkfiletemp (char *s, create_func_ref f, mode_t mode, void *data)
@@ -15,7 +15,7 @@ int mkfiletemp (char *s, create_func_ref f, mode_t mode, void *data)
   if (xlen < 6) return (errno = EINVAL, -1) ;
   do
   {
-    autosurf_name(s + len - xlen, xlen) ;
+    random_name_early(s + len - xlen, xlen) ;
     r = (*f)(s, mode, data) ;
   } while (r == -1 && errno == EEXIST) ;
   return r ;

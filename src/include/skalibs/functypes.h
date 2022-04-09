@@ -58,4 +58,10 @@ typedef create_func *create_func_ref ;
 typedef int link_func (char const *, char const *) ;
 typedef link_func *link_func_ref ;
 
+typedef void randomgen_func (char *, size_t) ;
+typedef randomgen_func *randomgen_func_ref ;
+
+typedef uint32_t uint32_func (uint32_t) ;
+typedef uint32_func *uint32_func_ref ;
+
 #endif

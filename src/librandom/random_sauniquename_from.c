@@ -4,14 +4,14 @@
 #include <skalibs/skamisc.h>
 #include <skalibs/random.h>
 
-int random_sauniquename (stralloc *sa, size_t n)
+int random_sauniquename_from (stralloc *sa, size_t n, randomgen_func_ref f)
 {
   size_t base = sa->len ;
   int wasnull = !sa->s ;
   if (!sauniquename(sa)) return 0 ;
   if (!stralloc_readyplus(sa, n+1)) goto err ;
   stralloc_catb(sa, ":", 1) ;
-  random_name(sa->s + sa->len, n) ;
+  random_name_from(sa->s + sa->len, n, f) ;
   sa->len += n ;
   return 1 ;
 

@@ -1,12 +1,10 @@
 /* ISC license. */
 
-#ifndef RANDOM_INTERNAL_H
-#define RANDOM_INTERNAL_H
+#ifndef SKALIBS_RANDOM_INTERNAL_H
+#define SKALIBS_RANDOM_INTERNAL_H
 
-#include <skalibs/surf.h>
+#include <stddef.h>
 
-extern char const *random_oklist ;
-extern int random_fd ;
-extern SURFSchedule surf_here ;
+extern void random_devurandom (char *, size_t) ;
 
 #endif
