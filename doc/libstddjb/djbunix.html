@@ -422,12 +422,25 @@ Returns 1 if it succeeds, and 0 (and sets errno) if it fails. The
 </p>
 
 <p>
+<code> int waitn_posix (pid_t *pids, unsigned int n, int *wstat) </code> <br />
+Like <tt>waitn</tt>, but stores into <em>*wstat</em> the status
+of the last process in the <em>pids</em> array (i.e. <tt>pids[n-1]</tt>).
+</p>
+
+<p>
 <code> int waitn_reap (pid_t *pids, unsigned int n) </code> <br />
 Instantly reaps all zombies whose PIDs are stored in the
 <em>pids</em> array, of size <em>n</em>.
 Returns -1 (and sets errno) if it fails, and the number of reaped
 zombies if it succeeds. The <em>pid</em> array is not guaranteed to
 be unchanged.
+</p>
+
+<p>
+<code> int waitn_reap_posix (pid_t *pids, unsigned int n, int *wstat) </code> <br />
+Like <tt>waitn_reap</tt>, but stores into <em>*wstat</em> the status
+of the last process in the <em>pids</em> array (i.e. <tt>pids[n-1]</tt>),
+if applicable; otherwise <em>*wstat</em> is unchanged.
 </p>
 
 <p>

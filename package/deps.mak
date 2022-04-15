@@ -682,7 +682,9 @@ src/libstddjb/wait_pid_nohang.o src/libstddjb/wait_pid_nohang.lo: src/libstddjb/
 src/libstddjb/wait_pids_nohang.o src/libstddjb/wait_pids_nohang.lo: src/libstddjb/wait_pids_nohang.c src/include/skalibs/djbunix.h
 src/libstddjb/wait_reap.o src/libstddjb/wait_reap.lo: src/libstddjb/wait_reap.c src/include/skalibs/djbunix.h
 src/libstddjb/waitn.o src/libstddjb/waitn.lo: src/libstddjb/waitn.c src/include/skalibs/djbunix.h
+src/libstddjb/waitn_posix.o src/libstddjb/waitn_posix.lo: src/libstddjb/waitn_posix.c src/include/skalibs/djbunix.h
 src/libstddjb/waitn_reap.o src/libstddjb/waitn_reap.lo: src/libstddjb/waitn_reap.c src/include/skalibs/djbunix.h
+src/libstddjb/waitn_reap_posix.o src/libstddjb/waitn_reap_posix.lo: src/libstddjb/waitn_reap_posix.c src/include/skalibs/djbunix.h
 src/libstddjb/waitpid_nointr.o src/libstddjb/waitpid_nointr.lo: src/libstddjb/waitpid_nointr.c src/include/skalibs/djbunix.h
 src/libstddjb/writenclose_unsafe.o src/libstddjb/writenclose_unsafe.lo: src/libstddjb/writenclose_unsafe.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
 src/libstddjb/writevnclose_unsafe.o src/libstddjb/writevnclose_unsafe.lo: src/libstddjb/writevnclose_unsafe.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/siovec.h
