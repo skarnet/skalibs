@@ -3,21 +3,23 @@
 #ifndef SKALIBS_UNIX_TRANSACTIONAL_H
 #define SKALIBS_UNIX_TRANSACTIONAL_H
 
-#include <sys/types.h>
+#include <stddef.h>
 #include <sys/stat.h>
 #include <sys/uio.h>
 
-#include <skalibs/uint64.h>
 #include <skalibs/direntry.h>
 #include <skalibs/stralloc.h>
 
  /* Transactional/reliable filesystem operations */
 
+extern int opengetlnclose (char const *, stralloc *, int) ;
+
 extern int open2_at (int, char const *, int) ;
 extern int open3_at (int, char const *, int, unsigned int) ;
 extern int access_at (int, char const *, int, unsigned int) ;
-
-extern int opengetlnclose (char const *, stralloc *, int) ;
+extern DIR *opendir_at (int, char const *) ;
+extern int stat_at (int, char const *, struct stat *) ;
+extern int lstat_at (int, char const *, struct stat *) ;
 
 extern int open_readat (int, char const *) ;
 extern int open_readatb (int, char const *) ;
@@ -27,10 +29,14 @@ extern int open_truncat (int, char const *) ;
 extern int open_truncatb (int, char const *) ;
 extern int open_appendat (int, char const *) ;
 extern int open_appendatb (int, char const *) ;
-extern DIR *opendir_at (int, char const *) ;
-
-extern int stat_at (int, char const *, struct stat *) ;
-extern int lstat_at (int, char const *, struct stat *) ;
+extern int openc_readat (int, char const *) ;
+extern int openc_readatb (int, char const *) ;
+extern int openc_writeat (int, char const *) ;
+extern int openc_writeatb (int, char const *) ;
+extern int openc_truncat (int, char const *) ;
+extern int openc_truncatb (int, char const *) ;
+extern int openc_appendat (int, char const *) ;
+extern int openc_appendatb (int, char const *) ;
 
 extern size_t openreadnclose_at (int, char const *, char *, size_t) ;
 extern int openslurpclose_at (int, char const *, stralloc *) ;

@@ -34,7 +34,7 @@ int access_at (int dirfd, char const *file, int amode, unsigned int flag)
   if (getuid() != geteuid() || getgid() != getegid())
     return (errno = ENOSYS, -1) ;
   (void)flag ;
-  fdhere = open_read(".") ;
+  fdhere = openc_read(".") ;
   if (fdhere < 0) return -1 ;
   if (fd_chdir(dirfd) < 0)
   {

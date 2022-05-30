@@ -5,7 +5,7 @@
 
 int openslurpclose_at (int dirfd, char const *fn, stralloc *sa)
 {
-  int fd = open_readatb(dirfd, fn) ;
+  int fd = openc_readatb(dirfd, fn) ;
   if (fd < 0) return 0 ;
   if (!slurp(sa, fd))
   {

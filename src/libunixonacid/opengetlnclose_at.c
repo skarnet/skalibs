@@ -11,7 +11,7 @@ int opengetlnclose_at (int dirfd, char const *fn, stralloc *sa, int sep)
   char buf[BUFFER_INSIZE] ;
   buffer b ;
   int r ;
-  int fd = open_readatb(dirfd, fn) ;
+  int fd = openc_readatb(dirfd, fn) ;
   if (fd < 0) return -1 ;
   buffer_init(&b, &buffer_read, fd, buf, BUFFER_INSIZE) ;
   r = skagetln(&b, sa, sep) ;
