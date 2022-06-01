@@ -6,5 +6,6 @@
 #include <skalibs/sha1.h>
 #include <skalibs/sha256.h>
 #include <skalibs/sha512.h>
+#include <skalibs/blake2s.h>
 
 #endif
