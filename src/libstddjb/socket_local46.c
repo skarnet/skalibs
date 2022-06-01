@@ -21,14 +21,14 @@ int socket_local46 (int s, ip46 *ip, uint16_t *port)
   {
     struct sockaddr_in6 *sa6 = (struct sockaddr_in6 *)&sa ;
     memcpy(ip->ip, sa6->sin6_addr.s6_addr, 16) ;
-    uint16_unpack_big((char *)&sa6->sin6_port, port) ;
+    *port = uint16_big(sa6->sin6_port) ;
     ip->is6 = 1 ;
   }
   else if (sa.ss_family == AF_INET)
   {
     struct sockaddr_in *sa4 = (struct sockaddr_in *)&sa ;
     memcpy(ip->ip, &sa4->sin_addr.s_addr, 4) ;
-    uint16_unpack_big((char *)&sa4->sin_port, port) ;
+    *port = uint16_big(sa4->sin_port) ;
     ip->is6 = 0 ;
   }
   else return (errno = EAFNOSUPPORT, -1) ;

@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include <string.h>
+
 #include <skalibs/uint16.h>
 
 void uint16_unpack (char const *s, uint16_t *u)

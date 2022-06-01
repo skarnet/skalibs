@@ -2,6 +2,7 @@
 
 #include <skalibs/sysdeps.h>
 #include <skalibs/nonposix.h>
+
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <string.h>
@@ -17,9 +18,9 @@
 
 int socket_accept6_internal (int s, char *ip6, uint16_t *port, unsigned int options)
 {
+  int fd ;
   struct sockaddr_in6 sa ;
   socklen_t dummy = sizeof sa ;
-  int fd ;
   do
 #ifdef SKALIBS_HASACCEPT4
     fd = accept4(s, (struct sockaddr *)&sa, &dummy, ((options & O_NONBLOCK) ? SOCK_NONBLOCK : 0) | ((options & O_CLOEXEC) ? SOCK_CLOEXEC : 0)) ;
@@ -37,7 +38,7 @@ int socket_accept6_internal (int s, char *ip6, uint16_t *port, unsigned int opti
   }
 #endif
   memcpy(ip6, sa.sin6_addr.s6_addr, 16) ;
-  uint16_unpack_big((char *)&sa.sin6_port, port) ;
+  *port = uint16_big(sa.sin6_port) ;
   return fd ;
 }
 

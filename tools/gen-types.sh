@@ -16,7 +16,7 @@ for i in short int long ; do
   tools/gen-types-internal.sh $i $I $bits < src/headers/signed-template
 done
 
-for i in "$@" ; do
+for i ; do
   un=un
   I=$(echo "$i" | tr a-z A-Z)
   bits=$(getbits "$sysdeps" $i)

@@ -4,9 +4,12 @@
 #define @type@_unpack uint@BITS@_unpack
 #define @type@_unpack_big uint@BITS@_unpack_big
 
-#define @type@_reverse uint@BITS@_reverse
-#define @type@_big_endian uint@BITS@_big_endian
-#define @type@_little_endian uint@BITS@_little_endian
+#define @type@_little uint@BITS@_little
+#define @type@_big uint@BITS@_big
+#define @type@_littlep uint@BITS@_littlep
+#define @type@_bigp uint@BITS@_bigp
+#define @type@_littlen uint@BITS@_littlen
+#define @type@_bign uint@BITS@_bign
 
 #define @TYPE@_FMT UINT@BITS@_FMT
 #define @TYPE@_OFMT UINT@BITS@_OFMT
@@ -38,5 +41,4 @@
 #define @type@0_xscan(s, u) @type@0_scan_base(s, (u), 16)
 #define @type@_bscan(s, u) @type@_scan_base(s, (u), 2)
 #define @type@0_bscan(s, u) @type@0_scan_base(s, (u), 2)
-
 

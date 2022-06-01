@@ -1,10 +1,12 @@
 /* ISC license. */
 
 #include <skalibs/nonposix.h>
+
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <errno.h>
 #include <string.h>
+
 #include <skalibs/uint16.h>
 #include <skalibs/ip46.h>
 #include <skalibs/socket.h>
@@ -20,7 +22,7 @@ ssize_t socket_recv6 (int s, char *buf, size_t len, char *ip6, uint16_t *port)
   while ((r == -1) && (errno == EINTR)) ;
   if (r == -1) return -1 ;
   memcpy(ip6, sa.sin6_addr.s6_addr, 16) ;
-  uint16_unpack_big((char *)&sa.sin6_port, port) ;
+  *port = uint16_big(sa.sin6_port) ;
   return r ;
 }
 

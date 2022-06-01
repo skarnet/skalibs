@@ -58,6 +58,7 @@ src/include/skalibs/unixonacid.h: src/include/skalibs/ancil.h src/include/skalib
 src/libdatastruct/avlnode-internal.h: src/include/skalibs/avlnode.h
 src/libdatastruct/genqdyn-internal.h: src/include/skalibs/genqdyn.h
 src/libenvexec/envdir-internal.h: src/include/skalibs/stralloc.h
+src/libstdcrypto/blake2s-internal.h: src/include/skalibs/blake2s.h
 src/libstdcrypto/sha1-internal.h: src/include/skalibs/sha1.h
 src/libstdcrypto/sha256-internal.h: src/include/skalibs/sha256.h
 src/libstdcrypto/sha512-internal.h: src/include/skalibs/sha512.h
@@ -177,6 +178,10 @@ src/librandom/random_uint32_from.o src/librandom/random_uint32_from.lo: src/libr
 src/librandom/random_unsort_from.o src/librandom/random_unsort_from.lo: src/librandom/random_unsort_from.c src/include/skalibs/random.h
 src/librandom/surf.o src/librandom/surf.lo: src/librandom/surf.c src/include/skalibs/surf.h src/include/skalibs/uint32.h
 src/librandom/surf_init.o src/librandom/surf_init.lo: src/librandom/surf_init.c src/include/skalibs/surf.h src/include/skalibs/uint32.h
+src/libstdcrypto/blake2s_final.o src/libstdcrypto/blake2s_final.lo: src/libstdcrypto/blake2s_final.c src/libstdcrypto/blake2s-internal.h src/include/skalibs/blake2s.h src/include/skalibs/uint32.h
+src/libstdcrypto/blake2s_init.o src/libstdcrypto/blake2s_init.lo: src/libstdcrypto/blake2s_init.c src/include/skalibs/blake2s.h
+src/libstdcrypto/blake2s_transform.o src/libstdcrypto/blake2s_transform.lo: src/libstdcrypto/blake2s_transform.c src/libstdcrypto/blake2s-internal.h src/include/skalibs/blake2s.h src/include/skalibs/uint32.h
+src/libstdcrypto/blake2s_update.o src/libstdcrypto/blake2s_update.lo: src/libstdcrypto/blake2s_update.c src/libstdcrypto/blake2s-internal.h src/include/skalibs/blake2s.h
 src/libstdcrypto/sha1_feed.o src/libstdcrypto/sha1_feed.lo: src/libstdcrypto/sha1_feed.c src/include/skalibs/bytestr.h src/libstdcrypto/sha1-internal.h src/include/skalibs/sha1.h
 src/libstdcrypto/sha1_final.o src/libstdcrypto/sha1_final.lo: src/libstdcrypto/sha1_final.c src/libstdcrypto/sha1-internal.h src/include/skalibs/sha1.h src/include/skalibs/uint32.h
 src/libstdcrypto/sha1_init.o src/libstdcrypto/sha1_init.lo: src/libstdcrypto/sha1_init.c src/include/skalibs/sha1.h
@@ -499,15 +504,14 @@ src/libstddjb/socket_bind4.o src/libstddjb/socket_bind4.lo: src/libstddjb/socket
 src/libstddjb/socket_bind4r.o src/libstddjb/socket_bind4r.lo: src/libstddjb/socket_bind4r.c src/include/skalibs/nonposix.h src/include/skalibs/socket.h
 src/libstddjb/socket_bind6.o src/libstddjb/socket_bind6.lo: src/libstddjb/socket_bind6.c src/include/skalibs/ip46.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h src/include/skalibs/uint16.h
 src/libstddjb/socket_bind6r.o src/libstddjb/socket_bind6r.lo: src/libstddjb/socket_bind6r.c src/include/skalibs/nonposix.h src/include/skalibs/socket.h
-src/libstddjb/socket_conn4.o src/libstddjb/socket_conn4.lo: src/libstddjb/socket_conn4.c src/include/skalibs/nonposix.h src/include/skalibs/socket.h src/include/skalibs/uint16.h
-src/libstddjb/socket_conn4_u32.o src/libstddjb/socket_conn4_u32.lo: src/libstddjb/socket_conn4_u32.c src/include/skalibs/socket.h src/include/skalibs/uint32.h
-src/libstddjb/socket_conn6.o src/libstddjb/socket_conn6.lo: src/libstddjb/socket_conn6.c src/include/skalibs/ip46.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h src/include/skalibs/uint16.h
+src/libstddjb/socket_connect4.o src/libstddjb/socket_connect4.lo: src/libstddjb/socket_connect4.c src/include/skalibs/nonposix.h src/include/skalibs/socket.h src/include/skalibs/uint16.h
+src/libstddjb/socket_connect4_u32.o src/libstddjb/socket_connect4_u32.lo: src/libstddjb/socket_connect4_u32.c src/include/skalibs/socket.h src/include/skalibs/uint32.h
+src/libstddjb/socket_connect6.o src/libstddjb/socket_connect6.lo: src/libstddjb/socket_connect6.c src/include/skalibs/ip46.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h src/include/skalibs/uint16.h
 src/libstddjb/socket_connected.o src/libstddjb/socket_connected.lo: src/libstddjb/socket_connected.c src/include/skalibs/allreadwrite.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h
 src/libstddjb/socket_deadlineconnstamp4.o src/libstddjb/socket_deadlineconnstamp4.lo: src/libstddjb/socket_deadlineconnstamp4.c src/include/skalibs/error.h src/include/skalibs/socket.h
 src/libstddjb/socket_deadlineconnstamp46.o src/libstddjb/socket_deadlineconnstamp46.lo: src/libstddjb/socket_deadlineconnstamp46.c src/include/skalibs/error.h src/include/skalibs/ip46.h src/include/skalibs/socket.h
 src/libstddjb/socket_deadlineconnstamp4_u32.o src/libstddjb/socket_deadlineconnstamp4_u32.lo: src/libstddjb/socket_deadlineconnstamp4_u32.c src/include/skalibs/socket.h src/include/skalibs/uint32.h
 src/libstddjb/socket_deadlineconnstamp6.o src/libstddjb/socket_deadlineconnstamp6.lo: src/libstddjb/socket_deadlineconnstamp6.c src/include/skalibs/error.h src/include/skalibs/socket.h
-src/libstddjb/socket_delay.o src/libstddjb/socket_delay.lo: src/libstddjb/socket_delay.c src/include/skalibs/nonposix.h src/include/skalibs/socket.h
 src/libstddjb/socket_internal.o src/libstddjb/socket_internal.lo: src/libstddjb/socket_internal.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h src/include/skalibs/sysdeps.h
 src/libstddjb/socket_ioloop.o src/libstddjb/socket_ioloop.lo: src/libstddjb/socket_ioloop.c src/include/skalibs/error.h src/include/skalibs/iopause.h src/include/skalibs/socket.h
 src/libstddjb/socket_ioloop_send4.o src/libstddjb/socket_ioloop_send4.lo: src/libstddjb/socket_ioloop_send4.c src/include/skalibs/socket.h
@@ -524,8 +528,9 @@ src/libstddjb/socket_send4.o src/libstddjb/socket_send4.lo: src/libstddjb/socket
 src/libstddjb/socket_send6.o src/libstddjb/socket_send6.lo: src/libstddjb/socket_send6.c src/include/skalibs/ip46.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h src/include/skalibs/uint16.h
 src/libstddjb/socket_tcp4.o src/libstddjb/socket_tcp4.lo: src/libstddjb/socket_tcp4.c src/include/skalibs/nonposix.h src/include/skalibs/socket.h
 src/libstddjb/socket_tcp6.o src/libstddjb/socket_tcp6.lo: src/libstddjb/socket_tcp6.c src/include/skalibs/djbunix.h src/include/skalibs/ip46.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h
+src/libstddjb/socket_tcpnodelay.o src/libstddjb/socket_tcpnodelay.lo: src/libstddjb/socket_tcpnodelay.c src/include/skalibs/nonposix.h src/include/skalibs/socket.h
 src/libstddjb/socket_timeoutconn.o src/libstddjb/socket_timeoutconn.lo: src/libstddjb/socket_timeoutconn.c src/include/skalibs/socket.h src/include/skalibs/tai.h
-src/libstddjb/socket_tryr.o src/libstddjb/socket_tryr.lo: src/libstddjb/socket_tryr.c src/include/skalibs/nonposix.h src/include/skalibs/socket.h
+src/libstddjb/socket_tryreservein.o src/libstddjb/socket_tryreservein.lo: src/libstddjb/socket_tryreservein.c src/include/skalibs/nonposix.h src/include/skalibs/socket.h
 src/libstddjb/socket_udp4.o src/libstddjb/socket_udp4.lo: src/libstddjb/socket_udp4.c src/include/skalibs/nonposix.h src/include/skalibs/socket.h
 src/libstddjb/socket_udp6.o src/libstddjb/socket_udp6.lo: src/libstddjb/socket_udp6.c src/include/skalibs/djbunix.h src/include/skalibs/ip46.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h
 src/libstddjb/socket_waitconn.o src/libstddjb/socket_waitconn.lo: src/libstddjb/socket_waitconn.c src/include/skalibs/allreadwrite.h src/include/skalibs/iopause.h src/include/skalibs/socket.h
@@ -636,20 +641,22 @@ src/libstddjb/ucharn_scan_little.o src/libstddjb/ucharn_scan_little.lo: src/libs
 src/libstddjb/ucspi_get.o src/libstddjb/ucspi_get.lo: src/libstddjb/ucspi_get.c src/include/skalibs/env.h
 src/libstddjb/uint160_scan.o src/libstddjb/uint160_scan.lo: src/libstddjb/uint160_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint16.h
 src/libstddjb/uint16_bswap.o src/libstddjb/uint16_bswap.lo: src/libstddjb/uint16_bswap.c src/include/skalibs/uint16.h
+src/libstddjb/uint16_bswapn.o src/libstddjb/uint16_bswapn.lo: src/libstddjb/uint16_bswapn.c src/include/skalibs/uint16.h
+src/libstddjb/uint16_bswapp.o src/libstddjb/uint16_bswapp.lo: src/libstddjb/uint16_bswapp.c src/include/skalibs/uint16.h
 src/libstddjb/uint16_fmtlist.o src/libstddjb/uint16_fmtlist.lo: src/libstddjb/uint16_fmtlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint16.h
 src/libstddjb/uint16_pack.o src/libstddjb/uint16_pack.lo: src/libstddjb/uint16_pack.c src/include/skalibs/uint16.h
 src/libstddjb/uint16_pack_big.o src/libstddjb/uint16_pack_big.lo: src/libstddjb/uint16_pack_big.c src/include/skalibs/uint16.h
-src/libstddjb/uint16_reverse.o src/libstddjb/uint16_reverse.lo: src/libstddjb/uint16_reverse.c src/include/skalibs/uint16.h
 src/libstddjb/uint16_scan.o src/libstddjb/uint16_scan.lo: src/libstddjb/uint16_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint16.h src/include/skalibs/uint64.h
 src/libstddjb/uint16_scanlist.o src/libstddjb/uint16_scanlist.lo: src/libstddjb/uint16_scanlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint16.h
 src/libstddjb/uint16_unpack.o src/libstddjb/uint16_unpack.lo: src/libstddjb/uint16_unpack.c src/include/skalibs/uint16.h
 src/libstddjb/uint16_unpack_big.o src/libstddjb/uint16_unpack_big.lo: src/libstddjb/uint16_unpack_big.c src/include/skalibs/uint16.h
 src/libstddjb/uint320_scan.o src/libstddjb/uint320_scan.lo: src/libstddjb/uint320_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint32.h
 src/libstddjb/uint32_bswap.o src/libstddjb/uint32_bswap.lo: src/libstddjb/uint32_bswap.c src/include/skalibs/uint32.h
+src/libstddjb/uint32_bswapn.o src/libstddjb/uint32_bswapn.lo: src/libstddjb/uint32_bswapn.c src/include/skalibs/uint32.h
+src/libstddjb/uint32_bswapp.o src/libstddjb/uint32_bswapp.lo: src/libstddjb/uint32_bswapp.c src/include/skalibs/uint32.h
 src/libstddjb/uint32_fmtlist.o src/libstddjb/uint32_fmtlist.lo: src/libstddjb/uint32_fmtlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint32.h
 src/libstddjb/uint32_pack.o src/libstddjb/uint32_pack.lo: src/libstddjb/uint32_pack.c src/include/skalibs/uint32.h
 src/libstddjb/uint32_pack_big.o src/libstddjb/uint32_pack_big.lo: src/libstddjb/uint32_pack_big.c src/include/skalibs/uint32.h
-src/libstddjb/uint32_reverse.o src/libstddjb/uint32_reverse.lo: src/libstddjb/uint32_reverse.c src/include/skalibs/uint32.h
 src/libstddjb/uint32_scan.o src/libstddjb/uint32_scan.lo: src/libstddjb/uint32_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
 src/libstddjb/uint32_scanlist.o src/libstddjb/uint32_scanlist.lo: src/libstddjb/uint32_scanlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint32.h
 src/libstddjb/uint32_unpack.o src/libstddjb/uint32_unpack.lo: src/libstddjb/uint32_unpack.c src/include/skalibs/uint32.h
@@ -658,12 +665,13 @@ src/libstddjb/uint640_fmt_generic.o src/libstddjb/uint640_fmt_generic.lo: src/li
 src/libstddjb/uint640_scan.o src/libstddjb/uint640_scan.lo: src/libstddjb/uint640_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint64.h
 src/libstddjb/uint640_scan_base_max.o src/libstddjb/uint640_scan_base_max.lo: src/libstddjb/uint640_scan_base_max.c src/include/skalibs/fmtscan.h src/include/skalibs/uint64.h
 src/libstddjb/uint64_bswap.o src/libstddjb/uint64_bswap.lo: src/libstddjb/uint64_bswap.c src/include/skalibs/uint64.h
+src/libstddjb/uint64_bswapn.o src/libstddjb/uint64_bswapn.lo: src/libstddjb/uint64_bswapn.c src/include/skalibs/uint64.h
+src/libstddjb/uint64_bswapp.o src/libstddjb/uint64_bswapp.lo: src/libstddjb/uint64_bswapp.c src/include/skalibs/uint64.h
 src/libstddjb/uint64_fmt_generic.o src/libstddjb/uint64_fmt_generic.lo: src/libstddjb/uint64_fmt_generic.c src/include/skalibs/fmtscan.h src/include/skalibs/uint64.h
 src/libstddjb/uint64_fmtlist.o src/libstddjb/uint64_fmtlist.lo: src/libstddjb/uint64_fmtlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint64.h
 src/libstddjb/uint64_fmtlist_generic.o src/libstddjb/uint64_fmtlist_generic.lo: src/libstddjb/uint64_fmtlist_generic.c src/include/skalibs/uint64.h
 src/libstddjb/uint64_pack.o src/libstddjb/uint64_pack.lo: src/libstddjb/uint64_pack.c src/include/skalibs/uint64.h
 src/libstddjb/uint64_pack_big.o src/libstddjb/uint64_pack_big.lo: src/libstddjb/uint64_pack_big.c src/include/skalibs/uint64.h
-src/libstddjb/uint64_reverse.o src/libstddjb/uint64_reverse.lo: src/libstddjb/uint64_reverse.c src/include/skalibs/uint64.h
 src/libstddjb/uint64_scan.o src/libstddjb/uint64_scan.lo: src/libstddjb/uint64_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint64.h
 src/libstddjb/uint64_scan_base_max.o src/libstddjb/uint64_scan_base_max.lo: src/libstddjb/uint64_scan_base_max.c src/include/skalibs/fmtscan.h src/include/skalibs/uint64.h
 src/libstddjb/uint64_scanlist.o src/libstddjb/uint64_scanlist.lo: src/libstddjb/uint64_scanlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint64.h

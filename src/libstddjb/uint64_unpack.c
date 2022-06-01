@@ -1,6 +1,7 @@
 /* ISC license. */
 
 #include <string.h>
+
 #include <skalibs/uint64.h>
 
 void uint64_unpack (char const *s, uint64_t *u)

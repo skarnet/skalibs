@@ -1,10 +1,12 @@
 /* ISC license. */
 
 #include <skalibs/nonposix.h>
+
 #include <errno.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <string.h>
+
 #include <skalibs/uint16.h>
 #include <skalibs/ip46.h>
 #include <skalibs/socket.h>
@@ -15,10 +17,9 @@ int socket_remote6 (int s, char *ip, uint16_t *port)
 {
   struct sockaddr_in6 sa ;
   socklen_t dummy = sizeof sa ;
-  if (getpeername(s, (struct sockaddr *)&sa, &dummy) == -1)
-    return -1 ;
+  if (getpeername(s, (struct sockaddr *)&sa, &dummy) == -1) return -1 ;
   memcpy(ip, sa.sin6_addr.s6_addr, 16) ;
-  uint16_unpack_big((char *)&sa.sin6_port, port) ;
+  *port = uint16_big(sa.sin6_port) ;
   return 0 ;
 }
 

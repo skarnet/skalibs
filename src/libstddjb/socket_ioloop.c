@@ -1,6 +1,7 @@
 /* ISC license. */
 
 #include <errno.h>
+
 #include <skalibs/error.h>
 #include <skalibs/iopause.h>
 #include <skalibs/socket.h>
