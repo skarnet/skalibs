@@ -36,7 +36,6 @@ int selfpipe_trap (int sig)
 
 int selfpipe_trap (int sig)
 {
-  sigset_t set ;
   if (selfpipe_fd < 0) return (errno = EBADF, 0) ;
   if (!sig_catch(sig, &selfpipe_tophalf)) return 0 ;
   sigaddset(&selfpipe_caught, sig) ;
