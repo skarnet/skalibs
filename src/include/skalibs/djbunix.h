@@ -84,6 +84,7 @@ extern int sagethostname (stralloc *) ;
 
 extern int slurp (stralloc *, int) ;
 extern int openslurpclose (stralloc *, char const *) ;
+extern ssize_t readnclose (int fd, char *, size_t) ;  /* closes fd */
 extern ssize_t openreadnclose (char const *, char *, size_t) ;
 extern ssize_t openreadnclose_nb (char const *, char *, size_t) ;
 extern int openreadfileclose (char const *, stralloc *, size_t) ;

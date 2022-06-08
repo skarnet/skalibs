@@ -522,7 +522,7 @@ Returns 1 if it succeeds, and 0 (and sets errno) if it fails.
 <code> ssize_t openreadnclose (char const *file, char *s, size_t n) </code> <br />
 Reads at most <em>n</em> bytes from file <em>file</em> into preallocated
 buffer <em>s</em>. Returns -1 (and sets errno) if it fails; else returns the
-number of read bytes. If that number is not <em>n</em>, errno is set to EPIPE.
+number of read bytes.
 </p>
 
 <p>

@@ -8,7 +8,9 @@ In 2.12.0.0
    * random_char() removed.
    * random_string() renamed to random_buf().
    * early versions added.
- - New djbunix functions: waitn_posix(), waitn_reap_posix()
+ - New djbunix functions: waitn_posix(), waitn_reap_posix().
+ - readnclose() made public, now doesn't touch errno on success.
+ - openreadnclose_at() now returns a ssize_t.
 
 
 In 2.11.2.0

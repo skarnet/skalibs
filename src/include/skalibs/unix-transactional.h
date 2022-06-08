@@ -38,7 +38,7 @@ extern int openc_truncatb (int, char const *) ;
 extern int openc_appendat (int, char const *) ;
 extern int openc_appendatb (int, char const *) ;
 
-extern size_t openreadnclose_at (int, char const *, char *, size_t) ;
+extern ssize_t openreadnclose_at (int, char const *, char *, size_t) ;
 extern int openslurpclose_at (int, char const *, stralloc *) ;
 extern int opengetlnclose_at (int, char const *, stralloc *, int) ;
 
