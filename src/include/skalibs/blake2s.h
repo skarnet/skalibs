@@ -17,10 +17,10 @@ struct blake2s_ctx_s
   char buf[64] ;
 } ;
 
-#define BLAKE2S_INIT(outlen) { \
+#define BLAKE2S_INIT(len) { \
   .buflen = 0, \
-  .outlen = outlen, \
-  .h = { 0x6A09E667UL ^ (0x01010000 | outlen), 0xBB67AE85UL, 0x3C6EF372UL, 0xA54FF53AUL, 0x510E527FUL, 0x9B05688CUL, 0x1F83D9ABUL, 0x5BE0CD19UL }, \
+  .outlen = len, \
+  .h = { 0x6A09E667UL ^ (0x01010000 | len), 0xBB67AE85UL, 0x3C6EF372UL, 0xA54FF53AUL, 0x510E527FUL, 0x9B05688CUL, 0x1F83D9ABUL, 0x5BE0CD19UL }, \
   .t = { 0, 0 }, \
   .f = { 0, 0 }, \
   .buf = { 0 } }

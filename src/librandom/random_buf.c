@@ -35,7 +35,7 @@ void random_buf (char *s, size_t n)
 
 #elif defined(SKALIBS_HASDEVURANDOM)
 
-#include "random-internal.h"
+#include <skalibs/random.h>
 
 void random_buf (char *s, size_t n)
 {

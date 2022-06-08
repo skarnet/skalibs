@@ -169,8 +169,8 @@ src/libposixplz/strnlen.o src/libposixplz/strnlen.lo: src/libposixplz/strnlen.c 
 src/libposixplz/touch.o src/libposixplz/touch.lo: src/libposixplz/touch.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h
 src/libposixplz/unlink_void.o src/libposixplz/unlink_void.lo: src/libposixplz/unlink_void.c src/include/skalibs/posixplz.h
 src/librandom/autosurf.o src/librandom/autosurf.lo: src/librandom/autosurf.c src/include/skalibs/random.h src/include/skalibs/sha1.h src/include/skalibs/surf.h src/include/skalibs/tai.h src/include/skalibs/uint32.h
-src/librandom/random_buf.o src/librandom/random_buf.lo: src/librandom/random_buf.c src/include/skalibs/nonposix.h src/librandom/random-internal.h src/include/skalibs/random.h src/include/skalibs/surf.h src/include/skalibs/sysdeps.h
-src/librandom/random_buf_early.o src/librandom/random_buf_early.lo: src/librandom/random_buf_early.c src/include/skalibs/nonposix.h src/librandom/random-internal.h src/include/skalibs/random.h src/include/skalibs/surf.h src/include/skalibs/sysdeps.h
+src/librandom/random_buf.o src/librandom/random_buf.lo: src/librandom/random_buf.c src/include/skalibs/nonposix.h src/include/skalibs/random.h src/include/skalibs/surf.h src/include/skalibs/sysdeps.h
+src/librandom/random_buf_early.o src/librandom/random_buf_early.lo: src/librandom/random_buf_early.c src/include/skalibs/nonposix.h src/include/skalibs/random.h src/include/skalibs/surf.h src/include/skalibs/sysdeps.h
 src/librandom/random_devurandom.o src/librandom/random_devurandom.lo: src/librandom/random_devurandom.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/random.h src/include/skalibs/strerr2.h
 src/librandom/random_name_from.o src/librandom/random_name_from.lo: src/librandom/random_name_from.c src/include/skalibs/functypes.h src/include/skalibs/random.h
 src/librandom/random_sauniquename_from.o src/librandom/random_sauniquename_from.lo: src/librandom/random_sauniquename_from.c src/include/skalibs/random.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h

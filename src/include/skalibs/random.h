@@ -9,6 +9,8 @@
 #include <skalibs/functypes.h>
 #include <skalibs/stralloc.h>
 
+extern void random_devurandom (char *, size_t) ;
+
 extern void random_buf (char *, size_t) ;
 extern void random_buf_early (char *, size_t) ;
 
