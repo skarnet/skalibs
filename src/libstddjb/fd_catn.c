@@ -14,10 +14,12 @@ off_t fd_catn (int from, int to, off_t n)
   char buf[BSIZE] ;
   while (n >= BSIZE)
   {
+    size_t v ;
     ssize_t r = fd_read(from, buf, BSIZE) ;
     if (r == -1) return w ;
     if (!r) return (errno = EPIPE, w) ;
-    if (allwrite(to, buf, r) < r) return w ;
+    v = allwrite(to, buf, r) ;
+    if (v < r) return w + v ;
     n -= r ; w += r ;
   }
 
