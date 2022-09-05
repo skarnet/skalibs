@@ -1,9 +1,8 @@
 /* ISC license. */
 
 /*
-   This header MUST be paired with skalibs/nonposix.h AND
-   skalibs/bsdsnowflake.h, both of which must be included
-   before system headers.
+   This header MUST be paired with skalibs/nonposix.h,
+   which must be included before system headers.
 */
 
 #ifndef SKALIBS_NSIG_H
@@ -18,17 +17,22 @@
 #  define NSIG (SIGMAX + 1)
 # elif defined(_SIGMAX)
 #  define NSIG(_SIGMAX + 1)
-# elif defined(SKALIBS_BSD_SUCKS)
-#  define NSIG 64
 # else
 #  define NSIG 65
 # endif
 #endif
 
-#ifdef SKALIBS_BSD_SUCKS
-# define SKALIBS_NSIG (NSIG+1)
-#else
+/*
+  Some systems (FreeBSD, Darwin) incorrectly define NSIG as 32
+  (their highest signal number) when it should be 33 (highest plus one).
+  OpenBSD gets this right so we can't use SKALIBS_BSD_SUCKS.
+  The heuristic we use is: if NSIG is a power of two, it's wrong.
+*/
+
+#if NSIG & (NSIG - 1)
 # define SKALIBS_NSIG NSIG
+#else
+# define SKALIBS_NSIG (NSIG+1)
 #endif
 
 #endif

@@ -30,7 +30,6 @@ int selfpipe_trapset (sigset_t const *set)
 #else
 
 #include <skalibs/nonposix.h>
-#include <skalibs/bsdsnowflake.h>
 
 #include <errno.h>
 #include <signal.h>

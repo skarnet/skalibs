@@ -9,7 +9,7 @@
    - skalibs/sysdeps.h: system-dependent feature test macros
    - skalibs/nonposix.h: pre-system headers definitions for POSIX extensions
    - skalibs/bsdsnowflake.h: pre-system headers BSD-specific workarounds
-   - skalibs/nsig.h: SKALIBS_NSIG definition, requires nonposix+bsdsnowflake
+   - skalibs/nsig.h: SKALIBS_NSIG definition, requires nonposix
    - skalibs/posixishard.h: post-system headers workarounds for conformance failures
 */
 
