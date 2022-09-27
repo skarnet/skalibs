@@ -91,8 +91,8 @@ borrow any code from it.
 <h2> Data structures </h2>
 
 <p>
- A <tt>tai_t</tt> structure holds an absolute date with a one-second
-precision. A <tt>tain_t</tt> structure holds an absolute date with a
+ A <tt>tai</tt> structure holds an absolute date with a one-second
+precision. A <tt>tain</tt> structure holds an absolute date with a
 maximum of one-nanosecond precision, as permitted by the underlying system
 call. If <a href="../flags.html#usert">flag-usert</a> is clear, the system
 clock will be read via
@@ -101,12 +101,12 @@ system call, which has a one-microsecond precision; if it is set, the
 system clock will be read via the 
 <a href="https://www.opengroup.org/onlinepubs/9699919799/functions/clock_gettime.html">clock_gettime()</a>
 system call, which has a one-nanosecond precision. In either case, a current
-<tt>tain_t</tt> will be unable to be more precise than the underlying
+<tt>tain</tt> will be unable to be more precise than the underlying
 implementation.
 </p>
 
 <p>
- A <tt>tai_t</tt>, as well as a <tt>tain_t</tt>, can also
+ A <tt>tai</tt>, as well as a <tt>tain</tt>, can also
 hold a (possibly negative) relative time, i.e. a difference of absolute
 dates. It is up to the programmer to make sure that a relative time is
 never interpreted as an absolute TAI64 date, and vice-versa.
@@ -117,7 +117,7 @@ never interpreted as an absolute TAI64 date, and vice-versa.
 <h3> Wallclock operations </h3>
 
 <p>
-<code> int tai_now (tai_t *t) </code> <br />
+<code> int tai_now (tai *t) </code> <br />
 Writes the current time as a TAI value to *<em>t</em>, with a
 1-second precision. The current time is based on the system clock.
 Make sure skalibs has been compiled with or without the
@@ -129,10 +129,10 @@ it fails.
 </p>
 
 <p>
-<code> int sysclock_get (tain_t *a) </code> <br />
+<code> int sysclock_get (tain *a) </code> <br />
 Reads the current value of the system clock (as in CLOCK_REALTIME) into *<em>a</em>.
 Returns 1 if it succeeds or 0 (and sets errno) if it fails.
-Note that despite being a <tt>tain_t</tt>, *<em>a</em>
+Note that despite being a <tt>tain</tt>, *<em>a</em>
 <strong>does not contain a TAI value</strong> - it only contains
 an internal, Y2038-safe representation of the value of the system
 clock, which should be either TAI-10 or UTC. You should not use
@@ -140,14 +140,14 @@ this function directly unless you know exactly what you are doing.
 </p>
 
 <p>
-<code> int sysclock_set (tain_t const *a) </code> <br />
+<code> int sysclock_set (tain const *a) </code> <br />
 Sets the system clock to *<em>a</em>, provided *<em>a</em> has
 the correct internal representation. You should not use this
 function directly unless you know exactly what you are doing.
 </p>
 
 <p>
-<code> int tain_wallclock_read (tain_t *a) </code> <br />
+<code> int tain_wallclock_read (tain *a) </code> <br />
 Reads the current time into *<em>a</em>, as a TAI64N value.
 Returns 1 if it succeeds or 0 (and sets errno) if it fails.
 Here <em>a</em> contains a valid TAI64N stamp, no matter what the
@@ -156,7 +156,7 @@ on it.
 </p>
 
 <p>
-<code> int tain_setnow (tain_t const *a) </code> <br />
+<code> int tain_setnow (tain const *a) </code> <br />
 Sets the current time to *<em>a</em>.
 Returns 1 if it succeeds or 0 (and sets errno) if it fails.
 <em>a</em> must contain a valid TAI64N stamp; proper
@@ -165,7 +165,7 @@ the right format for the system clock.
 </p>
 
 <p>
-<code> int tain_now_set_wallclock (tain_t *a) </code> <br />
+<code> int tain_now_set_wallclock (tain *a) </code> <br />
 Tells skalibs that future invocations of <tt>tain_now()</tt>
 (see below) should use a wall clock, i.e. the system time
 as returned by <tt>clock_gettime(CLOCK_REALTIME)</tt> or
@@ -186,7 +186,7 @@ Otherwise, they will fail with errno set to ENOSYS.
 </p>
 
 <p>
-<code> int tain_stopwatch_init (tain_t *a, clock_t cl, tain_t *offset) </code> <br />
+<code> int tain_stopwatch_init (tain *a, clock_t cl, tain *offset) </code> <br />
 Initializes a stopwatch in *<em>offset</em>, using a clock named <em>cl</em>.
 Typically, <em>cl</em> is something like CLOCK_MONOTONIC, when it is defined
 by the system. The actual value of
@@ -208,7 +208,7 @@ to zero.
 </p>
 
 <p>
-<code> int tain_stopwatch_read (tain_t *a, clock_t cl, tain_t const *offset) </code> <br />
+<code> int tain_stopwatch_read (tain *a, clock_t cl, tain const *offset) </code> <br />
  Gives the absolute time, as a TAI64N value, in *<em>a</em>. This
 absolute time is computed as a linear increase (as measured with
 the <em>cl</em> clock, which should be a monotonic clock such as
@@ -220,7 +220,7 @@ The function returns 1 if it succeeds or 0 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> int tain_now_set_stopwatch (tain_t *a) </code> <br />
+<code> int tain_now_set_stopwatch (tain *a) </code> <br />
 Tells skalibs that future invocations of <tt>tain_now()</tt>
 (see below) should use a stopwatch, i.e. the system time
 as returned by <tt>clock_gettime(CLOCK_MONOTONIC)</tt> or similar,
@@ -240,7 +240,7 @@ is returned in *<em>a</em>.
 <h3> All-purpose time reading </h3>
 
 <p>
-<code> int tain_now (tain_t *a) </code> <br />
+<code> int tain_now (tain *a) </code> <br />
 Writes the current time, as a TAI value, to *<em>a</em>. This is the
 function you should use by default. It returns 1 if it succeeds or
 0 (and sets errno) if it fails.
@@ -279,8 +279,8 @@ use the STAMP global variable to store the current timestamp.)
 format to another; they do not make any assumption about the
 format of the time contained in those structures. For instance,
 for the <tt>tai_from_timeval</tt> function, if the struct timeval
-contains an absolute UTC time, then the tai_t will also contain
-the same UTC time. Despite being a tai_t, it may contain
+contains an absolute UTC time, then the tai will also contain
+the same UTC time. Despite being a tai, it may contain
 something else than TAI time.
 </p>
 
@@ -290,32 +290,32 @@ system clock format to TAI, see the next section.
 </p>
 
 <p>
-<code> int tai_from_time (tai_t *t, time_t u) <br />
-int tai_relative_from_time (tai_t *t, time_t u) </code> <br />
+<code> int tai_from_time (tai *t, time_t u) <br />
+int tai_relative_from_time (tai *t, time_t u) </code> <br />
 Those functions convert an absolute (resp. relative) time in a
 time_t to an absolute (resp. relative)
-time in a tai_t, with a 1-second precision. They return 1,
+time in a tai, with a 1-second precision. They return 1,
 unless the time_t value is invalid (in which case they return 0).
 </p>
 
 <p>
-<code> int time_from_tai (time_t *u, tai_t const *t) <br />
-int time_from_tai_relative (time_t *u, tai_t const *t) </code> <br />
+<code> int time_from_tai (time_t *u, tai const *t) <br />
+int time_from_tai_relative (time_t *u, tai const *t) </code> <br />
 The inverse functions of the previous ones. Be aware that
 time_t is 32 bits on some systems and cannot store all values
-of a tai_t (in which case the functions will return 0 EOVERFLOW).
+of a tai (in which case the functions will return 0 EOVERFLOW).
 </p>
 
 <p>
-<code> int tain_from_timeval (tain_t *a, struct timeval const *tv) <br />
-int tain_relative_from_timeval (tain_t *a, struct timeval const *tv) <br />
-int tain_from_timespec (tain_t *a, struct timespec const *ts) <br />
-int tain_relative_from_timespec (tain_t *a, struct timespec const *ts) <br />
-int timeval_from_tain (struct timeval *tv, tain_t const *a) <br />
-int timeval_from_tain_relative (struct timeval *tv, tain_t const *a) <br />
-int timespec_from_tain (struct timespec *ts, tain_t const *a) <br />
-int timespec_from_tain_relative (struct timespec *ts, tain_t const *a) </code> <br />
-Same conversion operations, between <tt>tain_t</tt> and a
+<code> int tain_from_timeval (tain *a, struct timeval const *tv) <br />
+int tain_relative_from_timeval (tain *a, struct timeval const *tv) <br />
+int tain_from_timespec (tain *a, struct timespec const *ts) <br />
+int tain_relative_from_timespec (tain *a, struct timespec const *ts) <br />
+int timeval_from_tain (struct timeval *tv, tain const *a) <br />
+int timeval_from_tain_relative (struct timeval *tv, tain const *a) <br />
+int timespec_from_tain (struct timespec *ts, tain const *a) <br />
+int timespec_from_tain_relative (struct timespec *ts, tain const *a) </code> <br />
+Same conversion operations, between <tt>tain</tt> and a
 <tt>struct timeval</tt> or <tt>struct timespec</tt>. The 1-microsecond
 (for <tt>struct timeval</tt>) or 1-nanosecond (for <tt>struct timespec</tt>)
 precision is preserved.
@@ -326,8 +326,8 @@ precision is preserved.
 <p>
  Unlike the previous functions, the functions listed here will
 always operate on valid absolute timestamps. Only TAI64 time is
-stored in tai_t structures, and only TAI64N time is stored in
-tain_t structures. These functions will convert to/from TAI,
+stored in tai structures, and only TAI64N time is stored in
+tain structures. These functions will convert to/from TAI,
 from/to the machine system clock format, i.e. TAI-10 or UTC
 depending on whether skalibs was
 compiled with the --enable-tai-clock configure option).
@@ -347,31 +347,31 @@ happen on systems with a 32 bit <tt>time_t</tt>), or other error
 codes.
 </p>
 
-<code> int tai_from_time_sysclock (tai_t *a, time_t t) <br />
-int time_sysclock_from_tai (time_t *t, tai_t const *a) <br />
-int tain_from_timeval_sysclock (tain_t *a, struct timeval const *tv) <br />
-int timeval_sysclock_from_tain (struct timeval *tv, tain_t const *a) <br />
-int tain_from_timespec_sysclock (tain_t *a, struct timespec const *ts) <br />
-int timespec_sysclock_from_tain (struct timespec *ts, tain_t const *a) </code>
+<code> int tai_from_time_sysclock (tai *a, time_t t) <br />
+int time_sysclock_from_tai (time_t *t, tai const *a) <br />
+int tain_from_timeval_sysclock (tain *a, struct timeval const *tv) <br />
+int timeval_sysclock_from_tain (struct timeval *tv, tain const *a) <br />
+int tain_from_timespec_sysclock (tain *a, struct timespec const *ts) <br />
+int timespec_sysclock_from_tain (struct timespec *ts, tain const *a) </code>
 
 <h3> Conversions to/from basic types </h3>
 
 <p>
-<code> int tain_uint (tain_t *a, unsigned int c) </code> <br />
+<code> int tain_uint (tain *a, unsigned int c) </code> <br />
 Stores a relative time of <em>c</em> seconds into <em>a</em>.
 Normally returns 1, but may return 0 EINVAL on pathological numbers.
 </p>
 
 <p>
-<code> int tain_from_millisecs (tain_t *a, int ms) </code> <br />
-This function makes a <tt>tain_t</tt> representing a relative
+<code> int tain_from_millisecs (tain *a, int ms) </code> <br />
+This function makes a <tt>tain</tt> representing a relative
 time of <em>ms</em> milliseconds. <em>ms</em> must be non-negative.
 The function returns 1, unless <em>ms</em> is negative, in which case
 it returns 0 EINVAL.
 </p>
 
 <p>
-<code> int tain_to_millisecs (tain_t const *a) </code> <br />
+<code> int taino_millisecs (tain const *a) </code> <br />
 If *<em>a</em> contains a non-negative relative time that fits into
 a 31-bit integer number of milliseconds, the function returns that
 number. Else it returns -1 EINVAL.
@@ -380,14 +380,14 @@ number. Else it returns -1 EINVAL.
 <h3> Time computations </h3>
 
 <p>
-<code> int tai_add (tai_t *t, tai_t const *t1, tai_t const *t2) </code> <br />
+<code> int tai_add (tai *t, tai const *t1, tai const *t2) </code> <br />
 Stores *<em>t1</em> + *<em>t2</em> into <em>t</em>. Of course, *<em>t1</em>
 and *<em>t2</em> must not both represent absolute times.
 The function normally returns 1, but will return 0 on bad inputs.
 </p>
 
 <p>
-<code> int tai_sub (tai_t *t, tai_t const *t1, tai_t const *t2) </code> <br />
+<code> int tai_sub (tai *t, tai const *t1, tai const *t2) </code> <br />
 Stores *<em>t1</em> - *<em>t2</em> into <em>t</em>. *<em>t1</em> cannot
 be relative if *<em>t2</em> is absolute. If they are both relative or
 both absolute, then *<em>t</em> is relative, else it's absolute.
@@ -395,27 +395,27 @@ The function normally returns 1, but will return 0 on bad inputs.
 </p>
 
 <p>
-<code> int tain_add (tain_t *a, tain_t const *a1, tain_t const *a2) <br />
-int tain_sub (tain_t *a, tain_t const *a1, tain_t const *a2) </code> <br />
-Same thing with <tt>tain_t</tt>.
+<code> int tain_add (tain *a, tain const *a1, tain const *a2) <br />
+int tain_sub (tain *a, tain const *a1, tain const *a2) </code> <br />
+Same thing with <tt>tain</tt>.
 </p>
 
 <p>
-<code> int tain_addsec (tain_t *a, tain_t const *a1, int c) </code> <br />
+<code> int tain_addsec (tain *a, tain const *a1, int c) </code> <br />
 Adds <em>c</em> seconds to *<em>a1</em> and stores the result into <em>a</em>.
 <em>c</em> may be negative.
 </p>
 
 <p>
-<code> void tain_half (tain_t *a, tain_t const *b) </code> <br />
+<code> void tain_half (tain *a, tain const *b) </code> <br />
 Stores *<em>b</em>/2 into <em>a</em>. *<em>b</em> must be relative.
 </p>
 
 <h3> Comparing dates or durations </h3>
 
 <p>
-<code> int tai_less (tai_t const *t1, tai_t const *t2) <br />
-int tain_less (tain_t const *t1, tain_t const *t2) </code> <br />
+<code> int tai_less (tai const *t1, tai const *t2) <br />
+int tain_less (tain const *t1, tain const *t2) </code> <br />
 Those functions return nonzero iff *<em>t1</em> is lesser than *<em>t2</em>.
 *<em>t1</em> and *<em>t2</em> must be both relative, or both absolute.
 </p>
@@ -423,7 +423,7 @@ Those functions return nonzero iff *<em>t1</em> is lesser than *<em>t2</em>.
 <h3> Packing and unpacking </h3>
 
 <p>
-<code> void tai_pack (char *s, tai_t const *t) </code> <br />
+<code> void tai_pack (char *s, tai const *t) </code> <br />
 Marshals *<em>t</em> into the buffer <em>s</em> points to, which
 must be preallocated with at least TAI_PACK (8) characters. Afterwards,
 the buffer contains the
@@ -432,7 +432,7 @@ representation of *<em>t</em>.
 </p>
 
 <p>
-<code> void tai_unpack (char const *s, tai_t *t) </code> <br />
+<code> void tai_unpack (char const *s, tai *t) </code> <br />
 Unmarshals the
 <a href="https://cr.yp.to/libtai/tai64.html#tai64">external TAI64 format</a>
 label pointed to by <em>s</em> (at least TAI_PACK characters) and stores
@@ -440,8 +440,8 @@ the result into <em>t</em>.
 </p>
 
 <p>
-<code> void tain_pack (char *s, tain_t const *a) <br />
-void tain_unpack (char const *s, tain_t *a) </code> <br />
+<code> void tain_pack (char *s, tain const *a) <br />
+void tain_unpack (char const *s, tain *a) </code> <br />
 Same thing with
 <a href="https://cr.yp.to/libtai/tai64.html#tai64n">external TAI64N format</a>,
 using TAIN_PACK (12) characters.
@@ -450,7 +450,7 @@ using TAIN_PACK (12) characters.
 <h3> Formatting and scanning </h3>
 
 <p>
-<code> unsigned int tain_fmt (char *s, tain_t const *a) </code> <br />
+<code> unsigned int tain_fmt (char *s, tain const *a) </code> <br />
 Writes into <em>s</em> an ASCII representation of *<em>a</em> in external
 TAI64N format. <em>s</em> must point to a preallocated buffer of at least
 TAIN_PACK*2 (24) characters. The function returns the number of bytes that
@@ -458,7 +458,7 @@ have been written to <em>s</em> (24).
 </p>
 
 <p>
-<code> unsigned int tain_scan (char const *s, tain_t *a) </code> <br />
+<code> unsigned int tain_scan (char const *s, tain *a) </code> <br />
 Reads 24 characters from <em>s</em>; if those characters are a valid ASCII
 representation of the external TAI64N format of some time value, this value
 is stored into <em>a</em>, and 24 is returned. Else 0 is returned.
@@ -473,13 +473,13 @@ format of an absolute date.
 </p>
 
 <p>
-<code> unsigned int timestamp_fmt (char *s, tain_t const *a) </code> <br />
+<code> unsigned int timestamp_fmt (char *s, tain const *a) </code> <br />
 Writes a TAI64N timestamp representing the absolute date *<em>a</em>
 into the 25 characters pointed to by <em>s</em>. Returns 25.
 </p>
 
 <p>
-<code> unsigned int timestamp_scan (char const *s, tain_t *a) </code> <br />
+<code> unsigned int timestamp_scan (char const *s, tain *a) </code> <br />
 Reads 25 characters at <em>s</em>. If those characters are a valid TAI64N
 timestamp, stores the absolute date in <em>a</em> and returns 25. Else,
 returns 0.

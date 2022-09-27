@@ -114,7 +114,7 @@ Same as the previous function, with the SO_REUSEADDR option.
 </p>
 
 <p>
-<code> int socket_deadlineconnstamp46 (int fd, ip46_t const *a, uint16_t port, tain_t const *deadline, tain_t *stamp) </code> <br />
+<code> int socket_deadlineconnstamp46 (int fd, ip46_t const *a, uint16_t port, tain const *deadline, tain *stamp) </code> <br />
 Attempts to synchronously connect the socket <em>fd</em> to address a<em>a</em>
 and port <em>port</em>. Returns 1 if it succeeds and 0 (and sets errno)
 if it fails. <em>stamp</em> must contain an accurate enough
@@ -153,7 +153,7 @@ Returns 0 in case of success, and -1 (and sets errno) in case of failure.
 
 <p>
 <code> ssize_t socket_recvnb46 (int fd, char *s, size_t len, ip46_t *a, uint16_t *port,
-tain_t const *deadline, tain_t *stamp) </code> <br />
+tain const *deadline, tain *stamp) </code> <br />
 Like <tt>socket_recv46</tt>, except that the function blocks until a datagram
 is received. *<em>stamp</em> must be an accurate enough approximation of the
 current time, and is updated when the function returns. If no datagram has
@@ -162,7 +162,7 @@ arrived by absolute date *<em>deadline</em>, the function returns -1 ETIMEOUT.
 
 <p>
 <code> ssize_t socket_sendnb46 (int fd, char const *s, size_t len, ip46_t const *a, uint16_t port,
-tain_t const *deadline, tain_t *stamp) </code> <br />
+tain const *deadline, tain *stamp) </code> <br />
 Like <tt>socket_send46</tt>, except that the function blocks until a datagram
 has been effectively sent. *<em>stamp</em> must be an accurate enough approximation of the
 current time, and is updated when the function returns. If the message still has

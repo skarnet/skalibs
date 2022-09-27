@@ -54,17 +54,17 @@ Returns 1 on success and 0 (and sets errno) on failure.
 </p>
 
 <p>
-<code> int alarm_timeout (tain_t const *tto) </code> <br />
+<code> int alarm_timeout (tain const *tto) </code> <br />
 Sets a fuse that will raise a SIGALRM after some amount
 of time has passed. The amount of time is described in
 *<em>tto</em>, which is a relative
-<a href="tai.html">tain_t</a>, i.e. a structure containing
+<a href="tai.html">tain</a>, i.e. a structure containing
 a relative TAIN64 time.
 Returns 1 on success and 0 (and sets errno) on failure.
 </p>
 
 <p>
-<code> int alarm_deadline (tain_t const *deadline) </code> <br />
+<code> int alarm_deadline (tain const *deadline) </code> <br />
 Sets a fuse that will raise a SIGALRM when the clock reaches
 *<em>deadline</em>, which is an absolute time expressed in
 <a href="tai.html">TAI64N</a> format.

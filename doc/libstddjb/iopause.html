@@ -77,7 +77,7 @@ argument, the <tt>iopause()</tt> function uses a <em>deadline</em> argument,
 i.e. an absolute time at which it must return 0 if no event has happened
 so far, as well as a <em>stamp</em> argument, i.e. an absolute time meaning
 <em>now</em>. Those arguments are stored in
-<a href="tai.html">tain_t</a>s. Here is why:
+<a href="tai.html">tain</a>s. Here is why:
 </p>
 
 <p>
@@ -153,7 +153,7 @@ that is why <tt>iopause</tt> relies on the <a href="tai.html">tai</a> library.
 <h2> Functions </h2>
 
 <p>
-<code> int iopause (iopause_fd *x, unsigned int len, tain_t const *deadline, tain_t const *stamp) </code> <br />
+<code> int iopause (iopause_fd *x, unsigned int len, tain const *deadline, tain const *stamp) </code> <br />
 Blocks until one of the events described in the <em>x</em> array, of length
 <em>len</em>, happens, or until the absolute date *<em>deadline</em> is
 reached. <em>deadline</em> may be null, in which case the function blocks
@@ -164,7 +164,7 @@ happened, 0 for a timeout, or -1 (and sets errno) for an error.
 </p>
 
 <p>
-<code> int iopause_stamp (iopause_fd *x, unsigned int len, tain_t const *deadline, tain_t *stamp) </code> <br />
+<code> int iopause_stamp (iopause_fd *x, unsigned int len, tain const *deadline, tain *stamp) </code> <br />
 Like <tt>iopause()</tt>, but if <em>stamp</em> is not null, it is updated
 right before the function returns. This helps the user always keep a
 reasonably accurate estimation of the current time in <em>stamp</em>;

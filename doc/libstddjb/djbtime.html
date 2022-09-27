@@ -29,7 +29,7 @@ and implemented in the <tt>libskarnet.a</tt> or <tt>libskarnet.so</tt> library.
 
 <p>
  <tt>djbtime</tt> is a set of functions to convert
-<a href="tai.html">tai_t and tain_t</a> structures, and
+<a href="tai.html">tai and tain</a> structures, and
 <a href="https://cr.yp.to/libtai/tai64.html">TAI time</a>, from and to
 other time formats and user-friendly representations.
 </p>
@@ -37,13 +37,13 @@ other time formats and user-friendly representations.
 <h2> Data structures </h2>
 
 <ul>
- <li> TAI time with 1-second precision is represented as a <a href="tai.html">tai_t</a>. </li>
- <li> TAI time with more precision is represented as a <a href="tai.html">tain_t</a>. </li>
+ <li> TAI time with 1-second precision is represented as a <a href="tai.html">tai</a>. </li>
+ <li> TAI time with more precision is represented as a <a href="tai.html">tain</a>. </li>
  <li> UTC time is represented as an unsigned 64-bit integer
 equal to 2^62 added to the number of seconds since the Epoch. It's a trivial extension of
 the standard 32-bit Unix time that will expire in 2038. </li>
  <li> Broken-down GMT or local time with more than a 1-second precision is stored in a
-<tt>localtmn_t</tt> structure, containing a <tt>struct tm</tt> <em>tm</em>
+<tt>localtmn</tt> structure, containing a <tt>struct tm</tt> <em>tm</em>
 field and an unsigned long <em>nano</em> field. </li>
 </ul>
 
@@ -52,7 +52,7 @@ field and an unsigned long <em>nano</em> field. </li>
 <h3> UTC </h3>
 
 <p>
-<code> int utc_from_tai (uint64_t *u, tai_t const *t) </code> <br />
+<code> int utc_from_tai (uint64_t *u, tai const *t) </code> <br />
 Converts the absolute TAI64 time in *<em>t</em> to an UTC time, stored in
 *<em>u</em> as an unsigned 64-bit integer. *<em>u</em> is actually 2^62
 plus the number of seconds since the Epoch.
@@ -62,7 +62,7 @@ returns 2 instead of 1.
 </p>
 
 <p>
-<code> int tai_from_utc (tai_t *t, uint64_t u) </code> <br />
+<code> int tai_from_utc (tai *t, uint64_t u) </code> <br />
 Converts the UTC time in <em>u</em>, stored
 as an unsigned 64-bit integer (2^62 plus the number of seconds since
 the Epoch), to a TAI64 time in *<em>t</em>.
@@ -73,7 +73,7 @@ error occurs.
 <h3> NTP </h3>
 
 <p>
-<code> int ntp_from_tain (uint64_t *ntp, tain_t const *a) </code> <br />
+<code> int ntp_from_tain (uint64_t *ntp, tain const *a) </code> <br />
 Converts the absolute TAI64N time in *<em>a</em> to a 64-bit NTP timestamp,
 stored in *<em>ntp</em>. The higher 32 bits of *<em>ntp</em> represent a number
 of seconds ; the lower 32 bits are the fractional part of the timestamp.
@@ -83,7 +83,7 @@ error occurs (for instance:
 </p>
 
 <p>
-<code> int tain_from_ntp (tain_t *a, uint64_t ntp) </code> <br />
+<code> int tain_from_ntp (tain *a, uint64_t ntp) </code> <br />
 Converts the NTP timestamp in <em>ntp</em> to a TAI64N time in
 *<em>a</em>.
 The function returns 1 if it succeeds, or 0 (and sets errno) if an
@@ -101,7 +101,7 @@ timezone takes leap seconds into account or not.
 </p>
 
 <p>
-<code> int localtm_from_tai (struct tm *tm, tai_t const *t, int lo) </code> <br />
+<code> int localtm_from_tai (struct tm *tm, tai const *t, int lo) </code> <br />
 Converts the TAI time in *<em>t</em> to broken-down GMT (if
 <em>lo</em> is zero) or local (if <em>lo</em> is nonzero) time in
 *<em>tm</em>.
@@ -141,7 +141,7 @@ error occurs.
 </p>
 
 <p>
-<code> int tai_from_localtm (tai_t *t, struct tm const *tm) </code> <br />
+<code> int tai_from_localtm (tai *t, struct tm const *tm) </code> <br />
 Converts the broken-down local time in *<em>tm</em> to a TAI value
 in *<em>t</em>.
 The function returns 1 if it succeeds, or 0 (and sets errno) if an
@@ -157,11 +157,11 @@ error occurs.
 </p>
 
 <p>
- The following functions use the <tt>localtmn_t</tt> type to hold both
+ The following functions use the <tt>localtmn</tt> type to hold both
 a broken-down time and a nanosecond count:
 </p>
 
-<pre>typedef struct localtmn_s localtmn_t, *localtmn_t_ref ;
+<pre>typedef struct localtmn_s localtmn, *localtmn_ref ;
 struct localtmn_s
 {
   struct tm tm ;
@@ -174,10 +174,10 @@ struct localtmn_s
 </p>
 
 <p>
-<code> int localtmn_from_tain (localtmn_t *tmn, tain_t const *a, int lo) ; <br />
-int tain_from_localtmn (tain_t *a, localtmn_t const *tmn) ; <br />
-int localtmn_from_sysclock (localtmn_t *tmn, tain_t const *a, int lo) ; <br />
-int sysclock_from_localtmn (tain_t *a, localtmn_t const *tmn) ; </code> <br />
+<code> int localtmn_from_tain (localtmn *tmn, tain const *a, int lo) ; <br />
+int tain_from_localtmn (tain *a, localtmn const *tmn) ; <br />
+int localtmn_from_sysclock (localtmn *tmn, tain const *a, int lo) ; <br />
+int sysclock_from_localtmn (tain *a, localtmn const *tmn) ; </code> <br />
 </p>
 
 </body>
