@@ -3,7 +3,7 @@
 #ifndef SKALIBS_DISIZE_H
 #define SKALIBS_DISIZE_H
 
-#include <sys/types.h>
+#include <stddef.h>
 
 typedef struct disize_s disize, *disize_ref ;
 struct disize_s

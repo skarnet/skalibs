@@ -28,6 +28,10 @@ extern int buffer_timed_flush (buffer *, tain const *, tain *) ;
 #define buffer_timed_flush_g(b, deadline) buffer_timed_flush(b, (deadline), &STAMP)
 extern size_t buffer_timed_get (buffer *, char *, size_t, tain const *, tain *) ;
 #define buffer_timed_get_g(b, buf, buflen, deadline) buffer_timed_get(b, buf, buflen, (deadline), &STAMP)
+extern size_t buffer_timed_put (buffer *, char const *, size_t, tain const *, tain *) ;
+#define buffer_timed_put_g(b, s, len, deadline) buffer_timed_put(b, s, len, (deadline), &STAMP)
+extern size_t buffer_timed_puts (buffer *, char const *, tain const *, tain *) ;
+#define buffer_timed_puts_g(b, s, deadline) buffer_timed_puts(b, s, (deadline), &STAMP)
 
 extern int timed_getln (buffer *, stralloc *, char, tain const *, tain *) ;
 #define timed_getln_g(b, sa, sep, deadline) timed_getln(b, sa, sep, (deadline), &STAMP)

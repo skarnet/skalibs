@@ -1,9 +1,10 @@
 Changelog for skalibs.
 
-In 2.12.0.2
+In 2.12.1.0
 -----------
 
  - Bugfixes.
+ - New functions: buffer_timed_put(), buffer_timed_puts().
 
 
 In 2.12.0.1

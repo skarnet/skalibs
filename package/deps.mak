@@ -468,13 +468,13 @@ src/libstddjb/selfpipe_init.o src/libstddjb/selfpipe_init.lo: src/libstddjb/self
 src/libstddjb/selfpipe_internal.o src/libstddjb/selfpipe_internal.lo: src/libstddjb/selfpipe_internal.c src/include/skalibs/allreadwrite.h src/libstddjb/selfpipe-internal.h src/include/skalibs/sysdeps.h
 src/libstddjb/selfpipe_read.o src/libstddjb/selfpipe_read.lo: src/libstddjb/selfpipe_read.c src/include/skalibs/allreadwrite.h src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sysdeps.h
 src/libstddjb/selfpipe_trap.o src/libstddjb/selfpipe_trap.lo: src/libstddjb/selfpipe_trap.c src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
-src/libstddjb/selfpipe_trapset.o src/libstddjb/selfpipe_trapset.lo: src/libstddjb/selfpipe_trapset.c src/include/skalibs/bsdsnowflake.h src/include/skalibs/nonposix.h src/include/skalibs/nsig.h src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
+src/libstddjb/selfpipe_trapset.o src/libstddjb/selfpipe_trapset.lo: src/libstddjb/selfpipe_trapset.c src/include/skalibs/nonposix.h src/include/skalibs/nsig.h src/libstddjb/selfpipe-internal.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
 src/libstddjb/sgetopt.o src/libstddjb/sgetopt.lo: src/libstddjb/sgetopt.c src/include/skalibs/buffer.h src/include/skalibs/sgetopt.h
 src/libstddjb/sig0_scan.o src/libstddjb/sig0_scan.lo: src/libstddjb/sig0_scan.c src/include/skalibs/sig.h src/include/skalibs/types.h
 src/libstddjb/sig_altignore.o src/libstddjb/sig_altignore.lo: src/libstddjb/sig_altignore.c src/include/skalibs/sig.h
 src/libstddjb/sig_block.o src/libstddjb/sig_block.lo: src/libstddjb/sig_block.c src/include/skalibs/sig.h
 src/libstddjb/sig_blocknone.o src/libstddjb/sig_blocknone.lo: src/libstddjb/sig_blocknone.c src/include/skalibs/sig.h
-src/libstddjb/sig_catch.o src/libstddjb/sig_catch.lo: src/libstddjb/sig_catch.c src/include/skalibs/functypes.h src/include/skalibs/sig.h
+src/libstddjb/sig_catch.o src/libstddjb/sig_catch.lo: src/libstddjb/sig_catch.c src/include/skalibs/functypes.h src/include/skalibs/nonposix.h src/include/skalibs/nsig.h src/include/skalibs/sig.h
 src/libstddjb/sig_name.o src/libstddjb/sig_name.lo: src/libstddjb/sig_name.c src/libstddjb/sig-internal.h src/include/skalibs/sig.h
 src/libstddjb/sig_number.o src/libstddjb/sig_number.lo: src/libstddjb/sig_number.c src/libstddjb/sig-internal.h src/include/skalibs/sig.h
 src/libstddjb/sig_restoreto.o src/libstddjb/sig_restoreto.lo: src/libstddjb/sig_restoreto.c src/include/skalibs/sig.h
@@ -708,6 +708,8 @@ src/libunixonacid/bufalloc_timed_flush.o src/libunixonacid/bufalloc_timed_flush.
 src/libunixonacid/buffer_timed_fill.o src/libunixonacid/buffer_timed_fill.lo: src/libunixonacid/buffer_timed_fill.c src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/unix-timed.h
 src/libunixonacid/buffer_timed_flush.o src/libunixonacid/buffer_timed_flush.lo: src/libunixonacid/buffer_timed_flush.c src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/unix-timed.h
 src/libunixonacid/buffer_timed_get.o src/libunixonacid/buffer_timed_get.lo: src/libunixonacid/buffer_timed_get.c src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/unix-timed.h
+src/libunixonacid/buffer_timed_put.o src/libunixonacid/buffer_timed_put.lo: src/libunixonacid/buffer_timed_put.c src/include/skalibs/buffer.h src/include/skalibs/unix-timed.h
+src/libunixonacid/buffer_timed_puts.o src/libunixonacid/buffer_timed_puts.lo: src/libunixonacid/buffer_timed_puts.c src/include/skalibs/unix-timed.h
 src/libunixonacid/ipc_timed_recv.o src/libunixonacid/ipc_timed_recv.lo: src/libunixonacid/ipc_timed_recv.c src/include/skalibs/allreadwrite.h src/include/skalibs/functypes.h src/include/skalibs/socket.h src/include/skalibs/unix-timed.h
 src/libunixonacid/ipc_timed_send.o src/libunixonacid/ipc_timed_send.lo: src/libunixonacid/ipc_timed_send.c src/include/skalibs/error.h src/include/skalibs/iopause.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/unix-timed.h
 src/libunixonacid/ipc_timed_sendv.o src/libunixonacid/ipc_timed_sendv.lo: src/libunixonacid/ipc_timed_sendv.c src/include/skalibs/error.h src/include/skalibs/iopause.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/siovec.h src/include/skalibs/unix-timed.h
