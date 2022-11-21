@@ -19,7 +19,7 @@ extern void uint@BITS@_bswapn (uint@BITS@_t *, size_t) ;
 #define uint@BITS@0_ofmt(s, o, n) uint@BITS@0_fmt_base(s, o, (n), 8)
 #define uint@BITS@_xfmt(s, x) uint@BITS@_fmt_base(s, (x), 16)
 #define uint@BITS@0_xfmt(s, x, n) uint@BITS@0_fmt_base(s, x, (n), 16)
-#define uint@BITS@_bfmt(s, b) uint@BITS@0_fmt_base(s, (b), 2)
+#define uint@BITS@_bfmt(s, b) uint@BITS@_fmt_base(s, (b), 2)
 #define uint@BITS@0_bfmt(s, b, n) uint@BITS@0_fmt_base(s, b, (n), 2)
 
 extern size_t uint@BITS@_fmtlist (char *, uint@BITS@_t const *, size_t) ;
@@ -42,7 +42,7 @@ extern size_t uint@BITS@_scanlist (uint@BITS@_t *, size_t, char const *, size_t 
 #define int@BITS@_fmt(s, u) int@BITS@_fmt_base(s, (u), 10)
 #define int@BITS@_ofmt(s, o) int@BITS@_fmt_base(s, (o), 8)
 #define int@BITS@_xfmt(s, x) int@BITS@_fmt_base(s, (x), 16)
-#define int@BITS@_bfmt(s, b) int@BITS@0_fmt_base(s, (b), 2)
+#define int@BITS@_bfmt(s, b) int@BITS@_fmt_base(s, (b), 2)
 
 extern size_t int@BITS@_fmtlist (char *, int@BITS@_t const *, size_t) ;
 
