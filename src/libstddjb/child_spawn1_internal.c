@@ -71,7 +71,7 @@ pid_t child_spawn1_internal (char const *prog, char const *const *argv, char con
 #include <string.h>
 
 #include <skalibs/allreadwrite.h>
-#include <skalibs/strerr2.h>
+#include <skalibs/strerr.h>
 #include <skalibs/sig.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/exec.h>

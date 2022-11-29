@@ -2,6 +2,6 @@
 
 /* MT-unsafe */
 
-#include <skalibs/strerr2.h>
+#include <skalibs/strerr.h>
 
 char const *PROG = "(none)" ;

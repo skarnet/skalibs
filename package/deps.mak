@@ -30,7 +30,7 @@ src/include/skalibs/genset.h: src/include/skalibs/functypes.h
 src/include/skalibs/gensetdyn.h: src/include/skalibs/functypes.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
 src/include/skalibs/iopause.h: src/include/skalibs/tai.h
 src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
-src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr2.h
+src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr.h
 src/include/skalibs/netstring.h: src/include/skalibs/buffer.h src/include/skalibs/stralloc.h
 src/include/skalibs/posixishard.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/posixplz.h: src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h
@@ -40,11 +40,11 @@ src/include/skalibs/sha512.h: src/include/skalibs/uint64.h
 src/include/skalibs/sig.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/siovec.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/skaclient.h: src/include/skalibs/kolbak.h src/include/skalibs/tai.h src/include/skalibs/unixmessage.h
-src/include/skalibs/skalibs.h: src/include/skalibs/datastruct.h src/include/skalibs/posixplz.h src/include/skalibs/random.h src/include/skalibs/stdcrypto.h src/include/skalibs/stddjb.h src/include/skalibs/unixonacid.h
+src/include/skalibs/skalibs.h: src/include/skalibs/datastruct.h src/include/skalibs/posixplz.h src/include/skalibs/random.h src/include/skalibs/stdcrypto.h src/include/skalibs/stddjb.h src/include/skalibs/strerr.h src/include/skalibs/unixonacid.h
 src/include/skalibs/skamisc.h: src/include/skalibs/buffer.h src/include/skalibs/stralloc.h
 src/include/skalibs/socket.h: src/include/skalibs/gccattributes.h src/include/skalibs/posixplz.h src/include/skalibs/tai.h
 src/include/skalibs/stdcrypto.h: src/include/skalibs/blake2s.h src/include/skalibs/sha1.h src/include/skalibs/sha256.h src/include/skalibs/sha512.h
-src/include/skalibs/stddjb.h: src/include/skalibs/alarm.h src/include/skalibs/alloc.h src/include/skalibs/allreadwrite.h src/include/skalibs/bitarray.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/bytestr.h src/include/skalibs/cbuffer.h src/include/skalibs/cdb.h src/include/skalibs/cdbmake.h src/include/skalibs/direntry.h src/include/skalibs/disize.h src/include/skalibs/diuint.h src/include/skalibs/diuint32.h src/include/skalibs/djbtime.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/error.h src/include/skalibs/exec.h src/include/skalibs/fmtscan.h src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h src/include/skalibs/genalloc.h src/include/skalibs/genwrite.h src/include/skalibs/iopause.h src/include/skalibs/ip46.h src/include/skalibs/lolstdio.h src/include/skalibs/netstring.h src/include/skalibs/segfault.h src/include/skalibs/selfpipe.h src/include/skalibs/setgroups.h src/include/skalibs/sgetopt.h src/include/skalibs/sig.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/socket.h src/include/skalibs/stralloc.h src/include/skalibs/strerr.h src/include/skalibs/strerr2.h src/include/skalibs/tai.h src/include/skalibs/types.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
+src/include/skalibs/stddjb.h: src/include/skalibs/alarm.h src/include/skalibs/alloc.h src/include/skalibs/allreadwrite.h src/include/skalibs/bitarray.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/bytestr.h src/include/skalibs/cbuffer.h src/include/skalibs/cdb.h src/include/skalibs/cdbmake.h src/include/skalibs/direntry.h src/include/skalibs/disize.h src/include/skalibs/diuint.h src/include/skalibs/diuint32.h src/include/skalibs/djbtime.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/envalloc.h src/include/skalibs/error.h src/include/skalibs/exec.h src/include/skalibs/fmtscan.h src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h src/include/skalibs/genalloc.h src/include/skalibs/genwrite.h src/include/skalibs/iopause.h src/include/skalibs/ip46.h src/include/skalibs/lolstdio.h src/include/skalibs/netstring.h src/include/skalibs/segfault.h src/include/skalibs/selfpipe.h src/include/skalibs/setgroups.h src/include/skalibs/sgetopt.h src/include/skalibs/sig.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/socket.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h src/include/skalibs/types.h src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
 src/include/skalibs/strerr.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint64.h
@@ -140,15 +140,15 @@ src/libenvexec/mexec_af.o src/libenvexec/mexec_af.lo: src/libenvexec/mexec_af.c 
 src/libenvexec/mexec_afm.o src/libenvexec/mexec_afm.lo: src/libenvexec/mexec_afm.c src/include/skalibs/bytestr.h src/include/skalibs/exec.h
 src/libenvexec/mexec_afn.o src/libenvexec/mexec_afn.lo: src/libenvexec/mexec_afn.c src/include/skalibs/env.h src/include/skalibs/exec.h
 src/libenvexec/xexec0_ae.o src/libenvexec/xexec0_ae.lo: src/libenvexec/xexec0_ae.c src/include/skalibs/exec.h
-src/libenvexec/xexec_ae.o src/libenvexec/xexec_ae.lo: src/libenvexec/xexec_ae.c src/include/skalibs/exec.h src/include/skalibs/strerr2.h
-src/libenvexec/xexecvep.o src/libenvexec/xexecvep.lo: src/libenvexec/xexecvep.c src/include/skalibs/exec.h src/include/skalibs/posixplz.h src/include/skalibs/strerr2.h
-src/libenvexec/xexecvep_loose.o src/libenvexec/xexecvep_loose.lo: src/libenvexec/xexecvep_loose.c src/include/skalibs/exec.h src/include/skalibs/posixplz.h src/include/skalibs/strerr2.h
-src/libenvexec/xmexec0_af.o src/libenvexec/xmexec0_af.lo: src/libenvexec/xmexec0_af.c src/include/skalibs/exec.h src/include/skalibs/strerr2.h
-src/libenvexec/xmexec0_afm.o src/libenvexec/xmexec0_afm.lo: src/libenvexec/xmexec0_afm.c src/include/skalibs/exec.h src/include/skalibs/strerr2.h
-src/libenvexec/xmexec0_afn.o src/libenvexec/xmexec0_afn.lo: src/libenvexec/xmexec0_afn.c src/include/skalibs/exec.h src/include/skalibs/strerr2.h
-src/libenvexec/xmexec_af.o src/libenvexec/xmexec_af.lo: src/libenvexec/xmexec_af.c src/include/skalibs/exec.h src/include/skalibs/strerr2.h
-src/libenvexec/xmexec_afm.o src/libenvexec/xmexec_afm.lo: src/libenvexec/xmexec_afm.c src/include/skalibs/exec.h src/include/skalibs/strerr2.h
-src/libenvexec/xmexec_afn.o src/libenvexec/xmexec_afn.lo: src/libenvexec/xmexec_afn.c src/include/skalibs/exec.h src/include/skalibs/strerr2.h
+src/libenvexec/xexec_ae.o src/libenvexec/xexec_ae.lo: src/libenvexec/xexec_ae.c src/include/skalibs/exec.h src/include/skalibs/strerr.h
+src/libenvexec/xexecvep.o src/libenvexec/xexecvep.lo: src/libenvexec/xexecvep.c src/include/skalibs/exec.h src/include/skalibs/posixplz.h src/include/skalibs/strerr.h
+src/libenvexec/xexecvep_loose.o src/libenvexec/xexecvep_loose.lo: src/libenvexec/xexecvep_loose.c src/include/skalibs/exec.h src/include/skalibs/posixplz.h src/include/skalibs/strerr.h
+src/libenvexec/xmexec0_af.o src/libenvexec/xmexec0_af.lo: src/libenvexec/xmexec0_af.c src/include/skalibs/exec.h src/include/skalibs/strerr.h
+src/libenvexec/xmexec0_afm.o src/libenvexec/xmexec0_afm.lo: src/libenvexec/xmexec0_afm.c src/include/skalibs/exec.h src/include/skalibs/strerr.h
+src/libenvexec/xmexec0_afn.o src/libenvexec/xmexec0_afn.lo: src/libenvexec/xmexec0_afn.c src/include/skalibs/exec.h src/include/skalibs/strerr.h
+src/libenvexec/xmexec_af.o src/libenvexec/xmexec_af.lo: src/libenvexec/xmexec_af.c src/include/skalibs/exec.h src/include/skalibs/strerr.h
+src/libenvexec/xmexec_afm.o src/libenvexec/xmexec_afm.lo: src/libenvexec/xmexec_afm.c src/include/skalibs/exec.h src/include/skalibs/strerr.h
+src/libenvexec/xmexec_afn.o src/libenvexec/xmexec_afn.lo: src/libenvexec/xmexec_afn.c src/include/skalibs/exec.h src/include/skalibs/strerr.h
 src/libposixplz/doublefork.o src/libposixplz/doublefork.lo: src/libposixplz/doublefork.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h src/include/skalibs/uint64.h
 src/libposixplz/execvep.o src/libposixplz/execvep.lo: src/libposixplz/execvep.c src/libposixplz/posixplz-internal.h src/include/skalibs/posixplz.h
 src/libposixplz/execvep_internal.o src/libposixplz/execvep_internal.lo: src/libposixplz/execvep_internal.c src/include/skalibs/bytestr.h src/include/skalibs/posixplz.h
@@ -171,7 +171,7 @@ src/libposixplz/unlink_void.o src/libposixplz/unlink_void.lo: src/libposixplz/un
 src/librandom/autosurf.o src/librandom/autosurf.lo: src/librandom/autosurf.c src/include/skalibs/random.h src/include/skalibs/sha1.h src/include/skalibs/surf.h src/include/skalibs/tai.h src/include/skalibs/uint32.h
 src/librandom/random_buf.o src/librandom/random_buf.lo: src/librandom/random_buf.c src/include/skalibs/nonposix.h src/include/skalibs/random.h src/include/skalibs/surf.h src/include/skalibs/sysdeps.h
 src/librandom/random_buf_early.o src/librandom/random_buf_early.lo: src/librandom/random_buf_early.c src/include/skalibs/nonposix.h src/include/skalibs/random.h src/include/skalibs/surf.h src/include/skalibs/sysdeps.h
-src/librandom/random_devurandom.o src/librandom/random_devurandom.lo: src/librandom/random_devurandom.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/random.h src/include/skalibs/strerr2.h
+src/librandom/random_devurandom.o src/librandom/random_devurandom.lo: src/librandom/random_devurandom.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/random.h src/include/skalibs/strerr.h
 src/librandom/random_name_from.o src/librandom/random_name_from.lo: src/librandom/random_name_from.c src/include/skalibs/functypes.h src/include/skalibs/random.h
 src/librandom/random_sauniquename_from.o src/librandom/random_sauniquename_from.lo: src/librandom/random_sauniquename_from.c src/include/skalibs/random.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/librandom/random_uint32_from.o src/librandom/random_uint32_from.lo: src/librandom/random_uint32_from.c src/include/skalibs/functypes.h src/include/skalibs/random.h src/include/skalibs/uint32.h
@@ -294,13 +294,13 @@ src/libstddjb/cdb_p.o src/libstddjb/cdb_p.lo: src/libstddjb/cdb_p.c src/libstddj
 src/libstddjb/cdb_traverse_next.o src/libstddjb/cdb_traverse_next.lo: src/libstddjb/cdb_traverse_next.c src/libstddjb/cdb-internal.h src/include/skalibs/cdb.h src/include/skalibs/uint32.h
 src/libstddjb/cdb_zero.o src/libstddjb/cdb_zero.lo: src/libstddjb/cdb_zero.c src/include/skalibs/cdb.h
 src/libstddjb/cdbmake.o src/libstddjb/cdbmake.lo: src/libstddjb/cdbmake.c src/include/skalibs/buffer.h src/libstddjb/cdb-internal.h src/include/skalibs/cdbmake.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h src/include/skalibs/uint32.h
-src/libstddjb/child_spawn.o src/libstddjb/child_spawn.lo: src/libstddjb/child_spawn.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h src/include/skalibs/types.h
-src/libstddjb/child_spawn0.o src/libstddjb/child_spawn0.lo: src/libstddjb/child_spawn0.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h
-src/libstddjb/child_spawn1_internal.o src/libstddjb/child_spawn1_internal.lo: src/libstddjb/child_spawn1_internal.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h
+src/libstddjb/child_spawn.o src/libstddjb/child_spawn.lo: src/libstddjb/child_spawn.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/strerr.h src/include/skalibs/sysdeps.h src/include/skalibs/types.h
+src/libstddjb/child_spawn0.o src/libstddjb/child_spawn0.lo: src/libstddjb/child_spawn0.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/strerr.h src/include/skalibs/sysdeps.h
+src/libstddjb/child_spawn1_internal.o src/libstddjb/child_spawn1_internal.lo: src/libstddjb/child_spawn1_internal.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/strerr.h src/include/skalibs/sysdeps.h
 src/libstddjb/child_spawn1_pipe.o src/libstddjb/child_spawn1_pipe.lo: src/libstddjb/child_spawn1_pipe.c src/libstddjb/djbunix-internal.h src/include/skalibs/djbunix.h
 src/libstddjb/child_spawn1_socket.o src/libstddjb/child_spawn1_socket.lo: src/libstddjb/child_spawn1_socket.c src/libstddjb/djbunix-internal.h src/include/skalibs/djbunix.h src/include/skalibs/socket.h
-src/libstddjb/child_spawn2.o src/libstddjb/child_spawn2.lo: src/libstddjb/child_spawn2.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h
-src/libstddjb/child_spawn3.o src/libstddjb/child_spawn3.lo: src/libstddjb/child_spawn3.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/strerr2.h src/include/skalibs/sysdeps.h src/include/skalibs/types.h
+src/libstddjb/child_spawn2.o src/libstddjb/child_spawn2.lo: src/libstddjb/child_spawn2.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/strerr.h src/include/skalibs/sysdeps.h
+src/libstddjb/child_spawn3.o src/libstddjb/child_spawn3.lo: src/libstddjb/child_spawn3.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/strerr.h src/include/skalibs/sysdeps.h src/include/skalibs/types.h
 src/libstddjb/coe.o src/libstddjb/coe.lo: src/libstddjb/coe.c src/include/skalibs/djbunix.h
 src/libstddjb/deepsleepuntil.o src/libstddjb/deepsleepuntil.lo: src/libstddjb/deepsleepuntil.c src/include/skalibs/iopause.h src/include/skalibs/tai.h
 src/libstddjb/dir_close.o src/libstddjb/dir_close.lo: src/libstddjb/dir_close.c src/include/skalibs/direntry.h
@@ -345,7 +345,7 @@ src/libstddjb/genwrite_stdout.o src/libstddjb/genwrite_stdout.lo: src/libstddjb/
 src/libstddjb/getlnmax.o src/libstddjb/getlnmax.lo: src/libstddjb/getlnmax.c src/include/skalibs/buffer.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h
 src/libstddjb/getlnmaxsep.o src/libstddjb/getlnmaxsep.lo: src/libstddjb/getlnmaxsep.c src/include/skalibs/buffer.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h
 src/libstddjb/hiercopy.o src/libstddjb/hiercopy.lo: src/libstddjb/hiercopy.c src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h
-src/libstddjb/hiercopy_tmp.o src/libstddjb/hiercopy_tmp.lo: src/libstddjb/hiercopy_tmp.c src/include/skalibs/direntry.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h src/include/skalibs/strerr2.h
+src/libstddjb/hiercopy_tmp.o src/libstddjb/hiercopy_tmp.lo: src/libstddjb/hiercopy_tmp.c src/include/skalibs/direntry.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/int160_scan.o src/libstddjb/int160_scan.lo: src/libstddjb/int160_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint16.h
 src/libstddjb/int16_fmtlist.o src/libstddjb/int16_fmtlist.lo: src/libstddjb/int16_fmtlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint16.h
 src/libstddjb/int16_scan.o src/libstddjb/int16_scan.lo: src/libstddjb/int16_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint16.h src/include/skalibs/uint64.h
@@ -448,7 +448,7 @@ src/libstddjb/openwritevnclose_suffix.o src/libstddjb/openwritevnclose_suffix.lo
 src/libstddjb/openwritevnclose_unsafe.o src/libstddjb/openwritevnclose_unsafe.lo: src/libstddjb/openwritevnclose_unsafe.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
 src/libstddjb/path_canonicalize.o src/libstddjb/path_canonicalize.lo: src/libstddjb/path_canonicalize.c src/include/skalibs/djbunix.h
 src/libstddjb/pipe_internal.o src/libstddjb/pipe_internal.lo: src/libstddjb/pipe_internal.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
-src/libstddjb/prog.o src/libstddjb/prog.lo: src/libstddjb/prog.c src/include/skalibs/strerr2.h
+src/libstddjb/prog.o src/libstddjb/prog.lo: src/libstddjb/prog.c src/include/skalibs/strerr.h
 src/libstddjb/readnclose.o src/libstddjb/readnclose.lo: src/libstddjb/readnclose.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
 src/libstddjb/rm_rf.o src/libstddjb/rm_rf.lo: src/libstddjb/rm_rf.c src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h
 src/libstddjb/rm_rf_in_tmp.o src/libstddjb/rm_rf_in_tmp.lo: src/libstddjb/rm_rf_in_tmp.c src/include/skalibs/direntry.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
@@ -555,8 +555,6 @@ src/libstddjb/stralloc_reverse.o src/libstddjb/stralloc_reverse.lo: src/libstddj
 src/libstddjb/stralloc_reverse_blocks.o src/libstddjb/stralloc_reverse_blocks.lo: src/libstddjb/stralloc_reverse_blocks.c src/include/skalibs/stralloc.h
 src/libstddjb/stralloc_shrink.o src/libstddjb/stralloc_shrink.lo: src/libstddjb/stralloc_shrink.c src/include/skalibs/alloc.h src/include/skalibs/stralloc.h
 src/libstddjb/stralloc_zero.o src/libstddjb/stralloc_zero.lo: src/libstddjb/stralloc_zero.c src/include/skalibs/stralloc.h
-src/libstddjb/strerr.o src/libstddjb/strerr.lo: src/libstddjb/strerr.c src/include/skalibs/buffer.h src/include/skalibs/strerr.h
-src/libstddjb/strerr_sys.o src/libstddjb/strerr_sys.lo: src/libstddjb/strerr_sys.c src/include/skalibs/strerr.h
 src/libstddjb/string_format.o src/libstddjb/string_format.lo: src/libstddjb/string_format.c src/include/skalibs/bytestr.h src/include/skalibs/stralloc.h
 src/libstddjb/string_quote.o src/libstddjb/string_quote.lo: src/libstddjb/string_quote.c src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/string_quote_nodelim.o src/libstddjb/string_quote_nodelim.lo: src/libstddjb/string_quote_nodelim.c src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
@@ -698,6 +696,58 @@ src/libstddjb/waitn_reap_posix.o src/libstddjb/waitn_reap_posix.lo: src/libstddj
 src/libstddjb/waitpid_nointr.o src/libstddjb/waitpid_nointr.lo: src/libstddjb/waitpid_nointr.c src/include/skalibs/djbunix.h
 src/libstddjb/writenclose_unsafe.o src/libstddjb/writenclose_unsafe.lo: src/libstddjb/writenclose_unsafe.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
 src/libstddjb/writevnclose_unsafe.o src/libstddjb/writevnclose_unsafe.lo: src/libstddjb/writevnclose_unsafe.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/siovec.h
+src/libstrerr/strerr_die10sys.o src/libstrerr/strerr_die10sys.lo: src/libstrerr/strerr_die10sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die10x.o src/libstrerr/strerr_die10x.lo: src/libstrerr/strerr_die10x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die11sys.o src/libstrerr/strerr_die11sys.lo: src/libstrerr/strerr_die11sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die11x.o src/libstrerr/strerr_die11x.lo: src/libstrerr/strerr_die11x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die1sys.o src/libstrerr/strerr_die1sys.lo: src/libstrerr/strerr_die1sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die1x.o src/libstrerr/strerr_die1x.lo: src/libstrerr/strerr_die1x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die2sys.o src/libstrerr/strerr_die2sys.lo: src/libstrerr/strerr_die2sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die2x.o src/libstrerr/strerr_die2x.lo: src/libstrerr/strerr_die2x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die3sys.o src/libstrerr/strerr_die3sys.lo: src/libstrerr/strerr_die3sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die3x.o src/libstrerr/strerr_die3x.lo: src/libstrerr/strerr_die3x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die4sys.o src/libstrerr/strerr_die4sys.lo: src/libstrerr/strerr_die4sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die4x.o src/libstrerr/strerr_die4x.lo: src/libstrerr/strerr_die4x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die5sys.o src/libstrerr/strerr_die5sys.lo: src/libstrerr/strerr_die5sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die5x.o src/libstrerr/strerr_die5x.lo: src/libstrerr/strerr_die5x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die6sys.o src/libstrerr/strerr_die6sys.lo: src/libstrerr/strerr_die6sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die6x.o src/libstrerr/strerr_die6x.lo: src/libstrerr/strerr_die6x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die7sys.o src/libstrerr/strerr_die7sys.lo: src/libstrerr/strerr_die7sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die7x.o src/libstrerr/strerr_die7x.lo: src/libstrerr/strerr_die7x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die8sys.o src/libstrerr/strerr_die8sys.lo: src/libstrerr/strerr_die8sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die8x.o src/libstrerr/strerr_die8x.lo: src/libstrerr/strerr_die8x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die9sys.o src/libstrerr/strerr_die9sys.lo: src/libstrerr/strerr_die9sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_die9x.o src/libstrerr/strerr_die9x.lo: src/libstrerr/strerr_die9x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_diel.o src/libstrerr/strerr_diel.lo: src/libstrerr/strerr_diel.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_dielsys.o src/libstrerr/strerr_dielsys.lo: src/libstrerr/strerr_dielsys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_diev.o src/libstrerr/strerr_diev.lo: src/libstrerr/strerr_diev.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_dievsys.o src/libstrerr/strerr_dievsys.lo: src/libstrerr/strerr_dievsys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn10sys.o src/libstrerr/strerr_warn10sys.lo: src/libstrerr/strerr_warn10sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn10x.o src/libstrerr/strerr_warn10x.lo: src/libstrerr/strerr_warn10x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn11sys.o src/libstrerr/strerr_warn11sys.lo: src/libstrerr/strerr_warn11sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn11x.o src/libstrerr/strerr_warn11x.lo: src/libstrerr/strerr_warn11x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn1sys.o src/libstrerr/strerr_warn1sys.lo: src/libstrerr/strerr_warn1sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn1x.o src/libstrerr/strerr_warn1x.lo: src/libstrerr/strerr_warn1x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn2sys.o src/libstrerr/strerr_warn2sys.lo: src/libstrerr/strerr_warn2sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn2x.o src/libstrerr/strerr_warn2x.lo: src/libstrerr/strerr_warn2x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn3sys.o src/libstrerr/strerr_warn3sys.lo: src/libstrerr/strerr_warn3sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn3x.o src/libstrerr/strerr_warn3x.lo: src/libstrerr/strerr_warn3x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn4sys.o src/libstrerr/strerr_warn4sys.lo: src/libstrerr/strerr_warn4sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn4x.o src/libstrerr/strerr_warn4x.lo: src/libstrerr/strerr_warn4x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn5sys.o src/libstrerr/strerr_warn5sys.lo: src/libstrerr/strerr_warn5sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn5x.o src/libstrerr/strerr_warn5x.lo: src/libstrerr/strerr_warn5x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn6sys.o src/libstrerr/strerr_warn6sys.lo: src/libstrerr/strerr_warn6sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn6x.o src/libstrerr/strerr_warn6x.lo: src/libstrerr/strerr_warn6x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn7sys.o src/libstrerr/strerr_warn7sys.lo: src/libstrerr/strerr_warn7sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn7x.o src/libstrerr/strerr_warn7x.lo: src/libstrerr/strerr_warn7x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn8sys.o src/libstrerr/strerr_warn8sys.lo: src/libstrerr/strerr_warn8sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn8x.o src/libstrerr/strerr_warn8x.lo: src/libstrerr/strerr_warn8x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn9sys.o src/libstrerr/strerr_warn9sys.lo: src/libstrerr/strerr_warn9sys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warn9x.o src/libstrerr/strerr_warn9x.lo: src/libstrerr/strerr_warn9x.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warnl.o src/libstrerr/strerr_warnl.lo: src/libstrerr/strerr_warnl.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warnlsys.o src/libstrerr/strerr_warnlsys.lo: src/libstrerr/strerr_warnlsys.c src/include/skalibs/strerr.h
+src/libstrerr/strerr_warnv.o src/libstrerr/strerr_warnv.lo: src/libstrerr/strerr_warnv.c src/include/skalibs/buffer.h src/include/skalibs/strerr.h
+src/libstrerr/strerr_warnvsys.o src/libstrerr/strerr_warnvsys.lo: src/libstrerr/strerr_warnvsys.c src/include/skalibs/buffer.h src/include/skalibs/strerr.h
 src/libunixonacid/access_at.o src/libunixonacid/access_at.lo: src/libunixonacid/access_at.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/ancil_recv_fd.o src/libunixonacid/ancil_recv_fd.lo: src/libunixonacid/ancil_recv_fd.c src/include/skalibs/allreadwrite.h src/include/skalibs/ancil.h src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/sysdeps.h
 src/libunixonacid/ancil_send_fd.o src/libunixonacid/ancil_send_fd.lo: src/libunixonacid/ancil_send_fd.c src/include/skalibs/ancil.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h

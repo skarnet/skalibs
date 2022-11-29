@@ -1,10 +1,11 @@
 Changelog for skalibs.
 
-In 2.12.1.0
+In 2.13.0.0
 -----------
 
  - Bugfixes.
  - New functions: buffer_timed_put(), buffer_timed_puts().
+ - strerr.h revamped. strerr_die, strerr_warn, strerr_diesys, strerr_warnsys removed.
 
 
 In 2.12.0.1

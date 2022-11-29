@@ -20,7 +20,7 @@
 #else
 
 #include <skalibs/sig.h>
-#include <skalibs/strerr2.h>
+#include <skalibs/strerr.h>
 #include <skalibs/exec.h>
 
 #endif

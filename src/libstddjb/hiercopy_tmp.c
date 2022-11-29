@@ -5,7 +5,7 @@
 #include <sys/stat.h>
 #include <errno.h>
 #include <fcntl.h>
-#include <skalibs/strerr2.h>
+
 #include <skalibs/stralloc.h>
 #include <skalibs/direntry.h>
 #include <skalibs/djbunix.h>

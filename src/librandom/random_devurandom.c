@@ -4,7 +4,7 @@
 #include <errno.h>
 
 #include <skalibs/allreadwrite.h>
-#include <skalibs/strerr2.h>
+#include <skalibs/strerr.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/random.h>
 

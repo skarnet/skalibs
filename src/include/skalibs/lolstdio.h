@@ -7,7 +7,7 @@
 
 #include <skalibs/buffer.h>
 #include <skalibs/bufalloc.h>
-#include <skalibs/strerr2.h>
+#include <skalibs/strerr.h>
 
 #ifdef DEBUG
 # define LOLDEBUG(...) do \

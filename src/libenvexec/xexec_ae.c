@@ -3,7 +3,7 @@
 #include <errno.h>
 
 #include <skalibs/exec.h>
-#include <skalibs/strerr2.h>
+#include <skalibs/strerr.h>
 
 void xexec_ae (char const *file, char const *const *argv, char const *const *envp)
 {

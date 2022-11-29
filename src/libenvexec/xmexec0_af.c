@@ -3,7 +3,7 @@
 #include <errno.h>
 
 #include <skalibs/exec.h>
-#include <skalibs/strerr2.h>
+#include <skalibs/strerr.h>
 
 void xmexec0_af (char const *file, char const *const *argv, char const *const *envp, size_t envlen)
 {

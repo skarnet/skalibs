@@ -47,7 +47,7 @@ pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const
 #include <string.h>
 
 #include <skalibs/allreadwrite.h>
-#include <skalibs/strerr2.h>
+#include <skalibs/strerr.h>
 #include <skalibs/sig.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/exec.h>
