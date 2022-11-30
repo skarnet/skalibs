@@ -15,354 +15,239 @@ extern void strerr_warnlsys (unsigned int, ...) ;
 extern void strerr_diel (int, unsigned int, ...) gccattr_noreturn ;
 extern void strerr_dielsys (int, unsigned int, ...) gccattr_noreturn ;
 
-extern void strerr_warn1x (char const *) ;
-extern void strerr_warn2x (char const *, char const *) ;
-extern void strerr_warn3x (char const *, char const *, char const *) ;
-extern void strerr_warn4x (char const *, char const *, char const *, char const *) ;
-extern void strerr_warn5x (char const *, char const *, char const *, char const *, char const *) ;
-extern void strerr_warn6x (char const *, char const *, char const *, char const *, char const *, char const *) ;
-extern void strerr_warn7x (char const *, char const *, char const *, char const *, char const *, char const *, char const *) ;
-extern void strerr_warn8x (char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *) ;
-extern void strerr_warn9x (char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *) ;
-extern void strerr_warn10x (char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *) ;
-extern void strerr_warn11x (char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *) ;
+#define strerr_array(...) ((char const *const[]){__VA_ARGS__})
+#define strerr_warnn(n, ...) strerr_warnv(strerr_array(__VA_ARGS__), (n))
+#define strerr_warnnsys(n, ...) strerr_warnvsys(strerr_array(__VA_ARGS__), (n))
+#define strerr_dien(e, n, ...) strerr_diev(e, strerr_array(__VA_ARGS__), (n))
+#define strerr_diensys(e, n, ...) strerr_dievsys(e, strerr_array(__VA_ARGS__), (n))
 
-extern void strerr_warn1sys (char const *) ;
-extern void strerr_warn2sys (char const *, char const *) ;
-extern void strerr_warn3sys (char const *, char const *, char const *) ;
-extern void strerr_warn4sys (char const *, char const *, char const *, char const *) ;
-extern void strerr_warn5sys (char const *, char const *, char const *, char const *, char const *) ;
-extern void strerr_warn6sys (char const *, char const *, char const *, char const *, char const *, char const *) ;
-extern void strerr_warn7sys (char const *, char const *, char const *, char const *, char const *, char const *, char const *) ;
-extern void strerr_warn8sys (char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *) ;
-extern void strerr_warn9sys (char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *) ;
-extern void strerr_warn10sys (char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *) ;
-extern void strerr_warn11sys (char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *) ;
-
-extern void strerr_die1x (int, char const *) gccattr_noreturn ;
-extern void strerr_die2x (int, char const *, char const *) gccattr_noreturn ;
-extern void strerr_die3x (int, char const *, char const *, char const *) gccattr_noreturn ;
-extern void strerr_die4x (int, char const *, char const *, char const *, char const *) gccattr_noreturn ;
-extern void strerr_die5x (int, char const *, char const *, char const *, char const *, char const *) gccattr_noreturn ;
-extern void strerr_die6x (int, char const *, char const *, char const *, char const *, char const *, char const *) gccattr_noreturn ;
-extern void strerr_die7x (int, char const *, char const *, char const *, char const *, char const *, char const *, char const *) gccattr_noreturn ;
-extern void strerr_die8x (int, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *) gccattr_noreturn ;
-extern void strerr_die9x (int, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *) gccattr_noreturn ;
-extern void strerr_die10x (int, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *) gccattr_noreturn ;
-extern void strerr_die11x (int, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *) gccattr_noreturn ;
-
-extern void strerr_die1sys (int, char const *) gccattr_noreturn ;
-extern void strerr_die2sys (int, char const *, char const *) gccattr_noreturn ;
-extern void strerr_die3sys (int, char const *, char const *, char const *) gccattr_noreturn ;
-extern void strerr_die4sys (int, char const *, char const *, char const *, char const *) gccattr_noreturn ;
-extern void strerr_die5sys (int, char const *, char const *, char const *, char const *, char const *) gccattr_noreturn ;
-extern void strerr_die6sys (int, char const *, char const *, char const *, char const *, char const *, char const *) gccattr_noreturn ;
-extern void strerr_die7sys (int, char const *, char const *, char const *, char const *, char const *, char const *, char const *) gccattr_noreturn ;
-extern void strerr_die8sys (int, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *) gccattr_noreturn ;
-extern void strerr_die9sys (int, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *) gccattr_noreturn ;
-extern void strerr_die10sys (int, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *) gccattr_noreturn ;
-extern void strerr_die11sys (int, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *, char const *) gccattr_noreturn ;
+#define strerr_warn(...) strerr_warnn(sizeof(strerr_array(__VA_ARGS__))/sizeof(char const *), __VA_ARGS__)
+#define strerr_warnsys(...) strerr_warnnsys(sizeof(strerr_array(__VA_ARGS__))/sizeof(char const *), __VA_ARGS__)
+#define strerr_die(e, ...) strerr_dien(e, sizeof(strerr_array(__VA_ARGS__))/sizeof(char const *), __VA_ARGS__)
+#define strerr_diesys(...) strerr_diensys(e, sizeof(strerr_array(__VA_ARGS__))/sizeof(char const *), __VA_ARGS__)
 
 extern char const *PROG ;
 
-#define strerr_warnw1x(x1) \
-strerr_warn3x(PROG, ": warning: ", (x1))
-#define strerr_warnw2x(x1, x2) \
-strerr_warn4x(PROG, ": warning: ", (x1), x2)
-#define strerr_warnw3x(x1, x2, x3) \
-strerr_warn5x(PROG, ": warning: ", (x1), x2, x3)
-#define strerr_warnw4x(x1, x2, x3, x4) \
-strerr_warn6x(PROG, ": warning: ", (x1), x2, x3, x4)
-#define strerr_warnw5x(x1, x2, x3, x4, x5) \
-strerr_warn7x(PROG, ": warning: ", (x1), x2, x3, x4, x5)
-#define strerr_warnw6x(x1, x2, x3, x4, x5, x6) \
-strerr_warn8x(PROG, ": warning: ", (x1), x2, x3, x4, x5, x6)
-#define strerr_warnw7x(x1, x2, x3, x4, x5, x6, x7) \
-strerr_warn9x(PROG, ": warning: ", (x1), x2, x3, x4, x5, x6, x7)
-#define strerr_warnw8x(x1, x2, x3, x4, x5, x6, x7, x8) \
-strerr_warn10x(PROG, ": warning: ", (x1), x2, x3, x4, x5, x6, x7, x8)
-#define strerr_warnw9x(x1, x2, x3, x4, x5, x6, x7, x8, x9) \
-strerr_warn11x(PROG, ": warning: ", (x1), x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_warnwn(n, ...) strerr_warnn((n)+2, PROG, ": warning: ", __VA_ARGS__)
+#define strerr_warnwnsys(n, ...) strerr_warnnsys((n)+2, PROG, ": warning: ", __VA_ARGS__)
+#define strerr_diewn(e, n, ...) strerr_dien(e, (n)+2, PROG, ": warning: ", __VA_ARGS__)
+#define strerr_diewnsys(e, n, ...) strerr_diensys(e, (n)+2, PROG, ": warning: ", __VA_ARGS__)
+#define strerr_diefn(e, n, ...) strerr_dien(e, (n)+2, PROG, ": fatal: ", __VA_ARGS__)
+#define strerr_diefnsys(e, n, ...) strerr_diensys(e, (n)+2, PROG, ": fatal: ", __VA_ARGS__)
 
-#define strerr_warnw1sys(x1) \
-strerr_warn3sys(PROG, ": warning: ", (x1))
-#define strerr_warnw2sys(x1, x2) \
-strerr_warn4sys(PROG, ": warning: ", (x1), x2)
-#define strerr_warnw3sys(x1, x2, x3) \
-strerr_warn5sys(PROG, ": warning: ", (x1), x2, x3)
-#define strerr_warnw4sys(x1, x2, x3, x4) \
-strerr_warn6sys(PROG, ": warning: ", (x1), x2, x3, x4)
-#define strerr_warnw5sys(x1, x2, x3, x4, x5) \
-strerr_warn7sys(PROG, ": warning: ", (x1), x2, x3, x4, x5)
-#define strerr_warnw6sys(x1, x2, x3, x4, x5, x6) \
-strerr_warn8sys(PROG, ": warning: ", (x1), x2, x3, x4, x5, x6)
-#define strerr_warnw7sys(x1, x2, x3, x4, x5, x6, x7) \
-strerr_warn9sys(PROG, ": warning: ", (x1), x2, x3, x4, x5, x6, x7)
-#define strerr_warnw8sys(x1, x2, x3, x4, x5, x6, x7, x8) \
-strerr_warn10sys(PROG, ": warning: ", (x1), x2, x3, x4, x5, x6, x7, x8)
-#define strerr_warnw9sys(x1, x2, x3, x4, x5, x6, x7, x8, x9) \
-strerr_warn11sys(PROG, ": warning: ", (x1), x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_warnw(...) strerr_warn(PROG, ": warning: ", __VA_ARGS__)
+#define strerr_warnwsys(...) strerr_warnsys(PROG, ": warning: ", __VA_ARGS__)
+#define strerr_diew(e, ...) strerr_die(e, PROG, ": warning: ", __VA_ARGS__)
+#define strerr_diewsys(e, ...) strerr_diesys(e, PROG, ": warning: ", __VA_ARGS__)
+#define strerr_dief(e, ...) strerr_die(e, PROG, ": fatal: ", __VA_ARGS__)
+#define strerr_diefsys(e, ...) strerr_diesys(e, PROG, ": fatal: ", __VA_ARGS__)
 
-#define strerr_diew1x(e, x1) \
-strerr_die3x(e, PROG, ": warning: ", x1)
-#define strerr_diew2x(e, x1, x2) \
-strerr_die4x(e, PROG, ": warning: ", x1, x2)
-#define strerr_diew3x(e, x1, x2, x3) \
-strerr_die5x(e, PROG, ": warning: ", x1, x2, x3)
-#define strerr_diew4x(e, x1, x2, x3, x4) \
-strerr_die6x(e, PROG, ": warning: ", x1, x2, x3, x4)
-#define strerr_diew5x(e, x1, x2, x3, x4, x5) \
-strerr_die7x(e, PROG, ": warning: ", x1, x2, x3, x4, x5)
-#define strerr_diew6x(e, x1, x2, x3, x4, x5, x6) \
-strerr_die8x(e, PROG, ": warning: ", x1, x2, x3, x4, x5, x6)
-#define strerr_diew7x(e, x1, x2, x3, x4, x5, x6, x7) \
-strerr_die9x(e, PROG, ": warning: ", x1, x2, x3, x4, x5, x6, x7)
-#define strerr_diew8x(e, x1, x2, x3, x4, x5, x6, x7, x8) \
-strerr_die10x(e, PROG, ": warning: ", x1, x2, x3, x4, x5, x6, x7, x8)
-#define strerr_diew9x(e, x1, x2, x3, x4, x5, x6, x7, x8, x9) \
-strerr_die11x(e, PROG, ": warning: ", x1, x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_warnwun(n, ...) strerr_warnwn((n)+1, ": unable to ", __VA_ARGS__)
+#define strerr_warnwunsys(n, ...) strerr_warnwnsys((n)+1, ": unable to ", __VA_ARGS__)
+#define strerr_diewun(e, n, ...) strerr_diewn(e, (n)+1, ": unable to ", __VA_ARGS__)
+#define strerr_diewunsys(e, n, ...) strerr_diewnsys(e, (n)+1, ": unable to ", __VA_ARGS__)
+#define strerr_diefun(e, n, ...) strerr_diefn(e, (n)+1, ": unable to ", __VA_ARGS__)
+#define strerr_diefunsys(e, n, ...) strerr_diefnsys(e, (n)+1, ": unable to ", __VA_ARGS__)
 
-#define strerr_diew1sys(e, x1) \
-strerr_die3sys(e, PROG, ": warning: ", (x1))
-#define strerr_diew2sys(e, x1, x2) \
-strerr_die4sys(e, PROG, ": warning: ", x1, x2)
-#define strerr_diew3sys(e, x1, x2, x3) \
-strerr_die5sys(e, PROG, ": warning: ", x1, x2, x3)
-#define strerr_diew4sys(e, x1, x2, x3, x4) \
-strerr_die6sys(e, PROG, ": warning: ", x1, x2, x3, x4)
-#define strerr_diew5sys(e, x1, x2, x3, x4, x5) \
-strerr_die7sys(e, PROG, ": warning: ", x1, x2, x3, x4, x5)
-#define strerr_diew6sys(e, x1, x2, x3, x4, x5, x6) \
-strerr_die8sys(e, PROG, ": warning: ", x1, x2, x3, x4, x5, x6)
-#define strerr_diew7sys(e, x1, x2, x3, x4, x5, x6, x7) \
-strerr_die9sys(e, PROG, ": warning: ", x1, x2, x3, x4, x5, x6, x7)
-#define strerr_diew8sys(e, x1, x2, x3, x4, x5, x6, x7, x8) \
-strerr_die10sys(e, PROG, ": warning: ", x1, x2, x3, x4, x5, x6, x7, x8)
-#define strerr_diew9sys(e, x1, x2, x3, x4, x5, x6, x7, x8, x9) \
-strerr_die11sys(e, PROG, ": warning: ", x1, x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_warnwu(...) strerr_warnw(": unable to ", __VA_ARGS__)
+#define strerr_warnwusys(...) strerr_warnwsys(": unable to ", __VA_ARGS__)
+#define strerr_diewu(...) strerr_diew(": unable to ", __VA_ARGS__)
+#define strerr_diewusys(...) strerr_diewsys(": unable to ", __VA_ARGS__)
+#define strerr_diefu(...) strerr_dief(": unable to ", __VA_ARGS__)
+#define strerr_diefusys(...) strerr_diefsys(": unable to ", __VA_ARGS__)
 
-#define strerr_dief1x(e, x1) \
-strerr_die3x(e, PROG, ": fatal: ", x1)
-#define strerr_dief2x(e, x1, x2) \
-strerr_die4x(e, PROG, ": fatal: ", x1, x2)
-#define strerr_dief3x(e, x1, x2, x3) \
-strerr_die5x(e, PROG, ": fatal: ", x1, x2, x3)
-#define strerr_dief4x(e, x1, x2, x3, x4) \
-strerr_die6x(e, PROG, ": fatal: ", x1, x2, x3, x4)
-#define strerr_dief5x(e, x1, x2, x3, x4, x5) \
-strerr_die7x(e, PROG, ": fatal: ", x1, x2, x3, x4, x5)
-#define strerr_dief6x(e, x1, x2, x3, x4, x5, x6) \
-strerr_die8x(e, PROG, ": fatal: ", x1, x2, x3, x4, x5, x6)
-#define strerr_dief7x(e, x1, x2, x3, x4, x5, x6, x7) \
-strerr_die9x(e, PROG, ": fatal: ", x1, x2, x3, x4, x5, x6, x7)
-#define strerr_dief8x(e, x1, x2, x3, x4, x5, x6, x7, x8) \
-strerr_die10x(e, PROG, ": fatal: ", x1, x2, x3, x4, x5, x6, x7, x8)
+#define strerr_warnin(n, ...) strerr_warnn((n)+2, PROG, ": info: ", __VA_ARGS__)
+#define strerr_warninsys(n, ...) strerr_warnnsys((n)+2, PROG, ": info: ", __VA_ARGS__)
+#define strerr_warntn(n, ...) strerr_warnn((n)+2, PROG, ": tracing: ", __VA_ARGS__)
+#define strerr_warntnsys(n, ...) strerr_warnnsys((n)+2, PROG, ": tracing: ", __VA_ARGS__)
 
-#define strerr_dief1sys(e, x1) \
-strerr_die3sys(e, PROG, ": fatal: ", x1)
-#define strerr_dief2sys(e, x1, x2) \
-strerr_die4sys(e, PROG, ": fatal: ", x1, x2)
-#define strerr_dief3sys(e, x1, x2, x3) \
-strerr_die5sys(e, PROG, ": fatal: ", x1, x2, x3)
-#define strerr_dief4sys(e, x1, x2, x3, x4) \
-strerr_die6sys(e, PROG, ": fatal: ", x1, x2, x3, x4)
-#define strerr_dief5sys(e, x1, x2, x3, x4, x5) \
-strerr_die7sys(e, PROG, ": fatal: ", x1, x2, x3, x4, x5)
-#define strerr_dief6sys(e, x1, x2, x3, x4, x5, x6) \
-strerr_die8sys(e, PROG, ": fatal: ", x1, x2, x3, x4, x5, x6)
-#define strerr_dief7sys(e, x1, x2, x3, x4, x5, x6, x7) \
-strerr_die9sys(e, PROG, ": fatal: ", x1, x2, x3, x4, x5, x6, x7)
-#define strerr_dief8sys(e, x1, x2, x3, x4, x5, x6, x7, x8) \
-strerr_die10sys(e, PROG, ": fatal: ", x1, x2, x3, x4, x5, x6, x7, x8)
-#define strerr_dief9sys(e, x1, x2, x3, x4, x5, x6, x7, x8, x9) \
-strerr_die11sys(e, PROG, ": fatal: ", x1, x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_warni(...) strerr_warn(PROG, ": info: ", __VA_ARGS__)
+#define strerr_warnisys(...) strerr_warnsys(PROG, ": info: ", __VA_ARGS__)
+#define strerr_warnt(...) strerr_warn(PROG, ": tracing: ", __VA_ARGS__)
+#define strerr_warntsys(...) strerr_warnsys(PROG, ": tracing: ", __VA_ARGS__)
 
-#define strerr_diefu1x(e, x1) \
-strerr_die4x(e, PROG, ": fatal: ", "unable to ", x1)
-#define strerr_diefu2x(e, x1, x2) \
-strerr_die5x(e, PROG, ": fatal: ", "unable to ", x1, x2)
-#define strerr_diefu3x(e, x1, x2, x3) \
-strerr_die6x(e, PROG, ": fatal: ", "unable to ", x1, x2, x3)
-#define strerr_diefu4x(e, x1, x2, x3, x4) \
-strerr_die7x(e, PROG, ": fatal: ", "unable to ", x1, x2, x3, x4)
-#define strerr_diefu5x(e, x1, x2, x3, x4, x5) \
-strerr_die8x(e, PROG, ": fatal: ", "unable to ", x1, x2, x3, x4, x5)
-#define strerr_diefu6x(e, x1, x2, x3, x4, x5, x6) \
-strerr_die9x(e, PROG, ": fatal: ", "unable to ", x1, x2, x3, x4, x5, x6)
-#define strerr_diefu7x(e, x1, x2, x3, x4, x5, x6, x7) \
-strerr_die10x(e, PROG, ": fatal: ", "unable to ", x1, x2, x3, x4, x5, x6, x7)
-#define strerr_diefu8x(e, x1, x2, x3, x4, x5, x6, x7, x8) \
-strerr_die11x(e, PROG, ": fatal: ", "unable to ", x1, x2, x3, x4, x5, x6, x7, x8)
+#define strerr_dieusage(e, u) strerr_dien(e, 3, PROG, ": usage: ", u)
+#define strerr_dienotset(e, x) strerr_diefn(e, 2, (x), " not set")
+#define strerr_dieinvalid(e, x) strerr_diefn(e, 2, "invalid $", x)
+#define strerr_dieexec(e, x) strerr_diefunsys(e, 2, "exec ", x)
 
-#define strerr_diefu1sys(e, x1) \
-strerr_die4sys(e, PROG, ": fatal: ", "unable to ", x1)
-#define strerr_diefu2sys(e, x1, x2) \
-strerr_die5sys(e, PROG, ": fatal: ", "unable to ", x1, x2)
-#define strerr_diefu3sys(e, x1, x2, x3) \
-strerr_die6sys(e, PROG, ": fatal: ", "unable to ", x1, x2, x3)
-#define strerr_diefu4sys(e, x1, x2, x3, x4) \
-strerr_die7sys(e, PROG, ": fatal: ", "unable to ", x1, x2, x3, x4)
-#define strerr_diefu5sys(e, x1, x2, x3, x4, x5) \
-strerr_die8sys(e, PROG, ": fatal: ", "unable to ", x1, x2, x3, x4, x5)
-#define strerr_diefu6sys(e, x1, x2, x3, x4, x5, x6) \
-strerr_die9sys(e, PROG, ": fatal: ", "unable to ", x1, x2, x3, x4, x5, x6)
-#define strerr_diefu7sys(e, x1, x2, x3, x4, x5, x6, x7) \
-strerr_die10sys(e, PROG, ": fatal: ", "unable to ", x1, x2, x3, x4, x5, x6, x7)
-#define strerr_diefu8sys(e, x1, x2, x3, x4, x5, x6, x7, x8) \
-strerr_die11sys(e, PROG, ": fatal: ", "unable to ", x1, x2, x3, x4, x5, x6, x7, x8)
 
-#define strerr_warnwu1x(x1) \
-strerr_warn4x(PROG, ": warning: ", "unable to ", (x1))
-#define strerr_warnwu2x(x1, x2) \
-strerr_warn5x(PROG, ": warning: ", "unable to ", (x1), x2)
-#define strerr_warnwu3x(x1, x2, x3) \
-strerr_warn6x(PROG, ": warning: ", "unable to ", (x1), x2, x3)
-#define strerr_warnwu4x(x1, x2, x3, x4) \
-strerr_warn7x(PROG, ": warning: ", "unable to ", (x1), x2, x3, x4)
-#define strerr_warnwu5x(x1, x2, x3, x4, x5) \
-strerr_warn8x(PROG, ": warning: ", "unable to ", (x1), x2, x3, x4, x5)
-#define strerr_warnwu6x(x1, x2, x3, x4, x5, x6) \
-strerr_warn9x(PROG, ": warning: ", "unable to ", (x1), x2, x3, x4, x5, x6)
-#define strerr_warnwu7x(x1, x2, x3, x4, x5, x6, x7) \
-strerr_warn10x(PROG, ": warning: ", "unable to ", (x1), x2, x3, x4, x5, x6, x7)
+/* compat */
 
-#define strerr_warnwu1sys(x1) \
-strerr_warn4sys(PROG, ": warning: ", "unable to ", (x1))
-#define strerr_warnwu2sys(x1, x2) \
-strerr_warn5sys(PROG, ": warning: ", "unable to ", (x1), x2)
-#define strerr_warnwu3sys(x1, x2, x3) \
-strerr_warn6sys(PROG, ": warning: ", "unable to ", (x1), x2, x3)
-#define strerr_warnwu4sys(x1, x2, x3, x4) \
-strerr_warn7sys(PROG, ": warning: ", "unable to ", (x1), x2, x3, x4)
-#define strerr_warnwu5sys(x1, x2, x3, x4, x5) \
-strerr_warn8sys(PROG, ": warning: ", "unable to ", (x1), x2, x3, x4, x5)
-#define strerr_warnwu6sys(x1, x2, x3, x4, x5, x6) \
-strerr_warn9sys(PROG, ": warning: ", "unable to ", (x1), x2, x3, x4, x5, x6)
-#define strerr_warnwu7sys(x1, x2, x3, x4, x5, x6, x7) \
-strerr_warn10sys(PROG, ": warning: ", "unable to ", (x1), x2, x3, x4, x5, x6, x7)
-#define strerr_warnwu8sys(x1, x2, x3, x4, x5, x6, x7, x8) \
-strerr_warn11sys(PROG, ": warning: ", "unable to ", (x1), x2, x3, x4, x5, x6, x7, x8)
+#define strerr_warnw1x(x1) strerr_warnwn(1, x1)
+#define strerr_warnw2x(x1, x2) strerr_warnwn(2, x1, x2)
+#define strerr_warnw3x(x1, x2, x3) strerr_warnwn(3, x1, x2, x3)
+#define strerr_warnw4x(x1, x2, x3, x4) strerr_warnwn(4, x1, x2, x3, x4)
+#define strerr_warnw5x(x1, x2, x3, x4, x5) strerr_warnwn(5, x1, x2, x3, x4, x5)
+#define strerr_warnw6x(x1, x2, x3, x4, x5, x6) strerr_warnwn(6, x1, x2, x3, x4, x5, x6)
+#define strerr_warnw7x(x1, x2, x3, x4, x5, x6, x7) strerr_warnwn(7, x1, x2, x3, x4, x5, x6, x7)
+#define strerr_warnw8x(x1, x2, x3, x4, x5, x6, x7, x8) strerr_warnwn(8, x1, x2, x3, x4, x5, x6, x7, x8)
+#define strerr_warnw9x(x1, x2, x3, x4, x5, x6, x7, x8, x9) strerr_warnwn(9, x1, x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_warnw10x(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10) strerr_warnwn(10, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10)
 
-#define strerr_diewu1x(e, x1) \
-strerr_die4x(e, PROG, ": warning: ", "unable to ", x1)
-#define strerr_diewu2x(e, x1, x2) \
-strerr_die5x(e, PROG, ": warning: ", "unable to ", x1, x2)
-#define strerr_diewu3x(e, x1, x2, x3) \
-strerr_die6x(e, PROG, ": warning: ", "unable to ", x1, x2, x3)
-#define strerr_diewu4x(e, x1, x2, x3, x4) \
-strerr_die7x(e, PROG, ": warning: ", "unable to ", x1, x2, x3, x4)
-#define strerr_diewu5x(e, x1, x2, x3, x4, x5) \
-strerr_die8x(e, PROG, ": warning: ", "unable to ", x1, x2, x3, x4, x5)
-#define strerr_diewu6x(e, x1, x2, x3, x4, x5, x6) \
-strerr_die9x(e, PROG, ": warning: ", "unable to ", x1, x2, x3, x4, x5, x6)
-#define strerr_diewu7x(e, x1, x2, x3, x4, x5, x6, x7) \
-strerr_die10x(e, PROG, ": warning: ", "unable to ", x1, x2, x3, x4, x5, x6, x7)
-#define strerr_diewu8x(e, x1, x2, x3, x4, x5, x6, x7, x8) \
-strerr_die11x(e, PROG, ": warning: ", "unable to ", x1, x2, x3, x4, x5, x6, x7, x8)
+#define strerr_warnw1sys(x1) strerr_warnwnsys(1, x1)
+#define strerr_warnw2sys(x1, x2) strerr_warnwnsys(2, x1, x2)
+#define strerr_warnw3sys(x1, x2, x3) strerr_warnwnsys(3, x1, x2, x3)
+#define strerr_warnw4sys(x1, x2, x3, x4) strerr_warnwnsys(4, x1, x2, x3, x4)
+#define strerr_warnw5sys(x1, x2, x3, x4, x5) strerr_warnwnsys(5, x1, x2, x3, x4, x5)
+#define strerr_warnw6sys(x1, x2, x3, x4, x5, x6) strerr_warnwnsys(6, x1, x2, x3, x4, x5, x6)
+#define strerr_warnw7sys(x1, x2, x3, x4, x5, x6, x7) strerr_warnwnsys(7, x1, x2, x3, x4, x5, x6, x7)
+#define strerr_warnw8sys(x1, x2, x3, x4, x5, x6, x7, x8) strerr_warnwnsys(8, x1, x2, x3, x4, x5, x6, x7, x8)
+#define strerr_warnw9sys(x1, x2, x3, x4, x5, x6, x7, x8, x9) strerr_warnwnsys(9, x1, x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_warnw10sys(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10) strerr_warnwnsys(10, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10)
 
-#define strerr_diewu1sys(e, x1) \
-strerr_die4sys(e, PROG, ": warning: ", "unable to ", (x1))
-#define strerr_diewu2sys(e, x1, x2) \
-strerr_die5sys(e, PROG, ": warning: ", "unable to ", x1, x2)
-#define strerr_diewu3sys(e, x1, x2, x3) \
-strerr_die6sys(e, PROG, ": warning: ", "unable to ", x1, x2, x3)
-#define strerr_diewu4sys(e, x1, x2, x3, x4) \
-strerr_die7sys(e, PROG, ": warning: ", "unable to ", x1, x2, x3, x4)
-#define strerr_diewu5sys(e, x1, x2, x3, x4, x5) \
-strerr_die8sys(e, PROG, ": warning: ", "unable to ", x1, x2, x3, x4, x5)
-#define strerr_diewu6sys(e, x1, x2, x3, x4, x5, x6) \
-strerr_die9sys(e, PROG, ": warning: ", "unable to ", x1, x2, x3, x4, x5, x6)
-#define strerr_diewu7sys(e, x1, x2, x3, x4, x5, x6, x7) \
-strerr_die10sys(e, PROG, ": warning: ", "unable to ", x1, x2, x3, x4, x5, x6, x7)
-#define strerr_diewu8sys(e, x1, x2, x3, x4, x5, x6, x7, x8) \
-strerr_die11sys(e, PROG, ": warning: ", "unable to ", x1, x2, x3, x4, x5, x6, x7, x8)
+#define strerr_diew1x(e, x1) strerr_diewn(e, 1, x1)
+#define strerr_diew2x(e, x1, x2) strerr_diewn(e, 2, x1, x2)
+#define strerr_diew3x(e, x1, x2, x3) strerr_diewn(e, 3, x1, x2, x3)
+#define strerr_diew4x(e, x1, x2, x3, x4) strerr_diewn(e, 4, x1, x2, x3, x4)
+#define strerr_diew5x(e, x1, x2, x3, x4, x5) strerr_diewn(e, 5, x1, x2, x3, x4, x5)
+#define strerr_diew6x(e, x1, x2, x3, x4, x5, x6) strerr_diewn(e, 6, x1, x2, x3, x4, x5, x6)
+#define strerr_diew7x(e, x1, x2, x3, x4, x5, x6, x7) strerr_diewn(e, 7, x1, x2, x3, x4, x5, x6, x7)
+#define strerr_diew8x(e, x1, x2, x3, x4, x5, x6, x7, x8) strerr_diewn(e, 8, x1, x2, x3, x4, x5, x6, x7, x8)
+#define strerr_diew9x(e, x1, x2, x3, x4, x5, x6, x7, x8, x9) strerr_diewn(e, 9, x1, x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_diew10x(e, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10) strerr_diewn(e, 10, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10)
 
-#define strerr_dieusage(e, u) \
-strerr_die3x(e, PROG, ": usage: ", u)
+#define strerr_diew1sys(e, x1) strerr_diewnsys(e, 1, x1)
+#define strerr_diew2sys(e, x1, x2) strerr_diewnsys(e, 2, x1, x2)
+#define strerr_diew3sys(e, x1, x2, x3) strerr_diewnsys(e, 3, x1, x2, x3)
+#define strerr_diew4sys(e, x1, x2, x3, x4) strerr_diewnsys(e, 4, x1, x2, x3, x4)
+#define strerr_diew5sys(e, x1, x2, x3, x4, x5) strerr_diewnsys(e, 5, x1, x2, x3, x4, x5)
+#define strerr_diew6sys(e, x1, x2, x3, x4, x5, x6) strerr_diewnsys(e, 6, x1, x2, x3, x4, x5, x6)
+#define strerr_diew7sys(e, x1, x2, x3, x4, x5, x6, x7) strerr_diewnsys(e, 7, x1, x2, x3, x4, x5, x6, x7)
+#define strerr_diew8sys(e, x1, x2, x3, x4, x5, x6, x7, x8) strerr_diewnsys(e, 8, x1, x2, x3, x4, x5, x6, x7, x8)
+#define strerr_diew9sys(e, x1, x2, x3, x4, x5, x6, x7, x8, x9) strerr_diewnsys(e, 9, x1, x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_diew10sys(e, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10) strerr_diewnsys(e, 10, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10)
 
-#define strerr_dienotset(e, x) \
-strerr_dief2x(e, (x), " not set")
+#define strerr_dief1x(e, x1) strerr_diefn(e, 1, x1)
+#define strerr_dief2x(e, x1, x2) strerr_diefn(e, 2, x1, x2)
+#define strerr_dief3x(e, x1, x2, x3) strerr_diefn(e, 3, x1, x2, x3)
+#define strerr_dief4x(e, x1, x2, x3, x4) strerr_diefn(e, 4, x1, x2, x3, x4)
+#define strerr_dief5x(e, x1, x2, x3, x4, x5) strerr_diefn(e, 5, x1, x2, x3, x4, x5)
+#define strerr_dief6x(e, x1, x2, x3, x4, x5, x6) strerr_diefn(e, 6, x1, x2, x3, x4, x5, x6)
+#define strerr_dief7x(e, x1, x2, x3, x4, x5, x6, x7) strerr_diefn(e, 7, x1, x2, x3, x4, x5, x6, x7)
+#define strerr_dief8x(e, x1, x2, x3, x4, x5, x6, x7, x8) strerr_diefn(e, 8, x1, x2, x3, x4, x5, x6, x7, x8)
+#define strerr_dief9x(e, x1, x2, x3, x4, x5, x6, x7, x8, x9) strerr_diefn(e, 9, x1, x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_dief10x(e, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10) strerr_diefn(e, 10, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10)
 
-#define strerr_dieinvalid(e, x) \
-strerr_dief2x(e, "invalid $", x)
+#define strerr_dief1sys(e, x1) strerr_diefnsys(e, 1, x1)
+#define strerr_dief2sys(e, x1, x2) strerr_diefnsys(e, 2, x1, x2)
+#define strerr_dief3sys(e, x1, x2, x3) strerr_diefnsys(e, 3, x1, x2, x3)
+#define strerr_dief4sys(e, x1, x2, x3, x4) strerr_diefnsys(e, 4, x1, x2, x3, x4)
+#define strerr_dief5sys(e, x1, x2, x3, x4, x5) strerr_diefnsys(e, 5, x1, x2, x3, x4, x5)
+#define strerr_dief6sys(e, x1, x2, x3, x4, x5, x6) strerr_diefnsys(e, 6, x1, x2, x3, x4, x5, x6)
+#define strerr_dief7sys(e, x1, x2, x3, x4, x5, x6, x7) strerr_diefnsys(e, 7, x1, x2, x3, x4, x5, x6, x7)
+#define strerr_dief8sys(e, x1, x2, x3, x4, x5, x6, x7, x8) strerr_diefnsys(e, 8, x1, x2, x3, x4, x5, x6, x7, x8)
+#define strerr_dief9sys(e, x1, x2, x3, x4, x5, x6, x7, x8, x9) strerr_diefnsys(e, 9, x1, x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_dief10sys(e, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10) strerr_diefnsys(e, 10, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10)
 
-#define strerr_dieexec(e, x) \
-strerr_diefu2sys(e, "exec ", x)
+#define strerr_warnwu1x(x1) strerr_warnwun(1, x1)
+#define strerr_warnwu2x(x1, x2) strerr_warnwun(2, x1, x2)
+#define strerr_warnwu3x(x1, x2, x3) strerr_warnwun(3, x1, x2, x3)
+#define strerr_warnwu4x(x1, x2, x3, x4) strerr_warnwun(4, x1, x2, x3, x4)
+#define strerr_warnwu5x(x1, x2, x3, x4, x5) strerr_warnwun(5, x1, x2, x3, x4, x5)
+#define strerr_warnwu6x(x1, x2, x3, x4, x5, x6) strerr_warnwun(6, x1, x2, x3, x4, x5, x6)
+#define strerr_warnwu7x(x1, x2, x3, x4, x5, x6, x7) strerr_warnwun(7, x1, x2, x3, x4, x5, x6, x7)
+#define strerr_warnwu8x(x1, x2, x3, x4, x5, x6, x7, x8) strerr_warnwun(8, x1, x2, x3, x4, x5, x6, x7, x8)
+#define strerr_warnwu9x(x1, x2, x3, x4, x5, x6, x7, x8, x9) strerr_warnwun(9, x1, x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_warnwu10x(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10) strerr_warnwun(10, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10)
 
-#define strerr_warni1x(x1) \
-strerr_warn3x(PROG, ": info: ", (x1))
-#define strerr_warni2x(x1, x2) \
-strerr_warn4x(PROG, ": info: ", (x1), x2)
-#define strerr_warni3x(x1, x2, x3) \
-strerr_warn5x(PROG, ": info: ", (x1), x2, x3)
-#define strerr_warni4x(x1, x2, x3, x4) \
-strerr_warn6x(PROG, ": info: ", (x1), x2, x3, x4)
-#define strerr_warni5x(x1, x2, x3, x4, x5) \
-strerr_warn7x(PROG, ": info: ", (x1), x2, x3, x4, x5)
-#define strerr_warni6x(x1, x2, x3, x4, x5, x6) \
-strerr_warn8x(PROG, ": info: ", (x1), x2, x3, x4, x5, x6)
-#define strerr_warni7x(x1, x2, x3, x4, x5, x6, x7) \
-strerr_warn9x(PROG, ": info: ", (x1), x2, x3, x4, x5, x6, x7)
-#define strerr_warni8x(x1, x2, x3, x4, x5, x6, x7, x8) \
-strerr_warn10x(PROG, ": info: ", (x1), x2, x3, x4, x5, x6, x7, x8)
-#define strerr_warni9x(x1, x2, x3, x4, x5, x6, x7, x8, x9) \
-strerr_warn11x(PROG, ": info: ", (x1), x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_warnwu1sys(x1) strerr_warnwunsys(1, x1)
+#define strerr_warnwu2sys(x1, x2) strerr_warnwunsys(2, x1, x2)
+#define strerr_warnwu3sys(x1, x2, x3) strerr_warnwunsys(3, x1, x2, x3)
+#define strerr_warnwu4sys(x1, x2, x3, x4) strerr_warnwunsys(4, x1, x2, x3, x4)
+#define strerr_warnwu5sys(x1, x2, x3, x4, x5) strerr_warnwunsys(5, x1, x2, x3, x4, x5)
+#define strerr_warnwu6sys(x1, x2, x3, x4, x5, x6) strerr_warnwunsys(6, x1, x2, x3, x4, x5, x6)
+#define strerr_warnwu7sys(x1, x2, x3, x4, x5, x6, x7) strerr_warnwunsys(7, x1, x2, x3, x4, x5, x6, x7)
+#define strerr_warnwu8sys(x1, x2, x3, x4, x5, x6, x7, x8) strerr_warnwunsys(8, x1, x2, x3, x4, x5, x6, x7, x8)
+#define strerr_warnwu9sys(x1, x2, x3, x4, x5, x6, x7, x8, x9) strerr_warnwunsys(9, x1, x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_warnwu10sys(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10) strerr_warnwunsys(10, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10)
 
-#define strerr_warni1sys(x1) \
-strerr_warn3sys(PROG, ": info: ", (x1))
-#define strerr_warni2sys(x1, x2) \
-strerr_warn4sys(PROG, ": info: ", (x1), x2)
-#define strerr_warni3sys(x1, x2, x3) \
-strerr_warn5sys(PROG, ": info: ", (x1), x2, x3)
-#define strerr_warni4sys(x1, x2, x3, x4) \
-strerr_warn6sys(PROG, ": info: ", (x1), x2, x3, x4)
-#define strerr_warni5sys(x1, x2, x3, x4, x5) \
-strerr_warn7sys(PROG, ": info: ", (x1), x2, x3, x4, x5)
-#define strerr_warni6sys(x1, x2, x3, x4, x5, x6) \
-strerr_warn8sys(PROG, ": info: ", (x1), x2, x3, x4, x5, x6)
-#define strerr_warni7sys(x1, x2, x3, x4, x5, x6, x7) \
-strerr_warn9sys(PROG, ": info: ", (x1), x2, x3, x4, x5, x6, x7)
-#define strerr_warni8sys(x1, x2, x3, x4, x5, x6, x7, x8) \
-strerr_warn10sys(PROG, ": info: ", (x1), x2, x3, x4, x5, x6, x7, x8)
-#define strerr_warni9sys(x1, x2, x3, x4, x5, x6, x7, x8, x9) \
-strerr_warn11sys(PROG, ": info: ", (x1), x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_diewu1x(e, x1) strerr_diewun(e, 1, x1)
+#define strerr_diewu2x(e, x1, x2) strerr_diewun(e, 2, x1, x2)
+#define strerr_diewu3x(e, x1, x2, x3) strerr_diewun(e, 3, x1, x2, x3)
+#define strerr_diewu4x(e, x1, x2, x3, x4) strerr_diewun(e, 4, x1, x2, x3, x4)
+#define strerr_diewu5x(e, x1, x2, x3, x4, x5) strerr_diewun(e, 5, x1, x2, x3, x4, x5)
+#define strerr_diewu6x(e, x1, x2, x3, x4, x5, x6) strerr_diewun(e, 6, x1, x2, x3, x4, x5, x6)
+#define strerr_diewu7x(e, x1, x2, x3, x4, x5, x6, x7) strerr_diewun(e, 7, x1, x2, x3, x4, x5, x6, x7)
+#define strerr_diewu8x(e, x1, x2, x3, x4, x5, x6, x7, x8) strerr_diewun(e, 8, x1, x2, x3, x4, x5, x6, x7, x8)
+#define strerr_diewu9x(e, x1, x2, x3, x4, x5, x6, x7, x8, x9) strerr_diewun(e, 9, x1, x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_diewu10x(e, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10) strerr_diewun(e, 10, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10)
 
-#define strerr_warnt1x(x1) \
-strerr_warn3x(PROG, ": tracing: ", (x1))
-#define strerr_warnt2x(x1, x2) \
-strerr_warn4x(PROG, ": tracing: ", (x1), x2)
-#define strerr_warnt3x(x1, x2, x3) \
-strerr_warn5x(PROG, ": tracing: ", (x1), x2, x3)
-#define strerr_warnt4x(x1, x2, x3, x4) \
-strerr_warn6x(PROG, ": tracing: ", (x1), x2, x3, x4)
-#define strerr_warnt5x(x1, x2, x3, x4, x5) \
-strerr_warn7x(PROG, ": tracing: ", (x1), x2, x3, x4, x5)
-#define strerr_warnt6x(x1, x2, x3, x4, x5, x6) \
-strerr_warn8x(PROG, ": tracing: ", (x1), x2, x3, x4, x5, x6)
-#define strerr_warnt7x(x1, x2, x3, x4, x5, x6, x7) \
-strerr_warn9x(PROG, ": tracing: ", (x1), x2, x3, x4, x5, x6, x7)
-#define strerr_warnt8x(x1, x2, x3, x4, x5, x6, x7, x8) \
-strerr_warn10x(PROG, ": tracing: ", (x1), x2, x3, x4, x5, x6, x7, x8)
-#define strerr_warnt9x(x1, x2, x3, x4, x5, x6, x7, x8, x9) \
-strerr_warn11x(PROG, ": tracing: ", (x1), x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_diewu1sys(e, x1) strerr_diewunsys(e, 1, x1)
+#define strerr_diewu2sys(e, x1, x2) strerr_diewunsys(e, 2, x1, x2)
+#define strerr_diewu3sys(e, x1, x2, x3) strerr_diewunsys(e, 3, x1, x2, x3)
+#define strerr_diewu4sys(e, x1, x2, x3, x4) strerr_diewunsys(e, 4, x1, x2, x3, x4)
+#define strerr_diewu5sys(e, x1, x2, x3, x4, x5) strerr_diewunsys(e, 5, x1, x2, x3, x4, x5)
+#define strerr_diewu6sys(e, x1, x2, x3, x4, x5, x6) strerr_diewunsys(e, 6, x1, x2, x3, x4, x5, x6)
+#define strerr_diewu7sys(e, x1, x2, x3, x4, x5, x6, x7) strerr_diewunsys(e, 7, x1, x2, x3, x4, x5, x6, x7)
+#define strerr_diewu8sys(e, x1, x2, x3, x4, x5, x6, x7, x8) strerr_diewunsys(e, 8, x1, x2, x3, x4, x5, x6, x7, x8)
+#define strerr_diewu9sys(e, x1, x2, x3, x4, x5, x6, x7, x8, x9) strerr_diewunsys(e, 9, x1, x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_diewu10sys(e, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10) strerr_diewunsys(e, 10, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10)
 
-#define strerr_warnt1sys(x1) \
-strerr_warn3sys(PROG, ": tracing: ", (x1))
-#define strerr_warnt2sys(x1, x2) \
-strerr_warn4sys(PROG, ": tracing: ", (x1), x2)
-#define strerr_warnt3sys(x1, x2, x3) \
-strerr_warn5sys(PROG, ": tracing: ", (x1), x2, x3)
-#define strerr_warnt4sys(x1, x2, x3, x4) \
-strerr_warn6sys(PROG, ": tracing: ", (x1), x2, x3, x4)
-#define strerr_warnt5sys(x1, x2, x3, x4, x5) \
-strerr_warn7sys(PROG, ": tracing: ", (x1), x2, x3, x4, x5)
-#define strerr_warnt6sys(x1, x2, x3, x4, x5, x6) \
-strerr_warn8sys(PROG, ": tracing: ", (x1), x2, x3, x4, x5, x6)
-#define strerr_warnt7sys(x1, x2, x3, x4, x5, x6, x7) \
-strerr_warn9sys(PROG, ": tracing: ", (x1), x2, x3, x4, x5, x6, x7)
-#define strerr_warnt8sys(x1, x2, x3, x4, x5, x6, x7, x8) \
-strerr_warn10sys(PROG, ": tracing: ", (x1), x2, x3, x4, x5, x6, x7, x8)
-#define strerr_warnt9sys(x1, x2, x3, x4, x5, x6, x7, x8, x9) \
-strerr_warn11sys(PROG, ": tracing: ", (x1), x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_diefu1x(e, x1) strerr_diefun(e, 1, x1)
+#define strerr_diefu2x(e, x1, x2) strerr_diefun(e, 2, x1, x2)
+#define strerr_diefu3x(e, x1, x2, x3) strerr_diefun(e, 3, x1, x2, x3)
+#define strerr_diefu4x(e, x1, x2, x3, x4) strerr_diefun(e, 4, x1, x2, x3, x4)
+#define strerr_diefu5x(e, x1, x2, x3, x4, x5) strerr_diefun(e, 5, x1, x2, x3, x4, x5)
+#define strerr_diefu6x(e, x1, x2, x3, x4, x5, x6) strerr_diefun(e, 6, x1, x2, x3, x4, x5, x6)
+#define strerr_diefu7x(e, x1, x2, x3, x4, x5, x6, x7) strerr_diefun(e, 7, x1, x2, x3, x4, x5, x6, x7)
+#define strerr_diefu8x(e, x1, x2, x3, x4, x5, x6, x7, x8) strerr_diefun(e, 8, x1, x2, x3, x4, x5, x6, x7, x8)
+#define strerr_diefu9x(e, x1, x2, x3, x4, x5, x6, x7, x8, x9) strerr_diefun(e, 9, x1, x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_diefu10x(e, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10) strerr_diefun(e, 10, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10)
+
+#define strerr_diefu1sys(e, x1) strerr_diefunsys(e, 1, x1)
+#define strerr_diefu2sys(e, x1, x2) strerr_diefunsys(e, 2, x1, x2)
+#define strerr_diefu3sys(e, x1, x2, x3) strerr_diefunsys(e, 3, x1, x2, x3)
+#define strerr_diefu4sys(e, x1, x2, x3, x4) strerr_diefunsys(e, 4, x1, x2, x3, x4)
+#define strerr_diefu5sys(e, x1, x2, x3, x4, x5) strerr_diefunsys(e, 5, x1, x2, x3, x4, x5)
+#define strerr_diefu6sys(e, x1, x2, x3, x4, x5, x6) strerr_diefunsys(e, 6, x1, x2, x3, x4, x5, x6)
+#define strerr_diefu7sys(e, x1, x2, x3, x4, x5, x6, x7) strerr_diefunsys(e, 7, x1, x2, x3, x4, x5, x6, x7)
+#define strerr_diefu8sys(e, x1, x2, x3, x4, x5, x6, x7, x8) strerr_diefunsys(e, 8, x1, x2, x3, x4, x5, x6, x7, x8)
+#define strerr_diefu9sys(e, x1, x2, x3, x4, x5, x6, x7, x8, x9) strerr_diefunsys(e, 9, x1, x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_diefu10sys(e, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10) strerr_diefunsys(e, 10, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10)
+
+#define strerr_warni1x(x1) strerr_warnin(1, x1)
+#define strerr_warni2x(x1, x2) strerr_warnin(2, x1, x2)
+#define strerr_warni3x(x1, x2, x3) strerr_warnin(3, x1, x2, x3)
+#define strerr_warni4x(x1, x2, x3, x4) strerr_warnin(4, x1, x2, x3, x4)
+#define strerr_warni5x(x1, x2, x3, x4, x5) strerr_warnin(5, x1, x2, x3, x4, x5)
+#define strerr_warni6x(x1, x2, x3, x4, x5, x6) strerr_warnin(6, x1, x2, x3, x4, x5, x6)
+#define strerr_warni7x(x1, x2, x3, x4, x5, x6, x7) strerr_warnin(7, x1, x2, x3, x4, x5, x6, x7)
+#define strerr_warni8x(x1, x2, x3, x4, x5, x6, x7, x8) strerr_warnin(8, x1, x2, x3, x4, x5, x6, x7, x8)
+#define strerr_warni9x(x1, x2, x3, x4, x5, x6, x7, x8, x9) strerr_warnin(9, x1, x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_warni10x(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10) strerr_warnin(10, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10)
+
+#define strerr_warni1sys(x1) strerr_warninsys(1, x1)
+#define strerr_warni2sys(x1, x2) strerr_warninsys(2, x1, x2)
+#define strerr_warni3sys(x1, x2, x3) strerr_warninsys(3, x1, x2, x3)
+#define strerr_warni4sys(x1, x2, x3, x4) strerr_warninsys(4, x1, x2, x3, x4)
+#define strerr_warni5sys(x1, x2, x3, x4, x5) strerr_warninsys(5, x1, x2, x3, x4, x5)
+#define strerr_warni6sys(x1, x2, x3, x4, x5, x6) strerr_warninsys(6, x1, x2, x3, x4, x5, x6)
+#define strerr_warni7sys(x1, x2, x3, x4, x5, x6, x7) strerr_warninsys(7, x1, x2, x3, x4, x5, x6, x7)
+#define strerr_warni8sys(x1, x2, x3, x4, x5, x6, x7, x8) strerr_warninsys(8, x1, x2, x3, x4, x5, x6, x7, x8)
+#define strerr_warni9sys(x1, x2, x3, x4, x5, x6, x7, x8, x9) strerr_warninsys(9, x1, x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_warni10sys(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10) strerr_warninsys(10, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10)
+
+#define strerr_warnt1x(x1) strerr_warntn(1, x1)
+#define strerr_warnt2x(x1, x2) strerr_warntn(2, x1, x2)
+#define strerr_warnt3x(x1, x2, x3) strerr_warntn(3, x1, x2, x3)
+#define strerr_warnt4x(x1, x2, x3, x4) strerr_warntn(4, x1, x2, x3, x4)
+#define strerr_warnt5x(x1, x2, x3, x4, x5) strerr_warntn(5, x1, x2, x3, x4, x5)
+#define strerr_warnt6x(x1, x2, x3, x4, x5, x6) strerr_warntn(6, x1, x2, x3, x4, x5, x6)
+#define strerr_warnt7x(x1, x2, x3, x4, x5, x6, x7) strerr_warntn(7, x1, x2, x3, x4, x5, x6, x7)
+#define strerr_warnt8x(x1, x2, x3, x4, x5, x6, x7, x8) strerr_warntn(8, x1, x2, x3, x4, x5, x6, x7, x8)
+#define strerr_warnt9x(x1, x2, x3, x4, x5, x6, x7, x8, x9) strerr_warntn(9, x1, x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_warnt10x(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10) strerr_warntn(10, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10)
+
+#define strerr_warnt1sys(x1) strerr_warntnsys(1, x1)
+#define strerr_warnt2sys(x1, x2) strerr_warntnsys(2, x1, x2)
+#define strerr_warnt3sys(x1, x2, x3) strerr_warntnsys(3, x1, x2, x3)
+#define strerr_warnt4sys(x1, x2, x3, x4) strerr_warntnsys(4, x1, x2, x3, x4)
+#define strerr_warnt5sys(x1, x2, x3, x4, x5) strerr_warntnsys(5, x1, x2, x3, x4, x5)
+#define strerr_warnt6sys(x1, x2, x3, x4, x5, x6) strerr_warntnsys(6, x1, x2, x3, x4, x5, x6)
+#define strerr_warnt7sys(x1, x2, x3, x4, x5, x6, x7) strerr_warntnsys(7, x1, x2, x3, x4, x5, x6, x7)
+#define strerr_warnt8sys(x1, x2, x3, x4, x5, x6, x7, x8) strerr_warntnsys(8, x1, x2, x3, x4, x5, x6, x7, x8)
+#define strerr_warnt9sys(x1, x2, x3, x4, x5, x6, x7, x8, x9) strerr_warntnsys(9, x1, x2, x3, x4, x5, x6, x7, x8, x9)
+#define strerr_warnt10sys(x1, x2, x3, x4, x5, x6, x7, x8, x9, x10) strerr_warntnsys(10, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10)
 
 #endif

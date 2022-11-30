@@ -555,6 +555,14 @@ src/libstddjb/stralloc_reverse.o src/libstddjb/stralloc_reverse.lo: src/libstddj
 src/libstddjb/stralloc_reverse_blocks.o src/libstddjb/stralloc_reverse_blocks.lo: src/libstddjb/stralloc_reverse_blocks.c src/include/skalibs/stralloc.h
 src/libstddjb/stralloc_shrink.o src/libstddjb/stralloc_shrink.lo: src/libstddjb/stralloc_shrink.c src/include/skalibs/alloc.h src/include/skalibs/stralloc.h
 src/libstddjb/stralloc_zero.o src/libstddjb/stralloc_zero.lo: src/libstddjb/stralloc_zero.c src/include/skalibs/stralloc.h
+src/libstddjb/strerr_diel.o src/libstddjb/strerr_diel.lo: src/libstddjb/strerr_diel.c src/include/skalibs/strerr.h
+src/libstddjb/strerr_dielsys.o src/libstddjb/strerr_dielsys.lo: src/libstddjb/strerr_dielsys.c src/include/skalibs/strerr.h
+src/libstddjb/strerr_diev.o src/libstddjb/strerr_diev.lo: src/libstddjb/strerr_diev.c src/include/skalibs/strerr.h
+src/libstddjb/strerr_dievsys.o src/libstddjb/strerr_dievsys.lo: src/libstddjb/strerr_dievsys.c src/include/skalibs/strerr.h
+src/libstddjb/strerr_warnl.o src/libstddjb/strerr_warnl.lo: src/libstddjb/strerr_warnl.c src/include/skalibs/strerr.h
+src/libstddjb/strerr_warnlsys.o src/libstddjb/strerr_warnlsys.lo: src/libstddjb/strerr_warnlsys.c src/include/skalibs/strerr.h
+src/libstddjb/strerr_warnv.o src/libstddjb/strerr_warnv.lo: src/libstddjb/strerr_warnv.c src/include/skalibs/buffer.h src/include/skalibs/strerr.h
+src/libstddjb/strerr_warnvsys.o src/libstddjb/strerr_warnvsys.lo: src/libstddjb/strerr_warnvsys.c src/include/skalibs/buffer.h src/include/skalibs/strerr.h
 src/libstddjb/string_format.o src/libstddjb/string_format.lo: src/libstddjb/string_format.c src/include/skalibs/bytestr.h src/include/skalibs/stralloc.h
 src/libstddjb/string_quote.o src/libstddjb/string_quote.lo: src/libstddjb/string_quote.c src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/string_quote_nodelim.o src/libstddjb/string_quote_nodelim.lo: src/libstddjb/string_quote_nodelim.c src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
@@ -696,58 +704,6 @@ src/libstddjb/waitn_reap_posix.o src/libstddjb/waitn_reap_posix.lo: src/libstddj
 src/libstddjb/waitpid_nointr.o src/libstddjb/waitpid_nointr.lo: src/libstddjb/waitpid_nointr.c src/include/skalibs/djbunix.h
 src/libstddjb/writenclose_unsafe.o src/libstddjb/writenclose_unsafe.lo: src/libstddjb/writenclose_unsafe.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
 src/libstddjb/writevnclose_unsafe.o src/libstddjb/writevnclose_unsafe.lo: src/libstddjb/writevnclose_unsafe.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/siovec.h
-src/libstrerr/strerr_die10sys.o src/libstrerr/strerr_die10sys.lo: src/libstrerr/strerr_die10sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die10x.o src/libstrerr/strerr_die10x.lo: src/libstrerr/strerr_die10x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die11sys.o src/libstrerr/strerr_die11sys.lo: src/libstrerr/strerr_die11sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die11x.o src/libstrerr/strerr_die11x.lo: src/libstrerr/strerr_die11x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die1sys.o src/libstrerr/strerr_die1sys.lo: src/libstrerr/strerr_die1sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die1x.o src/libstrerr/strerr_die1x.lo: src/libstrerr/strerr_die1x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die2sys.o src/libstrerr/strerr_die2sys.lo: src/libstrerr/strerr_die2sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die2x.o src/libstrerr/strerr_die2x.lo: src/libstrerr/strerr_die2x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die3sys.o src/libstrerr/strerr_die3sys.lo: src/libstrerr/strerr_die3sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die3x.o src/libstrerr/strerr_die3x.lo: src/libstrerr/strerr_die3x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die4sys.o src/libstrerr/strerr_die4sys.lo: src/libstrerr/strerr_die4sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die4x.o src/libstrerr/strerr_die4x.lo: src/libstrerr/strerr_die4x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die5sys.o src/libstrerr/strerr_die5sys.lo: src/libstrerr/strerr_die5sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die5x.o src/libstrerr/strerr_die5x.lo: src/libstrerr/strerr_die5x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die6sys.o src/libstrerr/strerr_die6sys.lo: src/libstrerr/strerr_die6sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die6x.o src/libstrerr/strerr_die6x.lo: src/libstrerr/strerr_die6x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die7sys.o src/libstrerr/strerr_die7sys.lo: src/libstrerr/strerr_die7sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die7x.o src/libstrerr/strerr_die7x.lo: src/libstrerr/strerr_die7x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die8sys.o src/libstrerr/strerr_die8sys.lo: src/libstrerr/strerr_die8sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die8x.o src/libstrerr/strerr_die8x.lo: src/libstrerr/strerr_die8x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die9sys.o src/libstrerr/strerr_die9sys.lo: src/libstrerr/strerr_die9sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_die9x.o src/libstrerr/strerr_die9x.lo: src/libstrerr/strerr_die9x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_diel.o src/libstrerr/strerr_diel.lo: src/libstrerr/strerr_diel.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_dielsys.o src/libstrerr/strerr_dielsys.lo: src/libstrerr/strerr_dielsys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_diev.o src/libstrerr/strerr_diev.lo: src/libstrerr/strerr_diev.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_dievsys.o src/libstrerr/strerr_dievsys.lo: src/libstrerr/strerr_dievsys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn10sys.o src/libstrerr/strerr_warn10sys.lo: src/libstrerr/strerr_warn10sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn10x.o src/libstrerr/strerr_warn10x.lo: src/libstrerr/strerr_warn10x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn11sys.o src/libstrerr/strerr_warn11sys.lo: src/libstrerr/strerr_warn11sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn11x.o src/libstrerr/strerr_warn11x.lo: src/libstrerr/strerr_warn11x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn1sys.o src/libstrerr/strerr_warn1sys.lo: src/libstrerr/strerr_warn1sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn1x.o src/libstrerr/strerr_warn1x.lo: src/libstrerr/strerr_warn1x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn2sys.o src/libstrerr/strerr_warn2sys.lo: src/libstrerr/strerr_warn2sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn2x.o src/libstrerr/strerr_warn2x.lo: src/libstrerr/strerr_warn2x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn3sys.o src/libstrerr/strerr_warn3sys.lo: src/libstrerr/strerr_warn3sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn3x.o src/libstrerr/strerr_warn3x.lo: src/libstrerr/strerr_warn3x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn4sys.o src/libstrerr/strerr_warn4sys.lo: src/libstrerr/strerr_warn4sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn4x.o src/libstrerr/strerr_warn4x.lo: src/libstrerr/strerr_warn4x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn5sys.o src/libstrerr/strerr_warn5sys.lo: src/libstrerr/strerr_warn5sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn5x.o src/libstrerr/strerr_warn5x.lo: src/libstrerr/strerr_warn5x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn6sys.o src/libstrerr/strerr_warn6sys.lo: src/libstrerr/strerr_warn6sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn6x.o src/libstrerr/strerr_warn6x.lo: src/libstrerr/strerr_warn6x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn7sys.o src/libstrerr/strerr_warn7sys.lo: src/libstrerr/strerr_warn7sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn7x.o src/libstrerr/strerr_warn7x.lo: src/libstrerr/strerr_warn7x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn8sys.o src/libstrerr/strerr_warn8sys.lo: src/libstrerr/strerr_warn8sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn8x.o src/libstrerr/strerr_warn8x.lo: src/libstrerr/strerr_warn8x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn9sys.o src/libstrerr/strerr_warn9sys.lo: src/libstrerr/strerr_warn9sys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warn9x.o src/libstrerr/strerr_warn9x.lo: src/libstrerr/strerr_warn9x.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warnl.o src/libstrerr/strerr_warnl.lo: src/libstrerr/strerr_warnl.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warnlsys.o src/libstrerr/strerr_warnlsys.lo: src/libstrerr/strerr_warnlsys.c src/include/skalibs/strerr.h
-src/libstrerr/strerr_warnv.o src/libstrerr/strerr_warnv.lo: src/libstrerr/strerr_warnv.c src/include/skalibs/buffer.h src/include/skalibs/strerr.h
-src/libstrerr/strerr_warnvsys.o src/libstrerr/strerr_warnvsys.lo: src/libstrerr/strerr_warnvsys.c src/include/skalibs/buffer.h src/include/skalibs/strerr.h
 src/libunixonacid/access_at.o src/libunixonacid/access_at.lo: src/libunixonacid/access_at.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/ancil_recv_fd.o src/libunixonacid/ancil_recv_fd.lo: src/libunixonacid/ancil_recv_fd.c src/include/skalibs/allreadwrite.h src/include/skalibs/ancil.h src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/sysdeps.h
 src/libunixonacid/ancil_send_fd.o src/libunixonacid/ancil_send_fd.lo: src/libunixonacid/ancil_send_fd.c src/include/skalibs/ancil.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h
