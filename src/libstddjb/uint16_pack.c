@@ -7,6 +7,6 @@
 
 void uint16_pack (char *s, uint16_t u)
 {
-  uint16_littlep(u) ;
+  uint16_littlep(&u) ;
   memcpy(s, &u, sizeof(uint16_t)) ;
 }
