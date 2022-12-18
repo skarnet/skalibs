@@ -51,10 +51,10 @@ extern char const *PROG ;
 
 #define strerr_warnwu(...) strerr_warnw("unable to ", __VA_ARGS__)
 #define strerr_warnwusys(...) strerr_warnwsys("unable to ", __VA_ARGS__)
-#define strerr_diewu(...) strerr_diew("unable to ", __VA_ARGS__)
-#define strerr_diewusys(...) strerr_diewsys("unable to ", __VA_ARGS__)
-#define strerr_diefu(...) strerr_dief("unable to ", __VA_ARGS__)
-#define strerr_diefusys(...) strerr_diefsys("unable to ", __VA_ARGS__)
+#define strerr_diewu(e, ...) strerr_diew(e, "unable to ", __VA_ARGS__)
+#define strerr_diewusys(e, ...) strerr_diewsys(e, "unable to ", __VA_ARGS__)
+#define strerr_diefu(e, ...) strerr_dief(e, "unable to ", __VA_ARGS__)
+#define strerr_diefusys(e, ...) strerr_diefsys(e, "unable to ", __VA_ARGS__)
 
 #define strerr_warnin(n, ...) strerr_warnn((n)+2, PROG, ": info: ", __VA_ARGS__)
 #define strerr_warninsys(n, ...) strerr_warnnsys((n)+2, PROG, ": info: ", __VA_ARGS__)
