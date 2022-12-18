@@ -24,7 +24,7 @@ extern void strerr_dielsys (int, unsigned int, ...) gccattr_noreturn ;
 #define strerr_warn(...) strerr_warnn(sizeof(strerr_array(__VA_ARGS__))/sizeof(char const *), __VA_ARGS__)
 #define strerr_warnsys(...) strerr_warnnsys(sizeof(strerr_array(__VA_ARGS__))/sizeof(char const *), __VA_ARGS__)
 #define strerr_die(e, ...) strerr_dien(e, sizeof(strerr_array(__VA_ARGS__))/sizeof(char const *), __VA_ARGS__)
-#define strerr_diesys(...) strerr_diensys(e, sizeof(strerr_array(__VA_ARGS__))/sizeof(char const *), __VA_ARGS__)
+#define strerr_diesys(e, ...) strerr_diensys(e, sizeof(strerr_array(__VA_ARGS__))/sizeof(char const *), __VA_ARGS__)
 
 extern char const *PROG ;
 
@@ -42,19 +42,19 @@ extern char const *PROG ;
 #define strerr_dief(e, ...) strerr_die(e, PROG, ": fatal: ", __VA_ARGS__)
 #define strerr_diefsys(e, ...) strerr_diesys(e, PROG, ": fatal: ", __VA_ARGS__)
 
-#define strerr_warnwun(n, ...) strerr_warnwn((n)+1, ": unable to ", __VA_ARGS__)
-#define strerr_warnwunsys(n, ...) strerr_warnwnsys((n)+1, ": unable to ", __VA_ARGS__)
-#define strerr_diewun(e, n, ...) strerr_diewn(e, (n)+1, ": unable to ", __VA_ARGS__)
-#define strerr_diewunsys(e, n, ...) strerr_diewnsys(e, (n)+1, ": unable to ", __VA_ARGS__)
+#define strerr_warnwun(n, ...) strerr_warnwn((n)+1, "unable to ", __VA_ARGS__)
+#define strerr_warnwunsys(n, ...) strerr_warnwnsys((n)+1, "unable to ", __VA_ARGS__)
+#define strerr_diewun(e, n, ...) strerr_diewn(e, (n)+1, "unable to ", __VA_ARGS__)
+#define strerr_diewunsys(e, n, ...) strerr_diewnsys(e, (n)+1, "unable to ", __VA_ARGS__)
 #define strerr_diefun(e, n, ...) strerr_diefn(e, (n)+1, ": unable to ", __VA_ARGS__)
-#define strerr_diefunsys(e, n, ...) strerr_diefnsys(e, (n)+1, ": unable to ", __VA_ARGS__)
+#define strerr_diefunsys(e, n, ...) strerr_diefnsys(e, (n)+1, "unable to ", __VA_ARGS__)
 
-#define strerr_warnwu(...) strerr_warnw(": unable to ", __VA_ARGS__)
-#define strerr_warnwusys(...) strerr_warnwsys(": unable to ", __VA_ARGS__)
-#define strerr_diewu(...) strerr_diew(": unable to ", __VA_ARGS__)
-#define strerr_diewusys(...) strerr_diewsys(": unable to ", __VA_ARGS__)
-#define strerr_diefu(...) strerr_dief(": unable to ", __VA_ARGS__)
-#define strerr_diefusys(...) strerr_diefsys(": unable to ", __VA_ARGS__)
+#define strerr_warnwu(...) strerr_warnw("unable to ", __VA_ARGS__)
+#define strerr_warnwusys(...) strerr_warnwsys("unable to ", __VA_ARGS__)
+#define strerr_diewu(...) strerr_diew("unable to ", __VA_ARGS__)
+#define strerr_diewusys(...) strerr_diewsys("unable to ", __VA_ARGS__)
+#define strerr_diefu(...) strerr_dief("unable to ", __VA_ARGS__)
+#define strerr_diefusys(...) strerr_diefsys("unable to ", __VA_ARGS__)
 
 #define strerr_warnin(n, ...) strerr_warnn((n)+2, PROG, ": info: ", __VA_ARGS__)
 #define strerr_warninsys(n, ...) strerr_warnnsys((n)+2, PROG, ": info: ", __VA_ARGS__)
