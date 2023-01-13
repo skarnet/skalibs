@@ -555,12 +555,8 @@ src/libstddjb/stralloc_reverse.o src/libstddjb/stralloc_reverse.lo: src/libstddj
 src/libstddjb/stralloc_reverse_blocks.o src/libstddjb/stralloc_reverse_blocks.lo: src/libstddjb/stralloc_reverse_blocks.c src/include/skalibs/stralloc.h
 src/libstddjb/stralloc_shrink.o src/libstddjb/stralloc_shrink.lo: src/libstddjb/stralloc_shrink.c src/include/skalibs/alloc.h src/include/skalibs/stralloc.h
 src/libstddjb/stralloc_zero.o src/libstddjb/stralloc_zero.lo: src/libstddjb/stralloc_zero.c src/include/skalibs/stralloc.h
-src/libstddjb/strerr_diel.o src/libstddjb/strerr_diel.lo: src/libstddjb/strerr_diel.c src/include/skalibs/strerr.h
-src/libstddjb/strerr_dielsys.o src/libstddjb/strerr_dielsys.lo: src/libstddjb/strerr_dielsys.c src/include/skalibs/strerr.h
 src/libstddjb/strerr_diev.o src/libstddjb/strerr_diev.lo: src/libstddjb/strerr_diev.c src/include/skalibs/strerr.h
 src/libstddjb/strerr_dievsys.o src/libstddjb/strerr_dievsys.lo: src/libstddjb/strerr_dievsys.c src/include/skalibs/strerr.h
-src/libstddjb/strerr_warnl.o src/libstddjb/strerr_warnl.lo: src/libstddjb/strerr_warnl.c src/include/skalibs/strerr.h
-src/libstddjb/strerr_warnlsys.o src/libstddjb/strerr_warnlsys.lo: src/libstddjb/strerr_warnlsys.c src/include/skalibs/strerr.h
 src/libstddjb/strerr_warnv.o src/libstddjb/strerr_warnv.lo: src/libstddjb/strerr_warnv.c src/include/skalibs/buffer.h src/include/skalibs/strerr.h
 src/libstddjb/strerr_warnvsys.o src/libstddjb/strerr_warnvsys.lo: src/libstddjb/strerr_warnvsys.c src/include/skalibs/buffer.h src/include/skalibs/strerr.h
 src/libstddjb/string_format.o src/libstddjb/string_format.lo: src/libstddjb/string_format.c src/include/skalibs/bytestr.h src/include/skalibs/stralloc.h
