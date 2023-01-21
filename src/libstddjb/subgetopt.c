@@ -16,19 +16,18 @@ int subgetopt_r (int argc, char const *const *argv, char const *opts, subgetopt 
 
   if (!o->pos)
   {
+    char c ;
     if (argv[o->ind][0] != '-') return -1 ;
-    else
+    o->pos++ ;
+    c = argv[o->ind][1] ;
+    if (c == '-')
     {
-      char c ;
-      o->pos++ ;
-      c = argv[o->ind][1] ;
-      if (c == '-') o->ind++ ;
-      if (!c || (c == '-'))
-      {
-        o->pos = 0 ;
-        return -1 ;
-      }
+      if (argv[o->ind][2]) return o->problem = '-', '?' ;
+      o->ind++ ;
+      o->pos = 0 ;
+      return -1 ;
     }
+    if (!c || c == '-') return o->pos = 0, -1 ;
   }
   {
     char c = argv[o->ind][o->pos++] ;
