@@ -27,4 +27,10 @@ extern size_t strnlen (char const *, size_t) gccattr_pure ;
 #define MSG_NOSIGNAL 0
 #endif
 
+#ifdef PATH_MAX
+#define SKALIBS_PATH_MAX PATH_MAX
+#else
+#define SKALIBS_PATH_MAX 4096
+#endif
+
 #endif
