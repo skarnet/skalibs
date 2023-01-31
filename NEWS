@@ -1,5 +1,12 @@
 Changelog for skalibs.
 
+In 2.13.1.0
+-----------
+
+ - New macro: SKALIBS_PATH_MAX, in posixishard.h.
+Defined to 4096 on systems that do not define PATH_MAX.
+
+
 In 2.13.0.0
 -----------
 
