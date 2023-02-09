@@ -93,11 +93,7 @@ int envdir_internal_noclamp (char const *path, stralloc *modifs, unsigned int op
  errfd:
   fd_close(fd) ;
  err:
-  {
-    int e = errno ;
-    dir_close(dir) ;
-    if (wasnull) stralloc_free(modifs) ; else modifs->len = modifbase ;
-    errno = e ;
-    return -1 ;
-  }
+  dir_close(dir) ;
+  if (wasnull) stralloc_free(modifs) ; else modifs->len = modifbase ;
+  return -1 ;
 }

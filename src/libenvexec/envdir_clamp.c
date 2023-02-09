@@ -75,11 +75,7 @@ int envdir_internal_clamp (char const *path, stralloc *modifs, unsigned int opti
   return n ;
 
  err:
-  {
-    int e = errno ;
-    dir_close(dir) ;
-    if (wasnull) stralloc_free(modifs) ; else modifs->len = modifbase ;
-    errno = e ;
-    return -1 ;
-  }
+  dir_close(dir) ;
+  if (wasnull) stralloc_free(modifs) ; else modifs->len = modifbase ;
+  return -1 ;
 }

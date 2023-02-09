@@ -670,6 +670,17 @@ Same as above, using the <tt>satmp</tt> global stralloc as
 heap-allocated temporary space.
 </p>
 
+<h3> Directory listing </h3>
+
+<p>
+<code> int sals (char const *dir, stralloc *sa, size_t *maxlen) </code> <br />
+Appends the base names of all the files (save <tt>.</tt> and <tt>..</tt>) in
+<em>dir</em> to the stralloc <em>*sa</em>; each name is null-terminated.
+On error, returns -1 and sets errno. On success, returns the number of files
+it found, and writes to <em>*maxlen</em> the size of the largest file name
+it found (0 for an empty directory).
+</p>
+
 <h3> Variable length wrappers around Single Unix calls </h3>
 
 <p>

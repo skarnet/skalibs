@@ -14,32 +14,7 @@ static int dircopy (char const *src, char const *dst, mode_t mode, stralloc *tmp
 {
   size_t tmpbase = tmp->len ;
   size_t maxlen = 0 ;
-  {
-    DIR *dir = opendir(src) ;
-    if (!dir) return 0 ;
-    for (;;)
-    {
-      direntry *d ;
-      size_t n ;
-      errno = 0 ;
-      d = readdir(dir) ;
-      if (!d) break ;
-      if (d->d_name[0] == '.')
-        if (((d->d_name[1] == '.') && !d->d_name[2]) || !d->d_name[1])
-          continue ;
-      n = strlen(d->d_name) ;
-      if (n > maxlen) maxlen = n ;
-      if (!stralloc_catb(tmp, d->d_name, n+1)) break ;
-    }
-    if (errno)
-    {
-      int e = errno ;
-      dir_close(dir) ;
-      errno = e ;
-      goto err ;
-    }
-    dir_close(dir) ;
-  }
+  if (sals(src, tmp, &maxlen) == -1) return 0 ;
 
   if (mkdir(dst, S_IRWXU) < 0)
   {

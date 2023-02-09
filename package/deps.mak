@@ -451,13 +451,14 @@ src/libstddjb/pipe_internal.o src/libstddjb/pipe_internal.lo: src/libstddjb/pipe
 src/libstddjb/prog.o src/libstddjb/prog.lo: src/libstddjb/prog.c src/include/skalibs/strerr.h
 src/libstddjb/readnclose.o src/libstddjb/readnclose.lo: src/libstddjb/readnclose.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
 src/libstddjb/rm_rf.o src/libstddjb/rm_rf.lo: src/libstddjb/rm_rf.c src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h
-src/libstddjb/rm_rf_in_tmp.o src/libstddjb/rm_rf_in_tmp.lo: src/libstddjb/rm_rf_in_tmp.c src/include/skalibs/direntry.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
+src/libstddjb/rm_rf_in_tmp.o src/libstddjb/rm_rf_in_tmp.lo: src/libstddjb/rm_rf_in_tmp.c src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/rm_rf_tmp.o src/libstddjb/rm_rf_tmp.lo: src/libstddjb/rm_rf_tmp.c src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/rmstar.o src/libstddjb/rmstar.lo: src/libstddjb/rmstar.c src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h
 src/libstddjb/sabasename.o src/libstddjb/sabasename.lo: src/libstddjb/sabasename.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/sadirname.o src/libstddjb/sadirname.lo: src/libstddjb/sadirname.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/sagetcwd.o src/libstddjb/sagetcwd.lo: src/libstddjb/sagetcwd.c src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/sagethostname.o src/libstddjb/sagethostname.lo: src/libstddjb/sagethostname.c src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
+src/libstddjb/sals.o src/libstddjb/sals.lo: src/libstddjb/sals.c src/include/skalibs/direntry.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/sanitize_read.o src/libstddjb/sanitize_read.lo: src/libstddjb/sanitize_read.c src/include/skalibs/allreadwrite.h src/include/skalibs/error.h
 src/libstddjb/sareadlink.o src/libstddjb/sareadlink.lo: src/libstddjb/sareadlink.c src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/sarealpath.o src/libstddjb/sarealpath.lo: src/libstddjb/sarealpath.c src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
