@@ -16,7 +16,7 @@
  /* Timed "blocking" operations (the fd must still be non-blocking) */
 
 extern int timed_flush (void *, init_func_ref, init_func_ref, init_func_ref, tain const *, tain *) ;
-#define timed_flush_g(b, getfd, isnonempty, flush, deadline) timed_flush(b, getfd, isnonempty, flush, (deadline_), &STAMP)
+#define timed_flush_g(b, getfd, isnonempty, flush, deadline) timed_flush(b, getfd, isnonempty, flush, (deadline), &STAMP)
 extern ssize_t timed_get (void *, init_func_ref, get_func_ref, tain const *, tain *) ;
 #define timed_get_g (b, getfd, get, deadline) timed_get(b, getfd, get, (deadline), &STAMP)
 
