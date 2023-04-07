@@ -182,6 +182,21 @@ it's a serious one and your system has become very unstable.
 is positive, it is the number of the signal that was caught.
 </p>
 
+<h3> Accessing the selfpipe </h3>
+
+<pre>
+int fd = selfpipe_fd() ;
+</pre>
+
+<p>
+ Sometimes you need to access the fd of the selfpipe in two
+very distinct translation units (typically to poll on it), and you
+rightly don't want to add a global variable to store it, especially
+since it's already stored in a global internal variable in skalibs.
+No need to bloat your binary anymore: <tt>selfpipe_fd()</tt> will
+now retrieve the value for you, wherever you are.
+</p>
+
 <h3> Finishing </h3>
 
 <pre>

@@ -1,5 +1,11 @@
 Changelog for skalibs.
 
+In 2.13.2.0
+-----------
+
+ - New accessor function: selfpipe_fd().
+
+
 In 2.13.1.1
 -----------
 
