@@ -84,6 +84,14 @@ extern int sagethostname (stralloc *) ;
 
 extern int slurp (stralloc *, int) ;
 extern int openslurpclose (stralloc *, char const *) ;
+/*
+  TODO: next ABI break: change to
+#define slurp(sa, fd) slurpn((fd), (sa), 0)
+#define openslurpclose(sa, fn) openslurpnclose((fn), (sa), 0)
+*/
+
+extern int slurpn (int, stralloc *, size_t) ;
+extern int openslurpnclose (char const *, stralloc *, size_t) ;
 extern ssize_t readnclose (int fd, char *, size_t) ;  /* closes fd */
 extern ssize_t openreadnclose (char const *, char *, size_t) ;
 extern ssize_t openreadnclose_nb (char const *, char *, size_t) ;

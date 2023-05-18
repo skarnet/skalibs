@@ -3,7 +3,10 @@ Changelog for skalibs.
 In 2.13.2.0
 -----------
 
+ - Bugfixes.
  - New accessor function: selfpipe_fd().
+ - New functions: slurpn(), openslurpnclose().
+ - New strerr macros to warn with a "fatal" message
 
 
 In 2.13.1.1

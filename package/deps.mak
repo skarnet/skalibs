@@ -438,7 +438,8 @@ src/libstddjb/openc_write.o src/libstddjb/openc_write.lo: src/libstddjb/openc_wr
 src/libstddjb/openreadfileclose.o src/libstddjb/openreadfileclose.lo: src/libstddjb/openreadfileclose.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/openreadnclose.o src/libstddjb/openreadnclose.lo: src/libstddjb/openreadnclose.c src/include/skalibs/djbunix.h
 src/libstddjb/openreadnclose_nb.o src/libstddjb/openreadnclose_nb.lo: src/libstddjb/openreadnclose_nb.c src/include/skalibs/djbunix.h
-src/libstddjb/openslurpclose.o src/libstddjb/openslurpclose.lo: src/libstddjb/openslurpclose.c src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
+src/libstddjb/openslurpclose.o src/libstddjb/openslurpclose.lo: src/libstddjb/openslurpclose.c src/include/skalibs/djbunix.h
+src/libstddjb/openslurpnclose.o src/libstddjb/openslurpnclose.lo: src/libstddjb/openslurpnclose.c src/include/skalibs/djbunix.h
 src/libstddjb/openwritenclose.o src/libstddjb/openwritenclose.lo: src/libstddjb/openwritenclose.c src/include/skalibs/djbunix.h
 src/libstddjb/openwritenclose_suffix.o src/libstddjb/openwritenclose_suffix.lo: src/libstddjb/openwritenclose_suffix.c src/include/skalibs/djbunix.h
 src/libstddjb/openwritenclose_unsafe.o src/libstddjb/openwritenclose_unsafe.lo: src/libstddjb/openwritenclose_unsafe.c src/include/skalibs/djbunix.h
@@ -493,7 +494,8 @@ src/libstddjb/skagetlnmaxsep.o src/libstddjb/skagetlnmaxsep.lo: src/libstddjb/sk
 src/libstddjb/skagetlnsep.o src/libstddjb/skagetlnsep.lo: src/libstddjb/skagetlnsep.c src/include/skalibs/buffer.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/skagetlnsep_loose.o src/libstddjb/skagetlnsep_loose.lo: src/libstddjb/skagetlnsep_loose.c src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/skalibs_tzisright.o src/libstddjb/skalibs_tzisright.lo: src/libstddjb/skalibs_tzisright.c src/libstddjb/djbtime-internal.h
-src/libstddjb/slurp.o src/libstddjb/slurp.lo: src/libstddjb/slurp.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
+src/libstddjb/slurp.o src/libstddjb/slurp.lo: src/libstddjb/slurp.c src/include/skalibs/djbunix.h
+src/libstddjb/slurpn.o src/libstddjb/slurpn.lo: src/libstddjb/slurpn.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/socket_accept4.o src/libstddjb/socket_accept4.lo: src/libstddjb/socket_accept4.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h src/include/skalibs/sysdeps.h src/include/skalibs/uint16.h
 src/libstddjb/socket_accept4_u32.o src/libstddjb/socket_accept4_u32.lo: src/libstddjb/socket_accept4_u32.c src/include/skalibs/socket.h src/include/skalibs/uint32.h
 src/libstddjb/socket_accept6.o src/libstddjb/socket_accept6.lo: src/libstddjb/socket_accept6.c src/include/skalibs/djbunix.h src/include/skalibs/ip46.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h src/include/skalibs/sysdeps.h src/include/skalibs/uint16.h

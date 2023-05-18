@@ -22,7 +22,7 @@ struct cdbmaker_s
 #define CDBMAKER_ZERO { .hplist = GENALLOC_ZERO, .pos = 2048, .b = BUFFER_INIT(&fd_writev, -1, 0, 0) }
 
 extern int cdbmake_start (cdbmaker *, int) ;
-extern int cdbmake_add (cdbmaker *, char const *, unsigned int, char const *, unsigned int) ;
+extern int cdbmake_add (cdbmaker *, char const *, uint32_t, char const *, uint32_t) ;
 extern int cdbmake_finish (cdbmaker *) ;
 
 #endif

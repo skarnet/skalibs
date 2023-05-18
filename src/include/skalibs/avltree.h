@@ -51,8 +51,8 @@ extern int avltree_insert (avltree *, uint32_t) ;
 
 extern int avltree_delete (avltree *, void const *) ;
 
-#define avltree_iter(t, f, p) avlnode_iter(avltree_nodes(t), avltree_totalsize(t), avltree_root(t), f, p)
 #define avltree_iter_nocancel(t, cut, f, p) avlnode_iter(avltree_nodes(t), avltree_totalsize(t), cut, avltree_root(t), f, p)
+#define avltree_iter(t, f, p) avltree_iter_nocancel(t, avltree_totalsize(t), f, p)
 #define avltree_iter_withcancel(t, f, cancelf, p) avlnode_iter_withcancel(avltree_nodes(t), avltree_totalsize(t), avltree_root(t), f, cancelf, p)
 
 #endif
