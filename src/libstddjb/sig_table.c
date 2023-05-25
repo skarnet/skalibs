@@ -1,5 +1,7 @@
  /* ISC license. */
 
+#include <skalibs/nonposix.h>
+
 #include <signal.h>
 
 #include "sig-internal.h"

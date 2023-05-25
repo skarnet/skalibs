@@ -474,7 +474,7 @@ src/libstddjb/sig_catch.o src/libstddjb/sig_catch.lo: src/libstddjb/sig_catch.c 
 src/libstddjb/sig_name.o src/libstddjb/sig_name.lo: src/libstddjb/sig_name.c src/libstddjb/sig-internal.h src/include/skalibs/sig.h
 src/libstddjb/sig_number.o src/libstddjb/sig_number.lo: src/libstddjb/sig_number.c src/libstddjb/sig-internal.h src/include/skalibs/sig.h
 src/libstddjb/sig_restoreto.o src/libstddjb/sig_restoreto.lo: src/libstddjb/sig_restoreto.c src/include/skalibs/sig.h
-src/libstddjb/sig_table.o src/libstddjb/sig_table.lo: src/libstddjb/sig_table.c src/libstddjb/sig-internal.h
+src/libstddjb/sig_table.o src/libstddjb/sig_table.lo: src/libstddjb/sig_table.c src/include/skalibs/nonposix.h src/libstddjb/sig-internal.h
 src/libstddjb/sig_unblock.o src/libstddjb/sig_unblock.lo: src/libstddjb/sig_unblock.c src/include/skalibs/sig.h
 src/libstddjb/sigfpe.o src/libstddjb/sigfpe.lo: src/libstddjb/sigfpe.c src/include/skalibs/segfault.h
 src/libstddjb/sigsegv.o src/libstddjb/sigsegv.lo: src/libstddjb/sigsegv.c src/include/skalibs/segfault.h
