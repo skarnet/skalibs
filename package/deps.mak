@@ -344,7 +344,10 @@ src/libstddjb/genwrite_stdout.o src/libstddjb/genwrite_stdout.lo: src/libstddjb/
 src/libstddjb/getlnmax.o src/libstddjb/getlnmax.lo: src/libstddjb/getlnmax.c src/include/skalibs/buffer.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h
 src/libstddjb/getlnmaxsep.o src/libstddjb/getlnmaxsep.lo: src/libstddjb/getlnmaxsep.c src/include/skalibs/buffer.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h
 src/libstddjb/hiercopy.o src/libstddjb/hiercopy.lo: src/libstddjb/hiercopy.c src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h
-src/libstddjb/hiercopy_tmp.o src/libstddjb/hiercopy_tmp.lo: src/libstddjb/hiercopy_tmp.c src/include/skalibs/direntry.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
+src/libstddjb/hiercopy_internal.o src/libstddjb/hiercopy_internal.lo: src/libstddjb/hiercopy_internal.c src/include/skalibs/direntry.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
+src/libstddjb/hiercopy_loose.o src/libstddjb/hiercopy_loose.lo: src/libstddjb/hiercopy_loose.c src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h
+src/libstddjb/hiercopy_loose_tmp.o src/libstddjb/hiercopy_loose_tmp.lo: src/libstddjb/hiercopy_loose_tmp.c src/include/skalibs/djbunix.h
+src/libstddjb/hiercopy_tmp.o src/libstddjb/hiercopy_tmp.lo: src/libstddjb/hiercopy_tmp.c src/include/skalibs/djbunix.h
 src/libstddjb/int160_scan.o src/libstddjb/int160_scan.lo: src/libstddjb/int160_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint16.h
 src/libstddjb/int16_fmtlist.o src/libstddjb/int16_fmtlist.lo: src/libstddjb/int16_fmtlist.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint16.h
 src/libstddjb/int16_scan.o src/libstddjb/int16_scan.lo: src/libstddjb/int16_scan.c src/libstddjb/fmtscan-internal.h src/include/skalibs/uint16.h src/include/skalibs/uint64.h

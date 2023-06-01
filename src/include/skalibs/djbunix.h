@@ -155,7 +155,9 @@ extern int filecopy_unsafe (char const *, char const *, unsigned int) ;
 extern int filecopy_suffix (char const *, char const *, unsigned int, char const *) ;
 extern int sals (char const *, stralloc *, size_t *) ;
 extern int hiercopy (char const *, char const *) ;
-extern int hiercopy_tmp (char const *, char const *, stralloc *) ;
+extern int hiercopy_loose (char const *, char const *) ;
+extern int hiercopy_loose_tmp (char const *, char const *, stralloc *) ;
+extern int hiercopy_internal (char const *, char const *, stralloc *, unsigned int) ;
 
  /* Simple spawn functions with 0 or 1 communicating fds. */
 

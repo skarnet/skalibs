@@ -5,5 +5,5 @@
 
 int hiercopy (char const *src, char const *dst)
 {
-  return hiercopy_tmp(src, dst, &satmp) ;
+  return hiercopy_internal(src, dst, &satmp, 0) ;
 }
