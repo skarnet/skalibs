@@ -33,4 +33,10 @@ extern size_t strnlen (char const *, size_t) gccattr_pure ;
 #define SKALIBS_PATH_MAX 4096
 #endif
 
+#ifdef NAME_MAX
+#define SKALIBS_NAME_MAX NAME_MAX
+#else
+#define SKALIBS_NAME_MAX 255
+#endif
+
 #endif
