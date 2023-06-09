@@ -3,7 +3,10 @@
 #ifndef SKALIBS_POSIXISHARD_H
 #define SKALIBS_POSIXISHARD_H
 
-#include <stddef.h>
+#include <string.h>
+#include <errno.h>
+#include <limits.h>
+#include <sys/socket.h>
 
 #include <skalibs/gccattributes.h>
 
