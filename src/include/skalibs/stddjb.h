@@ -20,6 +20,7 @@
 #include <skalibs/cbuffer.h>
 #include <skalibs/cdb.h>
 #include <skalibs/cdbmake.h>
+#include <skalibs/devino.h>
 #include <skalibs/direntry.h>
 #include <skalibs/diuint32.h>
 #include <skalibs/diuint.h>

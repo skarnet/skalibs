@@ -7,14 +7,17 @@
 
 it: all
 
-make_need := 3.81
-ifeq "" "$(strip $(filter $(make_need), $(firstword $(sort $(make_need) $(MAKE_VERSION)))))"
-fail := $(error Your make ($(MAKE_VERSION)) is too old. You need $(make_need) or newer)
+$(shell test -r config.mak)
+ifneq ($(.SHELLSTATUS),0)
+$(error Missing config.mak; please use ./configure first)
 endif
 
-CC = $(error Please use ./configure first)
+make_need := 3.81
+ifeq "" "$(strip $(filter $(make_need), $(firstword $(sort $(make_need) $(MAKE_VERSION)))))"
+$(error Your make ($(MAKE_VERSION)) is too old. You need $(make_need) or newer)
+endif
 
--include config.mak
+include config.mak
 include package/deps.mak
 
 version_m := $(basename $(version))
