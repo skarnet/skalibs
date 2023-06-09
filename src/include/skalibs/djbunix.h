@@ -98,7 +98,7 @@ extern ssize_t openreadnclose (char const *, char *, size_t) ;
 extern ssize_t openreadnclose_nb (char const *, char *, size_t) ;
 extern int openreadfileclose (char const *, stralloc *, size_t) ;
 
-#define writenclose_unsafe(fd, s, n) writenclose_unsafe5(fd, s, (n), 0)
+#define writenclose_unsafe(fd, s, n) writenclose_unsafe5(fd, s, (n), 0, 0)
 #define writenclose_unsafe_sync(fd, s, n) writenclose_unsafe5(fd, s, (n), 0, 1)
 #define writenclose_unsafe_devino(fd, s, n, dev, ino) writenclose_unsafe_internal(fd, s, n, dev, (ino), 0)
 #define writenclose_unsafe_devino_sync(fd, s, n, dev, ino) writenclose_unsafe_internal(fd, s, n, dev, (ino), 1)
@@ -112,8 +112,8 @@ extern int writenclose_unsafe_internal (int, char const *, size_t, dev_t *, ino_
 extern int openwritenclose_unsafe5 (char const *, char const *, size_t, devino *, unsigned int) ;
 extern int openwritenclose_unsafe_internal (char const *, char const *, size_t, dev_t *, ino_t *, int) gccattr_deprecated ;
 
-#define openwritenclose_suffix(f, s, n, t) openwritenclose_suffix6(f, s, n, 0, 0, 0, t)
-#define openwritenclose_suffix_sync(f, s, n, t) openwritenclose_suffix6(f, s, n, 0, 0, 1, t)
+#define openwritenclose_suffix(f, s, n, t) openwritenclose_suffix6(f, s, n, 0, 0, t)
+#define openwritenclose_suffix_sync(f, s, n, t) openwritenclose_suffix6(f, s, n, 0, 1, t)
 #define openwritenclose_suffix_devino(f, s, n, t, dev, ino) openwritenclose_suffix_internal(f, s, n, dev, (ino), 0, t)
 #define openwritenclose_suffix_devino_sync(f, s, n, t, dev, ino) openwritenclose_suffix_internal(f, s, n, dev, (ino), 1, t)
 extern int openwritenclose_suffix6 (char const *, char const *, size_t, devino *, unsigned int, char const *) ;
