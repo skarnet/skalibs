@@ -19,7 +19,7 @@ typedef cmp_func *cmp_func_ref ;
 typedef void *dtok_func (uint32_t, void *) ;
 typedef dtok_func *dtok_func_ref ;
 
-typedef int iter_func (char *, void *) ;
+typedef int iter_func (void *, void *) ;
 typedef iter_func *iter_func_ref ;
 
 typedef void free_func (void *) ;

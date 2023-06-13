@@ -3,10 +3,10 @@
 #include <skalibs/functypes.h>
 #include <skalibs/gensetdyn.h>
 
-static int freeiter (char *s, void *aux)
+static int freeiter (void *s, void *aux)
 {
   free_func_ref f = aux ;
-  (*f)((void *)s) ;
+  (*f)(s) ;
   return 1 ;
 }
 

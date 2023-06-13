@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include <errno.h>
+
 #include <skalibs/genset.h>
 
 int genset_iter_withcancel (genset *g, iter_func_ref f, iter_func_ref cancelf, void *stuff)

@@ -125,6 +125,12 @@ extern int tain_sub (tain *, tain const *, tain const *) ;
 extern int tain_less (tain const *, tain const *) gccattr_pure ;
 #define tain_future(deadline) tain_less(&STAMP, (deadline))
 
+extern void tain_earliest1 (tain *, tain const *) ;
+extern void tain_earliestv (tain *, tain const *const *, unsigned int) ;
+#define tain_array(...) ((tain const *const[]){__VA_ARGS__})
+#define tain_earliestn(t, n, ...) tain_earliestv(t, tain_array(__VA_ARGS__), (n))
+#define tain_earliest(t, ...) tain_earliestn(t, sizeof(tain_array(__VA_ARGS__))/sizeof(tain const *), __VA_ARGS__)
+
 #define TAIN_PACK 12
 extern void tain_pack (char *, tain const *) ;
 extern void tain_unpack (char const *, tain *) ;

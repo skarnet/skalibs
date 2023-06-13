@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include <errno.h>
+
 #include <skalibs/gensetdyn.h>
 
 int gensetdyn_iter_withcancel (gensetdyn *g, iter_func_ref f, iter_func_ref cancelf, void *stuff)

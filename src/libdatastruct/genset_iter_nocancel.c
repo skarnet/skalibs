@@ -1,5 +1,7 @@
 /* ISC license. */
 
+#include <stdint.h>
+
 #include <skalibs/bitarray.h>
 #include <skalibs/genset.h>
 

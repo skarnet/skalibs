@@ -107,7 +107,7 @@ src/libdatastruct/gensetdyn_deepfree.o src/libdatastruct/gensetdyn_deepfree.lo: 
 src/libdatastruct/gensetdyn_delete.o src/libdatastruct/gensetdyn_delete.lo: src/libdatastruct/gensetdyn_delete.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h
 src/libdatastruct/gensetdyn_free.o src/libdatastruct/gensetdyn_free.lo: src/libdatastruct/gensetdyn_free.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h src/include/skalibs/stralloc.h
 src/libdatastruct/gensetdyn_init.o src/libdatastruct/gensetdyn_init.lo: src/libdatastruct/gensetdyn_init.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h src/include/skalibs/stralloc.h
-src/libdatastruct/gensetdyn_iter.o src/libdatastruct/gensetdyn_iter.lo: src/libdatastruct/gensetdyn_iter.c src/include/skalibs/bitarray.h src/include/skalibs/gensetdyn.h
+src/libdatastruct/gensetdyn_iter_nocancel.o src/libdatastruct/gensetdyn_iter_nocancel.lo: src/libdatastruct/gensetdyn_iter_nocancel.c src/include/skalibs/bitarray.h src/include/skalibs/gensetdyn.h
 src/libdatastruct/gensetdyn_iter_withcancel.o src/libdatastruct/gensetdyn_iter_withcancel.lo: src/libdatastruct/gensetdyn_iter_withcancel.c src/include/skalibs/gensetdyn.h
 src/libdatastruct/gensetdyn_new.o src/libdatastruct/gensetdyn_new.lo: src/libdatastruct/gensetdyn_new.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h
 src/libdatastruct/gensetdyn_ready.o src/libdatastruct/gensetdyn_ready.lo: src/libdatastruct/gensetdyn_ready.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h src/include/skalibs/stralloc.h
@@ -599,6 +599,8 @@ src/libstddjb/tai_unpack_little.o src/libstddjb/tai_unpack_little.lo: src/libstd
 src/libstddjb/tain_add.o src/libstddjb/tain_add.lo: src/libstddjb/tain_add.c src/include/skalibs/tai.h
 src/libstddjb/tain_addsec.o src/libstddjb/tain_addsec.lo: src/libstddjb/tain_addsec.c src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/tain_approx.o src/libstddjb/tain_approx.lo: src/libstddjb/tain_approx.c src/include/skalibs/tai.h
+src/libstddjb/tain_earliest1.o src/libstddjb/tain_earliest1.lo: src/libstddjb/tain_earliest1.c src/include/skalibs/tai.h
+src/libstddjb/tain_earliestv.o src/libstddjb/tain_earliestv.lo: src/libstddjb/tain_earliestv.c src/include/skalibs/tai.h
 src/libstddjb/tain_fmt.o src/libstddjb/tain_fmt.lo: src/libstddjb/tain_fmt.c src/include/skalibs/fmtscan.h src/include/skalibs/tai.h
 src/libstddjb/tain_frac.o src/libstddjb/tain_frac.lo: src/libstddjb/tain_frac.c src/include/skalibs/tai.h
 src/libstddjb/tain_from_localtmn.o src/libstddjb/tain_from_localtmn.lo: src/libstddjb/tain_from_localtmn.c src/include/skalibs/djbtime.h
