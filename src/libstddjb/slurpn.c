@@ -16,7 +16,7 @@ int slurpn (int fd, stralloc *sa, size_t max)
   for (;;)
   {
     ssize_t r ;
-    size_t n = max && sa->len + N > max ? max - sa->len : N ;
+    size_t n = max && sa->len - sabase + N > max ? max - (sa->len - sabase) : N ;
     if (!n) { errno = ENOBUFS ; goto err ; }
     if (!stralloc_readyplus(sa, n)) break ;
     r = fd_read(fd, sa->s + sa->len, n) ;

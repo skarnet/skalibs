@@ -16,5 +16,6 @@ extern unsigned int siovec_trunc (struct iovec *, unsigned int, size_t) ;
 
 extern size_t siovec_bytechr (struct iovec const *, unsigned int, char) ;
 extern size_t siovec_bytein (struct iovec const *, unsigned int, char const *, size_t) ;
+extern size_t siovec_search (struct iovec const *, unsigned int, char const *, size_t) ;
 
 #endif
