@@ -47,8 +47,10 @@ $package options:
 
 Sysdeps autodetection override:
   --with-sysdep-K=V             assume sysdep K has the value V [autodetected]
-List of mandatory K for cross-compiling: devurandom (V=yes|no)
- 
+
+List of mandatory sysdeps for cross-compiling:
+  devurandom (yes|no): =yes if you have a working /dev/urandom
+  posixspawnearlyreturn (yes|no): =yes if you have an old glibc or otherwise bad posix_spawn
 EOF
   exit 0
 }
@@ -641,6 +643,7 @@ choose cl chroot 'chroot()'
 
 # Here are the evil irreducible run-time sysdeps.
 choose clr devurandom '/dev/urandom'
+choose clr posixspawnearlyreturn 'posix_spawn() returning early'
 
 
 # Finally, produce config.mak and config.h
