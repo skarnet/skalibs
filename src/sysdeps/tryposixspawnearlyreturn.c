@@ -19,6 +19,6 @@ int main (void)
   e = posix_spawnattr_setflags(&attr, 0) ;
   if (e) return 111 ;
   if (close(fd) == -1 || unlink(tmp) == -1) return 111 ;
-  e = posix_spawn(0, argv[0], 0, &attrp, argv, &env) ;
+  e = posix_spawn(0, argv[0], 0, &attr, argv, &env) ;
   return e ? e == ENOENT ? 1 : 111 : 0 ;
 }

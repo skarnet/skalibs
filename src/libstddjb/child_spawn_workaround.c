@@ -25,7 +25,7 @@ pid_t child_spawn_workaround (pid_t pid, int const *p)
   if (r == -1) return 0 ;
   if (r) return (errno = EILSEQ, 0) ;  /* child wrote, wtf */
 
-  do e = waitid(P_PID, pid, &si, WNOHANG | WNOWAIT) ;
+  do e = waitid(P_PID, pid, &si, WEXITED | WNOHANG | WNOWAIT) ;
   while (e == -1 && errno == EINTR) ;
   if (e == -1) return pid ;  /* we're in trouble, but don't leak a child */
   if (!si.si_pid) return pid ;  /* child is running */
