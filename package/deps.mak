@@ -15,7 +15,7 @@ src/include/skalibs/buffer.h: src/include/skalibs/allreadwrite.h src/include/ska
 src/include/skalibs/bytestr.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/cbuffer.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/cdb.h: src/include/skalibs/gccattributes.h
-src/include/skalibs/cdbmake.h: src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h
+src/include/skalibs/cdbmake.h: src/include/skalibs/buffer.h src/include/skalibs/genalloc.h
 src/include/skalibs/datastruct.h: src/include/skalibs/avlnode.h src/include/skalibs/avltree.h src/include/skalibs/avltreen.h src/include/skalibs/bigkv.h src/include/skalibs/genqdyn.h src/include/skalibs/genset.h src/include/skalibs/gensetdyn.h
 src/include/skalibs/djbtime.h: src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/include/skalibs/djbunix.h: src/include/skalibs/devino.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
@@ -63,6 +63,7 @@ src/libstdcrypto/sha1-internal.h: src/include/skalibs/sha1.h
 src/libstdcrypto/sha256-internal.h: src/include/skalibs/sha256.h
 src/libstdcrypto/sha512-internal.h: src/include/skalibs/sha512.h
 src/libstddjb/cdb-internal.h: src/include/skalibs/cdb.h src/include/skalibs/gccattributes.h
+src/libstddjb/cdbmake-internal.h: src/include/skalibs/cdbmake.h
 src/libstddjb/child_spawn-internal.h: src/include/skalibs/sysdeps.h
 src/libstddjb/djbtime-internal.h: src/include/skalibs/uint64.h
 src/libstddjb/fmtscan-internal.h: src/include/skalibs/fmtscan.h src/include/skalibs/uint64.h
@@ -287,13 +288,20 @@ src/libstddjb/cdb_find.o src/libstddjb/cdb_find.lo: src/libstddjb/cdb_find.c src
 src/libstddjb/cdb_findnext.o src/libstddjb/cdb_findnext.lo: src/libstddjb/cdb_findnext.c src/libstddjb/cdb-internal.h src/include/skalibs/cdb.h src/include/skalibs/uint32.h
 src/libstddjb/cdb_free.o src/libstddjb/cdb_free.lo: src/libstddjb/cdb_free.c src/include/skalibs/cdb.h src/include/skalibs/posixplz.h
 src/libstddjb/cdb_hash.o src/libstddjb/cdb_hash.lo: src/libstddjb/cdb_hash.c src/libstddjb/cdb-internal.h
+src/libstddjb/cdb_hashadd.o src/libstddjb/cdb_hashadd.lo: src/libstddjb/cdb_hashadd.c src/libstddjb/cdb-internal.h
+src/libstddjb/cdb_hashv.o src/libstddjb/cdb_hashv.lo: src/libstddjb/cdb_hashv.c src/libstddjb/cdb-internal.h
 src/libstddjb/cdb_init.o src/libstddjb/cdb_init.lo: src/libstddjb/cdb_init.c src/include/skalibs/cdb.h src/include/skalibs/djbunix.h
 src/libstddjb/cdb_init_at.o src/libstddjb/cdb_init_at.lo: src/libstddjb/cdb_init_at.c src/include/skalibs/cdb.h src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
 src/libstddjb/cdb_init_fromfd.o src/libstddjb/cdb_init_fromfd.lo: src/libstddjb/cdb_init_fromfd.c src/include/skalibs/bsdsnowflake.h src/include/skalibs/cdb.h
 src/libstddjb/cdb_p.o src/libstddjb/cdb_p.lo: src/libstddjb/cdb_p.c src/libstddjb/cdb-internal.h src/include/skalibs/cdb.h
 src/libstddjb/cdb_traverse_next.o src/libstddjb/cdb_traverse_next.lo: src/libstddjb/cdb_traverse_next.c src/libstddjb/cdb-internal.h src/include/skalibs/cdb.h src/include/skalibs/uint32.h
 src/libstddjb/cdb_zero.o src/libstddjb/cdb_zero.lo: src/libstddjb/cdb_zero.c src/include/skalibs/cdb.h
-src/libstddjb/cdbmake.o src/libstddjb/cdbmake.lo: src/libstddjb/cdbmake.c src/include/skalibs/buffer.h src/libstddjb/cdb-internal.h src/include/skalibs/cdbmake.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h src/include/skalibs/uint32.h
+src/libstddjb/cdbmake_add.o src/libstddjb/cdbmake_add.lo: src/libstddjb/cdbmake_add.c src/include/skalibs/buffer.h src/libstddjb/cdb-internal.h src/libstddjb/cdbmake-internal.h src/include/skalibs/cdbmake.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h src/include/skalibs/uint32.h
+src/libstddjb/cdbmake_addbeginend.o src/libstddjb/cdbmake_addbeginend.lo: src/libstddjb/cdbmake_addbeginend.c src/include/skalibs/buffer.h src/libstddjb/cdbmake-internal.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h src/include/skalibs/uint32.h
+src/libstddjb/cdbmake_addv.o src/libstddjb/cdbmake_addv.lo: src/libstddjb/cdbmake_addv.c src/include/skalibs/buffer.h src/libstddjb/cdb-internal.h src/libstddjb/cdbmake-internal.h src/include/skalibs/cdbmake.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h src/include/skalibs/siovec.h src/include/skalibs/uint32.h
+src/libstddjb/cdbmake_finish.o src/libstddjb/cdbmake_finish.lo: src/libstddjb/cdbmake_finish.c src/include/skalibs/buffer.h src/libstddjb/cdbmake-internal.h src/include/skalibs/cdbmake.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h src/include/skalibs/uint32.h
+src/libstddjb/cdbmake_posplus.o src/libstddjb/cdbmake_posplus.lo: src/libstddjb/cdbmake_posplus.c src/libstddjb/cdbmake-internal.h
+src/libstddjb/cdbmake_start.o src/libstddjb/cdbmake_start.lo: src/libstddjb/cdbmake_start.c src/include/skalibs/buffer.h src/include/skalibs/cdbmake.h src/include/skalibs/genalloc.h
 src/libstddjb/child_spawn.o src/libstddjb/child_spawn.lo: src/libstddjb/child_spawn.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h src/include/skalibs/types.h
 src/libstddjb/child_spawn0.o src/libstddjb/child_spawn0.lo: src/libstddjb/child_spawn0.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
 src/libstddjb/child_spawn1_internal.o src/libstddjb/child_spawn1_internal.lo: src/libstddjb/child_spawn1_internal.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h

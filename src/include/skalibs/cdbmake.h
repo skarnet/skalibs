@@ -4,9 +4,8 @@
 #define SKALIBS_CDBMAKE_H
 
 #include <stdint.h>
+#include <sys/uio.h>
 
-#include <skalibs/diuint32.h>
-#include <skalibs/allreadwrite.h>
 #include <skalibs/genalloc.h>
 #include <skalibs/buffer.h>
 
@@ -18,11 +17,11 @@ struct cdbmaker_s
   buffer b ;
   char buf[BUFFER_OUTSIZE] ;
 } ;
-
-#define CDBMAKER_ZERO { .hplist = GENALLOC_ZERO, .pos = 2048, .b = BUFFER_INIT(&fd_writev, -1, 0, 0) }
+#define CDBMAKER_ZERO { .hplist = GENALLOC_ZERO, .pos = 2048, .b = BUFFER_ZERO, .buf = { 0 } }
 
 extern int cdbmake_start (cdbmaker *, int) ;
 extern int cdbmake_add (cdbmaker *, char const *, uint32_t, char const *, uint32_t) ;
+extern int cdbmake_addv (cdbmaker *, struct iovec const *, unsigned int, struct iovec const *, unsigned int) ;
 extern int cdbmake_finish (cdbmaker *) ;
 
 #endif

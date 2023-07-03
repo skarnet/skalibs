@@ -9,50 +9,7 @@
 #include <skalibs/buffer.h>
 #include <skalibs/genalloc.h>
 #include <skalibs/cdbmake.h>
-#include "cdb-internal.h"
-
-int cdbmake_start (cdbmaker *c, int fd)
-{
-  c->hplist = genalloc_zero ;
-  c->pos = 2048 ;
-  buffer_init(&c->b, &buffer_write, fd, c->buf, BUFFER_OUTSIZE) ;
-  return lseek(fd, c->pos, SEEK_SET) >= 0 ;
-}
-
-static int posplus (cdbmaker *c, uint32_t len)
-{
-  uint32_t newpos = c->pos + len ;
-  if (newpos < len) return (errno = ENOMEM, 0) ;
-  c->pos = newpos ;
-  return 1 ;
-}
-
-static inline int cdbmake_addend (cdbmaker *c, uint32_t keylen, uint32_t datalen, uint32_t h)
-{
-  diuint32 blah = { .left = h, .right = c->pos } ;
-  return genalloc_append(diuint32, &c->hplist, &blah) && posplus(c, 8) && posplus(c, keylen) && posplus(c, datalen) ;
-}
-
-static inline ssize_t cdbmake_addbegin (cdbmaker *c, uint32_t keylen, uint32_t datalen)
-{
-  char buf[8] ;
-  uint32_pack(buf, keylen) ;
-  uint32_pack(buf + 4, datalen) ;
-  return buffer_put(&c->b, buf, 8) == 8 ;
-}
-
-int cdbmake_add (cdbmaker *c, char const *key, uint32_t keylen, char const *data, uint32_t datalen)
-{
-  if (!cdbmake_addbegin(c, keylen, datalen)
-   || buffer_put(&c->b, key, keylen) < 0
-   || buffer_put(&c->b, data, datalen) < 0
-   || !cdbmake_addend(c, keylen, datalen, cdb_hash(key, keylen)))
-  {
-    genalloc_free(diuint32, &c->hplist) ;
-    return 0 ;
-  }
-  return 1 ;
-}
+#include "cdbmake-internal.h"
 
 int cdbmake_finish (cdbmaker *c)
 {
@@ -109,13 +66,13 @@ int cdbmake_finish (cdbmaker *c)
         uint32_pack(buf, hp[j].left) ;
         uint32_pack(buf + 4, hp[j].right) ;
         if (buffer_put(&c->b, buf, 8) < 0) return 0 ;
-        if (!posplus(c, 8)) return 0 ;
+        if (!cdbmake_posplus(c, 8)) return 0 ;
       }
     }
   }
 
   if (!buffer_flush(&c->b)
-   || lseek(buffer_fd(&c->b), 0, SEEK_SET) < 0
-   || buffer_putflush(&c->b, final, 2048) < 0) return 0 ;
+   || lseek(buffer_fd(&c->b), 0, SEEK_SET) == -1
+   || buffer_putflush(&c->b, final, 2048) < 2048) return 0 ;
   return 1 ;
 }
