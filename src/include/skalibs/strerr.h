@@ -47,7 +47,7 @@ extern char const *PROG ;
 #define strerr_warnfunsys(n, ...) strerr_warnfnsys((n)+1, "unable to ", __VA_ARGS__)
 #define strerr_diewun(e, n, ...) strerr_diewn(e, (n)+1, "unable to ", __VA_ARGS__)
 #define strerr_diewunsys(e, n, ...) strerr_diewnsys(e, (n)+1, "unable to ", __VA_ARGS__)
-#define strerr_diefun(e, n, ...) strerr_diefn(e, (n)+1, ": unable to ", __VA_ARGS__)
+#define strerr_diefun(e, n, ...) strerr_diefn(e, (n)+1, "unable to ", __VA_ARGS__)
 #define strerr_diefunsys(e, n, ...) strerr_diefnsys(e, (n)+1, "unable to ", __VA_ARGS__)
 
 #define strerr_warnwu(...) strerr_warnw("unable to ", __VA_ARGS__)
