@@ -11,25 +11,18 @@
 
 int slurpn (int fd, stralloc *sa, size_t max)
 {
-  size_t sabase = sa->len ;
-  int wasnull = !sa->s ;
   for (;;)
   {
     ssize_t r ;
-    size_t n = max && sa->len - sabase + N > max ? max - (sa->len - sabase) : N ;
-    if (!n) { errno = ENOBUFS ; goto err ; }
+    size_t n = max && sa->len + N > max ? max - sa->len : N ;
+    if (!n) return (errno = ENOBUFS, 0) ;
     if (!stralloc_readyplus(sa, n)) break ;
     r = fd_read(fd, sa->s + sa->len, n) ;
     switch (r)
     {
-      case -1 : goto err ;
+      case -1 : return 0 ;
       case 0 : return 1 ;
       default : sa->len += r ;
     }
   }
-
-err:
-  if (wasnull) stralloc_free(sa) ;
-  else sa->len = sabase ;
-  return 0 ;
 }

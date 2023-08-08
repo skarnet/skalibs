@@ -513,6 +513,14 @@ The function returns 1 if it succeeds, or 0 (and sets errno) if it fails.
 </p>
 
 <p>
+<code> int slurpn (stralloc *sa, int fd, size_t max) </code> <br />
+Same as <tt>slurp</tt>, but only grows the stralloc to a maximum
+of <em>max</em> bytes of total length. If there is still more to
+read on <em>fd</em> after <em>sa&rarr;len</em> has reached <em>max</em>,
+the function returns 0 with errno set to ENOBUFS.
+</p>
+
+<p>
 <code> int openslurpclose (stralloc *sa, char const *file) </code> <br />
 Slurps the contents of file <em>file</em> into *<em>sa</em>.
 Returns 1 if it succeeds, and 0 (and sets errno) if it fails.
