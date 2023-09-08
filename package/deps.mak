@@ -29,6 +29,7 @@ src/include/skalibs/genqdyn.h: src/include/skalibs/stralloc.h
 src/include/skalibs/genset.h: src/include/skalibs/functypes.h
 src/include/skalibs/gensetdyn.h: src/include/skalibs/functypes.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
 src/include/skalibs/iopause.h: src/include/skalibs/tai.h
+src/include/skalibs/ip46.h: src/include/skalibs/fmtscan.h src/include/skalibs/socket.h
 src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr.h
 src/include/skalibs/netstring.h: src/include/skalibs/buffer.h src/include/skalibs/stralloc.h
@@ -50,6 +51,9 @@ src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint64.h
 src/include/skalibs/textclient.h: src/include/skalibs/allreadwrite.h src/include/skalibs/tai.h src/include/skalibs/textmessage.h
 src/include/skalibs/textmessage.h: src/include/skalibs/allreadwrite.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
+src/include/skalibs/types.h: src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
+src/include/skalibs/uint16.h: src/include/skalibs/uint64.h
+src/include/skalibs/uint32.h: src/include/skalibs/uint64.h
 src/include/skalibs/unix-timed.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
 src/include/skalibs/unix-transactional.h: src/include/skalibs/direntry.h src/include/skalibs/stralloc.h
 src/include/skalibs/unixconnection.h: src/include/skalibs/unixmessage.h
@@ -64,7 +68,6 @@ src/libstdcrypto/sha256-internal.h: src/include/skalibs/sha256.h
 src/libstdcrypto/sha512-internal.h: src/include/skalibs/sha512.h
 src/libstddjb/cdb-internal.h: src/include/skalibs/cdb.h src/include/skalibs/gccattributes.h
 src/libstddjb/cdbmake-internal.h: src/include/skalibs/cdbmake.h
-src/libstddjb/child_spawn-internal.h: src/include/skalibs/sysdeps.h
 src/libstddjb/djbtime-internal.h: src/include/skalibs/uint64.h
 src/libstddjb/fmtscan-internal.h: src/include/skalibs/fmtscan.h src/include/skalibs/uint64.h
 src/libunixonacid/skaclient-internal.h: src/include/skalibs/kolbak.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
@@ -309,7 +312,7 @@ src/libstddjb/child_spawn1_pipe.o src/libstddjb/child_spawn1_pipe.lo: src/libstd
 src/libstddjb/child_spawn1_socket.o src/libstddjb/child_spawn1_socket.lo: src/libstddjb/child_spawn1_socket.c src/libstddjb/djbunix-internal.h src/include/skalibs/djbunix.h src/include/skalibs/socket.h
 src/libstddjb/child_spawn2.o src/libstddjb/child_spawn2.lo: src/libstddjb/child_spawn2.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
 src/libstddjb/child_spawn3.o src/libstddjb/child_spawn3.lo: src/libstddjb/child_spawn3.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/exec.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h src/include/skalibs/types.h
-src/libstddjb/child_spawn_workaround.o src/libstddjb/child_spawn_workaround.lo: src/libstddjb/child_spawn_workaround.c src/include/skalibs/allreadwrite.h src/libstddjb/child_spawn-internal.h src/include/skalibs/djbunix.h src/include/skalibs/sysdeps.h
+src/libstddjb/child_spawn_workaround.o src/libstddjb/child_spawn_workaround.lo: src/libstddjb/child_spawn_workaround.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/sysdeps.h
 src/libstddjb/coe.o src/libstddjb/coe.lo: src/libstddjb/coe.c src/include/skalibs/djbunix.h
 src/libstddjb/deepsleepuntil.o src/libstddjb/deepsleepuntil.lo: src/libstddjb/deepsleepuntil.c src/include/skalibs/iopause.h src/include/skalibs/tai.h
 src/libstddjb/devino_cmp.o src/libstddjb/devino_cmp.lo: src/libstddjb/devino_cmp.c src/include/skalibs/devino.h

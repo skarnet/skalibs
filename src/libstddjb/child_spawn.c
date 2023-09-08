@@ -20,10 +20,6 @@
 #include <skalibs/config.h>
 #include <skalibs/env.h>
 
-#ifdef SKALIBS_HASPOSIXSPAWNEARLYRETURN
-# include "child_spawn-internal.h"
-#endif
-
 pid_t child_spawn (char const *prog, char const *const *argv, char const *const *envp, int *fds, unsigned int n)
 {
   pid_t pid ;

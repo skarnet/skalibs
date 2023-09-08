@@ -1,6 +1,7 @@
 /* ISC license. */
 
 #include <skalibs/sysdeps.h>
+#include <skalibs/djbunix.h>
 
 #if defined(SKALIBS_HASPOSIXSPAWN) && defined(SKALIBS_HASPOSIXSPAWNEARLYRETURN)
 
@@ -9,8 +10,8 @@
 #include <sys/wait.h>
 
 #include <skalibs/allreadwrite.h>
-#include <skalibs/djbunix.h>
-#include "child_spawn-internal.h"
+
+ /* when posix_spawn returns too early, you need this */
 
 pid_t child_spawn_workaround (pid_t pid, int const *p)
 {
@@ -41,8 +42,14 @@ pid_t child_spawn_workaround (pid_t pid, int const *p)
 
 #else
 
- /* avoid empty TUs */
-
-extern int skalibs_child_spawn_workaround_dummy_ ;
+pid_t child_spawn_workaround (pid_t pid, int const *p)
+{
+  if (p)
+  {
+    fd_close(p[1]) ;
+    fd_close(p[0]) ;
+  }
+  return pid ;
+}
 
 #endif

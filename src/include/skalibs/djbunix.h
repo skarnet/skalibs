@@ -169,6 +169,8 @@ extern int hiercopy_loose (char const *, char const *) ;
 extern int hiercopy_loose_tmp (char const *, char const *, stralloc *) ;
 extern int hiercopy_internal (char const *, char const *, stralloc *, unsigned int) ;
 
+
+
  /* Simple spawn functions with 0 or 1 communicating fds. */
 
 extern pid_t child_spawn0 (char const *, char const *const *, char const *const *) ;
@@ -205,5 +207,11 @@ extern pid_t child_spawn3 (char const *, char const *const *, char const *const 
  */
 
 extern pid_t child_spawn (char const *, char const *const *, char const *const *, int *, unsigned int) ;
+
+
+ /* Work around buggy posix_spawn */
+
+extern pid_t child_spawn_workaround (pid_t, int const *) ;  /* closes the pipe if defined */
+
 
 #endif

@@ -11,11 +11,7 @@
 #include <spawn.h>
 
 #include <skalibs/config.h>
-
-#ifdef SKALIBS_HASPOSIXSPAWNEARLYRETURN
-# include <skalibs/djbunix.h>
-# include "child_spawn-internal.h"
-#endif
+#include <skalibs/djbunix.h>
 
 pid_t child_spawn0 (char const *prog, char const *const *argv, char const *const *envp)
 {
