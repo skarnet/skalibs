@@ -83,13 +83,8 @@ extern int sagetcwd (stralloc *) ;
 extern int sareadlink (stralloc *, char const *) ;
 extern int sagethostname (stralloc *) ;
 
-extern int slurp (stralloc *, int) ;
-extern int openslurpclose (stralloc *, char const *) ;
-/*
-  TODO: next ABI break: change to
 #define slurp(sa, fd) slurpn((fd), (sa), 0)
 #define openslurpclose(sa, fn) openslurpnclose((fn), (sa), 0)
-*/
 
 extern int slurpn (int, stralloc *, size_t) ;
 extern int openslurpnclose (char const *, stralloc *, size_t) ;
@@ -168,50 +163,5 @@ extern int hiercopy_tmp (char const *, char const *, stralloc *) ;
 extern int hiercopy_loose (char const *, char const *) ;
 extern int hiercopy_loose_tmp (char const *, char const *, stralloc *) ;
 extern int hiercopy_internal (char const *, char const *, stralloc *, unsigned int) ;
-
-
-
- /* Simple spawn functions with 0 or 1 communicating fds. */
-
-extern pid_t child_spawn0 (char const *, char const *const *, char const *const *) ;
-extern pid_t child_spawn1_pipe (char const *, char const *const *, char const *const *, int *, int) ;
-extern pid_t child_spawn1_socket (char const *, char const *const *, char const *const *, int *) ;
-
-
- /*
-    Spawn function with 2 communicating pipes. The int * points to 2 fds.
-    Input: fds[0] and fds[1] are the fds to move the pipes to in the child.
-    Output: fds[0] and fds[1] contain the pipes to the child.
- */
-
-extern pid_t child_spawn2 (char const *, char const *const *, char const *const *, int *) ;
-
-
- /*
-    Same, with an additional pipe from the child to the parent.
-    The int * points to 3 fds.
-    The additional fd# is available to the child in the defined env variable.
- */
-
-#define SKALIBS_CHILD_SPAWN_FDS_ENVVAR "SKALIBS_CHILD_SPAWN_FDS"
-
-extern pid_t child_spawn3 (char const *, char const *const *, char const *const *, int *) ;
-
-
- /*
-    Generalization of the previous functions.
-    * uses posix_spawn() if available, else uses fork+exec
-    * requests n (the last arg) communication fds between parent and child. Uses pipes.
-    * if n=1, equivalent to child_spawn1_pipe; child writes, parent reads.
-    * if n>=2, parent reads on even and writes on odd.
- */
-
-extern pid_t child_spawn (char const *, char const *const *, char const *const *, int *, unsigned int) ;
-
-
- /* Work around buggy posix_spawn */
-
-extern pid_t child_spawn_workaround (pid_t, int const *) ;  /* closes the pipe if defined */
-
 
 #endif

@@ -6,8 +6,10 @@ In 2.13.2.0
  - Bugfixes.
  - New accessor function: selfpipe_fd().
  - New functions: slurpn(), openslurpnclose().
- - New strerr macros to warn with a "fatal" message
- - New cdb functions: cdb_hashv(), cdbmake_addv()
+ - slurp() and openslurpclose() are now macros.
+ - New strerr macros to warn with a "fatal" message.
+ - New cdb functions: cdb_hashv(), cdbmake_addv().
+ - child_spawn() revamp. Prototype change (last arg is a size_t).
 
 
 In 2.13.1.1

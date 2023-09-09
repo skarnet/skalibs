@@ -5,7 +5,7 @@
 #include <errno.h>
 
 #include <skalibs/allreadwrite.h>
-#include <skalibs/djbunix.h>
+#include <skalibs/cspawn.h>
 #include <skalibs/textmessage.h>
 #include <skalibs/textclient.h>
 #include <skalibs/posixishard.h>

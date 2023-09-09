@@ -3,6 +3,7 @@
 #include <errno.h>
 #include <signal.h>
 
+#include <skalibs/cspawn.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/kolbak.h>
 #include <skalibs/skaclient.h>

@@ -13,7 +13,7 @@
 
  /* when posix_spawn returns too early, you need this */
 
-pid_t child_spawn_workaround (pid_t pid, int const *p)
+pid_t cspawn_workaround (pid_t pid, int const *p)
 {
   siginfo_t si ;
   int e ;
@@ -42,7 +42,7 @@ pid_t child_spawn_workaround (pid_t pid, int const *p)
 
 #else
 
-pid_t child_spawn_workaround (pid_t pid, int const *p)
+pid_t cspawn_workaround (pid_t pid, int const *p)
 {
   if (p)
   {

@@ -1,7 +1,7 @@
 /* ISC license. */
 
-#ifndef DJBUNIX_INTERNAL_H
-#define DJBUNIX_INTERNAL_H
+#ifndef CSPAWN_INTERNAL_H
+#define CSPAWN_INTERNAL_H
 
 #include <sys/types.h>
 

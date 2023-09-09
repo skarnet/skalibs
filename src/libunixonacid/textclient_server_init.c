@@ -1,7 +1,8 @@
 /* ISC license. */
 
 #include <stdlib.h>
-#include <skalibs/djbunix.h>
+
+#include <skalibs/cspawn.h>
 #include <skalibs/textclient.h>
 
 int textclient_server_init (textmessage_receiver *in, textmessage_sender *syncout, textmessage_sender *asyncout, char const *before, size_t beforelen, char const *after, size_t afterlen, tain const *deadline, tain *stamp)

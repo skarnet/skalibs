@@ -1,8 +1,9 @@
 /* ISC license. */
 
 #include <unistd.h>
-#include <skalibs/djbunix.h>
-#include "djbunix-internal.h"
+
+#include <skalibs/cspawn.h>
+#include "cspawn-internal.h"
 
 pid_t child_spawn1_pipe (char const *prog, char const *const *argv, char const *const *envp, int *fd, int to)
 {
