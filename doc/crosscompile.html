@@ -83,13 +83,17 @@ the time <tt>yes</tt> or <tt>no</tt>.
 <p>
  At all times, <tt>./configure --help</tt> provides the list of sysdeps
 you need to provide a <tt>--with-sysdep-*</tt> option for. As of
-skalibs-2.9.3.0, there is only one sysdep in this case:
+skalibs-2.14.0.0, there are two sysdeps in this case:
 </p>
 
 <ul>
  <li> <tt>devurandom</tt>: <tt>yes</tt> if the target has a valid
 pseudorandom generation device in <tt>/dev/urandom</tt>, and <tt>no</tt>
 otherwise. </li>
+ <li> <tt>posixspawnearlyreturn</tt>: <tt>yes</tt> if the target has a broken
+<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/posix_spawn.html">posix_spawn()</a>
+implementation that can return before the child has successfully exec'ed.
+That happens with old glibcs and some virtual platforms. </li>
 </ul>
 
 </body>

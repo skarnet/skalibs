@@ -357,52 +357,9 @@ and the grandchild's PID if the current process is the parent.
 </p>
 
 <p>
-<code> pid_t child_spawn0 (char const *file, char const *const *argv, char const *const *envp) </code> <br />
-Forks and executes a child as with <tt>exec_ae(file, argv, envp)</tt>.
-Returns 0 if it fails, and the pid of the child if it succeeds.
-Implemented via <a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/posix_spawn.html">posix_spawn()</a>
-on systems that support it.
+The <tt>child_spawn</tt> family of functions has been moved to the
+<a href="cspawn.html">skalibs/cspawn.h</a> header.
 </p>
-
-<p>
-<code> pid_t child_spawn1_pipe (char const *file, char const *const *argv, char const *const *envp, int *fd, int w) </code> <br />
-Like <tt>child_spawn0()</tt>, except that a pipe is created between the child's
-stdin (if <em>w</em> is 0) or stdout (if <em>w</em> is nonzero) and the parent.
-The parent's end of the pipe will be stored in *<em>fd</em>.
-</p>
-
-<p>
-<code> pid_t child_spawn1_socket (char const *file, char const *const *argv, char const *const *envp, int *fd) </code> <br />
-Like <tt>child_spawn0</tt>, except that a socket is created between the parent
-and the child. Both the child's stdin and stdout point to the socket; the parent has
-its end of the socket available in *<em>fd</em>.
-</p>
-
-<p>
-<code> pid_t child_spawn2 (char const *file, char const *const *argv, char const *const *envp, int *fds) </code> <br />
-Like <tt>child_spawn0()</tt>, except that two pipes are created between the
-parent and the child. <em>fds</em> must point to an array of 2 ints: this
-array is read as well as written by <tt>child_spawn2()</tt>. On function
-call, the numbers in <em>fds</em> must describe what fds should be used
-in the child to contain the communication pipes (for instance, if the child
-will read from its parent on stdin and writes to its parent on stdout, <em>fds</em>
-must contain 0 and 1). On function return, <em>fds</em> contains the
-descriptors for the pipes that read from / write to the child.
-</p>
-
-<p>
-<code> pid_t child_spawn (char const *file, char const *const *argv, char const *const *envp, int *fds, unsigned int nfds) </code> <br />
-More generic spawning function. <em>fds</em> must point to an array of at least <em>nfds</em> ints;
-file descriptors reading from or writing to the child will be stored there. The function returns
-0 on failure or the pid of the child on success.
-</p>
-<ul>
- <li> If <em>nfds</em> is 0, then the function behaves like <tt>child_spawn0</tt>, except
-all ignored signals will be un-ignored in the child </li>
- <li> If <em>nfds</em> is 1 or more, then <em>fds</em> will contain pipes between the
-child and the parent. The parent will read on even-numbered ones (starting on <em>fds</em>[0])
-and write on odd-numbered ones. </li>
-</ul>
 
 <h3> Waiting for children </h3>
 
