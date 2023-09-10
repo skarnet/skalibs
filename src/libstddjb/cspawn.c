@@ -2,9 +2,92 @@
 
 #include <skalibs/sysdeps.h>
 
+#ifdef SKALIBS_HASPOSIXSPAWN
+#include <skalibs/nonposix.h>
+#endif
+
 #include <errno.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+#include <skalibs/allreadwrite.h>
+#include <skalibs/sig.h>
+#include <skalibs/djbunix.h>
+#include <skalibs/selfpipe.h>
+#include <skalibs/exec.h>
 
 #include <skalibs/cspawn.h>
+
+static inline void cspawn_child_exec (char const *prog, char const *const *argv, char const *const *envp, uint32_t flags, cspawn_fileaction const *fa, size_t n)
+{
+  for (size_t i = 0 ; i < n ; i++)
+  {
+    switch (fa[i].type)
+    {
+      case CSPAWN_FA_CLOSE : fd_close(fa[i].x.fd) ; break ;
+      case CSPAWN_FA_COPY :
+        if (fd_copy(fa[i].x.fd2[0], fa[i].x.fd2[1]) == -1) return ;
+        break ;
+      case CSPAWN_FA_MOVE :
+        if (fd_move(fa[i].x.fd2[0], fa[i].x.fd2[1]) == -1) return ;
+        break ;
+      case CSPAWN_FA_OPEN :
+      {
+        int fd = open(fa[i].x.openinfo.file, fa[i].x.openinfo.oflag, fa[i].x.openinfo.mode) ;
+        if (fd == -1) return ;
+        if (fd_move(fa[i].x.openinfo.fd, fd) == -1) return ;
+        break ;
+      }
+      default :
+        errno = EINVAL ; return ;
+    }
+  }
+
+  if (flags & CSPAWN_FLAGS_SELFPIPE_FINISH) selfpipe_finish() ;
+  if (flags & CSPAWN_FLAGS_SIGBLOCKNONE) sig_blocknone() ;
+  if (flags & CSPAWN_FLAGS_SETSID) setsid() ;
+
+  exec_ae(prog, argv, envp) ;
+}
+
+static inline pid_t cspawn_fork (char const *prog, char const *const *argv, char const *const *envp, uint32_t flags, cspawn_fileaction const *fa, size_t n)
+{
+  pid_t pid ;
+  int p[2] ;
+  char c ;
+
+  if (pipecoe(p) == -1) return 0 ;
+  pid = fork() ;
+  if (pid == -1)
+  {
+    fd_close(p[1]) ;
+    fd_close(p[0]) ;
+    return 0 ;
+  }
+  if (!pid)
+  {
+    cspawn_child_exec(prog, argv, envp, flags, fa, n) ;
+    c = errno ;
+    fd_write(p[1], &c, 1) ;
+    _exit(127) ;
+  }
+
+  fd_close(p[1]) ;
+  p[1] = fd_read(p[0], &c, 1) ;
+  if (p[1] < 0)
+  {
+    fd_close(p[0]) ;
+    return 0 ;
+  }
+  fd_close(p[0]) ;
+  if (p[1])
+  {
+    wait_pid(pid, &p[0]) ;
+    errno = (unsigned char)c ;
+    return 0 ;
+  }
+  return pid ;
+}
 
 #ifdef SKALIBS_HASPOSIXSPAWN
 
@@ -18,8 +101,6 @@
 #ifdef SKALIBS_HASPOSIXSPAWNEARLYRETURN
 
 #include <sys/wait.h>
-
-#include <skalibs/allreadwrite.h>
 
 static inline pid_t cspawn_workaround (pid_t pid, int const *p)
 {
@@ -50,7 +131,7 @@ static inline pid_t cspawn_workaround (pid_t pid, int const *p)
 
 #endif
 
-pid_t cspawn (char const *prog, char const *const *argv, char const *const *envp, uint32_t flags, cspawn_fileaction const *fa, size_t n)
+static inline pid_t cspawn_pspawn (char const *prog, char const *const *argv, char const *const *envp, uint32_t flags, cspawn_fileaction const *fa, size_t n)
 {
   pid_t pid ;
   posix_spawnattr_t attr ;
@@ -139,82 +220,27 @@ pid_t cspawn (char const *prog, char const *const *argv, char const *const *envp
   return 0 ;
 }
 
-#else
-
-#include <fcntl.h>
-#include <unistd.h>
-
-#include <skalibs/allreadwrite.h>
-#include <skalibs/sig.h>
-#include <skalibs/selfpipe.h>
-#include <skalibs/exec.h>
-
-static inline void cspawn_child_exec (char const *prog, char const *const *argv, char const *const *envp, uint32_t flags, cspawn_fileaction const *fa, size_t n)
-{
-  for (size_t i = 0 ; i < n ; i++)
-  {
-    switch (fa[i].type)
-    {
-      case CSPAWN_FA_CLOSE : fd_close(fa[i].x.fd) ; break ;
-      case CSPAWN_FA_COPY :
-        if (fd_copy(fa[i].x.fd2[0], fa[i].x.fd2[1]) == -1) return ;
-        break ;
-      case CSPAWN_FA_MOVE :
-        if (fd_move(fa[i].x.fd2[0], fa[i].x.fd2[1]) == -1) return ;
-        break ;
-      case CSPAWN_FA_OPEN :
-      {
-        int fd = open(fa[i].x.openinfo.file, fa[i].x.openinfo.oflag, fa[i].x.openinfo.mode) ;
-        if (fd == -1) return ;
-        if (fd_move(fa[i].x.openinfo.fd, fd) == -1) return ;
-        break ;
-      }
-      default :
-        errno = EINVAL ; return ;
-    }
-  }
-
-  if (flags & CSPAWN_FLAGS_SELFPIPE_FINISH) selfpipe_finish() ;
-  if (flags & CSPAWN_FLAGS_SIGBLOCKNONE) sig_blocknone() ;
-}
+#ifdef SKALIBS_HASPOSIXSPAWNSETSID
 
 pid_t cspawn (char const *prog, char const *const *argv, char const *const *envp, uint32_t flags, cspawn_fileaction const *fa, size_t n)
 {
-  pid_t pid ;
-  int p[2] ;
-  char c ;
+  return cspawn_pspawn(prog, argv, envp, flags, fa, n) ;
+}
 
-  if (pipecoe(p) == -1) return 0 ;
-  pid = fork() ;
-  if (pid == -1)
-  {
-    fd_close(p[1]) ;
-    fd_close(p[0]) ;
-    return 0 ;
-  }
-  if (!pid)
-  {
-    cspawn_child_exec(prog, argv, envp, flags, fa, n) ;
-    c = errno ;
-    fd_write(p[1], &c, 1) ;
-    _exit(127) ;
-  }
+#else
 
-  fd_close(p[1]) ;
-  p[1] = fd_read(p[0], &c, 1) ;
-  if (p[1] < 0)
-  {
-    fd_close(p[0]) ;
-    return 0 ;
-  }
-  fd_close(p[0]) ;
-  if (p[1])
-  {
-    wait_pid(pid, &p[0]) ;
-    errno = (unsigned char)c ;
-    return 0 ;
-  }
-  return pid ;
+pid_t cspawn (char const *prog, char const *const *argv, char const *const *envp, uint32_t flags, cspawn_fileaction const *fa, size_t n)
+{
+  return flags & CSPAWN_FLAGS_SETSID ? cspawn_fork(prog, argv, envp, flags, fa, n) : cspawn_pspawn(prog, argv, envp, flags, fa, n) ;
+}
+
+#endif
+
+#else
+
+pid_t cspawn (char const *prog, char const *const *argv, char const *const *envp, uint32_t flags, cspawn_fileaction const *fa, size_t n)
+{
+  return cspawn_fork(prog, argv, envp, flags, fa, n) ;
 }
 
 #endif

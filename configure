@@ -640,10 +640,11 @@ choose cl explicit_bzero 'explicit_bzero()'
 choose cl getrandom 'getrandom()'
 choose cl grndinsecure 'GRND_INSECURE'
 choose cl chroot 'chroot()'
+choose cl posixspawnsetsid 'POSIX_SPAWN_SETSID' ${spawn_lib}
 
 # Here are the evil irreducible run-time sysdeps.
 choose clr devurandom '/dev/urandom'
-choose clr posixspawnearlyreturn 'posix_spawn() returning early'
+choose clr posixspawnearlyreturn 'posix_spawn() incorrectly returning early' ${spawn_lib}
 
 
 # Finally, produce config.mak and config.h
