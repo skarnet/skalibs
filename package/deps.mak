@@ -342,6 +342,7 @@ src/libstddjb/filecopy_suffix.o src/libstddjb/filecopy_suffix.lo: src/libstddjb/
 src/libstddjb/filecopy_unsafe.o src/libstddjb/filecopy_unsafe.lo: src/libstddjb/filecopy_unsafe.c src/include/skalibs/djbunix.h
 src/libstddjb/fmtscan_asc.o src/libstddjb/fmtscan_asc.lo: src/libstddjb/fmtscan_asc.c src/include/skalibs/fmtscan.h
 src/libstddjb/fmtscan_num.o src/libstddjb/fmtscan_num.lo: src/libstddjb/fmtscan_num.c src/include/skalibs/fmtscan.h
+src/libstddjb/gcspawn.o src/libstddjb/gcspawn.lo: src/libstddjb/gcspawn.c src/include/skalibs/allreadwrite.h src/include/skalibs/cspawn.h src/include/skalibs/djbunix.h src/include/skalibs/types.h
 src/libstddjb/genalloc_deepfree.o src/libstddjb/genalloc_deepfree.lo: src/libstddjb/genalloc_deepfree.c src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
 src/libstddjb/genwrite_flush_bufalloc.o src/libstddjb/genwrite_flush_bufalloc.lo: src/libstddjb/genwrite_flush_bufalloc.c src/include/skalibs/bufalloc.h src/include/skalibs/genwrite.h
 src/libstddjb/genwrite_flush_buffer.o src/libstddjb/genwrite_flush_buffer.lo: src/libstddjb/genwrite_flush_buffer.c src/include/skalibs/buffer.h src/include/skalibs/genwrite.h

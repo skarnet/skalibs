@@ -1,8 +1,8 @@
 #define @TYPE@_PACK @BYTES@
 #define @type@_pack uint@BITS@_pack
 #define @type@_pack_big uint@BITS@_pack_big
-#define @type@_unpack uint@BITS@_unpack
-#define @type@_unpack_big uint@BITS@_unpack_big
+#define @type@_unpack(pack, p) uint@BITS@_unpack(pack, (uint@BITS@_t *)(p))
+#define @type@_unpack_big(pack, p) uint@BITS@_unpack_big(pack, (uint@BITS@_t *)(p))
 
 #define @TYPE@_FMT (1+UINT@BITS@_FMT)
 #define @type@_fmt int@BITS@_fmt

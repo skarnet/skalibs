@@ -85,4 +85,9 @@ extern pid_t child_spawn3 (char const *, char const *const *, char const *const 
 
 extern pid_t child_spawn (char const *, char const *const *, char const *const *, int *, size_t) ;
 
+
+ /* cspawn, but running as a grandchild. Uses one fork(). */
+
+extern pid_t gcspawn (char const *, char const *const *, char const *const *, uint16_t, cspawn_fileaction const *, size_t) ;
+
 #endif
