@@ -453,17 +453,11 @@ src/libstddjb/openreadnclose.o src/libstddjb/openreadnclose.lo: src/libstddjb/op
 src/libstddjb/openreadnclose_nb.o src/libstddjb/openreadnclose_nb.lo: src/libstddjb/openreadnclose_nb.c src/include/skalibs/djbunix.h
 src/libstddjb/openslurpnclose.o src/libstddjb/openslurpnclose.lo: src/libstddjb/openslurpnclose.c src/include/skalibs/djbunix.h
 src/libstddjb/openwritenclose5.o src/libstddjb/openwritenclose5.lo: src/libstddjb/openwritenclose5.c src/include/skalibs/devino.h src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
-src/libstddjb/openwritenclose_internal_deprecated.o src/libstddjb/openwritenclose_internal_deprecated.lo: src/libstddjb/openwritenclose_internal_deprecated.c src/include/skalibs/devino.h src/include/skalibs/djbunix.h
 src/libstddjb/openwritenclose_suffix6.o src/libstddjb/openwritenclose_suffix6.lo: src/libstddjb/openwritenclose_suffix6.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
-src/libstddjb/openwritenclose_suffix_internal_deprecated.o src/libstddjb/openwritenclose_suffix_internal_deprecated.lo: src/libstddjb/openwritenclose_suffix_internal_deprecated.c src/include/skalibs/devino.h src/include/skalibs/djbunix.h
 src/libstddjb/openwritenclose_unsafe5.o src/libstddjb/openwritenclose_unsafe5.lo: src/libstddjb/openwritenclose_unsafe5.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
-src/libstddjb/openwritenclose_unsafe_internal_deprecated.o src/libstddjb/openwritenclose_unsafe_internal_deprecated.lo: src/libstddjb/openwritenclose_unsafe_internal_deprecated.c src/include/skalibs/devino.h src/include/skalibs/djbunix.h
 src/libstddjb/openwritevnclose5.o src/libstddjb/openwritevnclose5.lo: src/libstddjb/openwritevnclose5.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
-src/libstddjb/openwritevnclose_internal_deprecated.o src/libstddjb/openwritevnclose_internal_deprecated.lo: src/libstddjb/openwritevnclose_internal_deprecated.c src/include/skalibs/devino.h src/include/skalibs/djbunix.h
 src/libstddjb/openwritevnclose_suffix6.o src/libstddjb/openwritevnclose_suffix6.lo: src/libstddjb/openwritevnclose_suffix6.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
-src/libstddjb/openwritevnclose_suffix_internal_deprecated.o src/libstddjb/openwritevnclose_suffix_internal_deprecated.lo: src/libstddjb/openwritevnclose_suffix_internal_deprecated.c src/include/skalibs/devino.h src/include/skalibs/djbunix.h
 src/libstddjb/openwritevnclose_unsafe5.o src/libstddjb/openwritevnclose_unsafe5.lo: src/libstddjb/openwritevnclose_unsafe5.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
-src/libstddjb/openwritevnclose_unsafe_internal_deprecated.o src/libstddjb/openwritevnclose_unsafe_internal_deprecated.lo: src/libstddjb/openwritevnclose_unsafe_internal_deprecated.c src/include/skalibs/devino.h src/include/skalibs/djbunix.h
 src/libstddjb/path_canonicalize.o src/libstddjb/path_canonicalize.lo: src/libstddjb/path_canonicalize.c src/include/skalibs/djbunix.h
 src/libstddjb/pipe_internal.o src/libstddjb/pipe_internal.lo: src/libstddjb/pipe_internal.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
 src/libstddjb/prog.o src/libstddjb/prog.lo: src/libstddjb/prog.c src/include/skalibs/strerr.h
@@ -715,9 +709,7 @@ src/libstddjb/waitn_reap.o src/libstddjb/waitn_reap.lo: src/libstddjb/waitn_reap
 src/libstddjb/waitn_reap_posix.o src/libstddjb/waitn_reap_posix.lo: src/libstddjb/waitn_reap_posix.c src/include/skalibs/djbunix.h
 src/libstddjb/waitpid_nointr.o src/libstddjb/waitpid_nointr.lo: src/libstddjb/waitpid_nointr.c src/include/skalibs/djbunix.h
 src/libstddjb/writenclose_unsafe5.o src/libstddjb/writenclose_unsafe5.lo: src/libstddjb/writenclose_unsafe5.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
-src/libstddjb/writenclose_unsafe_internal_deprecated.o src/libstddjb/writenclose_unsafe_internal_deprecated.lo: src/libstddjb/writenclose_unsafe_internal_deprecated.c src/include/skalibs/devino.h src/include/skalibs/djbunix.h
 src/libstddjb/writevnclose_unsafe5.o src/libstddjb/writevnclose_unsafe5.lo: src/libstddjb/writevnclose_unsafe5.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/siovec.h
-src/libstddjb/writevnclose_unsafe_internal_deprecated.o src/libstddjb/writevnclose_unsafe_internal_deprecated.lo: src/libstddjb/writevnclose_unsafe_internal_deprecated.c src/include/skalibs/devino.h src/include/skalibs/djbunix.h
 src/libunixonacid/access_at.o src/libunixonacid/access_at.lo: src/libunixonacid/access_at.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/ancil_recv_fd.o src/libunixonacid/ancil_recv_fd.lo: src/libunixonacid/ancil_recv_fd.c src/include/skalibs/allreadwrite.h src/include/skalibs/ancil.h src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/sysdeps.h
 src/libunixonacid/ancil_send_fd.o src/libunixonacid/ancil_send_fd.lo: src/libunixonacid/ancil_send_fd.c src/include/skalibs/ancil.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h
