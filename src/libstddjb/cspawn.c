@@ -30,6 +30,7 @@ static inline void cspawn_child_exec (char const *prog, char const *const *argv,
         break ;
       case CSPAWN_FA_MOVE :
         if (fd_move(fa[i].x.fd2[0], fa[i].x.fd2[1]) == -1) return ;
+        if (fa[i].x.fd2[0] == fa[i].x.fd2[1] && uncoe(fa[i].x.fd2[0]) == -1) return ;
         break ;
       case CSPAWN_FA_OPEN :
       {
