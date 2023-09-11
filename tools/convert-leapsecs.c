@@ -28,7 +28,6 @@ int main (int argc, char const *const *argv)
     struct tm tm ;
     uint64_t tt ;
     time_t t ;
-    char *p ;
     int r ;
     char fmt[UINT64_FMT] ;
     sa.len = 0 ;

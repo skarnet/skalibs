@@ -165,6 +165,10 @@ static inline pid_t cspawn_pspawn (char const *prog, char const *const *argv, ch
     }
 #ifdef SKALIBS_HASPOSIXSPAWNSETSID
     if (flags & CSPAWN_FLAGS_SETSID) pfff |= POSIX_SPAWN_SETSID ;
+#else
+#ifdef SKALIBS_HASPOSIXSPAWNSETSIDNP
+    if (flags & CSPAWN_FLAGS_SETSID) pfff |= POSIX_SPAWN_SETSID_NP ;
+#endif
 #endif
     e = posix_spawnattr_setflags(&attr, pfff) ;
     if (e) goto errattr ;
@@ -253,7 +257,7 @@ static inline pid_t cspawn_pspawn (char const *prog, char const *const *argv, ch
   return 0 ;
 }
 
-#if defined(SKALIBS_HASPOSIXSPAWNSETSID) && (defined(SKALIBS_HASPOSIXSPAWNCHDIR) || defined(SKALIBS_HASPOSIXSPAWNCHDIRNP))
+#if (defined(SKALIBS_HASPOSIXSPAWNSETSID) || defined(SKALIBS_HASPOSIXSPAWNSETSIDNP)) && (defined(SKALIBS_HASPOSIXSPAWNCHDIR) || defined(SKALIBS_HASPOSIXSPAWNCHDIRNP))
 
 pid_t cspawn (char const *prog, char const *const *argv, char const *const *envp, uint16_t flags, cspawn_fileaction const *fa, size_t n)
 {
@@ -264,7 +268,7 @@ pid_t cspawn (char const *prog, char const *const *argv, char const *const *envp
 
 pid_t cspawn (char const *prog, char const *const *argv, char const *const *envp, uint16_t flags, cspawn_fileaction const *fa, size_t n)
 {
-#if !defined(SKALIBS_HASPOSIXSPAWNSETSID)
+#if !defined(SKALIBS_HASPOSIXSPAWNSETSID) && !defined(SKALIBS_HASPOSIXSPAWNSETSIDNP)
   if (flags & CSPAWN_FLAGS_SETSID) goto dofork ;
 #endif
 #if !defined(SKALIBS_HASPOSIXSPAWNCHDIR) && !defined(SKALIBS_HASPOSIXSPAWNCHDIRNP)
