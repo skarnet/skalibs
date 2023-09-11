@@ -145,17 +145,22 @@ static inline pid_t cspawn_pspawn (char const *prog, char const *const *argv, ch
 
   if (flags)
   {
+    short pfff = 0 ;
     e = posix_spawnattr_init(&attr) ;
     if (e) goto err ;
-    if (flags & 3)
+    if (flags & (CSPAWN_FLAGS_SIGBLOCKNONE | CSPAWN_FLAGS_SELFPIPE_FINISH))
     {
       sigset_t set ;
       sigemptyset(&set) ;
       e = posix_spawnattr_setsigmask(&attr, &set) ;
       if (e) goto errattr ;
-      e = posix_spawnattr_setflags(&attr, POSIX_SPAWN_SETSIGMASK) ;
-      if (e) goto errattr ;
+      pfff |= POSIX_SPAWN_SETSIGMASK ;
     }
+#ifdef SKALIBS_HASPOSIXSPAWNSETSID
+    if (flags & CSPAWN_FLAGS_SETSID) pfff |= POSIX_SPAWN_SETSID ;
+#endif
+    e = posix_spawnattr_setflags(&attr, pfff) ;
+    if (e) goto errattr ;
   }
 
   if (n)
@@ -195,7 +200,7 @@ static inline pid_t cspawn_pspawn (char const *prog, char const *const *argv, ch
   }
 
   if (nopath && (setenv("PATH", SKALIBS_DEFAULTPATH, 0) == -1)) { e = errno ; goto erractions ; }
-  e = posix_spawnp(&pid, prog, &actions, &attr, (char *const *)argv, (char *const *)envp) ;
+  e = posix_spawnp(&pid, prog, n ? &actions : 0, flags ? &attr : 0, (char *const *)argv, (char *const *)envp) ;
   if (nopath) unsetenv("PATH") ;
   if (e) goto errattr ;
 
