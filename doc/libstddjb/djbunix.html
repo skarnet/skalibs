@@ -504,76 +504,70 @@ size. Returns 1 if it succeeds and 0 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> int openwritenclose_unsafe_internal (char const *file, char const *s, size_t len, dev_t *dev, ino_t *ino, int dosync) </code> <br />
+<code> int openwritenclose_unsafe5 (char const *file, char const *s, size_t len, devino *devino, unsigned int options) </code> <br>
 Writes the <em>n</em> bytes stored at <em>s</em> into file <em>file</em>.
 The previous contents of <em>file</em> are destroyed even if the function
-fails. If <em>dosync</em> is nonzero, the new contents of <em>file</em>
-are synced to disk before the function returns. If <em>dev</em> and <em>ino</em>
-are not null, they're used to store the device and inode number of <em>file</em>.
+fails. If <em>options</em> has bit 0 set, the new contents of <em>file</em>
+are synced to disk before the function returns. If <em>devino</em> is not null,
+the device number of <em>file</em> is stored in <em>devino&rarr;dev</em>
+and its inode number in <em>devino&arr;ino</em>.
 The function returns 1 if it succeeds, or 0 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> int openwritenclose_unsafe (char const *file, char const *s, size_t len) <br />
-int openwritenclose_unsafe_sync (char const *file, char const *s, size_t len) <br />
-int openwritenclose_unsafe_devino (char const *file, char const *s, size_t len, dev_t *dev, ino_t *ino) <br />
-int openwritenclose_unsafe_devino_sync (char const *file, char const *s, size_t len, dev_t *dev, ino_t *ino) </code> <br />
-Trivial shortcuts around <tt>openwritenclose_unsafe_internal()</tt>. The
+<code> int openwritenclose_unsafe (char const *file, char const *s, size_t len) <br>
+int openwritenclose_unsafe_sync (char const *file, char const *s, size_t len) </code> <br>
+Trivial shortcuts around <tt>openwritenclose_unsafe5()</tt>. The
 reader can easily figure out what they do.
 </p>
 
 <p>
-<code> int openwritenclose_suffix_internal (char const *file, char const *s, size_t len, dev_t *dev, ino_t *ino, int dosync, char const *suffix) </code> <br />
+<code> int openwritenclose_suffix6 (char const *file, char const *s, size_t len, devino *devino, unsigned int options, char const *suffix) </code> <br>
 Writes the <em>n</em> bytes stored at <em>s</em> into file <em>file</em>,
 by first writing into <em>filesuffix</em> and atomically renaming
 <em>filesuffix</em> to <em>file</em>. IOW, the old contents of <em>file</em>
 are preserved if the operation fails, and are atomically replaced with the
 new contents if the operation succeeds.
-If <em>dosync</em> is nonzero, the new contents of <em>filesuffix</em>
-are synced to disk before the atomic replace. If <em>dev</em> and <em>ino</em>
-are not null, they're used to store the device and inode number of <em>file</em>.
+If <em>options</em> has bit 0 set, the new contents of <em>filesuffix</em>
+are synced to disk before the atomic replace. If <em>devino</em> is not null,
+the device number of <em>file</em> is stored in <em>devino&rarr;dev</em>
+and its inode number in <em>devino&arr;ino</em>.
 The function returns 1 if it succeeds, or 0 (and sets errno) if it fails.
 </p>
 
 <p>
-<code> int openwritenclose_suffix (char const *file, char const *s, size_t len, char const *suffix) <br />
-int openwritenclose_suffix_sync (char const *file, char const *s, size_t len, char const *suffix) <br />
-int openwritenclose_suffix_devino (char const *file, char const *s, size_t len, char const *suffix, dev_t *dev, ino_t *ino) <br />
-int openwritenclose_suffix_devino_sync (char const *file, char const *s, size_t len, char const *suffix, dev_t *dev, ino_t *ino) </code> <br />
+<code> int openwritenclose_suffix (char const *file, char const *s, size_t len, char const *suffix) <br>
+int openwritenclose_suffix_sync (char const *file, char const *s, size_t len, char const *suffix) </code> <br>
 Trivial shortcuts around <tt>openwritenclose_suffix_internal()</tt>. The
 reader can easily figure out what they do.
 </p>
 
 <p>
-<code> int openwritevnclose_unsafe_internal (char const *file, struct iovec const *v, unsigned int vlen, dev_t *dev, ino_t *ino, int dosync) </code> <br />
-Like <tt>openwritenclose_unsafe_internal</tt>, but the content to
+<code> int openwritevnclose_unsafe5 (char const *file, struct iovec const *v, unsigned int vlen, devino *devino, int dosync) </code> <br>
+Like <tt>openwritenclose_unsafe5</tt>, but the content to
 write is taken from a
 <a href="siovec.html">scatter/gather array</a> of <em>vlen</em>
 elements instead of a single string.
 </p>
 
 <p>
-<code> int openwritevnclose_unsafe (char const *file, struct iovec const *v, unsigned int vlen) <br />
-int openwritevnclose_unsafe_sync (char const *file, struct iovec const *v, unsigned int vlen) <br />
-int openwritevnclose_unsafe_devino (char const *file, struct iovec const *v, unsigned int vlen, dev_t *dev, ino_t *ino) <br />
-int openwritevnclose_unsafe_devino_sync (char const *file, struct iovec const *v, unsigned int vlen, dev_t *dev, ino_t *ino) </code> <br />
-Trivial wrappers around <tt>openwritevnclose_unsafe_internal()</tt>.
+<code> int openwritevnclose_unsafe (char const *file, struct iovec const *v, unsigned int vlen) <br>
+int openwritevnclose_unsafe_sync (char const *file, struct iovec const *v, unsigned int vlen) </code> <br>
+Trivial wrappers around <tt>openwritevnclose_unsafe5()</tt>.
 </p>
 
 <p>
-<code> int openwritevnclose_suffix_internal (char const *file, struct iovec const *v, unsigned int vlen, dev_t *dev, ino_t *ino, int dosync, char const *suffix) </code> <br />
-Like <tt>openwritenclose_suffix_internal</tt>, but the content to
+<code> int openwritevnclose_suffix6 (char const *file, struct iovec const *v, unsigned int vlen, devino *devino, int dosync, char const *suffix) </code> <br>
+Like <tt>openwritenclose_suffix6</tt>, but the content to
 write is taken from a
 <a href="siovec.html">scatter/gather array</a> of <em>vlen</em>
 elements instead of a single string.
 </p>
 
 <p>
-<code> int openwritevnclose_suffix (char const *file, struct iovec const *v, unsigned int vlen, char const *suffix) <br />
-int openwritevnclose_suffix_sync (char const *file, struct iovec const *v, unsigned int vlen, char const *suffix) <br />
-int openwritevnclose_suffix_devino (char const *file, struct iovec const *v, unsigned int vlen, char const *suffix, dev_t *dev, ino_t *ino) <br />
-int openwritevnclose_suffix_devino_sync (char const *file, struct iovec const *v, unsigned int vlen, char const *suffix, dev_t *dev, ino_t *ino) </code> <br />
-Trivial wrappers around <tt>openwritevnclose_suffix_internal()</tt>.
+<code> int openwritevnclose_suffix (char const *file, struct iovec const *v, unsigned int vlen, char const *suffix) <br>
+int openwritevnclose_suffix_sync (char const *file, struct iovec const *v, unsigned int vlen, char const *suffix) </code> <br>
+Trivial wrappers around <tt>openwritevnclose_suffix6()</tt>.
 </p>
 
 <h3> Filesystem deletion </h3>
