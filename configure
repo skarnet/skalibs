@@ -597,10 +597,11 @@ fi
 echo "$socket_lib" > $sysdeps/socket.lib
 
 trylibs clockrt sysclock 'clock_gettime()' -lrt
-choose cl clockmon CLOCK_MONOTONIC `cat "${sysdeps}/sysclock.lib"`
-choose cl clockboot CLOCK_BOOTTIME `cat "${sysdeps}/sysclock.lib"`
+choose cl clockmon CLOCK_MONOTONIC $sysclock_lib
+choose cl clockboot CLOCK_BOOTTIME $sysclock_lib
 trylibs posixspawn spawn 'posix_spawn()' -lrt
 trylibs timer timer 'timer_create()' -lrt
+trylibs pthread pthread 'pthread support' -lpthread -lrt
 
 tryendianness
 trytypes
@@ -640,11 +641,11 @@ choose cl explicit_bzero 'explicit_bzero()'
 choose cl getrandom 'getrandom()'
 choose cl grndinsecure 'GRND_INSECURE'
 choose cl chroot 'chroot()'
-choose cl posixspawnsetsid 'POSIX_SPAWN_SETSID' ${spawn_lib}
+choose cl posixspawnsetsid 'POSIX_SPAWN_SETSID' $spawn_lib
 
 # Here are the evil irreducible run-time sysdeps.
 choose clr devurandom '/dev/urandom'
-choose clr posixspawnearlyreturn 'posix_spawn() incorrectly returning early' ${spawn_lib}
+choose clr posixspawnearlyreturn 'posix_spawn() incorrectly returning early' $spawn_lib
 
 
 # Finally, produce config.mak and config.h
