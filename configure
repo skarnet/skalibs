@@ -642,6 +642,8 @@ choose cl getrandom 'getrandom()'
 choose cl grndinsecure 'GRND_INSECURE'
 choose cl chroot 'chroot()'
 choose cl posixspawnsetsid 'POSIX_SPAWN_SETSID' $spawn_lib
+choose cl posixspawnchdir 'posix_spawn_file_actions_addchdir()' $spawn_lib
+choose cl posixspawnchdirnp 'posix_spawn_file_actions_addchdir_np()' $spawn_lib
 
 # Here are the evil irreducible run-time sysdeps.
 choose clr devurandom '/dev/urandom'

@@ -10,10 +10,15 @@
 #define CSPAWN_FLAGS_SIGBLOCKNONE 0x0002U
 #define CSPAWN_FLAGS_SETSID 0x0004U
 
-#define CSPAWN_FA_CLOSE 0x0000U
-#define CSPAWN_FA_COPY 0x0001U
-#define CSPAWN_FA_MOVE 0x0002U
-#define CSPAWN_FA_OPEN 0x0003U
+enum cspawn_fileaction_type_e
+{
+  CSPAWN_FA_CLOSE,
+  CSPAWN_FA_COPY,
+  CSPAWN_FA_MOVE,
+  CSPAWN_FA_OPEN,
+  CSPAWN_FA_CHDIR,
+  CSPAWN_FA_FCHDIR
+} ;
 
 struct cspawn_fa_openinfo_s
 {
@@ -27,20 +32,21 @@ union cspawn_fileaction_u
 {
   int fd ;
   int fd2[2] ;
+  char const *path ;
   struct cspawn_fa_openinfo_s openinfo ;
 } ;
 
 typedef struct cspawn_fileaction_s cspawn_fileaction, *cspawn_fileaction_ref ;
 struct cspawn_fileaction_s
 {
-  uint32_t type ;
+  enum cspawn_fileaction_type_e type ;
   union cspawn_fileaction_u x ;
 } ;
 
 
  /* Generic interface for posix_spawn() with a fork()+execve() fallback */
 
-extern pid_t cspawn (char const *, char const *const *, char const *const *, uint32_t, cspawn_fileaction const *, size_t) ;
+extern pid_t cspawn (char const *, char const *const *, char const *const *, uint16_t, cspawn_fileaction const *, size_t) ;
 
 
  /* Simple spawn functions with 0 or 1 communicating fds. */

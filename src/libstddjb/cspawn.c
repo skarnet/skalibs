@@ -18,7 +18,7 @@
 
 #include <skalibs/cspawn.h>
 
-static inline void cspawn_child_exec (char const *prog, char const *const *argv, char const *const *envp, uint32_t flags, cspawn_fileaction const *fa, size_t n)
+static inline void cspawn_child_exec (char const *prog, char const *const *argv, char const *const *envp, uint16_t flags, cspawn_fileaction const *fa, size_t n)
 {
   for (size_t i = 0 ; i < n ; i++)
   {
@@ -38,6 +38,12 @@ static inline void cspawn_child_exec (char const *prog, char const *const *argv,
         if (fd_move(fa[i].x.openinfo.fd, fd) == -1) return ;
         break ;
       }
+      case CSPAWN_FA_CHDIR :
+        if (chdir(fa[i].x.path) == -1) return ;
+        break ;
+      case CSPAWN_FA_FCHDIR :
+        if (fchdir(fa[i].x.fd) == -1) return ;
+        break ;
       default :
         errno = EINVAL ; return ;
     }
@@ -50,7 +56,7 @@ static inline void cspawn_child_exec (char const *prog, char const *const *argv,
   exec_ae(prog, argv, envp) ;
 }
 
-static inline pid_t cspawn_fork (char const *prog, char const *const *argv, char const *const *envp, uint32_t flags, cspawn_fileaction const *fa, size_t n)
+static inline pid_t cspawn_fork (char const *prog, char const *const *argv, char const *const *envp, uint16_t flags, cspawn_fileaction const *fa, size_t n)
 {
   pid_t pid ;
   int p[2] ;
@@ -131,7 +137,7 @@ static inline pid_t cspawn_workaround (pid_t pid, int const *p)
 
 #endif
 
-static inline pid_t cspawn_pspawn (char const *prog, char const *const *argv, char const *const *envp, uint32_t flags, cspawn_fileaction const *fa, size_t n)
+static inline pid_t cspawn_pspawn (char const *prog, char const *const *argv, char const *const *envp, uint16_t flags, cspawn_fileaction const *fa, size_t n)
 {
   pid_t pid ;
   posix_spawnattr_t attr ;
@@ -192,6 +198,27 @@ static inline pid_t cspawn_pspawn (char const *prog, char const *const *argv, ch
           e = posix_spawn_file_actions_addopen(&actions, fa[i].x.openinfo.fd, fa[i].x.openinfo.file, fa[i].x.openinfo.oflag, fa[i].x.openinfo.mode) ;
           if (e) goto erractions ;
           break ;
+#ifdef SKALIBS_HASPOSIXSPAWNCHDIR
+        case CSPAWN_FA_CHDIR :
+          e = posix_spawn_file_actions_addchdir(&actions, fa[i].x.path) ;
+          if (e) goto erractions ;
+          break ;
+        case CSPAWN_FA_FCHDIR :
+          e = posix_spawn_file_actions_addfchdir(&actions, fa[i].x.fd) ;
+          if (e) goto erractions ;
+          break ;
+#else
+#ifdef SKALIBS_HASPOSIXSPAWNCHDIRNP
+        case CSPAWN_FA_CHDIR :
+          e = posix_spawn_file_actions_addchdir_np(&actions, fa[i].x.path) ;
+          if (e) goto erractions ;
+          break ;
+        case CSPAWN_FA_FCHDIR :
+          e = posix_spawn_file_actions_addfchdir_np(&actions, fa[i].x.fd) ;
+          if (e) goto erractions ;
+          break ;
+#endif
+#endif
         default :
           e = EINVAL ;
           goto erractions ;
@@ -225,25 +252,36 @@ static inline pid_t cspawn_pspawn (char const *prog, char const *const *argv, ch
   return 0 ;
 }
 
-#ifdef SKALIBS_HASPOSIXSPAWNSETSID
+#if defined(SKALIBS_HASPOSIXSPAWNSETSID) && (defined(SKALIBS_HASPOSIXSPAWNCHDIR) || defined(SKALIBS_HASPOSIXSPAWNCHDIRNP))
 
-pid_t cspawn (char const *prog, char const *const *argv, char const *const *envp, uint32_t flags, cspawn_fileaction const *fa, size_t n)
+pid_t cspawn (char const *prog, char const *const *argv, char const *const *envp, uint16_t flags, cspawn_fileaction const *fa, size_t n)
 {
   return cspawn_pspawn(prog, argv, envp, flags, fa, n) ;
 }
 
 #else
 
-pid_t cspawn (char const *prog, char const *const *argv, char const *const *envp, uint32_t flags, cspawn_fileaction const *fa, size_t n)
+pid_t cspawn (char const *prog, char const *const *argv, char const *const *envp, uint16_t flags, cspawn_fileaction const *fa, size_t n)
 {
-  return flags & CSPAWN_FLAGS_SETSID ? cspawn_fork(prog, argv, envp, flags, fa, n) : cspawn_pspawn(prog, argv, envp, flags, fa, n) ;
+#if !defined(SKALIBS_HASPOSIXSPAWNSETSID)
+  if (flags & CSPAWN_FLAGS_SETSID) goto dofork ;
+#endif
+#if !defined(SKALIBS_HASPOSIXSPAWNCHDIR) && !defined(SKALIBS_HASPOSIXSPAWNCHDIRNP)
+  for (size_t i = 0 ; i < n ; i++)
+    if (fa[i].type == CSPAWN_FA_CHDIR || fa[i].type == CSPAWN_FA_FCHDIR)
+      goto dofork ;
+#endif
+  return cspawn_pspawn(prog, argv, envp, flags, fa, n) ;
+
+ dofork:
+  return cspawn_fork(prog, argv, envp, flags, fa, n) ;
 }
 
 #endif
 
 #else
 
-pid_t cspawn (char const *prog, char const *const *argv, char const *const *envp, uint32_t flags, cspawn_fileaction const *fa, size_t n)
+pid_t cspawn (char const *prog, char const *const *argv, char const *const *envp, uint16_t flags, cspawn_fileaction const *fa, size_t n)
 {
   return cspawn_fork(prog, argv, envp, flags, fa, n) ;
 }
