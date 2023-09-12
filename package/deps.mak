@@ -32,7 +32,7 @@ src/include/skalibs/iopause.h: src/include/skalibs/tai.h
 src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr.h
 src/include/skalibs/netstring.h: src/include/skalibs/buffer.h src/include/skalibs/stralloc.h
-src/include/skalibs/posixishard.h: src/include/skalibs/gccattributes.h
+src/include/skalibs/posixishard.h: src/include/skalibs/gccattributes.h src/include/skalibs/stat.h
 src/include/skalibs/posixplz.h: src/include/skalibs/functypes.h src/include/skalibs/gccattributes.h
 src/include/skalibs/random.h: src/include/skalibs/functypes.h src/include/skalibs/stralloc.h
 src/include/skalibs/setgroups.h: src/include/skalibs/sysdeps.h
