@@ -10,6 +10,9 @@
 #include <skalibs/tai.h>
 
 
+extern int timespec_cmp (struct timespec const *, struct timespec const *) ;
+
+
 /* UTC <--> TAI conversions */
 /* sysclock can be either TAI-10 or UTC */
 

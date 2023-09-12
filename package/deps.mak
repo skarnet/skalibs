@@ -639,6 +639,7 @@ src/libstddjb/tain_zero.o src/libstddjb/tain_zero.lo: src/libstddjb/tain_zero.c 
 src/libstddjb/time_from_tai.o src/libstddjb/time_from_tai.lo: src/libstddjb/time_from_tai.c src/include/skalibs/bsdsnowflake.h src/include/skalibs/sysdeps.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/time_from_tai_relative.o src/libstddjb/time_from_tai_relative.lo: src/libstddjb/time_from_tai_relative.c src/include/skalibs/bsdsnowflake.h src/include/skalibs/sysdeps.h src/include/skalibs/tai.h
 src/libstddjb/time_sysclock_from_tai.o src/libstddjb/time_sysclock_from_tai.lo: src/libstddjb/time_sysclock_from_tai.c src/include/skalibs/bsdsnowflake.h src/include/skalibs/sysdeps.h src/include/skalibs/tai.h src/include/skalibs/uint64.h
+src/libstddjb/timespec_cmp.o src/libstddjb/timespec_cmp.lo: src/libstddjb/timespec_cmp.c src/include/skalibs/djbtime.h
 src/libstddjb/timespec_from_tain.o src/libstddjb/timespec_from_tain.lo: src/libstddjb/timespec_from_tain.c src/include/skalibs/tai.h
 src/libstddjb/timespec_from_tain_relative.o src/libstddjb/timespec_from_tain_relative.lo: src/libstddjb/timespec_from_tain_relative.c src/include/skalibs/tai.h
 src/libstddjb/timespec_sysclock_from_tain.o src/libstddjb/timespec_sysclock_from_tain.lo: src/libstddjb/timespec_sysclock_from_tain.c src/include/skalibs/tai.h
