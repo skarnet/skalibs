@@ -9,6 +9,7 @@
 #include <sys/socket.h>
 
 #include <skalibs/gccattributes.h>
+#include <skalibs/stat.h>
 
  /*
     This header must be used with some broken OSes who have
