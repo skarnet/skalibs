@@ -7,8 +7,7 @@
 
 it: all
 
-$(shell test -r config.mak)
-ifneq ($(.SHELLSTATUS),0)
+ifeq ($(realpath config.mak),)
 $(error Missing config.mak; please use ./configure first)
 endif
 
