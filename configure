@@ -627,6 +627,8 @@ choose cl setgroups 'setgroups()'
 choose cl settimeofday 'settimeofday()'
 choose cl signalfd 'signalfd()'
 choose cl splice 'splice()'
+choose c statim 'st.st_atim'
+choose c statimespec 'st.st_atimespec'
 choose cl strcasestr 'strcasestr()'
 choose c strnlen 'strnlen()'
 choose c uint64t 'uint64_t'
@@ -649,7 +651,7 @@ choose cl posixspawnchdirnp 'posix_spawn_file_actions_addchdir_np()' $spawn_lib
 
 # Here are the evil irreducible run-time sysdeps.
 choose clr devurandom '/dev/urandom'
-choose clr posixspawnearlyreturn 'posix_spawn() incorrectly returning early' $spawn_lib
+choose clr posixspawnearlyreturn 'posix_spawn() return early' $spawn_lib
 
 
 # Finally, produce config.mak and config.h
