@@ -3,29 +3,22 @@
 #ifndef SKALIBS_STAT_H
 #define SKALIBS_STAT_H
 
+ /*
+    This header must always be paired with skalibs/nonposix.h
+    (which must always come first).
+    If you #include <sys/stat.h> before this, it will not work.
+ */
+
 #include <skalibs/sysdeps.h>
 
-#ifdef SKALIBS_HASSTATIM
+#include <sys/stat.h>
 
-#define ST_ATIM st_atim
-#define ST_MTIM st_mtim
-#define ST_CTIM st_ctim
+#if !defined(SKALIBS_HASSTATIM) && defined(SKALIBS_HASSTATIMESPEC)
 
-#else
+#define st_atim st_atimespec
+#define st_mtim st_mtimespec
+#define st_ctim st_ctimespec
 
-#ifdef SKALIBS_HASSTATIMESPEC
-
-#define ST_ATIM st_atimespec
-#define ST_MTIM st_mtimespec
-#define ST_CTIM st_ctimespec
-
-#else
-
-#define ST_ATIM st_how_the_fuck_do_you_even_get_atime_on_this_OS
-#define ST_MTIM st_how_the_fuck_do_you_even_get_mtime_on_this_OS
-#define ST_CTIM st_how_the_fuck_do_you_even_get_ctime_on_this_OS
-
-#endif
 #endif
 
 #endif
