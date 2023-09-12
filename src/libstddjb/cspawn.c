@@ -96,7 +96,12 @@ static inline pid_t cspawn_fork (char const *prog, char const *const *argv, char
   return pid ;
 }
 
-#ifdef SKALIBS_HASPOSIXSPAWN
+ /*
+    guess who has a buggy posix_spawn() *and* doesn't have waitid() to work around it?
+    if you guessed OpenBSD, you're right!
+ */
+
+#if defined(SKALIBS_HASPOSIXSPAWN) && (!defined(SKALIBS_HASPOSIXSPAWNEARLYRETURN) || defined(SKALIBS_HASWAITID))
 
 #include <signal.h>
 #include <stdlib.h>
