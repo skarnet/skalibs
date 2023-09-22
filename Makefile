@@ -78,8 +78,8 @@ ifneq ($(strip $(SHARED_LIBS)),)
 	exec $(STRIP) -R .note -R .comment $(SHARED_LIBS)
 endif
 
-install: install-data install-sysdeps install-dynlib install-lib install-include
-install-data: $(ALL_DATA:src/etc/%=$(DESTDIR)$(datadir)/%)
+install: install-sysconf install-sysdeps install-dynlib install-lib install-include
+install-sysconf: $(ALL_DATA:src/etc/%=$(DESTDIR)$(sysconfdir)/%)
 install-sysdeps: $(ALL_SYSDEPS:$(sysdeps)/%=$(DESTDIR)$(sysdepdir)/%)
 install-dynlib: $(SHARED_LIBS:lib%.so.xyzzy=$(DESTDIR)$(dynlibdir)/lib%.so)
 install-lib: $(STATIC_LIBS:lib%.a.xyzzy=$(DESTDIR)$(libdir)/lib%.a)
@@ -101,7 +101,7 @@ $(DESTDIR)$(sproot)/library.so/lib%.so.$(version_M): $(DESTDIR)$(dynlibdir)/lib%
 
 endif
 
-$(DESTDIR)$(datadir)/%: src/etc/%
+$(DESTDIR)$(sysconfdir)/%: src/etc/%
 	exec $(INSTALL) -D -m 644 $< $@
 
 $(DESTDIR)$(sysdepdir)/%: $(sysdeps)/%

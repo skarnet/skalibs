@@ -22,7 +22,7 @@ Fine tuning of the installation directories:
   --dynlibdir=DIR               shared library files [PREFIX/lib]
   --libdir=DIR                  static library files [PREFIX/lib/$package]
   --includedir=DIR              include files for the C compiler [PREFIX/include]
-  --datadir=DIR                 global configuration files [PREFIX/etc]
+  --sysconfdir=DIR              global configuration files [PREFIX/etc]
   --sysdepdir=DIR               sysdeps directory [PREFIX/lib/$package/sysdeps]
 
  If no --prefix option is given, by default libdir will be /usr/lib/$package,
@@ -354,7 +354,7 @@ prefix=
 dynlibdir='$prefix/lib'
 libdir='$prefix/lib/$package'
 includedir='$prefix/include'
-datadir='$prefix/etc'
+sysconfdir='$prefix/etc'
 sysdepdir='$prefix/lib/$package/sysdeps'
 sysdeplist=
 shared=true
@@ -385,7 +385,7 @@ for arg ; do
     --dynlibdir=*) dynlibdir=${arg#*=} ;;
     --libdir=*) libdir=${arg#*=} ;;
     --includedir=*) includedir=${arg#*=} ;;
-    --datadir=*) datadir=${arg#*=} ;;
+    --sysconfdir=*) sysconfdir=${arg#*=} ;;
     --sysdepdir=*) sysdepdir=${arg#*=} ;;
     --with-include=*) var=${arg#*=} ; stripdir var ; addincpath="$addincpath -I$var" ;;
     --with-lib=*) var=${arg#*=} ; stripdir var ; addlibspath="$addlibspath -L$var" ; vpaths="$vpaths $var" ;;
@@ -435,7 +435,7 @@ fi
 
 # Expand installation directories
 stripdir prefix
-for i in exec_prefix dynlibdir libdir includedir datadir sysdepdir sysdepspre sproot ; do
+for i in exec_prefix dynlibdir libdir includedir sysconfdir sysdepdir sysdepspre sproot ; do
   eval tmp=\${$i}
   eval $i=$tmp
   stripdir $i
@@ -669,7 +669,7 @@ cat << EOF
 target := $target
 package := $package
 prefix := $prefix
-datadir := $datadir
+sysconfdir := $sysconfdir
 sysdepdir := $sysdepdir
 dynlibdir := $dynlibdir
 libdir := $libdir
@@ -735,7 +735,7 @@ cat <<EOF
 
 #define ${package_macro_name}_VERSION "$version"
 #define ${package_macro_name}_DEFAULTPATH "$defaultpath"
-#define ${package_macro_name}_ETC "$datadir"
+#define ${package_macro_name}_ETC "$sysconfdir"
 #define ${package_macro_name}_SPROOT "$sproot"
 #define ${package_macro_name}_HOME "$home"
 EOF
