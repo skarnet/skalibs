@@ -24,6 +24,7 @@ extern char **environ ;
  */
 
 extern void *memmem (void const *, size_t, void const *, size_t) gccattr_pure ;
+extern char *strcasestr (char const *, char const *) gccattr_pure ;
 extern int getpeereid (int, uid_t *, gid_t *) ;
 
 

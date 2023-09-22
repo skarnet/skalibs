@@ -166,6 +166,7 @@ src/libposixplz/mkptemp.o src/libposixplz/mkptemp.lo: src/libposixplz/mkptemp.c 
 src/libposixplz/mkptemp2.o src/libposixplz/mkptemp2.lo: src/libposixplz/mkptemp2.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
 src/libposixplz/munmap_void.o src/libposixplz/munmap_void.lo: src/libposixplz/munmap_void.c src/include/skalibs/posixplz.h
 src/libposixplz/setgroups.o src/libposixplz/setgroups.lo: src/libposixplz/setgroups.c src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/setgroups.h src/include/skalibs/sysdeps.h
+src/libposixplz/strcasestr.o src/libposixplz/strcasestr.lo: src/libposixplz/strcasestr.c src/include/skalibs/bytestr.h src/include/skalibs/sysdeps.h
 src/libposixplz/strnlen.o src/libposixplz/strnlen.lo: src/libposixplz/strnlen.c src/include/skalibs/bytestr.h src/include/skalibs/posixishard.h src/include/skalibs/sysdeps.h
 src/libposixplz/touch.o src/libposixplz/touch.lo: src/libposixplz/touch.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h
 src/libposixplz/unlink_void.o src/libposixplz/unlink_void.lo: src/libposixplz/unlink_void.c src/include/skalibs/posixplz.h
@@ -270,7 +271,6 @@ src/libstddjb/byte_zzero.o src/libstddjb/byte_zzero.lo: src/libstddjb/byte_zzero
 src/libstddjb/case_lowerb.o src/libstddjb/case_lowerb.lo: src/libstddjb/case_lowerb.c src/include/skalibs/bytestr.h
 src/libstddjb/case_lowers.o src/libstddjb/case_lowers.lo: src/libstddjb/case_lowers.c src/include/skalibs/bytestr.h
 src/libstddjb/case_startb.o src/libstddjb/case_startb.lo: src/libstddjb/case_startb.c src/include/skalibs/bytestr.h
-src/libstddjb/case_str.o src/libstddjb/case_str.lo: src/libstddjb/case_str.c src/include/skalibs/bytestr.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
 src/libstddjb/case_upperb.o src/libstddjb/case_upperb.lo: src/libstddjb/case_upperb.c src/include/skalibs/bytestr.h
 src/libstddjb/case_uppers.o src/libstddjb/case_uppers.lo: src/libstddjb/case_uppers.c src/include/skalibs/bytestr.h
 src/libstddjb/cbuffer_get.o src/libstddjb/cbuffer_get.lo: src/libstddjb/cbuffer_get.c src/include/skalibs/cbuffer.h src/include/skalibs/siovec.h

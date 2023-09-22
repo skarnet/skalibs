@@ -10,6 +10,8 @@ In 2.14.0.0
  - New strerr macros to warn with a "fatal" message.
  - New cdb functions: cdb_hashv(), cdbmake_addv().
  - child_spawn() revamp. Prototype change (last arg is a size_t).
+ - case_lowerb() and friends now use ctype.h functions
+ - case_str() removed, strcasestr() fallback implementation added.
 
 
 In 2.13.1.1

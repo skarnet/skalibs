@@ -1,13 +1,14 @@
 /* ISC license. */
 
+#include <ctype.h>
+
 #include <skalibs/bytestr.h>
 
 void case_lowers (char *s)
 {
-  unsigned char const d = 'a' - 'A' ;
   while (*s)
   {
-    if (('A' <= *s) && (*s <= 'Z')) *s += d ;
-    ++s ;
+    int c = tolower(*s) ;
+    *s++ = (unsigned char)c ;
   }
 }
