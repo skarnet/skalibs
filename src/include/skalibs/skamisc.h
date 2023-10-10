@@ -3,7 +3,7 @@
 #ifndef SKALIBS_SKAMISC_H
 #define SKALIBS_SKAMISC_H
 
-#include <sys/types.h>
+#include <string.h>
 
 #include <skalibs/buffer.h>
 #include <skalibs/stralloc.h>
@@ -22,6 +22,7 @@ extern int getlnmaxsep (buffer *, char *, size_t, size_t *, char const *, size_t
 extern int sauniquename (stralloc *) ;
 
 extern int string_quote (stralloc *, char const *, size_t) ;
+#define string_quotes(sa, s) string_quote(sa, (s), strlen(s))
 extern int string_quote_nodelim (stralloc *, char const *, size_t) ;
 extern int string_quote_nodelim_mustquote (stralloc *, char const *, size_t, char const *, size_t) ;
 extern int string_unquote (char *, size_t *, char const *, size_t, size_t *) ;
