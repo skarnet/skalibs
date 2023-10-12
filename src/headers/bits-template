@@ -1,3 +1,4 @@
+
 extern void uint@BITS@_pack (char *, uint@BITS@_t) ;
 extern void uint@BITS@_pack_big (char *, uint@BITS@_t) ;
 extern void uint@BITS@_unpack (char const *, uint@BITS@_t *) ;

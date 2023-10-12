@@ -36,6 +36,7 @@ else
   ./crash
 fi
 
+cat "src/headers/uint${bits}-bswap"
 tools/gen-types-internal.sh "" "" "$bits" < src/headers/bits-${endian}endian
 gen_bits "$bits" "$dfmt" "$ofmt" "$xfmt" "$bfmt"
 exec tools/gen-types-internal.sh "" "" "$bits" < src/headers/bits-footer
