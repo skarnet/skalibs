@@ -33,7 +33,7 @@ int string_unquote_withdelim (char *d, size_t *w, char const *s, size_t len, siz
     { 6, 6, 4, 6, 4, 4, 6, 6, 6 },
     { 6, 6, 0, 6, 0, 0, 6, 6, 6 }
   } ;
-  unsigned char class[256] = "7777777777777777777777777777777777777777777777772555555555777777777777777777777777777777777707777445554777777767776767673777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777" ;
+  unsigned char class[256] = "7777777777777777777777777777777777777777777777772555555555777777777777777777777777777777777707777445554777777767776667673777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777" ;
   size_t i = 0 ;
   unsigned char store = 0 ;
   unsigned char state = 0 ;
@@ -50,7 +50,7 @@ int string_unquote_withdelim (char *d, size_t *w, char const *s, size_t len, siz
     state = states[state][c] ;
     if (action & PUSH0) d[(*w)++] = 0 ;
     if (action & PUSH) d[(*w)++] = s[i] ;
-    if (action & PUSHSPEC) d[(*w)++] = 7 + byte_chr("abtnvfr", 7, s[i]) ;
+    if (action & PUSHSPEC) d[(*w)++] = s[i] == 's' ? ' ' : 7 + byte_chr("abtnvfr", 7, s[i]) ;
     if (action & STORE) store = fmtscan_num(s[i], 16) << 4 ;
     if (action & CALC) d[(*w)++] = store | fmtscan_num(s[i], 16) ;
     if (action & SYNTAXERROR) errno = EPROTO ;

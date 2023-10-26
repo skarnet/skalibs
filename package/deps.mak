@@ -571,7 +571,6 @@ src/libstddjb/strerr_warnv.o src/libstddjb/strerr_warnv.lo: src/libstddjb/strerr
 src/libstddjb/strerr_warnvsys.o src/libstddjb/strerr_warnvsys.lo: src/libstddjb/strerr_warnvsys.c src/include/skalibs/buffer.h src/include/skalibs/strerr.h
 src/libstddjb/string_format.o src/libstddjb/string_format.lo: src/libstddjb/string_format.c src/include/skalibs/bytestr.h src/include/skalibs/stralloc.h
 src/libstddjb/string_quote.o src/libstddjb/string_quote.lo: src/libstddjb/string_quote.c src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
-src/libstddjb/string_quote_nodelim.o src/libstddjb/string_quote_nodelim.lo: src/libstddjb/string_quote_nodelim.c src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/string_quote_nodelim_mustquote.o src/libstddjb/string_quote_nodelim_mustquote.lo: src/libstddjb/string_quote_nodelim_mustquote.c src/include/skalibs/fmtscan.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/string_unquote.o src/libstddjb/string_unquote.lo: src/libstddjb/string_unquote.c src/include/skalibs/skamisc.h
 src/libstddjb/string_unquote_nodelim.o src/libstddjb/string_unquote_nodelim.lo: src/libstddjb/string_unquote_nodelim.c src/include/skalibs/skamisc.h
