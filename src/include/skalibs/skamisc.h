@@ -29,8 +29,8 @@ extern int string_quote_options (stralloc *, char const *, size_t, uint32_t) ;
 extern int string_quote_nodelim_mustquote_options (stralloc *, char const *, size_t, char const *, size_t, uint32_t) ;
 #define string_quote_nodelim_mustquote(sa, s, len, delim, delimlen) string_quote_nodelim_mustquote_options(sa, s, len, delim, (delimlen), 0)
 #define string_quote_nodelim_mustquote_nospace(sa, s, len, delim, delimlen) string_quote_nodelim_mustquote_options(sa, s, len, delim, (delimlen), 1)
-#define string_quote_nodelim (sa, s, len) string_quote_nodelim_mustquote(sa, s, (len), "\"", 1)
-#define string_quote_nodelim_nospace (sa, s, len) string_quote_nodelim_mustquote_nospace(sa, s, (len), "\"", 1)
+#define string_quote_nodelim(sa, s, len) string_quote_nodelim_mustquote(sa, s, (len), "\"", 1)
+#define string_quote_nodelim_nospace(sa, s, len) string_quote_nodelim_mustquote_nospace(sa, s, (len), "\"", 1)
 
 extern int string_unquote (char *, size_t *, char const *, size_t, size_t *) ;
 extern ssize_t string_unquote_nodelim (char *, char const *, size_t) ;
