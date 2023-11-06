@@ -7,16 +7,14 @@
 
 it: all
 
-ifeq ($(realpath config.mak),)
-$(error Missing config.mak; please use ./configure first)
-endif
-
 make_need := 3.81
 ifeq "" "$(strip $(filter $(make_need), $(firstword $(sort $(make_need) $(MAKE_VERSION)))))"
 $(error Your make ($(MAKE_VERSION)) is too old. You need $(make_need) or newer)
 endif
 
-include config.mak
+CC = $(error Please use ./configure first)
+
+-include config.mak
 include package/deps.mak
 
 version_m := $(basename $(version))
