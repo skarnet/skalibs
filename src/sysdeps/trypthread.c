@@ -3,8 +3,9 @@
 #include <time.h>
 #include <pthread.h>
 
-void *pstart (void *)
+void *pstart (void *arg)
 {
+  (void)arg ;
   return 0 ;
 }
 
