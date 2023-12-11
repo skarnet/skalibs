@@ -32,12 +32,8 @@ struct ip46_s
 #define socket_udp46_nbcoe(h) socket_udp4_nbcoe()
 #define socket_udp46_internal(h, flags) socket_udp4_internal(flags)
 
-#define socket_recv46(fd, s, len, i, port) socket_recv4(fd, s, len, (i)->ip, port)
 #define socket_send46(fd, s, len, i, port) socket_send4(fd, s, len, (i)->ip, port)
 #define socket_local46(fd, i, port) socket_local4(fd, (i)->ip, port)
 #define socket_remote46(fd, i, port) socket_remote4(fd, (i)->ip, port)
 
-#define socket_recvnb46(fd, buf, len, i, port, deadline, stamp) socket_recvnb4(fd, buf, len, (i)->ip, port, deadline, stamp)
-#define socket_recvnb46_g(fd, buf, len, i, port, deadline) socket_recvnb46(fd, buf, len, i, port, (deadline), &STAMP)
 #define socket_sendnb46(fd, buf, len, i, port, deadline, stamp) socket_sendnb4(fd, buf, len, (i)->ip, port, deadline, stamp)
-#define socket_sendnb46_g(fd, buf, len, i, port, deadline, stamp) socket_sendnb46(fd, buf, len, i, port, (deadline), &STAMP)

@@ -532,7 +532,9 @@ src/libstddjb/socket_local4.o src/libstddjb/socket_local4.lo: src/libstddjb/sock
 src/libstddjb/socket_local46.o src/libstddjb/socket_local46.lo: src/libstddjb/socket_local46.c src/include/skalibs/ip46.h src/include/skalibs/nonposix.h src/include/skalibs/uint16.h
 src/libstddjb/socket_local6.o src/libstddjb/socket_local6.lo: src/libstddjb/socket_local6.c src/include/skalibs/ip46.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h src/include/skalibs/uint16.h
 src/libstddjb/socket_recv4.o src/libstddjb/socket_recv4.lo: src/libstddjb/socket_recv4.c src/include/skalibs/nonposix.h src/include/skalibs/socket.h src/include/skalibs/uint16.h
+src/libstddjb/socket_recv46.o src/libstddjb/socket_recv46.lo: src/libstddjb/socket_recv46.c src/include/skalibs/ip46.h src/include/skalibs/socket.h
 src/libstddjb/socket_recv6.o src/libstddjb/socket_recv6.lo: src/libstddjb/socket_recv6.c src/include/skalibs/ip46.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h src/include/skalibs/uint16.h
+src/libstddjb/socket_recvnb46.o src/libstddjb/socket_recvnb46.lo: src/libstddjb/socket_recvnb46.c src/include/skalibs/ip46.h src/include/skalibs/socket.h
 src/libstddjb/socket_remote4.o src/libstddjb/socket_remote4.lo: src/libstddjb/socket_remote4.c src/include/skalibs/nonposix.h src/include/skalibs/socket.h src/include/skalibs/uint16.h
 src/libstddjb/socket_remote46.o src/libstddjb/socket_remote46.lo: src/libstddjb/socket_remote46.c src/include/skalibs/ip46.h src/include/skalibs/nonposix.h src/include/skalibs/uint16.h
 src/libstddjb/socket_remote6.o src/libstddjb/socket_remote6.lo: src/libstddjb/socket_remote6.c src/include/skalibs/ip46.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h src/include/skalibs/uint16.h

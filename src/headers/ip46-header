@@ -3,7 +3,7 @@
 #ifndef SKALIBS_IP46_H
 #define SKALIBS_IP46_H
 
-#include <string.h>
+#include <sys/types.h>
 #include <stdint.h>
 #include <errno.h>
 
