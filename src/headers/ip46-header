@@ -8,6 +8,7 @@
 #include <errno.h>
 
 #include <skalibs/fmtscan.h>
+#include <skalibs/tai.h>
 #include <skalibs/socket.h>
 
 #define IP46_FMT IP6_FMT

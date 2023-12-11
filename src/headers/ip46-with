@@ -34,4 +34,6 @@ extern int socket_local46 (int, ip46 *, uint16_t *) ;
 extern int socket_remote46 (int, ip46 *, uint16_t *) ;
 
 #define socket_recvnb46(fd, buf, len, i, port, deadline, stamp) ((i)->is6 ? socket_recvnb6(fd, buf, len, (i)->ip, port, deadline, stamp) : socket_recvnb4(fd, buf, len, (i)->ip, port, deadline, stamp))
+#define socket_recvnb46_g(fd, buf, len, i, port, deadline) socket_recvnb46(fd, buf, len, i, port, (deadline), &STAMP)
 #define socket_sendnb46(fd, buf, len, i, port, deadline, stamp) ((i)->is6 ? socket_sendnb6(fd, buf, len, (i)->ip, port, deadline, stamp) : socket_sendnb4(fd, buf, len, (i)->ip, port, deadline, stamp))
+#define socket_sendnb46_g(fd, buf, len, i, port, deadline) socket_sendnb46(fd, buf, len, i, port, (deadline), &STAMP)

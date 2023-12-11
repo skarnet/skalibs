@@ -148,7 +148,7 @@ src/include/$(package)/uint64.h: $(sysdeps)/sysdeps src/headers/uint64-bswap src
 src/include/$(package)/types.h: src/include/$(package)/uint16.h src/include/$(package)/uint32.h src/include/$(package)/uint64.h $(sysdeps)/sysdeps src/headers/types-header src/headers/types-footer src/headers/unsigned-template src/headers/signed-template
 	exec tools/gen-types.sh $(sysdeps)/sysdeps $(TYPES) > $@
 
-src/include/$(package)/ip46.h: src/include/$(package)/fmtscan.h src/include/$(package)/socket.h $(sysdeps)/sysdeps src/headers/ip46-header src/headers/ip46-footer src/headers/ip46-with src/headers/ip46-without
+src/include/$(package)/ip46.h: src/include/$(package)/fmtscan.h src/include/$(package)/tai.h src/include/$(package)/socket.h $(sysdeps)/sysdeps src/headers/ip46-header src/headers/ip46-footer src/headers/ip46-with src/headers/ip46-without
 	@{ \
 	  cat src/headers/ip46-header ; \
 	  if $(ipv6) && grep -qF 'ipv6: yes' $(sysdeps)/sysdeps ; then cat src/headers/ip46-with ; \
