@@ -23,12 +23,11 @@
 #endif
 
 #ifdef _AIX
-#define __cplusplus  /* don't ask */
+extern int getpeereid (int, uid_t *, gid_t *) ;
 #endif
 
 #include <sys/types.h>
 #include <unistd.h>
-#include <sys/socket.h>
 
 int main (void)
 {
