@@ -10,7 +10,7 @@ getbits() {
 cat < src/headers/types-header
 
 for i in short int long ; do
-  I=$(echo "$i" | tr a-z A-Z)
+  I=$(echo "$i" | tr '[:lower:]' '[:upper:]')
   bits=$(getbits "$sysdeps" u$i)
   tools/gen-types-internal.sh u$i U$I $bits < src/headers/unsigned-template
   tools/gen-types-internal.sh $i $I $bits < src/headers/signed-template
@@ -18,7 +18,7 @@ done
 
 for i ; do
   un=un
-  I=$(echo "$i" | tr a-z A-Z)
+  I=$(echo "$i" | tr '[:lower:]' '[:upper:]')
   bits=$(getbits "$sysdeps" $i)
   if grep -qF "signed$i: yes" < "$sysdeps" ; then
     un=

@@ -12,7 +12,7 @@ cat <<EOF
 EOF
 
 while read k v ; do
-  k=$(echo "${k%%:}" | tr a-z A-Z)
+  k=$(echo "${k%%:}" | tr '[:lower:]' '[:upper:]')
   if test ${k} != ${k##SIGNED} ; then
     echo "#undef SKALIBS_HASUN$k"
     echo "#undef SKALIBS_HAS$k"
