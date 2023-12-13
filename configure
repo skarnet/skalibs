@@ -196,7 +196,7 @@ trybasic () {
 tryendianness () {
   echo "Checking endianness..."
   if iscached endianness ; then return ; fi
-  for i in endian.h sys/endian.h machine/endian.h ; do
+  for i in endian.h sys/endian.h machine/endian.h sys/machine.h ; do
     cat > "$tmpc" <<EOF
 #undef _POSIX_C_SOURCE
 #undef _XOPEN_SOURCE
