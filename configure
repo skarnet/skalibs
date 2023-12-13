@@ -196,7 +196,7 @@ trybasic () {
 tryendianness () {
   echo "Checking endianness..."
   if iscached endianness ; then return ; fi
-  for i in endian.h sys/endian.h machine/endian.h arpa/nameser_compat.h ; do
+  for i in endian.h sys/endian.h machine/endian.h ; do
     cat > "$tmpc" <<EOF
 #undef _POSIX_C_SOURCE
 #undef _XOPEN_SOURCE
@@ -216,7 +216,7 @@ int c = BYTE_ORDER ;
 EOF
     trybasic "$tmpc" || continue
     for j in little big pdp ; do
-      k=`echo $j | tr a-z A-Z`
+      k=`echo $j | tr '[:lower:]' '[:upper:]'`
       cat > "$tmpc" <<EOF
 #undef _POSIX_C_SOURCE
 #undef _XOPEN_SOURCE
@@ -241,6 +241,20 @@ EOF
     done
     rm -f "$tmpc"
     fail "$0: error: unable to determine endianness according to $i"
+  done
+
+  for j in little big ; do
+    k=`echo $j | tr '[:lower:]' '[:upper:]'`
+    cat > "$tmpc" <<EOF
+#include <sys/isa_defs.h>
+int a = _${k}_ENDIAN ;
+EOF
+    if trybasic "$tmpc" ; then
+      echo "endianness: $j" >> "$sysdeps/sysdeps"
+      echo "  ... $j"
+      rm -f "$tmpc"
+      return
+    fi
   done
   rm -f "$tmpc"
   fail "$0: error: unable to determine endianness: no suitable endian.h found"
