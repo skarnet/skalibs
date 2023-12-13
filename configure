@@ -247,7 +247,7 @@ EOF
     k=`echo $j | tr '[:lower:]' '[:upper:]'`
     cat > "$tmpc" <<EOF
 #include <sys/isa_defs.h>
-int a = _${k}_ENDIAN ;
+int a = _${k}_ENDIAN +1 ;
 EOF
     if trybasic "$tmpc" ; then
       echo "endianness: $j" >> "$sysdeps/sysdeps"
