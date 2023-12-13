@@ -2,9 +2,9 @@
 
 #include <skalibs/bsdsnowflake.h>
 
+#include <stdint.h>
 #include <sys/stat.h>
 #include <sys/mman.h>
-#include <stdint.h>
 #include <errno.h>
 
 #include <skalibs/cdb.h>
