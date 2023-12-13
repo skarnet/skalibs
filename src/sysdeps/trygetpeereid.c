@@ -18,9 +18,17 @@
 #ifndef _INCOMPLETE_XOPEN_C063
 #define _INCOMPLETE_XOPEN_C063
 #endif
+#ifndef _ALL_SOURCE
+#define _ALL_SOURCE
+#endif
+
+#ifdef _AIX
+#define __cplusplus  /* don't ask */
+#endif
 
 #include <sys/types.h>
 #include <unistd.h>
+#include <sys/socket.h>
 
 int main (void)
 {
