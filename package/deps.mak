@@ -170,7 +170,8 @@ src/libposixplz/strcasestr.o src/libposixplz/strcasestr.lo: src/libposixplz/strc
 src/libposixplz/strnlen.o src/libposixplz/strnlen.lo: src/libposixplz/strnlen.c src/include/skalibs/bytestr.h src/include/skalibs/posixishard.h src/include/skalibs/sysdeps.h
 src/libposixplz/touch.o src/libposixplz/touch.lo: src/libposixplz/touch.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h
 src/libposixplz/unlink_void.o src/libposixplz/unlink_void.lo: src/libposixplz/unlink_void.c src/include/skalibs/posixplz.h
-src/librandom/autosurf.o src/librandom/autosurf.lo: src/librandom/autosurf.c src/include/skalibs/random.h src/include/skalibs/sha1.h src/include/skalibs/surf.h src/include/skalibs/tai.h src/include/skalibs/uint32.h
+src/librandom/autosurf.o src/librandom/autosurf.lo: src/librandom/autosurf.c src/include/skalibs/sha1.h src/include/skalibs/surf.h src/include/skalibs/tai.h src/include/skalibs/uint32.h
+src/librandom/autosurf_name.o src/librandom/autosurf_name.lo: src/librandom/autosurf_name.c src/include/skalibs/random.h src/include/skalibs/surf.h
 src/librandom/random_buf.o src/librandom/random_buf.lo: src/librandom/random_buf.c src/include/skalibs/nonposix.h src/include/skalibs/random.h src/include/skalibs/surf.h src/include/skalibs/sysdeps.h
 src/librandom/random_buf_early.o src/librandom/random_buf_early.lo: src/librandom/random_buf_early.c src/include/skalibs/nonposix.h src/include/skalibs/random.h src/include/skalibs/surf.h src/include/skalibs/sysdeps.h
 src/librandom/random_devurandom.o src/librandom/random_devurandom.lo: src/librandom/random_devurandom.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/random.h src/include/skalibs/strerr.h

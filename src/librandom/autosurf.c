@@ -6,7 +6,6 @@
 #include <skalibs/uint32.h>
 #include <skalibs/tai.h>
 #include <skalibs/sha1.h>
-#include <skalibs/random.h>
 #include <skalibs/surf.h>
 
 /*
