@@ -12,7 +12,7 @@ size_t siovec_gather (struct iovec const *v, unsigned int n, char *s, size_t max
   {
     size_t len = v[i].iov_len ;
     if (len > max - w) len = max - w ;
-    memmove(s + w, v[i].iov_base, len) ;
+    if (len) memmove(s + w, v[i].iov_base, len) ;
     w += len ;
   }
   return w ;
