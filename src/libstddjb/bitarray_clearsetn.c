@@ -18,7 +18,10 @@ void bitarray_clearsetn (unsigned char *s, size_t a, size_t b, int h)
     if (h) s[a>>3] |= mask ; else s[a>>3] &= ~mask ;
     mask = h ? 0xff : 0x00 ;
     for (; i < b>>3 ; i++) s[i] = mask ;
-    mask = (1 << (b & 7)) - 1 ;
-    if (h) s[b>>3] |= mask ; else s[b>>3] &= ~mask ;
+    if (b & 7)
+    {
+      mask = (1 << (b & 7)) - 1 ;
+      if (h) s[b>>3] |= mask ; else s[b>>3] &= ~mask ;
+    }
   }
 }
