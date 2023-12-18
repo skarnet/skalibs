@@ -239,7 +239,7 @@ static inline pid_t cspawn_pspawn (char const *prog, char const *const *argv, ch
   if (nopath && (setenv("PATH", SKALIBS_DEFAULTPATH, 0) == -1)) { e = errno ; goto erractions ; }
   e = posix_spawnp(&pid, prog, n ? &actions : 0, flags ? &attr : 0, (char *const *)argv, (char *const *)envp) ;
   if (nopath) unsetenv("PATH") ;
-  if (e) goto errattr ;
+  if (e) goto erractions ;
 
   if (n) posix_spawn_file_actions_destroy(&actions) ;
   if (flags) posix_spawnattr_destroy(&attr) ;
