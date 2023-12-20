@@ -29,7 +29,7 @@ pid_t child_spawn3 (char const *prog, char const *const *argv, char const *const
     char const *newenv[envlen + 2] ;
     m += uint_fmt(modifs + sizeof(SKALIBS_CHILD_SPAWN_FDS_ENVVAR), p[2][1]) ;
     modifs[m++] = 0 ;
-    if (!env_mergen(newenv, envlen + 2, envp, envlen, modifs, m, 1)) goto err ;
+    env_mergen(newenv, envlen + 2, envp, envlen, modifs, m, 1) ;
     pid = cspawn(prog, argv, newenv, CSPAWN_FLAGS_SIGBLOCKNONE, fa, 2) ;
     if (!pid) goto err ;
   }

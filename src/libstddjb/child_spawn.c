@@ -36,7 +36,7 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
     if (i+1 < n) modifs[m++] = ',' ;
   }
   modifs[m++] = 0 ;
-  if (!env_mergen(newenv, envlen + 2, envp, envlen, modifs, m, 1)) goto errpi ;
+  env_mergen(newenv, envlen + 2, envp, envlen, modifs, m, 1) ;
   if (n) fa[0].x.fd2[1] = p[0][1] ;
   if (n >= 2) fa[1].x.fd2[1] = p[1][0] ;
   pid = cspawn(prog, argv, newenv, CSPAWN_FLAGS_SIGBLOCKNONE, fa, n < 2 ? n : 2) ;
