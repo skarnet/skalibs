@@ -4,6 +4,7 @@ In 2.14.1.0
 -----------
 
  - Bugfixes.
+ - Portability improvements.
  - New socket_sendnb46_g() and socket_recvnb46_g() macros.
 
 
