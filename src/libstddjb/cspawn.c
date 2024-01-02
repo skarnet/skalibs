@@ -7,7 +7,6 @@
 #endif
 
 #include <errno.h>
-#include <fcntl.h>
 #include <unistd.h>
 
 #include <skalibs/allreadwrite.h>
@@ -15,7 +14,6 @@
 #include <skalibs/djbunix.h>
 #include <skalibs/selfpipe.h>
 #include <skalibs/exec.h>
-
 #include <skalibs/cspawn.h>
 
 static inline void cspawn_child_exec (char const *prog, char const *const *argv, char const *const *envp, uint16_t flags, cspawn_fileaction const *fa, size_t n)
@@ -34,7 +32,7 @@ static inline void cspawn_child_exec (char const *prog, char const *const *argv,
         break ;
       case CSPAWN_FA_OPEN :
       {
-        int fd = open(fa[i].x.openinfo.file, fa[i].x.openinfo.oflag, fa[i].x.openinfo.mode) ;
+        int fd = open3(fa[i].x.openinfo.file, fa[i].x.openinfo.oflag, fa[i].x.openinfo.mode) ;
         if (fd == -1) return ;
         if (fd_move(fa[i].x.openinfo.fd, fd) == -1) return ;
         break ;
