@@ -583,7 +583,6 @@ tryflag CPPFLAGS_AUTO -Wno-unused-value
 tryflag CPPFLAGS_AUTO -Wno-parentheses
 tryflag CFLAGS_AUTO -ffunction-sections
 tryflag CFLAGS_AUTO -fdata-sections
-tryldflag LDFLAGS_SHARED -nostartfiles
 tryldflag LDFLAGS_AUTO -Wl,--as-needed
 tryldflag LDFLAGS_AUTO -Wl,--sort-section=alignment
 tryldflag LDFLAGS_AUTO -Wl,--sort-common

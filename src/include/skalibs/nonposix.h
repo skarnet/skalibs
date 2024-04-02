@@ -34,7 +34,7 @@
 #endif /* sun || __sun */
 
 
-#if defined(__linux__) || defined(__GNU__)
+#if defined(__linux__) || defined(__GNU__) || defined(__midipix__)
 
  /* GNU (Linux or Hurd): most extensions are unavailable unless
     you enable _GNU_SOURCE. Some Linux interfaces are also
