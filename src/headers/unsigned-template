@@ -29,9 +29,9 @@
 
 #define @type@_fmtlist uint@BITS@_fmtlist
 
-#define @type@_scan_base uint@BITS@_scan_base
-#define @type@0_scan_base uint@BITS@0_scan_base
-#define @type@_scanlist uint@BITS@_scanlist
+#define @type@_scan_base(s, u, b) uint@BITS@_scan_base(s, (uint@BITS@_t *)u, b)
+#define @type@0_scan_base(s, u, b) uint@BITS@0_scan_base(s, (uint@BITS@_t *)u, b)
+#define @type@_scanlist(tab, max, s, num) uint@BITS@_scanlist((uint@BITS@_t *)tab, max, s, num)
 
 #define @type@_scan(s, u) @type@_scan_base(s, (u), 10)
 #define @type@0_scan(s, u) @type@0_scan_base(s, (u), 10)

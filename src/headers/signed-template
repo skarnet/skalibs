@@ -7,8 +7,8 @@
 #define @TYPE@_FMT (1+UINT@BITS@_FMT)
 #define @type@_fmt int@BITS@_fmt
 #define @type@_fmtlist int@BITS@_fmtlist
-#define @type@_scan int@BITS@_scan
-#define @type@0_scan int@BITS@0_scan
-#define @type@_scanlist int@BITS@_scanlist
+#define @type@_scan(s, d, b) int@BITS@_scan(s, (int@BITS@_t *)d, b)
+#define @type@0_scan(s, d, b) int@BITS@0_scan(s, (int@BITS@_t *)d, b)
+#define @type@_scanlist(tab, max, s, num) int@BITS@_scanlist((int@BITS@_t *)tab, max, s, num)
 
 
