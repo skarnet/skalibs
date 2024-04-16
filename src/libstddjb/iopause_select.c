@@ -1,9 +1,12 @@
 /* ISC license. */
 
 #include <skalibs/bsdsnowflake.h>
+
 #include <string.h>  /* Solaris... */
 #include <errno.h>
+#include <sys/time.h>  /* MacOS... */
 #include <sys/select.h>
+
 #include <skalibs/tai.h>
 #include <skalibs/iopause.h>
 

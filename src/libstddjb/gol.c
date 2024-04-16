@@ -38,7 +38,7 @@ int gol (char const *const *argv, unsigned int argc, gol_bool const *b, unsigned
         for (; j < an ; j++) if (*p == a[j].so) break ;
         if (j < an)
         {
-          if (p[1]) ar[a[j].i] == p + 1 ;
+          if (p[1]) ar[a[j].i] = p + 1 ;
           else if (i+1 < argc && strcmp(argv[i+1], "--")) ar[a[j].i] = argv[++i] ;
           break ;
         }
