@@ -1,7 +1,5 @@
 /* ISC license. */
 
-#include <skalibs/nonposix.h>  /* lol MacOS */
-
 #include <unistd.h>
 #include <errno.h>
 

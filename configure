@@ -621,6 +621,7 @@ trytypes
 choose cl accept4 'accept4()'
 choose c cmsgcloexec 'MSG_CMSG_CLOEXEC'
 choose cl dirfd 'dirfd()'
+choose cl fdopendir 'fdopendir()'
 choose cl eventfd 'eventfd()'
 choose cl flock 'flock()'
 choose cl getpeereid 'getpeereid()'

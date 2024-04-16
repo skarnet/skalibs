@@ -337,7 +337,7 @@ src/libstddjb/fd_readv.o src/libstddjb/fd_readv.lo: src/libstddjb/fd_readv.c src
 src/libstddjb/fd_recv.o src/libstddjb/fd_recv.lo: src/libstddjb/fd_recv.c src/include/skalibs/allreadwrite.h
 src/libstddjb/fd_send.o src/libstddjb/fd_send.lo: src/libstddjb/fd_send.c src/include/skalibs/allreadwrite.h
 src/libstddjb/fd_shutdown.o src/libstddjb/fd_shutdown.lo: src/libstddjb/fd_shutdown.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h
-src/libstddjb/fd_sync.o src/libstddjb/fd_sync.lo: src/libstddjb/fd_sync.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h
+src/libstddjb/fd_sync.o src/libstddjb/fd_sync.lo: src/libstddjb/fd_sync.c src/include/skalibs/djbunix.h
 src/libstddjb/fd_unlock.o src/libstddjb/fd_unlock.lo: src/libstddjb/fd_unlock.c src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h
 src/libstddjb/fd_write.o src/libstddjb/fd_write.lo: src/libstddjb/fd_write.c src/include/skalibs/allreadwrite.h
 src/libstddjb/fd_writev.o src/libstddjb/fd_writev.lo: src/libstddjb/fd_writev.c src/include/skalibs/allreadwrite.h
@@ -756,7 +756,7 @@ src/libunixonacid/openc_truncat.o src/libunixonacid/openc_truncat.lo: src/libuni
 src/libunixonacid/openc_truncatb.o src/libunixonacid/openc_truncatb.lo: src/libunixonacid/openc_truncatb.c src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/openc_writeat.o src/libunixonacid/openc_writeat.lo: src/libunixonacid/openc_writeat.c src/include/skalibs/fcntl.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/openc_writeatb.o src/libunixonacid/openc_writeatb.lo: src/libunixonacid/openc_writeatb.c src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
-src/libunixonacid/opendir_at.o src/libunixonacid/opendir_at.lo: src/libunixonacid/opendir_at.c src/include/skalibs/direntry.h src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/unix-transactional.h
+src/libunixonacid/opendir_at.o src/libunixonacid/opendir_at.lo: src/libunixonacid/opendir_at.c src/include/skalibs/direntry.h src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/opengetlnclose.o src/libunixonacid/opengetlnclose.lo: src/libunixonacid/opengetlnclose.c src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/opengetlnclose_at.o src/libunixonacid/opengetlnclose_at.lo: src/libunixonacid/opengetlnclose_at.c src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/openreadnclose_at.o src/libunixonacid/openreadnclose_at.lo: src/libunixonacid/openreadnclose_at.c src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
