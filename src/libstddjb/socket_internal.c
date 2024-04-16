@@ -4,8 +4,8 @@
 #include <skalibs/nonposix.h>
 
 #include <sys/socket.h>
-#include <fcntl.h>
 
+#include <skalibs/fcntl.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/socket.h>
 

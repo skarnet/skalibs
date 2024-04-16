@@ -1,10 +1,10 @@
 /* ISC license. */
 
-#include <fcntl.h>
 #include <unistd.h>
 #include <errno.h>
 
 #include <skalibs/error.h>
+#include <skalibs/fcntl.h>
 #include <skalibs/djbunix.h>
 
 int fd_lock (int fd, int w, int nb)

@@ -4,10 +4,10 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <errno.h>
-#include <fcntl.h>
 
 #include <skalibs/stralloc.h>
 #include <skalibs/direntry.h>
+#include <skalibs/fcntl.h>
 #include <skalibs/djbunix.h>
 
 static int dircopy (char const *src, char const *dst, mode_t mode, stralloc *tmp, unsigned int options)

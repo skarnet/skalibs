@@ -2,9 +2,9 @@
 
 #include <sys/uio.h>
 #include <stdlib.h>
-#include <fcntl.h>
 #include <errno.h>
 
+#include <skalibs/fcntl.h>
 #include <skalibs/types.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/cspawn.h>

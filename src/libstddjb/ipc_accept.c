@@ -6,9 +6,9 @@
 #include <sys/un.h>
 #include <string.h>
 #include <errno.h>
-#include <fcntl.h>
 
 #include <skalibs/bytestr.h>
+#include <skalibs/fcntl.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/socket.h>
 

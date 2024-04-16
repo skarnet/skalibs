@@ -9,8 +9,10 @@
 #endif
 
 #include <skalibs/nonposix.h>
+
 #include <sys/stat.h>
-#include <fcntl.h>
+
+#include <skalibs/fcntl.h>
 #include <skalibs/unix-transactional.h>
 
 int stat_at (int dirfd, char const *file, struct stat *st)
@@ -27,9 +29,11 @@ int lstat_at (int dirfd, char const *file, struct stat *st)
 
  /* OpenBSD plz. lstat() is POSIX. */
 #include <skalibs/nonposix.h>
+
 #include <sys/stat.h>
-#include <fcntl.h>
 #include <errno.h>
+
+#include <skalibs/fcntl.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/unix-transactional.h>
 

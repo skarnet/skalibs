@@ -7,9 +7,9 @@
 #include <netinet/in.h>
 #include <string.h>
 #include <errno.h>
-#include <fcntl.h>
 
 #include <skalibs/uint16.h>
+#include <skalibs/fcntl.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/socket.h>
 

@@ -1,8 +1,8 @@
 /* ISC license. */
 
-#include <fcntl.h>
 #include <sys/stat.h>
 
+#include <skalibs/fcntl.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/posixplz.h>
 

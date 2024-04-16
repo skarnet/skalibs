@@ -1,6 +1,6 @@
 /* ISC license. */
 
-#include <fcntl.h>
+#include <skalibs/fcntl.h>
 #include <skalibs/djbunix.h>
 
 int ndelay_off (int fd)

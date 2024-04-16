@@ -17,8 +17,8 @@ int pipe_internal (int *p, unsigned int flags)
 #else
 
 #include <unistd.h>
-#include <fcntl.h>
 
+#include <skalibs/fcntl.h>
 #include <skalibs/djbunix.h>
 
 int pipe_internal (int *p, unsigned int flags)

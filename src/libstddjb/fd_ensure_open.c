@@ -1,8 +1,8 @@
 /* ISC license. */
 
 #include <errno.h>
-#include <fcntl.h>
 
+#include <skalibs/fcntl.h>
 #include <skalibs/djbunix.h>
 
 int fd_ensure_open (int fd, int w)

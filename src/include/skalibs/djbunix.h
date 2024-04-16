@@ -6,11 +6,11 @@
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <sys/wait.h>
-#include <fcntl.h>
 
 #include <skalibs/gccattributes.h>
 #include <skalibs/stralloc.h>
 #include <skalibs/devino.h>
+#include <skalibs/fcntl.h>
 
 extern int coe (int) ;
 extern int uncoe (int) ;

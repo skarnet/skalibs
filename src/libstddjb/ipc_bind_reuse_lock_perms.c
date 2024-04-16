@@ -2,13 +2,13 @@
 
 #include <skalibs/nonposix.h>
 
-#include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
 #include <sys/socket.h>
 #include <sys/stat.h>
 
+#include <skalibs/fcntl.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/socket.h>
 

@@ -5,11 +5,11 @@
 
 #include <stddef.h>
 #include <stdint.h>
-#include <fcntl.h>
 
 #include <skalibs/gccattributes.h>
 #include <skalibs/posixplz.h>
 #include <skalibs/tai.h>
+#include <skalibs/fcntl.h>
 
 typedef ssize_t socket_io_func (int, char *, size_t, char *, uint16_t *) ;
 typedef socket_io_func *socket_io_func_ref ;

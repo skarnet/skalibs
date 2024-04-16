@@ -1,9 +1,9 @@
 /* ISC license. */
 
-#include <fcntl.h>
 #include <unistd.h>
 #include <errno.h>
 
+#include <skalibs/fcntl.h>
 #include <skalibs/djbunix.h>
 
 void fd_unlock (int fd)

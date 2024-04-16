@@ -1,7 +1,8 @@
 /* ISC license. */
 
 #include <sys/stat.h>
-#include <fcntl.h>
+
+#include <skalibs/fcntl.h>
 #include <skalibs/unix-transactional.h>
 
 int open_appendat (int fd, char const *name)

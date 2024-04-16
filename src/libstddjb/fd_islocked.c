@@ -1,8 +1,8 @@
 /* ISC license. */
 
-#include <fcntl.h>
 #include <unistd.h>
 
+#include <skalibs/fcntl.h>
 #include <skalibs/djbunix.h>
 
 int fd_islocked (int fd)

@@ -11,14 +11,14 @@
 #include <skalibs/nonposix.h>
 
 #include <errno.h>
-#include <fcntl.h>
 
+#include <skalibs/fcntl.h>
 #include <skalibs/unix-transactional.h>
 
 int open2_at (int dirfd, char const *file, int flags)
 {
   int fd ;
-  do fd = openat(dirfd, file, flags) ;
+  do fd = openat(dirfd, file, flags) ;  /* all systems supporting openat() have O_CLOEXEC */
   while (fd == -1 && errno == EINTR) ;
   return fd ;
 }
@@ -26,8 +26,9 @@ int open2_at (int dirfd, char const *file, int flags)
 #else
 
 #include <sys/stat.h>
-#include <fcntl.h>
 #include <errno.h>
+
+#include <skalibs/fcntl.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/unix-transactional.h>
 

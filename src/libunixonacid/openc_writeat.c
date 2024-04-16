@@ -1,7 +1,6 @@
 /* ISC license. */
 
-#include <fcntl.h>
-
+#include <skalibs/fcntl.h>
 #include <skalibs/unix-transactional.h>
 
 int openc_writeat (int fd, char const *name)

@@ -628,6 +628,7 @@ choose cl sopeercred 'SO_PEERCRED'
 choose cl getpeerucred 'getpeerucred()'
 choose cl ipv6 'IPv6 support' $socket_lib
 choose c msgdontwait 'MSG_DONTWAIT'
+choose c ocloexec 'O_CLOEXEC'
 choose c odirectory 'O_DIRECTORY'
 choose cl openat 'openat()'
 choose cl linkat 'linkat()'

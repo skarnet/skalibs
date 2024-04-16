@@ -1,6 +1,6 @@
 /* ISC license. */
 
-#include <fcntl.h>
+#include <skalibs/fcntl.h>
 #include <skalibs/unix-transactional.h>
 
 int open_readat (int fd, char const *name)

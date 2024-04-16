@@ -1,6 +1,6 @@
 /* ISC license. */
 
-#include <fcntl.h>
+#include <skalibs/fcntl.h>
 #include <skalibs/djbunix.h>
 
 int filecopy_unsafe (char const *src, char const *dst, unsigned int mode)
