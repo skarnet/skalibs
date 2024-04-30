@@ -20,7 +20,6 @@
 #include <skalibs/cbuffer.h>
 #include <skalibs/cdb.h>
 #include <skalibs/cdbmake.h>
-#include <skalibs/cspawn.h>
 #include <skalibs/devino.h>
 #include <skalibs/direntry.h>
 #include <skalibs/diuint32.h>
@@ -31,6 +30,7 @@
 #include <skalibs/envalloc.h>
 #include <skalibs/env.h>
 #include <skalibs/exec.h>
+#include <skalibs/cspawn.h>
 #include <skalibs/fmtscan.h>
 #include <skalibs/functypes.h>
 #include <skalibs/gccattributes.h>

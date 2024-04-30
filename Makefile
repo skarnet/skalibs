@@ -12,8 +12,6 @@ ifeq "" "$(strip $(filter $(make_need), $(firstword $(sort $(make_need) $(MAKE_V
 $(error Your make ($(MAKE_VERSION)) is too old. You need $(make_need) or newer)
 endif
 
-CC = $(error Please use ./configure first)
-
 -include config.mak
 include package/deps.mak
 
@@ -52,7 +50,7 @@ ALL_INCLUDES := $(sort $(BUILT_INCLUDES) $(wildcard src/include/$(package)/*.h))
 ALL_SYSDEPS := $(wildcard $(sysdeps)/*)
 ALL_DATA := $(wildcard src/etc/*)
 
-all: $(ALL_LIBS) $(ALL_INCLUDES) $(ALL_SYSDEPS) $(ALL_DATA)
+all: config.mak $(ALL_LIBS) $(ALL_INCLUDES) $(ALL_SYSDEPS) $(ALL_DATA)
 
 clean:
 	@exec rm -f $(ALL_LIBS) $(ALL_BINS) $(ALL_SOBJS) $(ALL_DOBJS) $(BUILT_INCLUDES)

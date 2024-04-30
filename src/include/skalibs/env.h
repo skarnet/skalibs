@@ -17,10 +17,10 @@ extern int env_addmodif (stralloc *, char const *, char const *) ;
 extern int env_make (char const **, size_t, char const *, size_t) ;
 extern int env_string (stralloc *, char const *const *, size_t) ;
 
-extern size_t env_mergen (char const **, size_t, char const *const *, size_t, char const *, size_t, size_t) ;
-extern size_t env_merge (char const **, size_t, char const *const *, size_t, char const *, size_t) ;
-extern size_t env_mergn (char const **, size_t, char const *const *, char const *, size_t, size_t) ;
 extern size_t env_merg (char const **, size_t, char const *const *, char const *, size_t) ;
+extern size_t env_merge (char const **, size_t, char const *const *, size_t, char const *, size_t) ;
+#define env_mergen(v, vmax, envp, envlen, modifs, modiflen, modifn) env_merge(v, vmax, envp, envlen, modifs, modiflen)
+extern size_t env_mergn (char const **, size_t, char const *const *, char const *, size_t, size_t) ;
 
 #define SKALIBS_ENVDIR_VERBATIM 0x01
 #define SKALIBS_ENVDIR_NOCHOMP 0x02

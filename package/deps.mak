@@ -115,6 +115,14 @@ src/libdatastruct/gensetdyn_iter_withcancel.o src/libdatastruct/gensetdyn_iter_w
 src/libdatastruct/gensetdyn_new.o src/libdatastruct/gensetdyn_new.lo: src/libdatastruct/gensetdyn_new.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h
 src/libdatastruct/gensetdyn_ready.o src/libdatastruct/gensetdyn_ready.lo: src/libdatastruct/gensetdyn_ready.c src/include/skalibs/genalloc.h src/include/skalibs/gensetdyn.h src/include/skalibs/stralloc.h
 src/libdatastruct/gensetdyn_zero.o src/libdatastruct/gensetdyn_zero.lo: src/libdatastruct/gensetdyn_zero.c src/include/skalibs/gensetdyn.h
+src/libenvexec/child_spawn.o src/libenvexec/child_spawn.lo: src/libenvexec/child_spawn.c src/include/skalibs/cspawn.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/types.h
+src/libenvexec/child_spawn0.o src/libenvexec/child_spawn0.lo: src/libenvexec/child_spawn0.c src/include/skalibs/cspawn.h
+src/libenvexec/child_spawn1_internal.o src/libenvexec/child_spawn1_internal.lo: src/libenvexec/child_spawn1_internal.c src/libenvexec/cspawn-internal.h src/include/skalibs/cspawn.h src/include/skalibs/djbunix.h
+src/libenvexec/child_spawn1_pipe.o src/libenvexec/child_spawn1_pipe.lo: src/libenvexec/child_spawn1_pipe.c src/libenvexec/cspawn-internal.h src/include/skalibs/cspawn.h
+src/libenvexec/child_spawn1_socket.o src/libenvexec/child_spawn1_socket.lo: src/libenvexec/child_spawn1_socket.c src/libenvexec/cspawn-internal.h src/include/skalibs/cspawn.h src/include/skalibs/socket.h
+src/libenvexec/child_spawn2.o src/libenvexec/child_spawn2.lo: src/libenvexec/child_spawn2.c src/include/skalibs/cspawn.h src/include/skalibs/djbunix.h
+src/libenvexec/child_spawn3.o src/libenvexec/child_spawn3.lo: src/libenvexec/child_spawn3.c src/include/skalibs/cspawn.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/types.h
+src/libenvexec/cspawn.o src/libenvexec/cspawn.lo: src/libenvexec/cspawn.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/cspawn.h src/include/skalibs/djbunix.h src/include/skalibs/exec.h src/include/skalibs/nonposix.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
 src/libenvexec/env_addmodif.o src/libenvexec/env_addmodif.lo: src/libenvexec/env_addmodif.c src/include/skalibs/env.h src/include/skalibs/stralloc.h
 src/libenvexec/env_dump.o src/libenvexec/env_dump.lo: src/libenvexec/env_dump.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/nonposix.h src/include/skalibs/unix-transactional.h
 src/libenvexec/env_get.o src/libenvexec/env_get.lo: src/libenvexec/env_get.c src/include/skalibs/posixplz.h
@@ -123,7 +131,6 @@ src/libenvexec/env_len.o src/libenvexec/env_len.lo: src/libenvexec/env_len.c src
 src/libenvexec/env_make.o src/libenvexec/env_make.lo: src/libenvexec/env_make.c src/include/skalibs/env.h
 src/libenvexec/env_merg.o src/libenvexec/env_merg.lo: src/libenvexec/env_merg.c src/include/skalibs/env.h
 src/libenvexec/env_merge.o src/libenvexec/env_merge.lo: src/libenvexec/env_merge.c src/include/skalibs/bytestr.h src/include/skalibs/env.h
-src/libenvexec/env_mergen.o src/libenvexec/env_mergen.lo: src/libenvexec/env_mergen.c src/include/skalibs/bytestr.h src/include/skalibs/env.h
 src/libenvexec/env_mergn.o src/libenvexec/env_mergn.lo: src/libenvexec/env_mergn.c src/include/skalibs/env.h
 src/libenvexec/env_string.o src/libenvexec/env_string.lo: src/libenvexec/env_string.c src/include/skalibs/env.h src/include/skalibs/stralloc.h
 src/libenvexec/envalloc_0.o src/libenvexec/envalloc_0.lo: src/libenvexec/envalloc_0.c src/include/skalibs/envalloc.h src/include/skalibs/genalloc.h
@@ -135,12 +142,17 @@ src/libenvexec/envdir_clamp.o src/libenvexec/envdir_clamp.lo: src/libenvexec/env
 src/libenvexec/envdir_noclamp.o src/libenvexec/envdir_noclamp.lo: src/libenvexec/envdir_noclamp.c src/include/skalibs/buffer.h src/include/skalibs/bytestr.h src/include/skalibs/direntry.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/libenvexec/envdir-internal.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libenvexec/exec0_ae.o src/libenvexec/exec0_ae.lo: src/libenvexec/exec0_ae.c src/include/skalibs/exec.h
 src/libenvexec/exec_ae.o src/libenvexec/exec_ae.lo: src/libenvexec/exec_ae.c src/include/skalibs/config.h src/include/skalibs/exec.h src/include/skalibs/posixplz.h
+src/libenvexec/gcspawn.o src/libenvexec/gcspawn.lo: src/libenvexec/gcspawn.c src/include/skalibs/allreadwrite.h src/include/skalibs/cspawn.h src/include/skalibs/djbunix.h src/include/skalibs/types.h
+src/libenvexec/gmspawn_afn.o src/libenvexec/gmspawn_afn.lo: src/libenvexec/gmspawn_afn.c src/include/skalibs/cspawn.h src/include/skalibs/env.h
 src/libenvexec/mexec0_af.o src/libenvexec/mexec0_af.lo: src/libenvexec/mexec0_af.c src/include/skalibs/exec.h
 src/libenvexec/mexec0_afm.o src/libenvexec/mexec0_afm.lo: src/libenvexec/mexec0_afm.c src/include/skalibs/exec.h
 src/libenvexec/mexec0_afn.o src/libenvexec/mexec0_afn.lo: src/libenvexec/mexec0_afn.c src/include/skalibs/exec.h
 src/libenvexec/mexec_af.o src/libenvexec/mexec_af.lo: src/libenvexec/mexec_af.c src/include/skalibs/env.h src/include/skalibs/exec.h src/include/skalibs/stralloc.h
 src/libenvexec/mexec_afm.o src/libenvexec/mexec_afm.lo: src/libenvexec/mexec_afm.c src/include/skalibs/bytestr.h src/include/skalibs/exec.h
 src/libenvexec/mexec_afn.o src/libenvexec/mexec_afn.lo: src/libenvexec/mexec_afn.c src/include/skalibs/env.h src/include/skalibs/exec.h
+src/libenvexec/mspawn_af.o src/libenvexec/mspawn_af.lo: src/libenvexec/mspawn_af.c src/include/skalibs/cspawn.h src/include/skalibs/env.h src/include/skalibs/stralloc.h
+src/libenvexec/mspawn_afm.o src/libenvexec/mspawn_afm.lo: src/libenvexec/mspawn_afm.c src/include/skalibs/bytestr.h src/include/skalibs/cspawn.h
+src/libenvexec/mspawn_afn.o src/libenvexec/mspawn_afn.lo: src/libenvexec/mspawn_afn.c src/include/skalibs/cspawn.h src/include/skalibs/env.h
 src/libenvexec/xexec0_ae.o src/libenvexec/xexec0_ae.lo: src/libenvexec/xexec0_ae.c src/include/skalibs/exec.h
 src/libenvexec/xexec_ae.o src/libenvexec/xexec_ae.lo: src/libenvexec/xexec_ae.c src/include/skalibs/exec.h src/include/skalibs/strerr.h
 src/libenvexec/xexecvep.o src/libenvexec/xexecvep.lo: src/libenvexec/xexecvep.c src/include/skalibs/exec.h src/include/skalibs/posixplz.h src/include/skalibs/strerr.h
@@ -151,6 +163,9 @@ src/libenvexec/xmexec0_afn.o src/libenvexec/xmexec0_afn.lo: src/libenvexec/xmexe
 src/libenvexec/xmexec_af.o src/libenvexec/xmexec_af.lo: src/libenvexec/xmexec_af.c src/include/skalibs/exec.h src/include/skalibs/strerr.h
 src/libenvexec/xmexec_afm.o src/libenvexec/xmexec_afm.lo: src/libenvexec/xmexec_afm.c src/include/skalibs/exec.h src/include/skalibs/strerr.h
 src/libenvexec/xmexec_afn.o src/libenvexec/xmexec_afn.lo: src/libenvexec/xmexec_afn.c src/include/skalibs/exec.h src/include/skalibs/strerr.h
+src/libenvexec/xmspawn_af.o src/libenvexec/xmspawn_af.lo: src/libenvexec/xmspawn_af.c src/include/skalibs/cspawn.h src/include/skalibs/strerr.h
+src/libenvexec/xmspawn_afm.o src/libenvexec/xmspawn_afm.lo: src/libenvexec/xmspawn_afm.c src/include/skalibs/cspawn.h src/include/skalibs/strerr.h
+src/libenvexec/xmspawn_afn.o src/libenvexec/xmspawn_afn.lo: src/libenvexec/xmspawn_afn.c src/include/skalibs/cspawn.h src/include/skalibs/strerr.h
 src/libposixplz/doublefork.o src/libposixplz/doublefork.lo: src/libposixplz/doublefork.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h src/include/skalibs/uint64.h
 src/libposixplz/execvep.o src/libposixplz/execvep.lo: src/libposixplz/execvep.c src/libposixplz/posixplz-internal.h src/include/skalibs/posixplz.h
 src/libposixplz/execvep_internal.o src/libposixplz/execvep_internal.lo: src/libposixplz/execvep_internal.c src/include/skalibs/bytestr.h src/include/skalibs/posixplz.h
@@ -304,15 +319,7 @@ src/libstddjb/cdbmake_addv.o src/libstddjb/cdbmake_addv.lo: src/libstddjb/cdbmak
 src/libstddjb/cdbmake_finish.o src/libstddjb/cdbmake_finish.lo: src/libstddjb/cdbmake_finish.c src/include/skalibs/buffer.h src/libstddjb/cdbmake-internal.h src/include/skalibs/cdbmake.h src/include/skalibs/diuint32.h src/include/skalibs/genalloc.h src/include/skalibs/uint32.h
 src/libstddjb/cdbmake_posplus.o src/libstddjb/cdbmake_posplus.lo: src/libstddjb/cdbmake_posplus.c src/libstddjb/cdbmake-internal.h
 src/libstddjb/cdbmake_start.o src/libstddjb/cdbmake_start.lo: src/libstddjb/cdbmake_start.c src/include/skalibs/buffer.h src/include/skalibs/cdbmake.h src/include/skalibs/genalloc.h
-src/libstddjb/child_spawn.o src/libstddjb/child_spawn.lo: src/libstddjb/child_spawn.c src/include/skalibs/cspawn.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/types.h
-src/libstddjb/child_spawn0.o src/libstddjb/child_spawn0.lo: src/libstddjb/child_spawn0.c src/include/skalibs/cspawn.h
-src/libstddjb/child_spawn1_internal.o src/libstddjb/child_spawn1_internal.lo: src/libstddjb/child_spawn1_internal.c src/libstddjb/cspawn-internal.h src/include/skalibs/cspawn.h src/include/skalibs/djbunix.h
-src/libstddjb/child_spawn1_pipe.o src/libstddjb/child_spawn1_pipe.lo: src/libstddjb/child_spawn1_pipe.c src/libstddjb/cspawn-internal.h src/include/skalibs/cspawn.h
-src/libstddjb/child_spawn1_socket.o src/libstddjb/child_spawn1_socket.lo: src/libstddjb/child_spawn1_socket.c src/libstddjb/cspawn-internal.h src/include/skalibs/cspawn.h src/include/skalibs/socket.h
-src/libstddjb/child_spawn2.o src/libstddjb/child_spawn2.lo: src/libstddjb/child_spawn2.c src/include/skalibs/cspawn.h src/include/skalibs/djbunix.h
-src/libstddjb/child_spawn3.o src/libstddjb/child_spawn3.lo: src/libstddjb/child_spawn3.c src/include/skalibs/cspawn.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/types.h
 src/libstddjb/coe.o src/libstddjb/coe.lo: src/libstddjb/coe.c src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h
-src/libstddjb/cspawn.o src/libstddjb/cspawn.lo: src/libstddjb/cspawn.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/cspawn.h src/include/skalibs/djbunix.h src/include/skalibs/exec.h src/include/skalibs/nonposix.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
 src/libstddjb/deepsleepuntil.o src/libstddjb/deepsleepuntil.lo: src/libstddjb/deepsleepuntil.c src/include/skalibs/iopause.h src/include/skalibs/tai.h
 src/libstddjb/devino_cmp.o src/libstddjb/devino_cmp.lo: src/libstddjb/devino_cmp.c src/include/skalibs/devino.h
 src/libstddjb/dir_close.o src/libstddjb/dir_close.lo: src/libstddjb/dir_close.c src/include/skalibs/direntry.h
@@ -345,7 +352,6 @@ src/libstddjb/filecopy_suffix.o src/libstddjb/filecopy_suffix.lo: src/libstddjb/
 src/libstddjb/filecopy_unsafe.o src/libstddjb/filecopy_unsafe.lo: src/libstddjb/filecopy_unsafe.c src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h
 src/libstddjb/fmtscan_asc.o src/libstddjb/fmtscan_asc.lo: src/libstddjb/fmtscan_asc.c src/include/skalibs/fmtscan.h
 src/libstddjb/fmtscan_num.o src/libstddjb/fmtscan_num.lo: src/libstddjb/fmtscan_num.c src/include/skalibs/fmtscan.h
-src/libstddjb/gcspawn.o src/libstddjb/gcspawn.lo: src/libstddjb/gcspawn.c src/include/skalibs/allreadwrite.h src/include/skalibs/cspawn.h src/include/skalibs/djbunix.h src/include/skalibs/types.h
 src/libstddjb/genalloc_deepfree.o src/libstddjb/genalloc_deepfree.lo: src/libstddjb/genalloc_deepfree.c src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
 src/libstddjb/genwrite_flush_bufalloc.o src/libstddjb/genwrite_flush_bufalloc.lo: src/libstddjb/genwrite_flush_bufalloc.c src/include/skalibs/bufalloc.h src/include/skalibs/genwrite.h
 src/libstddjb/genwrite_flush_buffer.o src/libstddjb/genwrite_flush_buffer.lo: src/libstddjb/genwrite_flush_buffer.c src/include/skalibs/buffer.h src/include/skalibs/genwrite.h
