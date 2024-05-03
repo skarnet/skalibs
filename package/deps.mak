@@ -179,7 +179,8 @@ src/libposixplz/mkhtemp.o src/libposixplz/mkhtemp.lo: src/libposixplz/mkhtemp.c 
 src/libposixplz/mklinktemp.o src/libposixplz/mklinktemp.lo: src/libposixplz/mklinktemp.c src/include/skalibs/djbunix.h src/libposixplz/posixplz-internal.h src/include/skalibs/posixplz.h
 src/libposixplz/mkltemp.o src/libposixplz/mkltemp.lo: src/libposixplz/mkltemp.c src/include/skalibs/posixplz.h
 src/libposixplz/mkptemp.o src/libposixplz/mkptemp.lo: src/libposixplz/mkptemp.c src/include/skalibs/posixplz.h
-src/libposixplz/mkptemp2.o src/libposixplz/mkptemp2.lo: src/libposixplz/mkptemp2.c src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h src/include/skalibs/posixplz.h
+src/libposixplz/mkptemp2.o src/libposixplz/mkptemp2.lo: src/libposixplz/mkptemp2.c src/include/skalibs/posixplz.h
+src/libposixplz/mkptemp3.o src/libposixplz/mkptemp3.lo: src/libposixplz/mkptemp3.c src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h src/include/skalibs/posixplz.h
 src/libposixplz/munmap_void.o src/libposixplz/munmap_void.lo: src/libposixplz/munmap_void.c src/include/skalibs/posixplz.h
 src/libposixplz/setgroups.o src/libposixplz/setgroups.lo: src/libposixplz/setgroups.c src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/setgroups.h src/include/skalibs/sysdeps.h
 src/libposixplz/strcasestr.o src/libposixplz/strcasestr.lo: src/libposixplz/strcasestr.c src/include/skalibs/bytestr.h src/include/skalibs/sysdeps.h

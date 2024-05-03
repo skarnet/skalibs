@@ -5,6 +5,7 @@ In 2.4.2.0
 
  - Support for midipix and old MacOS X. (More sysdeps.)
  - New gol.h header (a take on getopt_long)
+ - New mkptemp3 function
 
 
 In 2.14.1.1
