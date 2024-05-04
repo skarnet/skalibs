@@ -131,6 +131,7 @@ src/libenvexec/env_len.o src/libenvexec/env_len.lo: src/libenvexec/env_len.c src
 src/libenvexec/env_make.o src/libenvexec/env_make.lo: src/libenvexec/env_make.c src/include/skalibs/env.h
 src/libenvexec/env_merg.o src/libenvexec/env_merg.lo: src/libenvexec/env_merg.c src/include/skalibs/env.h
 src/libenvexec/env_merge.o src/libenvexec/env_merge.lo: src/libenvexec/env_merge.c src/include/skalibs/bytestr.h src/include/skalibs/env.h
+src/libenvexec/env_mergen.o src/libenvexec/env_mergen.lo: src/libenvexec/env_mergen.c src/include/skalibs/env.h
 src/libenvexec/env_mergn.o src/libenvexec/env_mergn.lo: src/libenvexec/env_mergn.c src/include/skalibs/env.h
 src/libenvexec/env_string.o src/libenvexec/env_string.lo: src/libenvexec/env_string.c src/include/skalibs/env.h src/include/skalibs/stralloc.h
 src/libenvexec/envalloc_0.o src/libenvexec/envalloc_0.lo: src/libenvexec/envalloc_0.c src/include/skalibs/envalloc.h src/include/skalibs/genalloc.h
