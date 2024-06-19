@@ -41,7 +41,7 @@ otherwise.
 <h3> Primitive </h3>
 
 <p>
-<code> pid_t cspawn (char const *file, char const *const *argv, char const *const *envp, uint32_t flags, cspawn_fileaction const *fa, size_t n) </code> <br>
+<code> pid_t cspawn (char const *file, char const *const *argv, char const *const *envp, uint16_t flags, cspawn_fileaction const *fa, size_t n) </code> <br>
 Forks and execs a child as with <tt>exec_ae(file, argv, envp)</tt>.
 Returns 0 if it fails, and the pid of the child if it succeeds.
 Before execing, the following operations are performed in the child:
@@ -126,7 +126,7 @@ variable as a comma-separated list of integers. </li>
 </ul>
 
 <p>
-<code> pid_t gcspawn (char const *file, char const *const *argv, char const *const *envp, uint32_t flags, cspawn_fileaction const *fa, size_t n) </code> <br>
+<code> pid_t gcspawn (char const *file, char const *const *argv, char const *const *envp, uint16_t flags, cspawn_fileaction const *fa, size_t n) </code> <br>
 Like <tt>cspawn</tt>, but <em>argv</em> will be running as a grandchild of the
 current process. The function forks once, invokes <tt>cspawn</tt> from the child,
 and the child exits after passing the grandchild's pid to the parent.
