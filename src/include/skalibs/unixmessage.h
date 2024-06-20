@@ -41,7 +41,7 @@ struct unixmessagev_s
 extern unixmessagev const unixmessagev_zero ;
 
 #define UNIXMESSAGE_MAXSIZE (1U << 28)
-#define UNIXMESSAGE_MAXFDS 255
+#define UNIXMESSAGE_MAXFDS 253
 #define UNIXMESSAGE_BUFSIZE 2048
 #define UNIXMESSAGE_AUXBUFSIZE (sizeof(int) * UNIXMESSAGE_MAXFDS + 1)
 #define UNIXMESSAGE_MAXREADS 128
