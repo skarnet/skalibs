@@ -11,16 +11,14 @@
 #include <skalibs/unixmessage.h>
 #include <skalibs/posixishard.h>
 
-static inline int copyfds (char *s, int const *fds, unsigned int n, unsigned char const *bits, unixmessage_sender_closecb_func_ref closecb, void *closecbdata)
+static inline int copyfds (int *dst, int const *src, unsigned int n, unsigned char const *bits)
 {
-  unsigned int i = 0 ;
-  for (; i < n ; i++)
+  for (unsigned int i = 0 ; i < n ; i++)
   {
-    int fd = fds[i] ;
-    if (fd < 0) return (errno = EINVAL, -1) ;
+    int fd = src[i] ;
+    if (fd < 0) return (errno = EINVAL, 0) ;
     if (bitarray_peek(bits, i)) fd = - fd - 1 ;
-    memcpy(s, (char const *)&fd, sizeof(int)) ;
-    s += sizeof(int) ;
+    dst[i] = fd ;
   }
   return 1 ;
 }
@@ -28,15 +26,14 @@ static inline int copyfds (char *s, int const *fds, unsigned int n, unsigned cha
 static int reserve_and_copy (unixmessage_sender *b, size_t len, int const *fds, unsigned int nfds, unsigned char const *bits)
 {
   disize cur = { .left = b->data.len, .right = genalloc_len(int, &b->fds) } ;
-  if (len > UNIXMESSAGE_MAXSIZE || nfds > UNIXMESSAGE_MAXFDS)
-    return (errno = EPROTO, 0) ;
+  if (len > UNIXMESSAGE_MAXSIZE || nfds > UNIXMESSAGE_MAXFDS) return (errno = EPROTO, 0) ;
   if (!genalloc_readyplus(disize, &b->offsets, 1)
    || !genalloc_readyplus(int, &b->fds, nfds)
    || !stralloc_readyplus(&b->data, len))
     return 0 ;
-  if (!copyfds(b->fds.s + b->fds.len, fds, nfds, bits, b->closecb, b->closecbdata)) return 0 ;
+  if (!copyfds(genalloc_s(int, &b->fds) + cur.right, fds, nfds, bits)) return 0 ;
   genalloc_setlen(int, &b->fds, cur.right + nfds) ;
-  return genalloc_append(disize, &b->offsets, &cur) ;
+  return genalloc_catb(disize, &b->offsets, &cur, 1) ;
 }
 
 int unixmessage_put_and_close (unixmessage_sender *b, unixmessage const *m, unsigned char const *bits)
