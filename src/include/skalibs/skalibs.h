@@ -13,6 +13,7 @@
    - skalibs/posixishard.h: post-system headers workarounds for conformance failures
 */
 
+#include <skalibs/cplz.h>
 #include <skalibs/posixplz.h>
 #include <skalibs/stddjb.h>
 #include <skalibs/strerr.h>

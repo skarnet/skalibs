@@ -3,6 +3,7 @@
 #ifndef SKALIBS_NETSTRING_H
 #define SKALIBS_NETSTRING_H
 
+#include <stdint.h>
 #include <string.h>
 #include <sys/uio.h>
 
@@ -22,5 +23,7 @@ extern int netstring_get (buffer *, stralloc *, size_t *) ;
 extern int netstring_put (buffer *, char const *, size_t, size_t *) ;
 #define netstring_putba(ba, s, n) netstring_appendb(&(ba)->x, s, n)
 #define netstring_putbav(ba, v, n) netstring_appendv(&(ba)->x, v, n)
+
+extern int mininetstring_read (int, stralloc *, uint32_t *) ;
 
 #endif

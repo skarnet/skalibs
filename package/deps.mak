@@ -41,7 +41,7 @@ src/include/skalibs/sha512.h: src/include/skalibs/uint64.h
 src/include/skalibs/sig.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/siovec.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/skaclient.h: src/include/skalibs/kolbak.h src/include/skalibs/tai.h src/include/skalibs/unixmessage.h
-src/include/skalibs/skalibs.h: src/include/skalibs/datastruct.h src/include/skalibs/posixplz.h src/include/skalibs/random.h src/include/skalibs/stdcrypto.h src/include/skalibs/stddjb.h src/include/skalibs/strerr.h src/include/skalibs/unixonacid.h
+src/include/skalibs/skalibs.h: src/include/skalibs/cplz.h src/include/skalibs/datastruct.h src/include/skalibs/posixplz.h src/include/skalibs/random.h src/include/skalibs/stdcrypto.h src/include/skalibs/stddjb.h src/include/skalibs/strerr.h src/include/skalibs/unixonacid.h
 src/include/skalibs/skamisc.h: src/include/skalibs/buffer.h src/include/skalibs/stralloc.h
 src/include/skalibs/socket.h: src/include/skalibs/fcntl.h src/include/skalibs/gccattributes.h src/include/skalibs/posixplz.h src/include/skalibs/tai.h
 src/include/skalibs/stat.h: src/include/skalibs/sysdeps.h
@@ -435,6 +435,7 @@ src/libstddjb/ltm64_from_localtm.o src/libstddjb/ltm64_from_localtm.lo: src/libs
 src/libstddjb/ltm64_from_sysclock.o src/libstddjb/ltm64_from_sysclock.lo: src/libstddjb/ltm64_from_sysclock.c src/include/skalibs/config.h src/include/skalibs/djbtime.h src/include/skalibs/tai.h
 src/libstddjb/ltm64_from_tai.o src/libstddjb/ltm64_from_tai.lo: src/libstddjb/ltm64_from_tai.c src/libstddjb/djbtime-internal.h src/include/skalibs/djbtime.h
 src/libstddjb/ltm64_from_utc.o src/libstddjb/ltm64_from_utc.lo: src/libstddjb/ltm64_from_utc.c src/libstddjb/djbtime-internal.h src/include/skalibs/djbtime.h src/include/skalibs/uint64.h
+src/libstddjb/mininetstring_read.o src/libstddjb/mininetstring_read.lo: src/libstddjb/mininetstring_read.c src/include/skalibs/allreadwrite.h src/include/skalibs/netstring.h src/include/skalibs/stralloc.h
 src/libstddjb/ndelay_off.o src/libstddjb/ndelay_off.lo: src/libstddjb/ndelay_off.c src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h
 src/libstddjb/ndelay_on.o src/libstddjb/ndelay_on.lo: src/libstddjb/ndelay_on.c src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h
 src/libstddjb/netstring_append.o src/libstddjb/netstring_append.lo: src/libstddjb/netstring_append.c src/include/skalibs/netstring.h src/include/skalibs/stralloc.h src/include/skalibs/uint64.h
