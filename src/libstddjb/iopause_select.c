@@ -31,37 +31,31 @@ int iopause_select (iopause_fd *x, unsigned int len, tain const *deadline, tain 
     }
   }
 
+  for (unsigned int i = 0 ; i < len ; i++)
   {
-    unsigned int i = 0 ;
-    for (; i < len ; i++)
+    x[i].revents = 0 ;
+    if (x[i].fd >= 0)
     {
-      x[i].revents = 0 ;
-      if (x[i].fd >= 0)
-      {
-        if (x[i].fd >= FD_SETSIZE) return (errno = EMFILE, -1) ;
-        if (x[i].fd >= nfds) nfds = x[i].fd + 1 ;
-        if (x[i].events & IOPAUSE_READ) FD_SET(x[i].fd, &rfds) ;
-        if (x[i].events & IOPAUSE_WRITE) FD_SET(x[i].fd, &wfds) ;
-        if (x[i].events & IOPAUSE_EXCEPT) FD_SET(x[i].fd, &xfds) ;
-      }
+      if (x[i].fd >= FD_SETSIZE) return (errno = EMFILE, -1) ;
+      if (x[i].fd >= nfds) nfds = x[i].fd + 1 ;
+      if (x[i].events & IOPAUSE_READ) FD_SET(x[i].fd, &rfds) ;
+      if (x[i].events & IOPAUSE_WRITE) FD_SET(x[i].fd, &wfds) ;
+      if (x[i].events & IOPAUSE_EXCEPT) FD_SET(x[i].fd, &xfds) ;
     }
   }
 
   r = select(nfds, &rfds, &wfds, &xfds, deadline ? &tv : 0) ;
 
   if (r > 0)
-  {
-    unsigned int i = 0 ;
-    for (; i < len ; i++) if (x[i].fd >= 0)
+    for (unsigned int i = 0 ; i < len ; i++) if (x[i].fd >= 0)
     {
-      if ((x[i].events & IOPAUSE_READ) && FD_ISSET(x[i].fd, &rfds))
+      if (x[i].events & IOPAUSE_READ && FD_ISSET(x[i].fd, &rfds))
         x[i].revents |= IOPAUSE_READ ;
-      if ((x[i].events & IOPAUSE_WRITE) && FD_ISSET(x[i].fd, &wfds))
+      if (x[i].events & IOPAUSE_WRITE && FD_ISSET(x[i].fd, &wfds))
         x[i].revents |= IOPAUSE_WRITE ;
-      if ((x[i].events & IOPAUSE_EXCEPT) && FD_ISSET(x[i].fd, &xfds))
-        x[i].revents |= IOPAUSE_EXCEPT ;
+      if (x[i].events & IOPAUSE_EXCEPT && FD_ISSET(x[i].fd, &xfds))
+        x[i].revents |= x[i].events |= IOPAUSE_EXCEPT ;
     }
-  }
 
   return r ;
 }

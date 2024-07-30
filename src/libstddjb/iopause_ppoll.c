@@ -13,6 +13,7 @@
 
 int iopause_ppoll (iopause_fd *x, unsigned int len, tain const *deadline, tain const *stamp)
 {
+  int r ;
   struct timespec ts = { .tv_sec = 0, .tv_nsec = 0 } ;
   if (deadline && tain_less(stamp, deadline))
   {
@@ -24,7 +25,12 @@ int iopause_ppoll (iopause_fd *x, unsigned int len, tain const *deadline, tain c
       else deadline = 0 ;
     }
   }
-  return ppoll(x, len, deadline ? &ts : 0, 0) ;
+  r = ppoll(x, len, deadline ? &ts : 0, 0) ;
+  if (r > 0)
+    for (unsigned int i = 0 ; i < len ; i++)
+      if (x[i].revents & IOPAUSE_EXCEPT)
+        x[i].revents |= x[i].events ;
+  return r ;
 }
 
 #else

@@ -395,11 +395,13 @@ src/libstddjb/ip46_scan.o src/libstddjb/ip46_scan.lo: src/libstddjb/ip46_scan.c 
 src/libstddjb/ip46_scanlist.o src/libstddjb/ip46_scanlist.lo: src/libstddjb/ip46_scanlist.c src/include/skalibs/fmtscan.h src/include/skalibs/ip46.h
 src/libstddjb/ip4_fmt.o src/libstddjb/ip4_fmt.lo: src/libstddjb/ip4_fmt.c src/include/skalibs/fmtscan.h src/include/skalibs/uint32.h
 src/libstddjb/ip4_fmtu32.o src/libstddjb/ip4_fmtu32.lo: src/libstddjb/ip4_fmtu32.c src/include/skalibs/fmtscan.h src/include/skalibs/uint32.h
+src/libstddjb/ip4_netmask.o src/libstddjb/ip4_netmask.lo: src/libstddjb/ip4_netmask.c src/include/skalibs/fmtscan.h src/include/skalibs/uint32.h
 src/libstddjb/ip4_scan.o src/libstddjb/ip4_scan.lo: src/libstddjb/ip4_scan.c src/include/skalibs/fmtscan.h src/include/skalibs/types.h
 src/libstddjb/ip4_scanlist.o src/libstddjb/ip4_scanlist.lo: src/libstddjb/ip4_scanlist.c src/include/skalibs/fmtscan.h
 src/libstddjb/ip4_scanlist_u32.o src/libstddjb/ip4_scanlist_u32.lo: src/libstddjb/ip4_scanlist_u32.c src/include/skalibs/fmtscan.h
 src/libstddjb/ip4_scanu32.o src/libstddjb/ip4_scanu32.lo: src/libstddjb/ip4_scanu32.c src/include/skalibs/fmtscan.h src/include/skalibs/uint32.h
 src/libstddjb/ip6_fmt.o src/libstddjb/ip6_fmt.lo: src/libstddjb/ip6_fmt.c src/include/skalibs/diuint.h src/include/skalibs/fmtscan.h
+src/libstddjb/ip6_netmask.o src/libstddjb/ip6_netmask.lo: src/libstddjb/ip6_netmask.c src/include/skalibs/fmtscan.h src/include/skalibs/uint64.h
 src/libstddjb/ip6_scan.o src/libstddjb/ip6_scan.lo: src/libstddjb/ip6_scan.c src/include/skalibs/fmtscan.h src/include/skalibs/uint16.h
 src/libstddjb/ip6_scanlist.o src/libstddjb/ip6_scanlist.lo: src/libstddjb/ip6_scanlist.c src/include/skalibs/fmtscan.h
 src/libstddjb/ipc_accept.o src/libstddjb/ipc_accept.lo: src/libstddjb/ipc_accept.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h src/include/skalibs/sysdeps.h

@@ -29,7 +29,6 @@ extern size_t ip6_fmt (char *, char const *) ;
 
  /* scan */
 
-
 extern unsigned char fmtscan_num (unsigned char, unsigned char) gccattr_const ;
 
 extern size_t ip4_scan (char const *, char *) ;
@@ -42,5 +41,11 @@ extern size_t ip6_scanlist (char *, size_t, char const *, size_t *) ;
 extern size_t ucharn_scan (char const *, char *, size_t) ;
 extern size_t ucharn_scan_little (char const *, char *, size_t) ;
 extern size_t ucharn_findlen (char const *) gccattr_pure ;
+
+
+ /* misc */
+
+extern int ip4_netmask (char *, uint8_t) ;
+extern int ip6_netmask (char *, uint8_t) ;
 
 #endif
