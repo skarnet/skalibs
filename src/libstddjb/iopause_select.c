@@ -49,12 +49,9 @@ int iopause_select (iopause_fd *x, unsigned int len, tain const *deadline, tain 
   if (r > 0)
     for (unsigned int i = 0 ; i < len ; i++) if (x[i].fd >= 0)
     {
-      if (x[i].events & IOPAUSE_READ && FD_ISSET(x[i].fd, &rfds))
-        x[i].revents |= IOPAUSE_READ ;
-      if (x[i].events & IOPAUSE_WRITE && FD_ISSET(x[i].fd, &wfds))
-        x[i].revents |= IOPAUSE_WRITE ;
-      if (x[i].events & IOPAUSE_EXCEPT && FD_ISSET(x[i].fd, &xfds))
-        x[i].revents |= x[i].events |= IOPAUSE_EXCEPT ;
+      if (FD_ISSET(x[i].fd, &rfds)) x[i].revents |= IOPAUSE_READ ;
+      if (FD_ISSET(x[i].fd, &wfds)) x[i].revents |= IOPAUSE_WRITE ;
+      if (FD_ISSET(x[i].fd, &xfds)) x[i].revents |= IOPAUSE_EXCEPT | x[i].events ;
     }
 
   return r ;
