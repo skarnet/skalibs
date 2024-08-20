@@ -18,6 +18,10 @@
 
 static inline void cspawn_child_exec (char const *prog, char const *const *argv, char const *const *envp, uint16_t flags, cspawn_fileaction const *fa, size_t n)
 {
+  if (flags & CSPAWN_FLAGS_SELFPIPE_FINISH) selfpipe_finish() ;
+  if (flags & CSPAWN_FLAGS_SIGBLOCKNONE) sig_blocknone() ;
+  if (flags & CSPAWN_FLAGS_SETSID) setsid() ;
+
   for (size_t i = 0 ; i < n ; i++)
   {
     switch (fa[i].type)
@@ -47,10 +51,6 @@ static inline void cspawn_child_exec (char const *prog, char const *const *argv,
         errno = EINVAL ; return ;
     }
   }
-
-  if (flags & CSPAWN_FLAGS_SELFPIPE_FINISH) selfpipe_finish() ;
-  if (flags & CSPAWN_FLAGS_SIGBLOCKNONE) sig_blocknone() ;
-  if (flags & CSPAWN_FLAGS_SETSID) setsid() ;
 
   exec_ae(prog, argv, envp) ;
 }
