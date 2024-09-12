@@ -37,6 +37,7 @@ extern void execvep_loose (char const *, char const *const *, char const *const 
 extern void unlink_void (char const *) ;
 extern void munmap_void (void *, size_t) ;
 extern pid_t doublefork (void) ;
+extern pid_t fork_newpid (void) ;
 extern int touch (char const *) ;
 
 extern int mkfiletemp (char *, create_func_ref, mode_t, void *) ;

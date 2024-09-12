@@ -171,6 +171,7 @@ src/libposixplz/doublefork.o src/libposixplz/doublefork.lo: src/libposixplz/doub
 src/libposixplz/execvep.o src/libposixplz/execvep.lo: src/libposixplz/execvep.c src/libposixplz/posixplz-internal.h src/include/skalibs/posixplz.h
 src/libposixplz/execvep_internal.o src/libposixplz/execvep_internal.lo: src/libposixplz/execvep_internal.c src/include/skalibs/bytestr.h src/include/skalibs/posixplz.h
 src/libposixplz/execvep_loose.o src/libposixplz/execvep_loose.lo: src/libposixplz/execvep_loose.c src/libposixplz/posixplz-internal.h src/include/skalibs/posixplz.h
+src/libposixplz/fork_newpid.o src/libposixplz/fork_newpid.lo: src/libposixplz/fork_newpid.c src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/uint64.h
 src/libposixplz/getpeereid.o src/libposixplz/getpeereid.lo: src/libposixplz/getpeereid.c src/include/skalibs/nonposix.h src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h
 src/libposixplz/memmem.o src/libposixplz/memmem.lo: src/libposixplz/memmem.c src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h
 src/libposixplz/mkbtemp.o src/libposixplz/mkbtemp.lo: src/libposixplz/mkbtemp.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
