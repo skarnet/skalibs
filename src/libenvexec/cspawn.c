@@ -11,6 +11,7 @@
 
 #include <skalibs/allreadwrite.h>
 #include <skalibs/sig.h>
+#include <skalibs/posixplz.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/selfpipe.h>
 #include <skalibs/exec.h>
@@ -62,7 +63,7 @@ static inline pid_t cspawn_fork (char const *prog, char const *const *argv, char
   char c ;
 
   if (pipecoe(p) == -1) return 0 ;
-  pid = fork() ;
+  pid = flags & CSPAWN_FLAGS_NEWPIDNS ? fork_newpid() : fork() ;
   if (pid == -1)
   {
     fd_close(p[1]) ;
@@ -71,7 +72,7 @@ static inline pid_t cspawn_fork (char const *prog, char const *const *argv, char
   }
   if (!pid)
   {
-    cspawn_child_exec(prog, argv, envp, flags, fa, n) ;
+    cspawn_child_exec(prog, argv, envp, flags & ~CSPAWN_FLAGS_NEWPIDNS, fa, n) ;
     c = errno ;
     fd_write(p[1], &c, 1) ;
     _exit(127) ;
@@ -260,17 +261,9 @@ static inline pid_t cspawn_pspawn (char const *prog, char const *const *argv, ch
   return 0 ;
 }
 
-#if (defined(SKALIBS_HASPOSIXSPAWNSETSID) || defined(SKALIBS_HASPOSIXSPAWNSETSIDNP)) && (defined(SKALIBS_HASPOSIXSPAWNCHDIR) || defined(SKALIBS_HASPOSIXSPAWNCHDIRNP))
-
 pid_t cspawn (char const *prog, char const *const *argv, char const *const *envp, uint16_t flags, cspawn_fileaction const *fa, size_t n)
 {
-  return cspawn_pspawn(prog, argv, envp, flags, fa, n) ;
-}
-
-#else
-
-pid_t cspawn (char const *prog, char const *const *argv, char const *const *envp, uint16_t flags, cspawn_fileaction const *fa, size_t n)
-{
+  if (flags & CSPAWN_FLAGS_NEWPIDNS) goto dofork ;
 #if !defined(SKALIBS_HASPOSIXSPAWNSETSID) && !defined(SKALIBS_HASPOSIXSPAWNSETSIDNP)
   if (flags & CSPAWN_FLAGS_SETSID) goto dofork ;
 #endif
@@ -284,8 +277,6 @@ pid_t cspawn (char const *prog, char const *const *argv, char const *const *envp
  dofork:
   return cspawn_fork(prog, argv, envp, flags, fa, n) ;
 }
-
-#endif
 
 #else
 
