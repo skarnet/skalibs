@@ -21,14 +21,8 @@ POSIX.1-2008, available at:
   ./configure && make && sudo make install
 
  will work for most users.
- It will install the static libraries in /usr/lib/skalibs, the shared
+ It will install the static libraries in /usr/lib, the shared
 libraries in /lib, and the sysdeps in /usr/lib/skalibs/sysdeps.
-
- Please note that static libraries in /usr/lib/skalibs *will not*
-be found by a default linker invocation: you need -L/usr/lib/skalibs.
-Other skarnet.org software automatically handles that case if the
-default configuration is used, but if you change the configuration,
-remember to use the appropriate --with-lib configure option.
 
  You can strip the libraries of their extra symbols via "make strip"
 before the "make install" phase. It will shave a few bytes off them.

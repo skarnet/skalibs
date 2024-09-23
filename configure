@@ -366,7 +366,7 @@ LDFLAGS_NOSHARED=
 LDFLAGS_SHARED=-shared
 prefix=
 dynlibdir='$prefix/lib'
-libdir='$prefix/lib/$package'
+libdir='$prefix/lib'
 includedir='$prefix/include'
 sysconfdir='$prefix/etc'
 sysdepdir='$prefix/lib/$package/sysdeps'
@@ -436,8 +436,8 @@ done
 
 # Add /usr in the default default case
 if test -z "$prefix" ; then
-  if test "$libdir" = '$prefix/lib/$package' ; then
-    libdir=/usr/lib/$package
+  if test "$libdir" = '$prefix/lib' ; then
+    libdir=/usr/lib
   fi
   if test "$includedir" = '$prefix/include' ; then
     includedir=/usr/include
