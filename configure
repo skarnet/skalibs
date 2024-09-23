@@ -20,13 +20,13 @@ Installation directories:
 
 Fine tuning of the installation directories:
   --dynlibdir=DIR               shared library files [PREFIX/lib]
-  --libdir=DIR                  static library files [PREFIX/lib/$package]
+  --libdir=DIR                  static library files [PREFIX/lib]
   --includedir=DIR              include files for the C compiler [PREFIX/include]
   --sysconfdir=DIR              global configuration files [PREFIX/etc]
   --sysdepdir=DIR               sysdeps directory [PREFIX/lib/$package/sysdeps]
 
- If no --prefix option is given, by default libdir will be /usr/lib/$package,
- includedir will be /usr/include and sysdepdir will be /usr/lib/$package/sysdeps.
+If no --prefix option is given, by default libdir will be /usr/lib,
+includedir will be /usr/include and sysdepdir will be /usr/lib/$package/sysdeps.
 
 Dependencies:
   --with-include=DIR            add DIR to the list of searched directories for headers
@@ -42,13 +42,13 @@ Optional features:
 $package options:
   --disable-ipv6                do not build IPv6 support [enabled]
   --enable-iopause-select       prefer select() over poll() for iopause implementation [disabled]
-  --enable-tai-clock            assume the system clock is TAI-10 instead of UTC [disabled]
-  --with-default-path=PATH      default executable search path [/usr/bin:/bin]
+  --enable-tai-clock            build for a TAI-10 system clock instead of a UTC one [disabled]
+  --with-default-path=PATH      default executable search path when PATH is undef [/usr/bin:/bin]
 
 Sysdeps autodetection override:
   --with-sysdep-K=V             assume sysdep K has the value V [autodetected]
 
-List of mandatory sysdeps for cross-compiling:
+List of mandatory sysdeps to provide by hand for cross-compiling:
   devurandom (yes|no): =yes if you have a working /dev/urandom
   posixspawnearlyreturn (yes|no): =yes if you have an old glibc or otherwise bad posix_spawn
 EOF
