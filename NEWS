@@ -1,7 +1,14 @@
 Changelog for skalibs.
 
-In 2.4.3.0
-----------
+In 2.14.4.0
+-----------
+
+ - Documentation fixes. (This file, in particular.)
+ - New functions: buffer_timed_getv, buffer_timed_putv, timed_read, timed_readv
+
+
+In 2.14.3.0
+-----------
 
  - Bugfixes.
  - Newish function: mininetstring_read().
@@ -10,8 +17,8 @@ In 2.4.3.0
  - Install .a to /usr/lib by default.
 
 
-In 2.4.2.0
-----------
+In 2.14.2.0
+-----------
 
  - Support for midipix and old MacOS X. (More sysdeps.)
  - New gol.h header (a take on getopt_long).
