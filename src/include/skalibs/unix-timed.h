@@ -18,7 +18,7 @@
 extern int timed_flush (void *, init_func_ref, init_func_ref, init_func_ref, tain const *, tain *) ;
 #define timed_flush_g(b, getfd, isnonempty, flush, deadline) timed_flush(b, getfd, isnonempty, flush, (deadline), &STAMP)
 extern ssize_t timed_get (void *, init_func_ref, get_func_ref, tain const *, tain *) ;
-#define timed_get_g (b, getfd, get, deadline) timed_get(b, getfd, get, (deadline), &STAMP)
+#define timed_get_g(b, getfd, get, deadline) timed_get(b, getfd, get, (deadline), &STAMP)
 
 extern size_t timed_read (int, char *, size_t, tain const *, tain *) ;
 #define timed_read_g(fd, s, len, deadline) timed_read(fd, s, len, (deadline), &STAMP)
