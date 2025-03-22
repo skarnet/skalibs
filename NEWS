@@ -4,7 +4,8 @@ In 2.14.4.0
 -----------
 
  - Documentation fixes. (This file, in particular.)
- - New functions: buffer_timed_getv, buffer_timed_putv, timed_read, timed_readv
+ - New functions: buffer_timed_getv, buffer_timed_putv,
+   timed_read, timed_readv, timed_Write, timed_writev
 
 
 In 2.14.3.0

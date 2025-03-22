@@ -25,6 +25,11 @@ extern size_t timed_read (int, char *, size_t, tain const *, tain *) ;
 extern size_t timed_readv (int, struct iovec *, unsigned int, tain const *, tain *) ;
 #define timed_readv_g(fd, v, vlen, deadline) timed_readv(fd, v, vlen, (deadline), &STAMP)
 
+extern size_t timed_write (int, char const *, size_t, tain const *, tain *) ;
+#define timed_write_g(fd, s, len, deadline) timed_write(fd, s, len, (deadline), &STAMP)
+extern size_t timed_writev (int, struct iovec const *, unsigned int, tain const *, tain *) ;
+#define timed_writev_g(fd, v, vlen, deadline) timed_writev(fd, v, vlen, (deadline), &STAMP)
+
 extern ssize_t buffer_timed_fill (buffer *, tain const *, tain *) ;
 #define buffer_timed_fill_g(b, deadline) buffer_timed_fill(b, (deadline), &STAMP)
 extern int bufalloc_timed_flush (bufalloc *, tain const *, tain *) ;
