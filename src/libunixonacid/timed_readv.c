@@ -22,7 +22,7 @@ static int getfd (struct blah_s *blah)
 
 static ssize_t get (struct blah_s *blah)
 {
-  ssize_t r = fd_readv(blah->fd, blah->v, blah->vlen) ;
+  ssize_t r = sanitize_read(fd_readv(blah->fd, blah->v, blah->vlen)) ;
   if (r > 0) { blah->w += r ; siovec_seek(blah->v, blah->vlen, r) ; }
   return r ;
 }

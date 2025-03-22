@@ -21,7 +21,7 @@ static int getfd (struct blah_s *blah)
 
 static ssize_t get (struct blah_s *blah)
 {
-  ssize_t r = fd_read(blah->fd, blah->s + blah->w, blah->len - blah->w) ;
+  ssize_t r = sanitize_read(fd_read(blah->fd, blah->s + blah->w, blah->len - blah->w)) ;
   if (r > 0) blah->w += r ;
   return r ;
 }
