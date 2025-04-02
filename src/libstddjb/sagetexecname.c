@@ -52,7 +52,7 @@ int sagetexecname (stralloc *sa)
 #include <skalibs/nonposix.h>
 #include <sys/types.h>
 #include <stdint.h>
-#include <macho-o/dyld.h>
+#include <mach-o/dyld.h>
 
 #include <skalibs/stralloc.h>
 #include <skalibs/djbunix.h>
