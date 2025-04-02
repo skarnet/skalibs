@@ -82,6 +82,7 @@ extern int sadirname (stralloc *, char const *, size_t) ;
 extern int sagetcwd (stralloc *) ;
 extern int sareadlink (stralloc *, char const *) ;
 extern int sagethostname (stralloc *) ;
+extern int sagetexecname (stralloc *) ;
 
 #define slurp(sa, fd) slurpn((fd), (sa), 0)
 #define openslurpclose(sa, fn) openslurpnclose((fn), (sa), 0)

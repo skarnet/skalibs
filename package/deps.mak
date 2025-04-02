@@ -487,6 +487,7 @@ src/libstddjb/rmstar.o src/libstddjb/rmstar.lo: src/libstddjb/rmstar.c src/inclu
 src/libstddjb/sabasename.o src/libstddjb/sabasename.lo: src/libstddjb/sabasename.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/sadirname.o src/libstddjb/sadirname.lo: src/libstddjb/sadirname.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/sagetcwd.o src/libstddjb/sagetcwd.lo: src/libstddjb/sagetcwd.c src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
+src/libstddjb/sagetexecname.o src/libstddjb/sagetexecname.lo: src/libstddjb/sagetexecname.c src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/stralloc.h src/include/skalibs/sysdeps.h
 src/libstddjb/sagethostname.o src/libstddjb/sagethostname.lo: src/libstddjb/sagethostname.c src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/sals.o src/libstddjb/sals.lo: src/libstddjb/sals.c src/include/skalibs/direntry.h src/include/skalibs/djbunix.h src/include/skalibs/stralloc.h
 src/libstddjb/sanitize_read.o src/libstddjb/sanitize_read.lo: src/libstddjb/sanitize_read.c src/include/skalibs/allreadwrite.h src/include/skalibs/error.h

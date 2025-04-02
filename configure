@@ -51,6 +51,7 @@ Sysdeps autodetection override:
 List of mandatory sysdeps to provide by hand for cross-compiling:
   devurandom (yes|no): =yes if you have a working /dev/urandom
   posixspawnearlyreturn (yes|no): =yes if you have an old glibc or otherwise bad posix_spawn
+  procselfexe (yes|no): =yes if you have a working /proc/self/exe virtual symlink
 EOF
   exit 0
 }
@@ -185,6 +186,32 @@ choose () {
     echo "$name: no" >> $sysdeps/sysdeps
     echo "  ... no"
   fi
+}
+
+choosevalue () {
+  name="$1"
+  if iscached "$name" ; then return ; fi
+  if test -n "$cross" ; then
+    rm -f try$name
+    fail "$0: sysdep $name cannot be autodetected when cross-compiling. Please manually provide a value with the --with-sysdep-${name}=value... option."
+  fi
+  echo "Finding a suitable value for $2..."
+  shift 2
+  r=none
+  if $CC_AUTO $CPPFLAGS_AUTO $CPPFLAGS $CPPFLAGS_POST $CFLAGS_AUTO $CFLAGS $CFLAGS_POST -o "$tmpo" -c src/sysdeps/try$name.c 2>/dev/null \
+   && $CC_AUTO $CFLAGS_AUTO $CFLAGS $CFLAGS_POST $LDFLAGS_AUTO $LDFLAGS $LDFLAGS_POST -o try$name "$tmpo" 2>/dev/null ; then
+    while test -n "$1" ; do
+      ./try$name "$1" >/dev/null 2>&1
+      case "$?" in
+       111) fail "$0: test crashed, aborting." ;;
+       0) r="$1" ; break ;;
+      esac
+    shift
+    done
+  fi
+  rm -f try$name
+  echo "$name: $r" >> $sysdeps/sysdeps
+  echo "  ... $r"
 }
 
 trybasic () {
@@ -662,10 +689,15 @@ choose cl posixspawnsetsid 'POSIX_SPAWN_SETSID' $spawn_lib
 choose cl posixspawnsetsidnp 'POSIX_SPAWN_SETSID_NP' $spawn_lib
 choose cl posixspawnchdir 'posix_spawn_file_actions_addchdir()' $spawn_lib
 choose cl posixspawnchdirnp 'posix_spawn_file_actions_addchdir_np()' $spawn_lib
+choose cl getauxval 'getauxval()'
+choose cl kernprocpathname 'the KERN_PROC_PATHNAME sysctl'
+choose cl _nsgetexecutablepath '_NSGetExecutablePath()'
+choose cl getexecname 'getexecname()'
 
 # Here are the evil irreducible run-time sysdeps.
 choose clr devurandom '/dev/urandom'
 choose clr posixspawnearlyreturn 'posix_spawn() return early' $spawn_lib
+choosevalue procselfexe '/proc/self/exe' /proc/self/exe /proc/curproc/exe /proc/curproc/file /proc/self/path/a.out
 
 
 # Finally, produce config.mak and config.h

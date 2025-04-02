@@ -24,13 +24,17 @@ while read k v ; do
   elif test ${k} != ${k##SIZEOF} ; then
     echo "#undef SKALIBS_$k"
     echo "#define SKALIBS_$k $v"
-  elif test ${k} = ENDIANNESS ; then
-    echo '#undef SKALIBS_ENDIANNESS'
-    echo "#define SKALIBS_ENDIANNESS \"$v\""
   else
-    echo "#undef SKALIBS_HAS$k"
     if test $v = yes ; then
+      echo "#undef SKALIBS_HAS$k"
       echo "#define SKALIBS_HAS$k"
+    elif test $v = no ; then
+      echo "#undef SKALIBS_HAS$k"
+    else
+      echo "#undef SKALIBS_$k"
+      if test $v != none ; then
+        echo "#define SKALIBS_$k \"$v\""
+      fi
     fi
   fi
   echo
