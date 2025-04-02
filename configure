@@ -51,7 +51,7 @@ Sysdeps autodetection override:
 List of mandatory sysdeps to provide by hand for cross-compiling:
   devurandom (yes|no): =yes if you have a working /dev/urandom
   posixspawnearlyreturn (yes|no): =yes if you have an old glibc or otherwise bad posix_spawn
-  procselfexe (yes|no): =yes if you have a working /proc/self/exe virtual symlink
+  procselfexe (path|none): =path if you can get the executable name via readlink(path)
 EOF
   exit 0
 }
