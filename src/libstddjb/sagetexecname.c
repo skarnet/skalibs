@@ -87,6 +87,7 @@ int sagetexecname (stralloc *sa)
 #include <skalibs/stralloc.h>
 #include <skalibs/djbunix.h>
 
+extern int main () ;
 int sagetexecname (stralloc *sa)
 {
   Dl_info info ;
