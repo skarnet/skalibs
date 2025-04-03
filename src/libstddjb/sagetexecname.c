@@ -2,7 +2,7 @@
 
 #include <skalibs/sysdeps.h>
 
-#if defined(SKALIBS_PROCSELFEXE)
+#if defined(SKALIBS_PROCSELFEXE)  /* Linux, midipix, Solaris */
 
 #include <skalibs/stralloc.h>
 #include <skalibs/djbunix.h>
@@ -12,20 +12,7 @@ int sagetexecname (stralloc *sa)
   return sareadlink(sa, SKALIBS_PROCSELFEXE) ;
 }
 
-#elif defined(SKALIBS_HASGETEXECNAME)
-
-#include <skalibs/nonposix.h>
-#include <stdlib.h>
-
-#include <skalibs/stralloc.h>
-#include <skalibs/djbunix.h>
-
-int sagetexecname (stralloc *sa)
-{
-  return sarealpath(sa, getexecname()) ;
-}
-
-#elif defined(SKALIBS_HASKERNPROCPATHNAME)
+#elif defined(SKALIBS_HASKERNPROCPATHNAME)  /* FreeBSD, NetBSD */
 
 #include <skalibs/nonposix.h>
 #ifdef __NetBSD__
@@ -47,7 +34,7 @@ int sagetexecname (stralloc *sa)
   return 0 ;
 }
 
-#elif defined(SKALIBS_HAS_NSGETEXECUTABLEPATH)
+#elif defined(SKALIBS_HAS_NSGETEXECUTABLEPATH)  /* MacOS */
 
 #include <skalibs/nonposix.h>
 #include <sys/types.h>
@@ -65,7 +52,7 @@ int sagetexecname (stralloc *sa)
   return sarealpath(sa, buf) ;
 }
 
-#elif defined(SKALIBS_HASGETAUXVAL)
+#elif defined(SKALIBS_HASGETAUXVAL)  /* Hurd */
 
 #include <skalibs/nonposix.h>
 #include <sys/auxv.h>
@@ -79,7 +66,7 @@ int sagetexecname (stralloc *sa)
   return sarealpath(sa, (char const *)x) ;
 }
 
-#elif defined(SKALIBS_HASDLADDR)
+#elif defined(SKALIBS_HASDLADDR)  /* hack that only works with dynamic binaries */
 
 #include <skalibs/nonposix.h>
 #include <dlfcn.h>
@@ -94,6 +81,19 @@ int sagetexecname (stralloc *sa)
   if (!dladdr(&main, &info)) return -1 ;
   if (!stralloc_cats(sa, info.dli_fname) || !stralloc_0(sa)) return -1 ;
   return 0 ;
+}
+
+#elif defined(SKALIBS_HASGETEXECNAME)  /* bad: it will probably give argv[0] */
+
+#include <skalibs/nonposix.h>
+#include <stdlib.h>
+
+#include <skalibs/stralloc.h>
+#include <skalibs/djbunix.h>
+
+int sagetexecname (stralloc *sa)
+{
+  return sarealpath(sa, getexecname()) ;
 }
 
 #else  /* we tried */
