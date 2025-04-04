@@ -121,6 +121,8 @@ extern int tain_add (tain *, tain const *, tain const *) ;
 #define tain_add_g(deadline, tto) tain_add(deadline, &STAMP, tto)
 extern int tain_addsec (tain *, tain const *, int) ;
 #define tain_addsec_g(deadline, n) tain_addsec(deadline, &STAMP, n)
+extern int tain_addmsec (tain *, tain const *, unsigned int) ;
+#define tain_addmsec_g(deadline, n) tain_addmillisec(deadline, &STAMP, n)
 extern int tain_sub (tain *, tain const *, tain const *) ;
 extern int tain_less (tain const *, tain const *) gccattr_pure ;
 #define tain_future(deadline) tain_less(&STAMP, (deadline))

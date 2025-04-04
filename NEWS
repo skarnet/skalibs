@@ -8,7 +8,7 @@ In 2.14.4.0
  - New functions: buffer_timed_getv, buffer_timed_putv,
    timed_read, timed_readv, timed_Write, timed_writev
  - New sysdeps, better handling of variable sysdeps
- - New function: sagetexecname
+ - New functions: sagetexecname, tain_addmsec, millisleep
 
 
 In 2.14.3.0

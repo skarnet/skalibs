@@ -174,6 +174,7 @@ src/libposixplz/execvep_loose.o src/libposixplz/execvep_loose.lo: src/libposixpl
 src/libposixplz/fork_newpid.o src/libposixplz/fork_newpid.lo: src/libposixplz/fork_newpid.c src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/uint64.h
 src/libposixplz/getpeereid.o src/libposixplz/getpeereid.lo: src/libposixplz/getpeereid.c src/include/skalibs/nonposix.h src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h
 src/libposixplz/memmem.o src/libposixplz/memmem.lo: src/libposixplz/memmem.c src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h
+src/libposixplz/millisleep.o src/libposixplz/millisleep.lo: src/libposixplz/millisleep.c src/include/skalibs/posixplz.h
 src/libposixplz/mkbtemp.o src/libposixplz/mkbtemp.lo: src/libposixplz/mkbtemp.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
 src/libposixplz/mkctemp.o src/libposixplz/mkctemp.lo: src/libposixplz/mkctemp.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
 src/libposixplz/mkfiletemp.o src/libposixplz/mkfiletemp.lo: src/libposixplz/mkfiletemp.c src/include/skalibs/posixplz.h src/include/skalibs/random.h
@@ -618,6 +619,7 @@ src/libstddjb/tai_u64.o src/libstddjb/tai_u64.lo: src/libstddjb/tai_u64.c src/in
 src/libstddjb/tai_unpack.o src/libstddjb/tai_unpack.lo: src/libstddjb/tai_unpack.c src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/tai_unpack_little.o src/libstddjb/tai_unpack_little.lo: src/libstddjb/tai_unpack_little.c src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/tain_add.o src/libstddjb/tain_add.lo: src/libstddjb/tain_add.c src/include/skalibs/tai.h
+src/libstddjb/tain_addmsec.o src/libstddjb/tain_addmsec.lo: src/libstddjb/tain_addmsec.c src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/tain_addsec.o src/libstddjb/tain_addsec.lo: src/libstddjb/tain_addsec.c src/include/skalibs/tai.h src/include/skalibs/uint64.h
 src/libstddjb/tain_approx.o src/libstddjb/tain_approx.lo: src/libstddjb/tain_approx.c src/include/skalibs/tai.h
 src/libstddjb/tain_earliest1.o src/libstddjb/tain_earliest1.lo: src/libstddjb/tain_earliest1.c src/include/skalibs/tai.h

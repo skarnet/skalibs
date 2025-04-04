@@ -407,6 +407,12 @@ Adds <em>c</em> seconds to *<em>a1</em> and stores the result into <em>a</em>.
 </p>
 
 <p>
+<code> int tain_addmsec (tain *a, tain const *a1, unsigned int c) </code> <br />
+Adds <em>c</em> milliseconds to *<em>a1</em> and stores the result into <em>a</em>.
+Unlike with the previous function, <em>c</em> cannot be negative.
+</p>
+
+<p>
 <code> void tain_half (tain *a, tain const *b) </code> <br />
 Stores *<em>b</em>/2 into <em>a</em>. *<em>b</em> must be relative.
 </p>
