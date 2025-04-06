@@ -35,6 +35,7 @@ pid_t child_spawn (char const *prog, char const *const *argv, char const *const 
     m += uint_fmt(modifs + m, p[i][!(i & 1)]) ;
     if (i+1 < n) modifs[m++] = ',' ;
   }
+  i = n ;
   modifs[m++] = 0 ;
   env_mergen(newenv, envlen + 2, envp, envlen, modifs, m, 1) ;
   if (n) fa[0].x.fd2[1] = p[0][1] ;
