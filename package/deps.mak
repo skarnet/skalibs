@@ -398,7 +398,7 @@ src/libstddjb/ip46_scanlist.o src/libstddjb/ip46_scanlist.lo: src/libstddjb/ip46
 src/libstddjb/ip4_fmt.o src/libstddjb/ip4_fmt.lo: src/libstddjb/ip4_fmt.c src/include/skalibs/fmtscan.h src/include/skalibs/uint32.h
 src/libstddjb/ip4_fmtu32.o src/libstddjb/ip4_fmtu32.lo: src/libstddjb/ip4_fmtu32.c src/include/skalibs/fmtscan.h src/include/skalibs/uint32.h
 src/libstddjb/ip4_netmask.o src/libstddjb/ip4_netmask.lo: src/libstddjb/ip4_netmask.c src/include/skalibs/fmtscan.h src/include/skalibs/uint32.h
-src/libstddjb/ip4_scan.o src/libstddjb/ip4_scan.lo: src/libstddjb/ip4_scan.c src/include/skalibs/fmtscan.h src/include/skalibs/types.h
+src/libstddjb/ip4_scan.o src/libstddjb/ip4_scan.lo: src/libstddjb/ip4_scan.c src/include/skalibs/fmtscan.h src/include/skalibs/uint16.h
 src/libstddjb/ip4_scanlist.o src/libstddjb/ip4_scanlist.lo: src/libstddjb/ip4_scanlist.c src/include/skalibs/fmtscan.h
 src/libstddjb/ip4_scanlist_u32.o src/libstddjb/ip4_scanlist_u32.lo: src/libstddjb/ip4_scanlist_u32.c src/include/skalibs/fmtscan.h
 src/libstddjb/ip4_scanu32.o src/libstddjb/ip4_scanu32.lo: src/libstddjb/ip4_scanu32.c src/include/skalibs/fmtscan.h src/include/skalibs/uint32.h

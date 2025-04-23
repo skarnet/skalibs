@@ -125,7 +125,7 @@ libskarnet.a.xyzzy: $(ALL_SOBJS)
 	exec $(RANLIB) $@
 
 libskarnet.so.xyzzy: $(ALL_DOBJS)
-	exec $(CC) -o $@ $(CFLAGS_ALL) $(CFLAGS_SHARED) $(LDFLAGS_ALL) $(LDFLAGS_SHARED) -Wl,-soname,libskarnet.so.$(version_M) $^ $(SOCKET_LIB) $(SPAWN_LIB) $(SYSCLOCK_LIB) $(TAINNOW_LIB) $(TIMER_LIB) $(UTIL_LIB)
+	exec $(CC) -o $@ $(CFLAGS_ALL) $(CFLAGS_SHARED) $(LDFLAGS_ALL) $(LDFLAGS_SHARED) -Wl,-soname,libskarnet.so.$(version_M) -Wl,-rpath=$(dynlibdir) $^ $(SOCKET_LIB) $(SPAWN_LIB) $(SYSCLOCK_LIB) $(TAINNOW_LIB) $(TIMER_LIB) $(UTIL_LIB)
 
 .PHONY: it all clean distclean tgz strip install install-data install-sysdeps install-dynlib install-lib install-include
 
