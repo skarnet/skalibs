@@ -52,7 +52,7 @@ int envdir_internal_noclamp (char const *path, stralloc *modifs, unsigned int op
     {
       if (!slurp(modifs, fd)) goto errfd ;
       if (modifs->len == pos) modifs->len = pos - 1 ;
-      if (!(options & SKALIBS_ENVDIR_NOCHOMP) && (modifs->s[modifs->len - 1] == '\n')) modifs->len-- ;
+      else if (!(options & SKALIBS_ENVDIR_NOCHOMP) && modifs->s[modifs->len - 1] == '\n') modifs->len-- ;
     }
     else
     {
