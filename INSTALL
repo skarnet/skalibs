@@ -11,8 +11,8 @@ non-autodetectable sysdeps for your target architecture. See the
 "Cross-compilation" section below.
 
  This software will install on any operating system that implements
-POSIX.1-2008, available at:
-  https://pubs.opengroup.org/onlinepubs/9699919799/
+POSIX.1-2024, available at:
+  https://pubs.opengroup.org/onlinepubs/9799919799/
 
 
 * Standard usage

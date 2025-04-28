@@ -30,9 +30,9 @@ and implemented in the <tt>libskarnet.a</tt> or <tt>libskarnet.so</tt> library.
 <p>
  <tt>iopause</tt> is the skalibs API for event loop selection. It's a
 wrapper around the system's <tt>ppoll()</tt> or
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/poll.html">poll()</a>
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/poll.html">poll()</a>
 (if available) or
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/select.html">select()</a>
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/select.html">select()</a>
 (if neither <tt>ppoll()</tt> nor <tt>poll()</tt> is available) function.
  It works around some system-dependent quirks; also it works with
 <em>absolute dates</em> instead of timeouts. This is a good thing:
@@ -49,7 +49,7 @@ skalibs implementation is subtly different.
 
 <p>
  An <tt>iopause_fd</tt> structure is similar to a
-<a href="https://www.opengroup.org/onlinepubs/9699919799/basedefs/poll.h.html">struct pollfd</a>
+<a href="https://www.opengroup.org/onlinepubs/9799919799/basedefs/poll.h.html">struct pollfd</a>
 structure, and must be filled the same way. Usually, the user declares
 an array of <tt>iopause_fd</tt> and fills it, one element per descriptor
 to select on. If <em>x</em> is an <tt>iopause_fd</tt>:
@@ -183,9 +183,9 @@ instead if they configure skalibs with the <tt>--enable-iopause-select</tt> opti
 </p>
 
 <p>
-<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/poll.html">poll()</a>
+<a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/poll.html">poll()</a>
 has a more comfortable API than
-<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/select.html">select()</a>,
+<a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/select.html">select()</a>,
 but its maximum precision is 1 millisecond, which might not be enough for some applications;
 using <tt>select()</tt> instead incurs some CPU overhead for the API conversion, but has a
 1 microsecond precision.

@@ -132,7 +132,7 @@ allowing reading of unlimited-size variables. </li>
 <a href="https://man7.org/linux/man-pages/man2/close.2.html">close()</a>
 behaviour (closing the fd on EINTR) over the HP-UX one (not closing it).
 Destructors like
-<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/close.html">close()</a>
+<a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/close.html">close()</a>
 being allowed to fail has always been a mistake in the specification and a
 programming nightmare, making it impossible to behave correctly on all
 systems, but apparently standardization efforts are on the way and the Linux
@@ -189,7 +189,7 @@ uses it, so it won't unconditionally clobber sockets in the filesystem anymore. 
  <li> Revamping of the locking functions, see
 <a href="libstddjb/djbunix.html>djbunix.h</a>. </li>
  <li> Use of standard O_NONBLOCK and O_CLOEXEC (defined in
-<a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/fcntl.h.html"></a>
+<a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/fcntl.h.html"></a>
 instead of adhoc <tt>DJBUNIX_FLAG_NB</tt> and <tt>DJBUNIX_FLAG_COE</tt>. </li>
  <li>Better header separation; <tt>webipc.h</tt> removed (stuff moved to
 <tt>socket.h</tt>). </li>
@@ -251,7 +251,7 @@ Currently, that means one: <tt>--with-sysdep-devurandom=yes</tt> or
  <li> New functions:
   <ul>
    <li> <tt>skalibs_regcomp()</tt>, which accepts empty regexes even
-when <a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/regcomp.html">regcomp()</a>
+when <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/regcomp.html">regcomp()</a>
 does not (e.g. the BSDs). </li>
   </ul> </li>
 </ul>
@@ -346,7 +346,7 @@ families of functions, have been removed. </li>
 
 <ul>
  <li> <tt>openwritenclose()</tt> and <tt>openwritevnclose()</tt> now use
-<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/mkstemp.html">mkstemp()</a>
+<a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/mkstemp.html">mkstemp()</a>
 instead of relying on an unpredictable name (which required a random
 generator to be fully initialized). </li>
 </ul>
@@ -524,7 +524,7 @@ types. Main benefit: correct 64-bit support on 64-bit archs with 32-bit int. </l
 <ul>
  <li> The child_spawn* family of functions now resets all signals
 to their default values when spawning a program on systems with
-<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/posix_spawn.html">posix_spawn()</a>.
+<a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/posix_spawn.html">posix_spawn()</a>.
 This should not change anything - it's just paranoia. </li>
  <li> Minor bugfixes. </li>
 </ul>

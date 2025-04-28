@@ -62,21 +62,21 @@ the original working directory using <tt>fd_chdir</tt>.
 <p>
 <code> int open2_at (int fd, char const *file, int flags) </code><br />
 Safe wrapper around
-<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/open.html">openat()</a>
+<a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/open.html">openat()</a>
 when it takes 2 arguments.
 </p>
 
 <p>
 <code> int open3_at (int fd, char const *file, int flags) </code><br />
 Safe wrapper around
-<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/open.html">openat()</a>
+<a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/open.html">openat()</a>
 when it takes 3 arguments.
 </p>
 
 <p>
 <code> int access_at (int fd, char const *file, int amode, unsigned int flag) </code><br />
 Calls
-<a href="https://pubs.opengroup.org/onlinepubs/9699919799.orig/functions/faccessat.html">faccessat()</a>
+<a href="https://pubs.opengroup.org/onlinepubs/9799919799.orig/functions/faccessat.html">faccessat()</a>
 with <em>flags</em> set either to zero, or <tt>AT_EACCESS</tt>, if <em>flag</em> is nonzero.
 This function ensures a fall back on platforms without <tt>*at</tt> system calls.
 </p>

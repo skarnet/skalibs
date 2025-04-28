@@ -71,21 +71,21 @@ Returns 0 if it succeeds, or -1 (and sets errno) if it fails.
 <p>
 <code> int pipenb (int *p) </code> <br />
 Like
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/pipe.html">pipe()</a>,
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/pipe.html">pipe()</a>,
 but both ends of the created pipe are in non-blocking mode.
 </p>
 
 <p>
 <code> int pipecoe (int *p) </code> <br />
 Like
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/pipe.html">pipe()</a>,
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/pipe.html">pipe()</a>,
 but both ends of the created pipe are close-on-exec.
 </p>
 
 <p>
 <code> int pipenbcoe (int *p) </code> <br />
 Like
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/pipe.html">pipe()</a>,
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/pipe.html">pipe()</a>,
 but both ends of the created pipe are in non-blocking mode <em>and</em> close-on-exec.
 </p>
 
@@ -123,32 +123,32 @@ Returns 0 if it succeeds, or -1 (and sets errno) if it fails.
 <code> void fd_close (int fd) </code> <br />
 Closes <em>fd</em>.
 This is a <a href="safewrappers.html">safe wrapper</a> around
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/close.html">close()</a>.
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/close.html">close()</a>.
 </p>
 
 <p>
 <code> int fd_chmod (int fd, unsigned int mode) </code> <br />
 Safe wrapper around
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/fchmod.html">fchmod()</a>.
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/fchmod.html">fchmod()</a>.
 </p>
 
 <p>
 <code> int fd_chown (int fd, uid_t uid, gid_t gid) </code> <br />
 Safe wrapper around
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/fchown.html">fchown()</a>.
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/fchown.html">fchown()</a>.
 This function requires root privileges.
 </p>
 
 <p>
 <code> int fd_sync (int fd) </code> <br />
 Safe wrapper around
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/fsync.html">fsync()</a>.
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/fsync.html">fsync()</a>.
 </p>
 
 <p>
 <code> int fd_chdir (int fd) </code> <br />
 Safe wrapper around
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/fchdir.html">fchdir()</a>.
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/fchdir.html">fchdir()</a>.
 </p>
 
 <p>
@@ -196,7 +196,7 @@ Returns 1 if it succeeds and 0 if it fails.
 Shuts down socket <em>fd</em>, for reading if <em>w</em> is zero,
 and for writing otherwise. Does not return an error code; does
 not modify errno. This is just a call to
-<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/shutdown.html">shutdown()</a>
+<a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/shutdown.html">shutdown()</a>
 with errno saved, used essentially to isolate application code from
 <tt>sys/socket.h</tt> which is a portability nightmare.
 </p>
@@ -227,14 +227,14 @@ Returns -1 (and sets errno) if an error occurs.
 <p>
 <code> int open2 (char const *file, unsigned int flags) </code> <br />
 Safe wrapper around
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/open.html">open()</a>
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/open.html">open()</a>
 when it takes 2 arguments.
 </p>
 
 <p>
 <code> int open3 (char const *file, unsigned int flags, unsigned int mode) </code> <br />
 Safe wrapper around
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/open.html">open()</a>
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/open.html">open()</a>
 when it takes 3 arguments.
 </p>
 
@@ -267,7 +267,7 @@ Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
 Opens <em>file</em> in read-only, blocking mode.
 Returns a valid fd number if it succeeds, or -1 (and sets errno) if it fails.
 <em>This call does not block.</em> The
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/open.html">open()</a>
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/open.html">open()</a>
 system call is actually performed with the O_NONBLOCK option, and blocking mode
 is set afterwards; this behaviour allows for more transparent interactions
 with FIFOs.
@@ -413,7 +413,7 @@ or -1 (and sets errno) if it fails.
 <p>
 <code> pid_t waitpid_nointr (pid_t pid, int *wstat, int flags) </code> <br />
 Safe wrapper around
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/waitpid.html">waitpid()</a>.
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/waitpid.html">waitpid()</a>.
 </p>
 
 <p>

@@ -219,12 +219,12 @@ be trapped anymore.
  <li> The selfpipe library uses a global pipe;
 so, it's theoretically not safe for multithreading. However, as long as you dedicate
 one thread to signal handling and block signals in all the other threads
-(see <a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/pthread_sigmask.html">pthread_sigmask()</a>)
+(see <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/pthread_sigmask.html">pthread_sigmask()</a>)
 then you should be able to use the selfpipe in the thread that handles
 signals without trouble. Since reading the selfpipe involves waiting for
 a file descriptor to become readable, it is recommended to do this in a
 thread that will already have a regular input/output loop (via
-<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/poll.html">poll()</a>
+<a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/poll.html">poll()</a>
 or <a href="iopause.html">iopause()</a>) so you can just add the selfpipe
 to the list of fds you're reading on. </li>
  <li> In rare cases, the self-pipe can theoretically be filled, if some

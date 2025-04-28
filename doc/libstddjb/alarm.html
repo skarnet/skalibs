@@ -29,18 +29,18 @@ and implemented in the <tt>libskarnet.a</tt> or <tt>libskarnet.so</tt> library.
 
 <p>
  <tt>alarm</tt> is a set of primitives to provide the same functionality as
-<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/alarm.html">alarm()</a>,
+<a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/alarm.html">alarm()</a>,
 but with sub-second precision.
 </p>
 
 <p>
  Depending on the functionality the underlying system provides,
 the precision can be 1 nanosecond (implementation via
-<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/timer_getoverrun.html">timer_settime()</a>,
+<a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/timer_getoverrun.html">timer_settime()</a>,
 1 microsecond (implementation via
-<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/setitimer.html">setitimer()</a>,
+<a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/setitimer.html">setitimer()</a>,
 or 1 second (fallback implementation with
-<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/alarm.html">alarm()</a>
+<a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/alarm.html">alarm()</a>
 when nothing better can be found).
 </p>
 

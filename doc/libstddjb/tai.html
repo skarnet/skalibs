@@ -64,7 +64,7 @@ on UTC, TAI and Unix time</a>. </li>
 <p>
  The meat and potatoes of all this is that programmers cannot simply rely on
 standard Unix APIs such as
-<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/gettimeofday.html">gettimeofday()</a>
+<a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/gettimeofday.html">gettimeofday()</a>
 (which, by the way, is marked as obsolescent, but it's not going to disappear tomorrow)
 to measure time intervals or even to give precise absolute time, and in
 any case those APIs will become obsolete in 2038.
@@ -96,10 +96,10 @@ precision. A <tt>tain</tt> structure holds an absolute date with a
 maximum of one-nanosecond precision, as permitted by the underlying system
 call. If <a href="../flags.html#usert">flag-usert</a> is clear, the system
 clock will be read via
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/gettimeofday.html">gettimeofday()</a>
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/gettimeofday.html">gettimeofday()</a>
 system call, which has a one-microsecond precision; if it is set, the
 system clock will be read via the 
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/clock_gettime.html">clock_gettime()</a>
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/clock_gettime.html">clock_gettime()</a>
 system call, which has a one-nanosecond precision. In either case, a current
 <tt>tain</tt> will be unable to be more precise than the underlying
 implementation.
@@ -180,7 +180,7 @@ start of a program.
 
 <p>
 The following two operations can only succeed if your system provides the
-<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/clock_gettime.html">clock_gettime()</a>
+<a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/clock_gettime.html">clock_gettime()</a>
 primitive with at least one of the CLOCK_MONOTONIC or CLOCK_BOOTTIME clocks.
 Otherwise, they will fail with errno set to ENOSYS.
 </p>
@@ -333,7 +333,7 @@ depending on whether skalibs was
 compiled with the --enable-tai-clock configure option).
 This is useful to get valid TAI/TAI64N timestamps out of
 information exported by the system, for instance the time_t
-returned by <a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/time.html">time()</a>,
+returned by <a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/time.html">time()</a>,
 or in the <tt>st_atim</tt>, <tt>st_mtim</tt> or
 <tt>st_ctim</tt> fields of a <tt>struct stat</tt>.
 </p>

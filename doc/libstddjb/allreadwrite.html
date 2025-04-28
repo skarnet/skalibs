@@ -46,17 +46,17 @@ use higher-level APIs such as <a href="buffer.html">buffer</a> and
 <p>
 <code> typedef ssize_t io_func (int fd, char *buf, size_t len) </code> <br />
 This is the simplified type of IO functions such as
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/read.html">read()</a>
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/read.html">read()</a>
 and
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/write.html">write()</a>.
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/write.html">write()</a>.
 </p>
 
 <p>
 <code> typedef ssize_t iov_func (int fd, struct iovec const *v, unsigned int vlen) </code> <br />
 This is the simplified type of IO functions such as
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/readv.html">readv()</a>
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/readv.html">readv()</a>
 and
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/writev.html">writev()</a>,
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/writev.html">writev()</a>,
 where the content to perform IO on is specified as a
 <a href="siovec.html">scatter/gather array</a> of <em>vlen</em>
 elements instead of a single string.
@@ -122,42 +122,42 @@ elements instead of a single string.
 <p>
 <code> ssize_t fd_read (int fd, char *s, size_t len) </code> <br />
 <a href="safewrappers.html">Safe wrapper</a> around the
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/read.html">read()</a>
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/read.html">read()</a>
 function.
 </p>
 
 <p>
 <code> ssize_t fd_write (int fd, char const *s, size_t len) </code> <br />
 <a href="safewrappers.html">Safe wrapper</a> around the
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/write.html">write()</a>
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/write.html">write()</a>
 function.
 </p>
 <p>
 
 <code> ssize_t fd_readv (int fd, struct iovec const *v, unsigned int vlen) </code> <br />
 <a href="safewrappers.html">Safe wrapper</a> around the
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/readv.html">readv()</a>
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/readv.html">readv()</a>
 function.
 </p>
 
 <p>
 <code> ssize_t fd_writev (int fd, struct iovec const *v, unsigned int vlen) </code> <br />
 <a href="safewrappers.html">Safe wrapper</a> around the
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/writev.html">writev()</a>
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/writev.html">writev()</a>
 function.
 </p>
 
 <p>
 <code> ssize_t fd_recv (int fd, char *s, size_t len, unsigned int flags) </code> <br />
 <a href="safewrappers.html">Safe wrapper</a> around the
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/recv.html">recv()</a>
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/recv.html">recv()</a>
 function.
 </p>
 
 <p>
 <code> ssize_t fd_send (int fd, char const *s, size_t len, unsigned int flags) </code> <br />
 <a href="safewrappers.html">Safe wrapper</a> around the
-<a href="https://www.opengroup.org/onlinepubs/9699919799/functions/send.html">send()</a>
+<a href="https://www.opengroup.org/onlinepubs/9799919799/functions/send.html">send()</a>
 function.
 </p>
 
