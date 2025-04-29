@@ -49,11 +49,16 @@ src/include/$(package)/ip46.h
 ALL_INCLUDES := $(sort $(BUILT_INCLUDES) $(wildcard src/include/$(package)/*.h))
 ALL_SYSDEPS := $(wildcard $(sysdeps)/*)
 ALL_DATA := $(wildcard src/etc/*)
+PC_TARGETS :=
+ifdef DO_PKGCONFIG
+PC_TARGETS += libskarnet.pc
+endif
 
-all: config.mak $(ALL_LIBS) $(ALL_INCLUDES) $(ALL_SYSDEPS) $(ALL_DATA)
+
+all: config.mak $(ALL_LIBS) $(ALL_INCLUDES) $(ALL_SYSDEPS) $(ALL_DATA) $(PC_TARGETS)
 
 clean:
-	@exec rm -f $(ALL_LIBS) $(ALL_BINS) $(ALL_SOBJS) $(ALL_DOBJS) $(BUILT_INCLUDES)
+	@exec rm -f $(ALL_LIBS) $(ALL_BINS) $(ALL_SOBJS) $(ALL_DOBJS) $(BUILT_INCLUDES) $(PC_TARGETS)
 
 distclean: clean
 	@exec rm -rf config.mak src/include/$(package)/config.h sysdeps.cfg
@@ -74,12 +79,13 @@ ifneq ($(strip $(SHARED_LIBS)),)
 	exec $(STRIP) -R .note -R .comment $(SHARED_LIBS)
 endif
 
-install: install-sysconf install-sysdeps install-dynlib install-lib install-include
+install: install-sysconf install-sysdeps install-dynlib install-lib install-include install-pkgconfig
 install-sysconf: $(ALL_DATA:src/etc/%=$(DESTDIR)$(sysconfdir)/%)
 install-sysdeps: $(ALL_SYSDEPS:$(sysdeps)/%=$(DESTDIR)$(sysdepdir)/%)
 install-dynlib: $(SHARED_LIBS:lib%.so.xyzzy=$(DESTDIR)$(dynlibdir)/lib%.so)
 install-lib: $(STATIC_LIBS:lib%.a.xyzzy=$(DESTDIR)$(libdir)/lib%.a)
 install-include: $(ALL_INCLUDES:src/include/$(package)/%.h=$(DESTDIR)$(includedir)/$(package)/%.h)
+install-pkgconfig: $(PC_TARGETS:%=$(DESTDIR)$(pkgconfdir)/%)
 
 ifneq ($(exthome),)
 
@@ -114,6 +120,9 @@ $(DESTDIR)$(libdir)/lib%.a: lib%.a.xyzzy
 $(DESTDIR)$(includedir)/$(package)/%.h: src/include/$(package)/%.h
 	exec $(INSTALL) -D -m 644 $< $@
 
+$(DESTDIR)$(pkgconfdir)/lib%.pc: lib%.pc
+	exec $(INSTALL) -D -m 644 $< $@
+
 %.o: %.c
 	exec $(CC) $(CPPFLAGS_ALL) $(CFLAGS_ALL) -c -o $@ $<
 
@@ -126,6 +135,21 @@ libskarnet.a.xyzzy: $(ALL_SOBJS)
 
 libskarnet.so.xyzzy: $(ALL_DOBJS)
 	exec $(CC) -o $@ $(CFLAGS_ALL) $(CFLAGS_SHARED) $(LDFLAGS_ALL) $(LDFLAGS_SHARED) -Wl,-soname,libskarnet.so.$(version_M) -Wl,-rpath=$(dynlibdir) $^ $(SOCKET_LIB) $(SPAWN_LIB) $(SYSCLOCK_LIB) $(TAINNOW_LIB) $(TIMER_LIB) $(UTIL_LIB)
+
+libskarnet.pc:
+	exec env \
+	  library="skarnet" \
+	  includedir="$(includedir)" \
+	  dynlibdir="$(dynlibdir)" \
+	  libdir="$(libdir)" \
+	  extra_includedirs="$(extra_includedirs)" \
+	  extra_libdirs="$(extra_libdirs)" \
+	  extra_libs="$(strip $(SOCKET_LIB) $(SPAWN_LIB) $(SYSCLOCK_LIB) $(TAINNOW_LIB) $(TIMER_LIB) $(UTIL_LIB))" \
+	  description="The skarnet.org C programming library (skalibs)" \
+	  url="https://skarnet.org/software/skalibs/" \
+	  ldlibs="$(LDLIBS)" \
+	  ./tools/gen-dotpc.sh > $@.tmp
+	exec mv -f $@.tmp $@
 
 .PHONY: it all clean distclean tgz strip install install-data install-sysdeps install-dynlib install-lib install-include
 

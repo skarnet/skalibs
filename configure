@@ -23,6 +23,7 @@ Fine tuning of the installation directories:
   --libdir=DIR                  static library files [PREFIX/lib]
   --includedir=DIR              include files for the C compiler [PREFIX/include]
   --sysconfdir=DIR              global configuration files [PREFIX/etc]
+  --pkgconfdir=DIR              pkg-config .pc files [PREFIX/lib/pkgconfig]
   --sysdepdir=DIR               sysdeps directory [PREFIX/lib/$package/sysdeps]
 
 If no --prefix option is given, by default libdir will be /usr/lib,
@@ -38,8 +39,9 @@ Optional features:
   --disable-static              do not build static libraries [enabled]
   --disable-all-pic             do not build static libraries as PIC [enabled]
   --enable-slashpackage[=ROOT]  assume /package installation at ROOT [disabled]
+  --enable-pkgconfig            Build and install .pc files for pkg-config [disabled]
 
-$package options:
+$package tuning options:
   --disable-ipv6                do not build IPv6 support [enabled]
   --enable-iopause-select       prefer select() over poll() for iopause implementation [disabled]
   --enable-tai-clock            build for a TAI-10 system clock instead of a UTC one [disabled]
@@ -394,6 +396,7 @@ dynlibdir='$prefix/lib'
 libdir='$prefix/lib'
 includedir='$prefix/include'
 sysconfdir='$prefix/etc'
+pkgconfdir='$prefix/lib/pkgconfig'
 sysdepdir='$prefix/lib/$package/sysdeps'
 sysdeplist=
 shared=true
@@ -406,12 +409,15 @@ taiclock=false
 ddefaultpath=/usr/bin:/bin
 defaultpath=$ddefaultpath
 dpathorig=true
+pcw=false
 sproot=
 home=
 exthome=
 addincpath=''
 addlibspath=''
 addlibdpath=''
+depincpath=''
+deplibpath=''
 vpaths=''
 vpathd=''
 build=
@@ -425,9 +431,10 @@ for arg ; do
     --libdir=*) libdir=${arg#*=} ;;
     --includedir=*) includedir=${arg#*=} ;;
     --sysconfdir=*) sysconfdir=${arg#*=} ;;
+    --pkgconfdir=*) pkgconfdir=${arg#*=} ;;
     --sysdepdir=*) sysdepdir=${arg#*=} ;;
-    --with-include=*) var=${arg#*=} ; stripdir var ; addincpath="$addincpath -I$var" ;;
-    --with-lib=*) var=${arg#*=} ; stripdir var ; addlibspath="$addlibspath -L$var" ; vpaths="$vpaths $var" ;;
+    --with-include=*) var=${arg#*=} ; stripdir var ; addincpath="$addincpath -I$var" ; depincpath="${depincpath}${depincpath:+ }-I$var" ;;
+    --with-lib=*) var=${arg#*=} ; stripdir var ; addlibspath="$addlibspath -L$var" ; deplibpath="${deplibpath}${deplibpath:+ }-L$var" ; vpaths="$vpaths $var" ;;
     --with-dynlib=*) var=${arg#*=} ; stripdir var ; addlibdpath="$addlibdpath -L$var" ; vpathd="$vpathd $var" ;;
     --enable-shared|--enable-shared=yes) shared=true ;;
     --disable-shared|--enable-shared=no) shared=false ;;
@@ -435,6 +442,8 @@ for arg ; do
     --disable-static|--enable-static=no) static=false ;;
     --enable-all-pic|--enable-all-pic=yes) allpic=true ;;
     --disable-all-pic|--enable-all-pic=no) allpic=false ;;
+    --enable-pkgconfig|--enable-pkgconfig=yes) pcw=true ;;
+    --disable-pkgconfig|--enable-pkgconfig=no) pcw=false ;;
     --enable-slashpackage=*) sproot=${arg#*=} ; slashpackage=true ; ;;
     --enable-slashpackage) sproot= ; slashpackage=true ;;
     --disable-slashpackage) sproot= ; slashpackage=false ;;
@@ -467,6 +476,9 @@ if test -z "$prefix" ; then
   if test "$includedir" = '$prefix/include' ; then
     includedir=/usr/include
   fi
+  if test "$pkgconfdir" = '$prefix/lib/pkgconfig' ; then
+    pkgconfdir=/usr/lib/pkgconfig
+  fi
   if test "$sysdepdir" = '$prefix/lib/$package/sysdeps' ; then
     sysdepdir=/usr/lib/$package/sysdeps
   fi
@@ -474,7 +486,7 @@ fi
 
 # Expand installation directories
 stripdir prefix
-for i in exec_prefix dynlibdir libdir includedir sysconfdir sysdepdir sysdepspre sproot ; do
+for i in exec_prefix dynlibdir libdir includedir sysconfdir pkgconfdir sysdepdir sysdepspre sproot ; do
   eval tmp=\${$i}
   eval $i=$tmp
   stripdir $i
@@ -490,6 +502,7 @@ if $slashpackage ; then
   dynlibdir=${home}/library.so
   libdir=${home}/library
   includedir=${home}/include
+  pkgconfdir=${home}/pkgconfig
   if $dpathorig ; then
     if echo $defaultpath | tr : '\n' | grep -q '^/command$' ; then : ; else
       defaultpath="/command:$defaultpath"
@@ -721,11 +734,14 @@ sysdepdir := $sysdepdir
 dynlibdir := $dynlibdir
 libdir := $libdir
 includedir := $includedir
+pkgconfdir := $pkgconfdir
 sysdeps := $sysdeps
 version := $version
 sproot := $sproot
 home := $home
 exthome := ${exthome}
+extra_includedirs :=$depincpath
+extra_libdirs :=$deplibpath
 ipv6 := ${ipv6}
 SPAWN_LIB := ${spawn_lib}
 SOCKET_LIB := ${socket_lib}
@@ -759,6 +775,11 @@ if $shared ; then
   echo "SHARED_LIBS := libskarnet.so.xyzzy"
 else
   echo "SHARED_LIBS :="
+fi
+if $pcw ; then
+  echo "DO_PKGCONFIG := 1"
+else
+  echo "DO_PKGCONFIG :="
 fi
 if $allpic ; then
   echo "STATIC_LIBS_ARE_PIC := 1"

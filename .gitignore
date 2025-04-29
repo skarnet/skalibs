@@ -1,6 +1,7 @@
 *.o
-/*.a.xyzzy
 *.lo
+/*.pc
+/*.a.xyzzy
 /*.so.xyzzy
 /config.mak
 /src/include/skalibs/config.h
