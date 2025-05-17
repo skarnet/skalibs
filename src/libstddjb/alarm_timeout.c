@@ -42,8 +42,9 @@ int alarm_timeout (tain const *tto)
 #else
 #ifdef SKALIBS_HASITIMER
 
-#include <limits.h>
 #include <sys/time.h>
+#include <errno.h>
+#include <limits.h>
 
 int alarm_timeout (tain const *tto)
 {
@@ -53,7 +54,12 @@ int alarm_timeout (tain const *tto)
     it.it_value.tv_sec = INT_MAX ;
     it.it_value.tv_usec = 0 ;
   }
-  if (setitimer(ITIMER_REAL, &it, 0) < 0) return 0 ;
+  if (setitimer(ITIMER_REAL, &it, 0) < 0)
+  {
+    if (errno != EINVAL) return 0 ;
+    it.it_Value.tv_sec = 9999999 ;
+    if (setitimer(ITIMER_REAL, &it, 0) < 0) return 0 ;
+  }
   return 1 ;
 }
 
