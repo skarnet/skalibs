@@ -57,7 +57,7 @@ int alarm_timeout (tain const *tto)
   if (setitimer(ITIMER_REAL, &it, 0) < 0)
   {
     if (errno != EINVAL) return 0 ;
-    it.it_Value.tv_sec = 9999999 ;
+    it.it_value.tv_sec = 9999999 ;
     if (setitimer(ITIMER_REAL, &it, 0) < 0) return 0 ;
   }
   return 1 ;
