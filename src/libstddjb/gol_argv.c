@@ -15,12 +15,17 @@ unsigned int gol_argv (int argc, char const *const *argv, gol_bool const *b, uns
 
   if (r < 0)
   {
-    if (problem >= 0)
+    if (problem > 0)
     {
       char s[2] = { argv[-r][problem], 0 } ;
-      strerr_dief4x(100, "unrecognized ", "short", "option: ", s) ;
+      strerr_dief4x(100, "unrecognized ", "short ", "option: ", s) ;
     }
-    else strerr_dief3x(100, "unrecognized ", "option: ", argv[-r]) ;
+    else if (!problem)
+      strerr_dief3x(100, "invalid ", "option: ", argv[-r]) ;
+    else if (problem == -1)
+      strerr_dief4x(100, "unrecognized ", "boolean ", "option: ", argv[-r]) ;
+    else
+      strerr_dief3x(100, "unrecognized ", "option with argument: ", argv[-r]) ;
   }
   else return r + 1 ;
 }

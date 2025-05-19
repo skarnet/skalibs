@@ -18,8 +18,9 @@ int gol (char const *const *argv, unsigned int argc, gol_bool const *b, unsigned
       if (x)
       {
         size_t len = x - argv[i] - 2 ;
+        if (!len) return (*problem = 0, -1-i) ;
         for (; j < an ; j++) if (!strncmp(argv[i] + 2, a[j].lo, len) && !a[j].lo[len]) break ;
-        if (j >= an) return (*problem = -1, -1-i) ;
+        if (j >= an) return (*problem = -len-2, -1-i) ;
         ar[a[j].i] = x + 1 ;
       }
       else
@@ -32,7 +33,7 @@ int gol (char const *const *argv, unsigned int argc, gol_bool const *b, unsigned
     else
     {
       char const *p = argv[i] + 1 ;
-      for (; !*p ; p++)
+      for (; *p ; p++)
       {
         unsigned int j = 0 ;
         for (; j < an ; j++) if (*p == a[j].so) break ;
