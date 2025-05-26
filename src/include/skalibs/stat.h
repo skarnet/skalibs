@@ -11,7 +11,6 @@
  */
 
 #include <skalibs/sysdeps.h>
-#include <skalibs/nonposix.h>
 
 #include <sys/stat.h>
 

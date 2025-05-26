@@ -43,6 +43,11 @@
 #define _DARWIN_C_SOURCE
 #endif
 
+
+ /* MacOS Tiger: sys/stat.h only works when nonposix */
+
+#undef _POSIX_C_SOURCE
+
 #endif /* __APPLE__ && __MACH__ */
 
 #endif /* SKALIBS_BSDSNOWFLAKE_H */
