@@ -11,8 +11,8 @@
  */
 
 #include <skalibs/sysdeps.h>
-#include <skalibs/nonposix.h
->
+#include <skalibs/nonposix.h>
+
 #include <sys/stat.h>
 
 #if !defined(SKALIBS_HASSTATIM) && defined(SKALIBS_HASSTATIMESPEC)
