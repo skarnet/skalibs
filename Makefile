@@ -186,12 +186,14 @@ version_X := $(shell exec expr 256 '*' $(version_l) + $(subst .,,$(suffix $(vers
 version_XY := $(version_X)$(suffix $(version_m))
 version_XYZ := $(version_XY)$(suffix $(version))
 
+ifneq ($(exthome),)
 global-links: $(SHARED_LIBS:lib%.dylib.xyzzy=$(DESTDIR)$(sproot)/library.so/lib%.$(version_X).dylib)
 
 $(DESTDIR)$(sproot)/library.so/lib%.$(version_X).dylib: $(DESTDIR)$(sproot)/library.so/lib%.$(version_M).dylib
 	exec $(INSTALL) -l $(<F) $@
+endif
 
-$(DESTDIR)$(dynlibdir)/lib%.dylib $(DESTDIR)$(dynlibdir)/lib%.$(version_X).dylib $(DESTDIR)$(dynlibdir)/lib%.$(version_M).dylib $(DESTDIR)$(dynlibdir)/lib%.$(version).dylib: lib%.$dylib.xyzzy
+$(DESTDIR)$(dynlibdir)/lib%.dylib $(DESTDIR)$(dynlibdir)/lib%.$(version_X).dylib $(DESTDIR)$(dynlibdir)/lib%.$(version_M).dylib $(DESTDIR)$(dynlibdir)/lib%.$(version).dylib: lib%.dylib.xyzzy
 	$(INSTALL) -D -m 755 $< $(@D)/lib$(*F).$(version).dylib && \
 	$(INSTALL) -l lib$(*F).$(version).dylib $(@D)/lib$(*F).$(version_M).dylib && \
 	$(INSTALL) -l lib$(*F).$(version_M).dylib $(@D)/lib$(*F).$(version_X).dylib && \
