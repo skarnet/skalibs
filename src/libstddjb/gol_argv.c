@@ -1,17 +1,12 @@
 /* ISC license. */
 
-#include <string.h>
-
 #include <skalibs/gol.h>
 #include <skalibs/strerr.h>
 
-unsigned int gol_argv (int argc, char const *const *argv, gol_bool const *b, unsigned int bn, gol_arg const *a, unsigned int an, uint64_t *br, char const **ar)
+unsigned int gol_argv (char const *const *argv, gol_bool const *b, unsigned int bn, gol_arg const *a, unsigned int an, uint64_t *br, char const **ar)
 {
   int problem = 0 ;
-  int r ;
-  if (!argc) strerr_diefu1x(100, "gol: invalid argv") ;
-  if (argc == 1) return 1 ;
-  r = gol(argv + 1, argc - 1, b, bn, a, an, br, ar, &problem) ;
+  int r = gol(argv, b, bn, a, an, br, ar, &problem) ;
 
   if (r < 0)
   {
@@ -27,5 +22,5 @@ unsigned int gol_argv (int argc, char const *const *argv, gol_bool const *b, uns
     else
       strerr_dief3x(100, "unrecognized ", "option with argument: ", argv[-r]) ;
   }
-  else return r + 1 ;
+  else return r ;
 }

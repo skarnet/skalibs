@@ -369,6 +369,7 @@ src/libstddjb/getlnmax.o src/libstddjb/getlnmax.lo: src/libstddjb/getlnmax.c src
 src/libstddjb/getlnmaxsep.o src/libstddjb/getlnmaxsep.lo: src/libstddjb/getlnmaxsep.c src/include/skalibs/buffer.h src/include/skalibs/siovec.h src/include/skalibs/skamisc.h
 src/libstddjb/gol.o src/libstddjb/gol.lo: src/libstddjb/gol.c src/include/skalibs/gol.h
 src/libstddjb/gol_argv.o src/libstddjb/gol_argv.lo: src/libstddjb/gol_argv.c src/include/skalibs/gol.h src/include/skalibs/strerr.h
+src/libstddjb/gol_main.o src/libstddjb/gol_main.lo: src/libstddjb/gol_main.c src/include/skalibs/gol.h src/include/skalibs/strerr.h
 src/libstddjb/hiercopy.o src/libstddjb/hiercopy.lo: src/libstddjb/hiercopy.c src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h
 src/libstddjb/hiercopy_internal.o src/libstddjb/hiercopy_internal.lo: src/libstddjb/hiercopy_internal.c src/include/skalibs/direntry.h src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h src/include/skalibs/stralloc.h
 src/libstddjb/hiercopy_loose.o src/libstddjb/hiercopy_loose.lo: src/libstddjb/hiercopy_loose.c src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h

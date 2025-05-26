@@ -54,7 +54,6 @@ ifdef DO_PKGCONFIG
 PC_TARGETS += libskarnet.pc
 endif
 
-
 all: config.mak $(ALL_LIBS) $(ALL_INCLUDES) $(ALL_SYSDEPS) $(ALL_DATA) $(PC_TARGETS)
 
 clean:
@@ -83,7 +82,7 @@ endif
 install: install-sysconf install-sysdeps install-dynlib install-lib install-include install-pkgconfig
 install-sysconf: $(ALL_DATA:src/etc/%=$(DESTDIR)$(sysconfdir)/%)
 install-sysdeps: $(ALL_SYSDEPS:$(sysdeps)/%=$(DESTDIR)$(sysdepdir)/%)
-install-dynlib: $(SHARED_LIBS:lib%.so.xyzzy=$(DESTDIR)$(dynlibdir)/lib%.so)
+install-dynlib: $(SHARED_LIBS:lib%.$(SHLIB_EXT).xyzzy=$(DESTDIR)$(dynlibdir)/lib%.$(SHLIB_EXT))
 install-lib: $(STATIC_LIBS:lib%.a.xyzzy=$(DESTDIR)$(libdir)/lib%.a)
 install-include: $(ALL_INCLUDES:src/include/$(package)/%.h=$(DESTDIR)$(includedir)/$(package)/%.h)
 install-pkgconfig: $(PC_TARGETS:%=$(DESTDIR)$(pkgconfdir)/%)
@@ -95,9 +94,9 @@ $(DESTDIR)$(exthome): $(DESTDIR)$(home)
 
 update: $(DESTDIR)$(exthome)
 
-global-links: $(DESTDIR)$(exthome) $(SHARED_LIBS:lib%.so.xyzzy=$(DESTDIR)$(sproot)/library.so/lib%.so.$(version_M))
+global-links: $(DESTDIR)$(exthome) $(SHARED_LIBS:lib%.$(SHLIB_EXT).xyzzy=$(DESTDIR)$(sproot)/library.so/lib%.$(SHLIB_EXT).$(version_M))
 
-$(DESTDIR)$(sproot)/library.so/lib%.so.$(version_M): $(DESTDIR)$(dynlibdir)/lib%.so.$(version_M)
+$(DESTDIR)$(sproot)/library.so/lib%.$(SHLIB_EXT).$(version_M): $(DESTDIR)$(dynlibdir)/lib%.$(SHLIB_EXT).$(version_M)
 	exec $(INSTALL) -D -l ..$(subst $(sproot),,$(exthome))/library.so/$(<F) $@
 
 .PHONY: update global-links
@@ -110,7 +109,7 @@ $(DESTDIR)$(sysconfdir)/%: src/etc/%
 $(DESTDIR)$(sysdepdir)/%: $(sysdeps)/%
 	exec $(INSTALL) -D -m 644 $< $@
 
-$(DESTDIR)$(dynlibdir)/lib%.so $(DESTDIR)$(dynlibdir)/lib%.so.$(version_M): lib%.so.xyzzy
+$(DESTDIR)$(dynlibdir)/lib%.$(SHLIB_EXT) $(DESTDIR)$(dynlibdir)/lib%.$(SHLIB_EXT).$(version_M): lib%.$(SHLIB_EXT).xyzzy
 	$(INSTALL) -D -m 755 $< $@.$(version) && \
 	$(INSTALL) -l $(@F).$(version) $@.$(version_M) && \
 	exec $(INSTALL) -l $(@F).$(version_M) $@
@@ -179,3 +178,24 @@ src/include/$(package)/ip46.h: src/include/$(package)/fmtscan.h src/include/$(pa
 	  fi ; \
 	  exec cat src/headers/ip46-footer ; \
 	} > $@
+
+ifeq ($(SHLIB_EXT),dylib)
+# MacOS weirdness and 3-semver forcing
+
+version_X := $(shell exec expr 256 '*' $(version_l) + $(subst .,,$(suffix $(version_M))))
+version_XY := $(version_X)$(suffix $(version_m))
+version_XYZ := $(version_XY)$(suffix $(version))
+
+install-dynlib: $(SHARED_LIBS:lib%.dylib.xyzzy=$(DESTDIR)$(dynlibdir)/lib%.dylib.$(version_X))
+global-links: $(SHARED_LIBS:lib%.dylib.xyzzy=$(DESTDIR)$(sproot)/library.so/lib%.dylib.$(version_X))
+
+$(DESTDIR)$(sproot)/library.so/lib%.dylib.$(version_X): $(DESTDIR)$(sproot)/library.so/lib%.dylib.$(version_M)
+	exec $(INSTALL) -D -l $(@F).$(version_M) $@
+
+$(DESTDIR)$(dynlibdir)/lib%.dylib.$(version_X): $(DESTDIR)$(dynlibdir)/lib%.dylib.$(version_M)
+	exec $(INSTALL) -l $(@F).$(version_M) $@
+
+libskarnet.dylib.xyzzy: $(ALL_DOBJS)
+	exec $(CC) -o $@ $(CFLAGS_ALL) $(CFLAGS_SHARED) $(LDFLAGS_ALL) $(LDFLAGS_SHARED) -Wl,-dylib_install_name,$(dynlibdir)/libskarnet.$(version_M).dylib -Wl,-dylib_compatibility_version,$(version_XY) -Wl,-dylib_current_version,$(version_XYZ) $^ $(SOCKET_LIB) $(SPAWN_LIB) $(SYSCLOCK_LIB) $(TAINNOW_LIB) $(TIMER_LIB) $(UTIL_LIB)
+endif
+

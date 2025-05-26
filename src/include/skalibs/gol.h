@@ -26,7 +26,8 @@ struct gol_arg_s
   uint8_t so : 7 ;
 } ;
 
-extern int gol (char const *const *, unsigned int, gol_bool const *, unsigned int, gol_arg const *a, unsigned int, uint64_t *, char const **, int *) ;
-extern unsigned int gol_argv (int, char const *const *, gol_bool const *, unsigned int, gol_arg const *a, unsigned int, uint64_t *, char const **) ;
+extern int gol (char const *const *, gol_bool const *, unsigned int, gol_arg const *a, unsigned int, uint64_t *, char const **, int *) ;
+extern unsigned int gol_argv (char const *const *, gol_bool const *, unsigned int, gol_arg const *a, unsigned int, uint64_t *, char const **) ;
+extern unsigned int gol_main (int, char const *const *, gol_bool const *, unsigned int, gol_arg const *a, unsigned int, uint64_t *, char const **) ;
 
 #endif

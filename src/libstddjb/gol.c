@@ -4,9 +4,10 @@
 
 #include <skalibs/gol.h>
 
-int gol (char const *const *argv, unsigned int argc, gol_bool const *b, unsigned int bn, gol_arg const *a, unsigned int an, uint64_t *br, char const **ar, int *problem)
+int gol (char const *const *argv, gol_bool const *b, unsigned int bn, gol_arg const *a, unsigned int an, uint64_t *br, char const **ar, int *problem)
 {
-  for (unsigned int i = 0 ; i < argc ; i++)
+  unsigned int i = 0 ;
+  for (; argv[i] ; i++)
   {
     if (argv[i][0] != '-' || !argv[i][1]) return i ;
     if (argv[i][1] == '-')
@@ -40,7 +41,7 @@ int gol (char const *const *argv, unsigned int argc, gol_bool const *b, unsigned
         if (j < an)
         {
           if (p[1]) ar[a[j].i] = p + 1 ;
-          else if (i+1 < argc && strcmp(argv[i+1], "--")) ar[a[j].i] = argv[++i] ;
+          else if (argv[i+1] && strcmp(argv[i+1], "--")) ar[a[j].i] = argv[++i] ;
           break ;
         }
         for (j = 0 ; j < bn ; j++) if (*p == b[j].so) break ;
@@ -49,5 +50,5 @@ int gol (char const *const *argv, unsigned int argc, gol_bool const *b, unsigned
       }
     }
   }
-  return argc ;
+  return i ;
 }
