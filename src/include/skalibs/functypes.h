@@ -61,4 +61,7 @@ typedef link_func *link_func_ref ;
 typedef void randomgen_func (char *, size_t) ;
 typedef randomgen_func *randomgen_func_ref ;
 
+typedef int main_func (char const *const *) ;
+typedef main_func *main_func_ref ;
+
 #endif
