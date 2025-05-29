@@ -26,16 +26,16 @@ operations are provided:
 </p>
 
 <ul>
-  <li> rc4 </li>
-  <li> md5 </li>
   <li> sha1 </li>
   <li> sha256 </li>
   <li> sha512 </li>
+  <li> blake2s </li>
+  <li> crc32c </li>
 </ul>
 
 <p>
- Please bear in mind that rc4 and md5 are broken, and that sha1 is about to be.
-Do not use them in security-critical applications.
+ Please bear in mind that sha1 is practically broken.
+Do not use it in security-critical applications.
 </p>
 
 <h2> Compiling </h2>
@@ -50,49 +50,6 @@ Do not use them in security-critical applications.
  You should refer to the <tt>skalibs/stdcrypto.h</tt> header and included headers
 for the exact function prototypes.
 </p>
-
-<h3> <a name="rc4" />
-RC4 </h3>
-
-<pre>
-  RC4Schedule ctx ;
-  unsigned char const *key ;
-  size_t keylen ;
-  unsigned char const *in ;
-  unsigned char *out ;
-  size_t len ;
-
-  rc4_init(&amp;ctx, key, keylen) ;
-  rc4(&amp;ctx, in, out, len) ;
-</pre>
-
-<ul>
-  <li> <tt>rc4_init()</tt> initializes a RC4Schedule structure with a key <em>key</em>,
-of length <em>keylen</em>. It then computes and throws away the first <tt>RC4_THROWAWAY</tt>
-bytes, usually 100 </li>
-  <li> <tt>rc4()</tt> encrypts <em>len</em> bytes of <em>in</em> with the RC4 flow, and
-stores the results into <em>out</em> </li>
-</ul>
-
-<h3> <a name="md5" />
-MD5 </h3>
-
-<pre>
-  MD5Schedule ctx ;
-  char const *message ;
-  size_t messagelen ;
-  char digest[16] ;
-
-  md5_init(&amp;ctx) ;
-  md5_update(&amp;ctx, message, messagelen) ;
-  md5_final(&amp;ctx, digest) ;
-</pre>    
-
-<ul>
-  <li> <tt>md5_init()</tt> prepares a MD5Schedule structure for computation </li>
-  <li> <tt>md5_update()</tt> adds <em>message</em> to the message to be digested </li>
-  <li> <tt>md5_final()</tt> computes the digest </li>
-</ul>
 
 <h3> <a name="sha1"></a>
 SHA1 </h3>
@@ -153,6 +110,37 @@ SHA512 </h3>
   <li> <tt>sha512_update()</tt> adds <em>message</em> to the message to be digested </li>
   <li> <tt>sha512_final()</tt> computes the digest </li>
 </ul>
+
+<h3> <a name="blake2s"></a>
+blake2s </h3>
+
+ Same scheme as with the other hashes.
+
+<pre>
+  blake2s_ctx ctx ;
+  char const *message ;
+  size_t messagelen ;
+  size_t outlen = 32 ;  /* the user gives the length of the digest */
+  char digest[outlen] ;
+
+  blake2s_init(&amp;ctx, outlen) ;
+  blake2s_update(&amp;ctx, message, messagelen) ;
+  blake2s_final(&amp;ctx, digest) ;
+</pre>
+
+<h3> <a name="crc32c"></a>
+crc32c </h3>
+
+ This isn't a cryptography primitive, but just a function to compute
+the Castagnoli version of a cyclic redundancy code.
+
+<pre>
+  uint32_t crc = 0 ;  /* no need for context except that crc needs to be initialized to 0 */
+  char const *message ;
+  size_t messagelen ;
+
+  crc = crc32c(crc, message, messagelen) ;
+</pre>
 
 </body>
 </html>

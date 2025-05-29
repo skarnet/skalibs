@@ -7,5 +7,6 @@
 #include <skalibs/sha256.h>
 #include <skalibs/sha512.h>
 #include <skalibs/blake2s.h>
+#include <skalibs/crc32c.h>
 
 #endif

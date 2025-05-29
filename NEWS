@@ -1,5 +1,13 @@
 Changelog for skalibs.
 
+In 2.14.5.0
+-----------
+
+ - Bugfixes.
+ - Support for shared libraries on MacOS.
+ - crc32c implementation: skalibs/crc32c.h
+
+
 In 2.14.4.0
 -----------
 
