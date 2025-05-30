@@ -1,6 +1,8 @@
 /* ISC license. */
 
-#undef _POSIX_C_SOURCE
+#ifndef _DARWIN_C_SOURCE
+#define _DARWIN_C_SOURCE
+#endif
 
 #include <sys/stat.h>
 #include <time.h>
