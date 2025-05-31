@@ -39,6 +39,9 @@
  /* MacOS: needs this for full SUSv3 conformance. That's how you
     can tell it's really a BSD inside. With additional layers of crap. */
 
+#undef _POSIX_C_SOURCE
+#undef _XOPEN_SOURCE
+
 #ifndef _DARWIN_C_SOURCE
 #define _DARWIN_C_SOURCE
 #endif
