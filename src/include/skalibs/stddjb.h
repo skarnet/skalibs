@@ -39,6 +39,7 @@
 #include <skalibs/iopause.h>
 #include <skalibs/lolstdio.h>
 #include <skalibs/netstring.h>
+#include <skalibs/prog.h>
 #include <skalibs/segfault.h>
 #include <skalibs/selfpipe.h>
 #include <skalibs/setgroups.h>

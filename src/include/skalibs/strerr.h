@@ -4,6 +4,7 @@
 #define SKALIBS_STRERR_H
 
 #include <skalibs/gccattributes.h>
+#include <skalibs/prog.h>
 
 extern void strerr_warnv (char const *const *, unsigned int) ;
 extern void strerr_warnvsys (char const *const *, unsigned int) ;
@@ -20,8 +21,6 @@ extern void strerr_dievsys(int, char const *const *, unsigned int) gccattr_noret
 #define strerr_warnsys(...) strerr_warnnsys(sizeof(strerr_array(__VA_ARGS__))/sizeof(char const *), __VA_ARGS__)
 #define strerr_die(e, ...) strerr_dien(e, sizeof(strerr_array(__VA_ARGS__))/sizeof(char const *), __VA_ARGS__)
 #define strerr_diesys(e, ...) strerr_diensys(e, sizeof(strerr_array(__VA_ARGS__))/sizeof(char const *), __VA_ARGS__)
-
-extern char const *PROG ;
 
 #define strerr_warnwn(n, ...) strerr_warnn((n)+2, PROG, ": warning: ", __VA_ARGS__)
 #define strerr_warnwnsys(n, ...) strerr_warnnsys((n)+2, PROG, ": warning: ", __VA_ARGS__)

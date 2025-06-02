@@ -6,6 +6,7 @@ In 2.14.5.0
  - Bugfixes.
  - Support for shared libraries on MacOS.
  - crc32c implementation: skalibs/crc32c.h
+ - new skalibs/prog.h header for PROG modifications
 
 
 In 2.14.4.0
