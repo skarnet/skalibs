@@ -9,7 +9,7 @@
 extern void strerr_warnv (char const *const *, unsigned int) ;
 extern void strerr_warnvsys (char const *const *, unsigned int) ;
 extern void strerr_diev (int, char const *const *, unsigned int) gccattr_noreturn ;
-extern void strerr_dievsys(int, char const *const *, unsigned int) gccattr_noreturn ;
+extern void strerr_dievsys (int, char const *const *, unsigned int) gccattr_noreturn ;
 
 #define strerr_array(...) ((char const *const[]){__VA_ARGS__})
 #define strerr_warnn(n, ...) strerr_warnv(strerr_array(__VA_ARGS__), (n))
