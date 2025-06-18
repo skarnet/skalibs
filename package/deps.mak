@@ -178,6 +178,7 @@ src/libposixplz/memmem.o src/libposixplz/memmem.lo: src/libposixplz/memmem.c src
 src/libposixplz/millisleep.o src/libposixplz/millisleep.lo: src/libposixplz/millisleep.c src/include/skalibs/posixplz.h
 src/libposixplz/mkbtemp.o src/libposixplz/mkbtemp.lo: src/libposixplz/mkbtemp.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
 src/libposixplz/mkctemp.o src/libposixplz/mkctemp.lo: src/libposixplz/mkctemp.c src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h
+src/libposixplz/mkdirp.o src/libposixplz/mkdirp.lo: src/libposixplz/mkdirp.c src/include/skalibs/bsdsnowflake.h src/include/skalibs/posixplz.h src/include/skalibs/stat.h
 src/libposixplz/mkfiletemp.o src/libposixplz/mkfiletemp.lo: src/libposixplz/mkfiletemp.c src/include/skalibs/posixplz.h src/include/skalibs/random.h
 src/libposixplz/mkhtemp.o src/libposixplz/mkhtemp.lo: src/libposixplz/mkhtemp.c src/include/skalibs/posixplz.h
 src/libposixplz/mklinktemp.o src/libposixplz/mklinktemp.lo: src/libposixplz/mklinktemp.c src/include/skalibs/djbunix.h src/libposixplz/posixplz-internal.h src/include/skalibs/posixplz.h
