@@ -30,6 +30,7 @@ src/include/skalibs/genset.h: src/include/skalibs/functypes.h
 src/include/skalibs/gensetdyn.h: src/include/skalibs/functypes.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
 src/include/skalibs/gol.h: src/include/skalibs/uint64.h
 src/include/skalibs/iopause.h: src/include/skalibs/tai.h
+src/include/skalibs/ip46.h: src/include/skalibs/fmtscan.h src/include/skalibs/socket.h src/include/skalibs/tai.h
 src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr.h
 src/include/skalibs/netstring.h: src/include/skalibs/buffer.h src/include/skalibs/stralloc.h
@@ -53,6 +54,9 @@ src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint64.h
 src/include/skalibs/textclient.h: src/include/skalibs/allreadwrite.h src/include/skalibs/tai.h src/include/skalibs/textmessage.h
 src/include/skalibs/textmessage.h: src/include/skalibs/allreadwrite.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
+src/include/skalibs/types.h: src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
+src/include/skalibs/uint16.h: src/include/skalibs/uint64.h
+src/include/skalibs/uint32.h: src/include/skalibs/uint64.h
 src/include/skalibs/unix-timed.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
 src/include/skalibs/unix-transactional.h: src/include/skalibs/direntry.h src/include/skalibs/stralloc.h
 src/include/skalibs/unixconnection.h: src/include/skalibs/unixmessage.h
@@ -810,7 +814,7 @@ src/libunixonacid/skaclient_startf_async.o src/libunixonacid/skaclient_startf_as
 src/libunixonacid/skaclient_syncify.o src/libunixonacid/skaclient_syncify.lo: src/libunixonacid/skaclient_syncify.c src/include/skalibs/skaclient.h
 src/libunixonacid/skaclient_zero.o src/libunixonacid/skaclient_zero.lo: src/libunixonacid/skaclient_zero.c src/include/skalibs/skaclient.h
 src/libunixonacid/stat_at.o src/libunixonacid/stat_at.lo: src/libunixonacid/stat_at.c src/libunixonacid/at-internal.h src/include/skalibs/bsdsnowflake.h src/include/skalibs/fcntl.h src/include/skalibs/nonposix.h src/include/skalibs/stat.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
-src/libunixonacid/symlink_at.o src/libunixonacid/symlink_at.lo: src/libunixonacid/symlink_at.c src/include/skalibs/fcntl.h src/include/skalibs/nonposix.h src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
+src/libunixonacid/symlink_at.o src/libunixonacid/symlink_at.lo: src/libunixonacid/symlink_at.c src/libunixonacid/at-internal.h src/include/skalibs/fcntl.h src/include/skalibs/nonposix.h src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/textclient_command.o src/libunixonacid/textclient_command.lo: src/libunixonacid/textclient_command.c src/include/skalibs/posixishard.h src/include/skalibs/textclient.h
 src/libunixonacid/textclient_commandv.o src/libunixonacid/textclient_commandv.lo: src/libunixonacid/textclient_commandv.c src/include/skalibs/posixishard.h src/include/skalibs/textclient.h
 src/libunixonacid/textclient_end.o src/libunixonacid/textclient_end.lo: src/libunixonacid/textclient_end.c src/include/skalibs/djbunix.h src/include/skalibs/textclient.h src/include/skalibs/textmessage.h

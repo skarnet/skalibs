@@ -31,6 +31,7 @@ int symlink_at (char const *src, int dirfd, char const *dst)
 
 #include <skalibs/posixplz.h>
 #include <skalibs/unix-transactional.h>
+#include "at-internal.h"
 
 struct symlink_s
 {
