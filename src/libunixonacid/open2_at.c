@@ -12,6 +12,7 @@
 
 #include <errno.h>
 
+#include <skalibs/stat.h>
 #include <skalibs/fcntl.h>
 #include <skalibs/unix-transactional.h>
 
@@ -25,38 +26,33 @@ int open2_at (int dirfd, char const *file, int flags)
 
 #else
 
-#include <sys/stat.h>
-#include <errno.h>
-
 #include <skalibs/fcntl.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/unix-transactional.h>
+#include "at-internal.h"
+
+struct open2_s
+{
+  char const *file ;
+  int flags ;
+} ;
+
+static int do_open2 (void *p)
+{
+  struct open2_s *b = p ;
+  return open2(b->file, b->flags) ;
+}
+
+static void cancel_open2 (int fd, void *p)
+{
+  (void)p ;
+  fd_close(fd) ;
+}
 
 int open2_at (int dirfd, char const *file, int flags)
 {
-  int fd ;
-  int fdhere = open_read(".") ;
-  if (fdhere < 0) return -1 ;
-  if (fd_chdir(dirfd) < 0) goto errclose ;
-  fd = open2(file, flags) ;
-  if (fd < 0)
-  {
-    int e = errno ;
-    fd_chdir(fdhere) ;
-    errno = e ;
-    goto errclose ;
-  }
-  if (fd_chdir(fdhere) < 0)
-  {
-    fd_close(fd) ;
-    goto errclose ;
-  }
-  fd_close(fdhere) ;
-  return fd ;
-
- errclose:
-  fd_close(fdhere) ;
-  return -1 ;
+  struct open2_s args = { .file = file, .flags = flags } ;
+  return emulate_at(dirfd, &do_open2, &cancel_open2, &args) ;
 }
 
 #endif

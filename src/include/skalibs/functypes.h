@@ -28,6 +28,9 @@ typedef free_func *free_func_ref ;
 typedef int init_func (void *) ;
 typedef init_func *init_func_ref ;
 
+typedef void deinit_func (int, void *) ;
+typedef deinit_func *deinit_func_ref ;
+
 typedef ssize_t get_func (void *) ;
 typedef get_func *get_func_ref ;
 

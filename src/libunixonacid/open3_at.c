@@ -25,38 +25,34 @@ int open3_at (int dirfd, char const *file, int flags, unsigned int mode)
 
 #else
 
-#include <sys/stat.h>
-#include <errno.h>
-
 #include <skalibs/fcntl.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/unix-transactional.h>
+#include "at-internal.h"
+
+struct open3_s
+{
+  char const *file ;
+  int flags ;
+  unsigned int mode ;
+} ;
+
+static int do_open3 (void *p)
+{
+  struct open3_s *b = p ;
+  return open3(b->file, b->flags, b->mode) ;
+}
+
+static void cancel_open3 (int fd, void *p)
+{
+  (void)p ;
+  fd_close(fd) ;
+}
 
 int open3_at (int dirfd, char const *file, int flags, unsigned int mode)
 {
-  int fd ;
-  int fdhere = open_read(".") ;
-  if (fdhere < 0) return -1 ;
-  if (fd_chdir(dirfd) < 0) goto errclose ;
-  fd = open3(file, flags, mode) ;
-  if (fd < 0)
-  {
-    int e = errno ;
-    fd_chdir(fdhere) ;
-    errno = e ;
-    goto errclose ;
-  }
-  if (fd_chdir(fdhere) < 0)
-  {
-    fd_close(fd) ;
-    goto errclose ;
-  }
-  fd_close(fdhere) ;
-  return fd ;
-
- errclose:
-  fd_close(fdhere) ;
-  return -1 ;
+  struct open3_s args = { .file = file, .flags = flags, .mode = mode } ;
+  return emulate_at(dirfd, &do_open3, &cancel_open3, &args) ;
 }
 
 #endif

@@ -69,6 +69,7 @@ src/libstddjb/cdb-internal.h: src/include/skalibs/cdb.h src/include/skalibs/gcca
 src/libstddjb/cdbmake-internal.h: src/include/skalibs/cdbmake.h
 src/libstddjb/djbtime-internal.h: src/include/skalibs/uint64.h
 src/libstddjb/fmtscan-internal.h: src/include/skalibs/fmtscan.h src/include/skalibs/uint64.h
+src/libunixonacid/at-internal.h: src/include/skalibs/functypes.h
 src/libunixonacid/skaclient-internal.h: src/include/skalibs/kolbak.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
 src/libdatastruct/avlnode_delete.o src/libdatastruct/avlnode_delete.lo: src/libdatastruct/avlnode_delete.c src/libdatastruct/avlnode-internal.h src/include/skalibs/avlnode.h
 src/libdatastruct/avlnode_doublerotate.o src/libdatastruct/avlnode_doublerotate.lo: src/libdatastruct/avlnode_doublerotate.c src/libdatastruct/avlnode-internal.h src/include/skalibs/avlnode.h
@@ -739,7 +740,7 @@ src/libstddjb/waitn_reap_posix.o src/libstddjb/waitn_reap_posix.lo: src/libstddj
 src/libstddjb/waitpid_nointr.o src/libstddjb/waitpid_nointr.lo: src/libstddjb/waitpid_nointr.c src/include/skalibs/djbunix.h
 src/libstddjb/writenclose_unsafe5.o src/libstddjb/writenclose_unsafe5.lo: src/libstddjb/writenclose_unsafe5.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
 src/libstddjb/writevnclose_unsafe5.o src/libstddjb/writevnclose_unsafe5.lo: src/libstddjb/writevnclose_unsafe5.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/siovec.h
-src/libunixonacid/access_at.o src/libunixonacid/access_at.lo: src/libunixonacid/access_at.c src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
+src/libunixonacid/access_at.o src/libunixonacid/access_at.lo: src/libunixonacid/access_at.c src/libunixonacid/at-internal.h src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/ancil_recv_fd.o src/libunixonacid/ancil_recv_fd.lo: src/libunixonacid/ancil_recv_fd.c src/include/skalibs/allreadwrite.h src/include/skalibs/ancil.h src/include/skalibs/djbunix.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/sysdeps.h
 src/libunixonacid/ancil_send_fd.o src/libunixonacid/ancil_send_fd.lo: src/libunixonacid/ancil_send_fd.c src/include/skalibs/ancil.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h
 src/libunixonacid/atomic_rm_rf.o src/libunixonacid/atomic_rm_rf.lo: src/libunixonacid/atomic_rm_rf.c src/include/skalibs/skamisc.h src/include/skalibs/unix-transactional.h
@@ -753,6 +754,7 @@ src/libunixonacid/buffer_timed_getv.o src/libunixonacid/buffer_timed_getv.lo: sr
 src/libunixonacid/buffer_timed_put.o src/libunixonacid/buffer_timed_put.lo: src/libunixonacid/buffer_timed_put.c src/include/skalibs/buffer.h src/include/skalibs/unix-timed.h
 src/libunixonacid/buffer_timed_puts.o src/libunixonacid/buffer_timed_puts.lo: src/libunixonacid/buffer_timed_puts.c src/include/skalibs/unix-timed.h
 src/libunixonacid/buffer_timed_putv.o src/libunixonacid/buffer_timed_putv.lo: src/libunixonacid/buffer_timed_putv.c src/include/skalibs/buffer.h src/include/skalibs/siovec.h src/include/skalibs/unix-timed.h
+src/libunixonacid/emulate_at.o src/libunixonacid/emulate_at.lo: src/libunixonacid/emulate_at.c src/libunixonacid/at-internal.h src/include/skalibs/bsdsnowflake.h src/include/skalibs/djbunix.h src/include/skalibs/functypes.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/ipc_timed_recv.o src/libunixonacid/ipc_timed_recv.lo: src/libunixonacid/ipc_timed_recv.c src/include/skalibs/allreadwrite.h src/include/skalibs/functypes.h src/include/skalibs/socket.h src/include/skalibs/unix-timed.h
 src/libunixonacid/ipc_timed_send.o src/libunixonacid/ipc_timed_send.lo: src/libunixonacid/ipc_timed_send.c src/include/skalibs/error.h src/include/skalibs/iopause.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/unix-timed.h
 src/libunixonacid/ipc_timed_sendv.o src/libunixonacid/ipc_timed_sendv.lo: src/libunixonacid/ipc_timed_sendv.c src/include/skalibs/error.h src/include/skalibs/iopause.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/siovec.h src/include/skalibs/unix-timed.h
@@ -761,8 +763,8 @@ src/libunixonacid/kolbak_enqueue.o src/libunixonacid/kolbak_enqueue.lo: src/libu
 src/libunixonacid/kolbak_queue_init.o src/libunixonacid/kolbak_queue_init.lo: src/libunixonacid/kolbak_queue_init.c src/include/skalibs/kolbak.h
 src/libunixonacid/kolbak_unenqueue.o src/libunixonacid/kolbak_unenqueue.lo: src/libunixonacid/kolbak_unenqueue.c src/include/skalibs/kolbak.h
 src/libunixonacid/netstring_timed_get.o src/libunixonacid/netstring_timed_get.lo: src/libunixonacid/netstring_timed_get.c src/include/skalibs/buffer.h src/include/skalibs/iopause.h src/include/skalibs/netstring.h src/include/skalibs/unix-timed.h
-src/libunixonacid/open2_at.o src/libunixonacid/open2_at.lo: src/libunixonacid/open2_at.c src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
-src/libunixonacid/open3_at.o src/libunixonacid/open3_at.lo: src/libunixonacid/open3_at.c src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
+src/libunixonacid/open2_at.o src/libunixonacid/open2_at.lo: src/libunixonacid/open2_at.c src/libunixonacid/at-internal.h src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h src/include/skalibs/nonposix.h src/include/skalibs/stat.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
+src/libunixonacid/open3_at.o src/libunixonacid/open3_at.lo: src/libunixonacid/open3_at.c src/libunixonacid/at-internal.h src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/open_appendat.o src/libunixonacid/open_appendat.lo: src/libunixonacid/open_appendat.c src/include/skalibs/fcntl.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/open_appendatb.o src/libunixonacid/open_appendatb.lo: src/libunixonacid/open_appendatb.c src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/open_readat.o src/libunixonacid/open_readat.lo: src/libunixonacid/open_readat.c src/include/skalibs/fcntl.h src/include/skalibs/unix-transactional.h
@@ -807,7 +809,8 @@ src/libunixonacid/skaclient_startf.o src/libunixonacid/skaclient_startf.lo: src/
 src/libunixonacid/skaclient_startf_async.o src/libunixonacid/skaclient_startf_async.lo: src/libunixonacid/skaclient_startf_async.c src/include/skalibs/cspawn.h src/include/skalibs/djbunix.h src/include/skalibs/kolbak.h src/libunixonacid/skaclient-internal.h src/include/skalibs/skaclient.h
 src/libunixonacid/skaclient_syncify.o src/libunixonacid/skaclient_syncify.lo: src/libunixonacid/skaclient_syncify.c src/include/skalibs/skaclient.h
 src/libunixonacid/skaclient_zero.o src/libunixonacid/skaclient_zero.lo: src/libunixonacid/skaclient_zero.c src/include/skalibs/skaclient.h
-src/libunixonacid/stat_at.o src/libunixonacid/stat_at.lo: src/libunixonacid/stat_at.c src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
+src/libunixonacid/stat_at.o src/libunixonacid/stat_at.lo: src/libunixonacid/stat_at.c src/libunixonacid/at-internal.h src/include/skalibs/bsdsnowflake.h src/include/skalibs/fcntl.h src/include/skalibs/nonposix.h src/include/skalibs/stat.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
+src/libunixonacid/symlink_at.o src/libunixonacid/symlink_at.lo: src/libunixonacid/symlink_at.c src/include/skalibs/fcntl.h src/include/skalibs/nonposix.h src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/textclient_command.o src/libunixonacid/textclient_command.lo: src/libunixonacid/textclient_command.c src/include/skalibs/posixishard.h src/include/skalibs/textclient.h
 src/libunixonacid/textclient_commandv.o src/libunixonacid/textclient_commandv.lo: src/libunixonacid/textclient_commandv.c src/include/skalibs/posixishard.h src/include/skalibs/textclient.h
 src/libunixonacid/textclient_end.o src/libunixonacid/textclient_end.lo: src/libunixonacid/textclient_end.c src/include/skalibs/djbunix.h src/include/skalibs/textclient.h src/include/skalibs/textmessage.h

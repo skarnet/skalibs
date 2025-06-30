@@ -27,30 +27,32 @@ int access_at (int dirfd, char const *file, int amode, unsigned int flag)
 
 #include <skalibs/djbunix.h>
 #include <skalibs/unix-transactional.h>
+#include "at-internal.h"
+
+struct access_s
+{
+  char const *file ;
+  int amode ;
+} ;
+
+static int do_access (void *p)
+{
+  struct access_s *b = p ;
+  return access(b->file, b->amode) ;
+}
+
+static void cancel_access (int r, void *p)
+{
+  (void)r ;
+  (void)p ;
+}
 
 int access_at (int dirfd, char const *file, int amode, unsigned int flag)
 {
-  int fdhere ;
-  if (getuid() != geteuid() || getgid() != getegid())
-    return (errno = ENOSYS, -1) ;
-  (void)flag ;
-  fdhere = openc_read(".") ;
-  if (fdhere < 0) return -1 ;
-  if (fd_chdir(dirfd) < 0)
-  {
-    fd_close(fdhere) ;
-    return -1 ;
-  }
-  if (access(file, amode) < 0)
-  {
-    int e = errno ;
-    fd_chdir(fdhere) ;
-    fd_close(fdhere) ;
-    return (errno = e, -1) ;
-  }
-  fd_chdir(fdhere) ;
-  fd_close(fdhere) ;
-  return 0 ;
+  struct access_s args = { .file = file, .amode = amode } ;
+  if (flag && (getuid() != geteuid() || getgid() != getegid()))
+    return (errno = ENOSYS, 1) ;
+  return emulate_at(dirfd, &do_access, &cancel_access, &args) ;
 }
 
 #endif

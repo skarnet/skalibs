@@ -8,10 +8,11 @@
 #define _ATFILE_SOURCE
 #endif
 
+#include <skalibs/bsdsnowflake.h>
 #include <skalibs/nonposix.h>
 
-#include <sys/stat.h>
 
+#include <skalibs/stat.h>
 #include <skalibs/fcntl.h>
 #include <skalibs/unix-transactional.h>
 
@@ -27,52 +28,50 @@ int lstat_at (int dirfd, char const *file, struct stat *st)
 
 #else
 
- /* OpenBSD plz. lstat() is POSIX. */
+#include <skalibs/bsdsnowflake.h>
 #include <skalibs/nonposix.h>
 
-#include <sys/stat.h>
 #include <errno.h>
 
+#include <skalibs/stat.h>
 #include <skalibs/fcntl.h>
-#include <skalibs/djbunix.h>
 #include <skalibs/unix-transactional.h>
+#include "at-internal.h"
 
-static int fstat_at (int dirfd, char const *file, struct stat *st, int (*dostat)(char const *, struct stat *))
+struct stat_s
 {
-  int r ;
-  int fdhere = open_read(".") ;
-  if (fdhere < 0) return -1 ;
-  if (fd_chdir(dirfd) < 0)
-  {
-    fd_close(fdhere) ;
-    return -1 ;
-  }
-  r = (*dostat)(file, st) ;
-  if (r < 0)
-  {
-    int e = errno ;
-    fd_chdir(fdhere) ;
-    fd_close(fdhere) ;
-    errno = e ;
-    return -1 ;
-  }
-  if (fd_chdir(fdhere) < 0)
-  {
-    fd_close(fdhere) ;
-    return -1 ;
-  }
-  fd_close(fdhere) ;
-  return r ;
+  char const *file ;
+  struct stat *st ;
+} ;
+
+static int do_stat (void *p)
+{
+  struct stat_s *b = p ;
+  return stat(b->file, b->st) ;
+}
+
+static int do_lstat (void *p)
+{
+  struct stat_s *b = p ;
+  return lstat(b->file, b->st) ;
+}
+
+static void cancel_stat (int r, void *p)
+{
+  (void)r ;
+  (void)p ;
 }
 
 int stat_at (int dirfd, char const *file, struct stat *st)
 {
-  return fstat_at(dirfd, file, st, &stat) ;
+  struct stat_s args = { .file = file, .st = st } ;
+  return emulate_at(dirfd, &do_stat, &cancel_stat, &args) ;
 }
 
 int lstat_at (int dirfd, char const *file, struct stat *st)
 {
-  return fstat_at(dirfd, file, st, &lstat) ;
+  struct stat_s args = { .file = file, .st = st } ;
+  return emulate_at(dirfd, &do_lstat, &cancel_stat, &args) ;
 }
 
 #endif
