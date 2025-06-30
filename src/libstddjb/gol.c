@@ -28,7 +28,8 @@ int gol (char const *const *argv, gol_bool const *b, unsigned int bn, gol_arg co
       {
         for (; j < bn ; j++) if (!strcmp(argv[i] + 2, b[j].lo)) break ;
         if (j >= bn) return (*problem = -1, -1-i) ;
-        if (b[j].set) *br |= b[j].mask ; else *br &= ~b[j].mask ;
+        *br &= ~b[j].clear ;
+        *br |= b[j].set ;
       }
     }
     else
@@ -46,7 +47,8 @@ int gol (char const *const *argv, gol_bool const *b, unsigned int bn, gol_arg co
         }
         for (j = 0 ; j < bn ; j++) if (*p == b[j].so) break ;
         if (j >= bn) return (*problem = p - argv[i], -1-i) ;
-        if (b[j].set) *br |= b[j].mask ; else *br &= ~b[j].mask ;
+        *br &= ~b[j].clear ;
+        *br |= b[j].set ;
       }
     }
   }

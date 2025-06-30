@@ -12,10 +12,10 @@
 typedef struct gol_bool_s gol_bool, *gol_bool_ref ;
 struct gol_bool_s
 {
-  uint64_t mask ;
+  uint64_t set ;
+  uint64_t clear ;
   char const *lo ;
-  uint8_t so : 7 ;
-  uint8_t set : 1 ;
+  uint8_t so ;
 } ;
 
 typedef struct gol_arg_s gol_arg, *gol_arg_ref ;
@@ -23,7 +23,7 @@ struct gol_arg_s
 {
   char const *lo ;
   unsigned int i ;
-  uint8_t so : 7 ;
+  uint8_t so ;
 } ;
 
 extern int gol (char const *const *, gol_bool const *, unsigned int, gol_arg const *a, unsigned int, uint64_t *, char const **, int *) ;

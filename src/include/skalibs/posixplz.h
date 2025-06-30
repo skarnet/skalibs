@@ -41,7 +41,8 @@ extern pid_t fork_newpid (void) ;
 extern int touch (char const *) ;
 extern unsigned int millisleep (unsigned int) ;
 
-extern int mkdirp (char *, mode_t) ;
+extern int mkdirp (char const *, mode_t) ;
+extern int mkdirp2 (char *, mode_t) ;
 extern int mkfiletemp (char *, create_func_ref, mode_t, void *) ;
 extern int mklinktemp (char const *, char *, link_func_ref) ;
 extern int mkptemp (char *) ;
