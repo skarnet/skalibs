@@ -64,8 +64,8 @@ on UTC, TAI and Unix time</a>. </li>
 <p>
  The meat and potatoes of all this is that programmers cannot simply rely on
 standard Unix APIs such as
-<a href="https://pubs.opengroup.org/onlinepubs/9799919799/functions/gettimeofday.html">gettimeofday()</a>
-(which, by the way, is marked as obsolescent, but it's not going to disappear tomorrow)
+<a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/gettimeofday.html">gettimeofday()</a>
+(which has disappeared in POSIX.1-2024, but is still available in most libcs)
 to measure time intervals or even to give precise absolute time, and in
 any case those APIs will become obsolete in 2038.
 </p>

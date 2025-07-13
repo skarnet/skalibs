@@ -5,5 +5,5 @@
 ssize_t openreadnclose (char const *file, char *s, size_t n)
 {
   int fd = openbc_read(file) ;
-  return fd == -1 ? fd : readnclose(fd, s, n) ;
+  return fd == -1 ? -1 : readnclose(fd, s, n) ;
 }

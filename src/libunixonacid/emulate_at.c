@@ -16,7 +16,7 @@
 int emulate_at (int dirfd, init_func_ref f, deinit_func_ref g, void *p)
 {
   int r ;
-  int fdhere = open_read(".") ;
+  int fdhere = open_read(".", O_DIRECTORY) ;
   if (fdhere < 0) return -1 ;
   if (fd_chdir(dirfd) < 0) goto errclose ;
   r = (*f)(p) ;
