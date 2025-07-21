@@ -3,6 +3,10 @@
 #include <skalibs/sysdeps.h>
 
 #ifdef SKALIBS_HASPOSIXSPAWN
+#undef SKALIBS_POSIXSPAWNEARLYRETURN_WORKAROUND
+#if defined(SKALIBS_HASPOSIXSPAWNEARLYRETURN) && defined(SKALIBS_HASWAITID)
+# define SKALIBS_POSIXSPAWNEARLYRETURN_WORKAROUND
+#endif 
 #include <skalibs/nonposix.h>
 #endif
 
@@ -95,12 +99,7 @@ static inline pid_t cspawn_fork (char const *prog, char const *const *argv, char
   return pid ;
 }
 
- /*
-    guess who has a buggy posix_spawn() *and* doesn't have waitid() to work around it?
-    if you guessed OpenBSD, you're right!
- */
-
-#if defined(SKALIBS_HASPOSIXSPAWN) && (!defined(SKALIBS_HASPOSIXSPAWNEARLYRETURN) || defined(SKALIBS_HASWAITID))
+#if defined(SKALIBS_HASPOSIXSPAWN) && (!defined(SKALIBS_HASPOSIXSPAWNEARLYRETURN) || defined(SKALIBS_POSIXSPAWNEARLYRETURN_WORKAROUND))
 
 #include <signal.h>
 #include <stdlib.h>
@@ -109,7 +108,7 @@ static inline pid_t cspawn_fork (char const *prog, char const *const *argv, char
 #include <skalibs/config.h>
 #include <skalibs/djbunix.h>
 
-#ifdef SKALIBS_HASPOSIXSPAWNEARLYRETURN
+#ifdef SKALIBS_POSIXSPAWNEARLYRETURN_WORKAROUND
 
 #include <sys/wait.h>
 
@@ -149,7 +148,7 @@ static inline pid_t cspawn_pspawn (char const *prog, char const *const *argv, ch
   posix_spawn_file_actions_t actions ;
   int e ;
   int nopath = !getenv("PATH") ;
-#ifdef SKALIBS_HASPOSIXSPAWNEARLYRETURN
+#ifdef SKALIBS_POSIXSPAWNEARLYRETURN_WORKAROUND
   int p[2] ;
   if (pipecoe(p) == -1) return 0 ;
 #endif
@@ -242,7 +241,7 @@ static inline pid_t cspawn_pspawn (char const *prog, char const *const *argv, ch
 
   if (n) posix_spawn_file_actions_destroy(&actions) ;
   if (flags) posix_spawnattr_destroy(&attr) ;
-#ifdef SKALIBS_HASPOSIXSPAWNEARLYRETURN
+#ifdef SKALIBS_POSIXSPAWNEARLYRETURN_WORKAROUND
   return cspawn_workaround(pid, p) ;
 #else
   return pid ;
@@ -253,7 +252,7 @@ static inline pid_t cspawn_pspawn (char const *prog, char const *const *argv, ch
  errattr:
   if (flags) posix_spawnattr_destroy(&attr) ;
  err:
-#ifdef SKALIBS_HASPOSIXSPAWNEARLYRETURN
+#ifdef SKALIBS_POSIXSPAWNEARLYRETURN_WORKAROUND
   fd_close(p[1]) ;
   fd_close(p[0]) ;
 #endif
