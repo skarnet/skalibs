@@ -10,7 +10,6 @@ uint32_t avlnode_insertnode (avlnode *s, uint32_t max, uint32_t r, uint32_t i, d
   uint32_t stack[AVLNODE_MAXDEPTH] ;
   uint8_t spin[AVLNODE_MAXDEPTH] ;
   uint8_t sp = 0 ;
-  
   {
     void const *k = (*dtok)(s[i].data, p) ;
     for (; r < max ; sp++)
@@ -31,13 +30,12 @@ uint32_t avlnode_insertnode (avlnode *s, uint32_t max, uint32_t r, uint32_t i, d
   return r ;
 
  lastfix:
-  if (avlnode_ufroms(s[r].balance) != spin[sp])
+  if (avlnode_ufroms(s[r].balance) != spin[sp]) s[r].balance = 0 ;
+  else
   {
-    s[r].balance = 0 ;
-    return stack[0] ;
+    r = avlnode_rotate_maydouble(s, max, r, !spin[sp], spin[sp] != spin[sp+1]) ;
+    if (!sp--) return r ;
+    s[stack[sp]].child[spin[sp]] = r ;
   }
-  r = avlnode_rotate_maydouble(s, max, r, !spin[sp], spin[sp] != spin[sp+1]) ;
-  if (!sp--) return r ;
-  s[stack[sp]].child[spin[sp]] = r ;
   return stack[0] ;
 }
