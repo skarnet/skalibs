@@ -45,6 +45,7 @@ extern int mkdirp (char const *, mode_t) ;
 extern int mkdirp2 (char *, mode_t) ;
 extern int mkfiletemp (char *, create_func_ref, mode_t, void *) ;
 extern int mklinktemp (char const *, char *, link_func_ref) ;
+extern int mkntemp (char *) ;
 extern int mkptemp (char *) ;
 extern int mkptemp2 (char *, unsigned int) ;
 extern int mkptemp3 (char *, mode_t, unsigned int) ;

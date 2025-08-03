@@ -54,7 +54,7 @@ src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skali
 src/include/skalibs/textclient.h: src/include/skalibs/allreadwrite.h src/include/skalibs/tai.h src/include/skalibs/textmessage.h
 src/include/skalibs/textmessage.h: src/include/skalibs/allreadwrite.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
 src/include/skalibs/unix-timed.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
-src/include/skalibs/unix-transactional.h: src/include/skalibs/direntry.h src/include/skalibs/stralloc.h
+src/include/skalibs/unix-transactional.h: src/include/skalibs/direntry.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/unixconnection.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/unixmessage.h: src/include/skalibs/buffer.h src/include/skalibs/cbuffer.h src/include/skalibs/gccattributes.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
 src/include/skalibs/unixonacid.h: src/include/skalibs/ancil.h src/include/skalibs/kolbak.h src/include/skalibs/skaclient.h src/include/skalibs/textclient.h src/include/skalibs/textmessage.h src/include/skalibs/unix-timed.h src/include/skalibs/unix-transactional.h src/include/skalibs/unixconnection.h src/include/skalibs/unixmessage.h
@@ -185,6 +185,7 @@ src/libposixplz/mkfiletemp.o src/libposixplz/mkfiletemp.lo: src/libposixplz/mkfi
 src/libposixplz/mkhtemp.o src/libposixplz/mkhtemp.lo: src/libposixplz/mkhtemp.c src/include/skalibs/posixplz.h
 src/libposixplz/mklinktemp.o src/libposixplz/mklinktemp.lo: src/libposixplz/mklinktemp.c src/include/skalibs/djbunix.h src/libposixplz/posixplz-internal.h src/include/skalibs/posixplz.h
 src/libposixplz/mkltemp.o src/libposixplz/mkltemp.lo: src/libposixplz/mkltemp.c src/include/skalibs/posixplz.h
+src/libposixplz/mkntemp.o src/libposixplz/mkntemp.lo: src/libposixplz/mkntemp.c src/include/skalibs/posixplz.h
 src/libposixplz/mkptemp.o src/libposixplz/mkptemp.lo: src/libposixplz/mkptemp.c src/include/skalibs/posixplz.h
 src/libposixplz/mkptemp2.o src/libposixplz/mkptemp2.lo: src/libposixplz/mkptemp2.c src/include/skalibs/posixplz.h
 src/libposixplz/mkptemp3.o src/libposixplz/mkptemp3.lo: src/libposixplz/mkptemp3.c src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h src/include/skalibs/posixplz.h
@@ -745,7 +746,8 @@ src/libunixonacid/ancil_recv_fd.o src/libunixonacid/ancil_recv_fd.lo: src/libuni
 src/libunixonacid/ancil_send_fd.o src/libunixonacid/ancil_send_fd.lo: src/libunixonacid/ancil_send_fd.c src/include/skalibs/ancil.h src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h
 src/libunixonacid/atomic_rm_rf.o src/libunixonacid/atomic_rm_rf.lo: src/libunixonacid/atomic_rm_rf.c src/include/skalibs/skamisc.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/atomic_rm_rf_tmp.o src/libunixonacid/atomic_rm_rf_tmp.lo: src/libunixonacid/atomic_rm_rf_tmp.c src/include/skalibs/djbunix.h src/include/skalibs/random.h src/include/skalibs/stralloc.h src/include/skalibs/unix-transactional.h
-src/libunixonacid/atomic_symlink.o src/libunixonacid/atomic_symlink.lo: src/libunixonacid/atomic_symlink.c src/include/skalibs/posixplz.h src/include/skalibs/unix-transactional.h
+src/libunixonacid/atomic_symlink.o src/libunixonacid/atomic_symlink.lo: src/libunixonacid/atomic_symlink.c src/include/skalibs/unix-transactional.h
+src/libunixonacid/atomic_symlink4.o src/libunixonacid/atomic_symlink4.lo: src/libunixonacid/atomic_symlink4.c src/include/skalibs/posixplz.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/bufalloc_timed_flush.o src/libunixonacid/bufalloc_timed_flush.lo: src/libunixonacid/bufalloc_timed_flush.c src/include/skalibs/bufalloc.h src/include/skalibs/functypes.h src/include/skalibs/unix-timed.h
 src/libunixonacid/buffer_timed_fill.o src/libunixonacid/buffer_timed_fill.lo: src/libunixonacid/buffer_timed_fill.c src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/unix-timed.h
 src/libunixonacid/buffer_timed_flush.o src/libunixonacid/buffer_timed_flush.lo: src/libunixonacid/buffer_timed_flush.c src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/unix-timed.h

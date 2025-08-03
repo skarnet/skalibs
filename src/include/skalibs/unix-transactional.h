@@ -7,6 +7,7 @@
 #include <sys/stat.h>
 #include <sys/uio.h>
 
+#include <skalibs/gccattributes.h>
 #include <skalibs/direntry.h>
 #include <skalibs/stralloc.h>
 
@@ -47,6 +48,7 @@ extern size_t openwritevnclose_at (int, char const *, struct iovec const *, unsi
 
 extern int atomic_rm_rf (char const *) ;
 extern int atomic_rm_rf_tmp (char const *, stralloc *) ;
-extern int atomic_symlink (char const *, char const *, char const *) ;
+extern int atomic_symlink (char const *, char const *, char const *) gccattr_deprecated ;
+extern int atomic_symlink4 (char const *, char const *, char *, size_t) ;
 
 #endif

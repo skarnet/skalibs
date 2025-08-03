@@ -128,5 +128,22 @@ The difference between these two functions is the same as that between
 <tt>rm_rf</tt> and <tt>rm_rf_tmp</tt> in <tt>djbunix</tt>.
 </p>
 
+<h3> Atomic symbolic link creation <h3>
+
+<p>
+<code> int atomic_symlink4 (char const *target, char const *name, char *buf, size_t len) </code>
+Atomically makes a symlink named <em>name</em> pointing to <em>target</em>. If
+<em>name</em> designated an existing file, it is unlinked. Does not work if
+<em>name</em> is an existing directory (but <em>will</em> work if it is a
+symlink to a directory!) Returns 1 on success, and 0 (and sets errno) on
+error. <br>
+In addition, if <em>buf</em> is not NULL, and points
+to a buffer of nonzero length <em>len</em>, then if <em>name</em> exists prior to the
+call, it must be a symbolic link, and its target be shorter than <em>len</em> bytes.
+If these conditions are fulfilled, the operation succeeds, and <em>buf</em> then
+contains the previous target of <em>name</em>, with a terminating NULL. If they are not,
+the function fails with 0 (errno is ENAMETOOLONG if the buffer is too small).
+</p>
+
 </body>
 </html>
