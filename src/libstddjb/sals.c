@@ -12,6 +12,7 @@ int sals (char const *fn, stralloc *sa, size_t *x)
   int n = 0 ;
   size_t sabase = sa->len ;
   size_t maxlen = 0 ;
+  int wasnull = !sa->s ;
   DIR *dir = opendir(fn) ;
   if (!dir) return -1 ;
   for (;;)
@@ -36,6 +37,7 @@ int sals (char const *fn, stralloc *sa, size_t *x)
 
  err:
   dir_close(dir) ;
-  sa->len = sabase ;
+  if (wasnull) stralloc_free(sa) ;
+  else sa->len = sabase ;
   return -1 ;
 }
