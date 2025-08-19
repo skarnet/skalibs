@@ -4,7 +4,7 @@
 #define SKALIBS_POSIXPLZ_H
 
 #include <sys/types.h>
-#include <sys/stat.h>
+#include <stdlib.h>
 #include <regex.h>
 
 #include <skalibs/gccattributes.h>
@@ -59,6 +59,7 @@ extern int mkbtemp (char *, mode_t, dev_t) ;
     Wrappers around functions that should be specified better.
  */
 
+extern void qsortr (void *, size_t, size_t, cmp_func_ref, void *) ;
 #define skalibs_regcomp(re, s, flags) regcomp(re, (s)[0] ? (s) : ".*", flags)
 
 #endif

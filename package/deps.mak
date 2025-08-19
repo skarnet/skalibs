@@ -126,7 +126,8 @@ src/libenvexec/child_spawn2.o src/libenvexec/child_spawn2.lo: src/libenvexec/chi
 src/libenvexec/child_spawn3.o src/libenvexec/child_spawn3.lo: src/libenvexec/child_spawn3.c src/include/skalibs/cspawn.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/types.h
 src/libenvexec/cspawn.o src/libenvexec/cspawn.lo: src/libenvexec/cspawn.c src/include/skalibs/allreadwrite.h src/include/skalibs/config.h src/include/skalibs/cspawn.h src/include/skalibs/djbunix.h src/include/skalibs/exec.h src/include/skalibs/nonposix.h src/include/skalibs/posixplz.h src/include/skalibs/selfpipe.h src/include/skalibs/sig.h src/include/skalibs/sysdeps.h
 src/libenvexec/env_addmodif.o src/libenvexec/env_addmodif.lo: src/libenvexec/env_addmodif.c src/include/skalibs/env.h src/include/skalibs/stralloc.h
-src/libenvexec/env_dump.o src/libenvexec/env_dump.lo: src/libenvexec/env_dump.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/nonposix.h src/include/skalibs/unix-transactional.h
+src/libenvexec/env_dump.o src/libenvexec/env_dump.lo: src/libenvexec/env_dump.c src/include/skalibs/env.h
+src/libenvexec/env_dump4.o src/libenvexec/env_dump4.lo: src/libenvexec/env_dump4.c src/include/skalibs/bytestr.h src/include/skalibs/djbunix.h src/include/skalibs/env.h src/include/skalibs/nonposix.h src/include/skalibs/unix-transactional.h
 src/libenvexec/env_get.o src/libenvexec/env_get.lo: src/libenvexec/env_get.c src/include/skalibs/posixplz.h
 src/libenvexec/env_get2.o src/libenvexec/env_get2.lo: src/libenvexec/env_get2.c src/include/skalibs/bytestr.h src/include/skalibs/env.h
 src/libenvexec/env_len.o src/libenvexec/env_len.lo: src/libenvexec/env_len.c src/include/skalibs/env.h
@@ -190,6 +191,7 @@ src/libposixplz/mkptemp.o src/libposixplz/mkptemp.lo: src/libposixplz/mkptemp.c 
 src/libposixplz/mkptemp2.o src/libposixplz/mkptemp2.lo: src/libposixplz/mkptemp2.c src/include/skalibs/posixplz.h
 src/libposixplz/mkptemp3.o src/libposixplz/mkptemp3.lo: src/libposixplz/mkptemp3.c src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h src/include/skalibs/posixplz.h
 src/libposixplz/munmap_void.o src/libposixplz/munmap_void.lo: src/libposixplz/munmap_void.c src/include/skalibs/posixplz.h
+src/libposixplz/qsortr.o src/libposixplz/qsortr.lo: src/libposixplz/qsortr.c src/include/skalibs/functypes.h src/include/skalibs/posixplz.h src/include/skalibs/sysdeps.h
 src/libposixplz/setgroups.o src/libposixplz/setgroups.lo: src/libposixplz/setgroups.c src/include/skalibs/nonposix.h src/include/skalibs/posixishard.h src/include/skalibs/setgroups.h src/include/skalibs/sysdeps.h
 src/libposixplz/strcasestr.o src/libposixplz/strcasestr.lo: src/libposixplz/strcasestr.c src/include/skalibs/bytestr.h src/include/skalibs/sysdeps.h
 src/libposixplz/strnlen.o src/libposixplz/strnlen.lo: src/libposixplz/strnlen.c src/include/skalibs/bytestr.h src/include/skalibs/posixishard.h src/include/skalibs/sysdeps.h

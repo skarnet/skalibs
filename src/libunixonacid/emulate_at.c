@@ -7,6 +7,7 @@
 #include <skalibs/bsdsnowflake.h>
 
 #include <errno.h>
+#include <fcntl.h>
 
 #include <skalibs/functypes.h>
 #include <skalibs/djbunix.h>
@@ -16,7 +17,11 @@
 int emulate_at (int dirfd, init_func_ref f, deinit_func_ref g, void *p)
 {
   int r ;
-  int fdhere = open_read(".", O_DIRECTORY) ;
+#ifdef SKALIBS_HASODIRECTORY
+  int fdhere = open2(".", O_RDONLY | O_DIRECTORY) ;
+#else
+  int fdhere = open_readb(".") ;
+#endif
   if (fdhere < 0) return -1 ;
   if (fd_chdir(dirfd) < 0) goto errclose ;
   r = (*f)(p) ;
