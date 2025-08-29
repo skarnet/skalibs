@@ -570,6 +570,7 @@ src/libstddjb/socket_send4.o src/libstddjb/socket_send4.lo: src/libstddjb/socket
 src/libstddjb/socket_send6.o src/libstddjb/socket_send6.lo: src/libstddjb/socket_send6.c src/include/skalibs/ip46.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h src/include/skalibs/uint16.h
 src/libstddjb/socket_tcp4.o src/libstddjb/socket_tcp4.lo: src/libstddjb/socket_tcp4.c src/include/skalibs/nonposix.h src/include/skalibs/socket.h
 src/libstddjb/socket_tcp6.o src/libstddjb/socket_tcp6.lo: src/libstddjb/socket_tcp6.c src/include/skalibs/djbunix.h src/include/skalibs/ip46.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h
+src/libstddjb/socket_tcpdelay.o src/libstddjb/socket_tcpdelay.lo: src/libstddjb/socket_tcpdelay.c src/include/skalibs/nonposix.h src/include/skalibs/socket.h
 src/libstddjb/socket_tcpnodelay.o src/libstddjb/socket_tcpnodelay.lo: src/libstddjb/socket_tcpnodelay.c src/include/skalibs/nonposix.h src/include/skalibs/socket.h
 src/libstddjb/socket_timeoutconn.o src/libstddjb/socket_timeoutconn.lo: src/libstddjb/socket_timeoutconn.c src/include/skalibs/socket.h src/include/skalibs/tai.h
 src/libstddjb/socket_tryreservein.o src/libstddjb/socket_tryreservein.lo: src/libstddjb/socket_tryreservein.c src/include/skalibs/nonposix.h src/include/skalibs/socket.h

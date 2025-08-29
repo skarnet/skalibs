@@ -8,8 +8,8 @@
 
 #include <skalibs/socket.h>
 
-int socket_tcpnodelay (int s)
+int socket_tcpdelay (int s)
 {
-  static int const val = 1 ;
+  static int const val = 0 ;
   return setsockopt(s, IPPROTO_TCP, TCP_NODELAY, &val, sizeof(int)) ;
 }

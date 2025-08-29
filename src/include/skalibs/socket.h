@@ -156,6 +156,7 @@ extern int socket_remote6 (int, char *, uint16_t *) ;
 
 extern int socket_ipoptionskill (int) ;
 extern int socket_tcpnodelay (int) ;
+extern int socket_tcpdelay (int) ;
 extern void socket_tryreservein (int, unsigned int) ;
 
 
