@@ -170,6 +170,7 @@ src/libenvexec/xmexec_afn.o src/libenvexec/xmexec_afn.lo: src/libenvexec/xmexec_
 src/libenvexec/xmspawn_af.o src/libenvexec/xmspawn_af.lo: src/libenvexec/xmspawn_af.c src/include/skalibs/cspawn.h src/include/skalibs/strerr.h
 src/libenvexec/xmspawn_afm.o src/libenvexec/xmspawn_afm.lo: src/libenvexec/xmspawn_afm.c src/include/skalibs/cspawn.h src/include/skalibs/strerr.h
 src/libenvexec/xmspawn_afn.o src/libenvexec/xmspawn_afn.lo: src/libenvexec/xmspawn_afn.c src/include/skalibs/cspawn.h src/include/skalibs/strerr.h
+src/libposixplz/bsearchr.o src/libposixplz/bsearchr.lo: src/libposixplz/bsearchr.c src/include/skalibs/functypes.h src/include/skalibs/posixplz.h
 src/libposixplz/doublefork.o src/libposixplz/doublefork.lo: src/libposixplz/doublefork.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h src/include/skalibs/uint64.h
 src/libposixplz/execvep.o src/libposixplz/execvep.lo: src/libposixplz/execvep.c src/libposixplz/posixplz-internal.h src/include/skalibs/posixplz.h
 src/libposixplz/execvep_internal.o src/libposixplz/execvep_internal.lo: src/libposixplz/execvep_internal.c src/include/skalibs/bytestr.h src/include/skalibs/posixplz.h

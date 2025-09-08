@@ -60,6 +60,7 @@ extern int mkbtemp (char *, mode_t, dev_t) ;
  */
 
 extern void qsortr (void *, size_t, size_t, cmp_func_ref, void *) ;
+extern void *bsearchr (void const *, void const *, size_t, size_t, cmp_func_ref, void *) ;
 #define skalibs_regcomp(re, s, flags) regcomp(re, (s)[0] ? (s) : ".*", flags)
 
 #endif

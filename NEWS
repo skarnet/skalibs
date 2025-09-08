@@ -8,7 +8,7 @@ In 2.14.5.0
  - crc32c implementation: skalibs/crc32c.h
  - new skalibs/prog.h header for PROG modifications
  - new functions: symlink_at, mkdirp, mkdirp2, mkntemp,
-   atomic_symlink4, qsortr, env_dump4, socket_tcpdelay
+   atomic_symlink4, qsortr, bsearchr, env_dump4, socket_tcpdelay
 
 
 In 2.14.4.0
