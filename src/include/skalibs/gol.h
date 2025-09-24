@@ -27,7 +27,12 @@ struct gol_arg_s
 } ;
 
 extern int gol (char const *const *, gol_bool const *, unsigned int, gol_arg const *a, unsigned int, uint64_t *, char const **, int *) ;
+#define GOL(argv, rgolb, rgola, wgolb, wgola, problem) gol(argv, rgolb, sizeof(rgolb)/sizeof(gol_bool), rgola, sizeof(rgola)/sizeof(gol_arg), wgolb, wgola, problem)
+
 extern unsigned int gol_argv (char const *const *, gol_bool const *, unsigned int, gol_arg const *a, unsigned int, uint64_t *, char const **) ;
+#define GOL_argv(argv, rgolb, rgola, wgolb, wgola, problem) gol(argv, rgolb, sizeof(rgolb)/sizeof(gol_bool), rgola, sizeof(rgola)/sizeof(gol_arg), wgolb, wgola, problem)
+
 extern unsigned int gol_main (int, char const *const *, gol_bool const *, unsigned int, gol_arg const *a, unsigned int, uint64_t *, char const **) ;
+#define GOL_main(argc, argv, rgolb, rgola, wgolb, wgola) gol_main(argc, argv, rgolb, sizeof(rgolb)/sizeof(gol_bool), rgola, sizeof(rgola)/sizeof(gol_arg), wgolb, wgola)
 
 #endif
