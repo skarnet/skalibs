@@ -65,7 +65,7 @@ extern int avltreen_delete (avltreen *, void const *) ;
 #define avltreen_iter_withcancel(t, f, cancelf, p) avlnode_iter_withcancel(avltreen_nodes(t), avltreen_totalsize(t), avltreen_root(t), f, cancelf, p)
 
 
-#define AVLTREEB_SPACE(n) (sizeof(avltreen) + (n)*sizeof(avlnode) + ((n)+1)*sizeof(uint32_t))
+#define AVLTREEB_SPACE(n) (sizeof(avltreen) + (n)*sizeof(avlnode) + (n)*sizeof(uint32_t))
 #define avltreeb_totalsize(t) avltreen_totalsize((avltreen const *)(t))
 #define avltreeb_len(t) avltreen_len((avltreen const *)(t))
 #define avltreeb_nodes(t) avltreen_nodes((avltreen const *)(t))
