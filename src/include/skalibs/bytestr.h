@@ -50,4 +50,9 @@ extern void case_upperb (char *, size_t) ;
 #define case_starts(s, t) case_startb(s, strlen(s), t)
 extern int case_startb (char const *, size_t, char const *) gccattr_pure ;
 
+extern int str_cmp (void const *, void const *) gccattr_pure ;
+extern int str_bcmp (void const *, void const *) gccattr_pure ;
+extern int stringkey_cmp (void const *, void const *) gccattr_pure ;
+extern int stringkey_bcmp (void const *, void const *) gccattr_pure ;
+
 #endif

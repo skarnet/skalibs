@@ -64,4 +64,34 @@ extern int avltreen_delete (avltreen *, void const *) ;
 #define avltreen_iter_nocancel(t, cut, f, p) avlnode_iter_nocancel(avltreen_nodes(t), avltreen_totalsize(t), cut, avltreen_root(t), f, p)
 #define avltreen_iter_withcancel(t, f, cancelf, p) avlnode_iter_withcancel(avltreen_nodes(t), avltreen_totalsize(t), avltreen_root(t), f, cancelf, p)
 
+
+#define AVLTREEB_SPACE(n) (sizeof(avltreen) + (n)*sizeof(avlnode) + ((n)+1)*sizeof(uint32_t))
+#define avltreeb_totalsize(t) avltreen_totalsize((avltreen const *)(t))
+#define avltreeb_len(t) avltreen_len((avltreen const *)(t))
+#define avltreeb_nodes(t) avltreen_nodes((avltreen const *)(t))
+#define avltreeb_data(t, d) avltreen_data((avltreen const *)(t), d)
+#define avltreeb_root(t) avltreen_root((avltreen const *)(t))
+#define avltreeb_setroot(t, r) avltreen_setroot((avltreen *)(t), r)
+
+extern void avltreeb_init (void *, uint32_t, dtok_func_ref, cmp_func_ref, void *) ;
+#define avltreeb_searchnode(t, k) avltreen_searchnode((avltreen const *)(t), k)
+#define avltreeb_search(t, k, data) avltreen_search((avltreen const *)(t), k, data)
+#define avltreeb_height(t) avltreen_height((avltreen const *)(t))
+#define avltreeb_extremenode(t, h) avltreen_extremenode((avltreen const *)(t), h)
+#define avltreeb_minnode(t) avltreen_minnode((avltreen const *)(t))
+#define avltreeb_maxnode(t) avltreen_maxnode((avltreen const *)(t))
+#define avltreeb_extreme(t, h, data) avltreen_extreme((avltreen const *)(t), h, data)
+#define avltreeb_min(t, data) avltreen_min((avltreen const *)(t), data)
+#define avltreeb_max(t, data) avltreen_max((avltreen const *)(t), data)
+
+#define avltreeb_newnode(t, i) avltreen_newnode((avltreen *)(t), d)
+#define avltreeb_insertnode(t, i) avltreen_insertnode((avltreen *)(t), i)
+#define avltreeb_insert(t, d) avltreen_insert((avltreen *)(t), d)
+#define avltreeb_delete(t, k) avltreen_delete((avltreen *)(t), k)
+
+#define avltreeb_iter(t, f, p) avltreen_iter((avltreen *)(t), f, p)
+#define avltreeb_iter_nocancel(t, cut, f, p) avltreen_iter_nocancel((avltreen *)(t), cut, f, p)
+#define avltreeb_iter_withcancel(t, f, cancelf, p) avltreen_iter_withcancel((avltreen *)(t), f, cancelf, p)
+
+
 #endif

@@ -8,7 +8,7 @@
 
 void fd_unlock (int fd)
 {
-  struct flock fl =
+  static struct flock const fl =
   {
     .l_type = F_UNLCK,
     .l_whence = SEEK_SET,

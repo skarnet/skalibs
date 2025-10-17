@@ -89,6 +89,7 @@ src/libdatastruct/avltree_init.o src/libdatastruct/avltree_init.lo: src/libdatas
 src/libdatastruct/avltree_insert.o src/libdatastruct/avltree_insert.lo: src/libdatastruct/avltree_insert.c src/include/skalibs/avltree.h
 src/libdatastruct/avltree_newnode.o src/libdatastruct/avltree_newnode.lo: src/libdatastruct/avltree_newnode.c src/include/skalibs/avlnode.h src/include/skalibs/avltree.h src/include/skalibs/gensetdyn.h
 src/libdatastruct/avltree_zero.o src/libdatastruct/avltree_zero.lo: src/libdatastruct/avltree_zero.c src/include/skalibs/avltree.h
+src/libdatastruct/avltreeb_init.o src/libdatastruct/avltreeb_init.lo: src/libdatastruct/avltreeb_init.c src/include/skalibs/avlnode.h src/include/skalibs/avltreen.h
 src/libdatastruct/avltreen_delete.o src/libdatastruct/avltreen_delete.lo: src/libdatastruct/avltreen_delete.c src/include/skalibs/avlnode.h src/include/skalibs/avltreen.h src/include/skalibs/genset.h
 src/libdatastruct/avltreen_init.o src/libdatastruct/avltreen_init.lo: src/libdatastruct/avltreen_init.c src/include/skalibs/avlnode.h src/include/skalibs/avltreen.h src/include/skalibs/genset.h
 src/libdatastruct/avltreen_insert.o src/libdatastruct/avltreen_insert.lo: src/libdatastruct/avltreen_insert.c src/include/skalibs/avltreen.h
@@ -580,7 +581,9 @@ src/libstddjb/socket_udp6.o src/libstddjb/socket_udp6.lo: src/libstddjb/socket_u
 src/libstddjb/socket_waitconn.o src/libstddjb/socket_waitconn.lo: src/libstddjb/socket_waitconn.c src/include/skalibs/allreadwrite.h src/include/skalibs/iopause.h src/include/skalibs/socket.h
 src/libstddjb/socketpair_internal.o src/libstddjb/socketpair_internal.lo: src/libstddjb/socketpair_internal.c src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h src/include/skalibs/nonposix.h src/include/skalibs/socket.h src/include/skalibs/sysdeps.h
 src/libstddjb/stamp.o src/libstddjb/stamp.lo: src/libstddjb/stamp.c src/include/skalibs/tai.h
+src/libstddjb/str_bcmp.o src/libstddjb/str_bcmp.lo: src/libstddjb/str_bcmp.c src/include/skalibs/bytestr.h
 src/libstddjb/str_chr.o src/libstddjb/str_chr.lo: src/libstddjb/str_chr.c src/include/skalibs/bytestr.h
+src/libstddjb/str_cmp.o src/libstddjb/str_cmp.lo: src/libstddjb/str_cmp.c src/include/skalibs/bytestr.h
 src/libstddjb/str_fmt.o src/libstddjb/str_fmt.lo: src/libstddjb/str_fmt.c src/include/skalibs/fmtscan.h
 src/libstddjb/str_rchr.o src/libstddjb/str_rchr.lo: src/libstddjb/str_rchr.c src/include/skalibs/bytestr.h
 src/libstddjb/str_start.o src/libstddjb/str_start.lo: src/libstddjb/str_start.c src/include/skalibs/bytestr.h
@@ -607,6 +610,8 @@ src/libstddjb/string_quote_nodelim_mustquote.o src/libstddjb/string_quote_nodeli
 src/libstddjb/string_unquote.o src/libstddjb/string_unquote.lo: src/libstddjb/string_unquote.c src/include/skalibs/skamisc.h
 src/libstddjb/string_unquote_nodelim.o src/libstddjb/string_unquote_nodelim.lo: src/libstddjb/string_unquote_nodelim.c src/include/skalibs/skamisc.h
 src/libstddjb/string_unquote_withdelim.o src/libstddjb/string_unquote_withdelim.lo: src/libstddjb/string_unquote_withdelim.c src/include/skalibs/bytestr.h src/include/skalibs/fmtscan.h src/include/skalibs/posixishard.h src/include/skalibs/skamisc.h
+src/libstddjb/stringkey_bcmp.o src/libstddjb/stringkey_bcmp.lo: src/libstddjb/stringkey_bcmp.c src/libstddjb/bytestr-internal.h src/include/skalibs/bytestr.h
+src/libstddjb/stringkey_cmp.o src/libstddjb/stringkey_cmp.lo: src/libstddjb/stringkey_cmp.c src/libstddjb/bytestr-internal.h src/include/skalibs/bytestr.h
 src/libstddjb/strn_fmt.o src/libstddjb/strn_fmt.lo: src/libstddjb/strn_fmt.c src/include/skalibs/fmtscan.h src/include/skalibs/types.h
 src/libstddjb/subgetopt.o src/libstddjb/subgetopt.lo: src/libstddjb/subgetopt.c src/include/skalibs/sgetopt.h
 src/libstddjb/subgetopt_here.o src/libstddjb/subgetopt_here.lo: src/libstddjb/subgetopt_here.c src/include/skalibs/sgetopt.h
