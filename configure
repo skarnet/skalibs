@@ -717,6 +717,9 @@ choose cl kernprocpathname 'the KERN_PROC_PATHNAME sysctl'
 choose cl _nsgetexecutablepath '_NSGetExecutablePath()'
 choose cl getexecname 'getexecname()'
 choose cl dladdr 'dladdr()'
+choose c pidfd_open 'pidfd_open()'
+choose cl kevent 'kevent()'
+choose cl prsetchildsubreaper 'PR_SET_CHILD_SUBREAPER'
 
 # Here are the evil irreducible run-time sysdeps.
 choose clr devurandom '/dev/urandom'
