@@ -8,6 +8,7 @@
 #include <pthread.h>
 
 #include <skalibs/fcntl.h>
+#include <skalibs/allreadwrite.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/keventbridge.h>
 
