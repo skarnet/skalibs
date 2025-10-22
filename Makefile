@@ -134,7 +134,7 @@ libskarnet.a.xyzzy: $(ALL_SOBJS)
 	exec $(RANLIB) $@
 
 libskarnet.so.xyzzy: $(ALL_DOBJS)
-	exec $(CC) -o $@ $(CFLAGS_ALL) $(CFLAGS_SHARED) $(LDFLAGS_ALL) $(LDFLAGS_SHARED) -Wl,-soname,libskarnet.so.$(version_M) -Wl,-rpath=$(dynlibdir) $^ $(SOCKET_LIB) $(SPAWN_LIB) $(SYSCLOCK_LIB) $(TAINNOW_LIB) $(TIMER_LIB) $(UTIL_LIB)
+	exec $(CC) -o $@ $(CFLAGS_ALL) $(CFLAGS_SHARED) $(LDFLAGS_ALL) $(LDFLAGS_SHARED) -Wl,-soname,libskarnet.so.$(version_M) -Wl,-rpath=$(dynlibdir) $^ $(SOCKET_LIB) $(SPAWN_LIB) $(SYSCLOCK_LIB) $(TIMER_LIB) $(UTIL_LIB) $(PTHREAD_LIB)
 
 libskarnet.pc:
 	exec env \
@@ -144,7 +144,7 @@ libskarnet.pc:
 	  libdir="$(libdir)" \
 	  extra_includedirs="$(extra_includedirs)" \
 	  extra_libdirs="$(extra_libdirs)" \
-	  extra_libs="$(strip $(SOCKET_LIB) $(SPAWN_LIB) $(SYSCLOCK_LIB) $(TAINNOW_LIB) $(TIMER_LIB) $(UTIL_LIB))" \
+	  extra_libs="$(strip $(SOCKET_LIB) $(SPAWN_LIB) $(SYSCLOCK_LIB) $(TIMER_LIB) $(UTIL_LIB) $(PTHREAD_LIB))" \
 	  description="The skarnet.org C programming library (skalibs)" \
 	  url="https://skarnet.org/software/skalibs/" \
 	  ldlibs="$(LDLIBS)" \
