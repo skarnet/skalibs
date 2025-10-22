@@ -721,6 +721,7 @@ choose c pidfd_open 'pidfd_open()'
 choose cl prctl 'prctl()'
 choose cl procctl 'procctl()'
 choose cl kevent 'kevent()'
+choose cl kqueue1 'kqueue1()'
 
 # Here are the evil irreducible run-time sysdeps.
 choose clr devurandom '/dev/urandom'

@@ -1,7 +1,7 @@
 /* ISC license. */
 
-#ifndef STDDJB_H
-#define STDDJB_H
+#ifndef SKALIBS_STDDJB_H
+#define SKALIBS_STDDJB_H
 
 #include <skalibs/uint16.h>
 #include <skalibs/uint32.h>

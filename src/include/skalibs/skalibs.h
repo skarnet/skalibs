@@ -21,5 +21,6 @@
 #include <skalibs/random.h>
 #include <skalibs/datastruct.h>
 #include <skalibs/unixonacid.h>
+#include <skalibs/playnice.h>
 
 #endif
