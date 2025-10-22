@@ -19,10 +19,10 @@ struct keventbridge_s
   int kq ;
   int p[2] ;
 } ;
-#define KEVENTBRIDGE_ZERO { .th = PTHREAD_NULL, .kq = -1, .p = { -1, -1 } }
+#define KEVENTBRIDGE_ZERO { .kq = -1, .p = { -1, -1 } }
 
 extern int keventbridge_start (keventbridge *) ;
-#define keventbridge_write (kb, ke, n) kevent((kb)->kq, ke, (n), 0, 0, 0)
+#define keventbridge_write(kb, ke, n) kevent((kb)->kq, ke, (n), 0, 0, 0)
 extern int keventbridge_read (keventbridge const *, struct kevent *) ;
 extern void keventbridge_end (keventbridge *) ;
 
