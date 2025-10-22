@@ -61,7 +61,7 @@ int keventbridge_start (keventbridge *kbp)
   e = pthread_create(&kbp->th, &attr, &keventbridge_reader, kbp) ;
   if (e) { errno = e ; goto errattr ; }
   pthread_attr_destroy(&attr) ;
-  return 1 ;
+  return kbp->p[0] ;
 
  errattr:
   pthread_attr_destroy(&attr) ;
@@ -70,7 +70,7 @@ int keventbridge_start (keventbridge *kbp)
   fd_close(kbp->p[0]) ;
  errkq:
   fd_close(kbp->kq) ;
-  return 0 ;
+  return -1 ;
 }
 
 #endif
