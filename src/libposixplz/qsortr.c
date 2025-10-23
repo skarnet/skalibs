@@ -5,6 +5,9 @@
 
 #include <stdlib.h>
 
+#include <skalibs/functypes.h>
+#include <skalibs/posixplz.h>
+
 #ifdef SKALIBS_HASQSORTR_POSIX
 
 void qsortr (void *base, size_t n, size_t width, cmp_func_ref f, void *data)
@@ -21,9 +24,6 @@ void qsortr (void *base, size_t n, size_t width, cmp_func_ref f, void *data)
 }
 
 #else
-
-#include <skalibs/functypes.h>
-#include <skalibs/posixplz.h>
 
 struct aux_s
 {
