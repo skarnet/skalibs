@@ -12,6 +12,9 @@ ifeq "" "$(strip $(filter $(make_need), $(firstword $(sort $(make_need) $(MAKE_V
 $(error Your make ($(MAKE_VERSION)) is too old. You need $(make_need) or newer)
 endif
 
+deduprec = $(if $(1),$(firstword $(1)) $(call deduprec,$(filter-out $(firstword $(1)),$(wordlist 2,$(words $(1)),$(1)))),)
+dedup = $(strip $(call deduprec,$(1)))
+
 -include config.mak
 include package/deps.mak
 
@@ -39,6 +42,7 @@ ALL_SOBJS := $(ALL_DOBJS)
 CFLAGS_SHARED :=
 endif
 ALL_LIBS := $(SHARED_LIBS) $(STATIC_LIBS)
+SYSTEM_LIBS := $(call dedup,$(SOCKET_LIB) $(UTIL_LIB) $(PTHREAD_LIB) $(SYSCLOCK_LIB) $(TIMER_LIB) $(SPAWN_LIB))
 BUILT_INCLUDES := \
 src/include/$(package)/sysdeps.h \
 src/include/$(package)/uint16.h \
@@ -134,7 +138,7 @@ libskarnet.a.xyzzy: $(ALL_SOBJS)
 	exec $(RANLIB) $@
 
 libskarnet.so.xyzzy: $(ALL_DOBJS)
-	exec $(CC) -o $@ $(CFLAGS_ALL) $(CFLAGS_SHARED) $(LDFLAGS_ALL) $(LDFLAGS_SHARED) -Wl,-soname,libskarnet.so.$(version_M) -Wl,-rpath=$(dynlibdir) $^ $(SOCKET_LIB) $(SPAWN_LIB) $(SYSCLOCK_LIB) $(TIMER_LIB) $(UTIL_LIB) $(PTHREAD_LIB)
+	exec $(CC) -o $@ $(CFLAGS_ALL) $(CFLAGS_SHARED) $(LDFLAGS_ALL) $(LDFLAGS_SHARED) -Wl,-soname,libskarnet.so.$(version_M) -Wl,-rpath=$(dynlibdir) $^ $(SYSTEM_LIBS)
 
 libskarnet.pc:
 	exec env \
@@ -144,7 +148,7 @@ libskarnet.pc:
 	  libdir="$(libdir)" \
 	  extra_includedirs="$(extra_includedirs)" \
 	  extra_libdirs="$(extra_libdirs)" \
-	  extra_libs="$(strip $(SOCKET_LIB) $(SPAWN_LIB) $(SYSCLOCK_LIB) $(TIMER_LIB) $(UTIL_LIB) $(PTHREAD_LIB))" \
+	  extra_libs="$(SYSTEM_LIBS)" \
 	  description="The skarnet.org C programming library (skalibs)" \
 	  url="https://skarnet.org/software/skalibs/" \
 	  ldlibs="$(LDLIBS)" \
@@ -200,5 +204,5 @@ $(DESTDIR)$(dynlibdir)/lib%.dylib $(DESTDIR)$(dynlibdir)/lib%.$(version_X).dylib
 	exec $(INSTALL) -l lib$(*F).$(version_X).dylib $(@D)/lib$(*F).dylib
 
 libskarnet.dylib.xyzzy: $(ALL_DOBJS)
-	exec $(CC) -o $@ $(CFLAGS_ALL) $(CFLAGS_SHARED) $(LDFLAGS_ALL) $(LDFLAGS_SHARED) -Wl,-dylib_install_name,$(dynlibdir)/libskarnet.$(version_M).dylib -Wl,-dylib_compatibility_version,$(version_XY) -Wl,-dylib_current_version,$(version_XYZ) $^ $(SOCKET_LIB) $(SPAWN_LIB) $(SYSCLOCK_LIB) $(TAINNOW_LIB) $(TIMER_LIB) $(UTIL_LIB)
+	exec $(CC) -o $@ $(CFLAGS_ALL) $(CFLAGS_SHARED) $(LDFLAGS_ALL) $(LDFLAGS_SHARED) -Wl,-dylib_install_name,$(dynlibdir)/libskarnet.$(version_M).dylib -Wl,-dylib_compatibility_version,$(version_XY) -Wl,-dylib_current_version,$(version_XYZ) $^ $(SYSTEM_LIBS)
 endif
