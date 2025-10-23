@@ -1,6 +1,7 @@
 /* ISC license. */
 
 #include <skalibs/sysdeps.h>
+#include <skalibs/nonposix.h>
 
 #include <stdlib.h>
 
