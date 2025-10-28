@@ -5,6 +5,7 @@
 
 #include <skalibs/prog.h>
 #include <skalibs/strerr.h>
+#include <skalibs/gol.h>
 #include <skalibs/env.h>
 #include <skalibs/exec.h>
 
