@@ -28,8 +28,6 @@
 #include <skalibs/djbtime.h>
 #include <skalibs/djbunix.h>
 #include <skalibs/envalloc.h>
-#include <skalibs/env.h>
-#include <skalibs/exec.h>
 #include <skalibs/cspawn.h>
 #include <skalibs/fmtscan.h>
 #include <skalibs/functypes.h>
@@ -39,7 +37,6 @@
 #include <skalibs/iopause.h>
 #include <skalibs/lolstdio.h>
 #include <skalibs/netstring.h>
-#include <skalibs/prog.h>
 #include <skalibs/segfault.h>
 #include <skalibs/selfpipe.h>
 #include <skalibs/setgroups.h>

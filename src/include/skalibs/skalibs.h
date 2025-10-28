@@ -15,8 +15,8 @@
 
 #include <skalibs/cplz.h>
 #include <skalibs/posixplz.h>
+#include <skalibs/envexec.h>
 #include <skalibs/stddjb.h>
-#include <skalibs/strerr.h>
 #include <skalibs/stdcrypto.h>
 #include <skalibs/random.h>
 #include <skalibs/datastruct.h>
