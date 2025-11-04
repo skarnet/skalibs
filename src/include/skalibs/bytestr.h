@@ -52,7 +52,11 @@ extern int case_startb (char const *, size_t, char const *) gccattr_pure ;
 
 extern int str_cmp (void const *, void const *) gccattr_pure ;
 extern int str_bcmp (void const *, void const *) gccattr_pure ;
+extern int str_casecmp (void const *, void const *) gccattr_pure ;
+extern int str_bcasecmp (void const *, void const *) gccattr_pure ;
 extern int stringkey_cmp (void const *, void const *) gccattr_pure ;
 extern int stringkey_bcmp (void const *, void const *) gccattr_pure ;
+extern int stringkey_casecmp (void const *, void const *) gccattr_pure ;
+extern int stringkey_bcasecmp (void const *, void const *) gccattr_pure ;
 
 #endif
