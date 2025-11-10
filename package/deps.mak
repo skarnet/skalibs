@@ -31,7 +31,6 @@ src/include/skalibs/genset.h: src/include/skalibs/functypes.h
 src/include/skalibs/gensetdyn.h: src/include/skalibs/functypes.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
 src/include/skalibs/gol.h: src/include/skalibs/uint64.h
 src/include/skalibs/iopause.h: src/include/skalibs/tai.h
-src/include/skalibs/ip46.h: src/include/skalibs/fmtscan.h src/include/skalibs/socket.h src/include/skalibs/tai.h
 src/include/skalibs/keventbridge.h: src/include/skalibs/sysdeps.h
 src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr.h
@@ -47,7 +46,7 @@ src/include/skalibs/sig.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/siovec.h: src/include/skalibs/gccattributes.h
 src/include/skalibs/skaclient.h: src/include/skalibs/kolbak.h src/include/skalibs/tai.h src/include/skalibs/unixmessage.h
 src/include/skalibs/skalibs.h: src/include/skalibs/cplz.h src/include/skalibs/datastruct.h src/include/skalibs/envexec.h src/include/skalibs/playnice.h src/include/skalibs/posixplz.h src/include/skalibs/random.h src/include/skalibs/stdcrypto.h src/include/skalibs/stddjb.h src/include/skalibs/unixonacid.h
-src/include/skalibs/skamisc.h: src/include/skalibs/buffer.h src/include/skalibs/stralloc.h
+src/include/skalibs/skamisc.h: src/include/skalibs/buffer.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
 src/include/skalibs/socket.h: src/include/skalibs/fcntl.h src/include/skalibs/gccattributes.h src/include/skalibs/posixplz.h src/include/skalibs/tai.h
 src/include/skalibs/stat.h: src/include/skalibs/sysdeps.h
 src/include/skalibs/stdcrypto.h: src/include/skalibs/blake2s.h src/include/skalibs/crc32c.h src/include/skalibs/sha1.h src/include/skalibs/sha256.h src/include/skalibs/sha512.h
@@ -57,9 +56,6 @@ src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint64.h
 src/include/skalibs/textclient.h: src/include/skalibs/allreadwrite.h src/include/skalibs/tai.h src/include/skalibs/textmessage.h
 src/include/skalibs/textmessage.h: src/include/skalibs/allreadwrite.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
-src/include/skalibs/types.h: src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
-src/include/skalibs/uint16.h: src/include/skalibs/uint64.h
-src/include/skalibs/uint32.h: src/include/skalibs/uint64.h
 src/include/skalibs/unix-timed.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
 src/include/skalibs/unix-transactional.h: src/include/skalibs/direntry.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/unixconnection.h: src/include/skalibs/unixmessage.h
@@ -616,6 +612,7 @@ src/libstddjb/stralloc_reverse_blocks.o src/libstddjb/stralloc_reverse_blocks.lo
 src/libstddjb/stralloc_shrink.o src/libstddjb/stralloc_shrink.lo: src/libstddjb/stralloc_shrink.c src/include/skalibs/alloc.h src/include/skalibs/stralloc.h
 src/libstddjb/stralloc_zero.o src/libstddjb/stralloc_zero.lo: src/libstddjb/stralloc_zero.c src/include/skalibs/stralloc.h
 src/libstddjb/string_format.o src/libstddjb/string_format.lo: src/libstddjb/string_format.c src/include/skalibs/bytestr.h src/include/skalibs/stralloc.h
+src/libstddjb/string_index.o src/libstddjb/string_index.lo: src/libstddjb/string_index.c src/include/skalibs/genalloc.h src/include/skalibs/skamisc.h
 src/libstddjb/string_quote.o src/libstddjb/string_quote.lo: src/libstddjb/string_quote.c src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/string_quote_nodelim_mustquote.o src/libstddjb/string_quote_nodelim_mustquote.lo: src/libstddjb/string_quote_nodelim_mustquote.c src/include/skalibs/fmtscan.h src/include/skalibs/skamisc.h src/include/skalibs/stralloc.h
 src/libstddjb/string_unquote.o src/libstddjb/string_unquote.lo: src/libstddjb/string_unquote.c src/include/skalibs/skamisc.h

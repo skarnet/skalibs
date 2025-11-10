@@ -7,6 +7,7 @@
 
 #include <skalibs/buffer.h>
 #include <skalibs/stralloc.h>
+#include <skalibs/genalloc.h>
 
 extern stralloc satmp ;
 
@@ -37,5 +38,6 @@ extern ssize_t string_unquote_nodelim (char *, char const *, size_t) ;
 extern int string_unquote_withdelim (char *, size_t *, char const *, size_t, size_t *, char const *, size_t) ;
 
 extern int string_format (stralloc *, char const *, char const *, char const *const *) ;
+extern int string_index (char *, size_t, size_t, char, genalloc *) ;
 
 #endif
