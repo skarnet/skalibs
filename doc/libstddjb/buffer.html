@@ -29,8 +29,9 @@ and implemented in the <tt>libskarnet.a</tt> or <tt>libskarnet.so</tt> library.
 
 <p>
  skalibs provides convenience structures and functions to perform buffered I/O.
-These structures and functions abstract and replace, from a programer’s point
-of vue, direct calls to fd_read or fd_write for instance.
+These structures and functions abstract direct calls to <tt>read</tt> or <tt>write</tt>;
+they're meant to be used in place of <tt>stdio.h</tt> primitives. Unlike <tt>stdio</tt>,
+they can be used with non-blocking file descriptors.
 </p>
 
 <p>
@@ -84,7 +85,7 @@ fails.
 <p>
  The above are the most important and fundamental functions for buffering.
 Other functions can be found in the same header and their prototypes are
-self-explaining.
+self-explaining. More may be documented here later.
 </p>
 
 </body>
