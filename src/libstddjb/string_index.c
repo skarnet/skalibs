@@ -10,6 +10,7 @@ int string_index (char *s, size_t start, size_t len, char delim, genalloc *indic
   int wasnull = !indices->s ;
   int inword = 0 ;
 
+  len += start ;
   for (size_t i = start ; i < len ; i++)
   {
     if (s[i] == delim)
