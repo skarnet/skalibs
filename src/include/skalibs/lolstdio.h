@@ -13,7 +13,9 @@
 # define LOLDEBUG(...) do \
   { \
     buffer_puts(buffer_2, PROG) ; \
-    buffer_puts(buffer_2, ": debug: ") ; \
+    buffer_puts(buffer_2, ": debug: in ") ; \
+    buffer_puts(buffer_2, __func__) ; \
+    buffer_puts(buffer_2, ": ") ; \
     bprintf(buffer_2, __VA_ARGS__) ; \
     buffer_putflush(buffer_2, "\n", 1) ; \
   } while (0)

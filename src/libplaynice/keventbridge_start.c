@@ -41,7 +41,7 @@ static void *keventbridge_reader (void *arg)
   {
     int r = kevent(kbp->kq, 0, 0, &ke, 1, 0) ;
     if (r == -1 && errno != EINTR) break ;
-    if (r && allwrite(kbp->p[1], (char *)&ke, sizeof(ke)) < sizeof(ke)) break ;
+    if (r > 0 && allwrite(kbp->p[1], (char *)&ke, sizeof(ke)) < sizeof(ke)) break ;
   }
   fd_close(kbp->p[1]) ;
   kbp->p[1] = -1 ;
