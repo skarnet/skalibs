@@ -31,7 +31,7 @@ extern int fd_sync (int) ;
 extern off_t fd_cat (int, int) ;
 extern off_t fd_catn (int, int, off_t) ;
 extern int fd_ensure_open (int, int) ;
-#define fd_sanitize() (fd_ensure_open(0, 0) && fd_ensure_open(1, 1) && fd_ensure_open(2, 1))
+extern void fd_sanitize (void) ;
 extern void fd_shutdown (int, int) ;
 
 extern int fd_lock (int, int, int) ;
