@@ -5,10 +5,16 @@ In 2.14.5.0
 
  - Bugfixes.
  - Support for shared libraries on MacOS.
+ - New sysdeps to support old MacOS, kevent(), subreapers.
  - crc32c implementation: skalibs/crc32c.h
- - new skalibs/prog.h header for PROG modifications
- - new functions: symlink_at, mkdirp, mkdirp2, mkntemp,
+ - New skalibs/prog.h header for PROG modifications
+ - New functions: symlink_at, mkdirp, mkdirp2, mkntemp,
    atomic_symlink4, qsortr, bsearchr, env_dump4, socket_tcpdelay
+ - New gol subsystem: getopt_long, but with a better API. It is
+actually smaller and easier to use than subgetopt.
+ - New avltreeb macros.
+ - New keventbridge subsystem.
+ - Some documentation for buffer.h
 
 
 In 2.14.4.0
