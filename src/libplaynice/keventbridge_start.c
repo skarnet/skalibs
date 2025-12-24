@@ -58,7 +58,9 @@ int keventbridge_start (keventbridge *kbp)
   if (ndelay_on(kbp->p[0]) == -1) goto errp ;
   e = pthread_attr_init(&attr) ;
   if (e) { errno = e ; goto errp ; }
+#ifdef PTHREAD_STACK_MIN
   pthread_attr_setstacksize(&attr, PTHREAD_STACK_MIN) ;
+#endif
   e = pthread_create(&kbp->th, &attr, &keventbridge_reader, kbp) ;
   if (e) { errno = e ; goto errattr ; }
   pthread_attr_destroy(&attr) ;
