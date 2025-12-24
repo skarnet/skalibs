@@ -40,8 +40,8 @@ int env_dump4 (char const *dir, mode_t mode, char const *const *envp, int nochom
     char fn[len + 1] ;
     memcpy(fn, *envp, len) ;
     fn[len] = 0 ;
-    len = openwritevnclose_at(fd, fn, v, 1 + !!nochomp) ;
-    if (len < vallen + !!nochomp) goto cerr ;
+    len = openwritevnclose_at(fd, fn, v, 1 + !nochomp) ;
+    if (len < vallen + !nochomp) goto cerr ;
   }
   fd_close(fd) ;
   if (chmod(tmpdir, mode) == -1) goto err ;
