@@ -7,6 +7,7 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <sys/uio.h>
 
 #include <skalibs/bytestr.h>
 #include <skalibs/env.h>
@@ -31,12 +32,16 @@ int env_dump4 (char const *dir, mode_t mode, char const *const *envp, int nochom
   {
     size_t len = str_chr(*envp, '=') ;
     size_t vallen = strlen(*envp + len + 1) ;
-    char fn[len + 1 + !nochomp] ;
+    struct iovec v[2] =
+    {
+      { .iov_base = (char *)*envp + len + 1, .iov_len = vallen },
+      { .iov_base = "\n", .iov_len = 1 }
+    } ;
+    char fn[len + 1] ;
     memcpy(fn, *envp, len) ;
-    if (nochomp) fn[len] = 0 ;
-    else { fn[len] = '\n' ; fn[len+1] = 0 ; }
-    len = openwritenclose_at(fd, fn, *envp + len + 1 + !nochomp, vallen) ;
-    if (len < vallen) goto cerr ;
+    fn[len] = 0 ;
+    len = openwritevnclose_at(fd, fn, v, 1 + !!nochomp) ;
+    if (len < vallen + !!nochomp) goto cerr ;
   }
   fd_close(fd) ;
   if (chmod(tmpdir, mode) == -1) goto err ;
