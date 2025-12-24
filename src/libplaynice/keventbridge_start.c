@@ -4,6 +4,8 @@
 
 #ifdef SKALIBS_HASKEVENT
 
+#include <skalibs/nonposix.h>
+
 #include <errno.h>
 #include <pthread.h>
 #include <limits.h>

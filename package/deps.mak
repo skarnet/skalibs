@@ -182,7 +182,7 @@ src/libenvexec/xmspawn_afm.o src/libenvexec/xmspawn_afm.lo: src/libenvexec/xmspa
 src/libenvexec/xmspawn_afn.o src/libenvexec/xmspawn_afn.lo: src/libenvexec/xmspawn_afn.c src/include/skalibs/cspawn.h src/include/skalibs/strerr.h
 src/libplaynice/keventbridge_end.o src/libplaynice/keventbridge_end.lo: src/libplaynice/keventbridge_end.c src/include/skalibs/djbunix.h src/include/skalibs/keventbridge.h src/include/skalibs/sysdeps.h
 src/libplaynice/keventbridge_read.o src/libplaynice/keventbridge_read.lo: src/libplaynice/keventbridge_read.c src/include/skalibs/allreadwrite.h src/include/skalibs/keventbridge.h src/include/skalibs/sysdeps.h
-src/libplaynice/keventbridge_start.o src/libplaynice/keventbridge_start.lo: src/libplaynice/keventbridge_start.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h src/include/skalibs/keventbridge.h src/include/skalibs/sysdeps.h
+src/libplaynice/keventbridge_start.o src/libplaynice/keventbridge_start.lo: src/libplaynice/keventbridge_start.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h src/include/skalibs/keventbridge.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
 src/libposixplz/bsearchr.o src/libposixplz/bsearchr.lo: src/libposixplz/bsearchr.c src/include/skalibs/functypes.h src/include/skalibs/posixplz.h
 src/libposixplz/doublefork.o src/libposixplz/doublefork.lo: src/libposixplz/doublefork.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h src/include/skalibs/uint64.h
 src/libposixplz/execvep.o src/libposixplz/execvep.lo: src/libposixplz/execvep.c src/libposixplz/posixplz-internal.h src/include/skalibs/posixplz.h
