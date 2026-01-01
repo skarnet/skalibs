@@ -50,15 +50,17 @@ static int unixmessage_receiver_fill (unixmessage_receiver *b)
     .msg_control = b->fds_ok & 1 ? ancilbuf : 0,
     .msg_controllen = b->fds_ok & 1 ? CMSG_SPACE(b->auxb.a - 1) : 0
   } ;
+  int e = errno ;
   ssize_t r = -1 ;
   if (cbuffer_isfull(&b->mainb) || ((b->fds_ok & 1) && cbuffer_isfull(&b->auxb)))
     return (errno = ENOBUFS, -1) ;
   cbuffer_wpeek(&b->mainb, iov) ;
-  while (r < 0)
+  while (r == -1)
   {
     r = recvmsg(b->fd, &msghdr, awesomeflags) ;
-    if (!r || (r < 0 && errno != EINTR)) return r ;
+    if (!r || (r == -1 && errno != EINTR)) return r ;
   }
+  if (r > 0) errno = e ;
   if (b->fds_ok & 1)
   {
     struct cmsghdr *c = CMSG_FIRSTHDR(&msghdr) ;
@@ -78,7 +80,7 @@ static int unixmessage_receiver_fill (unixmessage_receiver *b)
       {
         size_t i = 0 ;
         for (; i < auxlen / sizeof(int) ; i++)
-          if (coe(((int *)CMSG_DATA(c))[i]) < 0)
+          if (coe(((int *)CMSG_DATA(c))[i]) == -1)
           {
             i++ ;
             while (i--) fd_close(((int *)CMSG_DATA(c))[i]) ;

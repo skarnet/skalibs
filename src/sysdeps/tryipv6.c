@@ -22,7 +22,7 @@ int main (void)
   s = socket(AF_INET6, SOCK_STREAM, 0) ;
   if (s < 0) return 111 ;
   do r = connect(s, (struct sockaddr *)&bar, sizeof bar) ;
-  while ((r == -1) && (errno == EINTR)) ;
-  if ((r == -1) && (errno == EALREADY)) errno = EINPROGRESS ;
+  while (r == -1 && errno == EINTR) ;
+  if (r == -1 && errno == EALREADY) errno = EINPROGRESS ;
   return 0 ;
 }

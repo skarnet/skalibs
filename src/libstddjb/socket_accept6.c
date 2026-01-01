@@ -18,25 +18,27 @@
 
 int socket_accept6_internal (int s, char *ip6, uint16_t *port, unsigned int options)
 {
+  int e = errno ;
   int fd ;
   struct sockaddr_in6 sa ;
   socklen_t dummy = sizeof sa ;
   do
 #ifdef SKALIBS_HASACCEPT4
-    fd = accept4(s, (struct sockaddr *)&sa, &dummy, ((options & O_NONBLOCK) ? SOCK_NONBLOCK : 0) | ((options & O_CLOEXEC) ? SOCK_CLOEXEC : 0)) ;
+    fd = accept4(s, (struct sockaddr *)&sa, &dummy, (options & O_NONBLOCK ? SOCK_NONBLOCK : 0) | (options & O_CLOEXEC ? SOCK_CLOEXEC : 0)) ;
 #else
     fd = accept(s, (struct sockaddr *)&sa, &dummy) ;
 #endif
-  while ((fd < 0) && (errno == EINTR)) ;
+  while (fd == -1 && errno == EINTR) ;
   if (fd < 0) return -1 ;
 #ifndef SKALIBS_HASACCEPT4
-  if ((((options & O_NONBLOCK) ? ndelay_on(fd) : ndelay_off(fd)) < 0)
-   || (((options & O_CLOEXEC) ? coe(fd) : uncoe(fd)) < 0))
+  if (((options & O_NONBLOCK ? ndelay_on(fd) : ndelay_off(fd)) == -1)
+   || ((options & O_CLOEXEC ? coe(fd) : uncoe(fd)) == -1))
   {
     fd_close(fd) ;
     return -1 ;
   }
 #endif
+  errno = e ;
   memcpy(ip6, sa.sin6_addr.s6_addr, 16) ;
   *port = uint16_big(sa.sin6_port) ;
   return fd ;

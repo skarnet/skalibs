@@ -18,9 +18,11 @@
 
 int symlink_at (char const *src, int dirfd, char const *dst)
 {
+  int e = errno ;
   int r ;
   do r = symlinkat(src, dirfd, dst) ;
   while (r == -1 && errno == EINTR) ;
+  if (r >= 0) errno = e ;
   return r ;
 }
 

@@ -17,9 +17,11 @@
 
 int open3_at (int dirfd, char const *file, int flags, unsigned int mode)
 {
+  int e = errno ;
   int fd ;
   do fd = openat(dirfd, file, flags, mode) ; /* all systems that support openat() have O_CLOEXEC */
   while (fd == -1 && errno == EINTR) ;
+  if (fd >= 0) errno = e ;
   return fd ;
 }
 

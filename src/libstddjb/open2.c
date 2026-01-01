@@ -13,9 +13,11 @@
 
 int open2 (char const *s, unsigned int flags)
 {
+  int e = errno ;
   int r ;
   do r = open(s, flags) ;
   while (r == -1 && errno == EINTR) ;
+  if (r >= 0) errno = e ;
   return r ;
 }
 
@@ -23,6 +25,7 @@ int open2 (char const *s, unsigned int flags)
 
 int open2 (char const *s, unsigned int flags)
 {
+  int e = errno ;
   int fd ;
   do fd = open(s, flags & ~O_CLOEXEC) ;
   while (fd == -1 && errno == EINTR) ;
@@ -32,6 +35,7 @@ int open2 (char const *s, unsigned int flags)
     fd_close(fd) ;
     return -1 ;
   }
+  errno = e ;
   return fd ;
 }
 

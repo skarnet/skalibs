@@ -18,9 +18,11 @@
 
 int open2_at (int dirfd, char const *file, int flags)
 {
+  int e = errno ;
   int fd ;
   do fd = openat(dirfd, file, flags) ;  /* all systems supporting openat() have O_CLOEXEC */
   while (fd == -1 && errno == EINTR) ;
+  if (fd >= 0) errno = e ;
   return fd ;
 }
 

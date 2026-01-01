@@ -50,10 +50,12 @@ int ancil_recv_fd (int sock, char expected_ch)
     .msg_control = ancilbuf,
     .msg_controllen = CMSG_SPACE(sizeof(int))
   } ;
+  int e = errno ;
   do r = recvmsg(sock, &msghdr, awesomeflags) ;
   while (r < 0 && errno == EINTR) ;
   if (r < 0) return r ;
   if (!r) return (errno = EPIPE, -1) ;
+  errno = e ;
   c = CMSG_FIRSTHDR(&msghdr) ;
   if (ch != expected_ch
    || !c
@@ -62,7 +64,7 @@ int ancil_recv_fd (int sock, char expected_ch)
    || (size_t)(c->cmsg_len - (CMSG_DATA(c) - (unsigned char *)c)) != sizeof(int)) return (errno = EPROTO, -1) ;
   memcpy(&fd, CMSG_DATA(c), sizeof(int)) ;
 #ifndef SKALIBS_HASCMSGCLOEXEC
-  if (coe(fd) < 0)
+  if (coe(fd) == -1)
   {
     fd_close(fd) ;
     return -1 ;

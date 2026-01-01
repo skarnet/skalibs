@@ -98,9 +98,11 @@ int unixmessage_sender_flush (unixmessage_sender *b)
         ((int *)CMSG_DATA(cp))[i] = fd < 0 ? -(fd+1) : fd ;
       }
     }
+    int e = errno ;
     do r = sendmsg(b->fd, &hdr, MSG_NOSIGNAL) ;
-    while (r < 0 && errno == EINTR) ;
+    while (r == -1 && errno == EINTR) ;
     if (r <= 0) return 0 ;
+    errno = e ;
     if (nfds)
     {
       size_t i = 0 ;

@@ -12,6 +12,7 @@
 
 ssize_t socket_send4 (int s, char const *buf, size_t len, char const *ip, uint16_t port)
 {
+  int e = errno ;
   ssize_t r ;
   struct sockaddr_in sa ;
   memset(&sa, 0, sizeof sa) ;
@@ -19,6 +20,7 @@ ssize_t socket_send4 (int s, char const *buf, size_t len, char const *ip, uint16
   sa.sin_port = uint16_big(port) ;
   memcpy(&sa.sin_addr, ip, 4) ;
   do r = sendto(s, buf, len, 0, (struct sockaddr *)&sa, sizeof sa) ;
-  while ((r == -1) && (errno == EINTR)) ;
+  while (r == -1 && errno == EINTR) ;
+  if (r >= 0) errno = e ;
   return r ;
 }

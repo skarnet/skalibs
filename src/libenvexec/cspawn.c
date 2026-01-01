@@ -125,8 +125,10 @@ static inline pid_t cspawn_workaround (pid_t pid, int const *p)
   if (r == -1) return 0 ;
   if (r) return (errno = EILSEQ, 0) ;  /* child wrote, wtf */
 
+  int se = errno ;
   do e = waitid(P_PID, pid, &si, WEXITED | WNOHANG | WNOWAIT) ;
   while (e == -1 && errno == EINTR) ;
+  errno = se ;
   if (e == -1) return pid ;  /* we're in trouble, but don't leak a child */
   if (!si.si_pid) return pid ;  /* child is running */
   if (si.si_code != CLD_EXITED || si.si_status != 127) return pid ; /* child died after execve(), let caller handle it */

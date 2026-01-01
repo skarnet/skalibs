@@ -1,6 +1,7 @@
 /* ISC license. */
 
 #include <errno.h>
+
 #include <skalibs/direntry.h>
 
 void dir_close (DIR *dir)

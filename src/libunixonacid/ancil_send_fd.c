@@ -31,13 +31,15 @@ int ancil_send_fd (int sock, int fd, char ch)
     .msg_controllen = CMSG_SPACE(sizeof(int))
   } ;
   struct cmsghdr *c = CMSG_FIRSTHDR(&hdr) ;
+  int e = errno ;
   memset(hdr.msg_control, 0, hdr.msg_controllen) ;
   c->cmsg_level = SOL_SOCKET ;
   c->cmsg_type = SCM_RIGHTS ;
   c->cmsg_len = CMSG_LEN(sizeof(int)) ;
   memcpy(CMSG_DATA(c), &fd, sizeof(int)) ;
   do r = sendmsg(sock, &hdr, MSG_NOSIGNAL) ;
-  while (r < 0 && errno == EINTR) ;
+  while (r == -1 && errno == EINTR) ;
   if (r <= 0) return 0 ;
+  errno = e ;
   return 1 ;
 }

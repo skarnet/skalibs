@@ -24,6 +24,7 @@ void random_buf_early (char *s, size_t n)
 {
   static int broken = 0 ;
   if (broken) goto bleh ;
+  int e = errno ;
   while (n)
   {
     ssize_t r = getrandom(s, n, GRND_INSECURE) ;
@@ -35,9 +36,11 @@ void random_buf_early (char *s, size_t n)
     s += r ;
     n -= r ;
   }
+  errno = e ;
   return ;
  breakit:
   broken = 1 ;
+  errno = e ;
  bleh:
   random_devurandom(s, n) ;
 }
