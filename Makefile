@@ -142,6 +142,7 @@ libskarnet.so.xyzzy: $(ALL_DOBJS)
 
 libskarnet.pc:
 	exec env \
+	  prefix="$(prefix)" \
 	  library="skarnet" \
 	  includedir="$(includedir)" \
 	  dynlibdir="$(dynlibdir)" \

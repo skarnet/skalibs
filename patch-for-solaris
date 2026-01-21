@@ -22,6 +22,7 @@ patchit ./tools/gen-types.sh
 patchit ./tools/gen-types-internal.sh
 patchit ./tools/gen-bits.sh
 patchit ./tools/gen-sysdepsh.sh
+patchit ./tools/gen-dotpc.sh
 
 echo 'SHELL := /usr/xpg4/bin/sh' > Makefile.tmp
 echo >> Makefile.tmp
