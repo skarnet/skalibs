@@ -74,5 +74,7 @@ int cdbmake_finish (cdbmaker *c)
   if (!buffer_flush(&c->b)
    || lseek(buffer_fd(&c->b), 0, SEEK_SET) == -1
    || buffer_putflush(&c->b, final, 2048) < 2048) return 0 ;
+
+  genalloc_free(diuint32, &c->hplist) ;
   return 1 ;
 }
