@@ -105,7 +105,7 @@ extern pid_t mspawn_af (char const *, char const *const *, char const *const *, 
 #define mspawn_ae(file, argv, envp, flags, fa, n) mspawn_af(file, argv, (envp), env_len(envp), flags, fa, n)
 
 #define mspawn_an(file, argv, modif, modiflen, modifn, flags, fa, n) mspawn_aen(file, argv, (char const *const *)environ, modif, modiflen, modifn, flags, fa, n)
-#define mspawn_am(file, argv, modif, modiflen, flags, fa, n) mspawn_aem(file, argv, (char const *const *)environ, modif, modiflen, flaga, fa, n)
+#define mspawn_am(file, argv, modif, modiflen, flags, fa, n) mspawn_aem(file, argv, (char const *const *)environ, modif, modiflen, flags, fa, n)
 #define mspawn_a(file, argv, flags, fa, n) mspawn_ae(file, (argv), (char const *const *)environ, flags, fa, n)
 
 #define mspawn_fn(argv, envp, envlen, modif, modiflen, modifn, flags, fa, n) mspawn_afn((argv)[0], (argv), envp, envlen, modif, modiflen, modifn, flags, fa, n)
