@@ -1,5 +1,7 @@
 /* ISC license. */
 
+#include <string.h>
+
 #include <skalibs/stralloc.h>
 #include <skalibs/genalloc.h>
 #include <skalibs/gensetdyn.h>
@@ -21,6 +23,7 @@ int gensetdyn_ready (gensetdyn *g, uint32_t n)
     uint32_t j = n - 1 - i + g->storage.len ;
     genalloc_catb(uint32_t, &g->freelist, &j, 1) ;
   }
+  memset(g->storage.s + g->storage.len, 0, g->storage.a - g->storage.len) ;
   g->storage.len = n ;
   return 1 ;
 }
