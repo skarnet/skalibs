@@ -1,9 +1,12 @@
 Changelog for skalibs.
 
-In 2.14.5.2
+In 2.14.6.0
 -----------
 
  - Bugfixes.
+ - New functions: sassclient.h and sassserver.h, in libunixonacid.
+The goal is to factor the client-side and server-side code for
+asynchronous helpers such as s6-ftrigrd, skadnsd, and more.
 
 
 In 2.14.5.1
