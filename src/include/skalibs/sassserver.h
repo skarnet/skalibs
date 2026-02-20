@@ -9,14 +9,14 @@
 #include <skalibs/tai.h>
 #include <skalibs/iopause.h>
 
-typedef void *sassserver_send_func (uint32_t, uint32_t, char const *, size_t) ;
+typedef int sassserver_send_func (void *, uint32_t, uint32_t, char const *, size_t) ;
 typedef sassserver_send_func *sassserver_send_func_ref ;
 
 typedef void sassserver_cancel_func (void *) ;
 typedef sassserver_cancel_func *sassserver_cancel_func_ref ;
 
-extern void sassserver_init (char const *, char const *, sassserver_send_func_ref, sassserver_cancel_func_ref, tain const *, tain *stamp) ;
-#define sassserver_init_g(banner1, banner2, deadline) sassserver_init(banner1, banner2, (deadline), &STAMP)
+extern void sassserver_init (char const *, char const *, sassserver_send_func_ref, sassserver_cancel_func_ref, size_t, tain const *, tain *stamp) ;
+#define sassserver_init_g(banner1, banner2, sendf, cancelf, esize, deadline) sassserver_init(banner1, banner2, sendf, cancelf, esize, (deadline), &STAMP)
 extern unsigned int sassserver_prepare_iopause (iopause_fd *, tain *) ;
 extern void sassserver_timeout (void) ;
 extern int sassserver_event (iopause_fd const *) ;

@@ -6,6 +6,7 @@
 #include <errno.h>
 
 #include <skalibs/uint32.h>
+#include <skalibs/alloc.h>
 #include <skalibs/error.h>
 #include <skalibs/strerr.h>
 #include <skalibs/tai.h>
@@ -26,18 +27,19 @@ struct sassserver_query_s
 
 static sassserver_send_func_ref sassserver_sendf ;
 static sassserver_cancel_func_ref sassserver_cancelf ;
+static size_t sassserver_datasize ;
 
 static gensetdyn sassserver_queries = GENSETDYN_INIT(sassserver_query, 8, 3, 8) ;
 #define SASSSERVER_QUERY(i) GENSETDYN_P(sassserver_query, &sassserver_queries, (i))
 
-void *sassserver_data (uint32_t handle)
-{
-  return SASSSERVER_QUERY(handle)->data ;
-}
-
 static void *sassserver_deadline_dtok (uint32_t d, void *aux)
 {
   return &GENSETDYN_P(sassserver_query, (gensetdyn *)aux, d)->deadline ;
+}
+
+void *sassserver_data (uint32_t handle)
+{
+  return SASSSERVER_QUERY(handle)->data ;
 }
 
 static int sassserver_deadline_cmp (void const *a, void const *b, void *aux)
@@ -145,6 +147,7 @@ static int sassserver_parse_protocol (struct iovec const *v, void *aux)
       uint32_t timeout ;
       uint32_t opcode ;
       uint32_t len ;
+      int e ;
       if (vlen < 16) strerr_dief1x(100, "invalid client request") ;
       if (!gensetdyn_new(&sassserver_queries, &handle)) strerr_diefu1sys(111, "gensetdyn_new") ;
       p = SASSSERVER_QUERY(handle) ;
@@ -162,14 +165,14 @@ static int sassserver_parse_protocol (struct iovec const *v, void *aux)
       sassserver_uniquify(&p->deadline) ;
       if (!avltree_insert(&sassserver_by_deadline, handle)) strerr_diefu1sys(111, "avltree_insert") ;
       if (!avltree_insert(&sassserver_by_id, handle)) strerr_diefu1sys(111, "avltree_insert") ;
-      p->data = (*sassserver_sendf)(handle, opcode, s, len) ;
       if (!p->data)
       {
-        int e = errno ;
-        sassserver_remove(handle) ;
-        sassserver_sync_answer(e) ;
+        p->data = alloc(sassserver_datasize) ;
+        if (!p->data) strerr_diefu1sys(111, "alloc") ;
       }
-      else sassserver_sync_answer(0) ;
+      e = (*sassserver_sendf)(p->data, handle, opcode, s, len) ;
+      if (e) sassserver_remove(handle) ;
+      sassserver_sync_answer(e) ;
       break ;
     }
     default : strerr_dief1x(100, "invalid client request") ;
@@ -177,7 +180,7 @@ static int sassserver_parse_protocol (struct iovec const *v, void *aux)
   return 1 ;
 }
 
-void sassserver_init (char const *banner1, char const *banner2, sassserver_send_func_ref sendf, sassserver_cancel_func_ref cancelf, tain const *deadline, tain *stamp)
+void sassserver_init (char const *banner1, char const *banner2, sassserver_send_func_ref sendf, sassserver_cancel_func_ref cancelf, size_t datasize, tain const *deadline, tain *stamp)
 {
   if (!textclient_server_01x_init(banner1, strlen(banner1), banner2, strlen(banner2), deadline, stamp))
     strerr_diefu1sys(111, "sync with client") ;
