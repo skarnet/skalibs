@@ -9,7 +9,7 @@
 #include <skalibs/tai.h>
 #include <skalibs/iopause.h>
 
-typedef int sassserver_send_func (void *, uint32_t, uint32_t, char const *, size_t) ;
+typedef int sassserver_send_func (void *, uint32_t, uint32_t, uint32_t, char const *, size_t) ;
 typedef sassserver_send_func *sassserver_send_func_ref ;
 
 typedef void sassserver_cancel_func (void *) ;
@@ -23,7 +23,7 @@ extern int sassserver_event (iopause_fd const *) ;
 extern void *sassserver_data (uint32_t) ;
 
 extern void sassserver_async_failure (uint32_t, int) ;
-extern void sassserver_async_success (uint32_t, char const *, size_t) ;
-extern void sassserver_async_successv (uint32_t, struct iovec const *, unsigned int) ;
+extern void sassserver_async_success (uint32_t, uint32_t, char const *, size_t) ;
+extern void sassserver_async_successv (uint32_t, uint32_t, struct iovec const *, unsigned int) ;
 
 #endif

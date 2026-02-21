@@ -12,6 +12,7 @@
 #include <skalibs/unixconnection.h>
 #include <skalibs/kolbak.h>
 #include <skalibs/skaclient.h>
+#include <skalibs/sass.h>
 #include <skalibs/sassclient.h>
 #include <skalibs/sassserver.h>
 

@@ -15,6 +15,7 @@
 #include <skalibs/avltree.h>
 #include <skalibs/textmessage.h>
 #include <skalibs/textclient.h>
+#include <skalibs/sass.h>
 #include <skalibs/sassserver.h>
 
 typedef struct sassserver_query_s sassserver_query, sassserver_query_ref ;
@@ -94,7 +95,7 @@ void sassserver_async_failure (uint32_t handle, int e)
   sassserver_remove(handle) ;
 }
 
-void sassserver_async_successv (uint32_t handle, struct iovec const *v, unsigned int n)
+void sassserver_async_successv (uint32_t handle, uint32_t flags, struct iovec const *v, unsigned int n)
 {
   sassserver_query *p = SASSSERVER_QUERY(handle) ;
   char pack[8] = "\0\0\0\0\0\0\0" ;
@@ -104,13 +105,13 @@ void sassserver_async_successv (uint32_t handle, struct iovec const *v, unsigned
   uint32_pack_big(pack, p->id) ;
   if (!textmessage_putv(textmessage_sender_x, vv, n+1))
     strerr_diefu1sys(111, "textmessage_putv") ;
-  sassserver_remove(handle) ;
+  if (!(flags & SASS_FLAGS_KEEP)) sassserver_remove(handle) ;
 }
 
-void sassserver_async_success (uint32_t handle, char const *s, size_t len)
+void sassserver_async_success (uint32_t handle, uint32_t flags, char const *s, size_t len)
 {
   struct iovec v = { .iov_base = (char *)s, .iov_len = len } ;
-  sassserver_async_successv(handle, &v, 1) ;
+  sassserver_async_successv(handle, flags, &v, 1) ;
 }
 
 static inline void sassserver_uniquify (tain *deadline)
@@ -144,14 +145,16 @@ static int sassserver_parse_protocol (struct iovec const *v, void *aux)
     {
       sassserver_query *p ;
       uint32_t handle ;
+      uint32_t flags ;
       uint32_t timeout ;
       uint32_t opcode ;
       uint32_t len ;
       int e ;
-      if (vlen < 16) strerr_dief1x(100, "invalid client request") ;
+      if (vlen < 20) strerr_dief1x(100, "invalid client request") ;
       if (!gensetdyn_new(&sassserver_queries, &handle)) strerr_diefu1sys(111, "gensetdyn_new") ;
       p = SASSSERVER_QUERY(handle) ;
       uint32_unpack_big(s, &p->id) ; s += 4 ; vlen -= 4 ;
+      uint32_unpack_big(s, &flags) ; s += 4 ; vlen -= 4 ;
       uint32_unpack_big(s, &timeout) ; s += 4 ; vlen -= 4 ;
       uint32_unpack_big(s, &opcode) ; s += 4 ; vlen -= 4 ;
       uint32_unpack_big(s, &len) ; s += 4 ; vlen -= 4 ;
@@ -170,7 +173,7 @@ static int sassserver_parse_protocol (struct iovec const *v, void *aux)
         p->data = alloc(sassserver_datasize) ;
         if (!p->data) strerr_diefu1sys(111, "alloc") ;
       }
-      e = (*sassserver_sendf)(p->data, handle, opcode, s, len) ;
+      e = (*sassserver_sendf)(p->data, handle, flags, opcode, s, len) ;
       if (e) sassserver_remove(handle) ;
       sassserver_sync_answer(e) ;
       break ;

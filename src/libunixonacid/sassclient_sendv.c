@@ -15,14 +15,14 @@
 #include <skalibs/sassclient.h>
 #include "sassclient-internal.h"
 
-int sassclient_sendv (sassclient *a, uint32_t *cid, uint32_t timeout, uint32_t opcode, struct iovec const *vv, unsigned int n, sassclient_cb_func_ref cb, void *data, tain const *deadline, tain *stamp)
+int sassclient_sendv (sassclient *a, uint32_t *cid, uint32_t flags, uint32_t timeout, uint32_t opcode, struct iovec const *vv, unsigned int n, sassclient_cb_func_ref cb, void *data, tain const *deadline, tain *stamp)
 {
   size_t len = siovec_len(vv, n) ;
   uint32_t id ;
   int e ;
   struct iovec answer ;
   sassclient_data *p ;
-  char pack[17] = "+" ;
+  char pack[21] = "+" ;
   struct iovec v[1 + n] ;
   if (len + 11 > UINT32_MAX) return (errno = ENAMETOOLONG, 0) ;
 
@@ -41,9 +41,10 @@ int sassclient_sendv (sassclient *a, uint32_t *cid, uint32_t timeout, uint32_t o
   v[0].iov_len = 17 ;
   for (unsigned int i = 0 ; i < n ; i++) v[i+1] = vv[i] ;
   uint32_pack_big(pack + 1, id) ;
-  uint32_pack_big(pack + 5, timeout) ;
-  uint32_pack_big(pack + 9, opcode) ;
-  uint32_pack_big(pack + 13, len) ;
+  uint32_pack_big(pack + 5, flags) ;
+  uint32_pack_big(pack + 9, timeout) ;
+  uint32_pack_big(pack + 13, opcode) ;
+  uint32_pack_big(pack + 17, len) ;
   if (!textclient_exchangev(&a->connection, v, 1 + n, &answer, deadline, stamp)) { e = errno ; goto err0 ; }
   if (answer.iov_len == 1) { e = *(unsigned char *)answer.iov_base ; goto err0 ; }
   if (answer.iov_len != 5 || *(unsigned char *)answer.iov_base) { e = EPROTO ; goto err0 ; }
