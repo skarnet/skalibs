@@ -41,7 +41,7 @@ src/include/skalibs/posixplz.h: src/include/skalibs/functypes.h src/include/skal
 src/include/skalibs/prog.h: src/include/skalibs/types.h
 src/include/skalibs/random.h: src/include/skalibs/functypes.h src/include/skalibs/stralloc.h
 src/include/skalibs/sassclient.h: src/include/skalibs/genqdyn.h src/include/skalibs/gensetdyn.h src/include/skalibs/tai.h src/include/skalibs/textclient.h
-src/include/skalibs/sassserver.h: src/include/skalibs/iopause.h src/include/skalibs/tai.h
+src/include/skalibs/sassserver.h: src/include/skalibs/avltree.h src/include/skalibs/gensetdyn.h src/include/skalibs/iopause.h src/include/skalibs/tai.h
 src/include/skalibs/setgroups.h: src/include/skalibs/sysdeps.h
 src/include/skalibs/sha512.h: src/include/skalibs/uint64.h
 src/include/skalibs/sig.h: src/include/skalibs/gccattributes.h

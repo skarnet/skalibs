@@ -21,7 +21,7 @@ struct sassclient_s
 } ;
 #define SASSCLIENT_ZERO { .connection = TEXTCLIENT_ZERO, .store = GENSETDYN_ZERO, .results = GENQDYN_ZERO }
 
-typedef int sassclient_cb_func (char const *, size_t, void *) ;
+typedef int sassclient_cb_func (char const *, size_t, uint32_t, void *) ;
 typedef sassclient_cb_func *sassclient_cb_func_ref ;
 
 extern int sassclient_start (sassclient *, char const *const *, char const *, char const *, tain const *, tain *) ;

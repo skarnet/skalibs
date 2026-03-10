@@ -9,7 +9,7 @@
 
 #include "sassclient-internal.h"
 
-int asyncnss_cancel_internal (sassclient *a, uint32_t id, tain const *deadline, tain *stamp)
+int sassclient_cancel_internal (sassclient *a, uint32_t id, tain const *deadline, tain *stamp)
 {
   struct iovec answer ;
   char pack[5] = "-" ;

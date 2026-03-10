@@ -33,7 +33,7 @@ static int sassclient_msghandler (struct iovec const *v, void *aux)
   }
   else
   {
-    e = (*p->cb)(s + 8, v->iov_len - 8, p->data) ;
+    e = (*p->cb)(s + 8, v->iov_len - 8, id, p->data) ;
     uint32_pack_big(res + 4, e) ;
   }
   e = pthread_mutex_lock(&a->results_mutex) ;
