@@ -163,6 +163,7 @@ static int sassserver_parse_protocol (struct iovec const *v, void *aux)
           (*a->cleanupf)(a->aux) ;
           strerr_diefu1sys(111, "alloc") ;
         }
+        memset(p->data, 0, a->datasize) ;
       }
       e = (*a->sendf)(p->data, handle, flags, opcode, s, len) ;
       if (e) sassserver_remove(a, handle) ;
