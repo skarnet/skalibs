@@ -5,6 +5,7 @@
 #include <stdint.h>
 #include <errno.h>
 
+#include <skalibs/functypes.h>
 #include <skalibs/uint32.h>
 #include <skalibs/alloc.h>
 #include <skalibs/error.h>
@@ -57,12 +58,15 @@ static int sassserver_id_cmp (void const *a, void const *b, void *aux)
   return *aa < *bb ? -1 : *aa > *bb ;
 }
 
-static void sassserver_sync_answer (int e)
+static void sassserver_sync_answer (sassserver *a, int e)
 {
   char pack[4] ;
   uint32_pack_big(pack, (uint32_t)e) ;
   if (!textmessage_put(textmessage_sender_1, pack, 4))
+  {
+    (*a->cleanupf)(a->aux) ;
     strerr_diefu1sys(111, "textmessage_put") ;
+  }
 }
 
 static void sassserver_remove (sassserver *a, uint32_t handle)
@@ -86,18 +90,26 @@ static int sassserver_parse_protocol (struct iovec const *v, void *aux)
   sassserver *a = aux ;
   char const *s = v->iov_base ;
   size_t vlen = v->iov_len ;
-  if (vlen-- < 5) strerr_dief1x(100, "invalid client request") ;
+  if (vlen-- < 5)
+  {
+    (*a->cleanupf)(a->aux) ;
+    strerr_dief1x(100, "invalid client request") ;
+  }
   switch (*s++)
   {
     case '-' : /* cancel */
     {
       uint32_t handle, id ;
-      if (vlen != 4) strerr_dief1x(100, "invalid client request") ;
+      if (vlen != 4)
+      {
+        (*a->cleanupf)(a->aux) ;
+        strerr_dief1x(100, "invalid client request") ;
+      }
       uint32_unpack_big(s, &id) ;
-      if (!avltree_search(&a->by_id, &id, &handle)) sassserver_sync_answer(EINVAL) ;
+      if (!avltree_search(&a->by_id, &id, &handle)) sassserver_sync_answer(a, EINVAL) ;
       (*a->cancelf)(SASSSERVER_QUERY(a, handle)->data) ;
       sassserver_remove(a, handle) ;
-      sassserver_sync_answer(0) ;
+      sassserver_sync_answer(a, 0) ;
       break ;
     }
     case '+' : /* send */
@@ -109,15 +121,27 @@ static int sassserver_parse_protocol (struct iovec const *v, void *aux)
       uint32_t opcode ;
       uint32_t len ;
       int e ;
-      if (vlen < 20) strerr_dief1x(100, "invalid client request") ;
-      if (!gensetdyn_new(&a->queries, &handle)) strerr_diefu1sys(111, "gensetdyn_new") ;
+      if (vlen < 20)
+      {
+        (*a->cleanupf)(a->aux) ;
+        strerr_dief1x(100, "invalid client request") ;
+      }
+      if (!gensetdyn_new(&a->queries, &handle))
+      {
+        (*a->cleanupf)(a->aux) ;
+        strerr_diefu1sys(111, "gensetdyn_new") ;
+      }
       p = SASSSERVER_QUERY(a, handle) ;
       uint32_unpack_big(s, &p->id) ; s += 4 ; vlen -= 4 ;
       uint32_unpack_big(s, &flags) ; s += 4 ; vlen -= 4 ;
       uint32_unpack_big(s, &timeout) ; s += 4 ; vlen -= 4 ;
       uint32_unpack_big(s, &opcode) ; s += 4 ; vlen -= 4 ;
       uint32_unpack_big(s, &len) ; s += 4 ; vlen -= 4 ;
-      if (len != vlen) strerr_dief1x(100, "invalid client request") ;
+      if (len != vlen)
+      {
+        (*a->cleanupf)(a->aux) ;
+        strerr_dief1x(100, "invalid client request") ;
+      }
       if (timeout)
       {
         if (!tain_from_millisecs(&p->deadline, timeout)) strerr_dief1x(100, "invalid client request") ;
@@ -125,19 +149,29 @@ static int sassserver_parse_protocol (struct iovec const *v, void *aux)
       }
       else tain_add_g(&p->deadline, &tain_infinite_relative) ;
       sassserver_uniquify(a, &p->deadline) ;
-      if (!avltree_insert(&a->by_deadline, handle)) strerr_diefu1sys(111, "avltree_insert") ;
-      if (!avltree_insert(&a->by_id, handle)) strerr_diefu1sys(111, "avltree_insert") ;
+      if (!avltree_insert(&a->by_deadline, handle)
+       || !avltree_insert(&a->by_id, handle))
+      {
+        (*a->cleanupf)(a->aux) ;
+        strerr_diefu1sys(111, "avltree_insert") ;
+      }
       if (!p->data)
       {
         p->data = alloc(a->datasize) ;
-        if (!p->data) strerr_diefu1sys(111, "alloc") ;
+        if (!p->data)
+        {
+          (*a->cleanupf)(a->aux) ;
+          strerr_diefu1sys(111, "alloc") ;
+        }
       }
       e = (*a->sendf)(p->data, handle, flags, opcode, s, len) ;
       if (e) sassserver_remove(a, handle) ;
-      sassserver_sync_answer(e) ;
+      sassserver_sync_answer(a, e) ;
       break ;
     }
-    default : strerr_dief1x(100, "invalid client request") ;
+    default :
+      (*a->cleanupf)(a->aux) ;
+      strerr_dief1x(100, "invalid client request") ;
   }
   return 1 ;
 }
@@ -157,7 +191,10 @@ void sassserver_async_failure (sassserver *a, uint32_t handle, int e)
   uint32_pack_big(pack, p->id) ;
   uint32_pack_big(pack + 4, (uint32_t)e) ;
   if (!textmessage_put(textmessage_sender_x, pack, 8))
+  {
+    (*a->cleanupf)(a->aux) ;
     strerr_diefu1sys(111, "textmessage_put") ;
+  }
   sassserver_remove(a, handle) ;
 }
 
@@ -170,7 +207,10 @@ void sassserver_async_successv (sassserver *a, uint32_t handle, uint32_t flags, 
   for (unsigned int i = 0 ; i < n ; i++) vv[i+1] = v[i] ;
   uint32_pack_big(pack, p->id) ;
   if (!textmessage_putv(textmessage_sender_x, vv, n+1))
+  {
+    (*a->cleanupf)(a->aux) ;
     strerr_diefu1sys(111, "textmessage_putv") ;
+  }
   if (!(flags & SASS_FLAGS_KEEP)) sassserver_remove(a, handle) ;
 }
 
@@ -180,13 +220,15 @@ void sassserver_async_success (sassserver *a, uint32_t handle, uint32_t flags, c
   sassserver_async_successv(a, handle, flags, &v, 1) ;
 }
 
-void sassserver_init (sassserver *a, char const *banner1, char const *banner2, sassserver_send_func_ref sendf, sassserver_cancel_func_ref cancelf, size_t datasize, tain const *deadline, tain *stamp)
+void sassserver_init (sassserver *a, char const *banner1, char const *banner2, sassserver_send_func_ref sendf, sassserver_cancel_func_ref cancelf, size_t datasize, free_func_ref cleanupf, void *aux, tain const *deadline, tain *stamp)
 {
   if (!textclient_server_01x_init(banner1, strlen(banner1), banner2, strlen(banner2), deadline, stamp))
     strerr_diefu1sys(111, "sync with client") ;
   a->sendf = sendf ;
   a->cancelf = cancelf ;
   a->datasize = datasize ;
+  a->cleanupf = cleanupf ;
+  a->aux = aux ;
   gensetdyn_init(&a->queries, sizeof(sassserver_query), 8, 3, 8) ;
   avltree_init(&a->by_deadline, 8, 3, 8, &sassserver_deadline_dtok, &sassserver_deadline_cmp, &a->queries) ;
   avltree_init(&a->by_id, 8, 3, 8, &sassserver_id_dtok, &sassserver_id_cmp, &a->queries) ;
@@ -224,17 +266,24 @@ int sassserver_event (sassserver *a, iopause_fd const *x)
 {
   if (x[1].revents & IOPAUSE_WRITE)
     if (!textmessage_sender_flush(textmessage_sender_1) && !error_isagain(errno))
+    {
+      (*a->cleanupf)(a->aux) ;
       strerr_diefu1sys(111, "flush stdout") ;
+    }
   if (x[2].revents & IOPAUSE_WRITE)
     if (!textmessage_sender_flush(textmessage_sender_x) && !error_isagain(errno))
+    {
+      (*a->cleanupf)(a->aux) ;
       strerr_diefu1sys(111, "flush asyncout") ;
+    }
 
   if (!textmessage_receiver_isempty(textmessage_receiver_0) || x[0].revents & IOPAUSE_READ)
   {
     if (textmessage_handle(textmessage_receiver_0, &sassserver_parse_protocol, a) == -1)
     {
-      if (errno != EPIPE) strerr_diefu1sys(111, "read messages from client") ;
-      return 1 ;
+      if (errno == EPIPE) return 1 ;
+      (*a->cleanupf)(a->aux) ;
+      strerr_diefu1sys(111, "read messages from client") ;
     }
   }
   return 0 ;

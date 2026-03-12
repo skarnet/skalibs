@@ -31,6 +31,7 @@ src/include/skalibs/genset.h: src/include/skalibs/functypes.h
 src/include/skalibs/gensetdyn.h: src/include/skalibs/functypes.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
 src/include/skalibs/gol.h: src/include/skalibs/uint64.h
 src/include/skalibs/iopause.h: src/include/skalibs/tai.h
+src/include/skalibs/ip46.h: src/include/skalibs/fmtscan.h src/include/skalibs/socket.h src/include/skalibs/tai.h
 src/include/skalibs/keventbridge.h: src/include/skalibs/sysdeps.h
 src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr.h
@@ -41,7 +42,7 @@ src/include/skalibs/posixplz.h: src/include/skalibs/functypes.h src/include/skal
 src/include/skalibs/prog.h: src/include/skalibs/types.h
 src/include/skalibs/random.h: src/include/skalibs/functypes.h src/include/skalibs/stralloc.h
 src/include/skalibs/sassclient.h: src/include/skalibs/genqdyn.h src/include/skalibs/gensetdyn.h src/include/skalibs/tai.h src/include/skalibs/textclient.h
-src/include/skalibs/sassserver.h: src/include/skalibs/avltree.h src/include/skalibs/gensetdyn.h src/include/skalibs/iopause.h src/include/skalibs/tai.h
+src/include/skalibs/sassserver.h: src/include/skalibs/avltree.h src/include/skalibs/functypes.h src/include/skalibs/gensetdyn.h src/include/skalibs/iopause.h src/include/skalibs/tai.h
 src/include/skalibs/setgroups.h: src/include/skalibs/sysdeps.h
 src/include/skalibs/sha512.h: src/include/skalibs/uint64.h
 src/include/skalibs/sig.h: src/include/skalibs/gccattributes.h
@@ -58,6 +59,9 @@ src/include/skalibs/strerr2.h: src/include/skalibs/strerr.h
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint64.h
 src/include/skalibs/textclient.h: src/include/skalibs/allreadwrite.h src/include/skalibs/tai.h src/include/skalibs/textmessage.h
 src/include/skalibs/textmessage.h: src/include/skalibs/allreadwrite.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
+src/include/skalibs/types.h: src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
+src/include/skalibs/uint16.h: src/include/skalibs/uint64.h
+src/include/skalibs/uint32.h: src/include/skalibs/uint64.h
 src/include/skalibs/unix-timed.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
 src/include/skalibs/unix-transactional.h: src/include/skalibs/direntry.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/unixconnection.h: src/include/skalibs/unixmessage.h
@@ -822,7 +826,7 @@ src/libunixonacid/sassclient_send.o src/libunixonacid/sassclient_send.lo: src/li
 src/libunixonacid/sassclient_sendv.o src/libunixonacid/sassclient_sendv.lo: src/libunixonacid/sassclient_sendv.c src/include/skalibs/gensetdyn.h src/libunixonacid/sassclient-internal.h src/include/skalibs/sassclient.h src/include/skalibs/siovec.h src/include/skalibs/tai.h src/include/skalibs/textclient.h src/include/skalibs/uint32.h
 src/libunixonacid/sassclient_start.o src/libunixonacid/sassclient_start.lo: src/libunixonacid/sassclient_start.c src/include/skalibs/genqdyn.h src/include/skalibs/gensetdyn.h src/include/skalibs/posixplz.h src/libunixonacid/sassclient-internal.h src/include/skalibs/sassclient.h src/include/skalibs/textclient.h
 src/libunixonacid/sassclient_update.o src/libunixonacid/sassclient_update.lo: src/libunixonacid/sassclient_update.c src/include/skalibs/genqdyn.h src/include/skalibs/gensetdyn.h src/include/skalibs/posixishard.h src/libunixonacid/sassclient-internal.h src/include/skalibs/sassclient.h src/include/skalibs/textclient.h src/include/skalibs/uint32.h
-src/libunixonacid/sassserver.o src/libunixonacid/sassserver.lo: src/libunixonacid/sassserver.c src/include/skalibs/alloc.h src/include/skalibs/avltree.h src/include/skalibs/error.h src/include/skalibs/gensetdyn.h src/include/skalibs/iopause.h src/include/skalibs/sass.h src/include/skalibs/sassserver.h src/include/skalibs/strerr.h src/include/skalibs/tai.h src/include/skalibs/textclient.h src/include/skalibs/textmessage.h src/include/skalibs/uint32.h
+src/libunixonacid/sassserver.o src/libunixonacid/sassserver.lo: src/libunixonacid/sassserver.c src/include/skalibs/alloc.h src/include/skalibs/avltree.h src/include/skalibs/error.h src/include/skalibs/functypes.h src/include/skalibs/gensetdyn.h src/include/skalibs/iopause.h src/include/skalibs/sass.h src/include/skalibs/sassserver.h src/include/skalibs/strerr.h src/include/skalibs/tai.h src/include/skalibs/textclient.h src/include/skalibs/textmessage.h src/include/skalibs/uint32.h
 src/libunixonacid/skaclient_default_cb.o src/libunixonacid/skaclient_default_cb.lo: src/libunixonacid/skaclient_default_cb.c src/include/skalibs/posixishard.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
 src/libunixonacid/skaclient_end.o src/libunixonacid/skaclient_end.lo: src/libunixonacid/skaclient_end.c src/include/skalibs/djbunix.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h
 src/libunixonacid/skaclient_init.o src/libunixonacid/skaclient_init.lo: src/libunixonacid/skaclient_init.c src/libunixonacid/skaclient-internal.h src/include/skalibs/skaclient.h src/include/skalibs/unixmessage.h

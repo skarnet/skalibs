@@ -6,6 +6,7 @@
 #include <sys/uio.h>
 #include <stdint.h>
 
+#include <skalibs/functypes.h>
 #include <skalibs/tai.h>
 #include <skalibs/iopause.h>
 #include <skalibs/gensetdyn.h>
@@ -23,14 +24,16 @@ struct sassserver_s
   sassserver_send_func_ref sendf ;
   sassserver_cancel_func_ref cancelf ;
   size_t datasize ;
+  free_func_ref cleanupf ;
+  void *aux ;
   gensetdyn queries ;
   avltree by_deadline ;
   avltree by_id ;
 } ;
-#define SASSSERVER_ZERO { .sendf = 0, .cancelf = 0, .datasize = 0, .queries = GENSETDYN_ZERO, .by_deadline = AVLTREE_ZERO, .by_id = AVLTREE_ZERO }
+#define SASSSERVER_ZERO { .sendf = 0, .cancelf = 0, .datasize = 0, .cleanupf = 0, .aux = 0, .queries = GENSETDYN_ZERO, .by_deadline = AVLTREE_ZERO, .by_id = AVLTREE_ZERO }
 
-extern void sassserver_init (sassserver *, char const *, char const *, sassserver_send_func_ref, sassserver_cancel_func_ref, size_t, tain const *, tain *stamp) ;
-#define sassserver_init_g(a, banner1, banner2, sendf, cancelf, esize, deadline) sassserver_init(a, banner1, banner2, sendf, cancelf, esize, (deadline), &STAMP)
+extern void sassserver_init (sassserver *, char const *, char const *, sassserver_send_func_ref, sassserver_cancel_func_ref, size_t, free_func_ref, void *, tain const *, tain *stamp) ;
+#define sassserver_init_g(a, banner1, banner2, sendf, cancelf, esize, cleanupf, aux, deadline) sassserver_init(a, banner1, banner2, sendf, cancelf, esize, cleanupf, aux, (deadline), &STAMP)
 extern unsigned int sassserver_prepare_iopause (sassserver const *, iopause_fd *, tain *) ;
 extern void sassserver_timeout (sassserver *) ;
 extern int sassserver_event (sassserver *, iopause_fd const *) ;
