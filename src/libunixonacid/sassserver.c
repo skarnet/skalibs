@@ -186,6 +186,7 @@ void sassserver_init (sassserver *a, char const *banner1, char const *banner2, s
     strerr_diefu1sys(111, "sync with client") ;
   a->sendf = sendf ;
   a->cancelf = cancelf ;
+  a->datasize = datasize ;
   gensetdyn_init(&a->queries, sizeof(sassserver_query), 8, 3, 8) ;
   avltree_init(&a->by_deadline, 8, 3, 8, &sassserver_deadline_dtok, &sassserver_deadline_cmp, &a->queries) ;
   avltree_init(&a->by_id, 8, 3, 8, &sassserver_id_dtok, &sassserver_id_cmp, &a->queries) ;
