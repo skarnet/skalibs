@@ -3,9 +3,9 @@
 #ifndef SKALIBS_SASS_H
 #define SKALIBS_SASS_H
 
-enum sass_flags_e
+enum sass_flag_e
 {
-  SASS_FLAGS_KEEP = 0x01,
+  SASS_FLAG_KEEP = 0x01,
 } ;
 
 #endif

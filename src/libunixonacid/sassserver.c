@@ -212,7 +212,7 @@ void sassserver_async_successv (sassserver *a, uint32_t handle, uint32_t flags, 
     (*a->cleanupf)(a->aux) ;
     strerr_diefu1sys(111, "textmessage_putv") ;
   }
-  if (!(flags & SASS_FLAGS_KEEP)) sassserver_remove(a, handle) ;
+  if (!(flags & SASS_FLAG_KEEP)) sassserver_remove(a, handle) ;
 }
 
 void sassserver_async_success (sassserver *a, uint32_t handle, uint32_t flags, char const *s, size_t len)
