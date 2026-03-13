@@ -11,7 +11,7 @@ iopause_func_ref const iopause_ = &iopause_ppoll ;
 
 #include <skalibs/config.h>
 
-#ifdef SKALIBS_FLAG_PREFERSELECT
+#if defined(SKALIBS_FLAG_PREFERSELECT) || defined(__APPLE__)
 
 iopause_func_ref const iopause_ = &iopause_select ;
 
