@@ -19,13 +19,13 @@
 int sassclient_sendv (sassclient *a, uint32_t *cid, uint32_t flags, uint32_t timeout, uint32_t opcode, struct iovec const *vv, unsigned int n, sassclient_cb_func_ref cb, void *data, tain const *deadline, tain *stamp)
 {
   size_t len = siovec_len(vv, n) ;
-  uint32_t id ;
+  uint32_t id, ans ;
   int e ;
   struct iovec answer ;
   sassclient_data *p ;
   char pack[21] = "+" ;
   struct iovec v[1 + n] ;
-  if (len + 11 > UINT32_MAX) return (errno = ENAMETOOLONG, 0) ;
+  if (len + 17 > UINT32_MAX) return (errno = ENAMETOOLONG, 0) ;
 
   e = pthread_mutex_tailock(&a->connection_mutex, deadline, stamp) ;
   if (e) return (errno = e, 0) ;
@@ -39,8 +39,9 @@ int sassclient_sendv (sassclient *a, uint32_t *cid, uint32_t flags, uint32_t tim
   uint32_pack_big(pack + 13, opcode) ;
   uint32_pack_big(pack + 17, len) ;
   if (!textclient_exchangev(&a->connection, v, 1 + n, &answer, deadline, stamp)) { e = errno ; goto err0 ; }
-  if (answer.iov_len == 1) { e = *(unsigned char *)answer.iov_base ; goto err0 ; }
-  if (answer.iov_len != 5 || *(unsigned char *)answer.iov_base) { e = EPROTO ; goto err0 ; }
+  if (answer.iov_len != 4) { e = EPROTO ; goto err0 ; }
+  uint32_unpack_big((char *)answer.iov_base, &ans) ;
+  if (ans) { e = ans ; goto err0 ; }
   p = GENSETDYN_P(sassclient_data, &a->store, id) ;
   p->cb = cb ;
   p->data = data ;
