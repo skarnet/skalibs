@@ -36,7 +36,8 @@ extern void sassserver_init (sassserver *, char const *, char const *, sassserve
 #define sassserver_init_g(a, banner1, banner2, sendf, cancelf, esize, cleanupf, aux, deadline) sassserver_init(a, banner1, banner2, sendf, cancelf, esize, cleanupf, aux, (deadline), &STAMP)
 extern unsigned int sassserver_prepare_iopause (sassserver const *, iopause_fd *, tain *) ;
 extern void sassserver_timeout (sassserver *) ;
-extern int sassserver_event (sassserver *, iopause_fd const *) ;
+extern void sassserver_write_event (sassserver *, iopause_fd const *) ;
+extern int sassserver_read_event (sassserver *, iopause_fd const *) ;
 extern void *sassserver_data (sassserver const *, uint32_t) ;
 
 extern void sassserver_async_failure (sassserver *, uint32_t, int) ;

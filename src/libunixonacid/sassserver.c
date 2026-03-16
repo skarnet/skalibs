@@ -263,7 +263,7 @@ void sassserver_timeout (sassserver *a)
   }
 }
 
-int sassserver_event (sassserver *a, iopause_fd const *x)
+void sassserver_write_event (sassserver *a, iopause_fd const *x)
 {
   if (x[1].revents & IOPAUSE_WRITE)
     if (!textmessage_sender_flush(textmessage_sender_1) && !error_isagain(errno))
@@ -277,7 +277,10 @@ int sassserver_event (sassserver *a, iopause_fd const *x)
       (*a->cleanupf)(a->aux) ;
       strerr_diefu1sys(111, "flush asyncout") ;
     }
+}
 
+int sassserver_read_event (sassserver *a, iopause_fd const *x)
+{
   if (!textmessage_receiver_isempty(textmessage_receiver_0) || x[0].revents & IOPAUSE_READ)
   {
     if (textmessage_handle(textmessage_receiver_0, &sassserver_parse_protocol, a) == -1)
