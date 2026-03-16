@@ -10,6 +10,7 @@
 #include <skalibs/uint32.h>
 #include <skalibs/tai.h>
 #include <skalibs/siovec.h>
+#include <skalibs/pthread.h>
 #include <skalibs/gensetdyn.h>
 #include <skalibs/textclient.h>
 #include <skalibs/sassclient.h>
@@ -26,16 +27,8 @@ int sassclient_sendv (sassclient *a, uint32_t *cid, uint32_t flags, uint32_t tim
   struct iovec v[1 + n] ;
   if (len + 11 > UINT32_MAX) return (errno = ENAMETOOLONG, 0) ;
 
-  {
-    struct timespec ts ;
-    tain diff ;
-    tain_sub(&diff, deadline, stamp) ;
-    if (!timespec_from_tain_relative(&ts, &diff)) return 0 ;
-    e = pthread_mutex_timedlock(&a->connection_mutex, &ts) ;
-//    e = pthread_mutex_clocklock(&a->connection_mutex, CLOCK_MONOTONIC, &ts) ;
-    if (e) return (errno = e, 0) ;
-  }
-
+  e = pthread_mutex_tailock(&a->connection_mutex, deadline, stamp) ;
+  if (e) return (errno = e, 0) ;
   if (!gensetdyn_new(&a->store, &id)) goto err ;
   v[0].iov_base = pack ;
   v[0].iov_len = 17 ;
