@@ -31,7 +31,7 @@ int sassclient_sendv (sassclient *a, uint32_t *cid, uint32_t flags, uint32_t tim
   if (e) return (errno = e, 0) ;
   if (!gensetdyn_new(&a->store, &id)) goto err ;
   v[0].iov_base = pack ;
-  v[0].iov_len = 17 ;
+  v[0].iov_len = 21 ;
   for (unsigned int i = 0 ; i < n ; i++) v[i+1] = vv[i] ;
   uint32_pack_big(pack + 1, id) ;
   uint32_pack_big(pack + 5, flags) ;
