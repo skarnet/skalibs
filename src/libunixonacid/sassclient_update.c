@@ -17,23 +17,21 @@
 static int sassclient_msghandler (struct iovec const *v, void *aux)
 {
   sassclient *a = aux ;
-  char const *s = v->iov_base ;
   int e ;
   sassclient_data *p ;
   uint32_t id ;
   char res[8] ;
   if (v->iov_len < 8) return (errno = EPROTO, 0) ;
-  uint32_unpack_big(s, &id) ;
-  memcpy(res, s, 4) ; s += 4 ;
+  memcpy(res, v->iov_base, 8) ;
+  uint32_unpack_big(res, &id) ;
   p = GENSETDYN_P(sassclient_data, &a->store, id) ;
-  if (memcmp(s, "\0\0\0", 4))
+  if (memcmp(res + 4, "\0\0\0", 4))
   {
     if (v->iov_len != 8) return (errno = EPROTO, 0) ;
-    memcpy(res + 4, s, 4) ;
   }
   else
   {
-    e = (*p->cb)(s + 8, v->iov_len - 8, id, p->data) ;
+    e = (*p->cb)((char *)v->iov_base + 8, v->iov_len - 8, id, p->data) ;
     uint32_pack_big(res + 4, e) ;
   }
   e = pthread_mutex_lock(&a->results_mutex) ;
