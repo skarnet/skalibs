@@ -722,7 +722,8 @@ choose cl prctl 'prctl()'
 choose cl procctl 'procctl()'
 choose cl kevent 'kevent()'
 choose cl kqueue1 'kqueue1()'
-choose cl pthreadmutexclocklock 'pthread_mutex_clocklock()'
+choose cl pthreadmutextimedlock 'pthread_mutex_timedlock()' $pthread_lib
+choose cl pthreadmutexclocklock 'pthread_mutex_clocklock()' $pthread_lib
 
 # Here are the evil irreducible run-time sysdeps.
 choose clr devurandom '/dev/urandom'

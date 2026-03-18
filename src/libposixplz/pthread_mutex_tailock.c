@@ -8,6 +8,8 @@
 #include <skalibs/tai.h>
 #include <skalibs/pthread.h>
 
+#ifdef SKALIBS_HASPTHREADMUTEXTIMEDLOCK
+
 int pthread_mutex_tailock (pthread_mutex_t *mtx, tain const *deadline, tain *stamp)
 {
   int e ;
@@ -26,3 +28,14 @@ int pthread_mutex_tailock (pthread_mutex_t *mtx, tain const *deadline, tain *sta
   tain_now(stamp) ;
   return e ;
 }
+
+#else
+
+int pthread_mutex_tailock (pthread_mutex_t *mtx, tain const *deadline, tain *stamp)
+{
+  (void)deadline ;
+  (void)stamp ;
+  return pthread_mutex_lock(mtx) ;
+}
+
+#endif
