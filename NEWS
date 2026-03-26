@@ -4,6 +4,8 @@ In 2.14.6.0
 -----------
 
  - Bugfixes.
+ - strallocs are now zero-initialized up to their capacity.
+ - Newly allocated gensetdyn slots are now zero-initialized.
  - New functions: sassclient.h and sassserver.h, in libunixonacid.
 The goal is to factor the client-side and server-side code for
 asynchronous helpers such as s6-ftrigrd, skadnsd, and more.
