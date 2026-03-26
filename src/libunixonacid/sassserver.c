@@ -223,7 +223,7 @@ void sassserver_async_success (sassserver *a, uint32_t handle, uint32_t flags, c
 
 void sassserver_init (sassserver *a, char const *banner1, char const *banner2, sassserver_send_func_ref sendf, sassserver_cancel_func_ref cancelf, size_t datasize, free_func_ref cleanupf, void *aux, tain const *deadline, tain *stamp)
 {
-  if (!textclient_server_01x_init(banner1, strlen(banner1), banner2, strlen(banner2), deadline, stamp))
+  if (!textclient_server_01x_init_frompipe(banner1, strlen(banner1), banner2, strlen(banner2), deadline, stamp))
     strerr_diefu1sys(111, "sync with client") ;
   a->sendf = sendf ;
   a->cancelf = cancelf ;
