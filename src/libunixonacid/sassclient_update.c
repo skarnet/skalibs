@@ -42,7 +42,6 @@ static int sassclient_msghandler (struct iovec const *v, void *aux)
     return 0 ;
   }
   pthread_mutex_unlock(&a->results_mutex) ;
-  if (!gensetdyn_delete(&a->store, id)) return 0 ;
   return 1 ;
 }
 
