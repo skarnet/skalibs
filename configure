@@ -38,6 +38,7 @@ Optional features:
   --disable-shared              do not build shared libraries [enabled]
   --disable-static              do not build static libraries [enabled]
   --disable-all-pic             do not build static libraries as PIC [enabled]
+  --disable-rpath               do not embed RPATH in libraries [enabled]
   --enable-slashpackage[=ROOT]  assume /package installation at ROOT [disabled]
   --enable-pkgconfig            Build and install .pc files for pkg-config [disabled]
 
@@ -403,6 +404,7 @@ shlibext=so
 shared=true
 static=true
 allpic=true
+rpath=true
 slashpackage=false
 ipv6=true
 select=false
@@ -443,6 +445,8 @@ for arg ; do
     --disable-static|--enable-static=no) static=false ;;
     --enable-all-pic|--enable-all-pic=yes) allpic=true ;;
     --disable-all-pic|--enable-all-pic=no) allpic=false ;;
+    --enable-rpath|--enable-rpath=yes) rpath=true ;;
+    --disable-rpath|--enable-rpath=no) rpath=false ;;
     --enable-pkgconfig|--enable-pkgconfig=yes) pcw=true ;;
     --disable-pkgconfig|--enable-pkgconfig=no) pcw=false ;;
     --enable-slashpackage=*) sproot=${arg#*=} ; slashpackage=true ; ;;
@@ -794,6 +798,11 @@ if $shared ; then
   echo "SHARED_LIBS := libskarnet.${shlibext}.xyzzy"
 else
   echo "SHARED_LIBS :="
+fi
+if $rpath ; then
+  echo "LDFLAGS_RPATH := -Wl,-rpath=${dynlibdir}"
+else
+  echo "LDFLAGS_RPATH :="
 fi
 if $pcw ; then
   echo "DO_PKGCONFIG := 1"

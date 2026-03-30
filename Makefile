@@ -138,7 +138,7 @@ libskarnet.a.xyzzy: $(ALL_SOBJS)
 	exec $(RANLIB) $@
 
 libskarnet.so.xyzzy: $(ALL_DOBJS)
-	exec $(CC) -o $@ $(CFLAGS_ALL) $(CFLAGS_SHARED) $(LDFLAGS_ALL) $(LDFLAGS_SHARED) -Wl,-soname,libskarnet.so.$(version_M) -Wl,-rpath=$(dynlibdir) $^ $(SYSTEM_LIBS)
+	exec $(CC) -o $@ $(CFLAGS_ALL) $(CFLAGS_SHARED) $(LDFLAGS_ALL) $(LDFLAGS_SHARED) -Wl,-soname,libskarnet.so.$(version_M) $(LDFLAGS_RPATH) $^ $(SYSTEM_LIBS)
 
 libskarnet.pc:
 	exec env \
