@@ -4,6 +4,7 @@ In 2.15.0.0
 -----------
 
  - Bugfixes.
+ - RPATH can now be disabled at configure time.
  - strallocs are now zero-initialized up to their capacity.
  - Newly allocated gensetdyn slots are now zero-initialized.
  - New functions: sassclient.h and sassserver.h, in libunixonacid.
