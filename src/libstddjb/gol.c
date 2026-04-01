@@ -20,13 +20,13 @@ int gol (char const *const *argv, gol_bool const *b, unsigned int bn, gol_arg co
       {
         size_t len = x - argv[i] - 2 ;
         if (!len) return (*problem = 0, -1-i) ;
-        for (; j < an ; j++) if (!strncmp(argv[i] + 2, a[j].lo, len) && !a[j].lo[len]) break ;
+        for (; j < an ; j++) if (a[j].lo && !strncmp(argv[i] + 2, a[j].lo, len) && !a[j].lo[len]) break ;
         if (j >= an) return (*problem = -len-2, -1-i) ;
         ar[a[j].i] = x + 1 ;
       }
       else
       {
-        for (; j < bn ; j++) if (!strcmp(argv[i] + 2, b[j].lo)) break ;
+        for (; j < bn ; j++) if (b[j].lo && !strcmp(argv[i] + 2, b[j].lo)) break ;
         if (j >= bn) return (*problem = -1, -1-i) ;
         *br &= ~b[j].clear ;
         *br |= b[j].set ;

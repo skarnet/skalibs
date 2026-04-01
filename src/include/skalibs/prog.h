@@ -4,6 +4,7 @@
 #define SKALIBS_PROG_H
 
 #include <stddef.h>
+
 #include <skalibs/types.h>
 
 extern char const *PROG ;
