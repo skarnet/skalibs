@@ -5,7 +5,6 @@
 #include <stdint.h>
 #include <errno.h>
 
-#include <skalibs/functypes.h>
 #include <skalibs/uint32.h>
 #include <skalibs/alloc.h>
 #include <skalibs/error.h>
@@ -18,45 +17,7 @@
 #include <skalibs/textclient.h>
 #include <skalibs/sass.h>
 #include <skalibs/sassserver.h>
-
-
- /* Private */
-
-typedef struct sassserver_query_s sassserver_query, sassserver_query_ref ;
-struct sassserver_query_s
-{
-  uint32_t id ;
-  tain deadline ;
-  void *data ;
-} ;
-
-#define SASSSERVER_QUERY(a, i) GENSETDYN_P(sassserver_query, &(a)->queries, i)
-
-static void *sassserver_deadline_dtok (uint32_t d, void *aux)
-{
-  return &GENSETDYN_P(sassserver_query, (gensetdyn *)aux, d)->deadline ;
-}
-
-static int sassserver_deadline_cmp (void const *a, void const *b, void *aux)
-{
-  tain const *aa = a ;
-  tain const *bb = b ;
-  (void)aux ;
-  return tain_less(aa, bb) ? -1 : tain_less(bb, aa) ;
-}
-
-static void *sassserver_id_dtok (uint32_t d, void *aux)
-{
-  return &GENSETDYN_P(sassserver_query, (gensetdyn *)aux, d)->id ;
-}
-
-static int sassserver_id_cmp (void const *a, void const *b, void *aux)
-{
-  uint32_t const *aa = a ;
-  uint32_t const *bb = b ;
-  (void)aux ;
-  return *aa < *bb ? -1 : *aa > *bb ;
-}
+#include "sassserver-internal.h"
 
 static void sassserver_sync_answer (sassserver *a, int e)
 {
@@ -178,8 +139,6 @@ static int sassserver_parse_protocol (struct iovec const *v, void *aux)
 }
 
 
- /* Public */
-
 void *sassserver_data (sassserver const *a, uint32_t handle)
 {
   return SASSSERVER_QUERY(a, handle)->data ;
@@ -219,20 +178,6 @@ void sassserver_async_success (sassserver *a, uint32_t handle, uint32_t flags, c
 {
   struct iovec v = { .iov_base = (char *)s, .iov_len = len } ;
   sassserver_async_successv(a, handle, flags, &v, 1) ;
-}
-
-void sassserver_init (sassserver *a, char const *banner1, char const *banner2, sassserver_send_func_ref sendf, sassserver_cancel_func_ref cancelf, size_t datasize, free_func_ref cleanupf, void *aux, tain const *deadline, tain *stamp)
-{
-  if (!textclient_server_01x_init_frompipe(banner1, strlen(banner1), banner2, strlen(banner2), deadline, stamp))
-    strerr_diefu1sys(111, "sync with client") ;
-  a->sendf = sendf ;
-  a->cancelf = cancelf ;
-  a->datasize = datasize ;
-  a->cleanupf = cleanupf ;
-  a->aux = aux ;
-  gensetdyn_init(&a->queries, sizeof(sassserver_query), 8, 3, 8) ;
-  avltree_init(&a->by_deadline, 8, 3, 8, &sassserver_deadline_dtok, &sassserver_deadline_cmp, &a->queries) ;
-  avltree_init(&a->by_id, 8, 3, 8, &sassserver_id_dtok, &sassserver_id_cmp, &a->queries) ;
 }
 
 unsigned int sassserver_prepare_iopause (sassserver const *a, iopause_fd *x, tain *deadline)
