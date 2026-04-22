@@ -1,5 +1,6 @@
 *.o
 *.lo
+/tmp-configure-*
 /*.pc
 /*.a.xyzzy
 /*.so.xyzzy
