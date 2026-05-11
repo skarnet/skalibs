@@ -55,7 +55,7 @@ List of mandatory sysdeps to provide by hand for cross-compiling:
   devurandom (yes|no): =yes if the target has a working /dev/urandom
   posixspawnearlyreturn (yes|no): =yes if the target has an old glibc or otherwise bad posix_spawn
   procselfexe (path|none): =path if you can get the executable name via readlink(path)
-  selectshorttimeout (yes|no): =yes if the target's select() fails on very long timeouts (MacOS, old OpenBSD)
+  selectinfinite (yes|no): =no if the target's select() fails on long timeouts (MacOS, old OpenBSD)
 EOF
   exit 0
 }
@@ -734,7 +734,7 @@ choose cl pthreadmutexclocklock 'pthread_mutex_clocklock()' $pthread_lib
 choose clr devurandom '/dev/urandom'
 choose clr posixspawnearlyreturn 'posix_spawn() return early' $spawn_lib
 choosevalue procselfexe '/proc/self/exe' /proc/self/exe /proc/curproc/exe /proc/curproc/file /proc/self/path/a.out
-choose clr selectshorttimeout 'a select() that fails on long timeouts'
+choose clr selectinfinite 'a select() that supports very long timeouts'
 
 
 # Finally, produce config.mak and config.h

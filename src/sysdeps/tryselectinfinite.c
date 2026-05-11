@@ -17,18 +17,19 @@
 #include <sys/time.h>
 #include <sys/select.h>
 #include <unistd.h>
+#include <errno.h>
 #include <signal.h>
 
 static void alrm_handler (int sig)
 {
   (void)sig ;
-  _exit(1) ;
+  _exit(0) ;
 }
 
 int main (void)
 {
-  struct sigaction action = { .sa_handler = &alrm_handler, .sa_flags = SA_NOCLDSTOP | SA_RESTART } ;
-  struct timeval tv = { .tv_sec = 100000000, .tv_usec = 0 } ;
+  struct sigaction action = { .sa_handler = &alrm_handler, .sa_flags = SA_NOCLDSTOP } ;
+  struct timeval tv = { .tv_sec = 100000001, .tv_usec = 0 } ;
   fd_set r, w, x ;
   FD_ZERO(&r) ;
   FD_ZERO(&w) ;
@@ -36,6 +37,6 @@ int main (void)
   sigfillset(&action.sa_mask) ;
   if (sigaction(SIGALRM, &action, 0) == -1) _exit(111) ;
   alarm(1) ;
-  if (select(1, &r, &w, &x, &tv) == -1) _exit(errno == EINVAL ? 0 : 111) ;
-  _exit(1) ;
+  select(1, &r, &w, &x, &tv) ;
+  _exit(errno == EINVAL ? 1 : 111) ;
 }
