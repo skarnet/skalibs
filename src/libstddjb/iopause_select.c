@@ -1,5 +1,6 @@
 /* ISC license. */
 
+#include <skalibs/sysdeps.h>
 #include <skalibs/bsdsnowflake.h>
 
 #include <string.h>  /* Solaris... */
@@ -29,6 +30,13 @@ int iopause_select (iopause_fd *x, unsigned int len, tain const *deadline, tain 
       if (errno != EOVERFLOW) return -1 ;
       else deadline = 0 ;
     }
+#ifdef SKALIBS_HASSELECTSHORTTIMEOUT
+    if (deadline && tv.tv_sec >= 100000000)
+    {
+      tv.tv_sec = 99999999 ;
+      tv.tv_usec = 0 ;
+    }
+#endif
   }
 
   for (unsigned int i = 0 ; i < len ; i++)

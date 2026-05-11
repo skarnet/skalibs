@@ -419,7 +419,7 @@ src/libstddjb/int64_scanlist.o src/libstddjb/int64_scanlist.lo: src/libstddjb/in
 src/libstddjb/iopause.o src/libstddjb/iopause.lo: src/libstddjb/iopause.c src/include/skalibs/config.h src/include/skalibs/iopause.h src/include/skalibs/sysdeps.h
 src/libstddjb/iopause_poll.o src/libstddjb/iopause_poll.lo: src/libstddjb/iopause_poll.c src/include/skalibs/iopause.h src/include/skalibs/tai.h
 src/libstddjb/iopause_ppoll.o src/libstddjb/iopause_ppoll.lo: src/libstddjb/iopause_ppoll.c src/include/skalibs/iopause.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/tai.h
-src/libstddjb/iopause_select.o src/libstddjb/iopause_select.lo: src/libstddjb/iopause_select.c src/include/skalibs/bsdsnowflake.h src/include/skalibs/iopause.h src/include/skalibs/tai.h
+src/libstddjb/iopause_select.o src/libstddjb/iopause_select.lo: src/libstddjb/iopause_select.c src/include/skalibs/bsdsnowflake.h src/include/skalibs/iopause.h src/include/skalibs/sysdeps.h src/include/skalibs/tai.h
 src/libstddjb/iopause_stamp.o src/libstddjb/iopause_stamp.lo: src/libstddjb/iopause_stamp.c src/include/skalibs/iopause.h src/include/skalibs/tai.h
 src/libstddjb/ip46_scan.o src/libstddjb/ip46_scan.lo: src/libstddjb/ip46_scan.c src/include/skalibs/fmtscan.h src/include/skalibs/ip46.h
 src/libstddjb/ip46_scanlist.o src/libstddjb/ip46_scanlist.lo: src/libstddjb/ip46_scanlist.c src/include/skalibs/fmtscan.h src/include/skalibs/ip46.h
