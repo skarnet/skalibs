@@ -1,14 +1,5 @@
 /* ISC license. */
 
-#undef _POSIX_C_SOURCE
-#undef _XOPEN_SOURCE
-
-#ifndef _BSD_SOURCE
-#define _BSD_SOURCE
-#endif
-#ifndef _NETBSD_SOURCE
-#define _NETBSD_SOURCE
-#endif
 #ifndef _DARWIN_C_SOURCE
 #define _DARWIN_C_SOURCE
 #endif
