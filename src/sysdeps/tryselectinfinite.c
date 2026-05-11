@@ -4,7 +4,7 @@
 #define _DARWIN_C_SOURCE
 #endif
 
-#include <sys/types.h>
+#include <string.h>
 #include <sys/time.h>
 #include <sys/select.h>
 #include <unistd.h>
