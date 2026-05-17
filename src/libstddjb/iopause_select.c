@@ -46,9 +46,9 @@ int iopause_select (iopause_fd *x, unsigned int len, tain const *deadline, tain 
     {
       if (x[i].fd >= FD_SETSIZE) return (errno = EMFILE, -1) ;
       if (x[i].fd >= nfds) nfds = x[i].fd + 1 ;
-      if (x[i].events & IOPAUSE_READ) FD_SET(x[i].fd, &rfds) ;
-      if (x[i].events & IOPAUSE_WRITE) FD_SET(x[i].fd, &wfds) ;
-      if (x[i].events & IOPAUSE_EXCEPT) FD_SET(x[i].fd, &xfds) ;
+      if ((x[i].events & IOPAUSE_READ) == IOPAUSE_READ) FD_SET(x[i].fd, &rfds) ;
+      if ((x[i].events & IOPAUSE_WRITE) == IOPAUSE_WRITE) FD_SET(x[i].fd, &wfds) ;
+      if ((x[i].events & IOPAUSE_EXCEPT) == IOPAUSE_EXCEPT) FD_SET(x[i].fd, &xfds) ;
     }
   }
 
