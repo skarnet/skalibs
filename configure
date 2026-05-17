@@ -161,7 +161,7 @@ choose () {
   libs="$*"
   r=true
   case "$what" in
-    *c*) $CC_AUTO $CPPFLAGS_AUTO $CPPFLAGS $CPPFLAGS_POST $CFLAGS_AUTO $CFLAGS $CFLAGS_POST -Werror=incompatible-pointer-types -o "$tmpo" -c src/sysdeps/try$name.c 2>/dev/null || r=false ;;
+    *c*) $CC_AUTO $CPPFLAGS_AUTO $CPPFLAGS $CPPFLAGS_POST $CFLAGS_AUTO $CFLAGS $CFLAGS_POST -o "$tmpo" -c src/sysdeps/try$name.c 2>/dev/null || r=false ;;
   esac
   if $r ; then
     case "$what" in
@@ -630,6 +630,7 @@ tryflag CPPFLAGS_AUTO -Werror=implicit-function-declaration
 tryflag CPPFLAGS_AUTO -Werror=implicit-int
 tryflag CPPFLAGS_AUTO -Werror=pointer-sign
 tryflag CPPFLAGS_AUTO -Werror=pointer-arith
+tryflag CPPFLAGS_AUTO -Werror=incompatible-pointer-types
 tryflag CPPFLAGS_AUTO -Wno-unused-value
 tryflag CPPFLAGS_AUTO -Wno-parentheses
 tryflag CFLAGS_AUTO -ffunction-sections
