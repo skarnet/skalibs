@@ -4,6 +4,7 @@
 
 #ifdef SKALIBS_HASKEVENT
 
+#include <skalibs/nonposix.h>
 #include <skalibs/allreadwrite.h>
 #include <skalibs/keventbridge.h>
 

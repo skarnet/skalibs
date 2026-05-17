@@ -4,6 +4,8 @@
 
 #ifdef SKALIBS_HASKEVENT
 
+#include <skalibs/nonposix.h>
+
 #include <pthread.h>
 
 #include <skalibs/djbunix.h>
