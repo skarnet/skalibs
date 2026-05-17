@@ -161,7 +161,7 @@ choose () {
   libs="$*"
   r=true
   case "$what" in
-    *c*) $CC_AUTO $CPPFLAGS_AUTO $CPPFLAGS $CPPFLAGS_POST $CFLAGS_AUTO $CFLAGS $CFLAGS_POST -o "$tmpo" -c src/sysdeps/try$name.c 2>/dev/null || r=false ;;
+    *c*) $CC_AUTO $CPPFLAGS_AUTO $CPPFLAGS $CPPFLAGS_POST $CFLAGS_AUTO $CFLAGS $CFLAGS_POST -Werror=incompatible-pointer-types -o "$tmpo" -c src/sysdeps/try$name.c 2>/dev/null || r=false ;;
   esac
   if $r ; then
     case "$what" in
