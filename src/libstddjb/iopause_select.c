@@ -31,7 +31,7 @@ int iopause_select (iopause_fd *x, unsigned int len, tain const *deadline, tain 
       else deadline = 0 ;
     }
 #ifndef SKALIBS_HASSELECTINFINITE
-    if (deadline && tv.tv_sec >= 100000000)
+    if (tv.tv_sec >= 100000000)
     {
       tv.tv_sec = 100000000 ;
       tv.tv_usec = 0 ;

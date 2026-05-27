@@ -8,10 +8,20 @@
 int iopause_stamp (iopause_fd *x, unsigned int n, tain const *deadline, tain *stamp)
 {
   int e = errno ;
-  int r ;
-  do r = iopause(x, n, deadline, stamp) ;
-  while (r == -1 && errno == EINTR) ;
-  if (stamp) tain_now(stamp) ;
-  if (r >= 0) errno = e ;
-  return r ;
+  for (;;)
+  {
+    int r = iopause(x, n, deadline, stamp) ;
+    if (r == -1)
+    {
+      if (errno != EINTR) return -1 ;
+      if (stamp) tain_now(stamp) ;
+    }
+    else
+    {
+      if (stamp) tain_now(stamp) ;
+      errno = e ;
+      if (r > 0) return r ;
+      if (deadline && stamp && !tain_less(stamp, deadline)) return 0 ;
+    }
+  }
 }

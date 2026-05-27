@@ -3,6 +3,7 @@
 #include <limits.h>
 #include <string.h>
 #include <stdlib.h>
+
 #include <skalibs/stralloc.h>
 #include <skalibs/djbunix.h>
 
@@ -23,6 +24,7 @@ int sarealpath (stralloc *sa, char const *path)
       return -1 ;
     }
     free(p) ;
+    sa->len-- ;
 #endif
   }
   else
