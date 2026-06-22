@@ -1,5 +1,12 @@
 Changelog for skalibs.
 
+In 2.15.1.0
+-----------
+
+ - Bugfixes.
+ - New sysdep: selectinfinite (to work around a MacOS/old OpenBSD bug)
+
+
 In 2.15.0.0
 -----------
 
@@ -41,7 +48,7 @@ In 2.14.4.0
  - Bugfixes.
  - Documentation fixes. (This file, in particular.)
  - New functions: buffer_timed_getv, buffer_timed_putv,
-   timed_read, timed_readv, timed_Write, timed_writev
+   timed_read, timed_readv, timed_write, timed_writev
  - New sysdeps, better handling of variable sysdeps
  - New functions: sagetexecname, tain_addmsec, millisleep
 
