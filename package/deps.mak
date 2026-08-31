@@ -183,9 +183,10 @@ src/libenvexec/xmexec_afn.o src/libenvexec/xmexec_afn.lo: src/libenvexec/xmexec_
 src/libenvexec/xmspawn_af.o src/libenvexec/xmspawn_af.lo: src/libenvexec/xmspawn_af.c src/include/skalibs/cspawn.h src/include/skalibs/strerr.h
 src/libenvexec/xmspawn_afm.o src/libenvexec/xmspawn_afm.lo: src/libenvexec/xmspawn_afm.c src/include/skalibs/cspawn.h src/include/skalibs/strerr.h
 src/libenvexec/xmspawn_afn.o src/libenvexec/xmspawn_afn.lo: src/libenvexec/xmspawn_afn.c src/include/skalibs/cspawn.h src/include/skalibs/strerr.h
-src/libplaynice/keventbridge_end.o src/libplaynice/keventbridge_end.lo: src/libplaynice/keventbridge_end.c src/include/skalibs/djbunix.h src/include/skalibs/keventbridge.h src/include/skalibs/sysdeps.h
-src/libplaynice/keventbridge_read.o src/libplaynice/keventbridge_read.lo: src/libplaynice/keventbridge_read.c src/include/skalibs/allreadwrite.h src/include/skalibs/keventbridge.h src/include/skalibs/sysdeps.h
+src/libplaynice/keventbridge_end.o src/libplaynice/keventbridge_end.lo: src/libplaynice/keventbridge_end.c src/include/skalibs/djbunix.h src/include/skalibs/keventbridge.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
+src/libplaynice/keventbridge_read.o src/libplaynice/keventbridge_read.lo: src/libplaynice/keventbridge_read.c src/include/skalibs/allreadwrite.h src/include/skalibs/keventbridge.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
 src/libplaynice/keventbridge_start.o src/libplaynice/keventbridge_start.lo: src/libplaynice/keventbridge_start.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h src/include/skalibs/keventbridge.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h
+src/libplaynice/pthread_create_flat.o src/libplaynice/pthread_create_flat.lo: src/libplaynice/pthread_create_flat.c src/include/skalibs/functypes.h src/include/skalibs/sysdeps.h
 src/libposixplz/bsearchr.o src/libposixplz/bsearchr.lo: src/libposixplz/bsearchr.c src/include/skalibs/functypes.h src/include/skalibs/posixplz.h
 src/libposixplz/doublefork.o src/libposixplz/doublefork.lo: src/libposixplz/doublefork.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/posixplz.h src/include/skalibs/uint64.h
 src/libposixplz/execvep.o src/libposixplz/execvep.lo: src/libposixplz/execvep.c src/libposixplz/posixplz-internal.h src/include/skalibs/posixplz.h
@@ -763,6 +764,7 @@ src/libstddjb/waitn_posix.o src/libstddjb/waitn_posix.lo: src/libstddjb/waitn_po
 src/libstddjb/waitn_reap.o src/libstddjb/waitn_reap.lo: src/libstddjb/waitn_reap.c src/include/skalibs/djbunix.h
 src/libstddjb/waitn_reap_posix.o src/libstddjb/waitn_reap_posix.lo: src/libstddjb/waitn_reap_posix.c src/include/skalibs/djbunix.h
 src/libstddjb/waitpid_nointr.o src/libstddjb/waitpid_nointr.lo: src/libstddjb/waitpid_nointr.c src/include/skalibs/djbunix.h
+src/libstddjb/waitpids_nohang.o src/libstddjb/waitpids_nohang.lo: src/libstddjb/waitpids_nohang.c src/include/skalibs/djbunix.h
 src/libstddjb/writenclose_unsafe5.o src/libstddjb/writenclose_unsafe5.lo: src/libstddjb/writenclose_unsafe5.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h
 src/libstddjb/writevnclose_unsafe5.o src/libstddjb/writevnclose_unsafe5.lo: src/libstddjb/writevnclose_unsafe5.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/siovec.h
 src/libunixonacid/access_at.o src/libunixonacid/access_at.lo: src/libunixonacid/access_at.c src/libunixonacid/at-internal.h src/include/skalibs/djbunix.h src/include/skalibs/fcntl.h src/include/skalibs/nonposix.h src/include/skalibs/sysdeps.h src/include/skalibs/unix-transactional.h

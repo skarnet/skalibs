@@ -67,4 +67,7 @@ typedef randomgen_func *randomgen_func_ref ;
 typedef int main_func (char const *const *) ;
 typedef main_func *main_func_ref ;
 
+typedef void *generic_func (void *) ;
+typedef generic_func *generic_func_ref ;
+
 #endif

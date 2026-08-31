@@ -3,6 +3,11 @@
 #include <sys/wait.h>
 #include <skalibs/djbunix.h>
 
+ /*
+   wait_pid_nohang (defined here): reaps everything until it gets pid
+   waitpid_nohang (macro): only tries to reap pid, doesn't touch others
+ */
+
 pid_t wait_pid_nohang (pid_t pid, int *wstat)
 {
   int w = 0 ;

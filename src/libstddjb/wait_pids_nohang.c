@@ -3,6 +3,10 @@
 #include <sys/wait.h>
 #include <skalibs/djbunix.h>
 
+ /*
+   wait_pids_nohang (with the underscore): reap everything, report if in pids
+ */
+
 int wait_pids_nohang (pid_t const *pids, unsigned int len, int *wstat)
 {
   for (;;)

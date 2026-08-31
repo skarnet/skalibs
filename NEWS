@@ -1,5 +1,15 @@
 Changelog for skalibs.
 
+In 2.15.2.0
+-----------
+
+ - Bugfixes.
+ - New libplaynice function: pthread_create_flat
+   (to avoid mallocing the arg when creating a thread)
+ - New functions: waitpid_nohang, waitpids_nohang
+   (to only reap the listed pids and ignore others)
+
+
 In 2.15.1.0
 -----------
 
