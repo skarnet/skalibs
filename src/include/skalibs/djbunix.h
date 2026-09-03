@@ -59,18 +59,23 @@ extern int openc_write (char const *) ;
 
 extern size_t path_canonicalize (char *, char const *, int) ;
 
-extern pid_t wait_nointr (int *) ;
-extern pid_t waitpid_nointr (pid_t, int *, int) ;
-#define wait_pid(pid, wstat) waitpid_nointr(pid, (wstat), 0)
-#define waitpid_nohang(pid, wstat) waitpid_nointr(pid, (wstat), WNOHANG)
-#define wait_nohang(wstat) waitpid_nohang(-1, (wstat))
-extern pid_t wait_pid_nohang (pid_t, int *) ;
-extern int wait_pids_nohang (pid_t const *, unsigned int, int *) ;
-extern int waitpids_nohang (pid_t const *, unsigned int, int *) ;
-
 #define wait_status(w) (WIFSIGNALED(w) ? 256 + WTERMSIG(w) : WEXITSTATUS(w))
 #define wait_estatus(w) (WIFSIGNALED(w) ? 128 + WTERMSIG(w) : WEXITSTATUS(w) >= 128 ? 128 : WEXITSTATUS(w))
 
+/* These do not reap unknown children */
+extern pid_t waitpid_nointr (pid_t, int *, int) ;
+#define wait_pid(pid, wstat) waitpid_nointr(pid, (wstat), 0)
+#define waitpid_nohang(pid, wstat) waitpid_nointr(pid, (wstat), WNOHANG)
+extern int waitpids_nohang (pid_t const *, size_t, int *, size_t *) ;
+extern size_t waitpids (pid_t const *, size_t, int *) ;
+
+/* These reap unknown children */
+extern pid_t wait_nointr (int *) ;
+#define wait_nohang(wstat) waitpid_nohang(-1, (wstat))
+extern pid_t wait_pid_nohang (pid_t, int *) ;
+extern int wait_pids_nohang (pid_t const *, unsigned int, int *) ;
+
+/* These will disappear or be refactored */
 extern unsigned int wait_reap (void) ;
 extern int waitn (pid_t *, unsigned int) ;
 extern int waitn_posix (pid_t *, unsigned int, int *) ;
