@@ -1,7 +1,7 @@
 /* ISC license. */
 
-#include <sys/uio.h>
 #include <stdint.h>
+#include <sys/uio.h>
 #include <errno.h>
 #include <time.h>
 #include <limits.h>
@@ -25,7 +25,7 @@ int sassclient_sendv (sassclient *a, uint32_t *cid, uint32_t flags, uint32_t tim
   sassclient_data *p ;
   char pack[21] = "+" ;
   struct iovec v[1 + n] ;
-  if (len + 17 > UINT32_MAX) return (errno = ENAMETOOLONG, 0) ;
+  if (len > UINT32_MAX - 17) return (errno = ENAMETOOLONG, 0) ;
 
   e = pthread_mutex_tailock(&a->connection_mutex, deadline, stamp) ;
   if (e) return (errno = e, 0) ;
