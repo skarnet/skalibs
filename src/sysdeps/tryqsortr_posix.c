@@ -5,6 +5,9 @@
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
 #endif
+#ifndef __EXTENSIONS__
+#define __EXTENSIONS__
+#endif
 
 #include <stdlib.h>
 

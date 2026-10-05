@@ -5,6 +5,9 @@
 #ifndef _BSD_SOURCE
 #define _BSD_SOURCE
 #endif
+#ifndef __EXTENSIONS__
+#define __EXTENSIONS__
+#endif
 
 #include <stdlib.h>
 
