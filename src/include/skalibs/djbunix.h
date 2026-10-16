@@ -74,13 +74,7 @@ extern pid_t wait_nointr (int *) ;
 #define wait_nohang(wstat) waitpid_nohang(-1, (wstat))
 extern pid_t wait_pid_nohang (pid_t, int *) ;
 extern int wait_pids_nohang (pid_t const *, unsigned int, int *) ;
-
-/* These will disappear or be refactored */
 extern unsigned int wait_reap (void) ;
-extern int waitn (pid_t *, unsigned int) ;
-extern int waitn_posix (pid_t *, unsigned int, int *) ;
-extern int waitn_reap (pid_t *, unsigned int) ;
-extern int waitn_reap_posix (pid_t *, unsigned int, int *) ;
 
 extern int fd_chdir (int) ;
 

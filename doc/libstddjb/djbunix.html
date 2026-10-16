@@ -364,41 +364,13 @@ The <tt>child_spawn</tt> family of functions has been moved to the
 
 <h3> Waiting for children </h3>
 
+<h4> Including bastards (children a process doesn't know it has) </h4>
+
 <p>
 <code> unsigned int wait_reap () </code> <br />
 Instantly reaps all the pending zombies, without blocking, without a look at
 the exit codes.
 Returns the number of reaped zombies.
-</p>
-
-<p>
-<code> int waitn (pid_t *pids, unsigned int n) </code> <br />
-Waits until all processes whose PIDs are stored in the
-<em>pids</em> array, of size <em>n</em>, have died.
-Returns 1 if it succeeds, and 0 (and sets errno) if it fails. The
-<em>pid</em> array is not guaranteed to be unchanged.
-</p>
-
-<p>
-<code> int waitn_posix (pid_t *pids, unsigned int n, int *wstat) </code> <br />
-Like <tt>waitn</tt>, but stores into <em>*wstat</em> the status
-of the last process in the <em>pids</em> array (i.e. <tt>pids[n-1]</tt>).
-</p>
-
-<p>
-<code> int waitn_reap (pid_t *pids, unsigned int n) </code> <br />
-Instantly reaps all zombies whose PIDs are stored in the
-<em>pids</em> array, of size <em>n</em>.
-Returns -1 (and sets errno) if it fails, and the number of reaped
-zombies if it succeeds. The <em>pid</em> array is not guaranteed to
-be unchanged.
-</p>
-
-<p>
-<code> int waitn_reap_posix (pid_t *pids, unsigned int n, int *wstat) </code> <br />
-Like <tt>waitn_reap</tt>, but stores into <em>*wstat</em> the status
-of the last process in the <em>pids</em> array (i.e. <tt>pids[n-1]</tt>),
-if applicable; otherwise <em>*wstat</em> is unchanged.
 </p>
 
 <p>
@@ -448,14 +420,38 @@ function over the basic Unix APIs. This allows a program to:
 </p>
 
 <ul>
- <li> Automatically and silently take care of children it does not know
-it has. This situation can happen when a process forks and the parent
+ <li> Automatically and silently take care of bastards (children it does not know
+it has). This situation can happen when a process forks and the parent
 execs. When the child dies, the new parent process has to drag the
-"zombie bastard" along, which is ugly; <tt>wait_pids_nohang()</tt>
+zombie bastard along, which is ugly; <tt>wait_pids_nohang()</tt>
 prevents this. </li>
  <li> Still take appropriate care of its legitimate children, in
 any order. </li>
 </ul>
+
+<h4> Excluding bastards </h4>
+
+<p>
+<code> size_t waitpids (pid_t const *pids, size_t n, int *wstat) </code> <br />
+Blockingly waits until it has reapt all the pids in array <em>pids</em> of
+size <em>n</em>, or an error occurs; does not reap any zombie that is not
+listed in <em>pids</em>. On success, it returns <em>n</em>.
+On error, it returns an integer <em>i</em> lesser than <em>n</em>, which
+is the position of the error in array <em>pids</em>, and sets errno.
+All the pids before
+<tt><em>pids</em>[<em>i</em>]</tt> have been properly reapt, and *<em>wstat</em>
+contains the status for the last reapt process, <tt><em>pids</em>[<em>i</em>-1]</tt>.
+</p>
+
+<p>
+<code> int waitpids_nohang (pid_t const *pids, size_t n, int *wstat, size_t *i) </code> <br />
+Instantly reaps one zombie among the pids listed in array <em>pids</em> of
+size <em>n</em>. If an error occurs, returns -1, sets errno, and writes the
+index (in the <em>pids</em> array) of the incriminated process in *<em>i</em>.
+If it finds a zombie, it writes the index of the found and reapt process
+in *<em>i</em> and returns 1. If no zombie is found in the list, it
+returns 0. Any zombie not listed remains untouched.
+</p>
 
 <h3> Reading and writing whole files </h3>
 

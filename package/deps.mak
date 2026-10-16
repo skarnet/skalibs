@@ -31,7 +31,6 @@ src/include/skalibs/genset.h: src/include/skalibs/functypes.h
 src/include/skalibs/gensetdyn.h: src/include/skalibs/functypes.h src/include/skalibs/genalloc.h src/include/skalibs/stralloc.h
 src/include/skalibs/gol.h: src/include/skalibs/uint64.h
 src/include/skalibs/iopause.h: src/include/skalibs/tai.h
-src/include/skalibs/ip46.h: src/include/skalibs/fmtscan.h src/include/skalibs/socket.h src/include/skalibs/tai.h
 src/include/skalibs/keventbridge.h: src/include/skalibs/sysdeps.h
 src/include/skalibs/kolbak.h: src/include/skalibs/unixmessage.h
 src/include/skalibs/lolstdio.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/strerr.h
@@ -59,9 +58,6 @@ src/include/skalibs/strerr.h: src/include/skalibs/gccattributes.h src/include/sk
 src/include/skalibs/tai.h: src/include/skalibs/gccattributes.h src/include/skalibs/uint64.h
 src/include/skalibs/textclient.h: src/include/skalibs/allreadwrite.h src/include/skalibs/tai.h src/include/skalibs/textmessage.h
 src/include/skalibs/textmessage.h: src/include/skalibs/allreadwrite.h src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
-src/include/skalibs/types.h: src/include/skalibs/uint16.h src/include/skalibs/uint32.h src/include/skalibs/uint64.h
-src/include/skalibs/uint16.h: src/include/skalibs/uint64.h
-src/include/skalibs/uint32.h: src/include/skalibs/uint64.h
 src/include/skalibs/unix-timed.h: src/include/skalibs/bufalloc.h src/include/skalibs/buffer.h src/include/skalibs/functypes.h src/include/skalibs/stralloc.h src/include/skalibs/tai.h
 src/include/skalibs/unix-transactional.h: src/include/skalibs/direntry.h src/include/skalibs/gccattributes.h src/include/skalibs/stralloc.h
 src/include/skalibs/unixconnection.h: src/include/skalibs/unixmessage.h
@@ -763,10 +759,6 @@ src/libstddjb/wait_nointr.o src/libstddjb/wait_nointr.lo: src/libstddjb/wait_noi
 src/libstddjb/wait_pid_nohang.o src/libstddjb/wait_pid_nohang.lo: src/libstddjb/wait_pid_nohang.c src/include/skalibs/djbunix.h
 src/libstddjb/wait_pids_nohang.o src/libstddjb/wait_pids_nohang.lo: src/libstddjb/wait_pids_nohang.c src/include/skalibs/djbunix.h
 src/libstddjb/wait_reap.o src/libstddjb/wait_reap.lo: src/libstddjb/wait_reap.c src/include/skalibs/djbunix.h
-src/libstddjb/waitn.o src/libstddjb/waitn.lo: src/libstddjb/waitn.c src/include/skalibs/djbunix.h
-src/libstddjb/waitn_posix.o src/libstddjb/waitn_posix.lo: src/libstddjb/waitn_posix.c src/include/skalibs/djbunix.h
-src/libstddjb/waitn_reap.o src/libstddjb/waitn_reap.lo: src/libstddjb/waitn_reap.c src/include/skalibs/djbunix.h
-src/libstddjb/waitn_reap_posix.o src/libstddjb/waitn_reap_posix.lo: src/libstddjb/waitn_reap_posix.c src/include/skalibs/djbunix.h
 src/libstddjb/waitpid_nointr.o src/libstddjb/waitpid_nointr.lo: src/libstddjb/waitpid_nointr.c src/include/skalibs/djbunix.h
 src/libstddjb/waitpids.o src/libstddjb/waitpids.lo: src/libstddjb/waitpids.c src/include/skalibs/djbunix.h
 src/libstddjb/waitpids_nohang.o src/libstddjb/waitpids_nohang.lo: src/libstddjb/waitpids_nohang.c src/include/skalibs/djbunix.h
@@ -818,7 +810,7 @@ src/libunixonacid/opendir_at.o src/libunixonacid/opendir_at.lo: src/libunixonaci
 src/libunixonacid/opengetlnclose.o src/libunixonacid/opengetlnclose.lo: src/libunixonacid/opengetlnclose.c src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/opengetlnclose_at.o src/libunixonacid/opengetlnclose_at.lo: src/libunixonacid/opengetlnclose_at.c src/include/skalibs/allreadwrite.h src/include/skalibs/buffer.h src/include/skalibs/djbunix.h src/include/skalibs/skamisc.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/openreadnclose_at.o src/libunixonacid/openreadnclose_at.lo: src/libunixonacid/openreadnclose_at.c src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
-src/libunixonacid/openslurpclose_at.o src/libunixonacid/openslurpclose_at.lo: src/libunixonacid/openslurpclose_at.c src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
+src/libunixonacid/openslurpnclose_at.o src/libunixonacid/openslurpnclose_at.lo: src/libunixonacid/openslurpnclose_at.c src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/openwritenclose_at.o src/libunixonacid/openwritenclose_at.lo: src/libunixonacid/openwritenclose_at.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/openwritevnclose_at.o src/libunixonacid/openwritevnclose_at.lo: src/libunixonacid/openwritevnclose_at.c src/include/skalibs/allreadwrite.h src/include/skalibs/djbunix.h src/include/skalibs/siovec.h src/include/skalibs/unix-transactional.h
 src/libunixonacid/sassclient_ack.o src/libunixonacid/sassclient_ack.lo: src/libunixonacid/sassclient_ack.c src/include/skalibs/genqdyn.h src/include/skalibs/sassclient.h src/include/skalibs/uint32.h

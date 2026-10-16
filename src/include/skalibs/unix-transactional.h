@@ -40,7 +40,8 @@ extern int openc_appendat (int, char const *) ;
 extern int openc_appendatb (int, char const *) ;
 
 extern ssize_t openreadnclose_at (int, char const *, char *, size_t) ;
-extern int openslurpclose_at (int, char const *, stralloc *) ;
+#define openslurpclose_at(dirfd, fn, sa) openslurpnclose_at(dirfd, fn, (sa), 0)
+extern int openslurpnclose_at (int, char const *, stralloc *, size_t) ;
 extern int opengetlnclose_at (int, char const *, stralloc *, int) ;
 
 extern size_t openwritenclose_at (int, char const *, char const *, size_t) ;

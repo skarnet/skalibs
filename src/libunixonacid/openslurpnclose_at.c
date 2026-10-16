@@ -3,11 +3,11 @@
 #include <skalibs/djbunix.h>
 #include <skalibs/unix-transactional.h>
 
-int openslurpclose_at (int dirfd, char const *fn, stralloc *sa)
+int openslurpnclose_at (int dirfd, char const *fn, stralloc *sa, size_t n)
 {
   int fd = openc_readatb(dirfd, fn) ;
   if (fd < 0) return 0 ;
-  if (!slurp(sa, fd))
+  if (!slurpn(fd, sa, n))
   {
     fd_close(fd) ;
     return 0 ;

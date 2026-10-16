@@ -1,6 +1,6 @@
 Changelog for skalibs.
 
-In 2.15.2.0
+In 2.16.0.0
 -----------
 
  - Bugfixes.
@@ -8,6 +8,8 @@ In 2.15.2.0
    (to avoid mallocing the arg when creating a thread)
  - New functions: waitpid_nohang, waitpids_nohang
    (to only reap the listed pids and ignore others)
+ - New function: openslurpnclose_at. openslurpclose_at is now a macro.
+ - Removed functions: waitn*
 
 
 In 2.15.1.0
