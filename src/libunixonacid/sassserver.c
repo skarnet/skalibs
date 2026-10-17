@@ -26,7 +26,7 @@ static void sassserver_sync_answer (sassserver *a, int e)
   if (!textmessage_put(textmessage_sender_1, pack, 4))
   {
     (*a->cleanupf)(a->aux) ;
-    strerr_diefu1sys(111, "textmessage_put") ;
+    strerr_diefusys(111, "textmessage_put") ;
   }
 }
 
@@ -54,7 +54,7 @@ static int sassserver_parse_protocol (struct iovec const *v, void *aux)
   if (vlen-- < 5)
   {
     (*a->cleanupf)(a->aux) ;
-    strerr_dief1x(100, "invalid client request") ;
+    strerr_dief(100, "invalid client request") ;
   }
   switch (*s++)
   {
@@ -64,7 +64,7 @@ static int sassserver_parse_protocol (struct iovec const *v, void *aux)
       if (vlen != 4)
       {
         (*a->cleanupf)(a->aux) ;
-        strerr_dief1x(100, "invalid client request") ;
+        strerr_dief(100, "invalid client request") ;
       }
       uint32_unpack_big(s, &id) ;
       if (!avltree_search(&a->by_id, &id, &handle)) sassserver_sync_answer(a, EINVAL) ;
@@ -85,12 +85,12 @@ static int sassserver_parse_protocol (struct iovec const *v, void *aux)
       if (vlen < 20)
       {
         (*a->cleanupf)(a->aux) ;
-        strerr_dief1x(100, "invalid client request") ;
+        strerr_dief(100, "invalid client request") ;
       }
       if (!gensetdyn_new(&a->queries, &handle))
       {
         (*a->cleanupf)(a->aux) ;
-        strerr_diefu1sys(111, "gensetdyn_new") ;
+        strerr_diefusys(111, "gensetdyn_new") ;
       }
       p = SASSSERVER_QUERY(a, handle) ;
       uint32_unpack_big(s, &p->id) ; s += 4 ; vlen -= 4 ;
@@ -101,11 +101,11 @@ static int sassserver_parse_protocol (struct iovec const *v, void *aux)
       if (len != vlen)
       {
         (*a->cleanupf)(a->aux) ;
-        strerr_dief1x(100, "invalid client request") ;
+        strerr_dief(100, "invalid client request") ;
       }
       if (timeout)
       {
-        if (!tain_from_millisecs(&p->deadline, timeout)) strerr_dief1x(100, "invalid client request") ;
+        if (!tain_from_millisecs(&p->deadline, timeout)) strerr_dief(100, "invalid client request") ;
         tain_add_g(&p->deadline, &p->deadline) ;
       }
       else tain_add_g(&p->deadline, &tain_infinite_relative) ;
@@ -114,7 +114,7 @@ static int sassserver_parse_protocol (struct iovec const *v, void *aux)
        || !avltree_insert(&a->by_id, handle))
       {
         (*a->cleanupf)(a->aux) ;
-        strerr_diefu1sys(111, "avltree_insert") ;
+        strerr_diefusys(111, "avltree_insert") ;
       }
       if (!p->data)
       {
@@ -122,7 +122,7 @@ static int sassserver_parse_protocol (struct iovec const *v, void *aux)
         if (!p->data)
         {
           (*a->cleanupf)(a->aux) ;
-          strerr_diefu1sys(111, "alloc") ;
+          strerr_diefusys(111, "alloc") ;
         }
         memset(p->data, 0, a->datasize) ;
       }
@@ -133,7 +133,7 @@ static int sassserver_parse_protocol (struct iovec const *v, void *aux)
     }
     default :
       (*a->cleanupf)(a->aux) ;
-      strerr_dief1x(100, "invalid client request") ;
+      strerr_dief(100, "invalid client request") ;
   }
   return 1 ;
 }
@@ -153,7 +153,7 @@ void sassserver_async_failure (sassserver *a, uint32_t handle, int e)
   if (!textmessage_put(textmessage_sender_x, pack, 8))
   {
     (*a->cleanupf)(a->aux) ;
-    strerr_diefu1sys(111, "textmessage_put") ;
+    strerr_diefusys(111, "textmessage_put") ;
   }
   sassserver_remove(a, handle) ;
 }
@@ -169,7 +169,7 @@ void sassserver_async_successv (sassserver *a, uint32_t handle, uint32_t flags, 
   if (!textmessage_putv(textmessage_sender_x, vv, n+1))
   {
     (*a->cleanupf)(a->aux) ;
-    strerr_diefu1sys(111, "textmessage_putv") ;
+    strerr_diefusys(111, "textmessage_putv") ;
   }
   if (!(flags & SASS_FLAG_KEEP)) sassserver_remove(a, handle) ;
 }
@@ -214,13 +214,13 @@ void sassserver_write_event (sassserver *a, iopause_fd const *x)
     if (!textmessage_sender_flush(textmessage_sender_1) && !error_isagain(errno))
     {
       (*a->cleanupf)(a->aux) ;
-      strerr_diefu1sys(111, "flush stdout") ;
+      strerr_diefusys(111, "flush stdout") ;
     }
   if (x[2].revents & IOPAUSE_WRITE)
     if (!textmessage_sender_flush(textmessage_sender_x) && !error_isagain(errno))
     {
       (*a->cleanupf)(a->aux) ;
-      strerr_diefu1sys(111, "flush asyncout") ;
+      strerr_diefusys(111, "flush asyncout") ;
     }
 }
 
@@ -232,7 +232,7 @@ int sassserver_read_event (sassserver *a, iopause_fd const *x)
     {
       if (errno == EPIPE) return 1 ;
       (*a->cleanupf)(a->aux) ;
-      strerr_diefu1sys(111, "read messages from client") ;
+      strerr_diefusys(111, "read messages from client") ;
     }
   }
   return 0 ;
