@@ -1,5 +1,8 @@
 /* ISC license. */
 
+#include <skalibs/bsdsnowflake.h>
+#include <skalibs/nonposix.h>
+
 #include <stdlib.h>
 
 #include <skalibs/bytestr.h>

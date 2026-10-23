@@ -1,5 +1,6 @@
  /* ISC license. */
 
+#include <skalibs/bsdsnowflake.h>
 #include <skalibs/nonposix.h>
 
 #include <signal.h>
@@ -85,5 +86,5 @@ static char const *const table[SKALIBS_NSIG] =
 
 char const *sig_name (int sig)
 {
-  return sig <= 0 || sig > SKALIBS_NSIG || !table[sig] ? "???" : table[sig] ;
+  return sig <= 0 || sig >= SKALIBS_NSIG || !table[sig] ? "???" : table[sig] ;
 }
